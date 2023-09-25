@@ -1,0 +1,13 @@
+{{#tree: extensions=["persist"] | 
+*'''[[Main Page]]'''
+
+*Private
+*More
+*Stuff
+**[[Notes]]
+
+*Mediawi
+}}
+
+
+[[Category:Boot]]

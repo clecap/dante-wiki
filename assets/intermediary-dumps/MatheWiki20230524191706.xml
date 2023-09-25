@@ -1,0 +1,1747 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.11/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.11/ http://www.mediawiki.org/xml/export-0.11.xsd" version="0.11" xml:lang="en">
+  <siteinfo>
+    <sitename>MatheWiki</sitename>
+    <dbname>DB_dir</dbname>
+    <base>http://localhost:8080/wiki-dir/index.php/Main_Page</base>
+    <generator>MediaWiki 1.38.0</generator>
+    <case>first-letter</case>
+    <namespaces>
+      <namespace key="-2" case="first-letter">Media</namespace>
+      <namespace key="-1" case="first-letter">Special</namespace>
+      <namespace key="0" case="first-letter" />
+      <namespace key="1" case="first-letter">Talk</namespace>
+      <namespace key="2" case="first-letter">User</namespace>
+      <namespace key="3" case="first-letter">User talk</namespace>
+      <namespace key="4" case="first-letter">MatheWiki</namespace>
+      <namespace key="5" case="first-letter">MatheWiki talk</namespace>
+      <namespace key="6" case="first-letter">File</namespace>
+      <namespace key="7" case="first-letter">File talk</namespace>
+      <namespace key="8" case="first-letter">MediaWiki</namespace>
+      <namespace key="9" case="first-letter">MediaWiki talk</namespace>
+      <namespace key="10" case="first-letter">Template</namespace>
+      <namespace key="11" case="first-letter">Template talk</namespace>
+      <namespace key="12" case="first-letter">Help</namespace>
+      <namespace key="13" case="first-letter">Help talk</namespace>
+      <namespace key="14" case="first-letter">Category</namespace>
+      <namespace key="15" case="first-letter">Category talk</namespace>
+      <namespace key="2100" case="first-letter">Snip</namespace>
+      <namespace key="2101" case="first-letter">Snip talk</namespace>
+      <namespace key="2300" case="first-letter">Gadget</namespace>
+      <namespace key="2301" case="first-letter">Gadget talk</namespace>
+      <namespace key="2302" case="case-sensitive">Gadget definition</namespace>
+      <namespace key="2303" case="case-sensitive">Gadget definition talk</namespace>
+    </namespaces>
+  </siteinfo>
+  <page>
+    <title>Main Page</title>
+    <ns>0</ns>
+    <id>1</id>
+    <revision>
+      <id>601</id>
+      <parentid>600</parentid>
+      <timestamp>2023-05-24T18:54:04Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <comment>/* Gadgets */</comment>
+      <origin>601</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="1014" sha1="a29g6bn91yadsrg0syq38ewruyfe193" xml:space="preserve">
+__TOC__
+
+&lt;div style="float:left;"&gt;
+&lt;inputbox&gt;
+type=create 
+break=no 
+buttonlabel=Create new article with this title  
+&lt;/inputbox&gt;
+&lt;/div&gt;&lt;div style="clear:left;"&gt;&lt;/div&gt;
+
+
+== Create Page ==
+* [[MediaWiki:CreatePage]]
+
+
+
+== Entry ==
+
+[[MediaWiki:Common.js]]
+
+[[MediaWIki:Common.css]]
+
+[[MediaWiki:Corefiles]]
+
+== Gadgets ==
+* [[MediaWiki:Gadgets-definition]]
+* [[MediaWiki:Gadget-danteGadgetTest.js]]
+* [[MediaWiki:Gadget-danteDump1.js]]
+
+== Edit the following system messages ==
+
+* [[MediaWiki:Aboutsite]]
+* [[MediaWiki:Copyright]]
+* [[MediaWiki:Copyrightwarning]]
+* [[MediaWiki:Copyrightwarning2]]
+* [[MediaWiki:Deletereason-dropdown]]
+* [[MediaWiki:Privacypage]]
+* [[MediaWiki:Viewcount]]
+
+== Personalization ==
+* [[MediaWiki:Message of the Day]]
+* [[MediaWiki:Important message of the Day]]
+
+== Sidebar Configuration ==
+
+* [[MediaWiki:Sidebar]]
+* [[MediaWiki:Sidebar/Areas]]
+* [[MediaWiki:Sidebar/Navigation]]
+* [[MediaWiki:Sidebar/Navi]]
+* [[MediaWiki:Sidebar/Social]]
+
+== Tests ==
+
+* [[Test: Sample Long Page]]</text>
+      <sha1>a29g6bn91yadsrg0syq38ewruyfe193</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>File:CaravaggioJeromeValletta.jpg</title>
+    <ns>6</ns>
+    <id>2</id>
+    <revision>
+      <id>2</id>
+      <timestamp>2023-01-06T15:52:59Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <origin>2</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
+      <sha1>phoiac9h4m842xq45sp7s6u21eteeq1</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Parsifal Test</title>
+    <ns>0</ns>
+    <id>3</id>
+    <revision>
+      <id>347</id>
+      <parentid>346</parentid>
+      <timestamp>2023-05-20T16:31:19Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <origin>347</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="765" sha1="c2la6sxwlrjcw6o9it6cwqr2l1kfgto" xml:space="preserve">== Titel ==
+
+&lt;amsmath n="Myname"&gt;aq kk123d ssssfaq fghjghj56 8765 w qa qaajhajakqq kjhaslkjh  hallo q1jk aa s wwad fs d a&lt;/amsmath&gt;
+&lt;amsmath&gt;
+b 
+&lt;/amsmath&gt;
+
+== One ==
+&lt;beamer&gt;
+One 
+&lt;/beamer&gt;
+
+
+== Stuff ==
+&lt;beamer&gt;
+This is now asdcvb we asd qwe as d  qwe a sd qw e asd qwe asd qwe asd qwe asd qwe asd qwe asd qwe asd qwe asd qwe asd beamer asd
+&lt;/beamer&gt;
+
+== Only ==
+
+&lt;amsmath n="Myname"&gt;aq kkdhjk  faq  w qa qaajhajakqq kjhaslkjh  hallo q1jk a s wwad fs d a&lt;/amsmath&gt;
+
+== Titel Y ==
+
+&lt;amsmath o-proof&gt;Ea iaaa s df asd   gg   n s&lt;/amsmath&gt;
+&lt;amsmath c-habanalop&gt;Zwhc 
+sdf sdf
+sdfsdf
+sdfsdf
+sdfsdf
+sdfsdf
+sdfsdf
+sdfsdf
+sdfsdf
+sdfsdf
+sdfsdf
+sdfsdf
+sdfsdf
+sdfsdf
+sdfsdf
+sdfsdf
+sdfsdfsdf
+sdf
+sdfe i&lt;/amsmath&gt;
+&lt;amsmath c="Ha bA Na"&gt;
+Drei \url{https://www.ifi.ch}
+&lt;/amsmath&gt;</text>
+      <sha1>c2la6sxwlrjcw6o9it6cwqr2l1kfgto</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:ParsifalTemplate/amsmath</title>
+    <ns>8</ns>
+    <id>4</id>
+    <revision>
+      <id>329</id>
+      <parentid>317</parentid>
+      <timestamp>2023-05-20T15:50:02Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <origin>329</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="10448" sha1="jmycac9fh0h5odi286prn8e60fjr8mh" xml:space="preserve">&lt;pre&gt;
+\documentclass[varwidth=15cm,margin=0.07cm]{standalone} 
+  
+ 
+                  
+  
+\makeatletter  
+%\g@addto@macro{\@parboxrestore}{\parskip=0.25cm}
+\makeatother
+      
+                        
+\usepackage[utf8]{inputenc}          % expecting text as UTF-8
+\usepackage{ucs}                     % unicode support
+\usepackage[fleqn]{amsmath}
+\usepackage{amssymb,amscd}           % math symbols
+\usepackage{mathtools}                                % fixes deficiencies in amsmath
+\usepackage{wasysym}                 % some symbols
+\usepackage{bussproofs}                               % proof trees
+     
+\usepackage{csquotes}                % quotes
+
+ 
+\usepackage{tabto}
+
+\usepackage[usenames]{color}%    Should load before tcolorbox
+                  
+\usepackage{tcolorbox}
+ 
+   
+%%
+%% Include local packages
+%%
+
+\input{chc-jpabox.tex}
+
+
+\usepackage{ifpdf}%    to be able to detect pdf
+\ifpdf{
+\pdfcompresslevel=0
+\pdfobjcompresslevel=0
+%% the following is to get stable builds with the same hash value of the PDF and better control over document privarcy
+\pdftrailerid{}             % seed pdf trailer computation with and empty argument for reproducible hash values 
+\pdfsuppressptexinfo7       % force pdf driver to omit 1 fullbanner, 2 filename, 4 pagenumber, but leaves info dict intact (for trapped !)
+\pdfinfoomitdate1           % force removal of creation and modification dates from PDF file
+\pdfpagewidth 15cm
+}\else{}\fi
+
+
+
+\paperheight 30cm
+\paperwidth 15cm
+\setlength{\hoffset}{-1in}
+\setlength{\voffset}{-1in}
+\oddsidemargin 0cm
+\evensidemargin 0cm
+\marginparsep 0cm
+\marginparwidth 0cm
+\headsep 0cm
+\headheight 0cm
+
+\pagestyle{empty}
+
+
+\def\myInitialize{%   needed for initializations to be done after begin{document} which are taken out by the precompilation process
+  \parindent 0pt
+  \parskip 0.25cm
+  \chcdisplayskipadjust
+}
+
+
+%%
+%% HYPERREF
+%%               
+
+\usepackage[colorlinks,hyperfootnotes=false]{hyperref}
+\hypersetup{breaklinks=true}
+
+
+\renewcommand{\thempfootnote}{\arabic{mpfootnote}}%    forces footnotes in standalone class to be numeric
+
+%%
+%% LOCALIZATION
+%%  
+\usepackage[shorthands=off,german]{babel}%  localization; MUST turn off shorthands due to an interference with some xypic features
+
+%\input prooftree
+
+%%
+%% ENUMERATION and ITEMIZATION
+%%
+
+\usepackage[inline]{enumitem}
+
+%% Configuring enumitem
+%   CAVE: 1) the \setlist global values for a single list must be defined in a SINGLE \setlist command as they otherwise get overwritten by defaults again
+%         2) the settings do not carry over to \newlist defined custom lists
+%         3) for the starred inline versions the settings are carried over from the non-starred to the starred versions
+%         4) for \newlist defined custom lists the settings do not carry over from the non-starred to the starred versions
+%         SIGH !
+
+\setlist[enumerate]{partopsep=\parskip,topsep=-\parskip,itemsep=0cm,label=\textbf{(\arabic*)},after={\vskip 2\parskip }}%%% overwritten below
+\setlist{itemjoin={\hspace{0.5cm}}}%                                                                                       a bit of space as joiner for the inline version
+
+%% define enumerated as dotted version should we nevertheless need it.
+\newlist{enumerated}{enumerate}{3}\setlist[enumerated]{topsep=0pt,itemsep=0cm,label=\textbf{\arabic*.}}  
+\newlist{enumerated*}{enumerate*}{3}\setlist[enumerated*]{topsep=0pt,itemsep=0cm,label=\textbf{\arabic*.}} % need that since for custom lists the * automatism does not work
+
+\setlist[itemize]{topsep=0pt,itemsep=0cm}
+\setlist[description]{itemindent=-1.5em, labelsep=0pt,partopsep=\parskip,topsep=-\parskip}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FONTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{concmath}
+%\usepackage[OT1]{fontenc}
+
+%\usepackage{txfonts}
+
+\usepackage{stix}                  % needed for \operp and similar symbols
+\usepackage{stmaryrd}              % needed for \bigsqcap
+\usepackage{fontawesome}           % make fontawesome with some additional symbols available, for example \faTV etc
+
+
+\usepackage{marginnote}
+\def\mymarg#1{\hspace*{-6cm}\marginnote{#1}}
+
+%\usepackage[dvips,ps,color,all]{xy}
+
+
+\usepackage[all]{xy}
+
+
+\setlength{\mathindent}{1cm}
+
+%\makeatletter
+%\setlength\@mathmargin{100pt}
+%\makeatother
+
+
+\def\chcdisplayskipadjust{% 
+  \setlength{\abovedisplayskip}{4pt}%
+  \setlength{\belowdisplayskip}{4pt}%
+  \setlength{\abovedisplayshortskip}{4pt}%
+  \setlength{\belowdisplayshortskip}{4pt}%
+}%
+
+\let\chcoldselectfont\selectfont%
+\def\selectfont{%
+  \chcoldselectfont%
+  \chcdisplayskipadjust%
+}%
+\chcdisplayskipadjust%
+
+
+
+
+\usepackage{array}% load the new array package
+
+
+%%
+%% TWEAK array environment
+%%
+
+\arraycolsep=1.0pt \def\arraystretch{1.0}
+
+%%
+%% TWEAK amsmath macro to allow \begin{pmatrix}[1.5] for having more space see https://tex.stackexchange.com/questions/14071/how-can-i-increase-the-line-spacing-in-a-matrix
+%%
+\makeatletter
+\renewcommand*\env@matrix[1][\arraystretch]{%
+  \edef\arraystretch{#1}%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{*\c@MaxMatrixCols c}}
+\makeatother
+
+
+
+%%
+%% SHORTCUTS
+%%
+\def\be{\begin{equation}}
+\def\ee{\end{equation}}
+
+
+
+% add shortcut for roman literals
+\makeatletter
+\newcommand{\rmnum}[1]{\romannumeral #1}
+\newcommand{\Rmnum}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+
+
+\def\proof#1#2#3{\prooftree #1 \justifies #2 \thickness=0.04em \using #3 \endprooftree}
+
+
+
+\usepackage{soul}                                     % defines strikeout markup   \st{strike out}
+
+
+%%%
+%%% SYMBOLS
+%%%
+
+
+
+%% MediaWiki:ParsifalInclude/LaTeXSymbols
+
+
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+
+\def\vv#1{\overrightarrow{#1}} 
+\def\vvplus{\vec{+}}
+
+\def\commutes{\leftrightarrow}
+
+\def\with{\|}
+
+\def\leaves{\spadesuit}                     % Leaves of a tree etc...
+\def\interleave{ \mid \mid \mid }   
+
+
+
+\def\con{ \mbox{\^{ }}}                     % Concatenation
+\def\sts#1{\stackrel{#1}{\longrightarrow}}  % State Transition System
+\def\stss#1{\stackrel{#1}{ {\longrightarrow } }_*} % with a star
+\def\stsp#1{\stackrel{#1}{ {\longrightarrow } }_+} % with a plus
+\def\stsc#1{\stackrel{#1}{ {\longrightarrow } }_\circ} % with a circle
+\def\stsh#1{\stackrel{#1}{ {\longrightarrow } }_h} % with a h
+\def\pre#1{ {^\bullet #1} }                 % preset in Petri Nets
+\def\post#1{ {#1 ^ \bullet} }               % postset in Petri Nets
+\def\Me{\mbox{Me}}                          % Me (X,Y) Symbol
+\def\bottom{\bot}
+\def\with{\mid}
+
+\def\error{\dagger}                          % error symbol error algebras
+\def\im{{\cal I}}                            % image of a partial function
+\def\nin{\not\in}
+
+
+
+\def\negil{\kern-.13em }
+\def\negir{\kern-.08em }
+\def\LB{[\negil[}
+\def\RB{]\negir]}
+
+\def\1{\mbox{{\bf 1}}}
+\def\0{\mbox{{\bf 0}}}
+\def\T{\mbox{{\bf T}}}
+\def\F{\mbox{{\bf F}}}
+
+%%
+%% SETS and FUNCTIONS
+%%
+
+\def\N{{\Bbb N}}
+\def\Z{{\Bbb Z}}
+\def\K{{\Bbb K}}
+\def\R{{\Bbb R}}
+\def\C{{\Bbb C}}
+
+
+
+
+
+
+
+\def\pto{\rightharpoonup}            % partial function:  f: A \pto B
+\def\inclusion{\hookrightarrow}      % inclusion, or more general: injective function   f: A \inclusion B
+
+
+\def\lins{{\text{\bf Lin}_s}}    % stetige lineare Abbildungen
+\def\tr{\text{\bf Tr}}           % spur operator
+\def\ito{\hookrightarrow}        % inclusion function
+\def\pto{\leadsto}               % partially defined function
+\def\ker{\text{\bf Kern}}        % Kernel of a linear map
+\def\im{\text{\bf Im}}           % Image of a linear map
+\def\eig{\text{\bf Eig}}         % Eigenspace of a linear map
+\def\norm#1{\| #1 \|}            % norm
+
+%%
+%% Pseudocode
+%%
+ 
+\def\tIF{\mbox{\tt \ if }}
+\def\tTHEN{\mbox{\tt \ then }}
+\def\tELSE{\mbox{\tt \ else }}
+\def\tFI{\mbox{\tt \ fi }}
+\def\tWHILE{\mbox{\tt \ while }}
+\def\tDO{\mbox{\tt \ do }}
+\def\tREPEAT{\mbox{\tt \ repeat }}
+\def\tUNTIL{\mbox{\tt \ until }}
+ 
+ 
+%% 
+%% Category Theory
+%% 
+\def\M{{\frak M}}                       % Morphisms of a category
+\def\O{{\frak O}}                       % Objects of a category
+\def\codom{\mbox{\textbf{Codom}}}       % Codomain
+\def\dom{\mbox{\textbf{Dom}}}           % Domain
+\def\Hom{\mbox{\textbf{Hom}}}           % Hom functor
+
+\def\hto{\twoheadrightarrow}
+\def\htot{\rightarrowtail}
+\def\smallbox{[\hspace*{-0.02cm}]} % Non-deterministic choice in guarded command language
+
+
+\def\clolli{{\&gt;\mathbin\multimap\&gt;}}
+\def\illolc{{\&gt;\mathbin{\circ\! -}\&gt;}}
+
+\def\before{\mathbin\succeq} 
+\def\prebefore{\mathbin{\vec{\succ}}}
+\def\extendsto{\mathbin\trianglerighteq}
+\def\extendstoim{\mathbin{\vec{\triangleright}}}
+
+
+
+%%%% \def\figlabel#1{\immediate\write\@mainaux{\string\newlabel{#1}{{\arabic{pictco}}{999}}}}
+
+\def\trans{\longrightarrow}
+\def\transa#1{\stackrel{#1}{\trans}}
+\def\transb#1#2{\stackrel{#1}{\trans_#2}}
+
+
+
+
+
+\def\proof#1#2#3{\prooftree #1 \justifies #2 \thickness=0.04em \using #3 \endprooftree}
+
+\def\entails{\vdash}
+
+
+\def\tbone#1{\hbox to 5cm{#1}}
+
+
+
+
+
+\def\THEN{\Rightarrow}
+\def\IFF{\Leftrightarrow}
+
+
+
+
+%%%
+%%% tweak the itemizations %%%%%%%%%%% WANT TO PHASE THIS OUT !!!!
+\newcounter{myc}
+\newenvironment{mitemize}%
+  {\begin{list}{\arabic{myc}.}{\usecounter{myc}\setlength{\topsep}{0pt}}%
+    \setlength{\itemsep}{0pt}%
+    \setlength{\parskip}{\parskip}}%
+  {\end{list}}
+  
+\newenvironment{menumerate}%
+  {\begin{list}{\arabic{myc}.}{\usecounter{myc}\setlength{\topsep}{0pt}}%
+    \setlength{\itemsep}{0pt}%
+    \setlength{\parskip}{\parskip}}%
+  {\end{list}}  
+%%%
+%%%  END OF TWEAK ITEMIZATIONS
+%%%
+
+
+%%
+%% SPACING MACROS
+%%
+
+\def\tab{\hspace*{0.7cm}}
+\def\n{\break}
+
+\def\up{\vspace*{-\parskip}}          % go up one parskip
+\def\mleft{\hspace*{-\mathindent}}    % go left one mathindent space
+\def\mright{\hspace*{\mathindent}}    % go right one mathindent space
+
+
+\def\qquad{\quad\quad}
+\def\qqquad{\quad\quad\quad}
+
+
+
+
+%%%% STUFF ADDED LATER AND TO BE INCLUDED STILL
+
+
+
+\setlist[enumerate]{partopsep=0.5\parskip,topsep=-0.5\parskip,itemsep=0cm,label=\textbf{(\arabic*)},after={\vspace*{1.5\parskip}}}
+
+
+
+%%%%%%\usepackage{tikz}%     TAKES LONG TIME AND SHOULD PLACE INTO A SPECIAL PORTION not used in all places and do a precompile
+%% tikz does not work with dvi but needs pdf path of compilation
+
+
+
+\begin{document}\chcdisplayskipadjust\typeout{HERESTARTSTHEMAINDOCUMENT}%
+
+magic-line-identifier-for-inclusion
+
+\end{document}
+&lt;/pre&gt;
+
+
+[[Category:Boot]]
+[[Category:ParsifalTemplate]]</text>
+      <sha1>jmycac9fh0h5odi286prn8e60fjr8mh</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Test2</title>
+    <ns>0</ns>
+    <id>5</id>
+    <revision>
+      <id>250</id>
+      <parentid>249</parentid>
+      <timestamp>2023-05-06T18:31:53Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <origin>250</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="715" sha1="fckb65y03c39vitkuu76u6wynvc23on" xml:space="preserve">asd asd asd asd asd asd asd asd asd asd asd 
+sdf sdf sdf sdf sdf sdf sdf sdf sdf sdf sdf
+sdf sdf 123 qwe 123 123 123 qwe asd qwe qwe 12123
+qwe qwe qwesdf sdf sdf234323 asdf sadf 
+sdf sdf sdf sdf asf fsf fs ffd fs dffdf sddf sffs asdf sdf fsf df 121aab asd
+
+&lt;amsmath n="mix"&gt;
+moxypqqqqk\n
+
+ kqaaaa\\
+
+ kk\\
+
+  sdf sdf sdf
+sdf\\
+
+ sdf sdf
+sdf \\ 
+
+aqa aqqyqwey12567
+
+\bigskip
+
+sdf\bigskip
+
+sdf  \bigskip
+
+
+sdf\bigskip
+
+moxypqqqqk\n
+
+ kqaaaa\\
+
+ kk\\
+
+  sdf sdf sdf
+sdf\\
+
+ sdf sdf
+sdf \\ 
+
+aqa aqqyqwey12567
+
+\bigskip
+
+sdf\bigskip
+
+sdf  \bigskip
+
+
+sdf\bigskip
+
+moxypqqqqk\n
+
+ kqaaaa\\
+
+ kk\\
+
+  sdf sdf sdf
+sdf\\
+
+ sdf sdf
+sdf \\ 
+
+aqa aqqyqwey12567
+
+\bigskip
+
+sdf\bigskip
+
+sdf  \bigskip
+
+
+sdf\bigskip
+
+kk
+
+&lt;/amsmath&gt;</text>
+      <sha1>fckb65y03c39vitkuu76u6wynvc23on</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Snip:Snip</title>
+    <ns>2100</ns>
+    <id>7</id>
+    <revision>
+      <id>199</id>
+      <parentid>197</parentid>
+      <timestamp>2023-01-29T19:14:51Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <comment>Page created automatically by parser function on page [[snip]]</comment>
+      <origin>199</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="65" sha1="rgiysvbvxgg2oa9cs7xbwrk9ayzzzne" xml:space="preserve">qweqweqwe11111aa1jkqweqwewerwerXsXsqqawqqhajkaqsadsdsd11qqxqxar12</text>
+      <sha1>rgiysvbvxgg2oa9cs7xbwrk9ayzzzne</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Including a snippet</title>
+    <ns>0</ns>
+    <id>8</id>
+    <revision>
+      <id>202</id>
+      <parentid>201</parentid>
+      <timestamp>2023-01-29T19:21:58Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <origin>202</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="29" sha1="hiqb4q469iv3blua2gtpov7j6k7bpf0" xml:space="preserve">now we get:
+
+{{Snippet:Snip}}</text>
+      <sha1>hiqb4q469iv3blua2gtpov7j6k7bpf0</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Sidebar</title>
+    <ns>8</ns>
+    <id>9</id>
+    <revision>
+      <id>495</id>
+      <parentid>493</parentid>
+      <timestamp>2023-05-23T19:34:45Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <origin>495</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="360" sha1="d9egtpt9be3hoy5yi4lk2jygxvsgx2s" xml:space="preserve">* Areas
+
+* catus
+
+* Navigation
+
+* Cat Tools
+** MediaWiki:PersistCatWindow|Persist Cat Window
+** MediaWiki:CategoryTreeOfRoot|Category Tree Root
+** MediaWiki:Tagcloudpage|Category Cloud
+** Special:Categories|Category List
+** Special:CategoryTree|Category Query
+** Special:UncategorizedPages|Uncategorized Pages
+
+* SEARCH
+* TOOLBOX
+* LANGUAGES
+
+[[Category:Boot]]</text>
+      <sha1>d9egtpt9be3hoy5yi4lk2jygxvsgx2s</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Slides Test</title>
+    <ns>0</ns>
+    <id>11</id>
+    <revision>
+      <id>348</id>
+      <parentid>343</parentid>
+      <timestamp>2023-05-20T16:32:32Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <origin>348</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="200" sha1="tj8xo3aqex1id0pjiiicv89tc266b05" xml:space="preserve">
+__SLIDES__
+
+This requires a specific magic word here - ut it destroys the full view of the beamer. Why?
+
+== Slide 1 ==
+&lt;beamer&gt;
+This
+&lt;/beamer&gt;
+
+== Slide 2 ==
+&lt;amsmath&gt;
+Es ist $E = mc^2$.
+
+
+&lt;/amsmath&gt;</text>
+      <sha1>tj8xo3aqex1id0pjiiicv89tc266b05</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:ParsifalTemplate/beamer</title>
+    <ns>8</ns>
+    <id>12</id>
+    <revision>
+      <id>328</id>
+      <parentid>232</parentid>
+      <timestamp>2023-05-20T15:49:03Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <origin>328</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="299" sha1="q0khbal9e0uodt2jcrnflvsfwlsfgw2" xml:space="preserve">&lt;pre&gt;
+\documentclass{beamer}
+\begin{document}
+\title{Simple Beamer Class}   
+\author{Sascha Frank} 
+\date{\today} 
+
+\begin{document}\chcdisplayskipadjust\typeout{HERESTARTSTHEMAINDOCUMENT}%
+
+magic-line-identifier-for-inclusion
+
+\end{document}
+&lt;/pre&gt;
+
+
+[[Category:Boot]]
+[[Category:ParsifalTemplate]]</text>
+      <sha1>q0khbal9e0uodt2jcrnflvsfwlsfgw2</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Compilerbau</title>
+    <ns>0</ns>
+    <id>13</id>
+    <revision>
+      <id>308</id>
+      <parentid>307</parentid>
+      <timestamp>2023-05-18T13:45:34Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fanytree.js</comment>
+      <origin>308</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="132" sha1="23omq8liaw6gxwb6je7n4hydxbxyqes" xml:space="preserve">&lt;amsmath&gt;
+\section{Anwendungen Compilerbau}
+
+\begin{itemize}
+\item asd
+\end{itemize}
+
+
+&lt;/amsmath&gt;
+
+&lt;beamer&gt;
+Das ist also 
+
+&lt;/beamer&gt;</text>
+      <sha1>23omq8liaw6gxwb6je7n4hydxbxyqes</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Notes</title>
+    <ns>0</ns>
+    <id>14</id>
+    <revision>
+      <id>244</id>
+      <parentid>243</parentid>
+      <timestamp>2023-05-06T14:04:42Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <origin>244</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="376" sha1="a085dtv9c6d7cmajblo67bo3lufyi85" xml:space="preserve">Das ist jetzt ein Beispiel das wir uns gerne ansehen
+asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd qwd qwd qwd qwd qwd qwd asd asd a a 
+Das ist jetzt schon sehr gut.
+
+Wir wollen uns nicht ansehen, wie das im Detail funktioniertz. Denn das ist uns doch zu kompliziert. asd asd asd asd asd asd asd asd asd asd asd 123 sdf qwe qwe qwe
+
+&lt;amsmath&gt;
+
+asdasd
+
+&lt;/amsmath&gt;</text>
+      <sha1>a085dtv9c6d7cmajblo67bo3lufyi85</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>About</title>
+    <ns>0</ns>
+    <id>15</id>
+    <revision>
+      <id>318</id>
+      <timestamp>2023-05-20T14:32:31Z</timestamp>
+      <contributor>
+        <username>Maintenance script</username>
+        <id>3</id>
+      </contributor>
+      <comment>Imported from text file</comment>
+      <origin>318</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="24" sha1="plbxldqkhns2zhvbn8yb75zpz7ajpdp" xml:space="preserve">
+
+
+A generic about pages</text>
+      <sha1>plbxldqkhns2zhvbn8yb75zpz7ajpdp</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Example Page</title>
+    <ns>0</ns>
+    <id>16</id>
+    <revision>
+      <id>319</id>
+      <timestamp>2023-05-20T14:32:32Z</timestamp>
+      <contributor>
+        <username>Maintenance script</username>
+        <id>3</id>
+      </contributor>
+      <comment>Imported from text file</comment>
+      <origin>319</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="13" sha1="ajp6j7g939g7g08deo8r87ug3fal078" xml:space="preserve">
+
+= Example =</text>
+      <sha1>ajp6j7g939g7g08deo8r87ug3fal078</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>General disclaimer</title>
+    <ns>0</ns>
+    <id>17</id>
+    <revision>
+      <id>320</id>
+      <timestamp>2023-05-20T14:32:34Z</timestamp>
+      <contributor>
+        <username>Maintenance script</username>
+        <id>3</id>
+      </contributor>
+      <comment>Imported from text file</comment>
+      <origin>320</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
+      <sha1>phoiac9h4m842xq45sp7s6u21eteeq1</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Privacy policy</title>
+    <ns>0</ns>
+    <id>18</id>
+    <revision>
+      <id>322</id>
+      <timestamp>2023-05-20T14:32:37Z</timestamp>
+      <contributor>
+        <username>Maintenance script</username>
+        <id>3</id>
+      </contributor>
+      <comment>Imported from text file</comment>
+      <origin>322</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="34" sha1="2nkdpdzxjgzhf5ldmmauopso2cmpc0t" xml:space="preserve">
+Some privacy blurb
+
+= Important =</text>
+      <sha1>2nkdpdzxjgzhf5ldmmauopso2cmpc0t</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:ParsifalTemplate/deprecated</title>
+    <ns>8</ns>
+    <id>20</id>
+    <revision>
+      <id>331</id>
+      <timestamp>2023-05-20T15:54:32Z</timestamp>
+      <contributor>
+        <username>Maintenance script</username>
+        <id>3</id>
+      </contributor>
+      <comment>Imported from text file</comment>
+      <origin>331</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
+      <sha1>phoiac9h4m842xq45sp7s6u21eteeq1</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Snip:Test3</title>
+    <ns>2100</ns>
+    <id>21</id>
+    <revision>
+      <id>349</id>
+      <timestamp>2023-05-20T16:32:57Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <comment>Page created automatically by parser function on page [[Test3]]</comment>
+      <origin>349</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="65" sha1="rgiysvbvxgg2oa9cs7xbwrk9ayzzzne" xml:space="preserve">qweqweqwe11111aa1jkqweqwewerwerXsXsqqawqqhajkaqsadsdsd11qqxqxar12</text>
+      <sha1>rgiysvbvxgg2oa9cs7xbwrk9ayzzzne</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Test/Syntax Highlights</title>
+    <ns>0</ns>
+    <id>22</id>
+    <revision>
+      <id>360</id>
+      <parentid>353</parentid>
+      <timestamp>2023-05-20T16:41:58Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <origin>360</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="265" sha1="nogir1v349frb06thkm8e0szpdt8q5x" xml:space="preserve">
+
+== Simple Highlight ==
+&lt;syntaxhighlight&gt;
+let x = 7;
+&lt;/syntaxhighlight&gt;
+
+== More Complex Highlight ==
+‎&lt;syntaxhighlight lang="python"&gt;
+def quick_sort(arr):
+	less = []
+	pivot_list = []
+	more = []
+	if len(arr) &lt;= 1:
+		return arr
+	else:
+		pass
+‎&lt;/syntaxhighlight&gt;</text>
+      <sha1>nogir1v349frb06thkm8e0szpdt8q5x</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Test/Syntax Hightlights</title>
+    <ns>0</ns>
+    <id>23</id>
+    <redirect title="Test/Syntax Highlights" />
+    <revision>
+      <id>354</id>
+      <timestamp>2023-05-20T16:37:52Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <comment>Dir moved page [[Test/Syntax Hightlights]] to [[Test/Syntax Highlights]]</comment>
+      <origin>354</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="36" sha1="45mkiq63ik6r7rnx1s2pblxilhg8lm0" xml:space="preserve">#REDIRECT [[Test/Syntax Highlights]]</text>
+      <sha1>45mkiq63ik6r7rnx1s2pblxilhg8lm0</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Test/Markdown</title>
+    <ns>0</ns>
+    <id>24</id>
+    <revision>
+      <id>357</id>
+      <timestamp>2023-05-20T16:39:45Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "&lt;markdown&gt; `asd` &lt;/markdown&gt;"</comment>
+      <origin>357</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="28" sha1="rayg7q1ygqih0pv5xj55ozzeyk7kzlz" xml:space="preserve">&lt;markdown&gt;
+`asd`
+&lt;/markdown&gt;</text>
+      <sha1>rayg7q1ygqih0pv5xj55ozzeyk7kzlz</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Sidebar/Areas</title>
+    <ns>8</ns>
+    <id>26</id>
+    <revision>
+      <id>598</id>
+      <parentid>473</parentid>
+      <timestamp>2023-05-24T14:17:54Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <origin>598</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="91" sha1="t2q0fensvfl9a25hv6cgjql03dc36de" xml:space="preserve">&lt;pre&gt;
+{{#tree: extensions=["persist"] | 
+*'''[[Main Page]]'''
+
+*Stuff
+**[[Notes]]
+}}
+&lt;/pre&gt;</text>
+      <sha1>t2q0fensvfl9a25hv6cgjql03dc36de</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Sidebar/Social</title>
+    <ns>8</ns>
+    <id>27</id>
+    <revision>
+      <id>390</id>
+      <parentid>389</parentid>
+      <timestamp>2023-05-20T19:32:55Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <origin>390</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="154" sha1="e35gvb24uekb7x97qjbeiws5j392u94" xml:space="preserve">{{#tree: extensions=["persist"] | 
+*'''[[Main Page]]'''
+
+*Private
+*More
+*Academic
+**[https://orcid.org]
+**[https://scholar.google.de Scholar]
+
+*Mediawi
+}}</text>
+      <sha1>e35gvb24uekb7x97qjbeiws5j392u94</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Sidebar/socialus</title>
+    <ns>8</ns>
+    <id>28</id>
+    <revision>
+      <id>394</id>
+      <parentid>393</parentid>
+      <timestamp>2023-05-21T09:07:49Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <origin>394</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="163" sha1="bj33rw5yxlbyayzolixhn6zit32ahuk" xml:space="preserve">{{#tree: extensions=["persist"] | 
+*'''[[Main Page]]'''
+
+*This is socialus
+*More
+*Academic
+**[https://orcid.org]
+**[https://scholar.google.de Scholar]
+
+*Mediawi
+}}</text>
+      <sha1>bj33rw5yxlbyayzolixhn6zit32ahuk</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Sidebar/Categories</title>
+    <ns>8</ns>
+    <id>29</id>
+    <revision>
+      <id>410</id>
+      <parentid>406</parentid>
+      <timestamp>2023-05-21T10:02:02Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <origin>410</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="491" sha1="aojmcdwv165b8q8awwae2iu4gmm8twz" xml:space="preserve">This page is a system page.
+
+It must conform to the following rules:
+
+* It is in strict JSON format, which is contained in a PRE-tag.
+* Top-level it is an array
+* The array contains objects of one of the following types:
+** {"root": &lt;string&gt;, "depth": &lt;number&gt;}
+** {"name": &lt;string&gt;}
+** Every object may contain an optional "style" field.
+** Every object may contain an optional "classname" field.
+
+&lt;pre&gt;
+[
+  {"root": "Root", "depth":4},
+  {"name": "banode", "style": "color:gold;"}
+]
+&lt;/pre&gt;</text>
+      <sha1>aojmcdwv165b8q8awwae2iu4gmm8twz</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Category:Boot</title>
+    <ns>14</ns>
+    <id>30</id>
+    <revision>
+      <id>402</id>
+      <timestamp>2023-05-21T09:49:32Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "[[Category:System]]"</comment>
+      <origin>402</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="19" sha1="i84bxell5s45syub6c99pvyb3xjg9zk" xml:space="preserve">[[Category:System]]</text>
+      <sha1>i84bxell5s45syub6c99pvyb3xjg9zk</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Category:System</title>
+    <ns>14</ns>
+    <id>31</id>
+    <revision>
+      <id>409</id>
+      <parentid>408</parentid>
+      <timestamp>2023-05-21T09:56:07Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>409</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="17" sha1="plgyxa9zdjtjany4tcftrk2sfqdwo6g" xml:space="preserve">[[Category:Root]]</text>
+      <sha1>plgyxa9zdjtjany4tcftrk2sfqdwo6g</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Privacypage</title>
+    <ns>8</ns>
+    <id>35</id>
+    <revision>
+      <id>431</id>
+      <timestamp>2023-05-21T19:31:51Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "Project:Privacy policy"</comment>
+      <origin>431</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="22" sha1="c14lzyicxuub51vop3mzkngmr0y2vs5" xml:space="preserve">Project:Privacy policy</text>
+      <sha1>c14lzyicxuub51vop3mzkngmr0y2vs5</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Aboutsite</title>
+    <ns>8</ns>
+    <id>36</id>
+    <revision>
+      <id>451</id>
+      <parentid>443</parentid>
+      <timestamp>2023-05-22T13:41:26Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <origin>451</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="18" sha1="sy1if64yhgu4tenrajt4skhmg8ahcvh" xml:space="preserve">About {{SITENAME}}</text>
+      <sha1>sy1if64yhgu4tenrajt4skhmg8ahcvh</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Copyright</title>
+    <ns>8</ns>
+    <id>37</id>
+    <revision>
+      <id>449</id>
+      <parentid>442</parentid>
+      <timestamp>2023-05-22T13:40:35Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <origin>449</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="53" sha1="no9x9xeg81yiyx2piqrztgeuflab31a" xml:space="preserve">Content is available under $1 unless otherwise noted.</text>
+      <sha1>no9x9xeg81yiyx2piqrztgeuflab31a</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Copyrightwarning</title>
+    <ns>8</ns>
+    <id>38</id>
+    <revision>
+      <id>448</id>
+      <parentid>444</parentid>
+      <timestamp>2023-05-22T13:40:25Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <origin>448</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="64" sha1="e30wd5b8xbsvz1n6xxsdvfg1fm8ankg" xml:space="preserve">Please note that all contributions to this system
+are copyright.</text>
+      <sha1>e30wd5b8xbsvz1n6xxsdvfg1fm8ankg</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Copyrightwarning2</title>
+    <ns>8</ns>
+    <id>39</id>
+    <revision>
+      <id>450</id>
+      <parentid>445</parentid>
+      <timestamp>2023-05-22T13:40:58Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <origin>450</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="65" sha1="nuesz9rhni3k0z7z8zdc3apc1c5wtbw" xml:space="preserve">Please note that all contributions to 
+this system are copyright.</text>
+      <sha1>nuesz9rhni3k0z7z8zdc3apc1c5wtbw</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Deletereason-dropdown</title>
+    <ns>8</ns>
+    <id>40</id>
+    <revision>
+      <id>447</id>
+      <parentid>446</parentid>
+      <timestamp>2023-05-22T13:40:03Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <origin>447</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="104" sha1="nibcuv4myt6ub1l5h7vu1uysidqn80q" xml:space="preserve">* Common delete reasons
+** Spam
+** Vandalism
+** Copyright violation
+** Author request
+** Broken redirect</text>
+      <sha1>nibcuv4myt6ub1l5h7vu1uysidqn80q</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Sidebar</title>
+    <ns>12</ns>
+    <id>41</id>
+    <revision>
+      <id>474</id>
+      <parentid>462</parentid>
+      <timestamp>2023-05-22T14:23:59Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <comment>/* Configuring the Sidebar */</comment>
+      <origin>474</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="223" sha1="eraooa0up3b1a9vp5vpfvja9527k8tj" xml:space="preserve">
+== Configuring the Sidebar ==
+
+* Main Sidebar File: [[MediaWiki:Sidebar]]
+* Sidebar Tree Files:
+** [[MediaWiki:Sidebar/Areas]]
+** [[MediaWiki:Sidebar/Social]]
+* Sidebar Category Definition: [[MediaWiki:Sidebar/Categories]]</text>
+      <sha1>eraooa0up3b1a9vp5vpfvja9527k8tj</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:CreatePage</title>
+    <ns>8</ns>
+    <id>42</id>
+    <revision>
+      <id>476</id>
+      <timestamp>2023-05-22T14:34:51Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "&lt;div style="float:left;"&gt; &lt;inputbox&gt; type=create  break=no  buttonlabel=Create new article with this title   &lt;/inputbox&gt; &lt;/div&gt;&lt;div style="clear:left;"&gt;&lt;/div&gt;"</comment>
+      <origin>476</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="158" sha1="liq42mc4g5fvgmyvf25lutxryowaaww" xml:space="preserve">&lt;div style="float:left;"&gt;
+&lt;inputbox&gt;
+type=create 
+break=no 
+buttonlabel=Create new article with this title  
+&lt;/inputbox&gt;
+&lt;/div&gt;&lt;div style="clear:left;"&gt;&lt;/div&gt;</text>
+      <sha1>liq42mc4g5fvgmyvf25lutxryowaaww</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Sidebar/Navi</title>
+    <ns>8</ns>
+    <id>43</id>
+    <revision>
+      <id>492</id>
+      <parentid>491</parentid>
+      <timestamp>2023-05-23T19:27:05Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <origin>492</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="1353" sha1="gr4gxqa24l66tjg0iiv1rencrz3mhk8" xml:space="preserve">&lt;pre&gt;
+{{#tree: extensions=["persist"] | 
+* [{{fullurl:Main Page}} Main Page]
+* [{{fullurl:Special:RecentChanges}} Recent Changes]
+
+* &lt;b&gt;Help&lt;/b&gt;
+** [https://help.fandom.com/wiki/Extension:DPL3/Manual DPL3]
+** [[Help:Sidebar | Sidebar]]
+** [[Help:Parsifal | Parsifal]]
+** [[Help:Dante | Dante]]
+** [[Help:Links | Links]]
+** [https://www.mediawiki.org/wiki/Help:Links Links]
+
+* &lt;b&gt;Edit Sidebar&lt;/b&gt;
+** [{{fullurl:MediaWiki:Sidebar|action=edit}} Edit Sidebar]
+** [{{fullurl:MediaWiki:Sidebar/Areas|action=edit}} Areas]
+** [{{fullurl:MediaWiki:Sidebar/Categorie|action=edit}} Categories]
+** [{{fullurl:MediaWiki:Sidebar/Navigation|action=edit}} Navigation]
+* &lt;b&gt;Lists&lt;/b&gt;
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=8}} Mediawiki]
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=14}} Category]
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=10}} Template]
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=2}} User]
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=12}} Help]
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=4}} Project]
+** [Special:ListFiles Files]
+* &lt;b&gt;Author&lt;/b&gt;
+** [[Help:Parsifal Cheat Sheet | Parsifal Cheat Sheet]]
+* &lt;b&gt;Developer&lt;/b&gt;
+** [ Dante Issues]
+** [https://github.com/clecap/Parsifal/issues Parsifal Issues]
+** https://github.com/clecap/Parsifal/tree/dante
+** [ Github Dante]
+** [ Github Parsifal]
+}}
+&lt;/pre&gt;</text>
+      <sha1>gr4gxqa24l66tjg0iiv1rencrz3mhk8</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Sidebar/Navigation</title>
+    <ns>8</ns>
+    <id>44</id>
+    <revision>
+      <id>599</id>
+      <parentid>597</parentid>
+      <timestamp>2023-05-24T18:51:49Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <origin>599</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="1811" sha1="d6purid6x59pj4ztozc9aol9mxw4qq8" xml:space="preserve">&lt;pre&gt;
+{{#tree: extensions=["persist"] | 
+* &lt;b&gt;[{{fullurl:Main Page}} Main Page]&lt;/b&gt;
+* [{{fullurl:Special:RecentChanges}} Recent Changes]
+
+* &lt;b&gt;Help&lt;/b&gt;
+** [https://help.fandom.com/wiki/Extension:DPL3/Manual DPL3]
+** [[Help:Sidebar | Sidebar]]
+** [[Help:Parsifal | Parsifal]]
+** [[Help:Dante | Dante]]
+** [[Help:Links | Links]]
+** [https://www.mediawiki.org/wiki/Help:Links Links]
+
+* &lt;b&gt;Sidebar Edits&lt;/b&gt;
+** [{{fullurl:MediaWiki:Sidebar|action=edit}} Full Sidebar]
+** [{{fullurl:MediaWiki:Sidebar/Areas|action=edit}} Areas]
+** [{{fullurl:MediaWiki:Sidebar/Categorie|action=edit}} Categories]
+** [{{fullurl:MediaWiki:Sidebar/Navigation|action=edit}} Navigation]
+* &lt;b&gt;Lists&lt;/b&gt;
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=8}} Mediawiki]
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=14}} Category]
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=10}} Template]
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=2}} User]
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=12}} Help]
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=4}} Project]
+** [Special:ListFiles Files]
+* &lt;b&gt;Writer&lt;/b&gt;
+** [[Help:Parsifal Cheat Sheet | Parsifal Cheat Sheet]]
+* &lt;b&gt;Developer&lt;/b&gt;
+** [ Dante Issues]
+** [https://github.com/clecap/Parsifal/issues Parsifal Issues]
+** https://github.com/clecap/Parsifal/tree/dante
+** [ Github Dante]
+** [ Github Parsifal]
+* &lt;b&gt;Operator&lt;/b&gt;
+* &lt;b&gt;Tests&lt;/b&gt;
+* &lt;b&gt;[javascript:window.DANTE.testConsole() test1]&lt;/b&gt;
+* &lt;b&gt;[javascript:Dante.testConsoleZwei() test2]&lt;/b&gt;
+* &lt;b&gt;[javascript:Dante.testConsoleDrei() test3]&lt;/b&gt;
+* &lt;b&gt;[javascript:console.log(Dante.testConsoleDrei); testprintfc]&lt;/b&gt;
+* &lt;b&gt;[javascript:console.log(Dante); testprintdante]&lt;/b&gt;
+* &lt;b&gt;[javascript:console.log(Dante.testDump); testprintdantetestdump]&lt;/b&gt;
+* &lt;b&gt;[javascript:Dante.testDump(); Dante.testDump]&lt;/b&gt;
+
+
+}}
+&lt;/pre&gt;</text>
+      <sha1>d6purid6x59pj4ztozc9aol9mxw4qq8</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Corefiles</title>
+    <ns>8</ns>
+    <id>45</id>
+    <revision>
+      <id>500</id>
+      <parentid>499</parentid>
+      <timestamp>2023-05-23T21:08:45Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <origin>500</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="42" sha1="i4e87osesoutseay3opakbatckxi28a" xml:space="preserve">&lt;pre&gt;
+Main Page
+MediaWiki:Corefiles
+&lt;/pre&gt;</text>
+      <sha1>i4e87osesoutseay3opakbatckxi28a</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Gadgets-definition</title>
+    <ns>8</ns>
+    <id>46</id>
+    <revision>
+      <id>581</id>
+      <parentid>507</parentid>
+      <timestamp>2023-05-24T13:20:02Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <origin>581</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="146" sha1="619q71sg2v39xymslvtl6l3pt98ia68" xml:space="preserve">
+
+== Test ==
+* danteGadgetTest[ResourceLoader]|danteGadgetTest.js
+
+* Edittop[ResourceLoader]|edittop.js
+* danteDump1[ResourceLoader]|danteDump1.js</text>
+      <sha1>619q71sg2v39xymslvtl6l3pt98ia68</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Gadget-danteGadgetTest.js</title>
+    <ns>8</ns>
+    <id>48</id>
+    <revision>
+      <id>589</id>
+      <parentid>588</parentid>
+      <timestamp>2023-05-24T13:39:12Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <origin>589</origin>
+      <model>javascript</model>
+      <format>text/javascript</format>
+      <text bytes="187" sha1="0ek8xmfckm3ouywxtkxf5k45ka3odq9" xml:space="preserve">window.Dante=window.Dante || {};
+
+(function(){
+
+
+window.Dante.testConsoleDrei=function() {console.log ("testconsoleDrei");};
+
+console.log ("*** inside dante gadget", window.Dante);
+
+})();</text>
+      <sha1>0ek8xmfckm3ouywxtkxf5k45ka3odq9</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Common.js</title>
+    <ns>8</ns>
+    <id>49</id>
+    <revision>
+      <id>586</id>
+      <parentid>583</parentid>
+      <timestamp>2023-05-24T13:31:51Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <origin>586</origin>
+      <model>javascript</model>
+      <format>text/javascript</format>
+      <text bytes="405" sha1="cupt0yavm500nuhqe7phw79rju72kt6" xml:space="preserve">/* Any JavaScript here will be loaded for all users on every page load. */
+
+var Dante= Dante || {};
+
+(function(){
+
+console.log ("*** Common.js: Dante", Dante);
+
+window.DANTE = window.DANTE || {};
+
+window.DANTE.testConsole = function () {console.log ("testConsole");};
+
+Dante.testConsoleZwei =
+function() {console.log ("testconsoleZwei");};
+
+
+
+})();
+
+console.log ("******** Completed MediaWiki:Common.js");</text>
+      <sha1>cupt0yavm500nuhqe7phw79rju72kt6</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Gadget-danteDump1.js</title>
+    <ns>8</ns>
+    <id>50</id>
+    <revision>
+      <id>596</id>
+      <parentid>595</parentid>
+      <timestamp>2023-05-24T13:48:12Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <origin>596</origin>
+      <model>javascript</model>
+      <format>text/javascript</format>
+      <text bytes="1080" sha1="epujlwy6slmgda06lpeaefxsn1lhi8z" xml:space="preserve">window.Dante=window.Dante || {};
+(function(){
+
+
+function escapeHtml(unsafe)
+{
+    return unsafe
+         .replace(/&amp;/g, "&amp;amp;")
+         .replace(/&lt;/g, "&amp;lt;")
+         .replace(/&gt;/g, "&amp;gt;")
+         .replace(/"/g, "&amp;quot;")
+         .replace(/'/g, "&amp;#039;");
+ }
+
+
+window.Dante.testDump=function(){
+  var myWindow = window.open("", "", "width=1200,height=800");
+
+  var params = {"srces":"core", "srcFeatures":"current", "target":"window","title":"Special:DanteDump"};
+
+  var formBody = [];
+  for (var property in params) {
+    var encodedKey   = encodeURIComponent (property);
+    var encodedValue = encodeURIComponent (params[property]);
+    formBody.push(encodedKey + "=" + encodedValue);
+  }
+  formBody = formBody.join("&amp;");
+
+
+  fetch('./Special:DanteDump', {
+    method: 'POST',
+    headers: {
+        'Accept': 'text/html',
+        'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: formBody})
+   .then( function(response){ return response.text();} )
+   .then( function(text){return myWindow.document.write("&lt;pre&gt;"+escapeHtml(text)+"&lt;/pre&gt;");} );
+}
+
+})();</text>
+      <sha1>epujlwy6slmgda06lpeaefxsn1lhi8z</sha1>
+    </revision>
+  </page>
+</mediawiki>

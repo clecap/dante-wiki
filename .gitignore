@@ -1,0 +1,41 @@
+#
+# This is the .gitignore file for continuous-deployment-test
+#
+
+.DS_Store
+deprecated/
+*.zip
+mupdf-1.20.3-source/
+mupdf-1.20.3-source.tar
+
+
+volumes/full/content
+volumes/minimal/content
+
+vendor/
+
+#
+# private configuration data
+#
+customize-PRIVATE.sh
+localhost-key.pem
+localhost.pem
+login-key
+login-key.pub
+server.key
+server.pem
+mediawiki-PRIVATE.php
+AWS-PRIVATE.txt
+
+# the content directories in volumes are generated locally
+volumes/full/content/**
+volumes/full/content/
+wiki-dir/
+
+parsifal-cache/
+
+.git/
+
+dumps/
+chamaeleon/
+images/ssh-copy/bin/ssh_host_rsa_key.pub

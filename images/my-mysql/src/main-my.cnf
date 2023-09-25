@@ -1,0 +1,38 @@
+## This is the main mysql configuration file for /etc/my.cnf developed for dante / Parsifal 
+
+# for client and server
+[client-server]
+
+# for server
+[mysqld]
+
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+
+# this is read by the standalone daemon and embedded servers
+[server]
+
+# this is only for the mysqld standalone daemon
+[mysqld]
+
+port = 3306
+
+user = mysql
+datadir = /var/mysql/mysql
+log-bin = /var/mysql/log/bin-log
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

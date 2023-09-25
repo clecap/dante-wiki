@@ -1,0 +1,8 @@
+[{
+  "name": "lamp-fs",
+  "efsVolumeConfiguration": {
+    "fileSystemId":      "fs-042b9dd15afb92b6b",    /* HERE insert the  */
+    "rootDirectory":     "/",
+    "transitEncryption": "DISABLED"
+  } 
+}]
