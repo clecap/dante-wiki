@@ -5,7 +5,7 @@
 # and pushes them to github.com/clecap/dante-delta
 #
 # NOTE: We use a separate git directory, since volume might have a git directory from other activities
-
+  
 abort()
 {
   printf "%b" "\e[1;31m *** PUSHING DANTE DELTA WAS ABORTED *** \e[0m"
