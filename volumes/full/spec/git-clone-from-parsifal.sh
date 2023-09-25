@@ -23,8 +23,12 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # the directory into which we clone the files
 WIKI=${DIR}/../content/wiki-dir
 
-# the name of the branch to which we will clone
+# the name of the branch from which we will clone
 BRANCH=dante
+
+##
+## END configuration
+##
 
 printf "\n*** Changing to directory ${WIKI}/extensions ... "
 cd ${WIKI}/extensions
@@ -36,8 +40,8 @@ printf "DONE removing\n\n"
 
 printf "*** Cloning Parsifal from branch $BRANCH ... "
 git clone --branch $BRANCH https://github.com/clecap/Parsifal
-printf "DONE cloning branch $BARNCH of Parsifal\n\n"
+printf "DONE cloning branch $BRANCH of Parsifal\n\n"
 
-printf "\033[1;32m completed \033[0m \n"
+printf "\033[1;32m Done cloning Parsifal \033[0m \n"
 
 trap : EXIT         # switch trap command back to noop (:) on EXIT
