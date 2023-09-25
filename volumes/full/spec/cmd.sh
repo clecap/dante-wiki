@@ -14,12 +14,28 @@ TOPDIR="${DIR}/../../../"
 source ${DIR}/script-library.sh
 
 
+abort()
+{
+  printf "%b" "\e[1;31m *** CLONING FROM DELTA WAS ABORTED *** \e[0m"
+  exit 1
+}
+
+set -e                                  # abort execution on any error
+trap 'abort' EXIT                       # call abort on EXIT
+
+
+
+
 # region cleanUp: Code to clean up this directory
 # region
 cleanUp () {
   rm -Rf ${TOPDIR}/volumes/full/content/*
   rm -Rf ${TOPDIR}/volumes/full/content/*.git
   rm -Rf ${TOPDIR}/volumes/full/content/*.gitignore
+  mkdir -p ${TOPDIR}/volumes/full/content/wiki-dir
+  # we must clone from dante-delta to have the correct gitignore in place so that visual studio codium works correctly
+  source ${TOPDIR}/volumes/full/spec/git-clone-from-delta.sh 
+  source ${TOPDIR}/volumes/full/spec/git-clone-from-parsifal.sh 
 }
 # endregion
 #endregion
@@ -38,7 +54,7 @@ makeWiki () {
   mkdir -p ${TARGET}
   cd ${TARGET}
   wget https://releases.wikimedia.org/mediawiki/${WIKI_VERSION_MAJOR}/${WIKI_NAME}.tar.gz;
-  tar --strip-components=1 -xzf ${WIKI_NAME}.tar.gz
+  tar --strip-components=1 -xzf ${WIKI_NAME}.tar.gz 
   rm ./${WIKI_NAME}.tar.gz
 }
 # endregion
@@ -163,15 +179,17 @@ addingAssets () {
   cp ${DIR}/../../../assets/caravaggio-180x180.png   ${DIR}/../content/${TARGET}/logo.png
   printf "\nDONE adding some images\n"
 
-  echo ""; echo "*** Installing drawio external service"
+  printf "\n *** Installing drawio external service"
   mkdir -p ${DIR}/../content/${TARGET}/external-services/draw-io/
   echo "  mkdir done"
   wget https://github.com/clecap/drawio/archive/refs/heads/dev.zip -O ${DIR}/../content/${TARGET}/external-services/dev.zip
-  unzip ${DIR}/../content/${TARGET}/external-services/dev.zip -d ${DIR}/../content/${TARGET}/external-services/draw-io/
+  unzip -q ${DIR}/../content/${TARGET}/external-services/dev.zip -d ${DIR}/../content/${TARGET}/external-services/draw-io/
   rm ${DIR}/../content/${TARGET}/external-services/dev.zip
-  echo "DONE installing drawio external service"
-
+  echo "DONE installing drawio external service\n"
 }
+
+
+
 
 
 
@@ -186,10 +204,20 @@ makeWikiLocal 1.39 0 wiki-dir
 
 getSkins wiki-dir
 
-addingAssets wiki-dir
+addingImages wiki-dir
+
+installingDrawio wiki-dir
+
 
 printf "*** copying some private credentials from main directory into volume\n"
-cp ${DIR}/../../../conf/mediawiki-PRIVATE.php ${DIR}/../content/wiki-dir
+if [ -e ${DIR}/../../../conf/mediawiki-PRIVATE.php ]
+then
+  cp ${DIR}/../../../conf/mediawiki-PRIVATE.php ${DIR}/../content/wiki-dir/mediawiki-PRIVATE.sh
+else
+  cp ${DIR}/../../../conf/mediawiki-SAMPLE.php ${DIR}/../content/wiki-dir/mediawiki-PRIVATE.sh
+fi
+
+
 printf "DONE copying in\n\n"
 
 
