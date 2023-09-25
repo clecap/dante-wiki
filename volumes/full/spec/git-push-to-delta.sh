@@ -42,7 +42,7 @@ else
   printf " DONE "
 fi
 
-
+ 
 git --git-dir=$GIT_DIR config --local advice.addIgnoredFile false
 for name in ${MY_FILES[@]}
 do
