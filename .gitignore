@@ -1,5 +1,5 @@
 #
-# This is the .gitignore file for continuous-deployment-test
+# This is the .gitignore file for dante-wiki, the master development repository
 #
 
 .DS_Store
@@ -26,19 +26,23 @@ images/ssh-copy/bin/ssh_host_rsa_key.pub
 
 # the content directories in volumes are generated locally
 
-volumes/minimal/content
 
+### JUST keep this in as a marker for a while
+#volumes/minimal/content
+#
+#
+#
+#
+#volumes/full/content/wiki-dir/*
+#!volumes/full/content/wiki-dir/extensions/
+#
+#volumes/full/content/wiki-dir/extensions/*
+#!volumes/full/content/wiki-dir/extensions/Parsifal
+#
+#
+#parsifal-cache/
+#
 
-# volumes/full/content/**
-
-volumes/full/content/wiki-dir/*
-!volumes/full/content/wiki-dir/extensions/
-
-volumes/full/content/wiki-dir/extensions/*
-!volumes/full/content/wiki-dir/extensions/Parsifal
-
-
-parsifal-cache/
 
 .git/
 

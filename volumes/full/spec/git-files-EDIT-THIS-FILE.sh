@@ -5,6 +5,10 @@
 
 # NOTE: Shell lists do not have a comma separator
 
+##
+## CAVE: WHen we change this here we must also change .gitignore in wiki-dir (=dante-delta)
+##
+
 declare -a MY_FILES=(                  \
   "README-dantepatch.md"               \
   "includes/import/WikiImporter.php"   \
