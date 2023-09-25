@@ -43,9 +43,6 @@ images/ssh-copy/bin/ssh_host_rsa_key.pub
 #parsifal-cache/
 #
 
-
-.git/
-
 .vscode/tasks-min.json
 
 

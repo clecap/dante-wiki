@@ -295,6 +295,12 @@ makeWikiLocal () {
   cd ${TARGET}
   echo "*** Unpacking local copy $LOCAL_FILE, please wait..."
   tar --strip-components=1 -xzf ${LOCAL_FILE}
+  printf "DONE un-taring of ${LOCAL_FILE}\n\n"
+  
+  printf "*** Removing skins/Refreshed/.git and skins/Modern/.git which only disturb Codium git detection\n"
+  rm -Rf ${TOPDIR}/volumes/full/content/${TARGET}/skins/Refreshed/.git
+  rm -Rf ${TOPDIR}/volumes/full/content/${TARGET}/skins/Modern/.git
+  printf "DONE removing\n\n"
 
   echo "DONE"
 }
