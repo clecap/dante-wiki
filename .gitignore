@@ -29,12 +29,18 @@ images/ssh-copy/bin/ssh_host_rsa_key.pub
 
 
 # the content directories in volumes are generated locally
-# volumes/full/content/**
-volumes/full/content/
-wiki-dir/
+
 volumes/minimal/content
 
-!wiki-dir/extensions/Parsifal
+
+# volumes/full/content/**
+
+volumes/full/content/wiki-dir/*
+!volumes/full/content/wiki-dir/extensions/
+
+volumes/full/content/wiki-dir/extensions/*
+!volumes/full/content/wiki-dir/extensions/Parsifal
+
 
 parsifal-cache/
 
