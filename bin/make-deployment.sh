@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# This shellscript prepares the deployment for a new version of DanteWiki
+# Prepares the deployment for a new version of DanteWiki by making a copy from a running instance
+# inside of the development environment
 #
-
-# It does so by creating a fresh directory
-
+# Another approach would be a fresh installation directly from the githubs.
+#
 
 # get directory where this script resides, wherever it is called from
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -13,10 +13,9 @@ TOP_DIR="${DIR}/../"
 PRODUCTION=${TOP_DIR}/../dante-wiki-production
 VOLUME=${TOP_DIR}/../dante-wiki-volume
 
-
 printf "\n----- STEP 1: Prepare the VOLUME\n\n"
 
-printf "*** Clean old directory"
+printf "*** Clean the directory ${VOLUME} which we will be using as copy target"
 rm -Rf    ${VOLUME}
 printf "\nDONE cleaning old directory\n\n"
 
@@ -72,7 +71,7 @@ find [f-z]*.json -exec rm {} \;
 
 printf "DONE making new directory\n\n"
 
-printf "*** Pushing to github"
+printf "*** Making a local git and pushing to github"
 cd ${VOLUME}
 git init
 cp ${TOP_DIR}/bin/gitignore-for-volume ${VOLUME}/.gitignore
@@ -83,6 +82,7 @@ git remote add origin https://github.com/clecap/dante-wiki-volume.git
 git config http.postBuffer 524288000
 git push -u -f origin main
 printf "\n\n DONE"
+
 
 printf "\n----- STEP 2: Prepare PRODUCTION scripts\n\n"
 
@@ -99,14 +99,11 @@ cp ${TOP_DIR}/images/my-mysql/bin/run.sh ${PRODUCTION}/images/my-mysql/bin/run.s
 cp ${TOP_DIR}/volumes/full/spec/script-library.sh ${PRODUCTION}/volumes/full/spec/script-library.sh
 cp ${TOP_DIR}/volumes/full/spec/wiki-db-local-initialize.sh ${PRODUCTION}/volumes/full/spec/wiki-db-local-initialize.sh
 
-
-
 ## push this to the correct repository
 printf "*** Adding, commiting and pushing this to the repository ${PRODUCTION}\n"
 cd $PRODUCTION
 git add .
-git commit -m "automatically generated from development git and pushed into production git"
-git push 
-
+git commit -m "From development git and force-pushed into dante-wiki-production git by make-deployment.sht"
+git push --force
 
 printf "DONE Production\n"

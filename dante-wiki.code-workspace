@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "volumes/full/content/wiki-dir/extensions/Parsifal"
+		},
+		{
+			"path": "volumes/full/content/wiki-dir"
+		}
+	],
+	"settings": {}
+}
