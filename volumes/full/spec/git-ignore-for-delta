@@ -1,0 +1,39 @@
+## The original of this file in volume/full/spec/git-ignore-for-delta
+
+# This is the .gitignore file used when pushing to the github repository dante-delta
+
+.DS_Store
+  
+#
+# private configuration data
+#
+customize-PRIVATE.sh
+localhost-key.pem
+localhost.pem
+login-key
+login-key.pub
+server.key
+server.pem
+mediawiki-PRIVATE.php
+AWS-PRIVATE.txt
+
+.git/
+# note: .gitignore is always copied in from outside
+.gitignore
+
+ssh_host_rsa_key.pub
+
+#
+#
+#
+parsifal-cache/*
+
+DanteLinks/DANTELINKS-LOGFILE
+DanteTree/LOGFILE
+DantePresentations/endpoints/ENDPOINT_LOG
+DantePresentations/LOGFILE
+LOGFILE
+
+Parsifal/log/*
+
+
