@@ -8,8 +8,6 @@ deprecated/
 mupdf-1.20.3-source/
 mupdf-1.20.3-source.tar
 
-
-
 vendor/
 
 #
@@ -25,8 +23,6 @@ server.pem
 mediawiki-PRIVATE.php
 AWS-PRIVATE.txt
 images/ssh-copy/bin/ssh_host_rsa_key.pub
-
-
 
 # the content directories in volumes are generated locally
 
