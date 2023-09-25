@@ -9,6 +9,7 @@
 # get directory where this script resides wherever it is called from
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+TOPDIR="${DIR}/../../../"
 
 source ${DIR}/script-library.sh
 
@@ -16,12 +17,9 @@ source ${DIR}/script-library.sh
 # region cleanUp: Code to clean up this directory
 # region
 cleanUp () {
-  echo "Making ${DIR}/../../../vendor"
-  mkdir -p ${DIR}/../../../vendor
-  rm -Rf ${DIR}/../../../vendor
-  mkdir -p ${DIR}/../content
-  cd ${DIR}/..
-  rm -Rf content/*
+  rm -Rf ${TOPDIR}/volumes/full/content/*
+  rm -Rf ${TOPDIR}/volumes/full/content/*.git
+  rm -Rf ${TOPDIR}/volumes/full/content/*.gitignore
 }
 # endregion
 #endregion
