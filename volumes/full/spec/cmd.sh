@@ -29,9 +29,16 @@ trap 'abort' EXIT                       # call abort on EXIT
 # region cleanUp: Code to clean up this directory
 # region
 cleanUp () {
+  printf "\n*** Cleaning up volume at ${TOPDIR} \n\n"
+  chmod -R a+w ${TOPDIR}/volumes/full/content/${TARGET}.git
+  printf "Will remove ${TOPDIR}/volumes/full/content/*  \n"
   rm -Rf ${TOPDIR}/volumes/full/content/*
+  printf "DONE content/*\n"
   rm -Rf ${TOPDIR}/volumes/full/content/*.git
-  rm -Rf ${TOPDIR}/volumes/full/content/*.gitignore
+  printf "DONE content/*.git\n"
+  rm -f ${TOPDIR}/volumes/full/content/.gitignore
+  printf "DONE content/.gitignore\n"
+  printf "DONE cleaning up\n\n"
   mkdir -p ${TOPDIR}/volumes/full/content/wiki-dir
   # we must clone from dante-delta to have the correct gitignore in place so that visual studio codium works correctly
   source ${TOPDIR}/volumes/full/spec/git-clone-from-delta.sh 
@@ -125,12 +132,16 @@ getSkins () {
   echo ""; echo "*** Installing skin Modern"
   mkdir Modern
   git clone -b $MW_VERSION --single-branch https://gerrit.wikimedia.org/r/mediawiki/skins/Modern Modern
+    # must not have more .git directories than necessary   TODO: maybe use a different command then
+  rm -Rf Modern/.git
   echo "wfLoadSkin( 'Modern' );" >> ${TOP}/DanteSkinsInstalled.php
 
   # Refreshed
   echo ""; echo "*** Installing skin Refreshed"
   mkdir Refreshed
   git clone -b $MW_VERSION --single-branch https://gerrit.wikimedia.org/r/mediawiki/skins/Refreshed Refreshed
+    # must not have more .git directories than necessary  TODO: maybe use a 
+  rm -Rf Refreshed/.git
   echo "wfLoadSkin( 'Refreshed' );" >> ${TOP}/DanteSkinsInstalled.php
 
 }
