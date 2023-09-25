@@ -26,7 +26,7 @@ WIKI=${DIR}/../content/wiki-dir
 BRANCH=master
 
 # the local git we use for all of this
-GIT_DIR=${WIKI}/.danteGit
+GIT_DIR=${WIKI}/.git
 
 # the remote repository
 REMOTE_REPO=https://github.com/clecap/dante-delta.git
