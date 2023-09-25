@@ -10,6 +10,9 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 
+source ${DIR}/script-library.sh
+
+
 # region cleanUp: Code to clean up this directory
 # region
 cleanUp () {
@@ -43,38 +46,6 @@ makeWiki () {
 # endregion
 # endregion
 
-
-# region makeWikiLocal: Installs mediawiki from local cache directory vendor
-##                call as  makeWiki  MAJOR  MINOR  TARGET
-##                example:  makeWiki 1.37.0 wiki-dir
-# region
-makeWikiLocal () {
-  WIKI_VERSION_MAJOR=$1
-  WIKI_VERSION_MINOR=$2
-  TARGET=$3
-  WIKI_NAME=mediawiki-${WIKI_VERSION_MAJOR}.${WIKI_VERSION_MINOR}
-  LOCAL_FILE="${DIR}/../../../vendor/mediawiki/${WIKI_NAME}.tar.gz"
-
-  if [ ! -f "$LOCAL_FILE" ]; then
-    echo "*** Local cached version is missing, pulling from the network"
-    mkdir -p ${DIR}/../../../vendor/mediawiki
-    cd ${DIR}/../../../vendor/mediawiki
-    wget https://releases.wikimedia.org/mediawiki/${WIKI_VERSION_MAJOR}/${WIKI_NAME}.tar.gz;
-    cd ${DIR}
-  else 
-    echo "*** Found locally cached copy $LOCAL_FILE"
-  fi
-
-  cd ${DIR}/../content
-  mkdir -p ${TARGET}
-  cd ${TARGET}
-  echo "*** Unpacking local copy $LOCAL_FILE, please wait..."
-  tar --strip-components=1 -xzf ${LOCAL_FILE}
-
-  echo "DONE"
-}
-# endregion
-# endregion
 
 
 
@@ -222,12 +193,6 @@ addingAssets wiki-dir
 printf "*** copying some private credentials from main directory into volume\n"
 cp ${DIR}/../../../conf/mediawiki-PRIVATE.php ${DIR}/../content/wiki-dir
 printf "DONE copying in\n\n"
-
-
-
-
-
-
 
 
 ## simpleEntryPage

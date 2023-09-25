@@ -6,7 +6,7 @@ source ./global-names.sh
 if [ "$#" -ne 1 ]; then
   echo "Usage: $0 FAMILYNAME " >&2
   exit 1
-fi
+fi   
 
 FAMILY_NAME=$1
 

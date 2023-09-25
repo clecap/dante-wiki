@@ -4,9 +4,10 @@
 # This is a library of bash script functions
 #
 
+
+dropDatabase () {
 # region dropDatabase  DB_NAME  DB_CONTAINER  MYSQL_ROOT_PASSWORD
 # drops a database. could be helpful before an addDatabase
-dropDatabase () {
   local MY_DB_NAME=$1
   local DB_CONTAINER=$2
   local MYSQL_ROOT_PASSWORD=$3
@@ -21,6 +22,7 @@ MYSQLSTUFF
   printf "DONE: Exit code of dropDatabase generated database call: ${EXIT_CODE} \n\n"
 }
 #endregion
+
 
 dropUser () {
   local DB_CONTAINER=$1
@@ -234,6 +236,37 @@ addingReferenceToDante () {
 
 
 
+
+
+makeWikiLocal () {
+# makeWikiLocal: Installs mediawiki from local cache directory vendor
+##                call as  makeWiki  MAJOR  MINOR  TARGET
+##                example:  makeWiki 1.37.0 wiki-dir
+  WIKI_VERSION_MAJOR=$1
+  WIKI_VERSION_MINOR=$2
+  TARGET=$3
+
+  WIKI_NAME=mediawiki-${WIKI_VERSION_MAJOR}.${WIKI_VERSION_MINOR}
+  LOCAL_FILE="${DIR}/../../../vendor/mediawiki/${WIKI_NAME}.tar.gz"
+
+  if [ ! -f "$LOCAL_FILE" ]; then
+    echo "*** Local cached version is missing, pulling from the network"
+    mkdir -p ${DIR}/../../../vendor/mediawiki
+    cd ${DIR}/../../../vendor/mediawiki
+    wget https://releases.wikimedia.org/mediawiki/${WIKI_VERSION_MAJOR}/${WIKI_NAME}.tar.gz;
+    cd ${DIR}
+  else 
+    echo "*** Found locally cached copy $LOCAL_FILE"
+  fi
+
+  cd ${DIR}/../content
+  mkdir -p ${TARGET}
+  cd ${TARGET}
+  echo "*** Unpacking local copy $LOCAL_FILE, please wait..."
+  tar --strip-components=1 -xzf ${LOCAL_FILE}
+
+  echo "DONE"
+}
 
 
 
