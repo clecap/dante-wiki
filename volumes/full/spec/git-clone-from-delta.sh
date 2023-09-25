@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Pulls all the work from clecap/dante-delta into this directory
+# Clone clecap/dante-delta from github
 
 abort()
 {
@@ -19,10 +19,10 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 ## CONFIGURATION of this script
 ##
 
-# the wiki directory in which we collect the files
+# the wiki directory into which we clone the files
 WIKI=${DIR}/../content/wiki-dir
 
-# the name of the branch to which we will push upstream
+# the name of the branch to which we will clone
 BRANCH=master
 
 # the local git we use for all of this
@@ -46,7 +46,6 @@ else
   printf "DONE initializing a git\n\n"
 fi
 
-
 printf "*** Fetching origin ... "
 git --git-dir=$GIT_DIR --work-tree=${WIKI}  fetch origin
 printf "DONE fetching origin\n\n"
@@ -58,6 +57,7 @@ git --git-dir=$GIT_DIR --work-tree=${WIKI}  reset --hard origin/master
 printf "*** Pulling from ${BRANCH} ..."
 git --git-dir=$GIT_DIR --work-tree=${WIKI}  pull origin master
 printf "DONE pulling \n\n"
-  
 
-printf "\033[31m completed git-pull-from-delta.sh \033[0m \n"
+printf "\033[1;32m completed git-pull-from-delta.sh \033[0m \n"
+
+trap : EXIT         # switch trap command back to noop (:) on EXIT

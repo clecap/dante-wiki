@@ -11,23 +11,30 @@ abort()
 set -e                                  # abort execution on any error
 trap 'abort' EXIT                       # call abort on EXIT
 
-# pushes all the work done locally since the last 
 
 # get directory where this script resides wherever it is called from
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-WIKI=${DIR}/../content/wiki-dir
 
-printf "*** Adding files:\n"
-cd ${WIKI}/extensions/Parsifal
+##
+## CONFIGURATION of this script
+##
+
+# the directory from which we push all the work
+WIKI=${DIR}/../content/wiki-dir/extensions/Parsifal
+
+printf "\n*** Changing to directory ${WIKI} ... "
+cd ${WIKI}
+printf "DONE\n\n"
+
+printf "*** Adding all files:\n"
 git add . --verbose
 printf "DONE: Adding files\n\n"
 
-printf "\n*** Now commiting:\n"
+printf "\n*** Commiting:\n"
 git commit -m "Commit from git-push-to-parsifal.sh"
 printf "DONE commiting\n\n"
 
-
-printf "*** Now pushing to upstream\n"
+printf "*** Pushing to upstream\n"
 git push -u --verbose
 printf "DONE pushing to upstream\n\n"
 
