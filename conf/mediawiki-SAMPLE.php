@@ -14,8 +14,4 @@ $wgSMTP = [
 
 $wgLocaltimezone="Europe/Berlin";
 
-
-
-
-
 ?>

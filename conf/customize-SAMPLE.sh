@@ -13,7 +13,7 @@ DEFAULT_DB_VOLUME_NAME=my-mysql-data-volume
 
 MW_SITE_SERVER=https://localhost:4443
 
-MW_SITE_NAME="MatheWiki"
+MW_SITE_NAME="Localhost Wiki for Hot Development"
 
 
 ##### MUST REMOVE exit 1 as sign that we have configured this
