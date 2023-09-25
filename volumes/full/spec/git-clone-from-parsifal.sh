@@ -30,7 +30,7 @@ BRANCH=dante
 ## END configuration
 ##
 
-printf "\n*** Changing to directory ${WIKI}/extensions ... "
+printf "\n*** PARSIFAL Changing to directory ${WIKI}/extensions ... "
 cd ${WIKI}/extensions
 printf "DONE\n\n"
 
