@@ -5,8 +5,6 @@
 .DS_Store
 deprecated/
 *.zip
-mupdf-1.20.3-source/
-mupdf-1.20.3-source.tar
 
 vendor/
 
@@ -26,22 +24,9 @@ images/ssh-copy/bin/ssh_host_rsa_key.pub
 
 # the content directories in volumes are generated locally
 
+volumes/full/content
 
-### JUST keep this in as a marker for a while
-#volumes/minimal/content
-#
-#
-#
-#
-#volumes/full/content/wiki-dir/*
-#!volumes/full/content/wiki-dir/extensions/
-#
-#volumes/full/content/wiki-dir/extensions/*
-#!volumes/full/content/wiki-dir/extensions/Parsifal
-#
-#
-#parsifal-cache/
-#
+
 
 .vscode/tasks-min.json
 
