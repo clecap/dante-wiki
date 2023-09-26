@@ -34,6 +34,7 @@ printf "DONE fetching origin\n\n"
 #printf "*** git-pull-from-delta.sh: doing a hard reset on local git and pulling from master
 git reset --hard origin/master
 git pull origin master
+git push --set-upstream origin master
 #printf "DONE hard reset\n\n"
   
 
