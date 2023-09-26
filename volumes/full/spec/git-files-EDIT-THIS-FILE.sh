@@ -12,6 +12,7 @@
 declare -a MY_FILES=(                  \
   "README-dantepatch.md"               \
   "includes/import/WikiImporter.php"   \
+  "includes/media/SVGReader.php"   \
   "DantePolyfill.php"                  \
   "DanteSettings.php"                  \
   "DanteSettings-production.php"       \ 
