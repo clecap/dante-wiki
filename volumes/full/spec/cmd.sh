@@ -43,9 +43,14 @@ cleanUp () { # Code to clean up this directory
   printf "DONE cleaning up\n\n"
 
   mkdir -p ${TOPDIR}volumes/full/content/wiki-dir
+
+
+  # we must now copy in the gitignore for delta in order not to trigger VSCodium incorrectly when we load mediawiki
+  cp ${TOPDIR}/volumes/full/spec/git-ignore-for-delta ${TOPDIR}/volumes/full/content/wiki-dir
+
   # we must clone from dante-delta to have the correct gitignore in place so that visual studio codium works correctly
-  source ${TOPDIR}/volumes/full/spec/git-clone-from-delta.sh 
-  source ${TOPDIR}/volumes/full/spec/git-clone-from-parsifal.sh 
+  # source ${TOPDIR}/volumes/full/spec/git-clone-from-delta.sh 
+  # source ${TOPDIR}/volumes/full/spec/git-clone-from-parsifal.sh 
 }
 
 
@@ -208,6 +213,11 @@ addingAssets () {
 cleanUp 
 
 makeWikiLocal 1.39 0 wiki-dir
+
+# only NOW we should get the modifications
+source ${TOPDIR}/volumes/full/spec/git-clone-from-delta.sh 
+source ${TOPDIR}/volumes/full/spec/git-clone-from-parsifal.sh 
+
 
 getSkins wiki-dir
 
