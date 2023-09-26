@@ -34,12 +34,14 @@ TOP_DIR="${DIR}/../../../"
 
 abort()
 {
-  printf "%b" "\e[1;31m *** wiki-init.sh was aborted *** \e[0m"
+  printf "%b" "\e[1;31m *** ***                          *** *** \e[0m"
+  printf "%b" "\e[1;31m *** *** wiki-init.sh was aborted *** *** \e[0m"
+  printf "%b" "\e[1;31m *** ***                          *** *** \e[0m"
   exit 1
 }
 
-set -e                                  # abort execution on any error
-trap 'abort' EXIT                       # call abort on EXIT
+#set -e                                  # abort execution on any error
+#trap 'abort' EXIT                       # call abort on EXIT
 
 
 
@@ -89,16 +91,7 @@ DB_CONTAINER=my-mysql
 
 # endregion
 
-# region ABORT ERROR HANDLER
-abort()
-{
-    echo >&2 '
-***************
-*** ABORTED ***
-***************
-'
-    exit 1
-}
+
 
 
 # region  composerPermissions ()  
@@ -381,7 +374,7 @@ docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER}  [ -f "${MOUNT}/${VOLUM
 EXIT_VALUE=$?
 echo "shell result $EXIT_VALUE"
 if [ "$EXIT_VALUE" == "0" ]; then
-  printf "\e[1;31m* SUCCESS:  ${MOUNT}/${VOLUME_PATH}/LocalSettings.php  generated \e[0m"
+  printf "\e[1;32m* SUCCESS:  ${MOUNT}/${VOLUME_PATH}/LocalSettings.php  generated \e[0m"
 else
   printf "\e[1;41m* ERROR:  Could not generate ${MOUNT}/${VOLUME_PATH}/LocalSettings.php - *** ABORTING \e[0m \n"
 fi

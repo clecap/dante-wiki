@@ -15,6 +15,3 @@ MW_SITE_SERVER=https://localhost:4443
 
 MW_SITE_NAME="Localhost Wiki for Hot Development"
 
-
-##### MUST REMOVE exit 1 as sign that we have configured this
-exit 1
