@@ -26,11 +26,13 @@ trap 'abort' EXIT                       # call abort on EXIT
 
 
 
-# region cleanUp: Code to clean up this directory
-# region
-cleanUp () {
+
+cleanUp () { # Code to clean up this directory
   printf "\n*** Cleaning up volume at ${TOPDIR} \n\n"
-  chmod -R a+w ${TOPDIR}/volumes/full/content/${TARGET}.git
+  # git somteimes produces awkward permissions
+  if [ -d "${TOPDIR}/volumes/full/content/${TARGET}.git" ]; then
+    chmod -R a+w ${TOPDIR}/volumes/full/content/${TARGET}.git
+  fi
   printf "Will remove ${TOPDIR}/volumes/full/content/*  \n"
   rm -Rf ${TOPDIR}/volumes/full/content/*
   printf "DONE content/*\n"
@@ -39,20 +41,18 @@ cleanUp () {
   rm -f ${TOPDIR}/volumes/full/content/.gitignore
   printf "DONE content/.gitignore\n"
   printf "DONE cleaning up\n\n"
+
   mkdir -p ${TOPDIR}/volumes/full/content/wiki-dir
   # we must clone from dante-delta to have the correct gitignore in place so that visual studio codium works correctly
   source ${TOPDIR}/volumes/full/spec/git-clone-from-delta.sh 
   source ${TOPDIR}/volumes/full/spec/git-clone-from-parsifal.sh 
 }
-# endregion
-#endregion
 
 
-# region makeWiki: Installs mediawiki directly from the network
-##           call as  makeWiki  MAJOR  MINOR  TARGET
-##           example:  makeWiki 1.38.0 wiki-dir
-# region
-makeWiki () {
+
+makeWiki () { # Installs mediawiki directly from the network
+  ##           call as  makeWiki  MAJOR  MINOR  TARGET
+  ##           example:  makeWiki 1.38.0 wiki-dir
   WIKI_VERSION_MAJOR=$1
   WIKI_VERSION_MINOR=$2
   TARGET=$3
@@ -64,10 +64,6 @@ makeWiki () {
   tar --strip-components=1 -xzf ${WIKI_NAME}.tar.gz 
   rm ./${WIKI_NAME}.tar.gz
 }
-# endregion
-# endregion
-
-
 
 
 # region getMWExtension  Installs a mediawiki extension from gerrit or github
