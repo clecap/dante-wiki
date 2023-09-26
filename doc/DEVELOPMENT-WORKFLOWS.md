@@ -29,10 +29,6 @@ Execute the following **vscodium tasks**:
 The following commands are to be executed in the target machine.
 
 * We want to get a **shell into the lap container**  ```dev/dshell.sh```
-* We have **edited Parsifal and want to update** the container:
-** Push changes to github of Parsifal: ```vscodium task push Parsifal```
-** Update the container: ```dev/parsifal.sh```
-
 
 ## References ##
 

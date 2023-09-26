@@ -1,11 +1,12 @@
 
-This is the main repository for Dante-Wiki.
-
-
+This is the main development repository for Dante-Wiki.
 
 == Requirements ==
 * An installed wget
 * An installed docker
 
+
+
+== Git Remarks ==
 
 
