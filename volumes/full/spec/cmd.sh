@@ -34,15 +34,15 @@ cleanUp () { # Code to clean up this directory
     chmod -R a+w ${TOPDIR}/volumes/full/content/${TARGET}.git
   fi
   printf "Will remove ${TOPDIR}/volumes/full/content/*  \n"
-  rm -Rf ${TOPDIR}/volumes/full/content/*
+  rm -Rf ${TOPDIR}volumes/full/content/*
   printf "DONE content/*\n"
-  rm -Rf ${TOPDIR}/volumes/full/content/*.git
+  rm -Rf ${TOPDIR}volumes/full/content/*.git
   printf "DONE content/*.git\n"
-  rm -f ${TOPDIR}/volumes/full/content/.gitignore
+  rm -f ${TOPDIR}volumes/full/content/.gitignore
   printf "DONE content/.gitignore\n"
   printf "DONE cleaning up\n\n"
 
-  mkdir -p ${TOPDIR}/volumes/full/content/wiki-dir
+  mkdir -p ${TOPDIR}volumes/full/content/wiki-dir
   # we must clone from dante-delta to have the correct gitignore in place so that visual studio codium works correctly
   source ${TOPDIR}/volumes/full/spec/git-clone-from-delta.sh 
   source ${TOPDIR}/volumes/full/spec/git-clone-from-parsifal.sh 
