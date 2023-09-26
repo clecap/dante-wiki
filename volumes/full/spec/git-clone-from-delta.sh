@@ -2,7 +2,7 @@
 
 # Clone clecap/dante-delta from github
 
-### CAVE: striclty speaking we cannot clone dante-delta since we do not want a directory dante-delta but want to overwrite in volumes
+### CAVE: We MUST NOT clone dante-delta since we do not want a directory dante-delta but want to overwrite in volumes
 
 abort()
 {
@@ -49,16 +49,21 @@ else
 fi
 
 printf "*** Fetching origin ... "
-git --git-dir=$GIT_DIR --work-tree=${WIKI}  fetch origin
+git --git-dir=$GIT_DIR --work-tree=${WIKI} fetch origin
 printf "DONE fetching origin\n\n"
 
 printf "*** Hard reset on local git ... "
- 
-git --git-dir=$GIT_DIR --work-tree=${WIKI}  reset --hard origin/master
+  git --git-dir=$GIT_DIR --work-tree=${WIKI}  reset --hard origin/master
+printf "DONE hard reset\n\~"
 
 printf "*** Pulling from ${BRANCH} ..."
-git --git-dir=$GIT_DIR --work-tree=${WIKI}  pull origin master
+  git --git-dir=$GIT_DIR --work-tree=${WIKI}  pull origin master
 printf "DONE pulling \n\n"
+
+printf "*** Push once to connect..."
+  git push --set-upstream origin master
+printf "DONE pushing once\n\n"
+
 
 printf "\033[1;32m completed git-pull-from-delta.sh \033[0m \n"
 
