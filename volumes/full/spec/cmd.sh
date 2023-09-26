@@ -16,7 +16,7 @@ source ${DIR}/script-library.sh
 
 abort()
 {
-  printf "%b" "\e[1;31m *** CLONING FROM DELTA WAS ABORTED *** \e[0m"
+  printf "%b" "\e[1;31m *** cmd.sh was aborted *** \e[0m"
   exit 1
 }
 
@@ -43,14 +43,6 @@ cleanUp () { # Code to clean up this directory
   printf "DONE cleaning up\n\n"
 
   mkdir -p ${TOPDIR}volumes/full/content/wiki-dir
-
-
-  # we must now copy in the gitignore for delta in order not to trigger VSCodium incorrectly when we load mediawiki
-  cp ${TOPDIR}/volumes/full/spec/git-ignore-for-delta ${TOPDIR}/volumes/full/content/wiki-dir
-
-  # we must clone from dante-delta to have the correct gitignore in place so that visual studio codium works correctly
-  # source ${TOPDIR}/volumes/full/spec/git-clone-from-delta.sh 
-  # source ${TOPDIR}/volumes/full/spec/git-clone-from-parsifal.sh 
 }
 
 
@@ -209,12 +201,13 @@ addingAssets () {
 ## Install Mediawiki files
 ##
 
-
 cleanUp 
 
 makeWikiLocal 1.39 0 wiki-dir
 
 # only NOW we should get the modifications
+
+
 source ${TOPDIR}/volumes/full/spec/git-clone-from-delta.sh 
 source ${TOPDIR}/volumes/full/spec/git-clone-from-parsifal.sh 
 
