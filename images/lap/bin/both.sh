@@ -77,4 +77,4 @@ printf "COMPLETED PART 2\n\n"
 #  it is possible that an initialization has already been run !!
 #    (eg as part of add-wiki.sh or similar)
 
-printf "\033[31m completed RUN LAP and MY-MYSQL\033[0m \n"
+printf "\033[32m completed RUN LAP and MY-MYSQL\033[0m \n"
