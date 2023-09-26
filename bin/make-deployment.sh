@@ -71,16 +71,21 @@ find [f-z]*.json -exec rm {} \;
 
 printf "DONE making new directory\n\n"
 
-printf "*** Making a local git and pushing to github"
+# we must remove the gitignore which was in use for dante
+rm ${VOLUME}/wiki-dir/.gitignore
+
+BRANCH=master
+
+printf "*** Making a local git and pushing to github\n"
 cd ${VOLUME}
 git init
 cp ${TOP_DIR}/bin/gitignore-for-volume ${VOLUME}/.gitignore
 git add .
 git commit -m "Autocommit by make-deployment.sh"
-git branch -M main
+git branch -M ${BRANCH}
 git remote add origin https://github.com/clecap/dante-wiki-volume.git
 git config http.postBuffer 524288000
-git push -u -f origin main
+git push -u -f --set-upstream origin master
 printf "\n\n DONE"
 
 

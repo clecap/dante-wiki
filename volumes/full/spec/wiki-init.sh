@@ -32,11 +32,23 @@ TOP_DIR="${DIR}/../../../"
 
 
 
+abort()
+{
+  printf "%b" "\e[1;31m *** wiki-init.sh was aborted *** \e[0m"
+  exit 1
+}
+
+set -e                                  # abort execution on any error
+trap 'abort' EXIT                       # call abort on EXIT
+
+
+
 
 ##
 ## obtain some parameters from a file
 ##
 echo "Will now read customize-PRIVATE.sh"
+ls -l ${DIR}/../../../conf/customize-PRIVATE.sh
 source ${DIR}/../../../conf/customize-PRIVATE.sh
 echo "DONE reading customize-PRIVATE.sh"
 
@@ -127,6 +139,7 @@ composerUpdate () {
 # INSTALL an extension which is hosted on github
 # EXAMPLE:   installExtensionGithub  https://github.com/kuenzign/WikiMarkdown  WikiMarkdown  main
 installExtensionGithub () {
+
   URL=$1
   NAME=$2
   BRANCH=$3
@@ -656,3 +669,8 @@ printf "*** The Wiki is available at ${MW_SITE_SERVER} "
 
 
 main 
+
+
+
+
+trap : EXIT         # switch trap command back to noop (:) on EXIT
