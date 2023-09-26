@@ -10,5 +10,7 @@
 			"path": "volumes/full/content/wiki-dir"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"editor.fontSize": 18
+	}
 }
