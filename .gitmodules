@@ -1,0 +1,4 @@
+[submodule "dantedelta"]
+  path = volumes/full/content/wiki-dir
+  url =  https://github.com/clecap/dante-delta
+  ignore = all
