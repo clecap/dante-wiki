@@ -2,3 +2,8 @@
   path = volumes/full/content/wiki-dir
   url =  https://github.com/clecap/dante-delta
   ignore = all
+
+[submodule "parsifal"]
+  path = volumes/full/content/wiki-dir/extensions/Parsifal
+  url = https://github.com/clecap/Parsifal
+  ignore = all
