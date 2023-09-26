@@ -11,6 +11,7 @@
 		}
 	],
 	"settings": {
-		"editor.fontSize": 18
+		"editor.fontSize": 18,
+"   git.repositoryScanMaxDepth": -1
 	}
 }
