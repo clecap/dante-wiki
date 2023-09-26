@@ -1,5 +1,5 @@
 #!/bin/bash
-
+  
 # cleans in volume ${VOLUME_NAME} the directory ${MOUNT}/${VOLUME_PATH}
 # copies the contents of directory volumes/${DIR_NAME}/content to the volume ${VOLUME_NAME} and there at path ${VOLUME_PATH}
 # additionally executes shell commands in volumes/${DIR_NAME}/spec/cmd.sh
