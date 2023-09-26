@@ -54,7 +54,7 @@ printf "DONE fetching origin\n\n"
 
 printf "*** Hard reset on local git ... "
   git --git-dir=$GIT_DIR --work-tree=${WIKI}  reset --hard origin/master
-printf "DONE hard reset\n\~"
+printf "DONE hard reset\n\n"
 
 printf "*** Pulling from ${BRANCH} ..."
   git --git-dir=$GIT_DIR --work-tree=${WIKI}  pull origin master
