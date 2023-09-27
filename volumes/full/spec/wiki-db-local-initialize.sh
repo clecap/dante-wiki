@@ -7,6 +7,9 @@
 # Driver function which initializes the MediaWiki database and generates a local settings file
 #
 
+
+
+
 # get directory where this script resides wherever it is called from
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -61,7 +64,7 @@ addDatabase ${DB_NAME} ${DB_USER} ${DB_PASS} ${MYSQL_ROOT_PASSWORD} ${DB_CONTAIN
 
 removeLocalSettings ${LAP_CONTAINER} ${MOUNT} ${VOLUME_PATH}
 
-runMWInstallScript ${MW_SITE_NAME} ${MW_SITE_SERVER} ${SITE_ACRONYM} ${WK_PASS}
+runMWInstallScript "${MW_SITE_NAME}" "${MW_SITE_SERVER}" "${SITE_ACRONYM}" "${WK_PASS}"
 
 addingReferenceToDante ${MOUNT} ${VOLUME_PATH} ${LAP_CONTAINER}
 
