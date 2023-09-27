@@ -221,9 +221,9 @@ installingDrawio wiki-dir
 printf "*** copying some private credentials from main directory into volume\n"
 if [ -e ${DIR}/../../../conf/mediawiki-PRIVATE.php ]
 then
-  cp ${DIR}/../../../conf/mediawiki-PRIVATE.php ${DIR}/../content/wiki-dir/mediawiki-PRIVATE.sh
+  cp ${DIR}/../../../conf/mediawiki-PRIVATE.php ${DIR}/../content/wiki-dir/mediawiki-PRIVATE.php
 else
-  cp ${DIR}/../../../conf/mediawiki-SAMPLE.php ${DIR}/../content/wiki-dir/mediawiki-PRIVATE.sh
+  cp ${DIR}/../../../conf/mediawiki-SAMPLE.php ${DIR}/../content/wiki-dir/mediawiki-PRIVATE.php
 fi
 
 
