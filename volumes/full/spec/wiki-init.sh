@@ -45,6 +45,9 @@ abort()
 
 
 
+printf "\n\n*** Ensure buffer is large enough on a global scale in any case\n"
+git config --global http.postBuffer 524288000
+printf "DONE\n\n"
 
 ##
 ## obtain some parameters from a file
