@@ -53,4 +53,14 @@ printf "*** Setting up public key infrastructure, if present\n\n"
     exit 1
   fi
 
+printf "*** Killing apaches and waiting 10 seconds for processes to settle\n"
+  docker exec -it $LAP_CONTAINER  killall httpd
+  sleep 10
+printf "DONE\n\n"
+
+printf "*** Restarting apaches\n"
+  docker exec -it $LAP_CONTAINER  httpd
+print "DONE\n\n"
+
+
 printf "%b" "\e[1;32m *** DONE injecting key *** \e[0m"
