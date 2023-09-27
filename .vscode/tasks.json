@@ -9,12 +9,12 @@
     {"label": "004 generate volume full:              volumes/full/spec/cmd.sh",                          "command": "volumes/full/spec/cmd.sh"},
     {"label": "005 run lap and my-mysql (cleaned):          images/lap/bin/both.sh with cleand",      "command": "images/lap/bin/both.sh",   "args": ["--cleandb", "my-test-db-volume",  "--dir", "full"] },
     {"label": "006 run lap and my-mysql (NO clean):          images/lap/bin/both.sh ",               "command": "images/lap/bin/both.sh",   "args": ["--db", "my-test-db-volume",  "--dir", "full"] },
-  
     {"label": "009 initialize wiki:               volumes/full/spec/wiki-init.sh",                        "command": "volumes/full/spec/wiki-init.sh", "args": ["--site-server", "http://localhost:8080"]},
+    {"label": "010 inject keys:                    volumes/full/spec/inject-keys.sh",                        "command": "volumes/full/spec/inject-keys.sh", "args": ["pro"]},   
     {"label": "012 DEPLOY CURRENT VOLUME to DEPLOYMENT REPOSITORY (might want to refresh before)     bin/make-deployment.sh",                     "command": "bin/make-deployment.sh"},
-  {"label": "110 PUSH DELTA changes to github   volumes/full/spec/git-push-to-delta",                   "command": "volumes/full/spec/git-push-to-delta.sh"} ,
+    {"label": "110 PUSH DELTA changes to github   volumes/full/spec/git-push-to-delta",                   "command": "volumes/full/spec/git-push-to-delta.sh"} ,
     {"label": "111 PUSH PARSIFAL changes to github/Parsifal dante branch ",                               "command": "volumes/full/spec/git-push-to-parsifal.sh"} ,
-  {"label": "112 CLONE DELTA from github:         volumes/full/spec/git-clone-from-delta.sh",          "command": "volumes/full/spec/git-clone-from-delta.sh"},
+    {"label": "112 CLONE DELTA from github:         volumes/full/spec/git-clone-from-delta.sh",          "command": "volumes/full/spec/git-clone-from-delta.sh"},
     {"label": "113 CLONE PARSIFAL from github:      volumes/full/spec/git-clone-from-parsifal.sh",          "command": "volumes/full/spec/git-clone-from-parsifal.sh"}
   ]
 }
