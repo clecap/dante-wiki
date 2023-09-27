@@ -14,7 +14,6 @@
     {"label": "009 initialize wiki:               volumes/full/spec/wiki-init.sh",                        "command": "volumes/full/spec/wiki-init.sh", "args": ["--site-server", "http://localhost:8080"]},
     {"label": "010 PUSH DELTA changes to github   volumes/full/spec/git-push-to-delta",                   "command": "volumes/full/spec/git-push-to-delta.sh"} ,
     {"label": "011 PUSH PARSIFAL changes to github/Parsifal dante branch ",                               "command": "volumes/full/spec/git-push-to-parsifal.sh"} ,
-    {"label": "MUCH ( DRAFT!!! changed volume build process)",                                                      "command": "images/lap/bin/much.sh"},
     {"label": "Generate Deployment Repositories     bin/make-deployment.sh",                     "command": "bin/make-deployment.sh"}
   ]
 }

@@ -1,9 +1,6 @@
 # Development Workflow #
 
 
-## Directories ##
-* Some of our own extensions are in subdirectories of `own`.
-
 ## Directory Based Workflow ##
 
 The workflow is supported using vscode tasks defined in .vscode and available in task manager. The shaded areas below reference such tasks.

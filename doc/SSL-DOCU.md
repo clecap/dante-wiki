@@ -10,5 +10,3 @@
   copy localhost-key.pem and localhost.pem into conf
 
 ## Installing certificate and private key into web server 
-
-
