@@ -38,6 +38,13 @@ printf "\n*** Changing to directory ${WIKI} ... "
 cd ${WIKI}
 printf "DONE\n\n"
 
+# We must FIRST have a gitignore in place. If NOT then this triggers the scan of Visual Studio Codium,
+#   which detects all Mediawiki files as changed (too much), shuts down the rescanning and never sees the gitignore
+#
+printf "*** Pick up gitignore file from repository ..."
+  wget https://raw.githubusercontent.com/clecap/dante-delta/${BRANCH}/.gitignore
+printf "DONE\n\n"
+
 if [ -d "$GIT_DIR" ]; then
   printf "*** Git directory ${GIT_DIR} already exists ... nothing DONE\n\n"
 else
