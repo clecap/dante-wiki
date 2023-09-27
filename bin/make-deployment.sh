@@ -103,6 +103,7 @@ cp ${TOP_DIR}/images/my-mysql/bin/run.sh ${PRODUCTION}/images/my-mysql/bin/run.s
 
 cp ${TOP_DIR}/volumes/full/spec/script-library.sh ${PRODUCTION}/volumes/full/spec/script-library.sh
 cp ${TOP_DIR}/volumes/full/spec/wiki-db-local-initialize.sh ${PRODUCTION}/volumes/full/spec/wiki-db-local-initialize.sh
+cp ${TOP_DIR}/volumes/full/spec/inject-keys.sh ${PRODUCTION}/volumes/full/spec/inject-keys.sh
 
 ## push this to the correct repository
 printf "*** Adding, commiting and pushing this to the repository ${PRODUCTION}\n"

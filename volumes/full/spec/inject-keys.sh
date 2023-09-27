@@ -14,6 +14,7 @@ usage() {
   echo "  $0  iuk-dante                "
   echo "  $0  pro         macPro localhost    "
   echo "  $0  power       powerbook localhost "
+  echo "  $0  NAME        where NAME is an arbitrary string [a-zA-Z0-9]* see README"
   exit 1
 }
 
