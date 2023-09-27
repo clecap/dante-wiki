@@ -37,7 +37,7 @@ SITE_ACRONYM=$3
 WK_PASS=$4
 MYSQL_ROOT_PASSWORD=$5
 
-echo ""; echo "*** Running wiki-db-local-initalize.sh on ${MW_SITE_NAME} ${MW_SITE_SERVER} ${SITE_ACRONYM} ${WK_PASS} ${MYSQL_ROOT_PASSWORD}"
+echo ""; echo "*** Running wiki-db-local-initalize.sh on MW_SITE_NAME=${MW_SITE_NAME} MW_SITE_SERVER=${MW_SITE_SERVER} SITE_ACRONYM=${SITE_ACRONYM} WK_PASS=${WK_PASS} MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}"
 
 MOUNT="/var/www/html"
 VOLUME_PATH=wiki-dir

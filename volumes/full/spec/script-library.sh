@@ -143,12 +143,14 @@ removeLocalSettings () {
 # runMWInstallScript  MW_SITE_NAME  MW_SITE_SERVER  SITE_ACRONYM  WK_PASS
 runMWInstallScript () {
 
+  printf "*** runMWInstallScript called with $# positional parameters \n\n"
+
   local MW_SITE_NAME=$1
   local MW_SITE_SERVER=$2
   local SITE_ACRONYM=$3
   local WK_PASS=$4
 
-  echo ""; echo "*** Running runMWInstallScript on ${MW_SITE_NAME} ${MW_SITE_SERVER} ${SITE_ACRONYM} ${WK_PASS}"
+   printf "*** runMWInstallScript parsed the parameters as follows: MW_SITE_NAME= (${MW_SITE_NAME}) MW_SITE_SERVER=(${MW_SITE_SERVER}) SITE_ACRONYM=(${SITE_ACRONYM}) WK_PASS=(${WK_PASS})\n\n"
 
   local WK_USER="Admin"
 

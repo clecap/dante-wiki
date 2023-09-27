@@ -1,11 +1,16 @@
 #!/bin/bash
 
 
-ONE="One two three"
+ARGU_EINS="One two three"
 
-TWO=${ONE}
+ARGU_ZWEI="Abra"
 
-printf "\n Got: ${TWO}\n"
+fun () {
 
+ printf "*** fun called with $# positional parameters \n\n"
+
+}
+
+fun "${ARGU_EINS}"  "${ARGU_ZWEI}"
 
 
