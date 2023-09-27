@@ -44,7 +44,8 @@ else
   printf "*** Git directory ${GIT_DIR} does not exist, initializing and setting to branch master ... \n"
   git --git-dir=$GIT_DIR  init --initial-branch=$BRANCH
   git --git-dir=$GIT_DIR  remote add origin $REMOTE_REPO
-  git --git-dir=$GIT_DIR  config --local core.excludesfile ${DIR}/../../spec/git-ignore-for-delta       # configure this git to use spec/.gitignore
+###  git --git-dir=$GIT_DIR  config --local core.excludesfile ${DIR}/../../spec/git-ignore-for-delta       # configure this git to use spec/.gitignore
+##  git --git-dir=$GIT_DIR  
   printf "DONE initializing a git\n\n"
 fi
 

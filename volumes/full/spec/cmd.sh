@@ -205,9 +205,8 @@ cleanUp
 
 makeWikiLocal 1.39 0 wiki-dir
 
-# only NOW we should get the modifications
-
-
+# only NOW we should add the modifications
+# cp ${TOPDIR}/volumes/full/spec/git-ignore-for-delta ${TOPDIR}/volumes/full/content/wiki-dir/.gitignore
 source ${TOPDIR}/volumes/full/spec/git-clone-from-delta.sh 
 source ${TOPDIR}/volumes/full/spec/git-clone-from-parsifal.sh 
 

@@ -1,15 +1,18 @@
-## The original of this file in volume/full/spec/git-ignore-for-delta
+#
+# This is the .gitignore file inside of wiki-dir
+#
+# It is connected with repository dante-delta 
 
-# This is the .gitignore file used when pushing to the github repository dante-delta
-
-
-################################# OOPS THIS SEEMS WRONBG
-
+#
+# no apple artefacts
+#
 .DS_Store
-  
-#
-# private configuration data
-#
+deprecated/
+
+# no installable stuff
+annos/node_modules
+
+# no private configuration data
 customize-PRIVATE.sh
 localhost-key.pem
 localhost.pem
@@ -19,23 +22,69 @@ server.key
 server.pem
 mediawiki-PRIVATE.php
 AWS-PRIVATE.txt
+images/ssh-copy/bin/ssh_host_rsa_key.pub
+
+# no stuff we might produce ourselves
+log/mylog
+log/errors
+LOGFILE
+ERRORLOG
+
+# the content directories in volumes are generated locally
+
+##
+## IMPORTANT
+##
+#
+#  We have to exclude everything from Mediawiki
+#  and we have to include all deltas which must end up in dante-delta
+#
+
+cache/
+docs/**
+extensions/**
+external-services/**
+includes/**
+images/**
+languages/**
+maintenance/**
+mw-config/**
+resources/**
+skins/**
+tests/**
+vendor/**
+parsifal-cache/
 
 .git/
-# note: .gitignore is always copied in from outside
-.gitignore
 
-ssh_host_rsa_key.pub
+*
 
-#
-#
-parsifal-cache/*
+##
+## When we change this here we must also change git-files-EDIT-THIS-FILE.sh
+##
 
-DanteLinks/DANTELINKS-LOGFILE
-DanteTree/LOGFILE
-DantePresentations/endpoints/ENDPOINT_LOG
-DantePresentations/LOGFILE
-LOGFILE
-
-Parsifal/log/*
+### Files which we must include
 
 
+!README-dantepatch.md
+!includes/import/WikiImporter.php
+!includes/media/SVGReader.php
+!DantePolyfill.php
+!DanteSettings.php
+!DanteSettings-production.php
+!DanteSettings-development.php
+!README-dante-delta.md
+!.gitignore
+
+### Directories which we want to include
+!extensions/DanteSynch
+!extensions/DanteHideSection
+!extensions/DanteBread
+!extensions/DanteLinks
+!extensions/DanteSnippets
+!extensions/DanteTree
+!extensions/DantePresentations
+!extensions/DanteBackup
+!extensions/DanteSyntax
+!skins/skinny
+!skins/DantePresentationSkin
