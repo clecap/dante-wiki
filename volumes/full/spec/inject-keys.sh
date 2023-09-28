@@ -61,7 +61,7 @@ printf "DONE\n\n"
 
 printf "*** Restarting apaches\n"
   docker exec -it $LAP_CONTAINER  httpd
-print "DONE\n\n"
+printf "DONE\n\n"
 
 
 printf "%b" "\e[1;32m *** DONE injecting key *** \e[0m"
