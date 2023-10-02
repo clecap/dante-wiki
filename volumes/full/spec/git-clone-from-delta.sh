@@ -6,7 +6,7 @@
 
 abort()
 {
-  printf "%b" "\e[1;31m *** CLONING FROM DELTA WAS ABORTED *** \e[0m"
+  printf "%b" "\e[1;31m *** *** *** ABORTED *** *** *** \e[0m"
   exit 1
 }
 

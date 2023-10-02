@@ -570,13 +570,6 @@ echo "...DONE"
 
 
 
-copyInMinimal () { # copy in minimal initial contents from here to template volume
-  $MOUNT="/var/www/html/"
-  $TARGET="wiki-dir"
-  docker cp ${TOP_DIR}/assets/initial-contents/minimal-initial-contents.xml ${LAP_CONTAINER}:/${MOUNT}/${TARGET}/minimal-initial-contents.xml
-  docker cp ${TOP_DIR}/assets/initial-contents/minimal-initial-mainpage.xml ${LAP_CONTAINER}:/${MOUNT}/${TARGET}/minimal-initial-mainpage.wiki
-}
-
 
 
 # region  INITIALIZE    Initialization function for an individual WIKI
@@ -619,11 +612,6 @@ initialize () {
   runMWInstallScript
   addingReferenceToDante
   
-  printf "\n\n*** Copying in minimal initial contents"
-  copyInMinimal
-  printf "*** DONE copying in minimal initial contents"
-
-
   # initialContents ${VOLUME_PATH}   # currently not used 
 
   printf "\nDONE   *** INITIALIZING WIKI ***\n\n"

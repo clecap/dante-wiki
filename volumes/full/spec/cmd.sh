@@ -24,9 +24,6 @@ set -e                                  # abort execution on any error
 trap 'abort' EXIT                       # call abort on EXIT
 
 
-
-
-
 cleanUp () { # Code to clean up this directory
   printf "\n*** Cleaning up volume at ${TOPDIR} \n\n"
   # git somteimes produces awkward permissions
@@ -173,26 +170,15 @@ simpleEntryPage () {
 
 
 
-## Copy in some other assets
-addingAssets () {
+
+copyInMinimal () { # copy in minimal initial contents from here to template volume
+  trap 'abort' EXIT                       # call abort on EXIT
   TARGET=$1
-  printf "\n*** Adding assets to target=${TARGET}\n"
-
-  printf "\n** Adding some images\n"
-  cp ${DIR}/../../../assets/favicon.ico              ${DIR}/../content/${TARGET}/favicon.ico
-  cp ${DIR}/../../../assets/caravaggio-180x180.png   ${DIR}/../content/${TARGET}/logo.png
-  printf "\nDONE adding some images\n"
-
-  printf "\n *** Installing drawio external service"
-  mkdir -p ${DIR}/../content/${TARGET}/external-services/draw-io/
-  echo "  mkdir done"
-  wget https://github.com/clecap/drawio/archive/refs/heads/dev.zip -O ${DIR}/../content/${TARGET}/external-services/dev.zip
-  unzip -q ${DIR}/../content/${TARGET}/external-services/dev.zip -d ${DIR}/../content/${TARGET}/external-services/draw-io/
-  rm ${DIR}/../content/${TARGET}/external-services/dev.zip
-  echo "DONE installing drawio external service\n"
+  printf "\n*** Copying in minimal initial contents"
+  cp ${TOPDIR}/assets/initial-contents/minimal-initial-contents.xml  ${TOPDIR}/volumes/full/content/${TARGET}/minimal-initial-contents.xml
+  cp ${TOPDIR}/assets/initial-contents/minimal-initial-mainpage.wiki ${TOPDIR}/volumes/full/content/${TARGET}/minimal-initial-mainpage.wiki
+  printf "DONE copying in minimal initial contents"
 }
-
-
 
 
 
@@ -212,10 +198,9 @@ source ${TOPDIR}/volumes/full/spec/git-clone-from-parsifal.sh
 
 
 getSkins wiki-dir
-
 addingImages wiki-dir
-
 installingDrawio wiki-dir
+copyInMinimal wiki-dir
 
 
 printf "*** copying some private credentials from main directory into volume\n"
@@ -243,3 +228,7 @@ echo ""
 
 
 # makeWP 6.1.1 wp-dir
+
+
+trap : EXIT         # switch trap command back to noop (:) on EXIT
+

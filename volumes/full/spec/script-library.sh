@@ -22,12 +22,9 @@ installingDrawio () {
   TARGET=$1
   printf "\n *** Installing drawio external service into target=${TARGET}\n"
   mkdir -p ${TOPDIR}/volumes/full/content/${TARGET}/external-services/draw-io/
-  echo "  mkdir done, now wget"
-  ls ${TOPDIR}/volumes/full/content/${TARGET}
+#  ls ${TOPDIR}/volumes/full/content/${TARGET}
   wget https://github.com/clecap/drawio/archive/refs/heads/dev.zip -O ${TOPDIR}/volumes/full/content/${TARGET}/external-services/dev.zip
-  echo "  wget done"
   unzip -q ${TOPDIR}/volumes/full/content/${TARGET}/external-services/dev.zip -d ${TOPDIR}/volumes/full/content/${TARGET}/external-services/draw-io/
-  echo "  unzip done"
   rm ${TOPDIR}/volumes/full/content/${TARGET}/external-services/dev.zip
   echo "DONE installing drawio external service\n"
 }
