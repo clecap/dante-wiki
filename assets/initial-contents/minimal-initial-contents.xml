@@ -1,0 +1,3812 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.11/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.11/ http://www.mediawiki.org/xml/export-0.11.xsd" version="0.11" xml:lang="en">
+  <siteinfo>
+    <sitename>Wiki for Hot Development</sitename>
+    <dbname>DB_dir</dbname>
+    <base>https://localhost:4443/wiki-dir/index.php/Main_Page</base>
+    <generator>MediaWiki 1.39.0</generator>
+    <case>first-letter</case>
+    <namespaces>
+      <namespace key="-2" case="first-letter">Media</namespace>
+      <namespace key="-1" case="first-letter">Special</namespace>
+      <namespace key="0" case="first-letter" />
+      <namespace key="1" case="first-letter">Talk</namespace>
+      <namespace key="2" case="first-letter">User</namespace>
+      <namespace key="3" case="first-letter">User talk</namespace>
+      <namespace key="4" case="first-letter">Wiki for Hot Development</namespace>
+      <namespace key="5" case="first-letter">Wiki for Hot Development talk</namespace>
+      <namespace key="6" case="first-letter">File</namespace>
+      <namespace key="7" case="first-letter">File talk</namespace>
+      <namespace key="8" case="first-letter">MediaWiki</namespace>
+      <namespace key="9" case="first-letter">MediaWiki talk</namespace>
+      <namespace key="10" case="first-letter">Template</namespace>
+      <namespace key="11" case="first-letter">Template talk</namespace>
+      <namespace key="12" case="first-letter">Help</namespace>
+      <namespace key="13" case="first-letter">Help talk</namespace>
+      <namespace key="14" case="first-letter">Category</namespace>
+      <namespace key="15" case="first-letter">Category talk</namespace>
+      <namespace key="2100" case="first-letter">Snip</namespace>
+      <namespace key="2101" case="first-letter">Snip talk</namespace>
+      <namespace key="2300" case="case-sensitive">Gadget</namespace>
+      <namespace key="2301" case="case-sensitive">Gadget talk</namespace>
+      <namespace key="2302" case="case-sensitive">Gadget definition</namespace>
+      <namespace key="2303" case="case-sensitive">Gadget definition talk</namespace>
+    </namespaces>
+  </siteinfo>
+  <page>
+    <title>Main Page</title>
+    <ns>0</ns>
+    <id>1</id>
+    <revision>
+      <id>83</id>
+      <parentid>82</parentid>
+      <timestamp>2023-09-29T11:10:58Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <comment>/* First */</comment>
+      <origin>83</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="949" sha1="jjxdb7gn5tejq7fwktuese55629x4ov" xml:space="preserve">&lt;strong&gt;MediaWiki has been installed.&lt;/strong&gt;
+
+== First ==
+
+&lt;amsmath slim&gt;
+Hk jkjknn j j i a a ch geh denn ich denke das ist doch ganz lustig wenn wir einmal testen wie das mit x im browser  kgeht ein langer text          
+  k a
+&lt;/amsmath&gt;
+
+Consult the [https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents User's Guide] for information on using the wiki software.
+
+== Getting started ==
+* [https://www.mediawiki.org/wiki/Special:MyLanguage/Manual:Configuration_settings Configuration settings list]
+* [https://www.mediawiki.org/wiki/Special:MyLanguage/Manual:FAQ MediaWiki FAQ]
+* [https://lists.wikimedia.org/postorius/lists/mediawiki-announce.lists.wikimedia.org/ MediaWiki release mailing list]
+* [https://www.mediawiki.org/wiki/Special:MyLanguage/Localisation#Translation_resources Localise MediaWiki for your language]
+* [https://www.mediawiki.org/wiki/Special:MyLanguage/Manual:Combating_spam Learn how to combat spam on your wiki]</text>
+      <sha1>jjxdb7gn5tejq7fwktuese55629x4ov</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:ParsifalTemplate/amsmath</title>
+    <ns>8</ns>
+    <id>2</id>
+    <revision>
+      <id>85</id>
+      <parentid>75</parentid>
+      <timestamp>2023-09-29T19:43:02Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <origin>85</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="13835" sha1="jt4x7lheoim96n8spwpq1srr6fg77s0" xml:space="preserve">&lt;pre&gt;
+\documentclass[varwidth=15cm,margin=0.07cm]{standalone} 
+
+% NOTE: minted is included in dynamic-slides.tex
+
+%%
+%% Standard package imports
+%%
+
+\usepackage[T1]{fontenc}             % fontencoding - FIRST load fontencoding 
+\usepackage[utf8]{inputenc}          % and only THEN load UTF-8 see https://tex.stackexchange.com/questions/13067/
+\usepackage{ucs}                     % unicode support
+\usepackage{comment}                 %    allows to flag portions of the document using \begin{comment} ... \end{comment}
+
+\usepackage{csquotes}                % quotes
+\usepackage{tabto}                   % command \tabto{2cm}
+\usepackage[usenames]{color}         % Should load before tcolorbox                  
+\usepackage{tcolorbox}
+
+%%
+%% DRAWING and GRAPHICS
+%%
+
+\usepackage{tikz}
+\usetikzlibrary{trees,positioning}
+\usetikzlibrary{fpu}
+\usetikzlibrary{arrows.meta,calc,decorations.markings,math}
+\usetikzlibrary{intersections}
+\usetikzlibrary{positioning,fit}%
+\usetikzlibrary{quotes,angles}
+\usetikzlibrary{mindmap}%  
+\usetikzlibrary{shadows}%                           % needed by mindmaps
+
+
+\usepackage{qrcode}                                   % defines \qrcode[height=1cm,level=L]{ABCD} level: L M Q H for low medium ... quality
+\usepackage[percent]{overpic}                         % wrote some text directly over a picture, see 
+                                                      % https://tex.stackexchange.com/questions/20792/how-to-superimpose-latex-on-a-picture
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\pgfplotsset{trig format plots=rad}                   % trigonometry MUST clearly be done in radiants 
+
+\tikzset{trig format=rad}%      pgfplotsset only affects plots, also need this for all of tikz
+
+%%\usepackage{tikz-uml}  %% UNKNOWN 
+
+\def\tikzrad{\pgfplotsset{trig format plots=rad}\tikzset{trig format=rad}}
+\def\tikzdeg{\pgfplotsset{trig format plots=deg}\tikzset{trig format=deg}}
+
+%% TODO: what is this for ??
+\newcommand*{\info}[4][16.3]{%
+  \node [ annotation, #3, scale=0.65, text width = #1em, inner sep = 2mm ] at (#2) {%
+  %\vspace*{-0.5em}%
+  \def\BL{\list{$\bullet$}{\topsep=0pt\itemsep=0pt\parsep=0pt\parskip=0pt\labelwidth=8pt\leftmargin=8pt\itemindent=0pt\labelsep=2pt}%
+    \def\EL{\endlist}%\baselineskip12pt%
+  }%
+ \par\nointerlineskip  #4%
+  };
+}
+
+
+
+
+
+
+
+%%
+%% MATHEMATICS
+%%
+\usepackage[fleqn]{amsmath}          % ams math package with flushed left equations
+\usepackage{amssymb,amscd}           % math symbols
+\usepackage{mathtools}               % fixes deficiencies in amsmath
+\usepackage[all]{xy}
+\usepackage{bussproofs}              % proof trees
+
+
+
+
+%%
+%% TWEAK amsmath macro to allow \begin{pmatrix}[1.5] for having more space see https://tex.stackexchange.com/questions/14071/how-can-i-increase-the-line-spacing-in-a-matrix
+%%
+\makeatletter
+\renewcommand*\env@matrix[1][\arraystretch]{%
+  \edef\arraystretch{#1}%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{*\c@MaxMatrixCols c}}
+\makeatother
+
+%\input prooftree
+
+
+%%
+%% Include local packages
+%%
+
+\input{../local/chc-jpabox.tex}
+
+
+
+\usepackage{ifpdf}%          to be able to detect pdf
+\ifpdf{
+\pdfcompresslevel=0
+\pdfobjcompresslevel=0
+%% the following is to get stable builds with the same hash value of the PDF and better control over document privarcy
+\pdftrailerid{}             % seed pdf trailer computation with and empty argument for reproducible hash values 
+\pdfsuppressptexinfo7       % force pdf driver to omit 1 fullbanner, 2 filename, 4 pagenumber, but leaves info dict intact (for trapped !)
+\pdfinfoomitdate1           % force removal of creation and modification dates from PDF file
+\pdfpagewidth 15cm
+}\else{}\fi
+
+%%
+%% Adjusting the lengths
+%%
+
+\marginparsep   0cm
+\marginparwidth 0cm
+\headsep        0cm
+\headheight     0cm
+
+\pagestyle{empty}
+
+
+\setlength{\mathindent}{1cm}
+%\makeatletter
+%\setlength\@mathmargin{100pt}
+%\makeatother
+
+
+\def\chcdisplayskipadjust{% 
+  \setlength{\abovedisplayskip}{4pt}%
+  \setlength{\belowdisplayskip}{4pt}%
+  \setlength{\abovedisplayshortskip}{4pt}%
+  \setlength{\belowdisplayshortskip}{4pt}%
+}%
+
+\let\chcoldselectfont\selectfont%
+\def\selectfont{%
+  \chcoldselectfont%
+  \chcdisplayskipadjust%
+}%
+\chcdisplayskipadjust%
+
+
+\def\myInitialize{%   needed for initializations to be done after begin{document} which are taken out by the precompilation process
+  \parindent 0pt
+  \parskip 0.25cm
+  \chcdisplayskipadjust
+}
+
+
+%%
+%% HYPERREF
+%%
+\usepackage[hyphens,obeyspaces,spaces]{url}  % must be loaded before hyperref
+\usepackage[
+  colorlinks,
+  hyperfootnotes=true,    % footnote marks as links
+  unicode=true,           % https://tex.stackexchange.com/questions/10555/hyperref-warning-token-not-allowed-in-a-pdf-string
+  breaklinks=true,         % allow to break links
+  hypertexnames=true
+]{hyperref}
+
+%%
+%% BELOW configures the line breaking algorithm of the url package.
+%% DO NOT TOUCH since an additional blank at the wron place may break the algo
+%%
+\makeatletter
+\def\UrlBreaks{\do\.\do\@\do\\\do\/\do\!\do\_\do\|\do\;\do\&gt;\do\]%
+  \do\)\do\,\do\?\do\'\do+\do\=\do\#%
+  \do A\do B\do C\do D\do E\do F\do G\do H\do I\do J\do K\do L\do M%
+  \do N\do O\do P\do Q\do R\do S\do T\do U\do V\do W\do X\do Y\do Z%
+  \do a\do b\do c\do d\do e\do f\do g\do h\do i\do j\do k\do l\do m%
+  \do n\do o\do p\do q\do r\do s\do t\do u\do v\do w\do x\do y\do z%
+  \do 0\do 1\do 2\do 3\do 4\do 5\do 6\do 7\do 8\do 9\do\:%
+  \do\.\do\@\do\\\do\/\do\!\do\_\do\|\do\;\do\&gt;\do\]%
+  \do\)\do\,\do\?\do\&amp;\do\'\do+\do\=\do\#}%
+%\def\UrlBigBreaks{\do\:\do@url@hyp\do\/}%
+\def\UrlNoBreaks{}
+%\def\UrlOrds{\do\*\do\-\do\~\do\'\do\"\do\-\do\/\do\e}%
+\makeatother
+
+
+
+
+
+
+
+
+
+\renewcommand{\thempfootnote}{\arabic{mpfootnote}}%    forces footnotes in standalone class to be numeric
+
+
+%%
+%% LOCALIZATION
+%%  
+\usepackage[shorthands=off,german]{babel}%  localization; MUST turn off shorthands due to an interference with some xypic features
+
+
+
+%%
+%% ENUMERATION and ITEMIZATION
+%%
+
+\usepackage[inline]{enumitem}
+
+%% Configuring enumitem
+%   CAVE: 1) the \setlist global values for a single list must be defined in a SINGLE \setlist command as they otherwise get overwritten by defaults again
+%         2) the settings do not carry over to \newlist defined custom lists
+%         3) for the starred inline versions the settings are carried over from the non-starred to the starred versions
+%         4) for \newlist defined custom lists the settings do not carry over from the non-starred to the starred versions
+%         SIGH !
+
+\setlist{itemjoin={\hspace{0.5cm}}}%                     bit of space as joiner for the inline version
+
+\def\enumerateWithDots{
+  \setlist[enumerate]{
+    partopsep=1.0\parskip,  % separation added when the preceding is a paragraph
+    topsep=-0.5\parskip,    % separation added when the preceding is only a line with no paragraph ending
+    itemsep=0cm,
+    label=\textbf{(\arabic*)},
+    after={\vspace*{1.5\parskip}}
+  }
+}
+
+\def\enumerateWithBrackets{
+  \setlist[enumerate]{
+    partopsep=1.0\parskip,  % separation added when the preceding is a paragraph
+    topsep=-0.5\parskip,    % separation added when the preceding is only a line with no paragraph ending
+    itemsep=0cm,
+    label=\textbf{(\arabic*)},
+    after={\vspace*{1.5\parskip}}
+  }
+}
+
+\enumerateWithBrackets
+
+
+%% define enumerated as dotted version should we nevertheless need it.
+\newlist{enumerated}{enumerate}{3}\setlist[enumerated]{topsep=0pt,itemsep=0cm,label=\textbf{\arabic*.}}  
+\newlist{enumerated*}{enumerate*}{3}\setlist[enumerated*]{topsep=0pt,itemsep=0cm,label=\textbf{\arabic*.}} % need that since for custom lists the * automatism does not work
+
+\setlist[itemize]{
+  partopsep=1.0\parskip,
+  topsep=-0.5\parskip,
+  itemsep=0cm
+}
+
+\setlist[description]{itemindent=-1.5em, labelsep=0pt,partopsep=\parskip,topsep=-\parskip}
+
+
+
+%%
+%% TABLES and ARRAYS
+%%
+
+\usepackage{array}%                       load the new array package
+
+\arraycolsep=3.0pt%                       adds to the separation of array columns
+\def\arraystretch{1.2}%                   increase the distance between rows of an array
+
+\usepackage{adjustbox}%   used for alignment https://tex.stackexchange.com/questions/127056/vertical-alignment-of-graphic-and-tabular
+
+\usepackage{marginnote}
+\def\mymarg#1{\hspace*{-6cm}\marginnote{#1}}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FONTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{concmath}
+%\usepackage[OT1]{fontenc}
+%\usepackage{txfonts}
+
+\usepackage{stix}                  % needed for \operp and similar symbols
+\usepackage{stmaryrd}              % needed for \bigsqcap
+\usepackage{fontawesome}           % make fontawesome with some additional symbols available, for example \faTV etc
+\usepackage{wasysym}               % some symbols
+\usepackage{eurosym}               % euro symbol
+
+
+
+%%
+%% SHORTCUTS
+%%
+\def\be{\begin{equation}}
+\def\ee{\end{equation}}
+
+
+
+% add shortcut for roman literals
+\makeatletter
+\newcommand{\rmnum}[1]{\romannumeral #1}
+\newcommand{\Rmnum}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+
+
+\def\proof#1#2#3{\prooftree #1 \justifies #2 \thickness=0.04em \using #3 \endprooftree}
+
+
+
+
+\usepackage{soul}                                     % defines strikeout markup   \st{strike out}
+
+
+%%%
+%%% SYMBOLS
+%%%
+
+
+
+%% MediaWiki:ParsifalInclude/LaTeXSymbols
+
+
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+
+\def\vv#1{\overrightarrow{#1}} 
+\def\vvplus{\vec{+}}
+
+\def\commutes{\leftrightarrow}
+
+
+
+\def\with{\|}
+
+\def\leaves{\spadesuit}                     % Leaves of a tree etc...
+\def\interleave{ \mid \mid \mid }   
+
+
+\def\con{ \mbox{\^{ }}}                     % Concatenation
+\def\sts#1{\stackrel{#1}{\longrightarrow}}  % State Transition System
+\def\stss#1{\stackrel{#1}{ {\longrightarrow } }_*} % with a star
+\def\stsp#1{\stackrel{#1}{ {\longrightarrow } }_+} % with a plus
+\def\stsc#1{\stackrel{#1}{ {\longrightarrow } }_\circ} % with a circle
+\def\stsh#1{\stackrel{#1}{ {\longrightarrow } }_h} % with a h
+\def\pre#1{ {^\bullet #1} }                 % preset in Petri Nets
+\def\post#1{ {#1 ^ \bullet} }               % postset in Petri Nets
+\def\Me{\mbox{Me}}                          % Me (X,Y) Symbol
+\def\bottom{\bot}
+\def\with{\mid}
+
+\def\error{\dagger}                          % error symbol error algebras
+\def\im{{\cal I}}                            % image of a partial function
+\def\nin{\not\in}
+
+
+
+\def\negil{\kern-.13em }
+\def\negir{\kern-.08em }
+\def\LB{[\negil[}
+\def\RB{]\negir]}
+
+\def\1{\mbox{{\bf 1}}}
+\def\0{\mbox{{\bf 0}}}
+\def\T{\mbox{{\bf T}}}
+\def\F{\mbox{{\bf F}}}
+
+%%
+%% SETS and FUNCTIONS
+%%
+
+\def\N{{\Bbb N}}
+\def\Q{{\Bbb Q}}
+\def\Z{{\Bbb Z}}
+\def\K{{\Bbb K}}
+\def\R{{\Bbb R}}
+\def\C{{\Bbb C}}
+
+
+%%
+%% Specific mathematical arrows
+%%
+
+\def\pto{\rightharpoonup}            % partial function:  f: A \pto B
+\def\inclusion{\hookrightarrow}      % inclusion, or more general: injective function   f: A \inclusion B
+
+\def\ito{\hookrightarrow}        % inclusion function
+\def\pto{\leadsto}               % partially defined function
+
+
+\def\lins{{\text{\bf Lin}_s}}    % stetige lineare Abbildungen
+
+\def\tr{\text{\bf Tr}}           % spur operator
+\def\ker{\text{\bf Kern}}        % Kernel of a linear map
+\def\im{\text{\bf Im}}           % Image of a linear map
+\def\eig{\text{\bf Eig}}         % Eigenspace of a linear map
+
+\def\norm#1{\| #1 \|}            % norm
+
+%%
+%% Pseudocode
+%%
+ 
+\def\tIF{\mbox{\tt \ if }}
+\def\tTHEN{\mbox{\tt \ then }}
+\def\tELSE{\mbox{\tt \ else }}
+\def\tFI{\mbox{\tt \ fi }}
+\def\tWHILE{\mbox{\tt \ while }}
+\def\tDO{\mbox{\tt \ do }}
+\def\tREPEAT{\mbox{\tt \ repeat }}
+\def\tUNTIL{\mbox{\tt \ until }}
+
+%% 
+%% Category Theory
+%% 
+\def\M{{\frak M}}                       % Morphisms of a category
+\def\O{{\frak O}}                       % Objects of a category
+
+\def\codom{\mbox{\textbf{Codom}}}       % Codomain
+\def\dom{\mbox{\textbf{Dom}}}           % Domain
+\def\Hom{\mbox{\textbf{Hom}}}           % Hom functor
+
+\def\hto{\twoheadrightarrow}
+\def\htot{\rightarrowtail}
+\def\smallbox{[\hspace*{-0.02cm}]}      % Non-deterministic choice in guarded command language
+
+\def\clolli{{\&gt;\mathbin\multimap\&gt;}}
+\def\illolc{{\&gt;\mathbin{\circ\! -}\&gt;}}
+
+\def\before{\mathbin\succeq} 
+\def\prebefore{\mathbin{\vec{\succ}}}
+\def\extendsto{\mathbin\trianglerighteq}
+\def\extendstoim{\mathbin{\vec{\triangleright}}}
+
+
+\def\trans{\longrightarrow}
+\def\transa#1{\stackrel{#1}{\trans}}
+\def\transb#1#2{\stackrel{#1}{\trans_#2}}
+
+\def\proof#1#2#3{\prooftree #1 \justifies #2 \thickness=0.04em \using #3 \endprooftree}
+
+\def\entails{\vdash}
+
+
+\def\tbone#1{\hbox to 5cm{#1}}
+
+\def\THEN{\Rightarrow}
+\def\IFF{\Leftrightarrow}
+
+
+
+%%%
+%%% LEGACY STUFF
+%%%
+\newcounter{myc}
+\newenvironment{mitemize}%
+  {\begin{list}{\arabic{myc}.}{\usecounter{myc}\setlength{\topsep}{0pt}}%
+    \setlength{\itemsep}{0pt}%
+    \setlength{\parskip}{\parskip}}%
+  {\end{list}}
+  
+\newenvironment{menumerate}%
+  {\begin{list}{\arabic{myc}.}{\usecounter{myc}\setlength{\topsep}{0pt}}%
+    \setlength{\itemsep}{0pt}%
+    \setlength{\parskip}{\parskip}}%
+  {\end{list}}  
+%%%
+%%%  END OF TWEAK ITEMIZATIONS
+%%%
+
+
+%%
+%% SPACING MACROS
+%%
+
+\def\tab{\hspace*{0.7cm}}
+\def\n{\break}
+
+\def\up{\vspace*{-\parskip}}          % go up one parskip
+
+\def\mleft{\hspace*{-\mathindent}}    % go left one mathindent space
+\def\mright{\hspace*{\mathindent}}    % go right one mathindent space
+
+\def\qquad{\quad\quad}                % double quad
+\def\qqquad{\quad\quad\quad}          % triple quad
+\def\qqqauad{\quad\quad\quad\quad}    % quadruple quad
+
+%%
+%% STRUCTURAL MACROS
+%%
+
+\def\title#1{\textbf{\large #1}}
+
+
+
+
+
+\begin{document}\chcdisplayskipadjust\typeout{HERESTARTSTHEMAINDOCUMENT}%
+
+magic-line-identifier-for-inclusion
+
+\end{document}
+&lt;/pre&gt;
+
+
+[[Category:Boot]]
+[[Category:ParsifalTemplate]]</text>
+      <sha1>jt4x7lheoim96n8spwpq1srr6fg77s0</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Sidebar</title>
+    <ns>8</ns>
+    <id>3</id>
+    <revision>
+      <id>3</id>
+      <timestamp>2023-09-07T17:59:26Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <origin>3</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="358" sha1="mm6lx45lk5ckxynw4efrxl3jpqqdesd" xml:space="preserve">* Areas
+
+* catus
+
+* Navigation
+
+* UI
+
+* Cat Tools
+** MediaWiki:PersistCatWindow|Cat Window
+** MediaWiki:CategoryTreeOfRoot|Category Tree Root
+** MediaWiki:Tagcloudpage|Category Cloud
+** Special:Categories|Category List
+** Special:CategoryTree|Category Query
+** Special:UncategorizedPages|Uncategorized Pages
+
+* SEARCH
+* TOOLBOX
+* LANGUAGES
+
+[[Category:Boot]]</text>
+      <sha1>mm6lx45lk5ckxynw4efrxl3jpqqdesd</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:ParsifalTemplate/beamer</title>
+    <ns>8</ns>
+    <id>4</id>
+    <revision>
+      <id>4</id>
+      <timestamp>2023-06-08T21:48:04Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <origin>4</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="386" sha1="14iczclke7ibql2vjcz220nrm5v3ybl" xml:space="preserve">&lt;pre&gt;
+\documentclass[aspectratio=169]{beamer}
+
+\setbeamertemplate{navigation symbols}{}
+
+\def\myInitialize{%   needed for initializations to be done after begin{document} which are taken out by the precompilation process
+}
+
+\begin{document}\typeout{HERESTARTSTHEMAINDOCUMENT}%
+
+magic-line-identifier-for-inclusion
+
+\end{document}
+&lt;/pre&gt;
+
+
+[[Category:Boot]]
+[[Category:ParsifalTemplate]]</text>
+      <sha1>14iczclke7ibql2vjcz220nrm5v3ybl</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:ParsifalTemplate/deprecated</title>
+    <ns>8</ns>
+    <id>5</id>
+    <revision>
+      <id>5</id>
+      <timestamp>2023-06-04T19:54:47Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>5</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
+      <sha1>phoiac9h4m842xq45sp7s6u21eteeq1</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Sidebar/Areas</title>
+    <ns>8</ns>
+    <id>6</id>
+    <revision>
+      <id>6</id>
+      <timestamp>2023-09-15T16:04:49Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <origin>6</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="104" sha1="acmpn6g3zrj3dq1f44otmayc28iqhlk" xml:space="preserve">&lt;pre&gt;
+{{#tree: extensions=["persist"] | 
+*'''[[Main Page]]'''
+*Compiler
+*DanteWiki
+**[[Notes]]
+}}
+&lt;/pre&gt;</text>
+      <sha1>acmpn6g3zrj3dq1f44otmayc28iqhlk</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Sidebar/Social</title>
+    <ns>8</ns>
+    <id>7</id>
+    <revision>
+      <id>7</id>
+      <timestamp>2023-06-04T19:54:48Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>7</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="154" sha1="e35gvb24uekb7x97qjbeiws5j392u94" xml:space="preserve">{{#tree: extensions=["persist"] | 
+*'''[[Main Page]]'''
+
+*Private
+*More
+*Academic
+**[https://orcid.org]
+**[https://scholar.google.de Scholar]
+
+*Mediawi
+}}</text>
+      <sha1>e35gvb24uekb7x97qjbeiws5j392u94</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Sidebar/socialus</title>
+    <ns>8</ns>
+    <id>8</id>
+    <revision>
+      <id>8</id>
+      <timestamp>2023-06-04T19:54:48Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>8</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="163" sha1="bj33rw5yxlbyayzolixhn6zit32ahuk" xml:space="preserve">{{#tree: extensions=["persist"] | 
+*'''[[Main Page]]'''
+
+*This is socialus
+*More
+*Academic
+**[https://orcid.org]
+**[https://scholar.google.de Scholar]
+
+*Mediawi
+}}</text>
+      <sha1>bj33rw5yxlbyayzolixhn6zit32ahuk</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Sidebar/Categories</title>
+    <ns>8</ns>
+    <id>9</id>
+    <revision>
+      <id>9</id>
+      <timestamp>2023-09-15T19:11:41Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <origin>9</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="567" sha1="ftw6s03rvetjxq7eavgrzeof6l5whqp" xml:space="preserve">This page is a system page.
+
+It must conform to the following rules:
+
+* It contains data in strict JSON format, which must be contained in a PRE-tag.
+* Top-level the JSON data is an array.
+* The array contains objects of one of the following types:
+** {"root": &lt;string&gt;, "depth": &lt;number&gt;}
+** {"name": &lt;string&gt;}
+** Every object may contain an optional "style" field.
+** Every object may contain an optional "classname" field.
+
+&lt;pre&gt;
+[
+  {"root": "Root", "depth":4},
+  {"name": "Compiler", "style": "color:red;"},
+  {"name": "backup", "style": "color:green;"}
+]
+&lt;/pre&gt;</text>
+      <sha1>ftw6s03rvetjxq7eavgrzeof6l5whqp</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Privacypage</title>
+    <ns>8</ns>
+    <id>10</id>
+    <revision>
+      <id>10</id>
+      <timestamp>2023-06-04T19:54:48Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>10</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="22" sha1="c14lzyicxuub51vop3mzkngmr0y2vs5" xml:space="preserve">Project:Privacy policy</text>
+      <sha1>c14lzyicxuub51vop3mzkngmr0y2vs5</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Aboutsite</title>
+    <ns>8</ns>
+    <id>11</id>
+    <revision>
+      <id>11</id>
+      <timestamp>2023-06-04T19:54:48Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>11</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="18" sha1="sy1if64yhgu4tenrajt4skhmg8ahcvh" xml:space="preserve">About {{SITENAME}}</text>
+      <sha1>sy1if64yhgu4tenrajt4skhmg8ahcvh</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Copyright</title>
+    <ns>8</ns>
+    <id>12</id>
+    <revision>
+      <id>12</id>
+      <timestamp>2023-06-04T19:54:48Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>12</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="53" sha1="no9x9xeg81yiyx2piqrztgeuflab31a" xml:space="preserve">Content is available under $1 unless otherwise noted.</text>
+      <sha1>no9x9xeg81yiyx2piqrztgeuflab31a</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Copyrightwarning</title>
+    <ns>8</ns>
+    <id>13</id>
+    <revision>
+      <id>13</id>
+      <timestamp>2023-06-04T19:54:48Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>13</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="64" sha1="e30wd5b8xbsvz1n6xxsdvfg1fm8ankg" xml:space="preserve">Please note that all contributions to this system
+are copyright.</text>
+      <sha1>e30wd5b8xbsvz1n6xxsdvfg1fm8ankg</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Copyrightwarning2</title>
+    <ns>8</ns>
+    <id>14</id>
+    <revision>
+      <id>14</id>
+      <timestamp>2023-06-04T19:54:48Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>14</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="65" sha1="nuesz9rhni3k0z7z8zdc3apc1c5wtbw" xml:space="preserve">Please note that all contributions to 
+this system are copyright.</text>
+      <sha1>nuesz9rhni3k0z7z8zdc3apc1c5wtbw</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Deletereason-dropdown</title>
+    <ns>8</ns>
+    <id>15</id>
+    <revision>
+      <id>15</id>
+      <timestamp>2023-06-04T19:54:48Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>15</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="104" sha1="nibcuv4myt6ub1l5h7vu1uysidqn80q" xml:space="preserve">* Common delete reasons
+** Spam
+** Vandalism
+** Copyright violation
+** Author request
+** Broken redirect</text>
+      <sha1>nibcuv4myt6ub1l5h7vu1uysidqn80q</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:CreatePage</title>
+    <ns>8</ns>
+    <id>16</id>
+    <revision>
+      <id>16</id>
+      <timestamp>2023-06-04T19:54:48Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>16</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="158" sha1="liq42mc4g5fvgmyvf25lutxryowaaww" xml:space="preserve">&lt;div style="float:left;"&gt;
+&lt;inputbox&gt;
+type=create 
+break=no 
+buttonlabel=Create new article with this title  
+&lt;/inputbox&gt;
+&lt;/div&gt;&lt;div style="clear:left;"&gt;&lt;/div&gt;</text>
+      <sha1>liq42mc4g5fvgmyvf25lutxryowaaww</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Sidebar/Navi</title>
+    <ns>8</ns>
+    <id>17</id>
+    <revision>
+      <id>17</id>
+      <timestamp>2023-06-04T19:54:49Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>17</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="1353" sha1="gr4gxqa24l66tjg0iiv1rencrz3mhk8" xml:space="preserve">&lt;pre&gt;
+{{#tree: extensions=["persist"] | 
+* [{{fullurl:Main Page}} Main Page]
+* [{{fullurl:Special:RecentChanges}} Recent Changes]
+
+* &lt;b&gt;Help&lt;/b&gt;
+** [https://help.fandom.com/wiki/Extension:DPL3/Manual DPL3]
+** [[Help:Sidebar | Sidebar]]
+** [[Help:Parsifal | Parsifal]]
+** [[Help:Dante | Dante]]
+** [[Help:Links | Links]]
+** [https://www.mediawiki.org/wiki/Help:Links Links]
+
+* &lt;b&gt;Edit Sidebar&lt;/b&gt;
+** [{{fullurl:MediaWiki:Sidebar|action=edit}} Edit Sidebar]
+** [{{fullurl:MediaWiki:Sidebar/Areas|action=edit}} Areas]
+** [{{fullurl:MediaWiki:Sidebar/Categorie|action=edit}} Categories]
+** [{{fullurl:MediaWiki:Sidebar/Navigation|action=edit}} Navigation]
+* &lt;b&gt;Lists&lt;/b&gt;
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=8}} Mediawiki]
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=14}} Category]
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=10}} Template]
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=2}} User]
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=12}} Help]
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=4}} Project]
+** [Special:ListFiles Files]
+* &lt;b&gt;Author&lt;/b&gt;
+** [[Help:Parsifal Cheat Sheet | Parsifal Cheat Sheet]]
+* &lt;b&gt;Developer&lt;/b&gt;
+** [ Dante Issues]
+** [https://github.com/clecap/Parsifal/issues Parsifal Issues]
+** https://github.com/clecap/Parsifal/tree/dante
+** [ Github Dante]
+** [ Github Parsifal]
+}}
+&lt;/pre&gt;</text>
+      <sha1>gr4gxqa24l66tjg0iiv1rencrz3mhk8</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Sidebar/Navigation</title>
+    <ns>8</ns>
+    <id>18</id>
+    <revision>
+      <id>18</id>
+      <timestamp>2023-09-07T18:02:31Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <origin>18</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="2511" sha1="nerirs9420ju2ig5uvtdm1v5f0hdmp3" xml:space="preserve">&lt;pre&gt;
+{{#tree: extensions=["persist"] | 
+* &lt;b&gt;[{{fullurl:Main Page}} Main Page]&lt;/b&gt;
+* [[MediaWiki:CreatePage|Create Page]]
+* [{{fullurl:Special:RecentChanges}} Recent Changes]
+
+* &lt;b&gt;Help&lt;/b&gt;
+** [https://help.fandom.com/wiki/Extension:DPL3/Manual DPL3 ¦ class=dexternal]
+** [[Help:Sidebar | Sidebar]]
+** [[Help:Parsifal Cheat| Parsifal Cheat]]
+** [[Help:Dante Cheat| Dante Cheat]]
+** [[Help:Links | Links Cheat]]
+** [https://www.mediawiki.org/wiki/Help:Links Links WP ¦ class=dexternal]
+
+* &lt;b&gt;Sidebar Edits&lt;/b&gt;
+** [{{fullurl:MediaWiki:Sidebar|action=edit}} Full Sidebar]
+** [{{fullurl:MediaWiki:Sidebar/Areas|action=edit}} Areas]
+** [{{fullurl:MediaWiki:Sidebar/Categories|action=edit}} Categories]
+** [{{fullurl:MediaWiki:Sidebar/Navigation|action=edit}} Navigation]
+** [{{fullurl:MediaWiki:Sidebar/UI|action=edit}} UI]
+* &lt;b&gt;Lists&lt;/b&gt;
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=8}} MediaWiki]
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=14}} Category]
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=10}} Template]
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=2}} User]
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=12}} Help]
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=4}} Project]
+** [{{fullurl:Special:ListFiles}} Files]
+* &lt;b&gt;Developer&lt;/b&gt;
+** [https://github.com/clecap/dante-delta/issues  Dante Issues]
+** [https://github.com/clecap/Parsifal/issues Parsifal Issues]
+* &lt;b&gt;Operator&lt;/b&gt;
+* &lt;b&gt;Demos&lt;/b&gt;
+** [[Help:Demo for DanteLinks | Dante-Links]]
+** [[Help:Demo for Parsifal | Parsifal]]
+* &lt;b&gt;Tests&lt;/b&gt;
+** [[Help:Diverse Tests|Diverse Tests]]
+** &lt;b&gt;[javascript:window.DANTE.testConsole() window.DANTE.testConsole()]&lt;/b&gt;
+** &lt;b&gt;[javascript:Dante.testConsoleZwei() Dante.testConsoleZwei()]&lt;/b&gt;
+** &lt;b&gt;[javascript:Dante.testConsoleDrei() Dante.testConsoleDrei()]&lt;/b&gt;
+** &lt;b&gt;[javascript:console.log(Dante.testConsoleDrei); testprintfc]&lt;/b&gt;
+** &lt;b&gt;[javascript:console.log(Dante); Log Dante object]&lt;/b&gt;
+** &lt;b&gt;[javascript:console.log(Dante.testDump); Log Dante.testDump]&lt;/b&gt;
+** &lt;b&gt;[javascript:Dante.testDump(); Dante.testDump]&lt;/b&gt;
+** [[Help:Tests for Drawio|Drawio]]
+** [[Help:Parsifal Diverse Demo|Diverse Parsifal]]
+** [[Help:Test for DanteLinks|DanteLinks]]
+** [[Help:Parsifal Test|Parsifal General Tests]]
+** [[Help:Parsifal Raw Test|Parsifal Raw Tests]]
+** [[Help:Parsifal Page Width|Parsifal Page Width]]
+** [[Help:Slides Test Reveal|Slides Reveal]]
+** &lt;b&gt;[javascript:PRT.limitSize(true) Limit Size ON]&lt;/b&gt;
+** &lt;b&gt;[javascript:PRT.limitSize(false) Limit Size OFF]&lt;/b&gt;
+}}
+&lt;/pre&gt;</text>
+      <sha1>nerirs9420ju2ig5uvtdm1v5f0hdmp3</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Corefiles</title>
+    <ns>8</ns>
+    <id>19</id>
+    <revision>
+      <id>19</id>
+      <timestamp>2023-09-15T19:12:14Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <origin>19</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="68" sha1="1t92yq0rz89vcwih4874wy4lo1e3g5q" xml:space="preserve">Enter one file per line.
+
+&lt;pre&gt;
+Main Page
+MediaWiki:Corefiles
+&lt;/pre&gt;</text>
+      <sha1>1t92yq0rz89vcwih4874wy4lo1e3g5q</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Gadgets-definition</title>
+    <ns>8</ns>
+    <id>20</id>
+    <revision>
+      <id>20</id>
+      <timestamp>2023-06-04T19:54:49Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>20</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="146" sha1="619q71sg2v39xymslvtl6l3pt98ia68" xml:space="preserve">
+
+== Test ==
+* danteGadgetTest[ResourceLoader]|danteGadgetTest.js
+
+* Edittop[ResourceLoader]|edittop.js
+* danteDump1[ResourceLoader]|danteDump1.js</text>
+      <sha1>619q71sg2v39xymslvtl6l3pt98ia68</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Gadget-danteGadgetTest.js</title>
+    <ns>8</ns>
+    <id>21</id>
+    <revision>
+      <id>21</id>
+      <timestamp>2023-06-04T19:54:49Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>21</origin>
+      <model>javascript</model>
+      <format>text/javascript</format>
+      <text bytes="187" sha1="0ek8xmfckm3ouywxtkxf5k45ka3odq9" xml:space="preserve">window.Dante=window.Dante || {};
+
+(function(){
+
+
+window.Dante.testConsoleDrei=function() {console.log ("testconsoleDrei");};
+
+console.log ("*** inside dante gadget", window.Dante);
+
+})();</text>
+      <sha1>0ek8xmfckm3ouywxtkxf5k45ka3odq9</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Common.js</title>
+    <ns>8</ns>
+    <id>22</id>
+    <revision>
+      <id>22</id>
+      <timestamp>2023-06-04T19:54:49Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>22</origin>
+      <model>javascript</model>
+      <format>text/javascript</format>
+      <text bytes="405" sha1="cupt0yavm500nuhqe7phw79rju72kt6" xml:space="preserve">/* Any JavaScript here will be loaded for all users on every page load. */
+
+var Dante= Dante || {};
+
+(function(){
+
+console.log ("*** Common.js: Dante", Dante);
+
+window.DANTE = window.DANTE || {};
+
+window.DANTE.testConsole = function () {console.log ("testConsole");};
+
+Dante.testConsoleZwei =
+function() {console.log ("testconsoleZwei");};
+
+
+
+})();
+
+console.log ("******** Completed MediaWiki:Common.js");</text>
+      <sha1>cupt0yavm500nuhqe7phw79rju72kt6</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Gadget-danteDump1.js</title>
+    <ns>8</ns>
+    <id>23</id>
+    <revision>
+      <id>23</id>
+      <timestamp>2023-06-04T19:54:50Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>23</origin>
+      <model>javascript</model>
+      <format>text/javascript</format>
+      <text bytes="1080" sha1="epujlwy6slmgda06lpeaefxsn1lhi8z" xml:space="preserve">window.Dante=window.Dante || {};
+(function(){
+
+
+function escapeHtml(unsafe)
+{
+    return unsafe
+         .replace(/&amp;/g, "&amp;amp;")
+         .replace(/&lt;/g, "&amp;lt;")
+         .replace(/&gt;/g, "&amp;gt;")
+         .replace(/"/g, "&amp;quot;")
+         .replace(/'/g, "&amp;#039;");
+ }
+
+
+window.Dante.testDump=function(){
+  var myWindow = window.open("", "", "width=1200,height=800");
+
+  var params = {"srces":"core", "srcFeatures":"current", "target":"window","title":"Special:DanteDump"};
+
+  var formBody = [];
+  for (var property in params) {
+    var encodedKey   = encodeURIComponent (property);
+    var encodedValue = encodeURIComponent (params[property]);
+    formBody.push(encodedKey + "=" + encodedValue);
+  }
+  formBody = formBody.join("&amp;");
+
+
+  fetch('./Special:DanteDump', {
+    method: 'POST',
+    headers: {
+        'Accept': 'text/html',
+        'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: formBody})
+   .then( function(response){ return response.text();} )
+   .then( function(text){return myWindow.document.write("&lt;pre&gt;"+escapeHtml(text)+"&lt;/pre&gt;");} );
+}
+
+})();</text>
+      <sha1>epujlwy6slmgda06lpeaefxsn1lhi8z</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Dantewikis</title>
+    <ns>8</ns>
+    <id>24</id>
+    <revision>
+      <id>24</id>
+      <timestamp>2023-06-06T12:51:21Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment>Created page with " * abra * kadabra"</comment>
+      <origin>24</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="17" sha1="re6rh2bx5gy4bged2lc9bfuo3jwq5ko" xml:space="preserve">
+* abra
+* kadabra</text>
+      <sha1>re6rh2bx5gy4bged2lc9bfuo3jwq5ko</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:ParsifalTemplate/tex</title>
+    <ns>8</ns>
+    <id>25</id>
+    <revision>
+      <id>25</id>
+      <timestamp>2023-06-30T19:56:14Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment>Created page with "magic-line-identifier-for-inclusion"</comment>
+      <origin>25</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="35" sha1="r03s62hdhw16v7zc5iuazfm3chdfll8" xml:space="preserve">magic-line-identifier-for-inclusion</text>
+      <sha1>r03s62hdhw16v7zc5iuazfm3chdfll8</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Sidebar/UI</title>
+    <ns>8</ns>
+    <id>26</id>
+    <revision>
+      <id>26</id>
+      <timestamp>2023-09-15T16:04:00Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <origin>26</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="231" sha1="smeg0o52ypx7a7anzqs5klmy8ncj1dy" xml:space="preserve">&lt;pre&gt;
+{{#tree: extensions=["persist"] | 
+* &lt;b&gt;[javascript:PRT.limitSize(true) Limit Size ON]&lt;/b&gt;
+* &lt;b&gt;[javascript:PRT.limitSize(false) Limit Size OFF]&lt;/b&gt;
+* &lt;b&gt;[javascript:window.persistCatWindow() Persist Cat Window]&lt;/b&gt;
+}}
+&lt;/pre&gt;</text>
+      <sha1>smeg0o52ypx7a7anzqs5klmy8ncj1dy</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Backupfiles</title>
+    <ns>8</ns>
+    <id>27</id>
+    <revision>
+      <id>27</id>
+      <timestamp>2023-09-15T18:49:13Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <origin>27</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="90" sha1="rdjd3ksfnwmybfpzu9pdyu6vlxhwl0o" xml:space="preserve">Enter one file per line.
+
+&lt;pre&gt;
+Main Page
+MediaWiki:Corefiles
+MediaWiki:Backupfiles
+&lt;/pre&gt;</text>
+      <sha1>rdjd3ksfnwmybfpzu9pdyu6vlxhwl0o</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Backupcategories</title>
+    <ns>8</ns>
+    <id>28</id>
+    <revision>
+      <id>28</id>
+      <timestamp>2023-09-15T18:48:07Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <origin>28</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="57" sha1="6z6foaroyykougagljbu6z6cdm0ej9w" xml:space="preserve">Enter one category per line.
+&lt;pre&gt;
+backup
+Compiler
+&lt;/pre&gt;</text>
+      <sha1>6z6foaroyykougagljbu6z6cdm0ej9w</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>File:CaravaggioJeromeValletta.jpg</title>
+    <ns>6</ns>
+    <id>29</id>
+    <revision>
+      <id>30</id>
+      <timestamp>2023-06-04T19:54:47Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>30</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
+      <sha1>phoiac9h4m842xq45sp7s6u21eteeq1</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Parsifal Test</title>
+    <ns>12</ns>
+    <id>30</id>
+    <revision>
+      <id>31</id>
+      <timestamp>2023-09-07T08:38:44Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment>/* Titel */</comment>
+      <origin>31</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="1170" sha1="1ezj2n2jevxrfrxue7svyd9f72f5fjx" xml:space="preserve">== Titel ==
+
+&lt;amsmath n="Myname"&gt;aix q kk  1 2 3d ss fghjghj56 876qq kjha slkjh  hallo q1 jk aa s wwad fs d a andsom more  st uff which in side o f this   d
+   
+\xcx
+
+Rule of 14cm  
+\hrule height 1px depth 1px width 14cm \relax         
+
+Rule  of 14.2cm 
+\hrule height 1px depth 1px width 14.2cm \relax
+
+Rule of s 15cm
+\hrule height 1px depth 1px width 15cm \relax
+
+Rule of 16cm
+\hrule height 1px depth 1px width 16cm \relax
+&lt;/amsmath&gt;
+
+== Part 2 ==
+&lt;amsmath&gt;
+b ja q q io qw qw   fje q
+&lt;/amsmath&gt;
+
+== One ==
+&lt;beamer b&gt;
+Hallo2345123 123 123 
+Das ist jakjh 
+$a$=$b$ kjh  kjqh k jkl lkj j h iuhh zh qwe asd u io
+&lt;/beamer&gt;
+
+== Stuff ==
+&lt;beamer b&gt;
+This is no w asdcvb we asd  qwe as d  qwe a sd qw e asd qwe asd qwe asd qwe asd qwe  asd qwe asd qwe asd qwe asd qwe asd beamer a sd
+&lt;/beamer&gt;
+
+== Only ==
+
+&lt;amsmath n="Myname"&gt;J xust  a test&lt;/amsmath&gt;
+
+== Titel Y ==
+
+&lt;amsmath o-proof&gt;
+Ea iaaa  sds df ax sd   gg   n s
+&lt;/amsmath&gt;
+
+&lt;amsmath c-habanalop&gt;Zwhc 
+sdf sdf
+sdfsdf
+xx
+sdfsdf
+as
+sdfsdf
+sdfsdf
+
+sdfsdf
+
+sdfsdf
+
+sdfsdf
+
+sdfsdf
+
+sdfsdf
+
+sdfsdf
+
+sdfsdf
+
+sdfsdf
+
+sdfsdf
+
+sdfsdf
+
+sdfsdfsdf
+
+sdf
+
+sdfe i&lt;/amsmath&gt;
+
+&lt;amsmath c="Ha bA Na"&gt;
+Drei \url{https://www.ifi.ch}
+&lt;/amsmath&gt;</text>
+      <sha1>1ezj2n2jevxrfrxue7svyd9f72f5fjx</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Test2</title>
+    <ns>0</ns>
+    <id>31</id>
+    <revision>
+      <id>32</id>
+      <timestamp>2023-06-04T19:54:47Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>32</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="715" sha1="fckb65y03c39vitkuu76u6wynvc23on" xml:space="preserve">asd asd asd asd asd asd asd asd asd asd asd 
+sdf sdf sdf sdf sdf sdf sdf sdf sdf sdf sdf
+sdf sdf 123 qwe 123 123 123 qwe asd qwe qwe 12123
+qwe qwe qwesdf sdf sdf234323 asdf sadf 
+sdf sdf sdf sdf asf fsf fs ffd fs dffdf sddf sffs asdf sdf fsf df 121aab asd
+
+&lt;amsmath n="mix"&gt;
+moxypqqqqk\n
+
+ kqaaaa\\
+
+ kk\\
+
+  sdf sdf sdf
+sdf\\
+
+ sdf sdf
+sdf \\ 
+
+aqa aqqyqwey12567
+
+\bigskip
+
+sdf\bigskip
+
+sdf  \bigskip
+
+
+sdf\bigskip
+
+moxypqqqqk\n
+
+ kqaaaa\\
+
+ kk\\
+
+  sdf sdf sdf
+sdf\\
+
+ sdf sdf
+sdf \\ 
+
+aqa aqqyqwey12567
+
+\bigskip
+
+sdf\bigskip
+
+sdf  \bigskip
+
+
+sdf\bigskip
+
+moxypqqqqk\n
+
+ kqaaaa\\
+
+ kk\\
+
+  sdf sdf sdf
+sdf\\
+
+ sdf sdf
+sdf \\ 
+
+aqa aqqyqwey12567
+
+\bigskip
+
+sdf\bigskip
+
+sdf  \bigskip
+
+
+sdf\bigskip
+
+kk
+
+&lt;/amsmath&gt;</text>
+      <sha1>fckb65y03c39vitkuu76u6wynvc23on</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Including a snippet</title>
+    <ns>0</ns>
+    <id>32</id>
+    <revision>
+      <id>33</id>
+      <timestamp>2023-06-04T19:54:47Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>33</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="29" sha1="hiqb4q469iv3blua2gtpov7j6k7bpf0" xml:space="preserve">now we get:
+
+{{Snippet:Snip}}</text>
+      <sha1>hiqb4q469iv3blua2gtpov7j6k7bpf0</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Slides Test</title>
+    <ns>0</ns>
+    <id>33</id>
+    <revision>
+      <id>34</id>
+      <timestamp>2023-06-04T19:54:47Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>34</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="200" sha1="tj8xo3aqex1id0pjiiicv89tc266b05" xml:space="preserve">
+__SLIDES__
+
+This requires a specific magic word here - ut it destroys the full view of the beamer. Why?
+
+== Slide 1 ==
+&lt;beamer&gt;
+This
+&lt;/beamer&gt;
+
+== Slide 2 ==
+&lt;amsmath&gt;
+Es ist $E = mc^2$.
+
+
+&lt;/amsmath&gt;</text>
+      <sha1>tj8xo3aqex1id0pjiiicv89tc266b05</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Compilerbau</title>
+    <ns>0</ns>
+    <id>34</id>
+    <revision>
+      <id>35</id>
+      <timestamp>2023-06-04T19:54:47Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>35</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="132" sha1="23omq8liaw6gxwb6je7n4hydxbxyqes" xml:space="preserve">&lt;amsmath&gt;
+\section{Anwendungen Compilerbau}
+
+\begin{itemize}
+\item asd
+\end{itemize}
+
+
+&lt;/amsmath&gt;
+
+&lt;beamer&gt;
+Das ist also 
+
+&lt;/beamer&gt;</text>
+      <sha1>23omq8liaw6gxwb6je7n4hydxbxyqes</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Notes</title>
+    <ns>0</ns>
+    <id>35</id>
+    <revision>
+      <id>36</id>
+      <timestamp>2023-06-04T19:54:47Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>36</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="376" sha1="a085dtv9c6d7cmajblo67bo3lufyi85" xml:space="preserve">Das ist jetzt ein Beispiel das wir uns gerne ansehen
+asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd qwd qwd qwd qwd qwd qwd asd asd a a 
+Das ist jetzt schon sehr gut.
+
+Wir wollen uns nicht ansehen, wie das im Detail funktioniertz. Denn das ist uns doch zu kompliziert. asd asd asd asd asd asd asd asd asd asd asd 123 sdf qwe qwe qwe
+
+&lt;amsmath&gt;
+
+asdasd
+
+&lt;/amsmath&gt;</text>
+      <sha1>a085dtv9c6d7cmajblo67bo3lufyi85</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>About</title>
+    <ns>0</ns>
+    <id>36</id>
+    <revision>
+      <id>37</id>
+      <timestamp>2023-06-04T19:54:47Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>37</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="24" sha1="plbxldqkhns2zhvbn8yb75zpz7ajpdp" xml:space="preserve">
+
+
+A generic about pages</text>
+      <sha1>plbxldqkhns2zhvbn8yb75zpz7ajpdp</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Example Page</title>
+    <ns>0</ns>
+    <id>37</id>
+    <revision>
+      <id>38</id>
+      <timestamp>2023-06-04T19:54:47Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>38</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="13" sha1="ajp6j7g939g7g08deo8r87ug3fal078" xml:space="preserve">
+
+= Example =</text>
+      <sha1>ajp6j7g939g7g08deo8r87ug3fal078</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>General disclaimer</title>
+    <ns>0</ns>
+    <id>38</id>
+    <revision>
+      <id>39</id>
+      <timestamp>2023-06-04T19:54:47Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>39</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
+      <sha1>phoiac9h4m842xq45sp7s6u21eteeq1</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Privacy policy</title>
+    <ns>0</ns>
+    <id>39</id>
+    <revision>
+      <id>40</id>
+      <timestamp>2023-06-04T19:54:47Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>40</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="34" sha1="2nkdpdzxjgzhf5ldmmauopso2cmpc0t" xml:space="preserve">
+Some privacy blurb
+
+= Important =</text>
+      <sha1>2nkdpdzxjgzhf5ldmmauopso2cmpc0t</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Test/Syntax Highlights</title>
+    <ns>0</ns>
+    <id>40</id>
+    <revision>
+      <id>41</id>
+      <timestamp>2023-06-04T19:54:48Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>41</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="265" sha1="nogir1v349frb06thkm8e0szpdt8q5x" xml:space="preserve">
+
+== Simple Highlight ==
+&lt;syntaxhighlight&gt;
+let x = 7;
+&lt;/syntaxhighlight&gt;
+
+== More Complex Highlight ==
+‎&lt;syntaxhighlight lang="python"&gt;
+def quick_sort(arr):
+	less = []
+	pivot_list = []
+	more = []
+	if len(arr) &lt;= 1:
+		return arr
+	else:
+		pass
+‎&lt;/syntaxhighlight&gt;</text>
+      <sha1>nogir1v349frb06thkm8e0szpdt8q5x</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Test/Syntax Hightlights</title>
+    <ns>0</ns>
+    <id>41</id>
+    <redirect title="Test/Syntax Highlights" />
+    <revision>
+      <id>42</id>
+      <timestamp>2023-06-04T19:54:48Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>42</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="36" sha1="45mkiq63ik6r7rnx1s2pblxilhg8lm0" xml:space="preserve">#REDIRECT [[Test/Syntax Highlights]]</text>
+      <sha1>45mkiq63ik6r7rnx1s2pblxilhg8lm0</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Test/Markdown</title>
+    <ns>0</ns>
+    <id>42</id>
+    <revision>
+      <id>43</id>
+      <timestamp>2023-06-04T19:54:48Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>43</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="28" sha1="rayg7q1ygqih0pv5xj55ozzeyk7kzlz" xml:space="preserve">&lt;markdown&gt;
+`asd`
+&lt;/markdown&gt;</text>
+      <sha1>rayg7q1ygqih0pv5xj55ozzeyk7kzlz</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Category:Boot</title>
+    <ns>14</ns>
+    <id>43</id>
+    <revision>
+      <id>44</id>
+      <timestamp>2023-06-04T19:54:48Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>44</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="19" sha1="i84bxell5s45syub6c99pvyb3xjg9zk" xml:space="preserve">[[Category:System]]</text>
+      <sha1>i84bxell5s45syub6c99pvyb3xjg9zk</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Category:System</title>
+    <ns>14</ns>
+    <id>44</id>
+    <revision>
+      <id>45</id>
+      <timestamp>2023-06-04T19:54:48Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>45</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="17" sha1="plgyxa9zdjtjany4tcftrk2sfqdwo6g" xml:space="preserve">[[Category:Root]]</text>
+      <sha1>plgyxa9zdjtjany4tcftrk2sfqdwo6g</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Sidebar</title>
+    <ns>12</ns>
+    <id>45</id>
+    <revision>
+      <id>46</id>
+      <timestamp>2023-06-04T19:54:48Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>46</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="223" sha1="eraooa0up3b1a9vp5vpfvja9527k8tj" xml:space="preserve">
+== Configuring the Sidebar ==
+
+* Main Sidebar File: [[MediaWiki:Sidebar]]
+* Sidebar Tree Files:
+** [[MediaWiki:Sidebar/Areas]]
+** [[MediaWiki:Sidebar/Social]]
+* Sidebar Category Definition: [[MediaWiki:Sidebar/Categories]]</text>
+      <sha1>eraooa0up3b1a9vp5vpfvja9527k8tj</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Demo for DanteLinks</title>
+    <ns>12</ns>
+    <id>46</id>
+    <revision>
+      <id>47</id>
+      <timestamp>2023-06-06T22:36:14Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment>/* All Link Types */</comment>
+      <origin>47</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="1067" sha1="05tj477zi3r2r8m8v8n5jgjj5idc73x" xml:space="preserve">
+* Broken pipes for the internal links do not yet work.
+[[Main Page ¦ style=color:green;]]
+
+[[Help:Demo for DanteLinks]]
+
+[[Help:Demo for DanteLinks ¦ style=color:green;]]
+
+Adding style attributes to an external link via broken pipe symbol:
+* [https://blog.fefe.de Fefe ¦ style=color:green;]
+
+Adding target attributes so that an external link opens in a new tab:
+* [https://blog.fefe.de Fefe ¦ target=_blank ]
+
+For use in sidebars only: There is a special class dexternal which can be used to append an external link symbol to link. In the sidebar links which otherwise are external will not show the symbol external. This is as we need query extensions for a number of links in the sidebar and this needs fullurl as parser and this causes the parser to understand the link as external in every case. Therefore we turned this thingie off in sidebar until we find a smart fix for this.
+
+[[Main Page]]
+
+== All Link Types ==
+
+[[Main Page]]
+
+[[Main Page|Hauptseite]]
+
+[[Main Page]]s
+
+[https://blog.fefe.de]
+
+[https://blog.fefe.de Fefe]
+
+[[Halomi]]
+
+[[:Category:Root]]</text>
+      <sha1>05tj477zi3r2r8m8v8n5jgjj5idc73x</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Demo for Parsifal</title>
+    <ns>12</ns>
+    <id>47</id>
+    <revision>
+      <id>48</id>
+      <timestamp>2023-06-06T18:54:24Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <origin>48</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="53" sha1="qxp83972ncr5860dg2vgmhp9lm6nqxt" xml:space="preserve">
+__SLIDES__
+
+== one ==
+bla
+&lt;amsmath&gt;
+asdq
+
+&lt;/amsmath&gt;</text>
+      <sha1>qxp83972ncr5860dg2vgmhp9lm6nqxt</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Parsifal Diverse Demo</title>
+    <ns>12</ns>
+    <id>48</id>
+    <revision>
+      <id>49</id>
+      <timestamp>2023-09-04T21:20:50Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>49</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="3533" sha1="9kkn4uukbcuvranoi58gntiowa368ht" xml:space="preserve">&lt;amsmath style="border:10px solid green;"&gt;
+921iihj kjh ujkWe6697 i m a sdf  ke a meas urement and  get a r esu lt  $\omega$. We now assume we can talk of an object with the property $\omega$. We cannota
+say that the object is (or is in the state) $\omega$ as this description might not be precise enough in the sense that the object
+might have additional properties as well (The color red is an insufficient characterization of an object). We have the fantasy that
+a sufficient number of properties will uniquely describe an object (This fantasy might not be true).
+We used language to assign the property to the object but we should rather have used language which assigns the property to the 
+relation of both, the measurement device and the object. And we should not ignore that, in addition to measurement device and object there is
+also a certain rest in the universe. In the end, we should talk about the property being connected to the measurement device, the object and the rest of the universe. However, it is more convenient, at least in the beginning, to assume that the property belongs to the object 
+alone and take the journey from there. Also,lkj  we must admit that there are observations (Hon Mandel dip) and theories (particle number operator not always
+precisely defined in Fock space) which make it difficult to talk about well-defined objects, of which we have the fantasy that they can be identified, and even if they do not carry identity that the at least could be counted in numbers of a kind.
+
+We make the observation: If we measure a property twice immediately after each other leaving no time for development in between,
+we get the same result. This might not be the case for every measurement (there are measuremetns for which this is not true and where we describe the measurement as an interaction which changes the object in a way and
+there are measurements which cannot be made twice in a row as, for example, they destroy the measured object by the very act of observation -- at least
+that is how we describe the situations in these cases), but at least we can assume this for a class of ideal measurements. 
+
+Under this assumption: After the measurement we talk about the property of the object in a precise manner in the sense
+that a repeated measurement leads to the same result.
+
+So, how would we describe the object before the measurement?
+
+Assume we make the observation, that an object may lead to different measurement results. 
+We find: When we measure (different) objects of a certain kind of which we believe we know no difference (short of knowing somehow that they are different), why would they lead to different measurement results.
+
+a
+Even worse: We assumed that we knew a property after the measurement. So we know the object as such. 
+
+We can describe this as: One property is still missing which we did not measure in that measurement (for example we measured color and not smell) and if we had measured it
+we would have realized that the object is indeed different.
+We can describe this as: Before the measurement the object did not have the property we measured (it was imprinted by the measurement).
+Before the measurement the object had that property only to a certain degree, and for some reason the measurement process selected this and not that aspect of the property. 
+&lt;/amsmath&gt;
+
+
+&lt;amsmath&gt;
+1 5 s s  h jk jkl
+&lt;/amsmath&gt;
+
+
+&lt;amsmath&gt;
+1 as d  a sd as d    this is ju st an example
+&lt;/amsmath&gt; 
+
+&lt;amsmath&gt;
+Ve ry s  m a ll k    
+&lt;/amsmath&gt;
+[[Category:System]]
+[[Category:Boot]]</text>
+      <sha1>9kkn4uukbcuvranoi58gntiowa368ht</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Test for DanteLinks</title>
+    <ns>12</ns>
+    <id>49</id>
+    <revision>
+      <id>50</id>
+      <timestamp>2023-06-20T19:27:56Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <origin>50</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="177" sha1="34brh7em6shfxd9xx2fq18qel0twxhs" xml:space="preserve">* Broken pipes for the internal links do not yet work.
+[[Main Page ¦ style=color:green;]]
+
+== Test for setting target ==
+* [https://www.mediawiki.org/ olgana ¦ target=_blank ]</text>
+      <sha1>34brh7em6shfxd9xx2fq18qel0twxhs</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Slides Test Reveal</title>
+    <ns>12</ns>
+    <id>50</id>
+    <revision>
+      <id>51</id>
+      <timestamp>2023-08-27T16:23:01Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment>/* Four */</comment>
+      <origin>51</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="195" sha1="gr9isow5fn3myykj4pvw6g30dce0mcg" xml:space="preserve">
+__SLIDES__
+
+__NOTOC__
+
+==One==
+&lt;beamer b&gt;
+one
+
+qwe
+
+qwe
+
+qwe
+
+
+&lt;/beamer&gt;
+
+==Two==
+&lt;beamer b&gt;
+Two qwd
+&lt;/beamer&gt;
+
+== Three ==
+&lt;amsmath&gt;
+asd asd
+&lt;/amsmath&gt;
+
+== Four ==
+&lt;amsmath&gt;
+asd asdv
+&lt;/amsmath&gt;</text>
+      <sha1>gr9isow5fn3myykj4pvw6g30dce0mcg</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Tests for Drawio</title>
+    <ns>12</ns>
+    <id>51</id>
+    <revision>
+      <id>52</id>
+      <timestamp>2023-06-20T19:21:37Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>Dir moved page [[Tests for Drawio]] to [[Help:Tests for Drawio]] without leaving a redirect</comment>
+      <origin>52</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="45" sha1="tc9pijlp9xgslwze9td1wygmkfnxxy3" xml:space="preserve">
+== First Test ==  
+&lt;drawio filename="asd" /&gt;</text>
+      <sha1>tc9pijlp9xgslwze9td1wygmkfnxxy3</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Parsifal Page Width</title>
+    <ns>12</ns>
+    <id>52</id>
+    <revision>
+      <id>53</id>
+      <timestamp>2023-06-28T12:18:19Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <origin>53</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="275" sha1="fovg555xwpewgloylt0qfuvssu62zuz" xml:space="preserve">== Test for Parsifal Page Width ==
+Pre
+&lt;amsmath&gt;
+Ei nz el test aq qwehj hjk hjk 789
+ 
+Rule of 14cm
+\hrule height 1px depth 1px width 14cm \relax
+
+Rule of 15cm
+\hrule height 1px depth 1px width 15cm \relax
+
+Rule of 16cm
+\hrule height 1px depth 1px width 16cm \relax
+&lt;/amsmath&gt;</text>
+      <sha1>fovg555xwpewgloylt0qfuvssu62zuz</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Parsifal Raw Test</title>
+    <ns>12</ns>
+    <id>53</id>
+    <revision>
+      <id>54</id>
+      <timestamp>2023-06-30T20:52:51Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <origin>54</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="91" sha1="brrf0hy184ebx0xw2u318hfe8hm3q5d" xml:space="preserve">
+== First ==
+&lt;tex&gt;
+\documentclass{article}
+\begin{document}
+asd khjks
+\end{document}
+&lt;/tex&gt;</text>
+      <sha1>brrf0hy184ebx0xw2u318hfe8hm3q5d</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Just a comment</title>
+    <ns>0</ns>
+    <id>54</id>
+    <revision>
+      <id>55</id>
+      <timestamp>2023-08-27T12:21:24Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment>Created page with "Just  A  Comment"</comment>
+      <origin>55</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="16" sha1="ppiclegmobn61eruux8zaa2xr1wgswd" xml:space="preserve">Just
+
+A
+
+Comment</text>
+      <sha1>ppiclegmobn61eruux8zaa2xr1wgswd</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Diverse Tests</title>
+    <ns>12</ns>
+    <id>55</id>
+    <revision>
+      <id>56</id>
+      <timestamp>2023-09-12T10:04:38Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <origin>56</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="1847" sha1="d83d354zzoojuzpof5r2kbsybe3eeck" xml:space="preserve">
+[[Help:Transclusion Test]]
+
+= Level 1 =
+
+
+&lt;amsmath&gt;
+Blabla this is an example for an entire line filling the entire area of the browser to get a demonstration for the autoscaling feature.
+&lt;/amsmath&gt;
+
+== Level 1.1 ==
+
+=== Level 1.1.1 ===
+&lt;amsmath&gt;
+Blabla this is an example for an entire line filling the entire area of the browser to get a demonstration for the autoscaling feature.
+&lt;/amsmath&gt;
+
+&lt;amsmath&gt;
+Blabla s
+
+\bigskip\bigskip\bigskip
+
+this 
+
+\bigskip\bigskip\bigskip
+
+is 
+
+\bigskip\bigskip\bigskip
+
+an 
+
+\bigskip\bigskip\bigskip
+
+
+example 
+
+\bigskip\bigskip\bigskip
+
+
+for 
+
+an 
+
+\bigskip\bigskip\bigskip
+
+entire line 
+
+\bigskip\bigskip\bigskip
+
+filling 
+
+\bigskip\bigskip\bigskip
+
+the 
+
+\bigskip\bigskip\bigskip
+
+entire 
+
+area of the browser to get a demonstration for the autoscaling feature.
+&lt;/amsmath&gt;
+
+
+==== Level 1.1.1.1 ====
+
+&lt;amsmath&gt;
+\begin{figure} 
+\centering
+\begin{tikzpicture}
+\node (a) {E}
+child {node (b) {F}
+}
+child {node (c) {+}
+}
+child {node (d) {T}
+child {node (e) {T} 
+  child {node (f) {F}  child {node  (g) {8}} }  
+  }
+child {node  (h) {*}}
+child {node  (i) {F} child {node  (j) {2}}}
+};
+
+\begin{scope}[every node/.style={font=\footnotesize,color=red}]
+\node[right=of a] (na) {\{E.v${}\coloneqq{}$+T.v\}};
+\node[right=of d] (nd) {\{T.v${}\coloneqq{}$F.v$^{*}$T.v\}};
+\node[right=of i] (ni) {\{F.v${}\coloneqq{}$2\}};
+\node[left=of b] (nb) {\{F.v${}\coloneqq{}$5\}};
+\node[left=of e] (ne) {\{T.v${}\coloneqq{}$F.v\}};
+\node[left=of f] (nf) {\{F.v${}\coloneqq{}$8\}};
+\foreach \i in {a,b,d,e,f,i}
+  \draw[dotted] (\i) -- (n\i);
+\end{scope}
+\end{tikzpicture}
+
+\end{figure}
+
+&lt;/amsmath&gt;
+
+===== Level 1.1.1.1.1 =====
+
+====== Level 1.1.1.1.1.1 ======
+
+======= Level 1.1.1.1.1.1.1 =======
+
+======== Level 1.1.1.1.1.1.1.1 ========
+
+== Level 1.2 ==
+
+=== Level 1.2.1 ===
+
+=== Lebel 1.2.2 ===
+
+== Level 1.3 ==
+
+=== Level 1.3.1 ===</text>
+      <sha1>d83d354zzoojuzpof5r2kbsybe3eeck</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Compilerbau/Einführung</title>
+    <ns>0</ns>
+    <id>56</id>
+    <revision>
+      <id>57</id>
+      <timestamp>2023-09-15T19:24:53Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <origin>57</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="6901" sha1="i3r3hm8iylzp8ea9pd9l6i9ylvu2nsq" xml:space="preserve">
+__HIDEHL__
+
+== Wozu Compiler? ==
+&lt;amsmath&gt;
+\title{Wozu Compiler?}
+  
+\begin{itemize}
+\item[(1)] Umwandlung von Beschreibungsformen
+\item[(2)] in andere Beschreibungsformen
+\item[(3)] unter Beibehaltung der Semantik
+\end{itemize}
+&lt;/amsmath&gt;
+
+===== =====
+&lt;amsmath&gt;
+\textbf{Beispiel 1:} 
+\begin{itemize}
+\item FORTRAN ist für den Physiker eine leicht schreibbare Programmiersprache. 
+\item Intel 8086 Binärcode ist für den Laptop ausführbar.
+\end{itemize}
+
+\textbf{Beispiel 2:} (Untypisch für \enquote{Compilerbau}, entspricht aber der Definition)
+\begin{itemize}
+\item \LaTeX ist für den Mathematiker gut geeignet.
+\item Postscript ist für den Drucker gut geeignet.
+\item BMP ist für den Bildschirm gut geeignet.
+\end{itemize}
+
+\textbf{Beispiel 3:} 
+\begin{itemize}
+\item Typescript ist für den App-Programmierer leicht nutzbar.
+\item Javascript ist für den Browser leicht ausführbar.
+\end{itemize}
+&lt;/amsmath&gt;
+
+== ==
+&lt;amsmath&gt;
+\title{Beibehaltung der Semantik}
+
+Nicht immer strenge Anwendung von formaler Semantik.
+
+Unbekannte Eigenschaften der Hardware
+
+Ressourcen Limitierungen: Wir compilieren für eine
+random-access-machine mit (virtuell) unendlich viel Speicherplatz.
+
+Computer-Arithmetik: Wir tun oft so, also ob auf der Zielmaschine
+$a+(b+c) = (a+b)+c$ gilt. das stimmt aber nicht!
+
+Wir ignorieren Laufzeit-Ausnahmen.
+&lt;/amsmath&gt;
+
+
+&lt;amsmath&gt;
+\title{Andere Formate}
+
+
+
+
+&lt;/amsmath&gt;
+
+== ==
+&lt;amsmath&gt;
+\title{Compilerbau}   
+ 
+\begin{itemize}
+\item Altes und relative zentrales Problem der Informatik jk
+\item Bestehende Lösungen mit hohem Reifegrad
+\item Hersteller und Kunden sind Informatiker
+\item Durchgehende Fortsetzung von der Theorie in die Praxis
+\item Neue Sprachen und Sprachkonzepte benötigen immer wieder neue Compiler
+\end{itemize}
+ 
+&lt;/amsmath&gt;
+
+== Compiler versus Interpreter ==
+&lt;drawio filename="compiler-und-interpreter"/&gt;
+
+&lt;amsmath&gt;
+\begin{tabular}[]{p{2.5cm}p{5cm}p{5cm}}
+ &amp; \textbf{Compiler} &amp; \textbf{Interpreter} \\
+Ausführung &amp; Schnell &amp; Langsam \\
+Vorlauf &amp; Lang &amp; Kurz \\
+Abarbeitung &amp; 1-n Durchläufe &amp;  Schrittweise, inkrementell \\
+Statische Fehler &amp; Im gesamten Code gefunden &amp; Nur in ausgeführten Code-Teilen \\
+Symbolische Ausführung &amp; Schwierig\linebreak Mit symbolischem Debugger &amp; Banal, denn Interpretation\linebreak \textit{ist} symbolische Ausführung \\
+Modifikation &amp; Nur vor Compilation &amp; Auch zur Laufzeit \\
+Quellcode nötig &amp; Nur für Übersetzung &amp; Für jede Ausführung \\
+IP Schutz &amp; Leicht &amp; Schwer (obfuscation) \\
+Typische\linebreak Beispiele &amp; C, C++, Pascal, Modula, Fortran, Java, Swift &amp; JavaScript, Python, Shell-Sprachen, Postscript, Ruby, LISP, Haskell, Perl \\
+\end{tabular}
+
+Zunehmend Kombination beider Formen realisiert.
+&lt;/amsmath&gt;
+
+== Arten von Interpretern ==
+
+
+== Arten von Compilern ==
+
+===  ===
+&lt;amsmath&gt;
+\title{Nach der Umgebung}
+
+\begin{description}
+\item[Nativer Compiler ] übersetzt für das System auf dem der Compiler selber läuft.
+
+Beispiel: C-Compiler auf dem PC übersetzt für den PC.
+
+\item[Crosscompiler ] übersetzt für ein anderes System als jenes, auf dem
+der Compiler selber läuft.
+
+Beispiel: Swift-Compiler auf dem Mac Laptop übersetzt für das iPhone oder die Apple Watch.
+\end{description}
+&lt;/amsmath&gt;
+
+=== Nach der Abstraktionsstufe ===
+&lt;amsmath&gt;
+\title{Nach der Abstraktionsstufe}
+
+\begin{description}
+\item[Compiler ] übersetzt meistens von einer Sprache höherer Abstraktions-Stufe 
+in eine Sprache niedriger Abstraktions-Stufe.
+
+Beispiel: GNU C-Compiler übersetzt in Intel 8086 Maschinensprache.
+
+\item[Transpiler ] übersetzt von einer Hochsprache in eine andere Hochsprache.
+
+Beispiel: Babel Transpiler übersetzt ECMA-Script 6, JSX, Typescript in JavaScript nach ECMA-Script 5 Standard.
+
+Beispiel: Emscripten übersetzt C++ nach Javascript, im Umweg über die LLVM (Low Level Virtual Machine) Zwischensprache.
+
+\item[Recompiler ] übersetzt eine Sprache niedriger Abstraktions-Stufe in 
+einer Sprache niedriger Abstraktions-Stufe.
+
+Beispiel: LLVM Backend übersetzt LLVM in Intel 8086 Maschinensprache.
+
+\item[Decompiler ] übersetzt von Sprache niedriger Abstraktions-Stufe
+in eine Sprache hoher Abstraktions-Stufe.
+
+Beispiel: JEB decompiliert Java-Bytecode nach Java-Quellcode und
+Intel 8086 Maschinensprache nach C-Quellcode.
+
+\item[Assembler ] übersetzt symbolische Darstellung einer Maschinen-nahen 
+Sprache in die binäre Darstellung für eine Maschine.
+
+Beispiel: MASM übersetzt Intel 8086 Assembler in Intel 8086 Binärprogramme.
+
+\item[Bytecode Compiler ] übersetzt eine Hochsprache in eine Zwischensprache (Bytecode) für eine virtuelle Maschine.
+
+Beispiel: Compiler der LLVM Frontend Compiler übersetzen C und C++ nach LLVM.
+
+Beispiel: Java Bytecode Compiler übersetzt Java nach Java Bytecode.
+
+\end{description}
+&lt;/amsmath&gt;
+
+&lt;drawio filename="compiler-abstraktion" /&gt;
+
+=== Zeitpunkt ===
+&lt;amsmath&gt;
+
+\begin{description}
+\item[Ahead of Time (AOT) Compiler ] übersetzt vor der Ausführung.
+
+Beispiel: GNU C Compiler.
+
+\item[Just in Time (JIT) Compiler ] übersetzt bei der Ausführung.
+Versteckt eine de-facto AOT Compilation vor dem Benutzer.
+
+Kann mit Interpretations-Phase verbunden sein.
+
+\textit{Hotspot} Technologie: Nur wichtige Teile werden übersetzt, die anderen
+Teile bleiben interpretiert.
+
+Beispiel: V8 Compiler für JavaScript / Node.
+
+Beispiel: HHVM Compiler für PHP.
+
+\end{description}
+
+
+&lt;/amsmath&gt;
+
+== Begleitwerkzeuge ==
+&lt;amsmath&gt;
+\title{Begleitwerkzeuge}
+
+
+\begin{description}
+\item[Präprozessor ] Werkzeuge zur Vorbearbeitung von Quellcode.
+
+Beispiel: \href{https://en.cppreference.com/w/cpp/preprocessor}{cpp}: C Präprozessor.
+
+Beispiel: \href{https://webpack.js.org/}{Webpack}: JavaScript Bundler.
+
+\item[Assembler ] Werkzeuge zur Umwandlung einer symbolischen Darstellung einer Maschinen-nahen Sprache in die binäre Darstellung für eine Maschine.
+
+Beispiel: MASM übersetzt Intel 8086 Assembler in Intel 8086 Binärprogramme.
+
+\item[Linker/Lader ] Werkzeuge zum Zusammenfügen von Code-Bestandteilen
+mit Quer-Referenzen und symbolischen Adressen, meistens auf Ebene von
+Binärcode oder Maschinencode.
+
+Beispiel: \href{https://linux.die.net/man/8/ld.so}{ld.so, ld-linux.so}, \href{https://linux.die.net/man/8/ldconfig}{ldconfig.so}, \href{https://linux.die.net/man/1/ldd}{ldd} Linker/Lader Werkzeuge von Linux.
+
+\item[Linter ] Werkzeuge für statische Code-Analyse, meist auf Ebene
+von Quellcode. Machen auf bekannte oder mutmaßliche 
+
+Beispiel: \href{https://www.unix.com/man-page/v7/1/lint/}{lint} Linux lint Programm für C.
+
+\end{description}
+
+Literaturhinweis: S. Grover, Linux and Loaders, Linux Journal, 26. November 2002, \url{https://www.linuxjournal.com/article/6463}.
+
+&lt;/amsmath&gt;
+
+
+== Motivation ==
+&lt;beamer&gt;
+{\LARGE\bf Title} 
+
+\begin{itemize}
+\item Angewandte Theorie
+\end{itemize}
+&lt;/beamer&gt;
+
+
+&lt;hide&gt;
+Einige kleine Erklärungen.
+&lt;/hide&gt;
+
+Gerade noch ein wenig Zeugs
+
+== Compiler Bootstrapping ==
+asdasdasdasd
+
+
+[[Category:Compiler]]</text>
+      <sha1>i3r3hm8iylzp8ea9pd9l6i9ylvu2nsq</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Compilerbau/Semesterplan</title>
+    <ns>0</ns>
+    <id>57</id>
+    <revision>
+      <id>58</id>
+      <timestamp>2023-09-12T10:06:15Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment>/*  */</comment>
+      <origin>58</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="1782" sha1="qgktnqczj0y3i8pkc0og00owfbl29nd" xml:space="preserve">
+== ==
+&lt;amsmath&gt;
+\def\UE#1{\hspace*{0.5cm}\color{green}UE#1 (Gaede)}
+\def\PK#1{\hspace*{0.5cm}\color{red}PK#1 (Gaede)}
+\def\VL#1{\color{blue}VL#1 (Cap)}
+
+\def\ue{\leavevmode\color{green}}
+\def\pk{\leavevmode\color{red}}
+\def\vl{\leavevmode\color{blue}}
+
+\textbf{\large Zeitplanung}
+
+\begin{tabular}[]{c|l|lp{5cm}}
+\textbf{Datum} &amp; \textbf{Veranstaltung} &amp; \textbf{Thema} &amp; \textbf{Inhalte} \\ \hline
+16. 10. &amp; \VL{1} \\
+18. 10. &amp; \UE1 &amp; \ue Wiederholung &amp; \ue\scriptsize Wiederholung reguläre Ausdrücke, DEA und NDEA\\
+23. 10. &amp; \VL{2} \\
+25. 10. &amp; \PK 1 &amp; \pk Lexikalische Analyse 1 &amp;  \pk\scriptsize Einarbeitung in 
+  C und make, Implementierung eines Quellcode-Filters \\
+30. 10. &amp; \VL{3} \\
+01. 11. &amp; \UE 2 \\
+06. 11. &amp; \VL{4} \\
+08. 11. &amp; \PK 2 &amp; \pk Lexikalische Analyse 2 &amp; \pk\scriptsize Klassifizieren lexikalischer Token, Einsortieren in eine Symboltabelle \\
+13. 11. &amp; \VL{5} \\
+15. 11. &amp; \UE 3 \\
+20. 11. &amp; \VL{6} \\
+22. 11. &amp; \PK 3 &amp; \pk Syntax Analyse 1 &amp; \pk\scriptsize LL(1) Parser für Modula 2 via LL-Algo \\
+27. 11. &amp; \VL{7} \\
+29. 11. &amp; \UE 4 \\
+04. 12. &amp; \VL{8} \\
+06. 12. &amp; \PK 4 &amp; \pk Syntax Analyse 2 &amp; \pk\scriptsize LALR(1) Parser für Modula 2 via Bison \\
+11. 12. &amp; \VL{9} \\
+13. 12. &amp; \UE 5 \\
+18. 12. &amp; \VL{10} \\
+20. 12. &amp; \PK 5 &amp; \pk Semantische Analyse &amp; \pk\scriptsize  Aufbau eines attributierten Syntaxbaumes mittels Kimwitu++\\
+03. 01. &amp; \PK 6 &amp; \pk Code Erzeugung &amp; \pk\scriptsize Ausgabe einer Übersetzung in der Sprache C\\
+08. 01. &amp; \VL{11} \\
+10. 01. &amp; \UE 6 \\
+15. 01. &amp; \VL{12} \\
+17. 01. &amp; \PK 7 &amp; \pk Zusammenfassung &amp; \pk\scriptsize Rückblick und Abschlußbesprechung\\
+22. 01. &amp; \VL{13} \\
+24. 01. &amp; \UE 7 &amp; \ue Zusammenfassung &amp; \ue\scriptsize Rückblick und Abschlußbesprechung
+\end{tabular}
+
+
+&lt;/amsmath&gt;
+[[Category:Compiler]]</text>
+      <sha1>qgktnqczj0y3i8pkc0og00owfbl29nd</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Compiler/Stoffgliederung</title>
+    <ns>0</ns>
+    <id>58</id>
+    <revision>
+      <id>59</id>
+      <timestamp>2023-09-07T18:55:16Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>59</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="52" sha1="6w2n7msedfu7da0uyzrdnoi5jqs6f3j" xml:space="preserve">= =
+&lt;amsmath&gt;
+asd
+
+
+&lt;/amsmath&gt;
+[[Category:Compiler]]</text>
+      <sha1>6w2n7msedfu7da0uyzrdnoi5jqs6f3j</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Category:Compiler</title>
+    <ns>14</ns>
+    <id>59</id>
+    <revision>
+      <id>60</id>
+      <timestamp>2023-09-07T18:55:44Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment>Created page with "Compilerbau Vorlesung"</comment>
+      <origin>60</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="21" sha1="9hgj82tnju23y0gpupgkn2mdfcdkvt8" xml:space="preserve">Compilerbau Vorlesung</text>
+      <sha1>9hgj82tnju23y0gpupgkn2mdfcdkvt8</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Compilerbau/Literaturliste</title>
+    <ns>0</ns>
+    <id>60</id>
+    <revision>
+      <id>61</id>
+      <timestamp>2023-09-07T20:55:45Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>61</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="191" sha1="puk30bw7jost1ln3rnjyp8565dk7wq1" xml:space="preserve">
+
+
+&lt;amsmath&gt;
+
+\textbf{Wagenknecht:} C. Wagenknecht, M. Hielscher:
+
+Sehr gute Behandlung der LL(k) und LK(k) Theorie, sowie der
+grammatik-Transformationen.
+
+
+
+
+&lt;/amsmath&gt;
+[[Category:Compiler]]</text>
+      <sha1>puk30bw7jost1ln3rnjyp8565dk7wq1</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>File:Compiler-und-interpreter.svg</title>
+    <ns>6</ns>
+    <id>61</id>
+    <revision>
+      <id>63</id>
+      <parentid>62</parentid>
+      <timestamp>2023-09-27T22:00:53Z</timestamp>
+      <contributor>
+        <username>Imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment>Imported&gt;Dir uploaded [[File:Compiler-und-interpreter.svg]]</comment>
+      <origin>62</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="19" sha1="1t2q86rx3lsjwwz2n9tjf1n9icfk64q" xml:space="preserve">[[Category:backup]]</text>
+      <sha1>1t2q86rx3lsjwwz2n9tjf1n9icfk64q</sha1>
+    </revision>
+    <upload>
+      <timestamp>2023-09-08T12:49:50Z</timestamp>
+      <contributor>
+        <username>Imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment deleted="deleted" />
+      <filename>Compiler-und-interpreter.svg</filename>
+      <src>https://localhost:4443/wiki-dir/images/8/85/Compiler-und-interpreter.svg</src>
+      <size>14175</size>
+      <sha1base36>cbs8x8miwwfvi0qcofr0y1td9jk8fao</sha1base36>
+      <rel>8/85/Compiler-und-interpreter.svg</rel>
+      <contents encoding="base64">PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRw
+Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSI3NjFweCIgaGVp
+Z2h0PSI0NDFweCIgdmlld0JveD0iLTAuNSAtMC41IDc2MSA0NDEiIGNvbnRlbnQ9IiZsdDtteGZp
+bGUgaG9zdD0mcXVvdDtsb2NhbGhvc3QmcXVvdDsgbW9kaWZpZWQ9JnF1b3Q7MjAyMy0wOS0wOFQx
+Mjo0OTo0OS4yMzhaJnF1b3Q7IGFnZW50PSZxdW90O01vemlsbGEvNS4wIChNYWNpbnRvc2g7IElu
+dGVsIE1hYyBPUyBYIDEwXzE1XzcpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vj
+a28pIENocm9tZS8xMTYuMC4wLjAgU2FmYXJpLzUzNy4zNiZxdW90OyBldGFnPSZxdW90O1ZqZGpa
+YlJPR3hZYThSVHpxRkdaJnF1b3Q7IHZlcnNpb249JnF1b3Q7MjEuNS4wJnF1b3Q7IHR5cGU9JnF1
+b3Q7ZW1iZWQmcXVvdDsmZ3Q7Jmx0O2RpYWdyYW0gaWQ9JnF1b3Q7RjhSa2lXZmg0bTBKTDY2SnpM
+azgmcXVvdDsgbmFtZT0mcXVvdDtQYWdlLTEmcXVvdDsmZ3Q7N1pwTGM1c3dFTWMvamE4ZGd3RGpZ
+K0k4MnBsbXBoMGZtdlltdzlxb3hZZ1JjbXo2NlN0czhaSndnbTBDemt4UFlWY1AwSDkvZXF5Y0Va
+cXRkNDhNeDhFVDlTRWNtV04vTjBKM0k5TTBiR3NxL21TZTlPQnhIT1BnV0RIaXkwcWxZMDcrZ25T
+T3BYZERmRWhxRlRtbElTZHgzZW5SS0FLUDEzeVlNYnF0VjF2U3NQN1dHSzlBYzh3OUhPcmVIOFRu
+d2NIcjJ1UFMveG5JS3NqZmJJeGx5UnJubGFVakNiQlB0eFVYdWgraEdhT1VINTdXdXhtRW1YaTVM
+b2QyRDBkS2l3OWpFUEUyRFdRZ1huQzRrV083MlNRcnZBRDVlVHpOeHl6YUNYbUZjYnNOQ0lkNWpM
+MnNaQ3NpTEh3Qlg0ZkNNc1Rqa29UaGpJYVU3ZHVocGV1QjV3bC93aG45QTVXU2hXdGJRakowcTMr
+MEhNY0xNQTY3aWtzTzRoSG9HamhMUlJWWjZyaFNVRW1VNFVoN1c4Ykh5RVVQS3JISjIyR0p4S3Jv
+dWxSTlBFamhqcWcrMWxUVTVZdjhtNHc4WVhraFRoTGkxVlZqZEJQNWtIV1lLU0tFWU9sejFmaVpH
+Wi9zM0x6YlZRdnZVbWtkVlJMOEd0RzZqaFdkN0FhWmNoK0RFSFB5VXA4SFRkckpOM3lqUkh4SkVh
+WWlMS2tTa3J5TGhHNllCN0pWbFZ1bEkzUDhSa2Njc3hWd3JhTjlLSXRodDR1dTBTSzZRdDY1TkNN
+YVpiT0VNaDdRRlkxdytKWFNXRWI1TjNDZXl2VU1iemg5bFlFZDRjK3lKSHV1RUNDc0VvRE1TSytC
+bTJLVnV4QVNaSFlFQ1hxTHRpT1FpSW1LMDBxMU9LdVFYSW9SK3ZBWWRRU1IyS3ozdXN1WjNCOVls
+cnBKbkF1V3JSSnFEd21XOWRIQk10NFJMQ0hEUHFpeTJuUXcyRXlySTlpSzQ4WWdzRGtmSGJZTE5z
+TXFYZE1qQkZacDYzRnBjeXhsUlZMUHRXMXBjeFRhMEtCNzVrU2o3ZnRHVlBGRVJxbGpkMjZDc2dT
+bk9VSHhKOVBGdUtNRVJZbVAyMmQ2NG1vcS9pTFFyWWhnK0RaTW1rU2NPaE9Fblc1RVZBOTB2YXFv
+cDhyM0pPbzBWZll4dU10R0VoM1BoY1h5ZlVRczBPeER4YnpmaW9venVvNUpDRXlUc2I0RHZDVWxq
+WGkrNlRSSmE0UHJXMDNTdXVZQ09SM3hxV2FsZmZKcDZtbnFFMDY4Z0VRNm9LY3BPOFJNMTA3WWZk
+N241R2VhNjloMk5ORWFwRzI3N2ZSTHBKN3hEclppZGltaTFldUNxV2QzWHlJT0xHYkFyMlhOdkVo
+Y2RjMUV2YzUwVzFOM3NQdnZpMVJVTi9WK1ZkU1BScnA4cDkxLzkzeHBwYVZ4RFp0WExiT1RBNnpk
+TjFqTkVlcm5adDFTcHBIbEtJRnRtd0JhdHRKUnkrdUdNOUk3MU9abWZTQnUydDFKbmN3TnVqWnVq
+SW15Y0V6TzVLYTRsdXFCRy8xOGRqWGN0TDFlT3BrY3E0RWMrejg1cjVJanpQS245RVAxOGg4UzBQ
+MC8mbHQ7L2RpYWdyYW0mZ3Q7Jmx0Oy9teGZpbGUmZ3Q7Ij48ZGVmcy8+PGc+PGVsbGlwc2UgY3g9
+IjcwMCIgY3k9IjEyMCIgcng9IjYwIiByeT0iNDAiIGZpbGw9IiNmOGNlY2MiIHN0cm9rZT0iI2I4
+NTQ1MCIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjUg
+LTAuNSkiPjxzd2l0Y2g+PGZvcmVpZ25PYmplY3QgcG9pbnRlci1ldmVudHM9Im5vbmUiIHdpZHRo
+PSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3Jn
+L1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSIgc3R5bGU9Im92ZXJmbG93OiB2aXNpYmxl
+OyB0ZXh0LWFsaWduOiBsZWZ0OyI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94
+aHRtbCIgc3R5bGU9ImRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiB1bnNhZmUgY2VudGVyOyBq
+dXN0aWZ5LWNvbnRlbnQ6IHVuc2FmZSBjZW50ZXI7IHdpZHRoOiAxMThweDsgaGVpZ2h0OiAxcHg7
+IHBhZGRpbmctdG9wOiAxMjBweDsgbWFyZ2luLWxlZnQ6IDY0MXB4OyI+PGRpdiBkYXRhLWRyYXdp
+by1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRl
+ci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJk
+aXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZl
+dGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVu
+dHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+QXVz
+Z2FiZTwvZGl2PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSI3MDAiIHk9IjEy
+NCIgZmlsbD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9
+IjEycHgiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkF1c2dhYmU8L3RleHQ+PC9zd2l0Y2g+PC9nPjxw
+YXRoIGQ9Ik0gMTIwIDQwIEwgMTUzLjYzIDQwIiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAw
+LCAwKSIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBh
+dGggZD0iTSAxNTguODggNDAgTCAxNTEuODggNDMuNSBMIDE1My42MyA0MCBMIDE1MS44OCAzNi41
+IFoiIGZpbGw9InJnYigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1taXRl
+cmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxwYXRoIGQ9Ik0gMjgwIDQwIEwgMzEz
+LjYzIDQwIiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tlLW1pdGVybGlt
+aXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGggZD0iTSAzMTguODggNDAgTCAz
+MTEuODggNDMuNSBMIDMxMy42MyA0MCBMIDMxMS44OCAzNi41IFoiIGZpbGw9InJnYigwLCAwLCAw
+KSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1l
+dmVudHM9ImFsbCIvPjxwYXRoIGQ9Ik0gNDQwIDQwIEwgNDc1LjUgNzUuNSIgZmlsbD0ibm9uZSIg
+c3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVu
+dHM9InN0cm9rZSIvPjxwYXRoIGQ9Ik0gNDc5LjIxIDc5LjIxIEwgNDcxLjc4IDc2LjczIEwgNDc1
+LjUgNzUuNSBMIDQ3Ni43MyA3MS43OCBaIiBmaWxsPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZT0icmdi
+KDAsIDAsIDApIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48
+cGF0aCBkPSJNIDQ0MCAyMDAgTCA0NzUuNSAxNjQuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2Io
+MCwgMCwgMCkiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIv
+PjxwYXRoIGQ9Ik0gNDc5LjIxIDE2MC43OSBMIDQ3Ni43MyAxNjguMjIgTCA0NzUuNSAxNjQuNSBM
+IDQ3MS43OCAxNjMuMjcgWiIgZmlsbD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAw
+KSIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHBhdGggZD0i
+TSA2MDAgMTIwIEwgNjMzLjYzIDEyMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCki
+IHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIvPjxwYXRoIGQ9
+Ik0gNjM4Ljg4IDEyMCBMIDYzMS44OCAxMjMuNSBMIDYzMy42MyAxMjAgTCA2MzEuODggMTE2LjUg
+WiIgZmlsbD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tlLW1pdGVy
+bGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGVsbGlwc2UgY3g9IjYwIiBjeT0iNDAi
+IHJ4PSI2MCIgcnk9IjQwIiBmaWxsPSIjZmZlNmNjIiBzdHJva2U9IiNkNzliMDAiIHBvaW50ZXIt
+ZXZlbnRzPSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dpdGNo
+Pjxmb3JlaWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0
+PSIxMDAlIiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0
+dXJlI0V4dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGlnbjog
+bGVmdDsiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJk
+aXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250ZW50
+OiB1bnNhZmUgY2VudGVyOyB3aWR0aDogMTE4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDog
+NDBweDsgbWFyZ2luLWxlZnQ6IDFweDsiPjxkaXYgZGF0YS1kcmF3aW8tY29sb3JzPSJjb2xvcjog
+cmdiKDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXNpemU6
+IDBweDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJs
+b2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2Io
+MCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7IHdoaXRlLXNw
+YWNlOiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPlF1ZWxsY29kZTwvZGl2PjwvZGl2
+PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSI2MCIgeT0iNDQiIGZpbGw9InJnYigwLCAw
+LCAwKSIgZm9udC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hv
+cj0ibWlkZGxlIj5RdWVsbGNvZGU8L3RleHQ+PC9zd2l0Y2g+PC9nPjxlbGxpcHNlIGN4PSIzODAi
+IGN5PSI0MCIgcng9IjYwIiByeT0iNDAiIGZpbGw9IiNlMWQ1ZTciIHN0cm9rZT0iIzk2NzNhNiIg
+cG9pbnRlci1ldmVudHM9ImFsbCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjUgLTAuNSki
+Pjxzd2l0Y2g+PGZvcmVpZ25PYmplY3QgcG9pbnRlci1ldmVudHM9Im5vbmUiIHdpZHRoPSIxMDAl
+IiBoZWlnaHQ9IjEwMCUiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NW
+RzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSIgc3R5bGU9Im92ZXJmbG93OiB2aXNpYmxlOyB0ZXh0
+LWFsaWduOiBsZWZ0OyI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIg
+c3R5bGU9ImRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiB1bnNhZmUgY2VudGVyOyBqdXN0aWZ5
+LWNvbnRlbnQ6IHVuc2FmZSBjZW50ZXI7IHdpZHRoOiAxMThweDsgaGVpZ2h0OiAxcHg7IHBhZGRp
+bmctdG9wOiA0MHB4OyBtYXJnaW4tbGVmdDogMzIxcHg7Ij48ZGl2IGRhdGEtZHJhd2lvLWNvbG9y
+cz0iY29sb3I6IHJnYigwLCAwLCAwKTsgIiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsg
+Zm9udC1zaXplOiAwcHg7IHRleHQtYWxpZ246IGNlbnRlcjsiPjxkaXYgc3R5bGU9ImRpc3BsYXk6
+IGlubGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBj
+b2xvcjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyBwb2ludGVyLWV2ZW50czogYWxs
+OyB3aGl0ZS1zcGFjZTogbm9ybWFsOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7Ij5aaWVsY29kZTwv
+ZGl2PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIzODAiIHk9IjQ0IiBmaWxs
+PSJyZ2IoMCwgMCwgMCkiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6ZT0iMTJweCIg
+dGV4dC1hbmNob3I9Im1pZGRsZSI+WmllbGNvZGU8L3RleHQ+PC9zd2l0Y2g+PC9nPjxlbGxpcHNl
+IGN4PSIzODAiIGN5PSIyMDAiIHJ4PSI2MCIgcnk9IjQwIiBmaWxsPSIjZGFlOGZjIiBzdHJva2U9
+IiM2YzhlYmYiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgt
+MC41IC0wLjUpIj48c3dpdGNoPjxmb3JlaWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3
+aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3Lncz
+Lm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlz
+aWJsZTsgdGV4dC1hbGlnbjogbGVmdDsiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5
+OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRl
+cjsganVzdGlmeS1jb250ZW50OiB1bnNhZmUgY2VudGVyOyB3aWR0aDogMTE4cHg7IGhlaWdodDog
+MXB4OyBwYWRkaW5nLXRvcDogMjAwcHg7IG1hcmdpbi1sZWZ0OiAzMjFweDsiPjxkaXYgZGF0YS1k
+cmF3aW8tY29sb3JzPSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBi
+b3JkZXItYm94OyBmb250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHls
+ZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBI
+ZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXIt
+ZXZlbnRzOiBhbGw7IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsi
+PkVpbmdhYmU8L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMzgwIiB5
+PSIyMDQiIGZpbGw9InJnYigwLCAwLCAwKSIgZm9udC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1z
+aXplPSIxMnB4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5FaW5nYWJlPC90ZXh0Pjwvc3dpdGNoPjwv
+Zz48cmVjdCB4PSIxNjAiIHk9IjAiIHdpZHRoPSIxMjAiIGhlaWdodD0iODAiIGZpbGw9IiNkNWU4
+ZDQiIHN0cm9rZT0iIzgyYjM2NiIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxnIHRyYW5zZm9ybT0i
+dHJhbnNsYXRlKC0wLjUgLTAuNSkiPjxzd2l0Y2g+PGZvcmVpZ25PYmplY3QgcG9pbnRlci1ldmVu
+dHM9Im5vbmUiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHJlcXVpcmVkRmVhdHVyZXM9Imh0
+dHA6Ly93d3cudzMub3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSIgc3R5bGU9Im92
+ZXJmbG93OiB2aXNpYmxlOyB0ZXh0LWFsaWduOiBsZWZ0OyI+PGRpdiB4bWxucz0iaHR0cDovL3d3
+dy53My5vcmcvMTk5OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiB1
+bnNhZmUgY2VudGVyOyBqdXN0aWZ5LWNvbnRlbnQ6IHVuc2FmZSBjZW50ZXI7IHdpZHRoOiAxMThw
+eDsgaGVpZ2h0OiAxcHg7IHBhZGRpbmctdG9wOiA0MHB4OyBtYXJnaW4tbGVmdDogMTYxcHg7Ij48
+ZGl2IGRhdGEtZHJhd2lvLWNvbG9ycz0iY29sb3I6IHJnYigwLCAwLCAwKTsgIiBzdHlsZT0iYm94
+LXNpemluZzogYm9yZGVyLWJveDsgZm9udC1zaXplOiAwcHg7IHRleHQtYWxpZ246IGNlbnRlcjsi
+PjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250
+LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4y
+OyBwb2ludGVyLWV2ZW50czogYWxsOyBmb250LXdlaWdodDogYm9sZDsgd2hpdGUtc3BhY2U6IG5v
+cm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+Q29tcGlsZXI8L2Rpdj48L2Rpdj48L2Rpdj48
+L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMjIwIiB5PSI0NCIgZmlsbD0icmdiKDAsIDAsIDApIiBm
+b250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRleHQtYW5jaG9yPSJtaWRk
+bGUiIGZvbnQtd2VpZ2h0PSJib2xkIj5Db21waWxlcjwvdGV4dD48L3N3aXRjaD48L2c+PHJlY3Qg
+eD0iNDgwIiB5PSI4MCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSI4MCIgZmlsbD0iI2UxZDVlNyIgc3Ry
+b2tlPSIjOTY3M2E2IiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xh
+dGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9u
+ZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3
+dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6
+IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9y
+Zy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBj
+ZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDExOHB4OyBoZWln
+aHQ6IDFweDsgcGFkZGluZy10b3A6IDEyMHB4OyBtYXJnaW4tbGVmdDogNDgxcHg7Ij48ZGl2IGRh
+dGEtZHJhd2lvLWNvbG9ycz0iY29sb3I6IHJnYigwLCAwLCAwKTsgIiBzdHlsZT0iYm94LXNpemlu
+ZzogYm9yZGVyLWJveDsgZm9udC1zaXplOiAwcHg7IHRleHQtYWxpZ246IGNlbnRlcjsiPjxkaXYg
+c3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWls
+eTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyBwb2lu
+dGVyLWV2ZW50czogYWxsOyB3aGl0ZS1zcGFjZTogbm9ybWFsOyBvdmVyZmxvdy13cmFwOiBub3Jt
+YWw7Ij5NYXNjaGluZTwvZGl2PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSI1
+NDAiIHk9IjEyNCIgZmlsbD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBm
+b250LXNpemU9IjEycHgiIHRleHQtYW5jaG9yPSJtaWRkbGUiPk1hc2NoaW5lPC90ZXh0Pjwvc3dp
+dGNoPjwvZz48ZWxsaXBzZSBjeD0iNjAiIGN5PSIyNDAiIHJ4PSI2MCIgcnk9IjQwIiBmaWxsPSIj
+ZmZlNmNjIiBzdHJva2U9IiNkNzliMDAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48ZyB0cmFuc2Zv
+cm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dpdGNoPjxmb3JlaWduT2JqZWN0IHBvaW50ZXIt
+ZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiByZXF1aXJlZEZlYXR1cmVz
+PSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiIHN0eWxl
+PSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGlnbjogbGVmdDsiPjxkaXYgeG1sbnM9Imh0dHA6
+Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVt
+czogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250ZW50OiB1bnNhZmUgY2VudGVyOyB3aWR0aDog
+MTE4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogMjQwcHg7IG1hcmdpbi1sZWZ0OiAxcHg7
+Ij48ZGl2IGRhdGEtZHJhd2lvLWNvbG9ycz0iY29sb3I6IHJnYigwLCAwLCAwKTsgIiBzdHlsZT0i
+Ym94LXNpemluZzogYm9yZGVyLWJveDsgZm9udC1zaXplOiAwcHg7IHRleHQtYWxpZ246IGNlbnRl
+cjsiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBm
+b250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDog
+MS4yOyBwb2ludGVyLWV2ZW50czogYWxsOyB3aGl0ZS1zcGFjZTogbm9ybWFsOyBvdmVyZmxvdy13
+cmFwOiBub3JtYWw7Ij5RdWVsbGNvZGU8L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+
+PHRleHQgeD0iNjAiIHk9IjI0NCIgZmlsbD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVs
+dmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlF1ZWxsY29kZTwv
+dGV4dD48L3N3aXRjaD48L2c+PGVsbGlwc2UgY3g9IjYwIiBjeT0iNDAwIiByeD0iNjAiIHJ5PSI0
+MCIgZmlsbD0iI2RhZThmYyIgc3Ryb2tlPSIjNmM4ZWJmIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+
+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVj
+dCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWly
+ZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmls
+aXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHht
+bG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsg
+YWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRl
+cjsgd2lkdGg6IDExOHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6IDQwMHB4OyBtYXJnaW4t
+bGVmdDogMXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7
+ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFs
+aWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6
+ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGlu
+ZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsg
+b3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+RWluZ2FiZTwvZGl2PjwvZGl2PjwvZGl2PjwvZm9yZWln
+bk9iamVjdD48dGV4dCB4PSI2MCIgeT0iNDA0IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQtZmFt
+aWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6ZT0iMTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+RWlu
+Z2FiZTwvdGV4dD48L3N3aXRjaD48L2c+PHJlY3QgeD0iMTYwIiB5PSIyODAiIHdpZHRoPSIxMjAi
+IGhlaWdodD0iODAiIGZpbGw9IiNkNWU4ZDQiIHN0cm9rZT0iIzgyYjM2NiIgcG9pbnRlci1ldmVu
+dHM9ImFsbCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjUgLTAuNSkiPjxzd2l0Y2g+PGZv
+cmVpZ25PYmplY3QgcG9pbnRlci1ldmVudHM9Im5vbmUiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEw
+MCUiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzExL2ZlYXR1cmUj
+RXh0ZW5zaWJpbGl0eSIgc3R5bGU9Im92ZXJmbG93OiB2aXNpYmxlOyB0ZXh0LWFsaWduOiBsZWZ0
+OyI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5bGU9ImRpc3Bs
+YXk6IGZsZXg7IGFsaWduLWl0ZW1zOiB1bnNhZmUgY2VudGVyOyBqdXN0aWZ5LWNvbnRlbnQ6IHVu
+c2FmZSBjZW50ZXI7IHdpZHRoOiAxMThweDsgaGVpZ2h0OiAxcHg7IHBhZGRpbmctdG9wOiAzMjBw
+eDsgbWFyZ2luLWxlZnQ6IDE2MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiBy
+Z2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTog
+MHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxv
+Y2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigw
+LCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgZm9udC13ZWln
+aHQ6IGJvbGQ7IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPklu
+dGVycHJldGVyPC9kaXY+PC9kaXY+PC9kaXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjIyMCIg
+eT0iMzI0IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQt
+c2l6ZT0iMTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC13ZWlnaHQ9ImJvbGQiPkludGVy
+cHJldGVyPC90ZXh0Pjwvc3dpdGNoPjwvZz48ZWxsaXBzZSBjeD0iMzgwIiBjeT0iMzIwIiByeD0i
+NjAiIHJ5PSI0MCIgZmlsbD0iI2Y4Y2VjYyIgc3Ryb2tlPSIjYjg1NDUwIiBwb2ludGVyLWV2ZW50
+cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9y
+ZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAw
+JSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNF
+eHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7
+Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxh
+eTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5z
+YWZlIGNlbnRlcjsgd2lkdGg6IDExOHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6IDMyMHB4
+OyBtYXJnaW4tbGVmdDogMzIxcHg7Ij48ZGl2IGRhdGEtZHJhd2lvLWNvbG9ycz0iY29sb3I6IHJn
+YigwLCAwLCAwKTsgIiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9udC1zaXplOiAw
+cHg7IHRleHQtYWxpZ246IGNlbnRlcjsiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9j
+azsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAs
+IDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyBwb2ludGVyLWV2ZW50czogYWxsOyB3aGl0ZS1zcGFj
+ZTogbm9ybWFsOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7Ij5BdXNnYWJlPC9kaXY+PC9kaXY+PC9k
+aXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjM4MCIgeT0iMzI0IiBmaWxsPSJyZ2IoMCwgMCwg
+MCkiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6ZT0iMTJweCIgdGV4dC1hbmNob3I9
+Im1pZGRsZSI+QXVzZ2FiZTwvdGV4dD48L3N3aXRjaD48L2c+PHBhdGggZD0iTSAxMjAgMjQwIEwg
+MTU1LjUgMjc1LjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0
+ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBkPSJNIDE1OS4yMSAy
+NzkuMjEgTCAxNTEuNzggMjc2LjczIEwgMTU1LjUgMjc1LjUgTCAxNTYuNzMgMjcxLjc4IFoiIGZp
+bGw9InJnYigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1taXRlcmxpbWl0
+PSIxMCIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxwYXRoIGQ9Ik0gMTIwIDQwMCBMIDE1NS41IDM2
+NC41IiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tlLW1pdGVybGltaXQ9
+IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGggZD0iTSAxNTkuMjEgMzYwLjc5IEwg
+MTU2LjczIDM2OC4yMiBMIDE1NS41IDM2NC41IEwgMTUxLjc4IDM2My4yNyBaIiBmaWxsPSJyZ2Io
+MCwgMCwgMCkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBv
+aW50ZXItZXZlbnRzPSJhbGwiLz48cGF0aCBkPSJNIDI4MCAzMjAgTCAzMTMuNjMgMzIwIiBmaWxs
+PSJub25lIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBwb2lu
+dGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGggZD0iTSAzMTguODggMzIwIEwgMzExLjg4IDMyMy41
+IEwgMzEzLjYzIDMyMCBMIDMxMS44OCAzMTYuNSBaIiBmaWxsPSJyZ2IoMCwgMCwgMCkiIHN0cm9r
+ZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJh
+bGwiLz48L2c+PHN3aXRjaD48ZyByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9U
+Ui9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiLz48YSB0cmFuc2Zvcm09InRyYW5zbGF0ZSgw
+LC01KSIgeGxpbms6aHJlZj0iaHR0cHM6Ly93d3cuZHJhd2lvLmNvbS9kb2MvZmFxL3N2Zy1leHBv
+cnQtdGV4dC1wcm9ibGVtcyIgdGFyZ2V0PSJfYmxhbmsiPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRk
+bGUiIGZvbnQtc2l6ZT0iMTBweCIgeD0iNTAlIiB5PSIxMDAlIj5UZXh0IGlzIG5vdCBTVkcgLSBj
+YW5ub3QgZGlzcGxheTwvdGV4dD48L2E+PC9zd2l0Y2g+PC9zdmc+
+      </contents>
+    </upload>
+  </page>
+  <page>
+    <title>File:Compiler-abstraktion.svg</title>
+    <ns>6</ns>
+    <id>62</id>
+    <revision>
+      <id>65</id>
+      <parentid>64</parentid>
+      <timestamp>2023-09-27T22:00:53Z</timestamp>
+      <contributor>
+        <username>Imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment>Imported&gt;Dir uploaded [[File:Compiler-abstraktion.svg]]</comment>
+      <origin>64</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
+      <sha1>phoiac9h4m842xq45sp7s6u21eteeq1</sha1>
+    </revision>
+    <upload>
+      <timestamp>2023-09-08T14:41:30Z</timestamp>
+      <contributor>
+        <username>Imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment deleted="deleted" />
+      <filename>Compiler-abstraktion.svg</filename>
+      <archivename>20230908144145!Compiler-abstraktion.svg</archivename>
+      <src>https://localhost:4443/wiki-dir/images/archive/4/48/20230908144145%21Compiler-abstraktion.svg</src>
+      <size>8921</size>
+      <sha1base36>6ogt6uzw3kfhrbi93cbeskwkdond8t9</sha1base36>
+      <rel>archive/4/48/20230908144145!Compiler-abstraktion.svg</rel>
+      <contents encoding="base64">PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRw
+Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIzNDFweCIgaGVp
+Z2h0PSIyNDFweCIgdmlld0JveD0iLTAuNSAtMC41IDM0MSAyNDEiIGNvbnRlbnQ9IiZsdDtteGZp
+bGUgaG9zdD0mcXVvdDtsb2NhbGhvc3QmcXVvdDsgbW9kaWZpZWQ9JnF1b3Q7MjAyMy0wOS0wOFQx
+NDo0MToyOC44NDVaJnF1b3Q7IGFnZW50PSZxdW90O01vemlsbGEvNS4wIChNYWNpbnRvc2g7IElu
+dGVsIE1hYyBPUyBYIDEwXzE1XzcpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vj
+a28pIENocm9tZS8xMTYuMC4wLjAgU2FmYXJpLzUzNy4zNiZxdW90OyB2ZXJzaW9uPSZxdW90OzIx
+LjUuMCZxdW90OyBldGFnPSZxdW90O0ZJajFqNHlLbFZwUERIdzhmamdKJnF1b3Q7IHR5cGU9JnF1
+b3Q7ZW1iZWQmcXVvdDsmZ3Q7Jmx0O2RpYWdyYW0gaWQ9JnF1b3Q7S2lLZnh1ZUVnZXJQNFJ1QkMw
+UzgmcXVvdDsgbmFtZT0mcXVvdDtQYWdlLTEmcXVvdDsmZ3Q7N1ZoTmM5c2dFUDAxdW1hRXZtSWZF
+enR0THUxa21zNjBQVkpCSktaSWFCQ083Zjc2TGhGSVFqaXhKM1djYVpPVDJjZnVndDQrd2NwQnZL
+ZzJIeVZ1eWsrQ1VCNUVJZGtFOFRLSUlwUW1jL2pSeUxaRHNneDFRQ0VaTVU0RGNNdCtVd09HQmww
+eFFsdkhVUW5CRld0Y01CZDFUWFBsWUZoS3NYYmQ3Z1IzVjIxd1FUM2dOc2ZjUjc4eG9zb09uYVho
+Z0Y5VFZwUjJaUlNhbVFwYlp3TzBKU1ppUFlMaXF5QmVTQ0ZVTjZvMkM4bzFlWmFYTHU3REk3UDl4
+aVN0MVNFQlVSZHdqL25LUE51MXlNc2d5amlFWC82VU1DcjBxRzBremt0cU5xMjJsZ25JQnFTRGNi
+a3VtYUszRGM3MXpCcnFEbGlwS2c0V2dxRlpoMHBGTjQvdUZmVU1nSFNvcUtpU1czQ3hBWlkwbzVy
+RW1PdWhCTDFMT2FKL1pqQnNxbDcwbVFkaVlHQzQyYzFUN1BIMG1WRkM1Yi9CVkJTZWtLcHpqeXFQ
+aTN3bDd5a3h6MHRyY3FIZlNUQnpqdHVXNVM0ZlVxeHE4dUFkUG5qRGRyNzNvV0Q4R0J2THpkaHZ1
+YlhXaHFrK0NNWS9SdmdRb2cwYjBlMlpFdThnMkZ1REVjZnBEb290SmluSGl0Mjc2WGZ4YmxhNEVR
+d1c3a3NjeFc2SkVacVVyaFVybVZNVE5UNEI5aVNLVU9JbVVsZ1dWSG1Kb0daNE8zSnJ0RVA3eEli
+bmt3MW56c2tFZ3k3am9MR2UwNE5rTjN1WDNRbGtoL2FwNVZEWlRSTjUrajJTN002bnFrdU9xcnI1
+eTZyTzZDYzhtOCtqc1liTzBubnlwSTYwY1VNbGcwZUJTK29wRFlkN05IeW9JdUdaSDBydjlCVmRF
+VWZRYStrMkNWMGR4Tk9iN2xEZEp1a2tVZnd5dXAxdU9JMk9xbHY3dHIwTDkvVnU4R1J5bE1iUk0y
+OXcyNTNhUk5uc2hTU0pkcTV6TkUwaVQ1TmZKYTdiaG5IZGFFL1VDZDJ4Y2lYWUtpbCswWVhnUWd1
+bkZyVnV0dThZNXhNSWMxYlVXc2VnQTYyeFM5MXJNL2k2dXpBVEZTT0VQOWFwdTBJUC9yNVpqNUdy
+Z3l3TnByMTZ0a09GMDNQbk9hMDY4ai8vdnRCY1ZHK01jWGlsVDBkNTZsRysrTzhKOTdvd3krUXBD
+TTg4d3BkdlFlTW5ZeHpNNGYrcTd0Z2YvdldMci80QSZsdDsvZGlhZ3JhbSZndDsmbHQ7L214Zmls
+ZSZndDsiPjxkZWZzLz48Zz48ZWxsaXBzZSBjeD0iMTUwIiBjeT0iNDAiIHJ4PSI2MCIgcnk9IjQw
+IiBmaWxsPSJyZ2IoMjU1LCAyNTUsIDI1NSkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBwb2ludGVy
+LWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRj
+aD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdo
+dD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVh
+dHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246
+IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0i
+ZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVu
+dDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDExOHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6
+IDQwcHg7IG1hcmdpbi1sZWZ0OiA5MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9y
+OiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6
+ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUt
+YmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJn
+YigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUt
+c3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+SG9jaDxiciAvPnNwcmFjaGU8
+L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMTUwIiB5PSI0NCIgZmls
+bD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgi
+IHRleHQtYW5jaG9yPSJtaWRkbGUiPkhvY2guLi48L3RleHQ+PC9zd2l0Y2g+PC9nPjxlbGxpcHNl
+IGN4PSIxNTAiIGN5PSIyMDAiIHJ4PSI2MCIgcnk9IjQwIiBmaWxsPSJyZ2IoMjU1LCAyNTUsIDI1
+NSkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNm
+b3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBwb2ludGVy
+LWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJl
+cz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5IiBzdHls
+ZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRw
+Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRl
+bXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6
+IDExOHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6IDIwMHB4OyBtYXJnaW4tbGVmdDogOTFw
+eDsiPjxkaXYgZGF0YS1kcmF3aW8tY29sb3JzPSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxl
+PSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2Vu
+dGVyOyI+PGRpdiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7
+IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0
+OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93
+LXdyYXA6IG5vcm1hbDsiPk5pZWRlcjxiciAvPnNwcmFjaGU8L2Rpdj48L2Rpdj48L2Rpdj48L2Zv
+cmVpZ25PYmplY3Q+PHRleHQgeD0iMTUwIiB5PSIyMDQiIGZpbGw9InJnYigwLCAwLCAwKSIgZm9u
+dC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hvcj0ibWlkZGxl
+Ij5OaWVkZXIuLi48L3RleHQ+PC9zd2l0Y2g+PC9nPjxwYXRoIGQ9Ik0gMjAwIDcwIFEgMjYwIDEy
+MCAyMDQuNzMgMTY5Ljc0IiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tl
+LW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGggZD0iTSAyMDAu
+ODMgMTczLjI1IEwgMjAzLjY5IDE2NS45NyBMIDIwNC43MyAxNjkuNzQgTCAyMDguMzggMTcxLjE3
+IFoiIGZpbGw9InJnYigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1taXRl
+cmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxwYXRoIGQ9Ik0gMTAwIDE3NCBRIDQw
+IDEyNCA5NS4yNyA3NC4yNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9r
+ZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIvPjxwYXRoIGQ9Ik0gOTku
+MTcgNzAuNzUgTCA5Ni4zMSA3OC4wMyBMIDk1LjI3IDc0LjI2IEwgOTEuNjIgNzIuODMgWiIgZmls
+bD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tlLW1pdGVybGltaXQ9
+IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHBhdGggZD0iTSAyMDkuMDQgNDcuNTIgUSAzNzAg
+MTIgMTk4Ljc5IDExLjczIiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tl
+LW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGggZD0iTSAxOTMu
+NTQgMTEuNzIgTCAyMDAuNTUgOC4yMyBMIDE5OC43OSAxMS43MyBMIDIwMC41NCAxNS4yMyBaIiBm
+aWxsPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0ZXJsaW1p
+dD0iMTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48cGF0aCBkPSJNIDIxMCAxOTIgUSAzNzEgMjI4
+IDE5OS4zNyAyMjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0
+ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBkPSJNIDE5NC4xMiAy
+MjggTCAyMDEuMTIgMjI0LjUgTCAxOTkuMzcgMjI4IEwgMjAxLjEyIDIzMS41IFoiIGZpbGw9InJn
+YigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIg
+cG9pbnRlci1ldmVudHM9ImFsbCIvPjxyZWN0IHg9IjI4MCIgeT0iMjUiIHdpZHRoPSI2MCIgaGVp
+Z2h0PSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJub25lIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+
+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVj
+dCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWly
+ZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmls
+aXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHht
+bG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsg
+YWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRl
+cjsgd2lkdGg6IDU4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogNDBweDsgbWFyZ2luLWxl
+ZnQ6IDI4MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7
+ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFs
+aWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6
+ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGlu
+ZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsg
+b3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+VHJhbnNwaWxlcjwvZGl2PjwvZGl2PjwvZGl2PjwvZm9y
+ZWlnbk9iamVjdD48dGV4dCB4PSIzMTAiIHk9IjQ0IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQt
+ZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6ZT0iMTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+
+VHJhbnNwaWxlcjwvdGV4dD48L3N3aXRjaD48L2c+PHJlY3QgeD0iMjgwIiB5PSIxODUiIHdpZHRo
+PSI2MCIgaGVpZ2h0PSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJub25lIiBwb2ludGVyLWV2ZW50
+cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9y
+ZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAw
+JSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNF
+eHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7
+Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxh
+eTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5z
+YWZlIGNlbnRlcjsgd2lkdGg6IDU4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogMjAwcHg7
+IG1hcmdpbi1sZWZ0OiAyODFweDsiPjxkaXYgZGF0YS1kcmF3aW8tY29sb3JzPSJjb2xvcjogcmdi
+KDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXNpemU6IDBw
+eDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2Nr
+OyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwg
+MCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7IHdoaXRlLXNwYWNl
+OiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPlJlY29tcGlsZXI8L2Rpdj48L2Rpdj48
+L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMzEwIiB5PSIyMDQiIGZpbGw9InJnYigwLCAw
+LCAwKSIgZm9udC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hv
+cj0ibWlkZGxlIj5SZWNvbXBpbGVyPC90ZXh0Pjwvc3dpdGNoPjwvZz48cmVjdCB4PSIyNDAiIHk9
+IjkwIiB3aWR0aD0iNjAiIGhlaWdodD0iMzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0ibm9uZSIgcG9p
+bnRlci1ldmVudHM9ImFsbCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjUgLTAuNSkiPjxz
+d2l0Y2g+PGZvcmVpZ25PYmplY3QgcG9pbnRlci1ldmVudHM9Im5vbmUiIHdpZHRoPSIxMDAlIiBo
+ZWlnaHQ9IjEwMCUiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzEx
+L2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSIgc3R5bGU9Im92ZXJmbG93OiB2aXNpYmxlOyB0ZXh0LWFs
+aWduOiBsZWZ0OyI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5
+bGU9ImRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiB1bnNhZmUgY2VudGVyOyBqdXN0aWZ5LWNv
+bnRlbnQ6IHVuc2FmZSBjZW50ZXI7IHdpZHRoOiA1OHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10
+b3A6IDEwNXB4OyBtYXJnaW4tbGVmdDogMjQxcHg7Ij48ZGl2IGRhdGEtZHJhd2lvLWNvbG9ycz0i
+Y29sb3I6IHJnYigwLCAwLCAwKTsgIiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9u
+dC1zaXplOiAwcHg7IHRleHQtYWxpZ246IGNlbnRlcjsiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlu
+bGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xv
+cjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyBwb2ludGVyLWV2ZW50czogYWxsOyB3
+aGl0ZS1zcGFjZTogbm9ybWFsOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7Ij5Db21waWxlcjwvZGl2
+PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIyNzAiIHk9IjEwOSIgZmlsbD0i
+cmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRl
+eHQtYW5jaG9yPSJtaWRkbGUiPkNvbXBpbGVyPC90ZXh0Pjwvc3dpdGNoPjwvZz48cmVjdCB4PSIw
+IiB5PSI5MCIgd2lkdGg9IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUi
+IHBvaW50ZXItZXZlbnRzPSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUp
+Ij48c3dpdGNoPjxmb3JlaWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAw
+JSIgaGVpZ2h0PSIxMDAlIiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9T
+VkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4
+dC1hbGlnbjogbGVmdDsiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwi
+IHN0eWxlPSJkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlm
+eS1jb250ZW50OiB1bnNhZmUgY2VudGVyOyB3aWR0aDogNThweDsgaGVpZ2h0OiAxcHg7IHBhZGRp
+bmctdG9wOiAxMDVweDsgbWFyZ2luLWxlZnQ6IDFweDsiPjxkaXYgZGF0YS1kcmF3aW8tY29sb3Jz
+PSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBm
+b250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0iZGlzcGxheTog
+aW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNv
+bG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7
+IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPkRlY29tcGlsZXI8
+L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMzAiIHk9IjEwOSIgZmls
+bD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgi
+IHRleHQtYW5jaG9yPSJtaWRkbGUiPkRlY29tcGlsZXI8L3RleHQ+PC9zd2l0Y2g+PC9nPjwvZz48
+c3dpdGNoPjxnIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzExL2Zl
+YXR1cmUjRXh0ZW5zaWJpbGl0eSIvPjxhIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAsLTUpIiB4bGlu
+azpocmVmPSJodHRwczovL3d3dy5kcmF3aW8uY29tL2RvYy9mYXEvc3ZnLWV4cG9ydC10ZXh0LXBy
+b2JsZW1zIiB0YXJnZXQ9Il9ibGFuayI+PHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1z
+aXplPSIxMHB4IiB4PSI1MCUiIHk9IjEwMCUiPlRleHQgaXMgbm90IFNWRyAtIGNhbm5vdCBkaXNw
+bGF5PC90ZXh0PjwvYT48L3N3aXRjaD48L3N2Zz4=
+      </contents>
+    </upload>
+    <upload>
+      <timestamp>2023-09-08T14:41:45Z</timestamp>
+      <contributor>
+        <username>Imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment deleted="deleted" />
+      <filename>Compiler-abstraktion.svg</filename>
+      <archivename>20230908144149!Compiler-abstraktion.svg</archivename>
+      <src>https://localhost:4443/wiki-dir/images/archive/4/48/20230908144149%21Compiler-abstraktion.svg</src>
+      <size>8929</size>
+      <sha1base36>tq5oxsfvpj6z3antmi3wzza7q0ienos</sha1base36>
+      <rel>archive/4/48/20230908144149!Compiler-abstraktion.svg</rel>
+      <contents encoding="base64">PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRw
+Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIzNDFweCIgaGVp
+Z2h0PSIyNDFweCIgdmlld0JveD0iLTAuNSAtMC41IDM0MSAyNDEiIGNvbnRlbnQ9IiZsdDtteGZp
+bGUgaG9zdD0mcXVvdDtsb2NhbGhvc3QmcXVvdDsgbW9kaWZpZWQ9JnF1b3Q7MjAyMy0wOS0wOFQx
+NDo0MTo0NC40MDRaJnF1b3Q7IGFnZW50PSZxdW90O01vemlsbGEvNS4wIChNYWNpbnRvc2g7IElu
+dGVsIE1hYyBPUyBYIDEwXzE1XzcpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vj
+a28pIENocm9tZS8xMTYuMC4wLjAgU2FmYXJpLzUzNy4zNiZxdW90OyB2ZXJzaW9uPSZxdW90OzIx
+LjUuMCZxdW90OyBldGFnPSZxdW90O0ZTOHE5SmpFbm54UnBKV2ZYOW9YJnF1b3Q7IHR5cGU9JnF1
+b3Q7ZW1iZWQmcXVvdDsmZ3Q7Jmx0O2RpYWdyYW0gaWQ9JnF1b3Q7S2lLZnh1ZUVnZXJQNFJ1QkMw
+UzgmcXVvdDsgbmFtZT0mcXVvdDtQYWdlLTEmcXVvdDsmZ3Q7N1ZoTmI5c3dEUDAxdmhiK3JuTnNr
+MjY5YkNqV0FWdVBxc1RZd21RcmtKVW0yYThmSGNzZnN0TW1hSk1VV0h1SytFUlMwdU96VE1jSnB2
+bjZxeUtMN0p0a0lCemZaV3NubURtKzcwWGhCSDhxWkZNamNlelZRS280TTA0ZGNNLy9nZ0ZkZ3k0
+NWc5SnkxRklLelJjMlNHVlJBTlVXUnBTU0s5dHRMb1c5Nm9La01BTHVLUkZqOUJkbk9xdlJKSEk3
+L0JaNG1qVXJlNjZaeVVuamJJQXlJMHl1ZWxCdzR3UlRKYVd1Ui9sNkNxSWlyK0dsanZ2eXpHeTdN
+UVdGUGlUQXJ3T2VpRmlhczkxS21qbCtMREQ4K2xIaEtLMUc1VUlSbW9IWnRONDBUR0EySkIyTjYx
+WEdOZHd2Q0sxbVZsaDN4REtkQzdROEhNNjVFRk1wcE5yR0JZeEFNcWRWWXEza0grak54RFNCeHpu
+T21KMkIwckIrOW5SZXl4bUtEV1FPV20zUXBRbG9hRFk2QzQyNTZvcld1bVM5Z2lVR0kwWW5hWnU1
+b3hJSGhzM2R6QVlqWnI5ellLQk96KzA4b1VCM2N2dVlSQ0dLOUNUYyt1NFp5YjBja1R0aWp5N1ZF
+ekRERUJUc3FucnUwYVNDbENXbk5vTktMZ3UyOVhhMzNyaWQzMjBvR2c5OVk3YnUrODAyamJYbXVn
+M0M4VU1QNzBJcW80bW85d3hzZE5uc3JVR1A0MmdIeFEybVFCRE5uK3owdTNnM0s5eEpqZ3UzSmZZ
+RHU4U2VOeWhkS1plS2dvbnEzeko3RXZsZWFDZlNSS1dnUjRtd1ptVFRjMXRVRHVVTEc1NE1OaHhi
+dHg4TzZveWR4bHBPRDVKZDhpbTdNOGpPMjZlV1EyVTNURFRTNzVGa2R6bFVYWGhVMVUxT3F6cWpI
+L2RpTXZIN0dycUlKdUdMT3FxTU8xQWNqd0xxUlEyN2V6UjhxQ0x4ek52U1c3MUxYY1FlOUY2NkRW
+MWJCOEh3VFhlb2JzTm9rQ2c0alc2SEc0NzhvK3EyZWRvK2hmdCtiL0J3Y0pVRy9pdmY0RTAvMnlT
+S2t4TkowdHU1enRFMDZZMDArVk9Sb2x4d1ViWG1BM1ZpZDZ4dENkb3RkU0VMR1BUZkJpS0NwMFds
+WTlSQnBiSHJxdGZtK0FWNVpTWnl6cGg0cnJlM2hlNjh2VmtQUEZzSGNlUU1lL1Y0aHdxSDk4NXJX
+blZ2L0luNUE2ak1QeGpqK0VpZmovSm9SUG4wdnlkODFJVTFUSjZEOEhoRStPd2phUHhzaktQWi9T
+ZFdYL3ZkUDR2QnpUOD0mbHQ7L2RpYWdyYW0mZ3Q7Jmx0Oy9teGZpbGUmZ3Q7Ij48ZGVmcy8+PGc+
+PGVsbGlwc2UgY3g9IjE1MCIgY3k9IjQwIiByeD0iNjAiIHJ5PSI0MCIgZmlsbD0iI2RhZThmYyIg
+c3Ryb2tlPSIjNmM4ZWJmIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFu
+c2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0i
+bm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDov
+L3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZs
+b3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3Lncz
+Lm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2Fm
+ZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDExOHB4OyBo
+ZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6IDQwcHg7IG1hcmdpbi1sZWZ0OiA5MXB4OyI+PGRpdiBk
+YXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXpp
+bmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2
+IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1p
+bHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9p
+bnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9y
+bWFsOyI+SG9jaDxiciAvPnNwcmFjaGU8L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+
+PHRleHQgeD0iMTUwIiB5PSI0NCIgZmlsbD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVs
+dmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkhvY2guLi48L3Rl
+eHQ+PC9zd2l0Y2g+PC9nPjxlbGxpcHNlIGN4PSIxNTAiIGN5PSIyMDAiIHJ4PSI2MCIgcnk9IjQw
+IiBmaWxsPSIjZjhjZWNjIiBzdHJva2U9IiNiODU0NTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48
+ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dpdGNoPjxmb3JlaWduT2JqZWN0
+IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiByZXF1aXJl
+ZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxp
+dHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGlnbjogbGVmdDsiPjxkaXYgeG1s
+bnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OiBmbGV4OyBh
+bGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250ZW50OiB1bnNhZmUgY2VudGVy
+OyB3aWR0aDogMTE4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogMjAwcHg7IG1hcmdpbi1s
+ZWZ0OiA5MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7
+ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFs
+aWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6
+ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGlu
+ZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsg
+b3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+TmllZGVyPGJyIC8+c3ByYWNoZTwvZGl2PjwvZGl2Pjwv
+ZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIxNTAiIHk9IjIwNCIgZmlsbD0icmdiKDAsIDAs
+IDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRleHQtYW5jaG9y
+PSJtaWRkbGUiPk5pZWRlci4uLjwvdGV4dD48L3N3aXRjaD48L2c+PHBhdGggZD0iTSAyMDAgNzAg
+USAyNjAgMTIwIDIwNC43MyAxNjkuNzQiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDAp
+IiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBk
+PSJNIDIwMC44MyAxNzMuMjUgTCAyMDMuNjkgMTY1Ljk3IEwgMjA0LjczIDE2OS43NCBMIDIwOC4z
+OCAxNzEuMTcgWiIgZmlsbD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ry
+b2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHBhdGggZD0iTSAxMDAg
+MTc0IFEgNDAgMTI0IDk1LjI3IDc0LjI2IiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAw
+KSIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGgg
+ZD0iTSA5OS4xNyA3MC43NSBMIDk2LjMxIDc4LjAzIEwgOTUuMjcgNzQuMjYgTCA5MS42MiA3Mi44
+MyBaIiBmaWxsPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0
+ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48cGF0aCBkPSJNIDIwOS4wNCA0Ny41
+MiBRIDM3MCAxMiAxOTguNzkgMTEuNzMiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDAp
+IiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBk
+PSJNIDE5My41NCAxMS43MiBMIDIwMC41NSA4LjIzIEwgMTk4Ljc5IDExLjczIEwgMjAwLjU0IDE1
+LjIzIFoiIGZpbGw9InJnYigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1t
+aXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxwYXRoIGQ9Ik0gMjEwIDE5MiBR
+IDM3MSAyMjggMTk5LjM3IDIyOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0
+cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIvPjxwYXRoIGQ9Ik0g
+MTk0LjEyIDIyOCBMIDIwMS4xMiAyMjQuNSBMIDE5OS4zNyAyMjggTCAyMDEuMTIgMjMxLjUgWiIg
+ZmlsbD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tlLW1pdGVybGlt
+aXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHJlY3QgeD0iMjgwIiB5PSIyNSIgd2lkdGg9
+IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUiIHBvaW50ZXItZXZlbnRz
+PSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dpdGNoPjxmb3Jl
+aWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAl
+IiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4
+dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGlnbjogbGVmdDsi
+PjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5
+OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250ZW50OiB1bnNh
+ZmUgY2VudGVyOyB3aWR0aDogNThweDsgaGVpZ2h0OiAxcHg7IHBhZGRpbmctdG9wOiA0MHB4OyBt
+YXJnaW4tbGVmdDogMjgxcHg7Ij48ZGl2IGRhdGEtZHJhd2lvLWNvbG9ycz0iY29sb3I6IHJnYigw
+LCAwLCAwKTsgIiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9udC1zaXplOiAwcHg7
+IHRleHQtYWxpZ246IGNlbnRlcjsiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsg
+Zm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAs
+IDApOyBsaW5lLWhlaWdodDogMS4yOyBwb2ludGVyLWV2ZW50czogYWxsOyB3aGl0ZS1zcGFjZTog
+bm9ybWFsOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7Ij5UcmFuc3BpbGVyPC9kaXY+PC9kaXY+PC9k
+aXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjMxMCIgeT0iNDQiIGZpbGw9InJnYigwLCAwLCAw
+KSIgZm9udC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hvcj0i
+bWlkZGxlIj5UcmFuc3BpbGVyPC90ZXh0Pjwvc3dpdGNoPjwvZz48cmVjdCB4PSIyODAiIHk9IjE4
+NSIgd2lkdGg9IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUiIHBvaW50
+ZXItZXZlbnRzPSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dp
+dGNoPjxmb3JlaWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVp
+Z2h0PSIxMDAlIiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9m
+ZWF0dXJlI0V4dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGln
+bjogbGVmdDsiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxl
+PSJkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250
+ZW50OiB1bnNhZmUgY2VudGVyOyB3aWR0aDogNThweDsgaGVpZ2h0OiAxcHg7IHBhZGRpbmctdG9w
+OiAyMDBweDsgbWFyZ2luLWxlZnQ6IDI4MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNv
+bG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQt
+c2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxp
+bmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6
+IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hp
+dGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+UmVjb21waWxlcjwvZGl2
+PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIzMTAiIHk9IjIwNCIgZmlsbD0i
+cmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRl
+eHQtYW5jaG9yPSJtaWRkbGUiPlJlY29tcGlsZXI8L3RleHQ+PC9zd2l0Y2g+PC9nPjxyZWN0IHg9
+IjI0MCIgeT0iOTAiIHdpZHRoPSI2MCIgaGVpZ2h0PSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJu
+b25lIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAt
+MC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9
+IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcv
+VFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7
+IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3ho
+dG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1
+c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDU4cHg7IGhlaWdodDogMXB4OyBw
+YWRkaW5nLXRvcDogMTA1cHg7IG1hcmdpbi1sZWZ0OiAyNDFweDsiPjxkaXYgZGF0YS1kcmF3aW8t
+Y29sb3JzPSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXIt
+Ym94OyBmb250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0iZGlz
+cGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRp
+Y2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRz
+OiBhbGw7IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPkNvbXBp
+bGVyPC9kaXY+PC9kaXY+PC9kaXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjI3MCIgeT0iMTA5
+IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6ZT0i
+MTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Q29tcGlsZXI8L3RleHQ+PC9zd2l0Y2g+PC9nPjxy
+ZWN0IHg9IjAiIHk9IjkwIiB3aWR0aD0iNjAiIGhlaWdodD0iMzAiIGZpbGw9Im5vbmUiIHN0cm9r
+ZT0ibm9uZSIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0w
+LjUgLTAuNSkiPjxzd2l0Y2g+PGZvcmVpZ25PYmplY3QgcG9pbnRlci1ldmVudHM9Im5vbmUiIHdp
+ZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMu
+b3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSIgc3R5bGU9Im92ZXJmbG93OiB2aXNp
+YmxlOyB0ZXh0LWFsaWduOiBsZWZ0OyI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5
+OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiB1bnNhZmUgY2VudGVy
+OyBqdXN0aWZ5LWNvbnRlbnQ6IHVuc2FmZSBjZW50ZXI7IHdpZHRoOiA1OHB4OyBoZWlnaHQ6IDFw
+eDsgcGFkZGluZy10b3A6IDEwNXB4OyBtYXJnaW4tbGVmdDogMXB4OyI+PGRpdiBkYXRhLWRyYXdp
+by1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRl
+ci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJk
+aXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZl
+dGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVu
+dHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+RGVj
+b21waWxlcjwvZGl2PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIzMCIgeT0i
+MTA5IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6
+ZT0iMTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+RGVjb21waWxlcjwvdGV4dD48L3N3aXRjaD48
+L2c+PC9nPjxzd2l0Y2g+PGcgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIv
+U1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ii8+PGEgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCwt
+NSkiIHhsaW5rOmhyZWY9Imh0dHBzOi8vd3d3LmRyYXdpby5jb20vZG9jL2ZhcS9zdmctZXhwb3J0
+LXRleHQtcHJvYmxlbXMiIHRhcmdldD0iX2JsYW5rIj48dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxl
+IiBmb250LXNpemU9IjEwcHgiIHg9IjUwJSIgeT0iMTAwJSI+VGV4dCBpcyBub3QgU1ZHIC0gY2Fu
+bm90IGRpc3BsYXk8L3RleHQ+PC9hPjwvc3dpdGNoPjwvc3ZnPg==
+      </contents>
+    </upload>
+    <upload>
+      <timestamp>2023-09-08T14:41:50Z</timestamp>
+      <contributor>
+        <username>Imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment deleted="deleted" />
+      <filename>Compiler-abstraktion.svg</filename>
+      <src>https://localhost:4443/wiki-dir/images/4/48/Compiler-abstraktion.svg</src>
+      <size>8929</size>
+      <sha1base36>thztxlzdo33zca9wi1jk9xmhv0xbbuq</sha1base36>
+      <rel>4/48/Compiler-abstraktion.svg</rel>
+      <contents encoding="base64">PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRw
+Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIzNDFweCIgaGVp
+Z2h0PSIyNDFweCIgdmlld0JveD0iLTAuNSAtMC41IDM0MSAyNDEiIGNvbnRlbnQ9IiZsdDtteGZp
+bGUgaG9zdD0mcXVvdDtsb2NhbGhvc3QmcXVvdDsgbW9kaWZpZWQ9JnF1b3Q7MjAyMy0wOS0wOFQx
+NDo0MTo0OC44ODFaJnF1b3Q7IGFnZW50PSZxdW90O01vemlsbGEvNS4wIChNYWNpbnRvc2g7IElu
+dGVsIE1hYyBPUyBYIDEwXzE1XzcpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vj
+a28pIENocm9tZS8xMTYuMC4wLjAgU2FmYXJpLzUzNy4zNiZxdW90OyB2ZXJzaW9uPSZxdW90OzIx
+LjUuMCZxdW90OyBldGFnPSZxdW90O2xpTmZoUDh1aFVRRTFNSzZkT2FTJnF1b3Q7IHR5cGU9JnF1
+b3Q7ZW1iZWQmcXVvdDsmZ3Q7Jmx0O2RpYWdyYW0gaWQ9JnF1b3Q7S2lLZnh1ZUVnZXJQNFJ1QkMw
+UzgmcXVvdDsgbmFtZT0mcXVvdDtQYWdlLTEmcXVvdDsmZ3Q7N1ZoTmI5c3dEUDAxdmhiK3JuTnNr
+MjY5YkNqV0FWdVBxc1RZd21RcmtKVW0yYThmSGNzZnN0TW1hSk1VV0h1SytFUlMwdU96VE1jSnB2
+bjZxeUtMN0p0a0lCemZaV3NubURtKzcwWGhCSDhxWkZNamNlelZRS280TTA0ZGNNLy9nZ0ZkZ3k0
+NWc5SnkxRklLelJjMlNHVlJBTlVXUnBTU0s5dHRMb1c5Nm9La01BTHVLUkZqOUJkbk9xdlJKSEk3
+L0JaNG1qVXJlNjZaeVVuamJJQXlJMHl1ZWxCdzR3UlRKYVd1Ui9sNkNxSWlyK0dsanZ2eXpHeTdN
+UVdGUGlUQXJ3T2VpRmlhczkxS21qbCtMREQ4K2xIaEtLMUc1VUlSbW9IWnRONDBUR0EySkIyTjYx
+WEdOZHd2Q0sxbVZsaDN4REtkQzdROEhNNjVFRk1wcE5yR0JZeEFNcWRWWXEza0grak54RFNCeHpu
+T21KMkIwckIrOW5SZXl4bUtEV1FPV20zUXBRbG9hRFk2QzQyNTZvcld1bVM5Z2lVR0kwWW5hWnU1
+b3hJSGhzM2R6QVlqWnI5ellLQk96KzA4b1VCM2N2dVlSQ0dLOUNUYyt1NFp5YjBja1R0aWp5N1ZF
+ekRERUJUc3FucnUwYVNDbENXbk5vTktMZ3UyOVhhMzNyaWQzMjBvR2c5OVk3YnUrODAyamJYbXVn
+M0M4VU1QNzBJcW80bW85d3hzZE5uc3JVR1A0MmdIeFEybVFCRE5uK3owdTNnM0s5eEpqZ3UzSmZZ
+RHU4U2VOeWhkS1plS2dvbnEzeko3RXZsZWFDZlNSS1dnUjRtd1ptVFRjMXRVRHVVTEc1NE1OaHhi
+dHg4TzZveWR4bHBPRDVKZDhpbTdNOGpPMjZlV1EyVTNURFRTNzVGa2R6bFVYWGhVMVUxT3F6cWpI
+L2RpTXZIN0dycUlKdUdMT3FxTU8xQWNqd0xxUlEyN2V6UjhxQ0x4ek52U1c3MUxYY1FlOUY2NkRW
+MWJCOEh3VFhlb2JzTm9rQ2c0alc2SEc0NzhvK3EyZWRvK2hmdCtiL0J3Y0pVRy9pdmY0RTAvMnlT
+S2t4TkowdHU1enRFMDZZMDArVk9Sb2x4d1ViWG1BM1ZpZDZ4dENkb3RkU0VMR1BUZkJpS0NwMFds
+WTlSQnBiSHJxdGZtK0FWNVpTWnl6cGg0cnJlM2hlNjh2VmtQUEZzSGNlUU1lL1Y0aHdxSDk4NXJX
+blZ2L0luNUE2ak1QeGpqK0VpZmovSm9SUG4wdnlkODFJVTFUSjZEOEhoRStPd2phUHhzaktQWi9T
+ZFdYL3ZkUDR2QnpUOD0mbHQ7L2RpYWdyYW0mZ3Q7Jmx0Oy9teGZpbGUmZ3Q7Ij48ZGVmcy8+PGc+
+PGVsbGlwc2UgY3g9IjE1MCIgY3k9IjQwIiByeD0iNjAiIHJ5PSI0MCIgZmlsbD0iI2RhZThmYyIg
+c3Ryb2tlPSIjNmM4ZWJmIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFu
+c2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0i
+bm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDov
+L3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZs
+b3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3Lncz
+Lm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2Fm
+ZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDExOHB4OyBo
+ZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6IDQwcHg7IG1hcmdpbi1sZWZ0OiA5MXB4OyI+PGRpdiBk
+YXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXpp
+bmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2
+IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1p
+bHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9p
+bnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9y
+bWFsOyI+SG9jaDxiciAvPnNwcmFjaGU8L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+
+PHRleHQgeD0iMTUwIiB5PSI0NCIgZmlsbD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVs
+dmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkhvY2guLi48L3Rl
+eHQ+PC9zd2l0Y2g+PC9nPjxlbGxpcHNlIGN4PSIxNTAiIGN5PSIyMDAiIHJ4PSI2MCIgcnk9IjQw
+IiBmaWxsPSIjZjhjZWNjIiBzdHJva2U9IiNiODU0NTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48
+ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dpdGNoPjxmb3JlaWduT2JqZWN0
+IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiByZXF1aXJl
+ZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxp
+dHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGlnbjogbGVmdDsiPjxkaXYgeG1s
+bnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OiBmbGV4OyBh
+bGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250ZW50OiB1bnNhZmUgY2VudGVy
+OyB3aWR0aDogMTE4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogMjAwcHg7IG1hcmdpbi1s
+ZWZ0OiA5MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7
+ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFs
+aWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6
+ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGlu
+ZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsg
+b3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+TmllZGVyPGJyIC8+c3ByYWNoZTwvZGl2PjwvZGl2Pjwv
+ZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIxNTAiIHk9IjIwNCIgZmlsbD0icmdiKDAsIDAs
+IDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRleHQtYW5jaG9y
+PSJtaWRkbGUiPk5pZWRlci4uLjwvdGV4dD48L3N3aXRjaD48L2c+PHBhdGggZD0iTSAyMDAgNzAg
+USAyNjAgMTIwIDIwNC43MyAxNjkuNzQiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDAp
+IiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBk
+PSJNIDIwMC44MyAxNzMuMjUgTCAyMDMuNjkgMTY1Ljk3IEwgMjA0LjczIDE2OS43NCBMIDIwOC4z
+OCAxNzEuMTcgWiIgZmlsbD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ry
+b2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHBhdGggZD0iTSAxMDAg
+MTc0IFEgNDAgMTI0IDk1LjI3IDc0LjI2IiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAw
+KSIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGgg
+ZD0iTSA5OS4xNyA3MC43NSBMIDk2LjMxIDc4LjAzIEwgOTUuMjcgNzQuMjYgTCA5MS42MiA3Mi44
+MyBaIiBmaWxsPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0
+ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48cGF0aCBkPSJNIDIwOS4wNCA0Ny41
+MiBRIDM3MCAxMiAxOTguNzkgMTEuNzMiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDAp
+IiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBk
+PSJNIDE5My41NCAxMS43MiBMIDIwMC41NSA4LjIzIEwgMTk4Ljc5IDExLjczIEwgMjAwLjU0IDE1
+LjIzIFoiIGZpbGw9InJnYigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1t
+aXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxwYXRoIGQ9Ik0gMjEwIDE5MiBR
+IDM3MSAyMjggMTk5LjM3IDIyOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0
+cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIvPjxwYXRoIGQ9Ik0g
+MTk0LjEyIDIyOCBMIDIwMS4xMiAyMjQuNSBMIDE5OS4zNyAyMjggTCAyMDEuMTIgMjMxLjUgWiIg
+ZmlsbD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tlLW1pdGVybGlt
+aXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHJlY3QgeD0iMjgwIiB5PSIyNSIgd2lkdGg9
+IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUiIHBvaW50ZXItZXZlbnRz
+PSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dpdGNoPjxmb3Jl
+aWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAl
+IiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4
+dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGlnbjogbGVmdDsi
+PjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5
+OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250ZW50OiB1bnNh
+ZmUgY2VudGVyOyB3aWR0aDogNThweDsgaGVpZ2h0OiAxcHg7IHBhZGRpbmctdG9wOiA0MHB4OyBt
+YXJnaW4tbGVmdDogMjgxcHg7Ij48ZGl2IGRhdGEtZHJhd2lvLWNvbG9ycz0iY29sb3I6IHJnYigw
+LCAwLCAwKTsgIiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9udC1zaXplOiAwcHg7
+IHRleHQtYWxpZ246IGNlbnRlcjsiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsg
+Zm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAs
+IDApOyBsaW5lLWhlaWdodDogMS4yOyBwb2ludGVyLWV2ZW50czogYWxsOyB3aGl0ZS1zcGFjZTog
+bm9ybWFsOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7Ij5UcmFuc3BpbGVyPC9kaXY+PC9kaXY+PC9k
+aXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjMxMCIgeT0iNDQiIGZpbGw9InJnYigwLCAwLCAw
+KSIgZm9udC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hvcj0i
+bWlkZGxlIj5UcmFuc3BpbGVyPC90ZXh0Pjwvc3dpdGNoPjwvZz48cmVjdCB4PSIyODAiIHk9IjE4
+NSIgd2lkdGg9IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUiIHBvaW50
+ZXItZXZlbnRzPSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dp
+dGNoPjxmb3JlaWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVp
+Z2h0PSIxMDAlIiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9m
+ZWF0dXJlI0V4dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGln
+bjogbGVmdDsiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxl
+PSJkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250
+ZW50OiB1bnNhZmUgY2VudGVyOyB3aWR0aDogNThweDsgaGVpZ2h0OiAxcHg7IHBhZGRpbmctdG9w
+OiAyMDBweDsgbWFyZ2luLWxlZnQ6IDI4MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNv
+bG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQt
+c2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxp
+bmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6
+IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hp
+dGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+UmVjb21waWxlcjwvZGl2
+PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIzMTAiIHk9IjIwNCIgZmlsbD0i
+cmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRl
+eHQtYW5jaG9yPSJtaWRkbGUiPlJlY29tcGlsZXI8L3RleHQ+PC9zd2l0Y2g+PC9nPjxyZWN0IHg9
+IjI0MCIgeT0iOTAiIHdpZHRoPSI2MCIgaGVpZ2h0PSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJu
+b25lIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAt
+MC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9
+IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcv
+VFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7
+IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3ho
+dG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1
+c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDU4cHg7IGhlaWdodDogMXB4OyBw
+YWRkaW5nLXRvcDogMTA1cHg7IG1hcmdpbi1sZWZ0OiAyNDFweDsiPjxkaXYgZGF0YS1kcmF3aW8t
+Y29sb3JzPSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXIt
+Ym94OyBmb250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0iZGlz
+cGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRp
+Y2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRz
+OiBhbGw7IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPkNvbXBp
+bGVyPC9kaXY+PC9kaXY+PC9kaXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjI3MCIgeT0iMTA5
+IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6ZT0i
+MTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Q29tcGlsZXI8L3RleHQ+PC9zd2l0Y2g+PC9nPjxy
+ZWN0IHg9IjAiIHk9IjkwIiB3aWR0aD0iNjAiIGhlaWdodD0iMzAiIGZpbGw9Im5vbmUiIHN0cm9r
+ZT0ibm9uZSIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0w
+LjUgLTAuNSkiPjxzd2l0Y2g+PGZvcmVpZ25PYmplY3QgcG9pbnRlci1ldmVudHM9Im5vbmUiIHdp
+ZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMu
+b3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSIgc3R5bGU9Im92ZXJmbG93OiB2aXNp
+YmxlOyB0ZXh0LWFsaWduOiBsZWZ0OyI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5
+OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiB1bnNhZmUgY2VudGVy
+OyBqdXN0aWZ5LWNvbnRlbnQ6IHVuc2FmZSBjZW50ZXI7IHdpZHRoOiA1OHB4OyBoZWlnaHQ6IDFw
+eDsgcGFkZGluZy10b3A6IDEwNXB4OyBtYXJnaW4tbGVmdDogMXB4OyI+PGRpdiBkYXRhLWRyYXdp
+by1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRl
+ci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJk
+aXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZl
+dGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVu
+dHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+RGVj
+b21waWxlcjwvZGl2PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIzMCIgeT0i
+MTA5IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6
+ZT0iMTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+RGVjb21waWxlcjwvdGV4dD48L3N3aXRjaD48
+L2c+PC9nPjxzd2l0Y2g+PGcgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIv
+U1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ii8+PGEgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCwt
+NSkiIHhsaW5rOmhyZWY9Imh0dHBzOi8vd3d3LmRyYXdpby5jb20vZG9jL2ZhcS9zdmctZXhwb3J0
+LXRleHQtcHJvYmxlbXMiIHRhcmdldD0iX2JsYW5rIj48dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxl
+IiBmb250LXNpemU9IjEwcHgiIHg9IjUwJSIgeT0iMTAwJSI+VGV4dCBpcyBub3QgU1ZHIC0gY2Fu
+bm90IGRpc3BsYXk8L3RleHQ+PC9hPjwvc3dpdGNoPjwvc3ZnPg==
+      </contents>
+    </upload>
+  </page>
+  <page>
+    <title>Help:Transclusion Test</title>
+    <ns>12</ns>
+    <id>63</id>
+    <revision>
+      <id>66</id>
+      <timestamp>2023-09-12T10:20:46Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment>/* Hier */</comment>
+      <origin>66</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="112" sha1="skefc40nn028itooiikdf4naq1d5zkd" xml:space="preserve">
+= Teil 1 =
+{{:Compilerbau/Semesterplan}}
+
+= Hier =
+
+{{#lst:Formale Werkzeuge zur Sprachbeschreibung|Maschinen}}</text>
+      <sha1>skefc40nn028itooiikdf4naq1d5zkd</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Formale Werkzeuge zur Sprachbeschreibung</title>
+    <ns>0</ns>
+    <id>64</id>
+    <revision>
+      <id>67</id>
+      <timestamp>2023-09-13T15:58:04Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <origin>67</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="348" sha1="4qwvkworr5ft4crn9tkktg0syzzx13z" xml:space="preserve">
+
+== Sprachen ==
+&lt;amsmath&gt;
+\title{Sprachen}
+
+a
+&lt;/amsmath&gt;
+
+== Grammatiken ==
+&lt;amsmath&gt;
+\title{Grammatiken}
+
+Typ 0:
+
+Typ 1:
+
+Typ 2:
+
+Typ 3:
+&lt;/amsmath&gt;
+
+
+== Ableitungen und Ableitungsbäume ==
+&lt;amsmath&gt;
+
+
+&lt;/amsmath&gt;
+
+== Attributierte Bäume ==
+&lt;amsmath&gt;
+asd
+
+&lt;/amsmath&gt;
+
+== Maschinen ==
+Ünber Maschinen
+&lt;amsmath&gt;
+Eine Turing Maschine ist
+
+&lt;/amsmath&gt;</text>
+      <sha1>4qwvkworr5ft4crn9tkktg0syzzx13z</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Parsifal Cheat</title>
+    <ns>12</ns>
+    <id>65</id>
+    <revision>
+      <id>68</id>
+      <timestamp>2023-09-13T19:15:37Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <origin>68</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="762" sha1="pu124m0znkgjxkzlmc2juuddygnxew5" xml:space="preserve">__HIDEHEAD__
+
+== Parsifal Cheat Sheet ==
+
+=== Attributes ===
+
+==== Collapse ====
+
+==== Continuation ====
+Situation: We want to split TeX text into several smaller portions.
+Advantages of this are:
+* Faster preview
+* Smaller unit of error and unit of editing
+* Seperate edit link
+
+For the presentation, there can be several scenarios:
+* Separation: We want a bit of markup which lets the reader see that there are two
+different portions of text. 
+* Continuation: We do not want to indicate this separation into two different portions of text. The second portion should be a seamless continuation of the
+first text. Nevertheless there should be a possibility for the reader to recognize the two parts and to invoke edit links and similar actions for the
+two parts.</text>
+      <sha1>pu124m0znkgjxkzlmc2juuddygnxew5</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Dante Cheat</title>
+    <ns>12</ns>
+    <id>66</id>
+    <revision>
+      <id>69</id>
+      <timestamp>2023-09-14T16:25:32Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment>Created page with "  == Dante Tree ==  * A shift-click on to a Category link opens the category window as seperate popup window in small size and on the left of the screen. This proved helpful for quick deploy of a category window as an overview."</comment>
+      <origin>69</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="227" sha1="o0z473oro5adw6m9i6i1ipnkhm5a77m" xml:space="preserve">
+
+== Dante Tree ==
+
+* A shift-click on to a Category link opens the category window as seperate
+popup window in small size and on the left of the screen. This proved helpful for quick deploy of a category window as an overview.</text>
+      <sha1>o0z473oro5adw6m9i6i1ipnkhm5a77m</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Hide Test</title>
+    <ns>0</ns>
+    <id>67</id>
+    <revision>
+      <id>70</id>
+      <timestamp>2023-09-15T20:54:35Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <origin>70</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="136" sha1="nhlmneglg4fowz3ilg0e3dv96shn883" xml:space="preserve">
+
+This is main text. It contains a &lt; and more stuff.
+
+&lt;hide&gt;
+This is hidden text.
+&lt;/hide&gt;
+
+This is main text again.
+
+[[Category:backup]]</text>
+      <sha1>nhlmneglg4fowz3ilg0e3dv96shn883</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Metatest</title>
+    <ns>0</ns>
+    <id>68</id>
+    <revision>
+      <id>71</id>
+      <timestamp>2023-09-15T21:22:28Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <origin>71</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="42" sha1="3au7vn8yndv7oj60atbzl2u5zn4f5y8" xml:space="preserve">
+
+Das &lt; ist ein &amp;lt;
+
+
+[[Category:backup]]</text>
+      <sha1>3au7vn8yndv7oj60atbzl2u5zn4f5y8</sha1>
+    </revision>
+  </page>
+</mediawiki>
