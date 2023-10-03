@@ -11,6 +11,7 @@
     {"label": "006 run lap and my-mysql (NO clean):          images/lap/bin/both.sh ",               "command": "images/lap/bin/both.sh",   "args": ["--db", "my-test-db-volume",  "--dir", "full"] },
     {"label": "009 initialize wiki:               volumes/full/spec/wiki-init.sh",                        "command": "volumes/full/spec/wiki-init.sh", "args": ["--site-server", "http://localhost:8080"]},
     {"label": "010 inject keys:                    volumes/full/spec/inject-keys.sh",                        "command": "volumes/full/spec/inject-keys.sh", "args": ["pro"]},   
+    {"label": "010a initial content load:                    bin/initial-content.sh",                        "command": "bin/initial-content.sh"},   
     {"label": "012 DEPLOY CURRENT VOLUME to DEPLOYMENT REPOSITORY (might want to refresh before)     bin/make-deployment.sh",                     "command": "bin/make-deployment.sh"},
     {"label": "110 PUSH DELTA changes to github   volumes/full/spec/git-push-to-delta",                   "command": "volumes/full/spec/git-push-to-delta.sh"} ,
     {"label": "111 PUSH PARSIFAL changes to github/Parsifal dante branch ",                               "command": "volumes/full/spec/git-push-to-parsifal.sh"} ,
