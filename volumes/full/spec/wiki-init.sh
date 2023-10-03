@@ -588,23 +588,22 @@ initialize () {
   WK_PASS="password-$1"
 
   # TODO: must offer possibility to use a real password
-  echo "*** Initialize sees DB_USER=${DB_USER}, DB_PASS=${DB_PASS}, WK_USER=${WK_USER}, WK_PASS=${WK_PASS}"
+  printf "\n*** Initialize sees DB_USER=${DB_USER}, DB_PASS=${DB_PASS}, WK_USER=${WK_USER}, WK_PASS=${WK_PASS}\n\n"
 
   # path to the wiki inside of the volume
   VOLUME_PATH="wiki-${DB_USER}"
 
-  echo "** Are we a wiki directory?"
+  printf "** Is ${MOUNT}/${VOLUME_PATH}/ a wiki directory?\n"
   docker exec ${LAP_CONTAINER} ls ${MOUNT}/${VOLUME_PATH}/index.php
   if [ "$?" == "0" ]; then
-    echo "* Found index.php, probably yes, continuing"
+    printf "* Found index.php, probably yes, continuing\n\n"
   else 
-    echo "* NO *** EXITING initializer for ${VOLUME_PATH}"
+    printf "* NO *** EXITING initializer for ${VOLUME_PATH}\n\n"
     return
   fi
-  echo ""
 
 
-  addDatabase ${DB_NAME} ${DB_USER} ${DB_PASS}
+  #addDatabase ${DB_NAME} ${DB_USER} ${DB_PASS}
 
   # composer must run before the installscript so that the installscript has all the available extensions ready
   # this is necessary, since the installscript does an autoregistration of some components, for example the installed skins
@@ -612,9 +611,9 @@ initialize () {
   docker exec ${LAP_CONTAINER} rm -f ${MOUNT}/${VOLUME_PATH}/LocalSettings.php      # remove to have a clean start for install routines, ignore if not existant
   runMWInstallScript
   addingReferenceToDante
-
   initialTemplates  
-  # initialContents ${VOLUME_PATH}   # currently not used 
+  ##### initialContents ${VOLUME_PATH}   # currently not used 
+  touchLocalSettings
 
   printf "\nDONE   *** INITIALIZING WIKI ***\n\n"
 }

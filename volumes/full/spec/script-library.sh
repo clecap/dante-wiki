@@ -9,7 +9,7 @@
 
 
 initialTemplates () { # imports an initial set of Parsifal templates from the wiki_dir into a running wiki
-# get directory where this script resides wherever it is called from
+  # get directory where this script resides wherever it is called from
   MOUNT=/var/www/html/
   TARGET=wiki-dir
   LAP_CONTAINER=my-lap-container
@@ -21,7 +21,13 @@ initialTemplates () { # imports an initial set of Parsifal templates from the wi
 }  
 
 
-
+touchLocalSettings () { # touch the file LocalSettings.php helps refresh the cache
+  MOUNT=/var/www/html/
+  TARGET=wiki-dir
+  printf "*** Touching LocalSettings.php..."
+  docker exec ${LAP_CONTAINER} /bin/sh -c "touch ${MOUNT}${TARGET}/LocalSettings.php"
+  printf "DONE\n\n"
+}
 
 
 addingImages () {
