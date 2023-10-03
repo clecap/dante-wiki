@@ -8,6 +8,22 @@
 
 
 
+initialTemplates () { # imports an initial set of Parsifal templates from the wiki_dir into a running wiki
+# get directory where this script resides wherever it is called from
+  MOUNT=/var/www/html/
+  TARGET=wiki-dir
+  LAP_CONTAINER=my-lap-container
+  printf "*** Importing initial set of Parsifal templates..."
+    set -e; trap 'abort' EXIT                       # call abort on EXIT
+    docker exec ${LAP_CONTAINER} php ${MOUNT}${TARGET}/maintenance/importTextFiles.php --prefix "MediaWiki:ParsifalTemplate/" --rc --overwrite ${MOUNT}${TARGET}/extensions/Parsifal/initial-templates/*
+  printf "DONE\n\n"
+
+}  
+
+
+
+
+
 addingImages () {
 # Call with name of TARGET, example:  wiki-dir
   TARGET=$1

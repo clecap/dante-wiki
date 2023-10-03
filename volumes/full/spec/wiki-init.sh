@@ -40,22 +40,24 @@ abort()
   exit 1
 }
 
-#set -e                                  # abort execution on any error
-#trap 'abort' EXIT                       # call abort on EXIT
+set -e                                  # abort execution on any error
+trap 'abort' EXIT                       # call abort on EXIT
 
 
+printf "\n\n*** reading script library..."
+  source ${TOP_DIR}/volumes/full/spec/script-library.sh
+printf "DONE\n\n"
 
-printf "\n\n*** Ensure buffer is large enough on a global scale in any case\n"
-git config --global http.postBuffer 524288000
+printf "\n\n*** Ensure buffer is large enough on a global scale in any case\..."
+  git config --global http.postBuffer 524288000
 printf "DONE\n\n"
 
 ##
 ## obtain some parameters from a file
 ##
-echo "Will now read customize-PRIVATE.sh"
-ls -l ${DIR}/../../../conf/customize-PRIVATE.sh
-source ${DIR}/../../../conf/customize-PRIVATE.sh
-echo "DONE reading customize-PRIVATE.sh"
+printf "*** Reading customize-PRIVATE.sh..."
+  source ${DIR}/../../../conf/customize-PRIVATE.sh
+printf "DONE\n\n"
 
 ##
 ## Parse command line, where we can override some of the parameters from the file
@@ -140,6 +142,14 @@ installExtensionGithub () {
   NAME=$2
   BRANCH=$3
   printf "\n*** INSTALLING EXTENSION ${NAME} from ${URL} using branch ${BRANCH} ...\n"
+  printf "   Ensuring proper git postbuffer size"
+## https://stackoverflow.com/questions/21277806/fatal-early-eof-fatal-index-pack-failed/29355320#29355320
+  docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "git config --global http.postBuffer 524288000"
+  docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "git config --global core.packedGitLimit 512m"
+  docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "git config --global core.packedGitWindowSize 512m"
+  docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "git config --global pack.deltaCacheSize 2047m"
+  docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "git config --global pack.packSizeLimit 2047m"
+  docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "git config --global pack.windowMemory 2047m"
   printf "   Removing preexisting directory\n"
   docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "rm -Rf ${NAME} "
   printf "   Cloning ${URL} with branch ${BRANCH} into ${NAME}\n"
@@ -422,12 +432,6 @@ patchingForChameleon () {
 # endregion
 
 
-// installs drawio with a hard-coded installation directory
-// TODO: note, this is currently the dev branch of my own fork - not sure of this is the best decision
-
-
-
-
 ## for setting up wordpress, we start with a username 
 ## CAVE: wikis currently do this differently, by traversing the file system and picking up directories   ### TODO: make this uniform !!
 
@@ -599,9 +603,6 @@ initialize () {
   fi
   echo ""
 
-  echo ""; echo "";
-  echo "************************************************************************************* ONLY PARTIAL STUFF DONE, much is commented out ";
-  echo ""
 
   addDatabase ${DB_NAME} ${DB_USER} ${DB_PASS}
 
@@ -611,7 +612,8 @@ initialize () {
   docker exec ${LAP_CONTAINER} rm -f ${MOUNT}/${VOLUME_PATH}/LocalSettings.php      # remove to have a clean start for install routines, ignore if not existant
   runMWInstallScript
   addingReferenceToDante
-  
+
+  initialTemplates  
   # initialContents ${VOLUME_PATH}   # currently not used 
 
   printf "\nDONE   *** INITIALIZING WIKI ***\n\n"
@@ -627,7 +629,7 @@ initialize () {
 ##
 main () {
 
-set -e                                  # abort execution on any error
+set -e                                  # exit on error; call abort on exit
 trap 'abort' EXIT                       # call abort on EXIT
 
 parseCommandLine 
