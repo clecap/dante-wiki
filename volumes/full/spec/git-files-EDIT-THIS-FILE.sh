@@ -17,6 +17,7 @@ declare -a MY_FILES=(                  \
   "DanteSettings.php"                  \
   "DanteSettings-production.php"       \ 
   "DanteSettings-development.php"      \
+  "DanteSettings-used.php"             \
    "README-dante-delta.md"             \
    ".gitignore")
 
