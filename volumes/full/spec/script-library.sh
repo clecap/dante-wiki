@@ -90,6 +90,8 @@ copyInMinimal () { # copy in minimal initial contents from here to template volu
     mkdir -p ${TOP_DIR}/volumes/full/content/${TARGET}/assets
     cp ${TOP_DIR}/assets/initial-contents/minimal-initial-contents.xml  ${TOP_DIR}/volumes/full/content/${TARGET}/assets/minimal-initial-contents.xml
     cp "${TOP_DIR}/assets/initial-contents/Main Page" "${TOP_DIR}/volumes/full/content/${TARGET}/assets/Main Page"
+    cp "${TOP_DIR}/assets/initial-contents/Privacypage" "${TOP_DIR}/volumes/full/content/${TARGET}/assets/Privacypage"
+    cp "${TOP_DIR}/assets/initial-contents/Disclaimerpage" "${TOP_DIR}/volumes/full/content/${TARGET}/assets/Disclaimerpage"
     cp "${TOP_DIR}/assets/initial-contents/Sidebar" "${TOP_DIR}/volumes/full/content/${TARGET}/assets/Sidebar"
   printf "DONE copying in minimal initial contents"
 }
@@ -113,6 +115,9 @@ minimalInitialContents () {
   docker exec ${LAP_CONTAINER} php /var/www/html/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite --prefix "MediaWiki:" ${MOUNT}/${TARGET}/assets/Sidebar
 
   docker exec ${LAP_CONTAINER} php /var/www/html/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite  "${MOUNT}/${TARGET}/assets/Main Page"
+
+  docker exec ${LAP_CONTAINER} php /var/www/html/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite --prefix "MediaWiki" "${MOUNT}/${TARGET}/assets/Disclaimerpage"
+  docker exec ${LAP_CONTAINER} php /var/www/html/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite --prefix "MediaWiki" "${MOUNT}/${TARGET}/assets/Privacypage"
 
 
   printf "\n\n* rebuildrecentchanges\n"
