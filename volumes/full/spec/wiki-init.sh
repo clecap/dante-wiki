@@ -181,6 +181,9 @@ composerInstall () {
   # Install markdown-extended https://github.com/BenjaminHoegh/ParsedownExtended
   docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER}   sh -c " COMPOSER=composer.local.json  composer require benjaminhoegh/parsedown-extended"
 
+  # Install requirements for deepl integration in DantePresentations
+  docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER}   sh -c " COMPOSER=composer.local.json  composer require deeplcom/deepl-php"
+
   printf "\n\n*** DONE installing extension requirements\n\n"
 
 

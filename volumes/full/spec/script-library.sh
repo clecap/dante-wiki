@@ -93,7 +93,7 @@ copyInMinimal () { # copy in minimal initial contents from here to template volu
     cp "${TOP_DIR}/assets/initial-contents/Privacypage" "${TOP_DIR}/volumes/full/content/${TARGET}/assets/Privacypage"
     cp "${TOP_DIR}/assets/initial-contents/Disclaimerpage" "${TOP_DIR}/volumes/full/content/${TARGET}/assets/Disclaimerpage"
     cp "${TOP_DIR}/assets/initial-contents/Sidebar" "${TOP_DIR}/volumes/full/content/${TARGET}/assets/Sidebar"
-  printf "DONE copying in minimal initial contents"
+  printf "DONE copying in minimal initial contents\n\n"
 }
 
 
