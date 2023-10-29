@@ -27,24 +27,10 @@ usage() {
 
 # get directory where this script resides, wherever it is called from
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
 TOP_DIR="${DIR}/../../../"
 
 
-
-abort()
-{
-  printf "%b" "\e[1;31m *** ***                          *** *** \e[0m"
-  printf "%b" "\e[1;31m *** *** wiki-init.sh was aborted *** *** \e[0m"
-  printf "%b" "\e[1;31m *** ***                          *** *** \e[0m"
-  exit 1
-}
-
-set -e                                  # abort execution on any error
-trap 'abort' EXIT                       # call abort on EXIT
-
-
-printf "\n\n*** reading script library..."
+printf "\n\n*** reading in the script library..."
   source ${TOP_DIR}/volumes/full/spec/script-library.sh
 printf "DONE\n\n"
 
@@ -59,30 +45,7 @@ printf "*** Reading customize-PRIVATE.sh..."
   source ${DIR}/../../../conf/customize-PRIVATE.sh
 printf "DONE\n\n"
 
-##
-## Parse command line, where we can override some of the parameters from the file
-##
-parseCommandLine () {
-if [ "$#" -eq 0 ]; then    # We were called with zero parameters: show usage
-  usage
-else                       # We were called with parameters.
-  while (($#)); do
-    case $1 in 
-      (--site-server) 
-        MW_SITE_SERVER="$2";;
-      (--composerInstall)
-        composerInstall 
-      (*) 
-         echo "Error parsing options - aborting" 
-         usage 
-         exit 1
-        
-    esac
-  shift 2
-  done
-fi
-}
-# endregion
+
 
 
 # region  DEFINING certain global constants
@@ -95,7 +58,6 @@ LAP_CONTAINER=my-lap-container
 DB_CONTAINER=my-mysql
 
 # endregion
-
 
 
 
@@ -122,25 +84,30 @@ composerPermissions () {
 # endregion
 
 
+#
+#composerUpdate () {
+#  printf "\n*** Do a composer update on the global file\n"
+#  docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER}   sh -c " composer update --no-dev -o  --no-interaction "
+#  printf "DONE with the composer update on the global file\n"
+#
+#  printf "\n*** Do a composer update on the local file\n"
+#  docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER}   sh -c " COMPOSER=composer.local.json composer update --no-dev -o  --no-interaction "
+#  printf "DONE with local composer update\n"
+#}
 
-composerUpdate () {
-  printf "\n*** Do a composer update on the global file\n"
-  docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER}   sh -c " composer update --no-dev -o  --no-interaction "
-  printf "DONE with the composer update on the global file\n"
-
-  printf "\n*** Do a composer update on the local file\n"
-  docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER}   sh -c " COMPOSER=composer.local.json composer update --no-dev -o  --no-interaction "
-  printf "DONE with local composer update\n"
-}
 
 # region installExtensionGithub ()   
 # INSTALL an extension which is hosted on github
 # EXAMPLE:   installExtensionGithub  https://github.com/kuenzign/WikiMarkdown  WikiMarkdown  main
 installExtensionGithub () {
+  local URL=$1
+  local NAME=$2
+  local BRANCH=$3
 
-  URL=$1
-  NAME=$2
-  BRANCH=$3
+# MOUNT
+# VOLUME_PATH
+# LAP_CONTAINER
+
   printf "\n*** INSTALLING EXTENSION ${NAME} from ${URL} using branch ${BRANCH} ...\n"
   printf "   Ensuring proper git postbuffer size"
 ## https://stackoverflow.com/questions/21277806/fatal-early-eof-fatal-index-pack-failed/29355320#29355320
@@ -153,7 +120,7 @@ installExtensionGithub () {
   printf "   Removing preexisting directory\n"
   docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "rm -Rf ${NAME} "
   printf "   Cloning ${URL} with branch ${BRANCH} into ${NAME}\n"
-  docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions ${LAP_CONTAINER}          sh -c " git clone ${URL} --branch ${BRANCH} ${NAME} "
+  docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions ${LAP_CONTAINER}          sh -c " git clone --depth 1 ${URL} --branch ${BRANCH} ${NAME} "
   printf "   Removing .git to save on space\n"
   docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/${NAME} ${LAP_CONTAINER}  sh -c "rm -Rf .git "
   printf "   Injecting installation into DanteDynamicInstalls.php\n"
@@ -217,15 +184,14 @@ composerInstall () {
   printf "\n\n*** DONE installing extension requirements\n\n"
 
 
-  installExtensionGithub  https://github.com/kuenzign/WikiMarkdown                                        WikiMarkdown  main
-  installExtensionGithub  https://github.com/wikimedia/mediawiki-extensions-MobileFrontend                MobileFrontend REL1_39
+  installExtensionGithub  https://github.com/kuenzign/WikiMarkdown                                        WikiMarkdown        main
+  installExtensionGithub  https://github.com/wikimedia/mediawiki-extensions-MobileFrontend                MobileFrontend      REL1_39
 
 #  installExtensionGithub  https://github.com/labster/HideSection/                                         HideSection master
 
-  installExtensionGithub  https://github.com/wikimedia/mediawiki-extensions-RandomSelection               RandomSelection REL1_39
-  installExtensionGithub  https://github.com/wikimedia/mediawiki-extensions-LabeledSectionTransclusion    LabeledSectionTransclusion REL1_39
-  installExtensionGithub  https://github.com/wikimedia/mediawiki-extensions-RevisionSlider                RevisionSlider REL1_39
-
+  installExtensionGithub  https://github.com/wikimedia/mediawiki-extensions-RandomSelection               RandomSelection     REL1_39
+  installExtensionGithub  https://github.com/wikimedia/mediawiki-extensions-LabeledSectionTransclusion    LabeledSectionTransclusion   REL1_39
+  installExtensionGithub  https://github.com/wikimedia/mediawiki-extensions-RevisionSlider                RevisionSlider   REL1_39
   installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-NativeSvgHandler               NativeSvgHandler  REL1_39
 
 
@@ -263,7 +229,6 @@ installExtensionGithub https://github.com/Universal-Omega/DynamicPageList3 Dynam
 # endregion
 
 
-# region dropDatabase  DB_NAME  
 # drops a database. could be helpful before an addDatabase
 dropDatabase () {
   local MY_DB_NAME=$1
@@ -288,7 +253,7 @@ addDatabase () {
   local MY_DB_USER=$2
   local MY_DB_PASS=$3
  
-  printf "\n * addDatabase: Making a database ${MY_DB_NAME} with user ${MY_DB_USER} and password ${MY_DB_PASS} \n"
+  printf "\n\n*** addDatabase: Making a database ${MY_DB_NAME} with user ${MY_DB_USER} and password ${MY_DB_PASS} \n"
 
 # TODO: Adapt the permissions granted to the specific environment and run-time conditions.
 # TODO: CURRENTLY We ARE NOT USING A MYSQL_ROOT_PASSWORD (the empty passowrd works !!!)
@@ -304,14 +269,13 @@ FLUSH PRIVILEGES;
 MYSQLSTUFF
 
 EXIT_CODE=$?
-printf "DONE: Exit code of addDatabase generated database call: ${EXIT_CODE}\n"
+printf "DONE: Exit code of addDatabase generated database call: ${EXIT_CODE}\n\n"
 }
-# endregion
 
 
-# region runMWInstallScript ()   run the mediawiki install script and generate a LocalSettings.php
-#
+
 runMWInstallScript () {
+#  run the mediawiki install script and generate a LocalSettings.php
   MEDIAWIKI_DB_HOST=my-mysql
   MEDIAWIKI_DB_TYPE=mysql
   MEDIAWIKI_DB_NAME=${DB_NAME}
@@ -346,7 +310,7 @@ echo  "   MEDIAWIKI_DB_NAME            ${MEDIAWIKI_DB_NAME}"
 echo  "   MEDIAWIKI_DB_PORT            ${MEDIAWIKI_DB_PORT}" 
 echo  "   MEDIAWIKI_DB_USER            ${MEDIAWIKI_DB_USER}"
 echo  "   MEDIAWIKI_DB_PASSWORD        ${MEDIAWIKI_DB_PASSWORD}"
-echo  "...MEDIAWIKI_RUN_UPDATE_SCRIPT  ${MEDIAWIKI_RUN_UPDATE_SCRIPT}"
+echo  "   MEDIAWIKI_RUN_UPDATE_SCRIPT  ${MEDIAWIKI_RUN_UPDATE_SCRIPT}"
 echo  ""
 
 echo "SITE Parameters are: "
@@ -405,7 +369,7 @@ addingReferenceToDante () {
 
 # NOTE: Doing this with include does not produce an error if the file goes missing
 
-  docker exec -w /${MOUNT}/${VOLUME_PATH}  ${LAP_CONTAINER}   sh -c "echo ' ' >> LocalSettings.php"
+  docker exec -w /${MOUNT}/${VOLUME_PATH}   ${LAP_CONTAINER}   sh -c "echo ' ' >> LocalSettings.php"
   docker exec -w /${MOUNT}/${VOLUME_PATH}   ${LAP_CONTAINER}  sh -c " echo '###' >> LocalSettings.php"
   docker exec -w /${MOUNT}/${VOLUME_PATH}   ${LAP_CONTAINER}  sh -c "echo '### Automagically injected by volume cmd.sh ' >> LocalSettings.php"
   docker exec -w /${MOUNT}/${VOLUME_PATH}   ${LAP_CONTAINER}  sh -c "echo '###' >> LocalSettings.php  "
@@ -512,7 +476,7 @@ initWP () {
 # region initialContents
 #  Call this with one parameter (the target directory name)
 ### TODO: THIS IS *CURRENTLY* DEPRECATED
-initialContents () {
+initialContents () { # load initial contents
 
 TARGET=$1
 
@@ -547,14 +511,8 @@ printf "DONE copying"
 #  docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER} php maintenance/importTextFiles.php --prefix "Project:"  --overwrite $p
 #done
 
-
 docker exec ${LAP_CONTAINER} ${MOUNT}/${TARGET}/extensions/Parsifal/sh/make-formats.sh
-
-
-
 }
-
-# endregion
 
 
 ##
@@ -577,7 +535,6 @@ echo "...DONE"
 
 
 # region  INITIALIZE    Initialization function for an individual WIKI
-#
 #
 initialize () {
   DB_USER=$1
@@ -603,15 +560,20 @@ initialize () {
   fi
 
 
-  #addDatabase ${DB_NAME} ${DB_USER} ${DB_PASS}
+  addDatabase ${DB_NAME} ${DB_USER} ${DB_PASS}
 
   # composer must run before the installscript so that the installscript has all the available extensions ready
   # this is necessary, since the installscript does an autoregistration of some components, for example the installed skins
   composerInstall
+
+  addDatabase ${DB_NAME} ${DB_USER} ${DB_PASS}
+
   docker exec ${LAP_CONTAINER} rm -f ${MOUNT}/${VOLUME_PATH}/LocalSettings.php      # remove to have a clean start for install routines, ignore if not existant
   runMWInstallScript
+
   addingReferenceToDante
   initialTemplates  
+  minimalInitialContents
   ##### initialContents ${VOLUME_PATH}   # currently not used 
   touchLocalSettings
 
@@ -627,11 +589,6 @@ initialize () {
 # region main  MAIN function of the shell script
 ##
 main () {
-
-set -e                                  # exit on error; call abort on exit
-trap 'abort' EXIT                       # call abort on EXIT
-
-parseCommandLine 
 
 WIKIS="${DIR}/../content/wiki-"*        # collect list of wikis from existing directory structure
 
@@ -664,12 +621,4 @@ printf "*** The Wiki is available at ${MW_SITE_SERVER} "
 # endregion
 
 
-
-
-
 main 
-
-
-
-
-trap : EXIT         # switch trap command back to noop (:) on EXIT

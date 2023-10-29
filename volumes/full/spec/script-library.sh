@@ -6,6 +6,71 @@
 
 
 
+# propagate traps into called functions:
+set -E
+
+set -o functrace
+
+# See https://stackoverflow.com/questions/24398691/how-to-get-the-real-line-number-of-a-failing-bash-command
+
+function handle_error {
+  # get exit status of last executed command
+  local retval=$?
+  local line=${last_lineno:-$1}
+  local arg1=$1
+  local arg2=$2
+  local argLast=${@: -1}
+  printf "\e[1;31m***\n*** ERROR at CMD $argLast in LINE: $line of FILE: ${BASH_SOURCE[1]} with STATUS: $retval \n***\n\n     STACK TRACE:\n\n"
+  for i in "${!FUNCNAME[@]}"
+    do
+      printf "    \e[1;31m FCT %-15s called in FILE %-15s at LINE %-15s\n" ${FUNCNAME[$i]}  ${BASH_SOURCE[$i+1]}  ${BASH_LINENO[$i]}
+    done
+    exit $retval
+}
+
+# See https://stackoverflow.com/questions/24398691/how-to-get-the-real-line-number-of-a-failing-bash-command
+if (( ${BASH_VERSION%%.*} <= 3 )) || [[ ${BASH_VERSION%.*} = 4.0 ]]; then
+  trap '[[ $FUNCNAME = handle_error ]] || { last_lineno=$real_lineno; real_lineno=$LINENO; }' DEBUG
+fi
+trap 'handle_error $LINENO ${BASH_LINENO[@]} $BASH_COMMAND' ERR
+
+
+
+simpleEntryPage () { #  dynamically generate a simple entry page on the target-less url
+  echo "<html><head></head><body><a href='wiki-dir'>Wiki</a></body></html>" >>  ${TOP_DIR}/volumes/full/content/index.html
+}
+
+
+
+getSkins () {      #  copy in skins
+  TARGET=$1
+
+  local SKIN_DIR=${TOP_DIR}/volumes/full/content/${TARGET}/skins
+  cd ${SKIN_DIR}
+
+  echo "<?php " >> ${TOP_DIR}/volumes/full/content/${TARGET}/DanteSkinsInstalled.php
+
+  # Modern
+  printf "*** Installing skin Modern\n"
+  mkdir ${SKIN_DIR}/Modern
+  git clone -b $MW_VERSION --single-branch https://gerrit.wikimedia.org/r/mediawiki/skins/Modern Modern
+  rm -Rf ${SKIN_DIR}/Modern/.git
+  echo "wfLoadSkin( 'Modern' );" >> ${TOP_DIR}/volumes/full/content/${TARGET}/DanteSkinsInstalled.php
+  printf "DONE installing skin Modern\n\n"
+
+  # Refreshed
+  printf "*** Installing skin Refreshed"
+  mkdir ${SKIN_DIR}/Refreshed
+  git clone -b $MW_VERSION --single-branch https://gerrit.wikimedia.org/r/mediawiki/skins/Refreshed Refreshed
+  rm -Rf ${SKIN_DIR}/Refreshed/.git
+  echo "wfLoadSkin( 'Refreshed' );" >> ${TOP_DIR}/volumes/full/content/${TARGET}/DanteSkinsInstalled.php
+
+  # Chameleon          skin is broken
+  # CologneBlue        uses a method which is deprecated in 1.39
+}
+
+
+
 
 
 initialTemplates () { # imports an initial set of Parsifal templates from the wiki_dir into a running wiki
@@ -14,11 +79,67 @@ initialTemplates () { # imports an initial set of Parsifal templates from the wi
   TARGET=wiki-dir
   LAP_CONTAINER=my-lap-container
   printf "*** Importing initial set of Parsifal templates..."
-    set -e; trap 'abort' EXIT                       # call abort on EXIT
     docker exec ${LAP_CONTAINER} php ${MOUNT}${TARGET}/maintenance/importTextFiles.php --prefix "MediaWiki:ParsifalTemplate/" --rc --overwrite ${MOUNT}${TARGET}/extensions/Parsifal/initial-templates/*
   printf "DONE\n\n"
-
 }  
+
+
+copyInMinimal () { # copy in minimal initial contents from here to template volume
+  local TARGET=$1
+  printf "\n*** Copying in minimal initial contents"
+    mkdir -p ${TOP_DIR}/volumes/full/content/${TARGET}/assets
+    cp ${TOP_DIR}/assets/initial-contents/minimal-initial-contents.xml  ${TOP_DIR}/volumes/full/content/${TARGET}/assets/minimal-initial-contents.xml
+    cp "${TOP_DIR}/assets/initial-contents/Main Page" "${TOP_DIR}/volumes/full/content/${TARGET}/assets/Main Page"
+    cp "${TOP_DIR}/assets/initial-contents/Sidebar" "${TOP_DIR}/volumes/full/content/${TARGET}/assets/Sidebar"
+  printf "DONE copying in minimal initial contents"
+}
+
+
+
+minimalInitialContents () {
+  MOUNT="/var/www/html/"
+  LAP_CONTAINER=my-lap-container
+  TARGET=wiki-dir
+
+  CONT=${MOUNT}/${TARGET}/assets/minimal-initial-contents.xml
+#   docker exec ${LAP_CONTAINER} php ${MOUNT}${TARGET}/maintenance/importTextFiles.php --prefix "MediaWiki:ParsifalTemplate/" --rc --overwrite ${MOUNT}${TARGET}/extensions/Parsifal/initial-templates/*
+
+  printf "Initial contents is at $CONT"
+
+  docker exec ${LAP_CONTAINER} php ${MOUNT}${TARGET}/maintenance/importDump.php --namespaces '8' --debug $CONT
+  docker exec ${LAP_CONTAINER} php ${MOUNT}${TARGET}/maintenance/importDump.php --namespaces '10' --debug $CONT 
+  docker exec ${LAP_CONTAINER} php ${MOUNT}${TARGET}/maintenance/importDump.php --uploads --debug $CONT  
+
+  docker exec ${LAP_CONTAINER} php /var/www/html/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite --prefix "MediaWiki:" ${MOUNT}/${TARGET}/assets/Sidebar
+
+  docker exec ${LAP_CONTAINER} php /var/www/html/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite  "${MOUNT}/${TARGET}/assets/Main Page"
+
+
+  printf "\n\n* rebuildrecentchanges\n"
+    docker exec ${LAP_CONTAINER} php ${MOUNT}${TARGET}/maintenance/rebuildrecentchanges.php
+  printf "DONE\n"
+
+
+  docker exec ${LAP_CONTAINER} php ${MOUNT}${TARGET}/maintenance/initSiteStats.php --update
+  docker exec ${LAP_CONTAINER} php ${MOUNT}${TARGET}/maintenance/rebuildImages.php
+
+  printf "\n\n**** RUNNING: rebuildImages \n"
+    docker exec ${LAP_CONTAINER} php ${MOUNT}${TARGET}/maintenance/rebuildall.php 
+  printf "DONE\n"
+
+  printf "\n\n**** RUNNING: checkImages \n"
+    docker exec ${LAP_CONTAINER} php ${MOUNT}${TARGET}/maintenance/checkImages.php
+  printf "DONE\n"
+
+  printf "\n\n**** RUNNINF: refreshFileHeaders \n"
+    docker exec ${LAP_CONTAINER} php ${MOUNT}${TARGET}/maintenance/refreshFileHeaders.php --verbose
+  printf "DONE\n"
+
+
+ 
+}
+
+
 
 
 touchLocalSettings () { # touch the file LocalSettings.php helps refresh the cache
@@ -34,8 +155,8 @@ addingImages () {
 # Call with name of TARGET, example:  wiki-dir
   TARGET=$1
   printf "\n*** Adding image assets to target=${TARGET}\n"
-  cp ${TOPDIR}/assets/favicon.ico              ${TOPDIR}/volumes/full/content/${TARGET}/favicon.ico
-  cp ${TOPDIR}/assets/caravaggio-180x180.png   ${TOPDIR}/volumes/full/content/${TARGET}/logo.png
+  cp ${TOP_DIR}/assets/favicon.ico              ${TOP_DIR}/volumes/full/content/${TARGET}/favicon.ico
+  cp ${TOP_DIR}/assets/caravaggio-180x180.png   ${TOP_DIR}/volumes/full/content/${TARGET}/logo.png
   printf "\nDONE adding some images\n"
 }
 
@@ -43,16 +164,23 @@ installingDrawio () {
 # Call with name of TARGET, example: wiki-dir
   TARGET=$1
   printf "\n *** Installing drawio external service into target=${TARGET}\n"
-  mkdir -p ${TOPDIR}/volumes/full/content/${TARGET}/external-services/draw-io/
-#  ls ${TOPDIR}/volumes/full/content/${TARGET}
-  wget https://github.com/clecap/drawio/archive/refs/heads/dev.zip -O ${TOPDIR}/volumes/full/content/${TARGET}/external-services/dev.zip
-  unzip -q ${TOPDIR}/volumes/full/content/${TARGET}/external-services/dev.zip -d ${TOPDIR}/volumes/full/content/${TARGET}/external-services/draw-io/
-  rm ${TOPDIR}/volumes/full/content/${TARGET}/external-services/dev.zip
+  mkdir -p ${TOP_DIR}/volumes/full/content/${TARGET}/external-services/draw-io/
+#  ls ${TOP_DIR}/volumes/full/content/${TARGET}
+  wget https://github.com/clecap/drawio/archive/refs/heads/dev.zip -O ${TOP_DIR}/volumes/full/content/${TARGET}/external-services/dev.zip
+  unzip -q ${TOP_DIR}/volumes/full/content/${TARGET}/external-services/dev.zip -d ${TOP_DIR}/volumes/full/content/${TARGET}/external-services/draw-io/
+  rm ${TOP_DIR}/volumes/full/content/${TARGET}/external-services/dev.zip
   echo "DONE installing drawio external service\n"
 }
 
-
-
+waitingForDatabase () {
+  printf "*** Waiting for database to come up ... \n"
+  printf "PLEASE WAIT AT LEAST 1 MINUTE UNTIL NO ERRORS ARE SHOWING UP ANY LONGER\n\n"
+  while ! docker exec ${MYSQL_CONTAINER} mysql --user=root --password=${MYSQL_ROOT_PASSWORD} -e "SELECT 1"; do
+    sleep 1
+    echo "   Still waiting for database to come up..."
+  done
+  printf "DONE: database container is up\n\n"
+}
 
 
 dropDatabase () {
@@ -135,6 +263,22 @@ printf "DONE: Exit code of addDatabase generated database call: ${EXIT_CODE}\n\n
 
 
 
+cleanUpVolume () { # Code to clean up this directory
+  printf "\n*** Cleaning up volume at ${TOP_DIR} \n\n"
+  # git somteimes produces awkward permissions
+  if [ -d "${TOP_DIR}/volumes/full/content/${TARGET}.git" ]; then
+    chmod -R a+w ${TOP_DIR}/volumes/full/content/${TARGET}/.git
+  fi
+  printf "Will remove ${TOP_DIR}/volumes/full/content/*  \n"
+    rm -Rf ${TOP_DIR}/volumes/full/content/*
+  printf "DONE content/*\n"
+    rm -Rf ${TOP_DIR}/volumes/full/content/*.git
+  printf "DONE content/*.git\n"
+    rm -f ${TOP_DIR}/volumes/full/content/.gitignore
+  printf "DONE content/.gitignore\n"
+  printf "DONE cleaning up\n\n"
+  mkdir -p ${TOP_DIR}/volumes/full/content/wiki-dir
+}
 
 
 
@@ -318,7 +462,7 @@ makeWikiLocal () {
   tar --strip-components=1 -xzf ${LOCAL_FILE}
   printf "DONE un-taring of ${LOCAL_FILE}\n\n"
 
-  rm -Rf ${TOPDIR}/volumes/full/content/${TARGET}/skins/Refreshed/.git
+  rm -Rf ${TOP_DIR}/volumes/full/content/${TARGET}/skins/Refreshed/.git
 
   echo "DONE"
 }

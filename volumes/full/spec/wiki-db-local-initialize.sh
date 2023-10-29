@@ -7,9 +7,6 @@
 # Driver function which initializes the MediaWiki database and generates a local settings file
 #
 
-
-
-
 # get directory where this script resides wherever it is called from
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -56,7 +53,6 @@ set -e
 dropUser ${DB_CONTAINER} ${MYSQL_ROOT_PASSWORD} ${DB_USER}
 
 dropDatabase ${DB_NAME} ${DB_CONTAINER} ${MYSQL_ROOT_PASSWORD}
-
 
 echo "*** Calling: addDatabase DB_NAME=${DB_NAME} DB_USER=${DB_USER} DB_PASS=${DB_PASS} MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} DB_CONTAINER=${DB_CONTAINER} "
 
