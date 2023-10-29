@@ -11,7 +11,8 @@ $wgSMTP = [
     'auth'     => true                           // shall authentisation be used
 ];
 
-
 $wgLocaltimezone="Europe/Berlin";
+
+$DEEPL_API_KEY="INSERT-API-KEY";
 
 ?>
