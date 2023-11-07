@@ -99,18 +99,22 @@ printf "\n\n DONE"
 
 printf "\n----- STEP 2: Prepare PRODUCTION scripts\n\n"
 
+
+#### Deprecating scripts as part of volume repository. just copy them in directly from development repo, as this allows faster turn around
+
 # make directories for some scripts, use the same path as in development repository
-mkdir -p ${PRODUCTION}/images/lap/bin
-mkdir -p ${PRODUCTION}/images/my-mysql/bin
-mkdir -p ${PRODUCTION}/volumes/full/spec
+# mkdir -p ${PRODUCTION}/images/lap/bin
+# mkdir -p ${PRODUCTION}/images/my-mysql/bin
+# mkdir -p ${PRODUCTION}/volumes/full/spec
 
 # copy in some scripts
-cp ${TOP_DIR}/images/lap/bin/run.sh ${PRODUCTION}/images/lap/bin/run.sh
-cp ${TOP_DIR}/images/lap/bin/both.sh ${PRODUCTION}/images/lap/bin/both.sh
-cp ${TOP_DIR}/images/my-mysql/bin/run.sh ${PRODUCTION}/images/my-mysql/bin/run.sh
-cp ${TOP_DIR}/volumes/full/spec/script-library.sh ${PRODUCTION}/volumes/full/spec/script-library.sh
-cp ${TOP_DIR}/volumes/full/spec/wiki-db-local-initialize.sh ${PRODUCTION}/volumes/full/spec/wiki-db-local-initialize.sh
-cp ${TOP_DIR}/volumes/full/spec/inject-keys.sh ${PRODUCTION}/volumes/full/spec/inject-keys.sh
+# cp ${TOP_DIR}/images/lap/bin/run.sh ${PRODUCTION}/images/lap/bin/run.sh
+# cp ${TOP_DIR}/images/lap/bin/both.sh ${PRODUCTION}/images/lap/bin/both.sh
+# cp ${TOP_DIR}/images/my-mysql/bin/run.sh ${PRODUCTION}/images/my-mysql/bin/run.sh
+
+# cp ${TOP_DIR}/volumes/full/spec/script-library.sh ${PRODUCTION}/volumes/full/spec/script-library.sh
+# cp ${TOP_DIR}/volumes/full/spec/wiki-db-local-initialize.sh ${PRODUCTION}/volumes/full/spec/wiki-db-local-initialize.sh
+# cp ${TOP_DIR}/volumes/full/spec/inject-keys.sh ${PRODUCTION}/volumes/full/spec/inject-keys.sh
 
 ## push this to the correct repository
 printf "*** Adding, commiting and pushing this to the repository ${PRODUCTION}\n"
