@@ -551,27 +551,35 @@ function runDB() {
   if ! docker network inspect "$NETWORK_NAME" > /dev/null 2>&1; then
     printf " ** Network $NETWORK_NAME does not exist, creating it\n\n"
       docker network create "$NETWORK_NAME"
-    printf " DONE creating it\n"
+    printf " DONE creating it\n\n"
   else
-    printf " ** Network '$NETWORK_NAME' already exists."
+    printf " ** Network $NETWORK_NAME already exists\n\n"
   fi
 
-
-  printf " *** Creating DB container ${CONTAINER_NAME} "
+  if docker container inspect "$CONTAINER_NAME" > /dev/null 2>&1; then
+    if [ "$(docker container inspect -f '{{.State.Running}}' "$CONTAINER_NAME")" == "false" ]; then
+      printf " *** Container $CONTAINER_NAME exists but is stopped. Starting the container now.\n"
+        docker container start "$CONTAINER_NAME"
+      printf " DONE starting container $CONTAINER_NAME\n\n"
+    else
+      printf " *** Container '$CONTAINER_NAME' is already running.\n\n"
+    fi
+  else
+    printf " *** Container '$CONTAINER_NAME' does not exist. Creating and running it\n"
+    docker run -d --name ${CONTAINER_NAME}                      \
+      --network ${NETWORK_NAME}                                      \
+      -h ${HOST_NAME}                                           \
+      --env USERNAME=${USERNAME}                                \
+      -e MYSQL_ROOT_PASSWORD="${MYSQL_ROOT_PASSWORD}"           \
+      -e MYSQL_DUMP_USER="${MYSQL_DUMP_USER}"                   \
+      -e MYSQL_DUMP_PASSWORD"${MYSQL_DUMP_PASSWORD}"            \
+      --volume ${DB_VOLUME_NAME}:/${MOUNT}                      \
+      ${CONTAINER_NAME}                          
+  fi
 
 # export environment variables to the docker container for use there and in the entry point
-
   ## TODO: do we still want / need that ???
   ## below: provide USERNAME to trigger ssh mechanism
-  docker run -d --name ${CONTAINER_NAME}                      \
-    --network ${NETWORK_NAME}                                      \
-    -h ${HOST_NAME}                                           \
-    --env USERNAME=${USERNAME}                                \
-    -e MYSQL_ROOT_PASSWORD="${MYSQL_ROOT_PASSWORD}"           \
-    -e MYSQL_DUMP_USER="${MYSQL_DUMP_USER}"                   \
-    -e MYSQL_DUMP_PASSWORD"${MYSQL_DUMP_PASSWORD}"            \
-    --volume ${DB_VOLUME_NAME}:/${MOUNT}                      \
-    ${CONTAINER_NAME}                          
 }
 
 
