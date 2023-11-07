@@ -77,7 +77,7 @@ function getDanteWikiVolume() {
 
   local BRANCH=master
 
-  printf "*** wget branch ${BRANCH} from dante-wiki-volume ...\n"
+  printf "*** wget branch ${BRANCH} from dante-wiki-volume ...\n\n"
     rm -f ${DIR}/volumes/full/content/${BRANCH}.zip
     wget https://github.com/clecap/dante-wiki-volume/archive/refs/heads/${BRANCH}.zip -O ${DIR}/volumes/full/content/${BRANCH}.zip
     unzip -o ${DIR}/volumes/full/content/${BRANCH}.zip -d ${DIR}/volumes/full/content > unzip.log
@@ -548,9 +548,14 @@ function runDB() {
   local DB_VOLUME_NAME=mysql-volume
   local MOUNT=/var/mysql
 
-  printf " *** creating docker network ${NETWORK_NAME} ..."
-    docker network create ${NETWORK_NAME}
-  printf "\n DONE creating docker network\n\n"
+  if ! docker network inspect "$NETWORK_NAME" > /dev/null 2>&1; then
+    printf " ** Network $NETWORK_NAME does not exist, creating it\n\n"
+      docker network create "$NETWORK_NAME"
+    printf " DONE creating it\n"
+  else
+    printf " ** Network '$NETWORK_NAME' already exists."
+  fi
+
 
   printf " *** Creating DB container ${CONTAINER_NAME} "
 
