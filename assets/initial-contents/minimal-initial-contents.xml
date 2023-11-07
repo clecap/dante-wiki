@@ -37,35 +37,24 @@
     <ns>0</ns>
     <id>1</id>
     <revision>
-      <id>83</id>
-      <parentid>82</parentid>
-      <timestamp>2023-09-29T11:10:58Z</timestamp>
+      <id>108</id>
+      <parentid>91</parentid>
+      <timestamp>2023-10-31T19:22:49Z</timestamp>
       <contributor>
         <username>Dir</username>
         <id>1</id>
       </contributor>
-      <comment>/* First */</comment>
-      <origin>83</origin>
+      <origin>108</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="949" sha1="jjxdb7gn5tejq7fwktuese55629x4ov" xml:space="preserve">&lt;strong&gt;MediaWiki has been installed.&lt;/strong&gt;
+      <text bytes="84" sha1="bew2o5s90ptxe9aw7q0w7euokhiz8kp" xml:space="preserve">
 
-== First ==
+This is a freshly installed Dante Wiki.
 
-&lt;amsmath slim&gt;
-Hk jkjknn j j i a a ch geh denn ich denke das ist doch ganz lustig wenn wir einmal testen wie das mit x im browser  kgeht ein langer text          
-  k a
-&lt;/amsmath&gt;
+[[AAAVorlesung ]]
 
-Consult the [https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents User's Guide] for information on using the wiki software.
-
-== Getting started ==
-* [https://www.mediawiki.org/wiki/Special:MyLanguage/Manual:Configuration_settings Configuration settings list]
-* [https://www.mediawiki.org/wiki/Special:MyLanguage/Manual:FAQ MediaWiki FAQ]
-* [https://lists.wikimedia.org/postorius/lists/mediawiki-announce.lists.wikimedia.org/ MediaWiki release mailing list]
-* [https://www.mediawiki.org/wiki/Special:MyLanguage/Localisation#Translation_resources Localise MediaWiki for your language]
-* [https://www.mediawiki.org/wiki/Special:MyLanguage/Manual:Combating_spam Learn how to combat spam on your wiki]</text>
-      <sha1>jjxdb7gn5tejq7fwktuese55629x4ov</sha1>
+[https://blog.fefe.de]</text>
+      <sha1>bew2o5s90ptxe9aw7q0w7euokhiz8kp</sha1>
     </revision>
   </page>
   <page>
@@ -73,20 +62,18 @@ Consult the [https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents Use
     <ns>8</ns>
     <id>2</id>
     <revision>
-      <id>85</id>
-      <parentid>75</parentid>
-      <timestamp>2023-09-29T19:43:02Z</timestamp>
+      <id>2</id>
+      <timestamp>2023-10-28T18:55:48Z</timestamp>
       <contributor>
-        <username>Dir</username>
-        <id>1</id>
+        <username>Maintenance script</username>
+        <id>3</id>
       </contributor>
-      <origin>85</origin>
+      <comment>Imported from text file</comment>
+      <origin>2</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="13835" sha1="jt4x7lheoim96n8spwpq1srr6fg77s0" xml:space="preserve">&lt;pre&gt;
+      <text bytes="13860" sha1="dqdab2xni0boq1u8a9tbokmh5iun9o8" xml:space="preserve">&lt;pre&gt;
 \documentclass[varwidth=15cm,margin=0.07cm]{standalone} 
-
-% NOTE: minted is included in dynamic-slides.tex
 
 %%
 %% Standard package imports
@@ -101,6 +88,8 @@ Consult the [https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents Use
 \usepackage{tabto}                   % command \tabto{2cm}
 \usepackage[usenames]{color}         % Should load before tcolorbox                  
 \usepackage{tcolorbox}
+
+%% minted is included dynamically
 
 %%
 %% DRAWING and GRAPHICS
@@ -143,12 +132,6 @@ Consult the [https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents Use
   };
 }
 
-
-
-
-
-
-
 %%
 %% MATHEMATICS
 %%
@@ -157,9 +140,6 @@ Consult the [https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents Use
 \usepackage{mathtools}               % fixes deficiencies in amsmath
 \usepackage[all]{xy}
 \usepackage{bussproofs}              % proof trees
-
-
-
 
 %%
 %% TWEAK amsmath macro to allow \begin{pmatrix}[1.5] for having more space see https://tex.stackexchange.com/questions/14071/how-can-i-increase-the-line-spacing-in-a-matrix
@@ -180,6 +160,8 @@ Consult the [https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents Use
 %%
 
 \input{../local/chc-jpabox.tex}
+\input{../local/variants.tex}
+
 
 
 
@@ -231,6 +213,7 @@ Consult the [https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents Use
   \parindent 0pt
   \parskip 0.25cm
   \chcdisplayskipadjust
+  \initializeVariants
 }
 
 
@@ -573,9 +556,40 @@ Consult the [https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents Use
 
 \def\title#1{\textbf{\large #1}}
 
+\begin{document}\chcdisplayskipadjust\typeout{HERESTARTSTHEMAINDOCUMENT}%
+
+magic-line-identifier-for-inclusion
+
+\end{document}
+&lt;/pre&gt;
 
 
-
+[[Category:Boot]]
+[[Category:ParsifalTemplate]]</text>
+      <sha1>dqdab2xni0boq1u8a9tbokmh5iun9o8</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:ParsifalTemplate/beamer</title>
+    <ns>8</ns>
+    <id>3</id>
+    <revision>
+      <id>3</id>
+      <timestamp>2023-10-28T18:56:15Z</timestamp>
+      <contributor>
+        <username>Maintenance script</username>
+        <id>3</id>
+      </contributor>
+      <comment>Imported from text file</comment>
+      <origin>3</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="299" sha1="q0khbal9e0uodt2jcrnflvsfwlsfgw2" xml:space="preserve">&lt;pre&gt;
+\documentclass{beamer}
+\begin{document}
+\title{Simple Beamer Class}   
+\author{Sascha Frank} 
+\date{\today} 
 
 \begin{document}\chcdisplayskipadjust\typeout{HERESTARTSTHEMAINDOCUMENT}%
 
@@ -587,24 +601,25 @@ magic-line-identifier-for-inclusion
 
 [[Category:Boot]]
 [[Category:ParsifalTemplate]]</text>
-      <sha1>jt4x7lheoim96n8spwpq1srr6fg77s0</sha1>
+      <sha1>q0khbal9e0uodt2jcrnflvsfwlsfgw2</sha1>
     </revision>
   </page>
   <page>
     <title>MediaWiki:Sidebar</title>
     <ns>8</ns>
-    <id>3</id>
+    <id>4</id>
     <revision>
-      <id>3</id>
-      <timestamp>2023-09-07T17:59:26Z</timestamp>
+      <id>132</id>
+      <parentid>131</parentid>
+      <timestamp>2023-11-01T15:08:31Z</timestamp>
       <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
+        <username>Dir</username>
+        <id>1</id>
       </contributor>
-      <origin>3</origin>
+      <origin>132</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="358" sha1="mm6lx45lk5ckxynw4efrxl3jpqqdesd" xml:space="preserve">* Areas
+      <text bytes="87" sha1="3aynri3s8dqjeaq8rrbees2sug897fo" xml:space="preserve">* Areas
 
 * catus
 
@@ -612,55 +627,12 @@ magic-line-identifier-for-inclusion
 
 * UI
 
-* Cat Tools
-** MediaWiki:PersistCatWindow|Cat Window
-** MediaWiki:CategoryTreeOfRoot|Category Tree Root
-** MediaWiki:Tagcloudpage|Category Cloud
-** Special:Categories|Category List
-** Special:CategoryTree|Category Query
-** Special:UncategorizedPages|Uncategorized Pages
-
 * SEARCH
 * TOOLBOX
 * LANGUAGES
 
 [[Category:Boot]]</text>
-      <sha1>mm6lx45lk5ckxynw4efrxl3jpqqdesd</sha1>
-    </revision>
-  </page>
-  <page>
-    <title>MediaWiki:ParsifalTemplate/beamer</title>
-    <ns>8</ns>
-    <id>4</id>
-    <revision>
-      <id>4</id>
-      <timestamp>2023-06-08T21:48:04Z</timestamp>
-      <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
-      </contributor>
-      <origin>4</origin>
-      <model>wikitext</model>
-      <format>text/x-wiki</format>
-      <text bytes="386" sha1="14iczclke7ibql2vjcz220nrm5v3ybl" xml:space="preserve">&lt;pre&gt;
-\documentclass[aspectratio=169]{beamer}
-
-\setbeamertemplate{navigation symbols}{}
-
-\def\myInitialize{%   needed for initializations to be done after begin{document} which are taken out by the precompilation process
-}
-
-\begin{document}\typeout{HERESTARTSTHEMAINDOCUMENT}%
-
-magic-line-identifier-for-inclusion
-
-\end{document}
-&lt;/pre&gt;
-
-
-[[Category:Boot]]
-[[Category:ParsifalTemplate]]</text>
-      <sha1>14iczclke7ibql2vjcz220nrm5v3ybl</sha1>
+      <sha1>3aynri3s8dqjeaq8rrbees2sug897fo</sha1>
     </revision>
   </page>
   <page>
@@ -668,7 +640,7 @@ magic-line-identifier-for-inclusion
     <ns>8</ns>
     <id>5</id>
     <revision>
-      <id>5</id>
+      <id>7</id>
       <timestamp>2023-06-04T19:54:47Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -676,7 +648,7 @@ magic-line-identifier-for-inclusion
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>5</origin>
+      <origin>7</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
@@ -688,24 +660,25 @@ magic-line-identifier-for-inclusion
     <ns>8</ns>
     <id>6</id>
     <revision>
-      <id>6</id>
-      <timestamp>2023-09-15T16:04:49Z</timestamp>
+      <id>133</id>
+      <parentid>8</parentid>
+      <timestamp>2023-11-01T15:21:15Z</timestamp>
       <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
+        <username>Dir</username>
+        <id>1</id>
       </contributor>
-      <origin>6</origin>
+      <origin>133</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="104" sha1="acmpn6g3zrj3dq1f44otmayc28iqhlk" xml:space="preserve">&lt;pre&gt;
+      <text bytes="107" sha1="mq6i3dn7aixgko8ktqd66eqq1l1lsmn" xml:space="preserve">&lt;pre&gt;
 {{#tree: extensions=["persist"] | 
-*'''[[Main Page]]'''
-*Compiler
-*DanteWiki
+* '''[[Main Page]]'''
+* Compiler
+* DanteWiki
 **[[Notes]]
 }}
 &lt;/pre&gt;</text>
-      <sha1>acmpn6g3zrj3dq1f44otmayc28iqhlk</sha1>
+      <sha1>mq6i3dn7aixgko8ktqd66eqq1l1lsmn</sha1>
     </revision>
   </page>
   <page>
@@ -713,7 +686,7 @@ magic-line-identifier-for-inclusion
     <ns>8</ns>
     <id>7</id>
     <revision>
-      <id>7</id>
+      <id>9</id>
       <timestamp>2023-06-04T19:54:48Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -721,7 +694,7 @@ magic-line-identifier-for-inclusion
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>7</origin>
+      <origin>9</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="154" sha1="e35gvb24uekb7x97qjbeiws5j392u94" xml:space="preserve">{{#tree: extensions=["persist"] | 
@@ -743,7 +716,7 @@ magic-line-identifier-for-inclusion
     <ns>8</ns>
     <id>8</id>
     <revision>
-      <id>8</id>
+      <id>10</id>
       <timestamp>2023-06-04T19:54:48Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -751,7 +724,7 @@ magic-line-identifier-for-inclusion
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>8</origin>
+      <origin>10</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="163" sha1="bj33rw5yxlbyayzolixhn6zit32ahuk" xml:space="preserve">{{#tree: extensions=["persist"] | 
@@ -773,13 +746,13 @@ magic-line-identifier-for-inclusion
     <ns>8</ns>
     <id>9</id>
     <revision>
-      <id>9</id>
+      <id>11</id>
       <timestamp>2023-09-15T19:11:41Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
-      <origin>9</origin>
+      <origin>11</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="567" sha1="ftw6s03rvetjxq7eavgrzeof6l5whqp" xml:space="preserve">This page is a system page.
@@ -809,65 +782,25 @@ It must conform to the following rules:
     <ns>8</ns>
     <id>10</id>
     <revision>
-      <id>10</id>
-      <timestamp>2023-06-04T19:54:48Z</timestamp>
+      <id>79</id>
+      <parentid>12</parentid>
+      <timestamp>2023-10-29T01:14:16Z</timestamp>
       <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
+        <username>Dir</username>
+        <id>1</id>
       </contributor>
-      <minor/>
-      <comment>1 revision imported</comment>
-      <origin>10</origin>
+      <comment>Blanked the page</comment>
+      <origin>79</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="22" sha1="c14lzyicxuub51vop3mzkngmr0y2vs5" xml:space="preserve">Project:Privacy policy</text>
-      <sha1>c14lzyicxuub51vop3mzkngmr0y2vs5</sha1>
+      <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
+      <sha1>phoiac9h4m842xq45sp7s6u21eteeq1</sha1>
     </revision>
   </page>
   <page>
     <title>MediaWiki:Aboutsite</title>
     <ns>8</ns>
     <id>11</id>
-    <revision>
-      <id>11</id>
-      <timestamp>2023-06-04T19:54:48Z</timestamp>
-      <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
-      </contributor>
-      <minor/>
-      <comment>1 revision imported</comment>
-      <origin>11</origin>
-      <model>wikitext</model>
-      <format>text/x-wiki</format>
-      <text bytes="18" sha1="sy1if64yhgu4tenrajt4skhmg8ahcvh" xml:space="preserve">About {{SITENAME}}</text>
-      <sha1>sy1if64yhgu4tenrajt4skhmg8ahcvh</sha1>
-    </revision>
-  </page>
-  <page>
-    <title>MediaWiki:Copyright</title>
-    <ns>8</ns>
-    <id>12</id>
-    <revision>
-      <id>12</id>
-      <timestamp>2023-06-04T19:54:48Z</timestamp>
-      <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
-      </contributor>
-      <minor/>
-      <comment>1 revision imported</comment>
-      <origin>12</origin>
-      <model>wikitext</model>
-      <format>text/x-wiki</format>
-      <text bytes="53" sha1="no9x9xeg81yiyx2piqrztgeuflab31a" xml:space="preserve">Content is available under $1 unless otherwise noted.</text>
-      <sha1>no9x9xeg81yiyx2piqrztgeuflab31a</sha1>
-    </revision>
-  </page>
-  <page>
-    <title>MediaWiki:Copyrightwarning</title>
-    <ns>8</ns>
-    <id>13</id>
     <revision>
       <id>13</id>
       <timestamp>2023-06-04T19:54:48Z</timestamp>
@@ -880,15 +813,14 @@ It must conform to the following rules:
       <origin>13</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="64" sha1="e30wd5b8xbsvz1n6xxsdvfg1fm8ankg" xml:space="preserve">Please note that all contributions to this system
-are copyright.</text>
-      <sha1>e30wd5b8xbsvz1n6xxsdvfg1fm8ankg</sha1>
+      <text bytes="18" sha1="sy1if64yhgu4tenrajt4skhmg8ahcvh" xml:space="preserve">About {{SITENAME}}</text>
+      <sha1>sy1if64yhgu4tenrajt4skhmg8ahcvh</sha1>
     </revision>
   </page>
   <page>
-    <title>MediaWiki:Copyrightwarning2</title>
+    <title>MediaWiki:Copyright</title>
     <ns>8</ns>
-    <id>14</id>
+    <id>12</id>
     <revision>
       <id>14</id>
       <timestamp>2023-06-04T19:54:48Z</timestamp>
@@ -901,15 +833,14 @@ are copyright.</text>
       <origin>14</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="65" sha1="nuesz9rhni3k0z7z8zdc3apc1c5wtbw" xml:space="preserve">Please note that all contributions to 
-this system are copyright.</text>
-      <sha1>nuesz9rhni3k0z7z8zdc3apc1c5wtbw</sha1>
+      <text bytes="53" sha1="no9x9xeg81yiyx2piqrztgeuflab31a" xml:space="preserve">Content is available under $1 unless otherwise noted.</text>
+      <sha1>no9x9xeg81yiyx2piqrztgeuflab31a</sha1>
     </revision>
   </page>
   <page>
-    <title>MediaWiki:Deletereason-dropdown</title>
+    <title>MediaWiki:Copyrightwarning</title>
     <ns>8</ns>
-    <id>15</id>
+    <id>13</id>
     <revision>
       <id>15</id>
       <timestamp>2023-06-04T19:54:48Z</timestamp>
@@ -920,6 +851,48 @@ this system are copyright.</text>
       <minor/>
       <comment>1 revision imported</comment>
       <origin>15</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="64" sha1="e30wd5b8xbsvz1n6xxsdvfg1fm8ankg" xml:space="preserve">Please note that all contributions to this system
+are copyright.</text>
+      <sha1>e30wd5b8xbsvz1n6xxsdvfg1fm8ankg</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Copyrightwarning2</title>
+    <ns>8</ns>
+    <id>14</id>
+    <revision>
+      <id>16</id>
+      <timestamp>2023-06-04T19:54:48Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>16</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="65" sha1="nuesz9rhni3k0z7z8zdc3apc1c5wtbw" xml:space="preserve">Please note that all contributions to 
+this system are copyright.</text>
+      <sha1>nuesz9rhni3k0z7z8zdc3apc1c5wtbw</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Deletereason-dropdown</title>
+    <ns>8</ns>
+    <id>15</id>
+    <revision>
+      <id>17</id>
+      <timestamp>2023-06-04T19:54:48Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>17</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="104" sha1="nibcuv4myt6ub1l5h7vu1uysidqn80q" xml:space="preserve">* Common delete reasons
@@ -936,7 +909,7 @@ this system are copyright.</text>
     <ns>8</ns>
     <id>16</id>
     <revision>
-      <id>16</id>
+      <id>18</id>
       <timestamp>2023-06-04T19:54:48Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -944,7 +917,7 @@ this system are copyright.</text>
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>16</origin>
+      <origin>18</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="158" sha1="liq42mc4g5fvgmyvf25lutxryowaaww" xml:space="preserve">&lt;div style="float:left;"&gt;
@@ -962,7 +935,7 @@ buttonlabel=Create new article with this title
     <ns>8</ns>
     <id>17</id>
     <revision>
-      <id>17</id>
+      <id>19</id>
       <timestamp>2023-06-04T19:54:49Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -970,7 +943,7 @@ buttonlabel=Create new article with this title
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>17</origin>
+      <origin>19</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="1353" sha1="gr4gxqa24l66tjg0iiv1rencrz3mhk8" xml:space="preserve">&lt;pre&gt;
@@ -1017,28 +990,30 @@ buttonlabel=Create new article with this title
     <ns>8</ns>
     <id>18</id>
     <revision>
-      <id>18</id>
-      <timestamp>2023-09-07T18:02:31Z</timestamp>
+      <id>130</id>
+      <parentid>129</parentid>
+      <timestamp>2023-11-01T15:07:42Z</timestamp>
       <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
+        <username>Dir</username>
+        <id>1</id>
       </contributor>
-      <origin>18</origin>
+      <origin>130</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="2511" sha1="nerirs9420ju2ig5uvtdm1v5f0hdmp3" xml:space="preserve">&lt;pre&gt;
+      <text bytes="2896" sha1="ees1iup9vq06wjrlc9sigh4i4vpeqwt" xml:space="preserve">&lt;pre&gt;
 {{#tree: extensions=["persist"] | 
 * &lt;b&gt;[{{fullurl:Main Page}} Main Page]&lt;/b&gt;
 * [[MediaWiki:CreatePage|Create Page]]
 * [{{fullurl:Special:RecentChanges}} Recent Changes]
 
 * &lt;b&gt;Help&lt;/b&gt;
-** [https://help.fandom.com/wiki/Extension:DPL3/Manual DPL3 ¦ class=dexternal]
+** [https://blog.fefe.de Fefe]
+** [https://help.fandom.com/wiki/Extension:DPL3/Manual DPL3]
 ** [[Help:Sidebar | Sidebar]]
 ** [[Help:Parsifal Cheat| Parsifal Cheat]]
 ** [[Help:Dante Cheat| Dante Cheat]]
 ** [[Help:Links | Links Cheat]]
-** [https://www.mediawiki.org/wiki/Help:Links Links WP ¦ class=dexternal]
+** [https://www.mediawiki.org/wiki/Help:Links Links WP]
 
 * &lt;b&gt;Sidebar Edits&lt;/b&gt;
 ** [{{fullurl:MediaWiki:Sidebar|action=edit}} Full Sidebar]
@@ -1046,7 +1021,7 @@ buttonlabel=Create new article with this title
 ** [{{fullurl:MediaWiki:Sidebar/Categories|action=edit}} Categories]
 ** [{{fullurl:MediaWiki:Sidebar/Navigation|action=edit}} Navigation]
 ** [{{fullurl:MediaWiki:Sidebar/UI|action=edit}} UI]
-* &lt;b&gt;Lists&lt;/b&gt;
+* &lt;b&gt;Queries&lt;/b&gt;
 ** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=8}} MediaWiki]
 ** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=14}} Category]
 ** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=10}} Template]
@@ -1055,7 +1030,7 @@ buttonlabel=Create new article with this title
 ** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=4}} Project]
 ** [{{fullurl:Special:ListFiles}} Files]
 * &lt;b&gt;Developer&lt;/b&gt;
-** [https://github.com/clecap/dante-delta/issues  Dante Issues]
+** [https://github.com/clecap/dante-delta/issues Dante Issues]
 ** [https://github.com/clecap/Parsifal/issues Parsifal Issues]
 * &lt;b&gt;Operator&lt;/b&gt;
 * &lt;b&gt;Demos&lt;/b&gt;
@@ -1079,9 +1054,18 @@ buttonlabel=Create new article with this title
 ** [[Help:Slides Test Reveal|Slides Reveal]]
 ** &lt;b&gt;[javascript:PRT.limitSize(true) Limit Size ON]&lt;/b&gt;
 ** &lt;b&gt;[javascript:PRT.limitSize(false) Limit Size OFF]&lt;/b&gt;
+* [[Special:Upload| Upload file]]
+* [[Special:SpecialPages| Special pages]]
+* &lt;b&gt;Page Tools&lt;/b&gt;
+** [{{fullurl:Dummy:WhatLinksHere}} What links here?]
+** [{{fullurl:Dummy:PageInfo}} Page Info]
+** [{{fullurl:Dummy:RelatedChanges}} Related Changes]
+** [{{fullurl:Dummy:PermaLink}} Permanent Link]
+** [{{fullurl:Dummy:CiteThisPage}} Cite this page]
+** [javascript:print(true) Printable version]
 }}
 &lt;/pre&gt;</text>
-      <sha1>nerirs9420ju2ig5uvtdm1v5f0hdmp3</sha1>
+      <sha1>ees1iup9vq06wjrlc9sigh4i4vpeqwt</sha1>
     </revision>
   </page>
   <page>
@@ -1089,13 +1073,13 @@ buttonlabel=Create new article with this title
     <ns>8</ns>
     <id>19</id>
     <revision>
-      <id>19</id>
+      <id>21</id>
       <timestamp>2023-09-15T19:12:14Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
-      <origin>19</origin>
+      <origin>21</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="68" sha1="1t92yq0rz89vcwih4874wy4lo1e3g5q" xml:space="preserve">Enter one file per line.
@@ -1112,7 +1096,7 @@ MediaWiki:Corefiles
     <ns>8</ns>
     <id>20</id>
     <revision>
-      <id>20</id>
+      <id>22</id>
       <timestamp>2023-06-04T19:54:49Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -1120,7 +1104,7 @@ MediaWiki:Corefiles
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>20</origin>
+      <origin>22</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="146" sha1="619q71sg2v39xymslvtl6l3pt98ia68" xml:space="preserve">
@@ -1138,7 +1122,7 @@ MediaWiki:Corefiles
     <ns>8</ns>
     <id>21</id>
     <revision>
-      <id>21</id>
+      <id>23</id>
       <timestamp>2023-06-04T19:54:49Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -1146,7 +1130,7 @@ MediaWiki:Corefiles
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>21</origin>
+      <origin>23</origin>
       <model>javascript</model>
       <format>text/javascript</format>
       <text bytes="187" sha1="0ek8xmfckm3ouywxtkxf5k45ka3odq9" xml:space="preserve">window.Dante=window.Dante || {};
@@ -1167,7 +1151,7 @@ console.log ("*** inside dante gadget", window.Dante);
     <ns>8</ns>
     <id>22</id>
     <revision>
-      <id>22</id>
+      <id>24</id>
       <timestamp>2023-06-04T19:54:49Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -1175,7 +1159,7 @@ console.log ("*** inside dante gadget", window.Dante);
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>22</origin>
+      <origin>24</origin>
       <model>javascript</model>
       <format>text/javascript</format>
       <text bytes="405" sha1="cupt0yavm500nuhqe7phw79rju72kt6" xml:space="preserve">/* Any JavaScript here will be loaded for all users on every page load. */
@@ -1206,7 +1190,7 @@ console.log ("******** Completed MediaWiki:Common.js");</text>
     <ns>8</ns>
     <id>23</id>
     <revision>
-      <id>23</id>
+      <id>25</id>
       <timestamp>2023-06-04T19:54:50Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -1214,7 +1198,7 @@ console.log ("******** Completed MediaWiki:Common.js");</text>
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>23</origin>
+      <origin>25</origin>
       <model>javascript</model>
       <format>text/javascript</format>
       <text bytes="1080" sha1="epujlwy6slmgda06lpeaefxsn1lhi8z" xml:space="preserve">window.Dante=window.Dante || {};
@@ -1266,14 +1250,14 @@ window.Dante.testDump=function(){
     <ns>8</ns>
     <id>24</id>
     <revision>
-      <id>24</id>
+      <id>26</id>
       <timestamp>2023-06-06T12:51:21Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
       <comment>Created page with " * abra * kadabra"</comment>
-      <origin>24</origin>
+      <origin>26</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="17" sha1="re6rh2bx5gy4bged2lc9bfuo3jwq5ko" xml:space="preserve">
@@ -1287,14 +1271,14 @@ window.Dante.testDump=function(){
     <ns>8</ns>
     <id>25</id>
     <revision>
-      <id>25</id>
+      <id>27</id>
       <timestamp>2023-06-30T19:56:14Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
       <comment>Created page with "magic-line-identifier-for-inclusion"</comment>
-      <origin>25</origin>
+      <origin>27</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="35" sha1="r03s62hdhw16v7zc5iuazfm3chdfll8" xml:space="preserve">magic-line-identifier-for-inclusion</text>
@@ -1306,13 +1290,13 @@ window.Dante.testDump=function(){
     <ns>8</ns>
     <id>26</id>
     <revision>
-      <id>26</id>
+      <id>28</id>
       <timestamp>2023-09-15T16:04:00Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
-      <origin>26</origin>
+      <origin>28</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="231" sha1="smeg0o52ypx7a7anzqs5klmy8ncj1dy" xml:space="preserve">&lt;pre&gt;
@@ -1330,13 +1314,13 @@ window.Dante.testDump=function(){
     <ns>8</ns>
     <id>27</id>
     <revision>
-      <id>27</id>
+      <id>29</id>
       <timestamp>2023-09-15T18:49:13Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
-      <origin>27</origin>
+      <origin>29</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="90" sha1="rdjd3ksfnwmybfpzu9pdyu6vlxhwl0o" xml:space="preserve">Enter one file per line.
@@ -1354,13 +1338,13 @@ MediaWiki:Backupfiles
     <ns>8</ns>
     <id>28</id>
     <revision>
-      <id>28</id>
+      <id>30</id>
       <timestamp>2023-09-15T18:48:07Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
-      <origin>28</origin>
+      <origin>30</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="57" sha1="6z6foaroyykougagljbu6z6cdm0ej9w" xml:space="preserve">Enter one category per line.
@@ -1376,7 +1360,7 @@ Compiler
     <ns>6</ns>
     <id>29</id>
     <revision>
-      <id>30</id>
+      <id>32</id>
       <timestamp>2023-06-04T19:54:47Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -1384,7 +1368,7 @@ Compiler
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>30</origin>
+      <origin>32</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
@@ -1396,14 +1380,14 @@ Compiler
     <ns>12</ns>
     <id>30</id>
     <revision>
-      <id>31</id>
+      <id>33</id>
       <timestamp>2023-09-07T08:38:44Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
       <comment>/* Titel */</comment>
-      <origin>31</origin>
+      <origin>33</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="1170" sha1="1ezj2n2jevxrfrxue7svyd9f72f5fjx" xml:space="preserve">== Titel ==
@@ -1498,7 +1482,7 @@ Drei \url{https://www.ifi.ch}
     <ns>0</ns>
     <id>31</id>
     <revision>
-      <id>32</id>
+      <id>34</id>
       <timestamp>2023-06-04T19:54:47Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -1506,7 +1490,7 @@ Drei \url{https://www.ifi.ch}
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>32</origin>
+      <origin>34</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="715" sha1="fckb65y03c39vitkuu76u6wynvc23on" xml:space="preserve">asd asd asd asd asd asd asd asd asd asd asd 
@@ -1596,7 +1580,7 @@ kk
     <ns>0</ns>
     <id>32</id>
     <revision>
-      <id>33</id>
+      <id>35</id>
       <timestamp>2023-06-04T19:54:47Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -1604,7 +1588,7 @@ kk
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>33</origin>
+      <origin>35</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="29" sha1="hiqb4q469iv3blua2gtpov7j6k7bpf0" xml:space="preserve">now we get:
@@ -1618,7 +1602,7 @@ kk
     <ns>0</ns>
     <id>33</id>
     <revision>
-      <id>34</id>
+      <id>36</id>
       <timestamp>2023-06-04T19:54:47Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -1626,7 +1610,7 @@ kk
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>34</origin>
+      <origin>36</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="200" sha1="tj8xo3aqex1id0pjiiicv89tc266b05" xml:space="preserve">
@@ -1653,7 +1637,7 @@ Es ist $E = mc^2$.
     <ns>0</ns>
     <id>34</id>
     <revision>
-      <id>35</id>
+      <id>37</id>
       <timestamp>2023-06-04T19:54:47Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -1661,7 +1645,7 @@ Es ist $E = mc^2$.
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>35</origin>
+      <origin>37</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="132" sha1="23omq8liaw6gxwb6je7n4hydxbxyqes" xml:space="preserve">&lt;amsmath&gt;
@@ -1686,7 +1670,7 @@ Das ist also
     <ns>0</ns>
     <id>35</id>
     <revision>
-      <id>36</id>
+      <id>38</id>
       <timestamp>2023-06-04T19:54:47Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -1694,7 +1678,7 @@ Das ist also
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>36</origin>
+      <origin>38</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="376" sha1="a085dtv9c6d7cmajblo67bo3lufyi85" xml:space="preserve">Das ist jetzt ein Beispiel das wir uns gerne ansehen
@@ -1716,7 +1700,7 @@ asdasd
     <ns>0</ns>
     <id>36</id>
     <revision>
-      <id>37</id>
+      <id>39</id>
       <timestamp>2023-06-04T19:54:47Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -1724,7 +1708,7 @@ asdasd
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>37</origin>
+      <origin>39</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="24" sha1="plbxldqkhns2zhvbn8yb75zpz7ajpdp" xml:space="preserve">
@@ -1739,7 +1723,7 @@ A generic about pages</text>
     <ns>0</ns>
     <id>37</id>
     <revision>
-      <id>38</id>
+      <id>40</id>
       <timestamp>2023-06-04T19:54:47Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -1747,7 +1731,7 @@ A generic about pages</text>
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>38</origin>
+      <origin>40</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="13" sha1="ajp6j7g939g7g08deo8r87ug3fal078" xml:space="preserve">
@@ -1761,7 +1745,7 @@ A generic about pages</text>
     <ns>0</ns>
     <id>38</id>
     <revision>
-      <id>39</id>
+      <id>41</id>
       <timestamp>2023-06-04T19:54:47Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -1769,7 +1753,7 @@ A generic about pages</text>
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>39</origin>
+      <origin>41</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
@@ -1781,7 +1765,7 @@ A generic about pages</text>
     <ns>0</ns>
     <id>39</id>
     <revision>
-      <id>40</id>
+      <id>42</id>
       <timestamp>2023-06-04T19:54:47Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -1789,7 +1773,7 @@ A generic about pages</text>
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>40</origin>
+      <origin>42</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="34" sha1="2nkdpdzxjgzhf5ldmmauopso2cmpc0t" xml:space="preserve">
@@ -1804,7 +1788,7 @@ Some privacy blurb
     <ns>0</ns>
     <id>40</id>
     <revision>
-      <id>41</id>
+      <id>43</id>
       <timestamp>2023-06-04T19:54:48Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -1812,7 +1796,7 @@ Some privacy blurb
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>41</origin>
+      <origin>43</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="265" sha1="nogir1v349frb06thkm8e0szpdt8q5x" xml:space="preserve">
@@ -1842,7 +1826,7 @@ def quick_sort(arr):
     <id>41</id>
     <redirect title="Test/Syntax Highlights" />
     <revision>
-      <id>42</id>
+      <id>44</id>
       <timestamp>2023-06-04T19:54:48Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -1850,7 +1834,7 @@ def quick_sort(arr):
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>42</origin>
+      <origin>44</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="36" sha1="45mkiq63ik6r7rnx1s2pblxilhg8lm0" xml:space="preserve">#REDIRECT [[Test/Syntax Highlights]]</text>
@@ -1862,7 +1846,7 @@ def quick_sort(arr):
     <ns>0</ns>
     <id>42</id>
     <revision>
-      <id>43</id>
+      <id>45</id>
       <timestamp>2023-06-04T19:54:48Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -1870,7 +1854,7 @@ def quick_sort(arr):
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>43</origin>
+      <origin>45</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="28" sha1="rayg7q1ygqih0pv5xj55ozzeyk7kzlz" xml:space="preserve">&lt;markdown&gt;
@@ -1884,7 +1868,7 @@ def quick_sort(arr):
     <ns>14</ns>
     <id>43</id>
     <revision>
-      <id>44</id>
+      <id>46</id>
       <timestamp>2023-06-04T19:54:48Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -1892,7 +1876,7 @@ def quick_sort(arr):
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>44</origin>
+      <origin>46</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="19" sha1="i84bxell5s45syub6c99pvyb3xjg9zk" xml:space="preserve">[[Category:System]]</text>
@@ -1904,7 +1888,7 @@ def quick_sort(arr):
     <ns>14</ns>
     <id>44</id>
     <revision>
-      <id>45</id>
+      <id>47</id>
       <timestamp>2023-06-04T19:54:48Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -1912,7 +1896,7 @@ def quick_sort(arr):
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>45</origin>
+      <origin>47</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="17" sha1="plgyxa9zdjtjany4tcftrk2sfqdwo6g" xml:space="preserve">[[Category:Root]]</text>
@@ -1924,7 +1908,7 @@ def quick_sort(arr):
     <ns>12</ns>
     <id>45</id>
     <revision>
-      <id>46</id>
+      <id>48</id>
       <timestamp>2023-06-04T19:54:48Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -1932,7 +1916,7 @@ def quick_sort(arr):
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>46</origin>
+      <origin>48</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="223" sha1="eraooa0up3b1a9vp5vpfvja9527k8tj" xml:space="preserve">
@@ -1951,50 +1935,90 @@ def quick_sort(arr):
     <ns>12</ns>
     <id>46</id>
     <revision>
-      <id>47</id>
-      <timestamp>2023-06-06T22:36:14Z</timestamp>
+      <id>107</id>
+      <parentid>106</parentid>
+      <timestamp>2023-10-31T15:52:24Z</timestamp>
       <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
+        <username>Dir</username>
+        <id>1</id>
       </contributor>
       <comment>/* All Link Types */</comment>
-      <origin>47</origin>
+      <origin>107</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="1067" sha1="05tj477zi3r2r8m8v8n5jgjj5idc73x" xml:space="preserve">
-* Broken pipes for the internal links do not yet work.
-[[Main Page ¦ style=color:green;]]
+      <text bytes="2550" sha1="9y03lfmusdqqh7h2qrhnlc4zv9dblv7" xml:space="preserve">[[Main \Pag]]
 
-[[Help:Demo for DanteLinks]]
+'''Example'''
+* &lt;nowiki&gt;[[Main Page || doub]]&lt;/nowiki&gt;
+* [[Main Page || doub]] 
 
-[[Help:Demo for DanteLinks ¦ style=color:green;]]
+* &lt;nowiki&gt;[[Main Page \| doub]]&lt;/nowiki&gt;
+* [[Main Page \| doub]]
 
-Adding style attributes to an external link via broken pipe symbol:
+
+'''Example'''
+* &lt;nowiki&gt;[[Main Page ¦ style=color:green;]]&lt;/nowiki&gt;
+* [[Main Page ¦ style=color:green;]]
+
+'''Example'''
+* &lt;nowiki&gt;[[Help:Demo for DanteLinks ¦ style=color:green;]]&lt;/nowiki&gt;
+* [[Help:Demo for DanteLinks ¦ style=color:green;]]
+
+'''Example:''' Adding style attributes to an external link via broken pipe symbol
+* &lt;nowiki&gt;[https://blog.fefe.de Fefe ¦ style=color:green;]&lt;/nowiki&gt; produces
 * [https://blog.fefe.de Fefe ¦ style=color:green;]
 
-Adding target attributes so that an external link opens in a new tab:
+
+'''Example:''' Adding target attribute _blank to an external link opens it in a new tab
+* &lt;nowiki&gt;[https://blog.fefe.de Fefe ¦ target=_blank ]&lt;/nowiki&gt; produces:
 * [https://blog.fefe.de Fefe ¦ target=_blank ]
 
 For use in sidebars only: There is a special class dexternal which can be used to append an external link symbol to link. In the sidebar links which otherwise are external will not show the symbol external. This is as we need query extensions for a number of links in the sidebar and this needs fullurl as parser and this causes the parser to understand the link as external in every case. Therefore we turned this thingie off in sidebar until we find a smart fix for this.
 
 [[Main Page]]
 
+And here [[Main Page]] some text [https://blog.fefe.de Fefe] to see the distances when
+rendering in text.
+
+
+== Requirements ==
+
+* We always want to see where a link goes (internal or external)
+* We always want to know where a link opens (same tab, new tab, new window)
+* We want to allow the user to open the link where he wants to (same tab, new tab, new window)
+* We want to force-open some links in specific modes (same tab, new tab, new window) when the user only clicks normally.
+
 == All Link Types ==
 
-[[Main Page]]
+&lt;table&gt;
+&lt;tr&gt;&lt;td&gt;Internal&lt;/td&gt;&lt;td&gt;&lt;nowiki&gt;[[Main Page]]&lt;/nowiki&gt;&lt;/td&gt;&lt;td&gt;[[Main Page]]&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Piped&lt;/td&gt;&lt;td&gt;&lt;nowiki&gt;[[Main Page|Hauptseite]]&lt;/nowiki&gt;&lt;/td&gt;&lt;td&gt;[[Main Page|Hauptseite]]&lt;/td&gt;&lt;/tr&gt;
 
-[[Main Page|Hauptseite]]
+
+&lt;tr&gt;&lt;td&gt;External numbered&lt;/td&gt;&lt;td&gt;&lt;nowiki&gt;[https://blog.fefe.de]&lt;/nowiki&gt;&lt;/td&gt;&lt;td&gt;[https://blog.fefe.de]&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;External text&lt;/td&gt;&lt;td&gt;&lt;nowiki&gt;[https://blog.fefe.de Fefe]&lt;/nowiki&gt;&lt;/td&gt;&lt;td&gt;[https://blog.fefe.de Fefe]&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;External bare&lt;/td&gt;&lt;td&gt;&lt;nowiki&gt;https://blog.fefe.de&lt;/nowiki&gt;&lt;/td&gt;&lt;td&gt;https://blog.fefe.de&lt;/td&gt;&lt;/tr&gt;
+
+
+&lt;/table&gt;
+
 
 [[Main Page]]s
 
-[https://blog.fefe.de]
-
 [https://blog.fefe.de Fefe]
 
-[[Halomi]]
+
+[[Murundai\w]]
+
+[https://blog.fefe.de Hurundai\w]
+
+[[Pipetrick (computing)|Pipetrick]] 
+
+
+
 
 [[:Category:Root]]</text>
-      <sha1>05tj477zi3r2r8m8v8n5jgjj5idc73x</sha1>
+      <sha1>9y03lfmusdqqh7h2qrhnlc4zv9dblv7</sha1>
     </revision>
   </page>
   <page>
@@ -2002,13 +2026,13 @@ For use in sidebars only: There is a special class dexternal which can be used t
     <ns>12</ns>
     <id>47</id>
     <revision>
-      <id>48</id>
+      <id>50</id>
       <timestamp>2023-06-06T18:54:24Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
-      <origin>48</origin>
+      <origin>50</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="53" sha1="qxp83972ncr5860dg2vgmhp9lm6nqxt" xml:space="preserve">
@@ -2028,14 +2052,14 @@ asdq
     <ns>12</ns>
     <id>48</id>
     <revision>
-      <id>49</id>
+      <id>51</id>
       <timestamp>2023-09-04T21:20:50Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
       <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
-      <origin>49</origin>
+      <origin>51</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="3533" sha1="9kkn4uukbcuvranoi58gntiowa368ht" xml:space="preserve">&lt;amsmath style="border:10px solid green;"&gt;
@@ -2094,13 +2118,13 @@ Ve ry s  m a ll k
     <ns>12</ns>
     <id>49</id>
     <revision>
-      <id>50</id>
+      <id>52</id>
       <timestamp>2023-06-20T19:27:56Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
-      <origin>50</origin>
+      <origin>52</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="177" sha1="34brh7em6shfxd9xx2fq18qel0twxhs" xml:space="preserve">* Broken pipes for the internal links do not yet work.
@@ -2116,14 +2140,14 @@ Ve ry s  m a ll k
     <ns>12</ns>
     <id>50</id>
     <revision>
-      <id>51</id>
+      <id>53</id>
       <timestamp>2023-08-27T16:23:01Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
       <comment>/* Four */</comment>
-      <origin>51</origin>
+      <origin>53</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="195" sha1="gr9isow5fn3myykj4pvw6g30dce0mcg" xml:space="preserve">
@@ -2166,7 +2190,7 @@ asd asdv
     <ns>12</ns>
     <id>51</id>
     <revision>
-      <id>52</id>
+      <id>54</id>
       <timestamp>2023-06-20T19:21:37Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -2174,7 +2198,7 @@ asd asdv
       </contributor>
       <minor/>
       <comment>Dir moved page [[Tests for Drawio]] to [[Help:Tests for Drawio]] without leaving a redirect</comment>
-      <origin>52</origin>
+      <origin>54</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="45" sha1="tc9pijlp9xgslwze9td1wygmkfnxxy3" xml:space="preserve">
@@ -2188,13 +2212,13 @@ asd asdv
     <ns>12</ns>
     <id>52</id>
     <revision>
-      <id>53</id>
+      <id>55</id>
       <timestamp>2023-06-28T12:18:19Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
-      <origin>53</origin>
+      <origin>55</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="275" sha1="fovg555xwpewgloylt0qfuvssu62zuz" xml:space="preserve">== Test for Parsifal Page Width ==
@@ -2219,13 +2243,13 @@ Rule of 16cm
     <ns>12</ns>
     <id>53</id>
     <revision>
-      <id>54</id>
+      <id>56</id>
       <timestamp>2023-06-30T20:52:51Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
-      <origin>54</origin>
+      <origin>56</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="91" sha1="brrf0hy184ebx0xw2u318hfe8hm3q5d" xml:space="preserve">
@@ -2244,14 +2268,14 @@ asd khjks
     <ns>0</ns>
     <id>54</id>
     <revision>
-      <id>55</id>
+      <id>57</id>
       <timestamp>2023-08-27T12:21:24Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
       <comment>Created page with "Just  A  Comment"</comment>
-      <origin>55</origin>
+      <origin>57</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="16" sha1="ppiclegmobn61eruux8zaa2xr1wgswd" xml:space="preserve">Just
@@ -2267,13 +2291,13 @@ Comment</text>
     <ns>12</ns>
     <id>55</id>
     <revision>
-      <id>56</id>
+      <id>58</id>
       <timestamp>2023-09-12T10:04:38Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
-      <origin>56</origin>
+      <origin>58</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="1847" sha1="d83d354zzoojuzpof5r2kbsybe3eeck" xml:space="preserve">
@@ -2400,13 +2424,13 @@ child {node  (i) {F} child {node  (j) {2}}}
     <ns>0</ns>
     <id>56</id>
     <revision>
-      <id>57</id>
+      <id>59</id>
       <timestamp>2023-09-15T19:24:53Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
-      <origin>57</origin>
+      <origin>59</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="6901" sha1="i3r3hm8iylzp8ea9pd9l6i9ylvu2nsq" xml:space="preserve">
@@ -2657,14 +2681,14 @@ asdasdasdasd
     <ns>0</ns>
     <id>57</id>
     <revision>
-      <id>58</id>
+      <id>60</id>
       <timestamp>2023-09-12T10:06:15Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
       <comment>/*  */</comment>
-      <origin>58</origin>
+      <origin>60</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="1782" sha1="qgktnqczj0y3i8pkc0og00owfbl29nd" xml:space="preserve">
@@ -2723,14 +2747,14 @@ asdasdasdasd
     <ns>0</ns>
     <id>58</id>
     <revision>
-      <id>59</id>
+      <id>61</id>
       <timestamp>2023-09-07T18:55:16Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
       <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
-      <origin>59</origin>
+      <origin>61</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="52" sha1="6w2n7msedfu7da0uyzrdnoi5jqs6f3j" xml:space="preserve">= =
@@ -2748,14 +2772,14 @@ asd
     <ns>14</ns>
     <id>59</id>
     <revision>
-      <id>60</id>
+      <id>62</id>
       <timestamp>2023-09-07T18:55:44Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
       <comment>Created page with "Compilerbau Vorlesung"</comment>
-      <origin>60</origin>
+      <origin>62</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="21" sha1="9hgj82tnju23y0gpupgkn2mdfcdkvt8" xml:space="preserve">Compilerbau Vorlesung</text>
@@ -2767,14 +2791,14 @@ asd
     <ns>0</ns>
     <id>60</id>
     <revision>
-      <id>61</id>
+      <id>63</id>
       <timestamp>2023-09-07T20:55:45Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
       <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
-      <origin>61</origin>
+      <origin>63</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="191" sha1="puk30bw7jost1ln3rnjyp8565dk7wq1" xml:space="preserve">
@@ -2800,15 +2824,15 @@ grammatik-Transformationen.
     <ns>6</ns>
     <id>61</id>
     <revision>
-      <id>63</id>
-      <parentid>62</parentid>
-      <timestamp>2023-09-27T22:00:53Z</timestamp>
+      <id>65</id>
+      <parentid>64</parentid>
+      <timestamp>2023-10-28T19:33:32Z</timestamp>
       <contributor>
         <username>Imported&gt;Dir</username>
         <id>0</id>
       </contributor>
       <comment>Imported&gt;Dir uploaded [[File:Compiler-und-interpreter.svg]]</comment>
-      <origin>62</origin>
+      <origin>64</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="19" sha1="1t2q86rx3lsjwwz2n9tjf1n9icfk64q" xml:space="preserve">[[Category:backup]]</text>
@@ -3083,15 +3107,15 @@ YW5ub3QgZGlzcGxheTwvdGV4dD48L2E+PC9zd2l0Y2g+PC9zdmc+
     <ns>6</ns>
     <id>62</id>
     <revision>
-      <id>65</id>
-      <parentid>64</parentid>
-      <timestamp>2023-09-27T22:00:53Z</timestamp>
+      <id>67</id>
+      <parentid>66</parentid>
+      <timestamp>2023-10-28T19:33:32Z</timestamp>
       <contributor>
         <username>Imported&gt;Dir</username>
         <id>0</id>
       </contributor>
       <comment>Imported&gt;Dir uploaded [[File:Compiler-abstraktion.svg]]</comment>
-      <origin>64</origin>
+      <origin>66</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
@@ -3267,6 +3291,1382 @@ azpocmVmPSJodHRwczovL3d3dy5kcmF3aW8uY29tL2RvYy9mYXEvc3ZnLWV4cG9ydC10ZXh0LXBy
 b2JsZW1zIiB0YXJnZXQ9Il9ibGFuayI+PHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1z
 aXplPSIxMHB4IiB4PSI1MCUiIHk9IjEwMCUiPlRleHQgaXMgbm90IFNWRyAtIGNhbm5vdCBkaXNw
 bGF5PC90ZXh0PjwvYT48L3N3aXRjaD48L3N2Zz4=
+      </contents>
+    </upload>
+    <upload>
+      <timestamp>2023-09-08T14:41:30Z</timestamp>
+      <contributor>
+        <username>Imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment deleted="deleted" />
+      <filename>Compiler-abstraktion.svg</filename>
+      <archivename>20230908144145!Compiler-abstraktion.svg</archivename>
+      <src>https://localhost:4443/wiki-dir/images/archive/4/48/20230908144145%21Compiler-abstraktion.svg</src>
+      <size>8921</size>
+      <sha1base36>6ogt6uzw3kfhrbi93cbeskwkdond8t9</sha1base36>
+      <rel>archive/4/48/20230908144145!Compiler-abstraktion.svg</rel>
+      <contents encoding="base64">PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRw
+Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIzNDFweCIgaGVp
+Z2h0PSIyNDFweCIgdmlld0JveD0iLTAuNSAtMC41IDM0MSAyNDEiIGNvbnRlbnQ9IiZsdDtteGZp
+bGUgaG9zdD0mcXVvdDtsb2NhbGhvc3QmcXVvdDsgbW9kaWZpZWQ9JnF1b3Q7MjAyMy0wOS0wOFQx
+NDo0MToyOC44NDVaJnF1b3Q7IGFnZW50PSZxdW90O01vemlsbGEvNS4wIChNYWNpbnRvc2g7IElu
+dGVsIE1hYyBPUyBYIDEwXzE1XzcpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vj
+a28pIENocm9tZS8xMTYuMC4wLjAgU2FmYXJpLzUzNy4zNiZxdW90OyB2ZXJzaW9uPSZxdW90OzIx
+LjUuMCZxdW90OyBldGFnPSZxdW90O0ZJajFqNHlLbFZwUERIdzhmamdKJnF1b3Q7IHR5cGU9JnF1
+b3Q7ZW1iZWQmcXVvdDsmZ3Q7Jmx0O2RpYWdyYW0gaWQ9JnF1b3Q7S2lLZnh1ZUVnZXJQNFJ1QkMw
+UzgmcXVvdDsgbmFtZT0mcXVvdDtQYWdlLTEmcXVvdDsmZ3Q7N1ZoTmM5c2dFUDAxdW1hRXZtSWZF
+enR0THUxa21zNjBQVkpCSktaSWFCQ083Zjc2TGhGSVFqaXhKM1djYVpPVDJjZnVndDQrd2NwQnZL
+ZzJIeVZ1eWsrQ1VCNUVJZGtFOFRLSUlwUW1jL2pSeUxaRHNneDFRQ0VaTVU0RGNNdCtVd09HQmww
+eFFsdkhVUW5CRld0Y01CZDFUWFBsWUZoS3NYYmQ3Z1IzVjIxd1FUM2dOc2ZjUjc4eG9zb09uYVho
+Z0Y5VFZwUjJaUlNhbVFwYlp3TzBKU1ppUFlMaXF5QmVTQ0ZVTjZvMkM4bzFlWmFYTHU3REk3UDl4
+aVN0MVNFQlVSZHdqL25LUE51MXlNc2d5amlFWC82VU1DcjBxRzBremt0cU5xMjJsZ25JQnFTRGNi
+a3VtYUszRGM3MXpCcnFEbGlwS2c0V2dxRlpoMHBGTjQvdUZmVU1nSFNvcUtpU1czQ3hBWlkwbzVy
+RW1PdWhCTDFMT2FKL1pqQnNxbDcwbVFkaVlHQzQyYzFUN1BIMG1WRkM1Yi9CVkJTZWtLcHpqeXFQ
+aTN3bDd5a3h6MHRyY3FIZlNUQnpqdHVXNVM0ZlVxeHE4dUFkUG5qRGRyNzNvV0Q4R0J2THpkaHZ1
+YlhXaHFrK0NNWS9SdmdRb2cwYjBlMlpFdThnMkZ1REVjZnBEb290SmluSGl0Mjc2WGZ4YmxhNEVR
+d1c3a3NjeFc2SkVacVVyaFVybVZNVE5UNEI5aVNLVU9JbVVsZ1dWSG1Kb0daNE8zSnJ0RVA3eEli
+bmt3MW56c2tFZ3k3am9MR2UwNE5rTjN1WDNRbGtoL2FwNVZEWlRSTjUrajJTN002bnFrdU9xcnI1
+eTZyTzZDYzhtOCtqc1liTzBubnlwSTYwY1VNbGcwZUJTK29wRFlkN05IeW9JdUdaSDBydjlCVmRF
+VWZRYStrMkNWMGR4Tk9iN2xEZEp1a2tVZnd5dXAxdU9JMk9xbHY3dHIwTDkvVnU4R1J5bE1iUk0y
+OXcyNTNhUk5uc2hTU0pkcTV6TkUwaVQ1TmZKYTdiaG5IZGFFL1VDZDJ4Y2lYWUtpbCswWVhnUWd1
+bkZyVnV0dThZNXhNSWMxYlVXc2VnQTYyeFM5MXJNL2k2dXpBVEZTT0VQOWFwdTBJUC9yNVpqNUdy
+Z3l3TnByMTZ0a09GMDNQbk9hMDY4ai8vdnRCY1ZHK01jWGlsVDBkNTZsRysrTzhKOTdvd3krUXBD
+TTg4d3BkdlFlTW5ZeHpNNGYrcTd0Z2YvdldMci80QSZsdDsvZGlhZ3JhbSZndDsmbHQ7L214Zmls
+ZSZndDsiPjxkZWZzLz48Zz48ZWxsaXBzZSBjeD0iMTUwIiBjeT0iNDAiIHJ4PSI2MCIgcnk9IjQw
+IiBmaWxsPSJyZ2IoMjU1LCAyNTUsIDI1NSkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBwb2ludGVy
+LWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRj
+aD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdo
+dD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVh
+dHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246
+IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0i
+ZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVu
+dDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDExOHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6
+IDQwcHg7IG1hcmdpbi1sZWZ0OiA5MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9y
+OiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6
+ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUt
+YmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJn
+YigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUt
+c3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+SG9jaDxiciAvPnNwcmFjaGU8
+L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMTUwIiB5PSI0NCIgZmls
+bD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgi
+IHRleHQtYW5jaG9yPSJtaWRkbGUiPkhvY2guLi48L3RleHQ+PC9zd2l0Y2g+PC9nPjxlbGxpcHNl
+IGN4PSIxNTAiIGN5PSIyMDAiIHJ4PSI2MCIgcnk9IjQwIiBmaWxsPSJyZ2IoMjU1LCAyNTUsIDI1
+NSkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNm
+b3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBwb2ludGVy
+LWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJl
+cz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5IiBzdHls
+ZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRw
+Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRl
+bXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6
+IDExOHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6IDIwMHB4OyBtYXJnaW4tbGVmdDogOTFw
+eDsiPjxkaXYgZGF0YS1kcmF3aW8tY29sb3JzPSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxl
+PSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2Vu
+dGVyOyI+PGRpdiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7
+IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0
+OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93
+LXdyYXA6IG5vcm1hbDsiPk5pZWRlcjxiciAvPnNwcmFjaGU8L2Rpdj48L2Rpdj48L2Rpdj48L2Zv
+cmVpZ25PYmplY3Q+PHRleHQgeD0iMTUwIiB5PSIyMDQiIGZpbGw9InJnYigwLCAwLCAwKSIgZm9u
+dC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hvcj0ibWlkZGxl
+Ij5OaWVkZXIuLi48L3RleHQ+PC9zd2l0Y2g+PC9nPjxwYXRoIGQ9Ik0gMjAwIDcwIFEgMjYwIDEy
+MCAyMDQuNzMgMTY5Ljc0IiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tl
+LW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGggZD0iTSAyMDAu
+ODMgMTczLjI1IEwgMjAzLjY5IDE2NS45NyBMIDIwNC43MyAxNjkuNzQgTCAyMDguMzggMTcxLjE3
+IFoiIGZpbGw9InJnYigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1taXRl
+cmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxwYXRoIGQ9Ik0gMTAwIDE3NCBRIDQw
+IDEyNCA5NS4yNyA3NC4yNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9r
+ZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIvPjxwYXRoIGQ9Ik0gOTku
+MTcgNzAuNzUgTCA5Ni4zMSA3OC4wMyBMIDk1LjI3IDc0LjI2IEwgOTEuNjIgNzIuODMgWiIgZmls
+bD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tlLW1pdGVybGltaXQ9
+IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHBhdGggZD0iTSAyMDkuMDQgNDcuNTIgUSAzNzAg
+MTIgMTk4Ljc5IDExLjczIiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tl
+LW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGggZD0iTSAxOTMu
+NTQgMTEuNzIgTCAyMDAuNTUgOC4yMyBMIDE5OC43OSAxMS43MyBMIDIwMC41NCAxNS4yMyBaIiBm
+aWxsPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0ZXJsaW1p
+dD0iMTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48cGF0aCBkPSJNIDIxMCAxOTIgUSAzNzEgMjI4
+IDE5OS4zNyAyMjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0
+ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBkPSJNIDE5NC4xMiAy
+MjggTCAyMDEuMTIgMjI0LjUgTCAxOTkuMzcgMjI4IEwgMjAxLjEyIDIzMS41IFoiIGZpbGw9InJn
+YigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIg
+cG9pbnRlci1ldmVudHM9ImFsbCIvPjxyZWN0IHg9IjI4MCIgeT0iMjUiIHdpZHRoPSI2MCIgaGVp
+Z2h0PSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJub25lIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+
+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVj
+dCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWly
+ZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmls
+aXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHht
+bG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsg
+YWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRl
+cjsgd2lkdGg6IDU4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogNDBweDsgbWFyZ2luLWxl
+ZnQ6IDI4MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7
+ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFs
+aWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6
+ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGlu
+ZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsg
+b3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+VHJhbnNwaWxlcjwvZGl2PjwvZGl2PjwvZGl2PjwvZm9y
+ZWlnbk9iamVjdD48dGV4dCB4PSIzMTAiIHk9IjQ0IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQt
+ZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6ZT0iMTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+
+VHJhbnNwaWxlcjwvdGV4dD48L3N3aXRjaD48L2c+PHJlY3QgeD0iMjgwIiB5PSIxODUiIHdpZHRo
+PSI2MCIgaGVpZ2h0PSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJub25lIiBwb2ludGVyLWV2ZW50
+cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9y
+ZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAw
+JSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNF
+eHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7
+Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxh
+eTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5z
+YWZlIGNlbnRlcjsgd2lkdGg6IDU4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogMjAwcHg7
+IG1hcmdpbi1sZWZ0OiAyODFweDsiPjxkaXYgZGF0YS1kcmF3aW8tY29sb3JzPSJjb2xvcjogcmdi
+KDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXNpemU6IDBw
+eDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2Nr
+OyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwg
+MCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7IHdoaXRlLXNwYWNl
+OiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPlJlY29tcGlsZXI8L2Rpdj48L2Rpdj48
+L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMzEwIiB5PSIyMDQiIGZpbGw9InJnYigwLCAw
+LCAwKSIgZm9udC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hv
+cj0ibWlkZGxlIj5SZWNvbXBpbGVyPC90ZXh0Pjwvc3dpdGNoPjwvZz48cmVjdCB4PSIyNDAiIHk9
+IjkwIiB3aWR0aD0iNjAiIGhlaWdodD0iMzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0ibm9uZSIgcG9p
+bnRlci1ldmVudHM9ImFsbCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjUgLTAuNSkiPjxz
+d2l0Y2g+PGZvcmVpZ25PYmplY3QgcG9pbnRlci1ldmVudHM9Im5vbmUiIHdpZHRoPSIxMDAlIiBo
+ZWlnaHQ9IjEwMCUiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzEx
+L2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSIgc3R5bGU9Im92ZXJmbG93OiB2aXNpYmxlOyB0ZXh0LWFs
+aWduOiBsZWZ0OyI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5
+bGU9ImRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiB1bnNhZmUgY2VudGVyOyBqdXN0aWZ5LWNv
+bnRlbnQ6IHVuc2FmZSBjZW50ZXI7IHdpZHRoOiA1OHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10
+b3A6IDEwNXB4OyBtYXJnaW4tbGVmdDogMjQxcHg7Ij48ZGl2IGRhdGEtZHJhd2lvLWNvbG9ycz0i
+Y29sb3I6IHJnYigwLCAwLCAwKTsgIiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9u
+dC1zaXplOiAwcHg7IHRleHQtYWxpZ246IGNlbnRlcjsiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlu
+bGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xv
+cjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyBwb2ludGVyLWV2ZW50czogYWxsOyB3
+aGl0ZS1zcGFjZTogbm9ybWFsOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7Ij5Db21waWxlcjwvZGl2
+PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIyNzAiIHk9IjEwOSIgZmlsbD0i
+cmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRl
+eHQtYW5jaG9yPSJtaWRkbGUiPkNvbXBpbGVyPC90ZXh0Pjwvc3dpdGNoPjwvZz48cmVjdCB4PSIw
+IiB5PSI5MCIgd2lkdGg9IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUi
+IHBvaW50ZXItZXZlbnRzPSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUp
+Ij48c3dpdGNoPjxmb3JlaWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAw
+JSIgaGVpZ2h0PSIxMDAlIiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9T
+VkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4
+dC1hbGlnbjogbGVmdDsiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwi
+IHN0eWxlPSJkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlm
+eS1jb250ZW50OiB1bnNhZmUgY2VudGVyOyB3aWR0aDogNThweDsgaGVpZ2h0OiAxcHg7IHBhZGRp
+bmctdG9wOiAxMDVweDsgbWFyZ2luLWxlZnQ6IDFweDsiPjxkaXYgZGF0YS1kcmF3aW8tY29sb3Jz
+PSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBm
+b250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0iZGlzcGxheTog
+aW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNv
+bG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7
+IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPkRlY29tcGlsZXI8
+L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMzAiIHk9IjEwOSIgZmls
+bD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgi
+IHRleHQtYW5jaG9yPSJtaWRkbGUiPkRlY29tcGlsZXI8L3RleHQ+PC9zd2l0Y2g+PC9nPjwvZz48
+c3dpdGNoPjxnIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzExL2Zl
+YXR1cmUjRXh0ZW5zaWJpbGl0eSIvPjxhIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAsLTUpIiB4bGlu
+azpocmVmPSJodHRwczovL3d3dy5kcmF3aW8uY29tL2RvYy9mYXEvc3ZnLWV4cG9ydC10ZXh0LXBy
+b2JsZW1zIiB0YXJnZXQ9Il9ibGFuayI+PHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1z
+aXplPSIxMHB4IiB4PSI1MCUiIHk9IjEwMCUiPlRleHQgaXMgbm90IFNWRyAtIGNhbm5vdCBkaXNw
+bGF5PC90ZXh0PjwvYT48L3N3aXRjaD48L3N2Zz4=
+      </contents>
+    </upload>
+    <upload>
+      <timestamp>2023-09-08T14:41:30Z</timestamp>
+      <contributor>
+        <username>Imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment deleted="deleted" />
+      <filename>Compiler-abstraktion.svg</filename>
+      <archivename>20230908144145!Compiler-abstraktion.svg</archivename>
+      <src>https://localhost:4443/wiki-dir/images/archive/4/48/20230908144145%21Compiler-abstraktion.svg</src>
+      <size>8921</size>
+      <sha1base36>6ogt6uzw3kfhrbi93cbeskwkdond8t9</sha1base36>
+      <rel>archive/4/48/20230908144145!Compiler-abstraktion.svg</rel>
+      <contents encoding="base64">PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRw
+Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIzNDFweCIgaGVp
+Z2h0PSIyNDFweCIgdmlld0JveD0iLTAuNSAtMC41IDM0MSAyNDEiIGNvbnRlbnQ9IiZsdDtteGZp
+bGUgaG9zdD0mcXVvdDtsb2NhbGhvc3QmcXVvdDsgbW9kaWZpZWQ9JnF1b3Q7MjAyMy0wOS0wOFQx
+NDo0MToyOC44NDVaJnF1b3Q7IGFnZW50PSZxdW90O01vemlsbGEvNS4wIChNYWNpbnRvc2g7IElu
+dGVsIE1hYyBPUyBYIDEwXzE1XzcpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vj
+a28pIENocm9tZS8xMTYuMC4wLjAgU2FmYXJpLzUzNy4zNiZxdW90OyB2ZXJzaW9uPSZxdW90OzIx
+LjUuMCZxdW90OyBldGFnPSZxdW90O0ZJajFqNHlLbFZwUERIdzhmamdKJnF1b3Q7IHR5cGU9JnF1
+b3Q7ZW1iZWQmcXVvdDsmZ3Q7Jmx0O2RpYWdyYW0gaWQ9JnF1b3Q7S2lLZnh1ZUVnZXJQNFJ1QkMw
+UzgmcXVvdDsgbmFtZT0mcXVvdDtQYWdlLTEmcXVvdDsmZ3Q7N1ZoTmM5c2dFUDAxdW1hRXZtSWZF
+enR0THUxa21zNjBQVkpCSktaSWFCQ083Zjc2TGhGSVFqaXhKM1djYVpPVDJjZnVndDQrd2NwQnZL
+ZzJIeVZ1eWsrQ1VCNUVJZGtFOFRLSUlwUW1jL2pSeUxaRHNneDFRQ0VaTVU0RGNNdCtVd09HQmww
+eFFsdkhVUW5CRld0Y01CZDFUWFBsWUZoS3NYYmQ3Z1IzVjIxd1FUM2dOc2ZjUjc4eG9zb09uYVho
+Z0Y5VFZwUjJaUlNhbVFwYlp3TzBKU1ppUFlMaXF5QmVTQ0ZVTjZvMkM4bzFlWmFYTHU3REk3UDl4
+aVN0MVNFQlVSZHdqL25LUE51MXlNc2d5amlFWC82VU1DcjBxRzBremt0cU5xMjJsZ25JQnFTRGNi
+a3VtYUszRGM3MXpCcnFEbGlwS2c0V2dxRlpoMHBGTjQvdUZmVU1nSFNvcUtpU1czQ3hBWlkwbzVy
+RW1PdWhCTDFMT2FKL1pqQnNxbDcwbVFkaVlHQzQyYzFUN1BIMG1WRkM1Yi9CVkJTZWtLcHpqeXFQ
+aTN3bDd5a3h6MHRyY3FIZlNUQnpqdHVXNVM0ZlVxeHE4dUFkUG5qRGRyNzNvV0Q4R0J2THpkaHZ1
+YlhXaHFrK0NNWS9SdmdRb2cwYjBlMlpFdThnMkZ1REVjZnBEb290SmluSGl0Mjc2WGZ4YmxhNEVR
+d1c3a3NjeFc2SkVacVVyaFVybVZNVE5UNEI5aVNLVU9JbVVsZ1dWSG1Kb0daNE8zSnJ0RVA3eEli
+bmt3MW56c2tFZ3k3am9MR2UwNE5rTjN1WDNRbGtoL2FwNVZEWlRSTjUrajJTN002bnFrdU9xcnI1
+eTZyTzZDYzhtOCtqc1liTzBubnlwSTYwY1VNbGcwZUJTK29wRFlkN05IeW9JdUdaSDBydjlCVmRF
+VWZRYStrMkNWMGR4Tk9iN2xEZEp1a2tVZnd5dXAxdU9JMk9xbHY3dHIwTDkvVnU4R1J5bE1iUk0y
+OXcyNTNhUk5uc2hTU0pkcTV6TkUwaVQ1TmZKYTdiaG5IZGFFL1VDZDJ4Y2lYWUtpbCswWVhnUWd1
+bkZyVnV0dThZNXhNSWMxYlVXc2VnQTYyeFM5MXJNL2k2dXpBVEZTT0VQOWFwdTBJUC9yNVpqNUdy
+Z3l3TnByMTZ0a09GMDNQbk9hMDY4ai8vdnRCY1ZHK01jWGlsVDBkNTZsRysrTzhKOTdvd3krUXBD
+TTg4d3BkdlFlTW5ZeHpNNGYrcTd0Z2YvdldMci80QSZsdDsvZGlhZ3JhbSZndDsmbHQ7L214Zmls
+ZSZndDsiPjxkZWZzLz48Zz48ZWxsaXBzZSBjeD0iMTUwIiBjeT0iNDAiIHJ4PSI2MCIgcnk9IjQw
+IiBmaWxsPSJyZ2IoMjU1LCAyNTUsIDI1NSkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBwb2ludGVy
+LWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRj
+aD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdo
+dD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVh
+dHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246
+IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0i
+ZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVu
+dDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDExOHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6
+IDQwcHg7IG1hcmdpbi1sZWZ0OiA5MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9y
+OiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6
+ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUt
+YmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJn
+YigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUt
+c3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+SG9jaDxiciAvPnNwcmFjaGU8
+L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMTUwIiB5PSI0NCIgZmls
+bD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgi
+IHRleHQtYW5jaG9yPSJtaWRkbGUiPkhvY2guLi48L3RleHQ+PC9zd2l0Y2g+PC9nPjxlbGxpcHNl
+IGN4PSIxNTAiIGN5PSIyMDAiIHJ4PSI2MCIgcnk9IjQwIiBmaWxsPSJyZ2IoMjU1LCAyNTUsIDI1
+NSkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNm
+b3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBwb2ludGVy
+LWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJl
+cz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5IiBzdHls
+ZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRw
+Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRl
+bXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6
+IDExOHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6IDIwMHB4OyBtYXJnaW4tbGVmdDogOTFw
+eDsiPjxkaXYgZGF0YS1kcmF3aW8tY29sb3JzPSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxl
+PSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2Vu
+dGVyOyI+PGRpdiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7
+IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0
+OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93
+LXdyYXA6IG5vcm1hbDsiPk5pZWRlcjxiciAvPnNwcmFjaGU8L2Rpdj48L2Rpdj48L2Rpdj48L2Zv
+cmVpZ25PYmplY3Q+PHRleHQgeD0iMTUwIiB5PSIyMDQiIGZpbGw9InJnYigwLCAwLCAwKSIgZm9u
+dC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hvcj0ibWlkZGxl
+Ij5OaWVkZXIuLi48L3RleHQ+PC9zd2l0Y2g+PC9nPjxwYXRoIGQ9Ik0gMjAwIDcwIFEgMjYwIDEy
+MCAyMDQuNzMgMTY5Ljc0IiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tl
+LW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGggZD0iTSAyMDAu
+ODMgMTczLjI1IEwgMjAzLjY5IDE2NS45NyBMIDIwNC43MyAxNjkuNzQgTCAyMDguMzggMTcxLjE3
+IFoiIGZpbGw9InJnYigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1taXRl
+cmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxwYXRoIGQ9Ik0gMTAwIDE3NCBRIDQw
+IDEyNCA5NS4yNyA3NC4yNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9r
+ZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIvPjxwYXRoIGQ9Ik0gOTku
+MTcgNzAuNzUgTCA5Ni4zMSA3OC4wMyBMIDk1LjI3IDc0LjI2IEwgOTEuNjIgNzIuODMgWiIgZmls
+bD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tlLW1pdGVybGltaXQ9
+IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHBhdGggZD0iTSAyMDkuMDQgNDcuNTIgUSAzNzAg
+MTIgMTk4Ljc5IDExLjczIiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tl
+LW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGggZD0iTSAxOTMu
+NTQgMTEuNzIgTCAyMDAuNTUgOC4yMyBMIDE5OC43OSAxMS43MyBMIDIwMC41NCAxNS4yMyBaIiBm
+aWxsPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0ZXJsaW1p
+dD0iMTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48cGF0aCBkPSJNIDIxMCAxOTIgUSAzNzEgMjI4
+IDE5OS4zNyAyMjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0
+ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBkPSJNIDE5NC4xMiAy
+MjggTCAyMDEuMTIgMjI0LjUgTCAxOTkuMzcgMjI4IEwgMjAxLjEyIDIzMS41IFoiIGZpbGw9InJn
+YigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIg
+cG9pbnRlci1ldmVudHM9ImFsbCIvPjxyZWN0IHg9IjI4MCIgeT0iMjUiIHdpZHRoPSI2MCIgaGVp
+Z2h0PSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJub25lIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+
+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVj
+dCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWly
+ZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmls
+aXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHht
+bG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsg
+YWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRl
+cjsgd2lkdGg6IDU4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogNDBweDsgbWFyZ2luLWxl
+ZnQ6IDI4MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7
+ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFs
+aWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6
+ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGlu
+ZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsg
+b3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+VHJhbnNwaWxlcjwvZGl2PjwvZGl2PjwvZGl2PjwvZm9y
+ZWlnbk9iamVjdD48dGV4dCB4PSIzMTAiIHk9IjQ0IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQt
+ZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6ZT0iMTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+
+VHJhbnNwaWxlcjwvdGV4dD48L3N3aXRjaD48L2c+PHJlY3QgeD0iMjgwIiB5PSIxODUiIHdpZHRo
+PSI2MCIgaGVpZ2h0PSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJub25lIiBwb2ludGVyLWV2ZW50
+cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9y
+ZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAw
+JSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNF
+eHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7
+Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxh
+eTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5z
+YWZlIGNlbnRlcjsgd2lkdGg6IDU4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogMjAwcHg7
+IG1hcmdpbi1sZWZ0OiAyODFweDsiPjxkaXYgZGF0YS1kcmF3aW8tY29sb3JzPSJjb2xvcjogcmdi
+KDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXNpemU6IDBw
+eDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2Nr
+OyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwg
+MCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7IHdoaXRlLXNwYWNl
+OiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPlJlY29tcGlsZXI8L2Rpdj48L2Rpdj48
+L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMzEwIiB5PSIyMDQiIGZpbGw9InJnYigwLCAw
+LCAwKSIgZm9udC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hv
+cj0ibWlkZGxlIj5SZWNvbXBpbGVyPC90ZXh0Pjwvc3dpdGNoPjwvZz48cmVjdCB4PSIyNDAiIHk9
+IjkwIiB3aWR0aD0iNjAiIGhlaWdodD0iMzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0ibm9uZSIgcG9p
+bnRlci1ldmVudHM9ImFsbCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjUgLTAuNSkiPjxz
+d2l0Y2g+PGZvcmVpZ25PYmplY3QgcG9pbnRlci1ldmVudHM9Im5vbmUiIHdpZHRoPSIxMDAlIiBo
+ZWlnaHQ9IjEwMCUiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzEx
+L2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSIgc3R5bGU9Im92ZXJmbG93OiB2aXNpYmxlOyB0ZXh0LWFs
+aWduOiBsZWZ0OyI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5
+bGU9ImRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiB1bnNhZmUgY2VudGVyOyBqdXN0aWZ5LWNv
+bnRlbnQ6IHVuc2FmZSBjZW50ZXI7IHdpZHRoOiA1OHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10
+b3A6IDEwNXB4OyBtYXJnaW4tbGVmdDogMjQxcHg7Ij48ZGl2IGRhdGEtZHJhd2lvLWNvbG9ycz0i
+Y29sb3I6IHJnYigwLCAwLCAwKTsgIiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9u
+dC1zaXplOiAwcHg7IHRleHQtYWxpZ246IGNlbnRlcjsiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlu
+bGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xv
+cjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyBwb2ludGVyLWV2ZW50czogYWxsOyB3
+aGl0ZS1zcGFjZTogbm9ybWFsOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7Ij5Db21waWxlcjwvZGl2
+PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIyNzAiIHk9IjEwOSIgZmlsbD0i
+cmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRl
+eHQtYW5jaG9yPSJtaWRkbGUiPkNvbXBpbGVyPC90ZXh0Pjwvc3dpdGNoPjwvZz48cmVjdCB4PSIw
+IiB5PSI5MCIgd2lkdGg9IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUi
+IHBvaW50ZXItZXZlbnRzPSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUp
+Ij48c3dpdGNoPjxmb3JlaWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAw
+JSIgaGVpZ2h0PSIxMDAlIiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9T
+VkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4
+dC1hbGlnbjogbGVmdDsiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwi
+IHN0eWxlPSJkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlm
+eS1jb250ZW50OiB1bnNhZmUgY2VudGVyOyB3aWR0aDogNThweDsgaGVpZ2h0OiAxcHg7IHBhZGRp
+bmctdG9wOiAxMDVweDsgbWFyZ2luLWxlZnQ6IDFweDsiPjxkaXYgZGF0YS1kcmF3aW8tY29sb3Jz
+PSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBm
+b250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0iZGlzcGxheTog
+aW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNv
+bG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7
+IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPkRlY29tcGlsZXI8
+L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMzAiIHk9IjEwOSIgZmls
+bD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgi
+IHRleHQtYW5jaG9yPSJtaWRkbGUiPkRlY29tcGlsZXI8L3RleHQ+PC9zd2l0Y2g+PC9nPjwvZz48
+c3dpdGNoPjxnIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzExL2Zl
+YXR1cmUjRXh0ZW5zaWJpbGl0eSIvPjxhIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAsLTUpIiB4bGlu
+azpocmVmPSJodHRwczovL3d3dy5kcmF3aW8uY29tL2RvYy9mYXEvc3ZnLWV4cG9ydC10ZXh0LXBy
+b2JsZW1zIiB0YXJnZXQ9Il9ibGFuayI+PHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1z
+aXplPSIxMHB4IiB4PSI1MCUiIHk9IjEwMCUiPlRleHQgaXMgbm90IFNWRyAtIGNhbm5vdCBkaXNw
+bGF5PC90ZXh0PjwvYT48L3N3aXRjaD48L3N2Zz4=
+      </contents>
+    </upload>
+    <upload>
+      <timestamp>2023-09-08T14:41:30Z</timestamp>
+      <contributor>
+        <username>Imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment deleted="deleted" />
+      <filename>Compiler-abstraktion.svg</filename>
+      <archivename>20230908144145!Compiler-abstraktion.svg</archivename>
+      <src>https://localhost:4443/wiki-dir/images/archive/4/48/20230908144145%21Compiler-abstraktion.svg</src>
+      <size>8921</size>
+      <sha1base36>6ogt6uzw3kfhrbi93cbeskwkdond8t9</sha1base36>
+      <rel>archive/4/48/20230908144145!Compiler-abstraktion.svg</rel>
+      <contents encoding="base64">PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRw
+Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIzNDFweCIgaGVp
+Z2h0PSIyNDFweCIgdmlld0JveD0iLTAuNSAtMC41IDM0MSAyNDEiIGNvbnRlbnQ9IiZsdDtteGZp
+bGUgaG9zdD0mcXVvdDtsb2NhbGhvc3QmcXVvdDsgbW9kaWZpZWQ9JnF1b3Q7MjAyMy0wOS0wOFQx
+NDo0MToyOC44NDVaJnF1b3Q7IGFnZW50PSZxdW90O01vemlsbGEvNS4wIChNYWNpbnRvc2g7IElu
+dGVsIE1hYyBPUyBYIDEwXzE1XzcpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vj
+a28pIENocm9tZS8xMTYuMC4wLjAgU2FmYXJpLzUzNy4zNiZxdW90OyB2ZXJzaW9uPSZxdW90OzIx
+LjUuMCZxdW90OyBldGFnPSZxdW90O0ZJajFqNHlLbFZwUERIdzhmamdKJnF1b3Q7IHR5cGU9JnF1
+b3Q7ZW1iZWQmcXVvdDsmZ3Q7Jmx0O2RpYWdyYW0gaWQ9JnF1b3Q7S2lLZnh1ZUVnZXJQNFJ1QkMw
+UzgmcXVvdDsgbmFtZT0mcXVvdDtQYWdlLTEmcXVvdDsmZ3Q7N1ZoTmM5c2dFUDAxdW1hRXZtSWZF
+enR0THUxa21zNjBQVkpCSktaSWFCQ083Zjc2TGhGSVFqaXhKM1djYVpPVDJjZnVndDQrd2NwQnZL
+ZzJIeVZ1eWsrQ1VCNUVJZGtFOFRLSUlwUW1jL2pSeUxaRHNneDFRQ0VaTVU0RGNNdCtVd09HQmww
+eFFsdkhVUW5CRld0Y01CZDFUWFBsWUZoS3NYYmQ3Z1IzVjIxd1FUM2dOc2ZjUjc4eG9zb09uYVho
+Z0Y5VFZwUjJaUlNhbVFwYlp3TzBKU1ppUFlMaXF5QmVTQ0ZVTjZvMkM4bzFlWmFYTHU3REk3UDl4
+aVN0MVNFQlVSZHdqL25LUE51MXlNc2d5amlFWC82VU1DcjBxRzBremt0cU5xMjJsZ25JQnFTRGNi
+a3VtYUszRGM3MXpCcnFEbGlwS2c0V2dxRlpoMHBGTjQvdUZmVU1nSFNvcUtpU1czQ3hBWlkwbzVy
+RW1PdWhCTDFMT2FKL1pqQnNxbDcwbVFkaVlHQzQyYzFUN1BIMG1WRkM1Yi9CVkJTZWtLcHpqeXFQ
+aTN3bDd5a3h6MHRyY3FIZlNUQnpqdHVXNVM0ZlVxeHE4dUFkUG5qRGRyNzNvV0Q4R0J2THpkaHZ1
+YlhXaHFrK0NNWS9SdmdRb2cwYjBlMlpFdThnMkZ1REVjZnBEb290SmluSGl0Mjc2WGZ4YmxhNEVR
+d1c3a3NjeFc2SkVacVVyaFVybVZNVE5UNEI5aVNLVU9JbVVsZ1dWSG1Kb0daNE8zSnJ0RVA3eEli
+bmt3MW56c2tFZ3k3am9MR2UwNE5rTjN1WDNRbGtoL2FwNVZEWlRSTjUrajJTN002bnFrdU9xcnI1
+eTZyTzZDYzhtOCtqc1liTzBubnlwSTYwY1VNbGcwZUJTK29wRFlkN05IeW9JdUdaSDBydjlCVmRF
+VWZRYStrMkNWMGR4Tk9iN2xEZEp1a2tVZnd5dXAxdU9JMk9xbHY3dHIwTDkvVnU4R1J5bE1iUk0y
+OXcyNTNhUk5uc2hTU0pkcTV6TkUwaVQ1TmZKYTdiaG5IZGFFL1VDZDJ4Y2lYWUtpbCswWVhnUWd1
+bkZyVnV0dThZNXhNSWMxYlVXc2VnQTYyeFM5MXJNL2k2dXpBVEZTT0VQOWFwdTBJUC9yNVpqNUdy
+Z3l3TnByMTZ0a09GMDNQbk9hMDY4ai8vdnRCY1ZHK01jWGlsVDBkNTZsRysrTzhKOTdvd3krUXBD
+TTg4d3BkdlFlTW5ZeHpNNGYrcTd0Z2YvdldMci80QSZsdDsvZGlhZ3JhbSZndDsmbHQ7L214Zmls
+ZSZndDsiPjxkZWZzLz48Zz48ZWxsaXBzZSBjeD0iMTUwIiBjeT0iNDAiIHJ4PSI2MCIgcnk9IjQw
+IiBmaWxsPSJyZ2IoMjU1LCAyNTUsIDI1NSkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBwb2ludGVy
+LWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRj
+aD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdo
+dD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVh
+dHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246
+IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0i
+ZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVu
+dDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDExOHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6
+IDQwcHg7IG1hcmdpbi1sZWZ0OiA5MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9y
+OiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6
+ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUt
+YmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJn
+YigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUt
+c3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+SG9jaDxiciAvPnNwcmFjaGU8
+L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMTUwIiB5PSI0NCIgZmls
+bD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgi
+IHRleHQtYW5jaG9yPSJtaWRkbGUiPkhvY2guLi48L3RleHQ+PC9zd2l0Y2g+PC9nPjxlbGxpcHNl
+IGN4PSIxNTAiIGN5PSIyMDAiIHJ4PSI2MCIgcnk9IjQwIiBmaWxsPSJyZ2IoMjU1LCAyNTUsIDI1
+NSkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNm
+b3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBwb2ludGVy
+LWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJl
+cz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5IiBzdHls
+ZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRw
+Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRl
+bXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6
+IDExOHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6IDIwMHB4OyBtYXJnaW4tbGVmdDogOTFw
+eDsiPjxkaXYgZGF0YS1kcmF3aW8tY29sb3JzPSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxl
+PSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2Vu
+dGVyOyI+PGRpdiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7
+IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0
+OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93
+LXdyYXA6IG5vcm1hbDsiPk5pZWRlcjxiciAvPnNwcmFjaGU8L2Rpdj48L2Rpdj48L2Rpdj48L2Zv
+cmVpZ25PYmplY3Q+PHRleHQgeD0iMTUwIiB5PSIyMDQiIGZpbGw9InJnYigwLCAwLCAwKSIgZm9u
+dC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hvcj0ibWlkZGxl
+Ij5OaWVkZXIuLi48L3RleHQ+PC9zd2l0Y2g+PC9nPjxwYXRoIGQ9Ik0gMjAwIDcwIFEgMjYwIDEy
+MCAyMDQuNzMgMTY5Ljc0IiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tl
+LW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGggZD0iTSAyMDAu
+ODMgMTczLjI1IEwgMjAzLjY5IDE2NS45NyBMIDIwNC43MyAxNjkuNzQgTCAyMDguMzggMTcxLjE3
+IFoiIGZpbGw9InJnYigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1taXRl
+cmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxwYXRoIGQ9Ik0gMTAwIDE3NCBRIDQw
+IDEyNCA5NS4yNyA3NC4yNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9r
+ZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIvPjxwYXRoIGQ9Ik0gOTku
+MTcgNzAuNzUgTCA5Ni4zMSA3OC4wMyBMIDk1LjI3IDc0LjI2IEwgOTEuNjIgNzIuODMgWiIgZmls
+bD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tlLW1pdGVybGltaXQ9
+IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHBhdGggZD0iTSAyMDkuMDQgNDcuNTIgUSAzNzAg
+MTIgMTk4Ljc5IDExLjczIiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tl
+LW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGggZD0iTSAxOTMu
+NTQgMTEuNzIgTCAyMDAuNTUgOC4yMyBMIDE5OC43OSAxMS43MyBMIDIwMC41NCAxNS4yMyBaIiBm
+aWxsPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0ZXJsaW1p
+dD0iMTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48cGF0aCBkPSJNIDIxMCAxOTIgUSAzNzEgMjI4
+IDE5OS4zNyAyMjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0
+ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBkPSJNIDE5NC4xMiAy
+MjggTCAyMDEuMTIgMjI0LjUgTCAxOTkuMzcgMjI4IEwgMjAxLjEyIDIzMS41IFoiIGZpbGw9InJn
+YigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIg
+cG9pbnRlci1ldmVudHM9ImFsbCIvPjxyZWN0IHg9IjI4MCIgeT0iMjUiIHdpZHRoPSI2MCIgaGVp
+Z2h0PSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJub25lIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+
+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVj
+dCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWly
+ZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmls
+aXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHht
+bG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsg
+YWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRl
+cjsgd2lkdGg6IDU4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogNDBweDsgbWFyZ2luLWxl
+ZnQ6IDI4MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7
+ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFs
+aWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6
+ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGlu
+ZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsg
+b3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+VHJhbnNwaWxlcjwvZGl2PjwvZGl2PjwvZGl2PjwvZm9y
+ZWlnbk9iamVjdD48dGV4dCB4PSIzMTAiIHk9IjQ0IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQt
+ZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6ZT0iMTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+
+VHJhbnNwaWxlcjwvdGV4dD48L3N3aXRjaD48L2c+PHJlY3QgeD0iMjgwIiB5PSIxODUiIHdpZHRo
+PSI2MCIgaGVpZ2h0PSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJub25lIiBwb2ludGVyLWV2ZW50
+cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9y
+ZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAw
+JSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNF
+eHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7
+Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxh
+eTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5z
+YWZlIGNlbnRlcjsgd2lkdGg6IDU4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogMjAwcHg7
+IG1hcmdpbi1sZWZ0OiAyODFweDsiPjxkaXYgZGF0YS1kcmF3aW8tY29sb3JzPSJjb2xvcjogcmdi
+KDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXNpemU6IDBw
+eDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2Nr
+OyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwg
+MCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7IHdoaXRlLXNwYWNl
+OiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPlJlY29tcGlsZXI8L2Rpdj48L2Rpdj48
+L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMzEwIiB5PSIyMDQiIGZpbGw9InJnYigwLCAw
+LCAwKSIgZm9udC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hv
+cj0ibWlkZGxlIj5SZWNvbXBpbGVyPC90ZXh0Pjwvc3dpdGNoPjwvZz48cmVjdCB4PSIyNDAiIHk9
+IjkwIiB3aWR0aD0iNjAiIGhlaWdodD0iMzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0ibm9uZSIgcG9p
+bnRlci1ldmVudHM9ImFsbCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjUgLTAuNSkiPjxz
+d2l0Y2g+PGZvcmVpZ25PYmplY3QgcG9pbnRlci1ldmVudHM9Im5vbmUiIHdpZHRoPSIxMDAlIiBo
+ZWlnaHQ9IjEwMCUiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzEx
+L2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSIgc3R5bGU9Im92ZXJmbG93OiB2aXNpYmxlOyB0ZXh0LWFs
+aWduOiBsZWZ0OyI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5
+bGU9ImRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiB1bnNhZmUgY2VudGVyOyBqdXN0aWZ5LWNv
+bnRlbnQ6IHVuc2FmZSBjZW50ZXI7IHdpZHRoOiA1OHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10
+b3A6IDEwNXB4OyBtYXJnaW4tbGVmdDogMjQxcHg7Ij48ZGl2IGRhdGEtZHJhd2lvLWNvbG9ycz0i
+Y29sb3I6IHJnYigwLCAwLCAwKTsgIiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9u
+dC1zaXplOiAwcHg7IHRleHQtYWxpZ246IGNlbnRlcjsiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlu
+bGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xv
+cjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyBwb2ludGVyLWV2ZW50czogYWxsOyB3
+aGl0ZS1zcGFjZTogbm9ybWFsOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7Ij5Db21waWxlcjwvZGl2
+PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIyNzAiIHk9IjEwOSIgZmlsbD0i
+cmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRl
+eHQtYW5jaG9yPSJtaWRkbGUiPkNvbXBpbGVyPC90ZXh0Pjwvc3dpdGNoPjwvZz48cmVjdCB4PSIw
+IiB5PSI5MCIgd2lkdGg9IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUi
+IHBvaW50ZXItZXZlbnRzPSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUp
+Ij48c3dpdGNoPjxmb3JlaWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAw
+JSIgaGVpZ2h0PSIxMDAlIiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9T
+VkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4
+dC1hbGlnbjogbGVmdDsiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwi
+IHN0eWxlPSJkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlm
+eS1jb250ZW50OiB1bnNhZmUgY2VudGVyOyB3aWR0aDogNThweDsgaGVpZ2h0OiAxcHg7IHBhZGRp
+bmctdG9wOiAxMDVweDsgbWFyZ2luLWxlZnQ6IDFweDsiPjxkaXYgZGF0YS1kcmF3aW8tY29sb3Jz
+PSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBm
+b250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0iZGlzcGxheTog
+aW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNv
+bG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7
+IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPkRlY29tcGlsZXI8
+L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMzAiIHk9IjEwOSIgZmls
+bD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgi
+IHRleHQtYW5jaG9yPSJtaWRkbGUiPkRlY29tcGlsZXI8L3RleHQ+PC9zd2l0Y2g+PC9nPjwvZz48
+c3dpdGNoPjxnIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzExL2Zl
+YXR1cmUjRXh0ZW5zaWJpbGl0eSIvPjxhIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAsLTUpIiB4bGlu
+azpocmVmPSJodHRwczovL3d3dy5kcmF3aW8uY29tL2RvYy9mYXEvc3ZnLWV4cG9ydC10ZXh0LXBy
+b2JsZW1zIiB0YXJnZXQ9Il9ibGFuayI+PHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1z
+aXplPSIxMHB4IiB4PSI1MCUiIHk9IjEwMCUiPlRleHQgaXMgbm90IFNWRyAtIGNhbm5vdCBkaXNw
+bGF5PC90ZXh0PjwvYT48L3N3aXRjaD48L3N2Zz4=
+      </contents>
+    </upload>
+    <upload>
+      <timestamp>2023-09-08T14:41:30Z</timestamp>
+      <contributor>
+        <username>Imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment deleted="deleted" />
+      <filename>Compiler-abstraktion.svg</filename>
+      <archivename>20230908144145!Compiler-abstraktion.svg</archivename>
+      <src>https://localhost:4443/wiki-dir/images/archive/4/48/20230908144145%21Compiler-abstraktion.svg</src>
+      <size>8921</size>
+      <sha1base36>6ogt6uzw3kfhrbi93cbeskwkdond8t9</sha1base36>
+      <rel>archive/4/48/20230908144145!Compiler-abstraktion.svg</rel>
+      <contents encoding="base64">PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRw
+Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIzNDFweCIgaGVp
+Z2h0PSIyNDFweCIgdmlld0JveD0iLTAuNSAtMC41IDM0MSAyNDEiIGNvbnRlbnQ9IiZsdDtteGZp
+bGUgaG9zdD0mcXVvdDtsb2NhbGhvc3QmcXVvdDsgbW9kaWZpZWQ9JnF1b3Q7MjAyMy0wOS0wOFQx
+NDo0MToyOC44NDVaJnF1b3Q7IGFnZW50PSZxdW90O01vemlsbGEvNS4wIChNYWNpbnRvc2g7IElu
+dGVsIE1hYyBPUyBYIDEwXzE1XzcpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vj
+a28pIENocm9tZS8xMTYuMC4wLjAgU2FmYXJpLzUzNy4zNiZxdW90OyB2ZXJzaW9uPSZxdW90OzIx
+LjUuMCZxdW90OyBldGFnPSZxdW90O0ZJajFqNHlLbFZwUERIdzhmamdKJnF1b3Q7IHR5cGU9JnF1
+b3Q7ZW1iZWQmcXVvdDsmZ3Q7Jmx0O2RpYWdyYW0gaWQ9JnF1b3Q7S2lLZnh1ZUVnZXJQNFJ1QkMw
+UzgmcXVvdDsgbmFtZT0mcXVvdDtQYWdlLTEmcXVvdDsmZ3Q7N1ZoTmM5c2dFUDAxdW1hRXZtSWZF
+enR0THUxa21zNjBQVkpCSktaSWFCQ083Zjc2TGhGSVFqaXhKM1djYVpPVDJjZnVndDQrd2NwQnZL
+ZzJIeVZ1eWsrQ1VCNUVJZGtFOFRLSUlwUW1jL2pSeUxaRHNneDFRQ0VaTVU0RGNNdCtVd09HQmww
+eFFsdkhVUW5CRld0Y01CZDFUWFBsWUZoS3NYYmQ3Z1IzVjIxd1FUM2dOc2ZjUjc4eG9zb09uYVho
+Z0Y5VFZwUjJaUlNhbVFwYlp3TzBKU1ppUFlMaXF5QmVTQ0ZVTjZvMkM4bzFlWmFYTHU3REk3UDl4
+aVN0MVNFQlVSZHdqL25LUE51MXlNc2d5amlFWC82VU1DcjBxRzBremt0cU5xMjJsZ25JQnFTRGNi
+a3VtYUszRGM3MXpCcnFEbGlwS2c0V2dxRlpoMHBGTjQvdUZmVU1nSFNvcUtpU1czQ3hBWlkwbzVy
+RW1PdWhCTDFMT2FKL1pqQnNxbDcwbVFkaVlHQzQyYzFUN1BIMG1WRkM1Yi9CVkJTZWtLcHpqeXFQ
+aTN3bDd5a3h6MHRyY3FIZlNUQnpqdHVXNVM0ZlVxeHE4dUFkUG5qRGRyNzNvV0Q4R0J2THpkaHZ1
+YlhXaHFrK0NNWS9SdmdRb2cwYjBlMlpFdThnMkZ1REVjZnBEb290SmluSGl0Mjc2WGZ4YmxhNEVR
+d1c3a3NjeFc2SkVacVVyaFVybVZNVE5UNEI5aVNLVU9JbVVsZ1dWSG1Kb0daNE8zSnJ0RVA3eEli
+bmt3MW56c2tFZ3k3am9MR2UwNE5rTjN1WDNRbGtoL2FwNVZEWlRSTjUrajJTN002bnFrdU9xcnI1
+eTZyTzZDYzhtOCtqc1liTzBubnlwSTYwY1VNbGcwZUJTK29wRFlkN05IeW9JdUdaSDBydjlCVmRF
+VWZRYStrMkNWMGR4Tk9iN2xEZEp1a2tVZnd5dXAxdU9JMk9xbHY3dHIwTDkvVnU4R1J5bE1iUk0y
+OXcyNTNhUk5uc2hTU0pkcTV6TkUwaVQ1TmZKYTdiaG5IZGFFL1VDZDJ4Y2lYWUtpbCswWVhnUWd1
+bkZyVnV0dThZNXhNSWMxYlVXc2VnQTYyeFM5MXJNL2k2dXpBVEZTT0VQOWFwdTBJUC9yNVpqNUdy
+Z3l3TnByMTZ0a09GMDNQbk9hMDY4ai8vdnRCY1ZHK01jWGlsVDBkNTZsRysrTzhKOTdvd3krUXBD
+TTg4d3BkdlFlTW5ZeHpNNGYrcTd0Z2YvdldMci80QSZsdDsvZGlhZ3JhbSZndDsmbHQ7L214Zmls
+ZSZndDsiPjxkZWZzLz48Zz48ZWxsaXBzZSBjeD0iMTUwIiBjeT0iNDAiIHJ4PSI2MCIgcnk9IjQw
+IiBmaWxsPSJyZ2IoMjU1LCAyNTUsIDI1NSkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBwb2ludGVy
+LWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRj
+aD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdo
+dD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVh
+dHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246
+IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0i
+ZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVu
+dDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDExOHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6
+IDQwcHg7IG1hcmdpbi1sZWZ0OiA5MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9y
+OiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6
+ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUt
+YmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJn
+YigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUt
+c3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+SG9jaDxiciAvPnNwcmFjaGU8
+L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMTUwIiB5PSI0NCIgZmls
+bD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgi
+IHRleHQtYW5jaG9yPSJtaWRkbGUiPkhvY2guLi48L3RleHQ+PC9zd2l0Y2g+PC9nPjxlbGxpcHNl
+IGN4PSIxNTAiIGN5PSIyMDAiIHJ4PSI2MCIgcnk9IjQwIiBmaWxsPSJyZ2IoMjU1LCAyNTUsIDI1
+NSkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNm
+b3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBwb2ludGVy
+LWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJl
+cz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5IiBzdHls
+ZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRw
+Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRl
+bXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6
+IDExOHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6IDIwMHB4OyBtYXJnaW4tbGVmdDogOTFw
+eDsiPjxkaXYgZGF0YS1kcmF3aW8tY29sb3JzPSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxl
+PSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2Vu
+dGVyOyI+PGRpdiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7
+IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0
+OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93
+LXdyYXA6IG5vcm1hbDsiPk5pZWRlcjxiciAvPnNwcmFjaGU8L2Rpdj48L2Rpdj48L2Rpdj48L2Zv
+cmVpZ25PYmplY3Q+PHRleHQgeD0iMTUwIiB5PSIyMDQiIGZpbGw9InJnYigwLCAwLCAwKSIgZm9u
+dC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hvcj0ibWlkZGxl
+Ij5OaWVkZXIuLi48L3RleHQ+PC9zd2l0Y2g+PC9nPjxwYXRoIGQ9Ik0gMjAwIDcwIFEgMjYwIDEy
+MCAyMDQuNzMgMTY5Ljc0IiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tl
+LW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGggZD0iTSAyMDAu
+ODMgMTczLjI1IEwgMjAzLjY5IDE2NS45NyBMIDIwNC43MyAxNjkuNzQgTCAyMDguMzggMTcxLjE3
+IFoiIGZpbGw9InJnYigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1taXRl
+cmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxwYXRoIGQ9Ik0gMTAwIDE3NCBRIDQw
+IDEyNCA5NS4yNyA3NC4yNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9r
+ZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIvPjxwYXRoIGQ9Ik0gOTku
+MTcgNzAuNzUgTCA5Ni4zMSA3OC4wMyBMIDk1LjI3IDc0LjI2IEwgOTEuNjIgNzIuODMgWiIgZmls
+bD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tlLW1pdGVybGltaXQ9
+IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHBhdGggZD0iTSAyMDkuMDQgNDcuNTIgUSAzNzAg
+MTIgMTk4Ljc5IDExLjczIiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tl
+LW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGggZD0iTSAxOTMu
+NTQgMTEuNzIgTCAyMDAuNTUgOC4yMyBMIDE5OC43OSAxMS43MyBMIDIwMC41NCAxNS4yMyBaIiBm
+aWxsPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0ZXJsaW1p
+dD0iMTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48cGF0aCBkPSJNIDIxMCAxOTIgUSAzNzEgMjI4
+IDE5OS4zNyAyMjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0
+ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBkPSJNIDE5NC4xMiAy
+MjggTCAyMDEuMTIgMjI0LjUgTCAxOTkuMzcgMjI4IEwgMjAxLjEyIDIzMS41IFoiIGZpbGw9InJn
+YigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIg
+cG9pbnRlci1ldmVudHM9ImFsbCIvPjxyZWN0IHg9IjI4MCIgeT0iMjUiIHdpZHRoPSI2MCIgaGVp
+Z2h0PSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJub25lIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+
+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVj
+dCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWly
+ZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmls
+aXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHht
+bG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsg
+YWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRl
+cjsgd2lkdGg6IDU4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogNDBweDsgbWFyZ2luLWxl
+ZnQ6IDI4MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7
+ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFs
+aWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6
+ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGlu
+ZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsg
+b3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+VHJhbnNwaWxlcjwvZGl2PjwvZGl2PjwvZGl2PjwvZm9y
+ZWlnbk9iamVjdD48dGV4dCB4PSIzMTAiIHk9IjQ0IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQt
+ZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6ZT0iMTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+
+VHJhbnNwaWxlcjwvdGV4dD48L3N3aXRjaD48L2c+PHJlY3QgeD0iMjgwIiB5PSIxODUiIHdpZHRo
+PSI2MCIgaGVpZ2h0PSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJub25lIiBwb2ludGVyLWV2ZW50
+cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9y
+ZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAw
+JSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNF
+eHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7
+Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxh
+eTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5z
+YWZlIGNlbnRlcjsgd2lkdGg6IDU4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogMjAwcHg7
+IG1hcmdpbi1sZWZ0OiAyODFweDsiPjxkaXYgZGF0YS1kcmF3aW8tY29sb3JzPSJjb2xvcjogcmdi
+KDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXNpemU6IDBw
+eDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2Nr
+OyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwg
+MCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7IHdoaXRlLXNwYWNl
+OiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPlJlY29tcGlsZXI8L2Rpdj48L2Rpdj48
+L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMzEwIiB5PSIyMDQiIGZpbGw9InJnYigwLCAw
+LCAwKSIgZm9udC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hv
+cj0ibWlkZGxlIj5SZWNvbXBpbGVyPC90ZXh0Pjwvc3dpdGNoPjwvZz48cmVjdCB4PSIyNDAiIHk9
+IjkwIiB3aWR0aD0iNjAiIGhlaWdodD0iMzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0ibm9uZSIgcG9p
+bnRlci1ldmVudHM9ImFsbCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjUgLTAuNSkiPjxz
+d2l0Y2g+PGZvcmVpZ25PYmplY3QgcG9pbnRlci1ldmVudHM9Im5vbmUiIHdpZHRoPSIxMDAlIiBo
+ZWlnaHQ9IjEwMCUiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzEx
+L2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSIgc3R5bGU9Im92ZXJmbG93OiB2aXNpYmxlOyB0ZXh0LWFs
+aWduOiBsZWZ0OyI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5
+bGU9ImRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiB1bnNhZmUgY2VudGVyOyBqdXN0aWZ5LWNv
+bnRlbnQ6IHVuc2FmZSBjZW50ZXI7IHdpZHRoOiA1OHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10
+b3A6IDEwNXB4OyBtYXJnaW4tbGVmdDogMjQxcHg7Ij48ZGl2IGRhdGEtZHJhd2lvLWNvbG9ycz0i
+Y29sb3I6IHJnYigwLCAwLCAwKTsgIiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9u
+dC1zaXplOiAwcHg7IHRleHQtYWxpZ246IGNlbnRlcjsiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlu
+bGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xv
+cjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyBwb2ludGVyLWV2ZW50czogYWxsOyB3
+aGl0ZS1zcGFjZTogbm9ybWFsOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7Ij5Db21waWxlcjwvZGl2
+PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIyNzAiIHk9IjEwOSIgZmlsbD0i
+cmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRl
+eHQtYW5jaG9yPSJtaWRkbGUiPkNvbXBpbGVyPC90ZXh0Pjwvc3dpdGNoPjwvZz48cmVjdCB4PSIw
+IiB5PSI5MCIgd2lkdGg9IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUi
+IHBvaW50ZXItZXZlbnRzPSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUp
+Ij48c3dpdGNoPjxmb3JlaWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAw
+JSIgaGVpZ2h0PSIxMDAlIiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9T
+VkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4
+dC1hbGlnbjogbGVmdDsiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwi
+IHN0eWxlPSJkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlm
+eS1jb250ZW50OiB1bnNhZmUgY2VudGVyOyB3aWR0aDogNThweDsgaGVpZ2h0OiAxcHg7IHBhZGRp
+bmctdG9wOiAxMDVweDsgbWFyZ2luLWxlZnQ6IDFweDsiPjxkaXYgZGF0YS1kcmF3aW8tY29sb3Jz
+PSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBm
+b250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0iZGlzcGxheTog
+aW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNv
+bG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7
+IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPkRlY29tcGlsZXI8
+L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMzAiIHk9IjEwOSIgZmls
+bD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgi
+IHRleHQtYW5jaG9yPSJtaWRkbGUiPkRlY29tcGlsZXI8L3RleHQ+PC9zd2l0Y2g+PC9nPjwvZz48
+c3dpdGNoPjxnIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzExL2Zl
+YXR1cmUjRXh0ZW5zaWJpbGl0eSIvPjxhIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAsLTUpIiB4bGlu
+azpocmVmPSJodHRwczovL3d3dy5kcmF3aW8uY29tL2RvYy9mYXEvc3ZnLWV4cG9ydC10ZXh0LXBy
+b2JsZW1zIiB0YXJnZXQ9Il9ibGFuayI+PHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1z
+aXplPSIxMHB4IiB4PSI1MCUiIHk9IjEwMCUiPlRleHQgaXMgbm90IFNWRyAtIGNhbm5vdCBkaXNw
+bGF5PC90ZXh0PjwvYT48L3N3aXRjaD48L3N2Zz4=
+      </contents>
+    </upload>
+    <upload>
+      <timestamp>2023-09-08T14:41:45Z</timestamp>
+      <contributor>
+        <username>Imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment deleted="deleted" />
+      <filename>Compiler-abstraktion.svg</filename>
+      <archivename>20230908144149!Compiler-abstraktion.svg</archivename>
+      <src>https://localhost:4443/wiki-dir/images/archive/4/48/20230908144149%21Compiler-abstraktion.svg</src>
+      <size>8929</size>
+      <sha1base36>tq5oxsfvpj6z3antmi3wzza7q0ienos</sha1base36>
+      <rel>archive/4/48/20230908144149!Compiler-abstraktion.svg</rel>
+      <contents encoding="base64">PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRw
+Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIzNDFweCIgaGVp
+Z2h0PSIyNDFweCIgdmlld0JveD0iLTAuNSAtMC41IDM0MSAyNDEiIGNvbnRlbnQ9IiZsdDtteGZp
+bGUgaG9zdD0mcXVvdDtsb2NhbGhvc3QmcXVvdDsgbW9kaWZpZWQ9JnF1b3Q7MjAyMy0wOS0wOFQx
+NDo0MTo0NC40MDRaJnF1b3Q7IGFnZW50PSZxdW90O01vemlsbGEvNS4wIChNYWNpbnRvc2g7IElu
+dGVsIE1hYyBPUyBYIDEwXzE1XzcpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vj
+a28pIENocm9tZS8xMTYuMC4wLjAgU2FmYXJpLzUzNy4zNiZxdW90OyB2ZXJzaW9uPSZxdW90OzIx
+LjUuMCZxdW90OyBldGFnPSZxdW90O0ZTOHE5SmpFbm54UnBKV2ZYOW9YJnF1b3Q7IHR5cGU9JnF1
+b3Q7ZW1iZWQmcXVvdDsmZ3Q7Jmx0O2RpYWdyYW0gaWQ9JnF1b3Q7S2lLZnh1ZUVnZXJQNFJ1QkMw
+UzgmcXVvdDsgbmFtZT0mcXVvdDtQYWdlLTEmcXVvdDsmZ3Q7N1ZoTmI5c3dEUDAxdmhiK3JuTnNr
+MjY5YkNqV0FWdVBxc1RZd21RcmtKVW0yYThmSGNzZnN0TW1hSk1VV0h1SytFUlMwdU96VE1jSnB2
+bjZxeUtMN0p0a0lCemZaV3NubURtKzcwWGhCSDhxWkZNamNlelZRS280TTA0ZGNNLy9nZ0ZkZ3k0
+NWc5SnkxRklLelJjMlNHVlJBTlVXUnBTU0s5dHRMb1c5Nm9La01BTHVLUkZqOUJkbk9xdlJKSEk3
+L0JaNG1qVXJlNjZaeVVuamJJQXlJMHl1ZWxCdzR3UlRKYVd1Ui9sNkNxSWlyK0dsanZ2eXpHeTdN
+UVdGUGlUQXJ3T2VpRmlhczkxS21qbCtMREQ4K2xIaEtLMUc1VUlSbW9IWnRONDBUR0EySkIyTjYx
+WEdOZHd2Q0sxbVZsaDN4REtkQzdROEhNNjVFRk1wcE5yR0JZeEFNcWRWWXEza0grak54RFNCeHpu
+T21KMkIwckIrOW5SZXl4bUtEV1FPV20zUXBRbG9hRFk2QzQyNTZvcld1bVM5Z2lVR0kwWW5hWnU1
+b3hJSGhzM2R6QVlqWnI5ellLQk96KzA4b1VCM2N2dVlSQ0dLOUNUYyt1NFp5YjBja1R0aWp5N1ZF
+ekRERUJUc3FucnUwYVNDbENXbk5vTktMZ3UyOVhhMzNyaWQzMjBvR2c5OVk3YnUrODAyamJYbXVn
+M0M4VU1QNzBJcW80bW85d3hzZE5uc3JVR1A0MmdIeFEybVFCRE5uK3owdTNnM0s5eEpqZ3UzSmZZ
+RHU4U2VOeWhkS1plS2dvbnEzeko3RXZsZWFDZlNSS1dnUjRtd1ptVFRjMXRVRHVVTEc1NE1OaHhi
+dHg4TzZveWR4bHBPRDVKZDhpbTdNOGpPMjZlV1EyVTNURFRTNzVGa2R6bFVYWGhVMVUxT3F6cWpI
+L2RpTXZIN0dycUlKdUdMT3FxTU8xQWNqd0xxUlEyN2V6UjhxQ0x4ek52U1c3MUxYY1FlOUY2NkRW
+MWJCOEh3VFhlb2JzTm9rQ2c0alc2SEc0NzhvK3EyZWRvK2hmdCtiL0J3Y0pVRy9pdmY0RTAvMnlT
+S2t4TkowdHU1enRFMDZZMDArVk9Sb2x4d1ViWG1BM1ZpZDZ4dENkb3RkU0VMR1BUZkJpS0NwMFds
+WTlSQnBiSHJxdGZtK0FWNVpTWnl6cGg0cnJlM2hlNjh2VmtQUEZzSGNlUU1lL1Y0aHdxSDk4NXJX
+blZ2L0luNUE2ak1QeGpqK0VpZmovSm9SUG4wdnlkODFJVTFUSjZEOEhoRStPd2phUHhzaktQWi9T
+ZFdYL3ZkUDR2QnpUOD0mbHQ7L2RpYWdyYW0mZ3Q7Jmx0Oy9teGZpbGUmZ3Q7Ij48ZGVmcy8+PGc+
+PGVsbGlwc2UgY3g9IjE1MCIgY3k9IjQwIiByeD0iNjAiIHJ5PSI0MCIgZmlsbD0iI2RhZThmYyIg
+c3Ryb2tlPSIjNmM4ZWJmIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFu
+c2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0i
+bm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDov
+L3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZs
+b3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3Lncz
+Lm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2Fm
+ZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDExOHB4OyBo
+ZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6IDQwcHg7IG1hcmdpbi1sZWZ0OiA5MXB4OyI+PGRpdiBk
+YXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXpp
+bmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2
+IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1p
+bHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9p
+bnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9y
+bWFsOyI+SG9jaDxiciAvPnNwcmFjaGU8L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+
+PHRleHQgeD0iMTUwIiB5PSI0NCIgZmlsbD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVs
+dmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkhvY2guLi48L3Rl
+eHQ+PC9zd2l0Y2g+PC9nPjxlbGxpcHNlIGN4PSIxNTAiIGN5PSIyMDAiIHJ4PSI2MCIgcnk9IjQw
+IiBmaWxsPSIjZjhjZWNjIiBzdHJva2U9IiNiODU0NTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48
+ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dpdGNoPjxmb3JlaWduT2JqZWN0
+IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiByZXF1aXJl
+ZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxp
+dHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGlnbjogbGVmdDsiPjxkaXYgeG1s
+bnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OiBmbGV4OyBh
+bGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250ZW50OiB1bnNhZmUgY2VudGVy
+OyB3aWR0aDogMTE4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogMjAwcHg7IG1hcmdpbi1s
+ZWZ0OiA5MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7
+ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFs
+aWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6
+ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGlu
+ZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsg
+b3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+TmllZGVyPGJyIC8+c3ByYWNoZTwvZGl2PjwvZGl2Pjwv
+ZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIxNTAiIHk9IjIwNCIgZmlsbD0icmdiKDAsIDAs
+IDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRleHQtYW5jaG9y
+PSJtaWRkbGUiPk5pZWRlci4uLjwvdGV4dD48L3N3aXRjaD48L2c+PHBhdGggZD0iTSAyMDAgNzAg
+USAyNjAgMTIwIDIwNC43MyAxNjkuNzQiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDAp
+IiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBk
+PSJNIDIwMC44MyAxNzMuMjUgTCAyMDMuNjkgMTY1Ljk3IEwgMjA0LjczIDE2OS43NCBMIDIwOC4z
+OCAxNzEuMTcgWiIgZmlsbD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ry
+b2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHBhdGggZD0iTSAxMDAg
+MTc0IFEgNDAgMTI0IDk1LjI3IDc0LjI2IiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAw
+KSIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGgg
+ZD0iTSA5OS4xNyA3MC43NSBMIDk2LjMxIDc4LjAzIEwgOTUuMjcgNzQuMjYgTCA5MS42MiA3Mi44
+MyBaIiBmaWxsPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0
+ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48cGF0aCBkPSJNIDIwOS4wNCA0Ny41
+MiBRIDM3MCAxMiAxOTguNzkgMTEuNzMiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDAp
+IiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBk
+PSJNIDE5My41NCAxMS43MiBMIDIwMC41NSA4LjIzIEwgMTk4Ljc5IDExLjczIEwgMjAwLjU0IDE1
+LjIzIFoiIGZpbGw9InJnYigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1t
+aXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxwYXRoIGQ9Ik0gMjEwIDE5MiBR
+IDM3MSAyMjggMTk5LjM3IDIyOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0
+cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIvPjxwYXRoIGQ9Ik0g
+MTk0LjEyIDIyOCBMIDIwMS4xMiAyMjQuNSBMIDE5OS4zNyAyMjggTCAyMDEuMTIgMjMxLjUgWiIg
+ZmlsbD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tlLW1pdGVybGlt
+aXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHJlY3QgeD0iMjgwIiB5PSIyNSIgd2lkdGg9
+IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUiIHBvaW50ZXItZXZlbnRz
+PSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dpdGNoPjxmb3Jl
+aWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAl
+IiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4
+dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGlnbjogbGVmdDsi
+PjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5
+OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250ZW50OiB1bnNh
+ZmUgY2VudGVyOyB3aWR0aDogNThweDsgaGVpZ2h0OiAxcHg7IHBhZGRpbmctdG9wOiA0MHB4OyBt
+YXJnaW4tbGVmdDogMjgxcHg7Ij48ZGl2IGRhdGEtZHJhd2lvLWNvbG9ycz0iY29sb3I6IHJnYigw
+LCAwLCAwKTsgIiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9udC1zaXplOiAwcHg7
+IHRleHQtYWxpZ246IGNlbnRlcjsiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsg
+Zm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAs
+IDApOyBsaW5lLWhlaWdodDogMS4yOyBwb2ludGVyLWV2ZW50czogYWxsOyB3aGl0ZS1zcGFjZTog
+bm9ybWFsOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7Ij5UcmFuc3BpbGVyPC9kaXY+PC9kaXY+PC9k
+aXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjMxMCIgeT0iNDQiIGZpbGw9InJnYigwLCAwLCAw
+KSIgZm9udC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hvcj0i
+bWlkZGxlIj5UcmFuc3BpbGVyPC90ZXh0Pjwvc3dpdGNoPjwvZz48cmVjdCB4PSIyODAiIHk9IjE4
+NSIgd2lkdGg9IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUiIHBvaW50
+ZXItZXZlbnRzPSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dp
+dGNoPjxmb3JlaWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVp
+Z2h0PSIxMDAlIiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9m
+ZWF0dXJlI0V4dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGln
+bjogbGVmdDsiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxl
+PSJkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250
+ZW50OiB1bnNhZmUgY2VudGVyOyB3aWR0aDogNThweDsgaGVpZ2h0OiAxcHg7IHBhZGRpbmctdG9w
+OiAyMDBweDsgbWFyZ2luLWxlZnQ6IDI4MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNv
+bG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQt
+c2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxp
+bmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6
+IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hp
+dGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+UmVjb21waWxlcjwvZGl2
+PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIzMTAiIHk9IjIwNCIgZmlsbD0i
+cmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRl
+eHQtYW5jaG9yPSJtaWRkbGUiPlJlY29tcGlsZXI8L3RleHQ+PC9zd2l0Y2g+PC9nPjxyZWN0IHg9
+IjI0MCIgeT0iOTAiIHdpZHRoPSI2MCIgaGVpZ2h0PSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJu
+b25lIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAt
+MC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9
+IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcv
+VFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7
+IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3ho
+dG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1
+c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDU4cHg7IGhlaWdodDogMXB4OyBw
+YWRkaW5nLXRvcDogMTA1cHg7IG1hcmdpbi1sZWZ0OiAyNDFweDsiPjxkaXYgZGF0YS1kcmF3aW8t
+Y29sb3JzPSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXIt
+Ym94OyBmb250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0iZGlz
+cGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRp
+Y2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRz
+OiBhbGw7IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPkNvbXBp
+bGVyPC9kaXY+PC9kaXY+PC9kaXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjI3MCIgeT0iMTA5
+IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6ZT0i
+MTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Q29tcGlsZXI8L3RleHQ+PC9zd2l0Y2g+PC9nPjxy
+ZWN0IHg9IjAiIHk9IjkwIiB3aWR0aD0iNjAiIGhlaWdodD0iMzAiIGZpbGw9Im5vbmUiIHN0cm9r
+ZT0ibm9uZSIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0w
+LjUgLTAuNSkiPjxzd2l0Y2g+PGZvcmVpZ25PYmplY3QgcG9pbnRlci1ldmVudHM9Im5vbmUiIHdp
+ZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMu
+b3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSIgc3R5bGU9Im92ZXJmbG93OiB2aXNp
+YmxlOyB0ZXh0LWFsaWduOiBsZWZ0OyI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5
+OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiB1bnNhZmUgY2VudGVy
+OyBqdXN0aWZ5LWNvbnRlbnQ6IHVuc2FmZSBjZW50ZXI7IHdpZHRoOiA1OHB4OyBoZWlnaHQ6IDFw
+eDsgcGFkZGluZy10b3A6IDEwNXB4OyBtYXJnaW4tbGVmdDogMXB4OyI+PGRpdiBkYXRhLWRyYXdp
+by1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRl
+ci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJk
+aXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZl
+dGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVu
+dHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+RGVj
+b21waWxlcjwvZGl2PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIzMCIgeT0i
+MTA5IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6
+ZT0iMTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+RGVjb21waWxlcjwvdGV4dD48L3N3aXRjaD48
+L2c+PC9nPjxzd2l0Y2g+PGcgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIv
+U1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ii8+PGEgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCwt
+NSkiIHhsaW5rOmhyZWY9Imh0dHBzOi8vd3d3LmRyYXdpby5jb20vZG9jL2ZhcS9zdmctZXhwb3J0
+LXRleHQtcHJvYmxlbXMiIHRhcmdldD0iX2JsYW5rIj48dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxl
+IiBmb250LXNpemU9IjEwcHgiIHg9IjUwJSIgeT0iMTAwJSI+VGV4dCBpcyBub3QgU1ZHIC0gY2Fu
+bm90IGRpc3BsYXk8L3RleHQ+PC9hPjwvc3dpdGNoPjwvc3ZnPg==
+      </contents>
+    </upload>
+    <upload>
+      <timestamp>2023-09-08T14:41:45Z</timestamp>
+      <contributor>
+        <username>Imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment deleted="deleted" />
+      <filename>Compiler-abstraktion.svg</filename>
+      <archivename>20230908144149!Compiler-abstraktion.svg</archivename>
+      <src>https://localhost:4443/wiki-dir/images/archive/4/48/20230908144149%21Compiler-abstraktion.svg</src>
+      <size>8929</size>
+      <sha1base36>tq5oxsfvpj6z3antmi3wzza7q0ienos</sha1base36>
+      <rel>archive/4/48/20230908144149!Compiler-abstraktion.svg</rel>
+      <contents encoding="base64">PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRw
+Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIzNDFweCIgaGVp
+Z2h0PSIyNDFweCIgdmlld0JveD0iLTAuNSAtMC41IDM0MSAyNDEiIGNvbnRlbnQ9IiZsdDtteGZp
+bGUgaG9zdD0mcXVvdDtsb2NhbGhvc3QmcXVvdDsgbW9kaWZpZWQ9JnF1b3Q7MjAyMy0wOS0wOFQx
+NDo0MTo0NC40MDRaJnF1b3Q7IGFnZW50PSZxdW90O01vemlsbGEvNS4wIChNYWNpbnRvc2g7IElu
+dGVsIE1hYyBPUyBYIDEwXzE1XzcpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vj
+a28pIENocm9tZS8xMTYuMC4wLjAgU2FmYXJpLzUzNy4zNiZxdW90OyB2ZXJzaW9uPSZxdW90OzIx
+LjUuMCZxdW90OyBldGFnPSZxdW90O0ZTOHE5SmpFbm54UnBKV2ZYOW9YJnF1b3Q7IHR5cGU9JnF1
+b3Q7ZW1iZWQmcXVvdDsmZ3Q7Jmx0O2RpYWdyYW0gaWQ9JnF1b3Q7S2lLZnh1ZUVnZXJQNFJ1QkMw
+UzgmcXVvdDsgbmFtZT0mcXVvdDtQYWdlLTEmcXVvdDsmZ3Q7N1ZoTmI5c3dEUDAxdmhiK3JuTnNr
+MjY5YkNqV0FWdVBxc1RZd21RcmtKVW0yYThmSGNzZnN0TW1hSk1VV0h1SytFUlMwdU96VE1jSnB2
+bjZxeUtMN0p0a0lCemZaV3NubURtKzcwWGhCSDhxWkZNamNlelZRS280TTA0ZGNNLy9nZ0ZkZ3k0
+NWc5SnkxRklLelJjMlNHVlJBTlVXUnBTU0s5dHRMb1c5Nm9La01BTHVLUkZqOUJkbk9xdlJKSEk3
+L0JaNG1qVXJlNjZaeVVuamJJQXlJMHl1ZWxCdzR3UlRKYVd1Ui9sNkNxSWlyK0dsanZ2eXpHeTdN
+UVdGUGlUQXJ3T2VpRmlhczkxS21qbCtMREQ4K2xIaEtLMUc1VUlSbW9IWnRONDBUR0EySkIyTjYx
+WEdOZHd2Q0sxbVZsaDN4REtkQzdROEhNNjVFRk1wcE5yR0JZeEFNcWRWWXEza0grak54RFNCeHpu
+T21KMkIwckIrOW5SZXl4bUtEV1FPV20zUXBRbG9hRFk2QzQyNTZvcld1bVM5Z2lVR0kwWW5hWnU1
+b3hJSGhzM2R6QVlqWnI5ellLQk96KzA4b1VCM2N2dVlSQ0dLOUNUYyt1NFp5YjBja1R0aWp5N1ZF
+ekRERUJUc3FucnUwYVNDbENXbk5vTktMZ3UyOVhhMzNyaWQzMjBvR2c5OVk3YnUrODAyamJYbXVn
+M0M4VU1QNzBJcW80bW85d3hzZE5uc3JVR1A0MmdIeFEybVFCRE5uK3owdTNnM0s5eEpqZ3UzSmZZ
+RHU4U2VOeWhkS1plS2dvbnEzeko3RXZsZWFDZlNSS1dnUjRtd1ptVFRjMXRVRHVVTEc1NE1OaHhi
+dHg4TzZveWR4bHBPRDVKZDhpbTdNOGpPMjZlV1EyVTNURFRTNzVGa2R6bFVYWGhVMVUxT3F6cWpI
+L2RpTXZIN0dycUlKdUdMT3FxTU8xQWNqd0xxUlEyN2V6UjhxQ0x4ek52U1c3MUxYY1FlOUY2NkRW
+MWJCOEh3VFhlb2JzTm9rQ2c0alc2SEc0NzhvK3EyZWRvK2hmdCtiL0J3Y0pVRy9pdmY0RTAvMnlT
+S2t4TkowdHU1enRFMDZZMDArVk9Sb2x4d1ViWG1BM1ZpZDZ4dENkb3RkU0VMR1BUZkJpS0NwMFds
+WTlSQnBiSHJxdGZtK0FWNVpTWnl6cGg0cnJlM2hlNjh2VmtQUEZzSGNlUU1lL1Y0aHdxSDk4NXJX
+blZ2L0luNUE2ak1QeGpqK0VpZmovSm9SUG4wdnlkODFJVTFUSjZEOEhoRStPd2phUHhzaktQWi9T
+ZFdYL3ZkUDR2QnpUOD0mbHQ7L2RpYWdyYW0mZ3Q7Jmx0Oy9teGZpbGUmZ3Q7Ij48ZGVmcy8+PGc+
+PGVsbGlwc2UgY3g9IjE1MCIgY3k9IjQwIiByeD0iNjAiIHJ5PSI0MCIgZmlsbD0iI2RhZThmYyIg
+c3Ryb2tlPSIjNmM4ZWJmIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFu
+c2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0i
+bm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDov
+L3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZs
+b3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3Lncz
+Lm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2Fm
+ZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDExOHB4OyBo
+ZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6IDQwcHg7IG1hcmdpbi1sZWZ0OiA5MXB4OyI+PGRpdiBk
+YXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXpp
+bmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2
+IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1p
+bHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9p
+bnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9y
+bWFsOyI+SG9jaDxiciAvPnNwcmFjaGU8L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+
+PHRleHQgeD0iMTUwIiB5PSI0NCIgZmlsbD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVs
+dmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkhvY2guLi48L3Rl
+eHQ+PC9zd2l0Y2g+PC9nPjxlbGxpcHNlIGN4PSIxNTAiIGN5PSIyMDAiIHJ4PSI2MCIgcnk9IjQw
+IiBmaWxsPSIjZjhjZWNjIiBzdHJva2U9IiNiODU0NTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48
+ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dpdGNoPjxmb3JlaWduT2JqZWN0
+IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiByZXF1aXJl
+ZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxp
+dHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGlnbjogbGVmdDsiPjxkaXYgeG1s
+bnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OiBmbGV4OyBh
+bGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250ZW50OiB1bnNhZmUgY2VudGVy
+OyB3aWR0aDogMTE4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogMjAwcHg7IG1hcmdpbi1s
+ZWZ0OiA5MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7
+ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFs
+aWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6
+ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGlu
+ZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsg
+b3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+TmllZGVyPGJyIC8+c3ByYWNoZTwvZGl2PjwvZGl2Pjwv
+ZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIxNTAiIHk9IjIwNCIgZmlsbD0icmdiKDAsIDAs
+IDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRleHQtYW5jaG9y
+PSJtaWRkbGUiPk5pZWRlci4uLjwvdGV4dD48L3N3aXRjaD48L2c+PHBhdGggZD0iTSAyMDAgNzAg
+USAyNjAgMTIwIDIwNC43MyAxNjkuNzQiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDAp
+IiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBk
+PSJNIDIwMC44MyAxNzMuMjUgTCAyMDMuNjkgMTY1Ljk3IEwgMjA0LjczIDE2OS43NCBMIDIwOC4z
+OCAxNzEuMTcgWiIgZmlsbD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ry
+b2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHBhdGggZD0iTSAxMDAg
+MTc0IFEgNDAgMTI0IDk1LjI3IDc0LjI2IiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAw
+KSIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGgg
+ZD0iTSA5OS4xNyA3MC43NSBMIDk2LjMxIDc4LjAzIEwgOTUuMjcgNzQuMjYgTCA5MS42MiA3Mi44
+MyBaIiBmaWxsPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0
+ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48cGF0aCBkPSJNIDIwOS4wNCA0Ny41
+MiBRIDM3MCAxMiAxOTguNzkgMTEuNzMiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDAp
+IiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBk
+PSJNIDE5My41NCAxMS43MiBMIDIwMC41NSA4LjIzIEwgMTk4Ljc5IDExLjczIEwgMjAwLjU0IDE1
+LjIzIFoiIGZpbGw9InJnYigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1t
+aXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxwYXRoIGQ9Ik0gMjEwIDE5MiBR
+IDM3MSAyMjggMTk5LjM3IDIyOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0
+cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIvPjxwYXRoIGQ9Ik0g
+MTk0LjEyIDIyOCBMIDIwMS4xMiAyMjQuNSBMIDE5OS4zNyAyMjggTCAyMDEuMTIgMjMxLjUgWiIg
+ZmlsbD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tlLW1pdGVybGlt
+aXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHJlY3QgeD0iMjgwIiB5PSIyNSIgd2lkdGg9
+IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUiIHBvaW50ZXItZXZlbnRz
+PSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dpdGNoPjxmb3Jl
+aWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAl
+IiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4
+dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGlnbjogbGVmdDsi
+PjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5
+OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250ZW50OiB1bnNh
+ZmUgY2VudGVyOyB3aWR0aDogNThweDsgaGVpZ2h0OiAxcHg7IHBhZGRpbmctdG9wOiA0MHB4OyBt
+YXJnaW4tbGVmdDogMjgxcHg7Ij48ZGl2IGRhdGEtZHJhd2lvLWNvbG9ycz0iY29sb3I6IHJnYigw
+LCAwLCAwKTsgIiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9udC1zaXplOiAwcHg7
+IHRleHQtYWxpZ246IGNlbnRlcjsiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsg
+Zm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAs
+IDApOyBsaW5lLWhlaWdodDogMS4yOyBwb2ludGVyLWV2ZW50czogYWxsOyB3aGl0ZS1zcGFjZTog
+bm9ybWFsOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7Ij5UcmFuc3BpbGVyPC9kaXY+PC9kaXY+PC9k
+aXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjMxMCIgeT0iNDQiIGZpbGw9InJnYigwLCAwLCAw
+KSIgZm9udC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hvcj0i
+bWlkZGxlIj5UcmFuc3BpbGVyPC90ZXh0Pjwvc3dpdGNoPjwvZz48cmVjdCB4PSIyODAiIHk9IjE4
+NSIgd2lkdGg9IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUiIHBvaW50
+ZXItZXZlbnRzPSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dp
+dGNoPjxmb3JlaWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVp
+Z2h0PSIxMDAlIiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9m
+ZWF0dXJlI0V4dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGln
+bjogbGVmdDsiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxl
+PSJkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250
+ZW50OiB1bnNhZmUgY2VudGVyOyB3aWR0aDogNThweDsgaGVpZ2h0OiAxcHg7IHBhZGRpbmctdG9w
+OiAyMDBweDsgbWFyZ2luLWxlZnQ6IDI4MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNv
+bG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQt
+c2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxp
+bmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6
+IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hp
+dGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+UmVjb21waWxlcjwvZGl2
+PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIzMTAiIHk9IjIwNCIgZmlsbD0i
+cmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRl
+eHQtYW5jaG9yPSJtaWRkbGUiPlJlY29tcGlsZXI8L3RleHQ+PC9zd2l0Y2g+PC9nPjxyZWN0IHg9
+IjI0MCIgeT0iOTAiIHdpZHRoPSI2MCIgaGVpZ2h0PSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJu
+b25lIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAt
+MC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9
+IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcv
+VFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7
+IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3ho
+dG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1
+c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDU4cHg7IGhlaWdodDogMXB4OyBw
+YWRkaW5nLXRvcDogMTA1cHg7IG1hcmdpbi1sZWZ0OiAyNDFweDsiPjxkaXYgZGF0YS1kcmF3aW8t
+Y29sb3JzPSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXIt
+Ym94OyBmb250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0iZGlz
+cGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRp
+Y2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRz
+OiBhbGw7IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPkNvbXBp
+bGVyPC9kaXY+PC9kaXY+PC9kaXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjI3MCIgeT0iMTA5
+IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6ZT0i
+MTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Q29tcGlsZXI8L3RleHQ+PC9zd2l0Y2g+PC9nPjxy
+ZWN0IHg9IjAiIHk9IjkwIiB3aWR0aD0iNjAiIGhlaWdodD0iMzAiIGZpbGw9Im5vbmUiIHN0cm9r
+ZT0ibm9uZSIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0w
+LjUgLTAuNSkiPjxzd2l0Y2g+PGZvcmVpZ25PYmplY3QgcG9pbnRlci1ldmVudHM9Im5vbmUiIHdp
+ZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMu
+b3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSIgc3R5bGU9Im92ZXJmbG93OiB2aXNp
+YmxlOyB0ZXh0LWFsaWduOiBsZWZ0OyI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5
+OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiB1bnNhZmUgY2VudGVy
+OyBqdXN0aWZ5LWNvbnRlbnQ6IHVuc2FmZSBjZW50ZXI7IHdpZHRoOiA1OHB4OyBoZWlnaHQ6IDFw
+eDsgcGFkZGluZy10b3A6IDEwNXB4OyBtYXJnaW4tbGVmdDogMXB4OyI+PGRpdiBkYXRhLWRyYXdp
+by1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRl
+ci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJk
+aXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZl
+dGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVu
+dHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+RGVj
+b21waWxlcjwvZGl2PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIzMCIgeT0i
+MTA5IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6
+ZT0iMTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+RGVjb21waWxlcjwvdGV4dD48L3N3aXRjaD48
+L2c+PC9nPjxzd2l0Y2g+PGcgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIv
+U1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ii8+PGEgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCwt
+NSkiIHhsaW5rOmhyZWY9Imh0dHBzOi8vd3d3LmRyYXdpby5jb20vZG9jL2ZhcS9zdmctZXhwb3J0
+LXRleHQtcHJvYmxlbXMiIHRhcmdldD0iX2JsYW5rIj48dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxl
+IiBmb250LXNpemU9IjEwcHgiIHg9IjUwJSIgeT0iMTAwJSI+VGV4dCBpcyBub3QgU1ZHIC0gY2Fu
+bm90IGRpc3BsYXk8L3RleHQ+PC9hPjwvc3dpdGNoPjwvc3ZnPg==
+      </contents>
+    </upload>
+    <upload>
+      <timestamp>2023-09-08T14:41:45Z</timestamp>
+      <contributor>
+        <username>Imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment deleted="deleted" />
+      <filename>Compiler-abstraktion.svg</filename>
+      <archivename>20230908144149!Compiler-abstraktion.svg</archivename>
+      <src>https://localhost:4443/wiki-dir/images/archive/4/48/20230908144149%21Compiler-abstraktion.svg</src>
+      <size>8929</size>
+      <sha1base36>tq5oxsfvpj6z3antmi3wzza7q0ienos</sha1base36>
+      <rel>archive/4/48/20230908144149!Compiler-abstraktion.svg</rel>
+      <contents encoding="base64">PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRw
+Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIzNDFweCIgaGVp
+Z2h0PSIyNDFweCIgdmlld0JveD0iLTAuNSAtMC41IDM0MSAyNDEiIGNvbnRlbnQ9IiZsdDtteGZp
+bGUgaG9zdD0mcXVvdDtsb2NhbGhvc3QmcXVvdDsgbW9kaWZpZWQ9JnF1b3Q7MjAyMy0wOS0wOFQx
+NDo0MTo0NC40MDRaJnF1b3Q7IGFnZW50PSZxdW90O01vemlsbGEvNS4wIChNYWNpbnRvc2g7IElu
+dGVsIE1hYyBPUyBYIDEwXzE1XzcpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vj
+a28pIENocm9tZS8xMTYuMC4wLjAgU2FmYXJpLzUzNy4zNiZxdW90OyB2ZXJzaW9uPSZxdW90OzIx
+LjUuMCZxdW90OyBldGFnPSZxdW90O0ZTOHE5SmpFbm54UnBKV2ZYOW9YJnF1b3Q7IHR5cGU9JnF1
+b3Q7ZW1iZWQmcXVvdDsmZ3Q7Jmx0O2RpYWdyYW0gaWQ9JnF1b3Q7S2lLZnh1ZUVnZXJQNFJ1QkMw
+UzgmcXVvdDsgbmFtZT0mcXVvdDtQYWdlLTEmcXVvdDsmZ3Q7N1ZoTmI5c3dEUDAxdmhiK3JuTnNr
+MjY5YkNqV0FWdVBxc1RZd21RcmtKVW0yYThmSGNzZnN0TW1hSk1VV0h1SytFUlMwdU96VE1jSnB2
+bjZxeUtMN0p0a0lCemZaV3NubURtKzcwWGhCSDhxWkZNamNlelZRS280TTA0ZGNNLy9nZ0ZkZ3k0
+NWc5SnkxRklLelJjMlNHVlJBTlVXUnBTU0s5dHRMb1c5Nm9La01BTHVLUkZqOUJkbk9xdlJKSEk3
+L0JaNG1qVXJlNjZaeVVuamJJQXlJMHl1ZWxCdzR3UlRKYVd1Ui9sNkNxSWlyK0dsanZ2eXpHeTdN
+UVdGUGlUQXJ3T2VpRmlhczkxS21qbCtMREQ4K2xIaEtLMUc1VUlSbW9IWnRONDBUR0EySkIyTjYx
+WEdOZHd2Q0sxbVZsaDN4REtkQzdROEhNNjVFRk1wcE5yR0JZeEFNcWRWWXEza0grak54RFNCeHpu
+T21KMkIwckIrOW5SZXl4bUtEV1FPV20zUXBRbG9hRFk2QzQyNTZvcld1bVM5Z2lVR0kwWW5hWnU1
+b3hJSGhzM2R6QVlqWnI5ellLQk96KzA4b1VCM2N2dVlSQ0dLOUNUYyt1NFp5YjBja1R0aWp5N1ZF
+ekRERUJUc3FucnUwYVNDbENXbk5vTktMZ3UyOVhhMzNyaWQzMjBvR2c5OVk3YnUrODAyamJYbXVn
+M0M4VU1QNzBJcW80bW85d3hzZE5uc3JVR1A0MmdIeFEybVFCRE5uK3owdTNnM0s5eEpqZ3UzSmZZ
+RHU4U2VOeWhkS1plS2dvbnEzeko3RXZsZWFDZlNSS1dnUjRtd1ptVFRjMXRVRHVVTEc1NE1OaHhi
+dHg4TzZveWR4bHBPRDVKZDhpbTdNOGpPMjZlV1EyVTNURFRTNzVGa2R6bFVYWGhVMVUxT3F6cWpI
+L2RpTXZIN0dycUlKdUdMT3FxTU8xQWNqd0xxUlEyN2V6UjhxQ0x4ek52U1c3MUxYY1FlOUY2NkRW
+MWJCOEh3VFhlb2JzTm9rQ2c0alc2SEc0NzhvK3EyZWRvK2hmdCtiL0J3Y0pVRy9pdmY0RTAvMnlT
+S2t4TkowdHU1enRFMDZZMDArVk9Sb2x4d1ViWG1BM1ZpZDZ4dENkb3RkU0VMR1BUZkJpS0NwMFds
+WTlSQnBiSHJxdGZtK0FWNVpTWnl6cGg0cnJlM2hlNjh2VmtQUEZzSGNlUU1lL1Y0aHdxSDk4NXJX
+blZ2L0luNUE2ak1QeGpqK0VpZmovSm9SUG4wdnlkODFJVTFUSjZEOEhoRStPd2phUHhzaktQWi9T
+ZFdYL3ZkUDR2QnpUOD0mbHQ7L2RpYWdyYW0mZ3Q7Jmx0Oy9teGZpbGUmZ3Q7Ij48ZGVmcy8+PGc+
+PGVsbGlwc2UgY3g9IjE1MCIgY3k9IjQwIiByeD0iNjAiIHJ5PSI0MCIgZmlsbD0iI2RhZThmYyIg
+c3Ryb2tlPSIjNmM4ZWJmIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFu
+c2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0i
+bm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDov
+L3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZs
+b3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3Lncz
+Lm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2Fm
+ZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDExOHB4OyBo
+ZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6IDQwcHg7IG1hcmdpbi1sZWZ0OiA5MXB4OyI+PGRpdiBk
+YXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXpp
+bmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2
+IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1p
+bHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9p
+bnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9y
+bWFsOyI+SG9jaDxiciAvPnNwcmFjaGU8L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+
+PHRleHQgeD0iMTUwIiB5PSI0NCIgZmlsbD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVs
+dmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkhvY2guLi48L3Rl
+eHQ+PC9zd2l0Y2g+PC9nPjxlbGxpcHNlIGN4PSIxNTAiIGN5PSIyMDAiIHJ4PSI2MCIgcnk9IjQw
+IiBmaWxsPSIjZjhjZWNjIiBzdHJva2U9IiNiODU0NTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48
+ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dpdGNoPjxmb3JlaWduT2JqZWN0
+IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiByZXF1aXJl
+ZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxp
+dHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGlnbjogbGVmdDsiPjxkaXYgeG1s
+bnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OiBmbGV4OyBh
+bGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250ZW50OiB1bnNhZmUgY2VudGVy
+OyB3aWR0aDogMTE4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogMjAwcHg7IG1hcmdpbi1s
+ZWZ0OiA5MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7
+ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFs
+aWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6
+ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGlu
+ZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsg
+b3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+TmllZGVyPGJyIC8+c3ByYWNoZTwvZGl2PjwvZGl2Pjwv
+ZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIxNTAiIHk9IjIwNCIgZmlsbD0icmdiKDAsIDAs
+IDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRleHQtYW5jaG9y
+PSJtaWRkbGUiPk5pZWRlci4uLjwvdGV4dD48L3N3aXRjaD48L2c+PHBhdGggZD0iTSAyMDAgNzAg
+USAyNjAgMTIwIDIwNC43MyAxNjkuNzQiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDAp
+IiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBk
+PSJNIDIwMC44MyAxNzMuMjUgTCAyMDMuNjkgMTY1Ljk3IEwgMjA0LjczIDE2OS43NCBMIDIwOC4z
+OCAxNzEuMTcgWiIgZmlsbD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ry
+b2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHBhdGggZD0iTSAxMDAg
+MTc0IFEgNDAgMTI0IDk1LjI3IDc0LjI2IiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAw
+KSIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGgg
+ZD0iTSA5OS4xNyA3MC43NSBMIDk2LjMxIDc4LjAzIEwgOTUuMjcgNzQuMjYgTCA5MS42MiA3Mi44
+MyBaIiBmaWxsPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0
+ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48cGF0aCBkPSJNIDIwOS4wNCA0Ny41
+MiBRIDM3MCAxMiAxOTguNzkgMTEuNzMiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDAp
+IiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBk
+PSJNIDE5My41NCAxMS43MiBMIDIwMC41NSA4LjIzIEwgMTk4Ljc5IDExLjczIEwgMjAwLjU0IDE1
+LjIzIFoiIGZpbGw9InJnYigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1t
+aXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxwYXRoIGQ9Ik0gMjEwIDE5MiBR
+IDM3MSAyMjggMTk5LjM3IDIyOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0
+cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIvPjxwYXRoIGQ9Ik0g
+MTk0LjEyIDIyOCBMIDIwMS4xMiAyMjQuNSBMIDE5OS4zNyAyMjggTCAyMDEuMTIgMjMxLjUgWiIg
+ZmlsbD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tlLW1pdGVybGlt
+aXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHJlY3QgeD0iMjgwIiB5PSIyNSIgd2lkdGg9
+IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUiIHBvaW50ZXItZXZlbnRz
+PSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dpdGNoPjxmb3Jl
+aWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAl
+IiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4
+dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGlnbjogbGVmdDsi
+PjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5
+OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250ZW50OiB1bnNh
+ZmUgY2VudGVyOyB3aWR0aDogNThweDsgaGVpZ2h0OiAxcHg7IHBhZGRpbmctdG9wOiA0MHB4OyBt
+YXJnaW4tbGVmdDogMjgxcHg7Ij48ZGl2IGRhdGEtZHJhd2lvLWNvbG9ycz0iY29sb3I6IHJnYigw
+LCAwLCAwKTsgIiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9udC1zaXplOiAwcHg7
+IHRleHQtYWxpZ246IGNlbnRlcjsiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsg
+Zm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAs
+IDApOyBsaW5lLWhlaWdodDogMS4yOyBwb2ludGVyLWV2ZW50czogYWxsOyB3aGl0ZS1zcGFjZTog
+bm9ybWFsOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7Ij5UcmFuc3BpbGVyPC9kaXY+PC9kaXY+PC9k
+aXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjMxMCIgeT0iNDQiIGZpbGw9InJnYigwLCAwLCAw
+KSIgZm9udC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hvcj0i
+bWlkZGxlIj5UcmFuc3BpbGVyPC90ZXh0Pjwvc3dpdGNoPjwvZz48cmVjdCB4PSIyODAiIHk9IjE4
+NSIgd2lkdGg9IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUiIHBvaW50
+ZXItZXZlbnRzPSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dp
+dGNoPjxmb3JlaWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVp
+Z2h0PSIxMDAlIiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9m
+ZWF0dXJlI0V4dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGln
+bjogbGVmdDsiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxl
+PSJkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250
+ZW50OiB1bnNhZmUgY2VudGVyOyB3aWR0aDogNThweDsgaGVpZ2h0OiAxcHg7IHBhZGRpbmctdG9w
+OiAyMDBweDsgbWFyZ2luLWxlZnQ6IDI4MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNv
+bG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQt
+c2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxp
+bmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6
+IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hp
+dGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+UmVjb21waWxlcjwvZGl2
+PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIzMTAiIHk9IjIwNCIgZmlsbD0i
+cmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRl
+eHQtYW5jaG9yPSJtaWRkbGUiPlJlY29tcGlsZXI8L3RleHQ+PC9zd2l0Y2g+PC9nPjxyZWN0IHg9
+IjI0MCIgeT0iOTAiIHdpZHRoPSI2MCIgaGVpZ2h0PSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJu
+b25lIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAt
+MC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9
+IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcv
+VFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7
+IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3ho
+dG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1
+c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDU4cHg7IGhlaWdodDogMXB4OyBw
+YWRkaW5nLXRvcDogMTA1cHg7IG1hcmdpbi1sZWZ0OiAyNDFweDsiPjxkaXYgZGF0YS1kcmF3aW8t
+Y29sb3JzPSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXIt
+Ym94OyBmb250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0iZGlz
+cGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRp
+Y2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRz
+OiBhbGw7IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPkNvbXBp
+bGVyPC9kaXY+PC9kaXY+PC9kaXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjI3MCIgeT0iMTA5
+IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6ZT0i
+MTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Q29tcGlsZXI8L3RleHQ+PC9zd2l0Y2g+PC9nPjxy
+ZWN0IHg9IjAiIHk9IjkwIiB3aWR0aD0iNjAiIGhlaWdodD0iMzAiIGZpbGw9Im5vbmUiIHN0cm9r
+ZT0ibm9uZSIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0w
+LjUgLTAuNSkiPjxzd2l0Y2g+PGZvcmVpZ25PYmplY3QgcG9pbnRlci1ldmVudHM9Im5vbmUiIHdp
+ZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMu
+b3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSIgc3R5bGU9Im92ZXJmbG93OiB2aXNp
+YmxlOyB0ZXh0LWFsaWduOiBsZWZ0OyI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5
+OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiB1bnNhZmUgY2VudGVy
+OyBqdXN0aWZ5LWNvbnRlbnQ6IHVuc2FmZSBjZW50ZXI7IHdpZHRoOiA1OHB4OyBoZWlnaHQ6IDFw
+eDsgcGFkZGluZy10b3A6IDEwNXB4OyBtYXJnaW4tbGVmdDogMXB4OyI+PGRpdiBkYXRhLWRyYXdp
+by1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRl
+ci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJk
+aXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZl
+dGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVu
+dHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+RGVj
+b21waWxlcjwvZGl2PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIzMCIgeT0i
+MTA5IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6
+ZT0iMTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+RGVjb21waWxlcjwvdGV4dD48L3N3aXRjaD48
+L2c+PC9nPjxzd2l0Y2g+PGcgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIv
+U1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ii8+PGEgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCwt
+NSkiIHhsaW5rOmhyZWY9Imh0dHBzOi8vd3d3LmRyYXdpby5jb20vZG9jL2ZhcS9zdmctZXhwb3J0
+LXRleHQtcHJvYmxlbXMiIHRhcmdldD0iX2JsYW5rIj48dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxl
+IiBmb250LXNpemU9IjEwcHgiIHg9IjUwJSIgeT0iMTAwJSI+VGV4dCBpcyBub3QgU1ZHIC0gY2Fu
+bm90IGRpc3BsYXk8L3RleHQ+PC9hPjwvc3dpdGNoPjwvc3ZnPg==
+      </contents>
+    </upload>
+    <upload>
+      <timestamp>2023-09-08T14:41:45Z</timestamp>
+      <contributor>
+        <username>Imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment deleted="deleted" />
+      <filename>Compiler-abstraktion.svg</filename>
+      <archivename>20230908144149!Compiler-abstraktion.svg</archivename>
+      <src>https://localhost:4443/wiki-dir/images/archive/4/48/20230908144149%21Compiler-abstraktion.svg</src>
+      <size>8929</size>
+      <sha1base36>tq5oxsfvpj6z3antmi3wzza7q0ienos</sha1base36>
+      <rel>archive/4/48/20230908144149!Compiler-abstraktion.svg</rel>
+      <contents encoding="base64">PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRw
+Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIzNDFweCIgaGVp
+Z2h0PSIyNDFweCIgdmlld0JveD0iLTAuNSAtMC41IDM0MSAyNDEiIGNvbnRlbnQ9IiZsdDtteGZp
+bGUgaG9zdD0mcXVvdDtsb2NhbGhvc3QmcXVvdDsgbW9kaWZpZWQ9JnF1b3Q7MjAyMy0wOS0wOFQx
+NDo0MTo0NC40MDRaJnF1b3Q7IGFnZW50PSZxdW90O01vemlsbGEvNS4wIChNYWNpbnRvc2g7IElu
+dGVsIE1hYyBPUyBYIDEwXzE1XzcpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vj
+a28pIENocm9tZS8xMTYuMC4wLjAgU2FmYXJpLzUzNy4zNiZxdW90OyB2ZXJzaW9uPSZxdW90OzIx
+LjUuMCZxdW90OyBldGFnPSZxdW90O0ZTOHE5SmpFbm54UnBKV2ZYOW9YJnF1b3Q7IHR5cGU9JnF1
+b3Q7ZW1iZWQmcXVvdDsmZ3Q7Jmx0O2RpYWdyYW0gaWQ9JnF1b3Q7S2lLZnh1ZUVnZXJQNFJ1QkMw
+UzgmcXVvdDsgbmFtZT0mcXVvdDtQYWdlLTEmcXVvdDsmZ3Q7N1ZoTmI5c3dEUDAxdmhiK3JuTnNr
+MjY5YkNqV0FWdVBxc1RZd21RcmtKVW0yYThmSGNzZnN0TW1hSk1VV0h1SytFUlMwdU96VE1jSnB2
+bjZxeUtMN0p0a0lCemZaV3NubURtKzcwWGhCSDhxWkZNamNlelZRS280TTA0ZGNNLy9nZ0ZkZ3k0
+NWc5SnkxRklLelJjMlNHVlJBTlVXUnBTU0s5dHRMb1c5Nm9La01BTHVLUkZqOUJkbk9xdlJKSEk3
+L0JaNG1qVXJlNjZaeVVuamJJQXlJMHl1ZWxCdzR3UlRKYVd1Ui9sNkNxSWlyK0dsanZ2eXpHeTdN
+UVdGUGlUQXJ3T2VpRmlhczkxS21qbCtMREQ4K2xIaEtLMUc1VUlSbW9IWnRONDBUR0EySkIyTjYx
+WEdOZHd2Q0sxbVZsaDN4REtkQzdROEhNNjVFRk1wcE5yR0JZeEFNcWRWWXEza0grak54RFNCeHpu
+T21KMkIwckIrOW5SZXl4bUtEV1FPV20zUXBRbG9hRFk2QzQyNTZvcld1bVM5Z2lVR0kwWW5hWnU1
+b3hJSGhzM2R6QVlqWnI5ellLQk96KzA4b1VCM2N2dVlSQ0dLOUNUYyt1NFp5YjBja1R0aWp5N1ZF
+ekRERUJUc3FucnUwYVNDbENXbk5vTktMZ3UyOVhhMzNyaWQzMjBvR2c5OVk3YnUrODAyamJYbXVn
+M0M4VU1QNzBJcW80bW85d3hzZE5uc3JVR1A0MmdIeFEybVFCRE5uK3owdTNnM0s5eEpqZ3UzSmZZ
+RHU4U2VOeWhkS1plS2dvbnEzeko3RXZsZWFDZlNSS1dnUjRtd1ptVFRjMXRVRHVVTEc1NE1OaHhi
+dHg4TzZveWR4bHBPRDVKZDhpbTdNOGpPMjZlV1EyVTNURFRTNzVGa2R6bFVYWGhVMVUxT3F6cWpI
+L2RpTXZIN0dycUlKdUdMT3FxTU8xQWNqd0xxUlEyN2V6UjhxQ0x4ek52U1c3MUxYY1FlOUY2NkRW
+MWJCOEh3VFhlb2JzTm9rQ2c0alc2SEc0NzhvK3EyZWRvK2hmdCtiL0J3Y0pVRy9pdmY0RTAvMnlT
+S2t4TkowdHU1enRFMDZZMDArVk9Sb2x4d1ViWG1BM1ZpZDZ4dENkb3RkU0VMR1BUZkJpS0NwMFds
+WTlSQnBiSHJxdGZtK0FWNVpTWnl6cGg0cnJlM2hlNjh2VmtQUEZzSGNlUU1lL1Y0aHdxSDk4NXJX
+blZ2L0luNUE2ak1QeGpqK0VpZmovSm9SUG4wdnlkODFJVTFUSjZEOEhoRStPd2phUHhzaktQWi9T
+ZFdYL3ZkUDR2QnpUOD0mbHQ7L2RpYWdyYW0mZ3Q7Jmx0Oy9teGZpbGUmZ3Q7Ij48ZGVmcy8+PGc+
+PGVsbGlwc2UgY3g9IjE1MCIgY3k9IjQwIiByeD0iNjAiIHJ5PSI0MCIgZmlsbD0iI2RhZThmYyIg
+c3Ryb2tlPSIjNmM4ZWJmIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFu
+c2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0i
+bm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDov
+L3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZs
+b3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3Lncz
+Lm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2Fm
+ZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDExOHB4OyBo
+ZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6IDQwcHg7IG1hcmdpbi1sZWZ0OiA5MXB4OyI+PGRpdiBk
+YXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXpp
+bmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2
+IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1p
+bHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9p
+bnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9y
+bWFsOyI+SG9jaDxiciAvPnNwcmFjaGU8L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+
+PHRleHQgeD0iMTUwIiB5PSI0NCIgZmlsbD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVs
+dmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkhvY2guLi48L3Rl
+eHQ+PC9zd2l0Y2g+PC9nPjxlbGxpcHNlIGN4PSIxNTAiIGN5PSIyMDAiIHJ4PSI2MCIgcnk9IjQw
+IiBmaWxsPSIjZjhjZWNjIiBzdHJva2U9IiNiODU0NTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48
+ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dpdGNoPjxmb3JlaWduT2JqZWN0
+IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiByZXF1aXJl
+ZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxp
+dHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGlnbjogbGVmdDsiPjxkaXYgeG1s
+bnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OiBmbGV4OyBh
+bGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250ZW50OiB1bnNhZmUgY2VudGVy
+OyB3aWR0aDogMTE4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogMjAwcHg7IG1hcmdpbi1s
+ZWZ0OiA5MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7
+ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFs
+aWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6
+ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGlu
+ZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsg
+b3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+TmllZGVyPGJyIC8+c3ByYWNoZTwvZGl2PjwvZGl2Pjwv
+ZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIxNTAiIHk9IjIwNCIgZmlsbD0icmdiKDAsIDAs
+IDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRleHQtYW5jaG9y
+PSJtaWRkbGUiPk5pZWRlci4uLjwvdGV4dD48L3N3aXRjaD48L2c+PHBhdGggZD0iTSAyMDAgNzAg
+USAyNjAgMTIwIDIwNC43MyAxNjkuNzQiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDAp
+IiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBk
+PSJNIDIwMC44MyAxNzMuMjUgTCAyMDMuNjkgMTY1Ljk3IEwgMjA0LjczIDE2OS43NCBMIDIwOC4z
+OCAxNzEuMTcgWiIgZmlsbD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ry
+b2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHBhdGggZD0iTSAxMDAg
+MTc0IFEgNDAgMTI0IDk1LjI3IDc0LjI2IiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAw
+KSIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGgg
+ZD0iTSA5OS4xNyA3MC43NSBMIDk2LjMxIDc4LjAzIEwgOTUuMjcgNzQuMjYgTCA5MS42MiA3Mi44
+MyBaIiBmaWxsPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0
+ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48cGF0aCBkPSJNIDIwOS4wNCA0Ny41
+MiBRIDM3MCAxMiAxOTguNzkgMTEuNzMiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDAp
+IiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBk
+PSJNIDE5My41NCAxMS43MiBMIDIwMC41NSA4LjIzIEwgMTk4Ljc5IDExLjczIEwgMjAwLjU0IDE1
+LjIzIFoiIGZpbGw9InJnYigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1t
+aXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxwYXRoIGQ9Ik0gMjEwIDE5MiBR
+IDM3MSAyMjggMTk5LjM3IDIyOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0
+cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIvPjxwYXRoIGQ9Ik0g
+MTk0LjEyIDIyOCBMIDIwMS4xMiAyMjQuNSBMIDE5OS4zNyAyMjggTCAyMDEuMTIgMjMxLjUgWiIg
+ZmlsbD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tlLW1pdGVybGlt
+aXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHJlY3QgeD0iMjgwIiB5PSIyNSIgd2lkdGg9
+IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUiIHBvaW50ZXItZXZlbnRz
+PSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dpdGNoPjxmb3Jl
+aWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAl
+IiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4
+dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGlnbjogbGVmdDsi
+PjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5
+OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250ZW50OiB1bnNh
+ZmUgY2VudGVyOyB3aWR0aDogNThweDsgaGVpZ2h0OiAxcHg7IHBhZGRpbmctdG9wOiA0MHB4OyBt
+YXJnaW4tbGVmdDogMjgxcHg7Ij48ZGl2IGRhdGEtZHJhd2lvLWNvbG9ycz0iY29sb3I6IHJnYigw
+LCAwLCAwKTsgIiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9udC1zaXplOiAwcHg7
+IHRleHQtYWxpZ246IGNlbnRlcjsiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsg
+Zm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAs
+IDApOyBsaW5lLWhlaWdodDogMS4yOyBwb2ludGVyLWV2ZW50czogYWxsOyB3aGl0ZS1zcGFjZTog
+bm9ybWFsOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7Ij5UcmFuc3BpbGVyPC9kaXY+PC9kaXY+PC9k
+aXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjMxMCIgeT0iNDQiIGZpbGw9InJnYigwLCAwLCAw
+KSIgZm9udC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hvcj0i
+bWlkZGxlIj5UcmFuc3BpbGVyPC90ZXh0Pjwvc3dpdGNoPjwvZz48cmVjdCB4PSIyODAiIHk9IjE4
+NSIgd2lkdGg9IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUiIHBvaW50
+ZXItZXZlbnRzPSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dp
+dGNoPjxmb3JlaWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVp
+Z2h0PSIxMDAlIiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9m
+ZWF0dXJlI0V4dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGln
+bjogbGVmdDsiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxl
+PSJkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250
+ZW50OiB1bnNhZmUgY2VudGVyOyB3aWR0aDogNThweDsgaGVpZ2h0OiAxcHg7IHBhZGRpbmctdG9w
+OiAyMDBweDsgbWFyZ2luLWxlZnQ6IDI4MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNv
+bG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQt
+c2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxp
+bmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6
+IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hp
+dGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+UmVjb21waWxlcjwvZGl2
+PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIzMTAiIHk9IjIwNCIgZmlsbD0i
+cmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRl
+eHQtYW5jaG9yPSJtaWRkbGUiPlJlY29tcGlsZXI8L3RleHQ+PC9zd2l0Y2g+PC9nPjxyZWN0IHg9
+IjI0MCIgeT0iOTAiIHdpZHRoPSI2MCIgaGVpZ2h0PSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJu
+b25lIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAt
+MC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9
+IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcv
+VFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7
+IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3ho
+dG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1
+c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDU4cHg7IGhlaWdodDogMXB4OyBw
+YWRkaW5nLXRvcDogMTA1cHg7IG1hcmdpbi1sZWZ0OiAyNDFweDsiPjxkaXYgZGF0YS1kcmF3aW8t
+Y29sb3JzPSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXIt
+Ym94OyBmb250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0iZGlz
+cGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRp
+Y2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRz
+OiBhbGw7IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPkNvbXBp
+bGVyPC9kaXY+PC9kaXY+PC9kaXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjI3MCIgeT0iMTA5
+IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6ZT0i
+MTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Q29tcGlsZXI8L3RleHQ+PC9zd2l0Y2g+PC9nPjxy
+ZWN0IHg9IjAiIHk9IjkwIiB3aWR0aD0iNjAiIGhlaWdodD0iMzAiIGZpbGw9Im5vbmUiIHN0cm9r
+ZT0ibm9uZSIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0w
+LjUgLTAuNSkiPjxzd2l0Y2g+PGZvcmVpZ25PYmplY3QgcG9pbnRlci1ldmVudHM9Im5vbmUiIHdp
+ZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMu
+b3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSIgc3R5bGU9Im92ZXJmbG93OiB2aXNp
+YmxlOyB0ZXh0LWFsaWduOiBsZWZ0OyI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5
+OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiB1bnNhZmUgY2VudGVy
+OyBqdXN0aWZ5LWNvbnRlbnQ6IHVuc2FmZSBjZW50ZXI7IHdpZHRoOiA1OHB4OyBoZWlnaHQ6IDFw
+eDsgcGFkZGluZy10b3A6IDEwNXB4OyBtYXJnaW4tbGVmdDogMXB4OyI+PGRpdiBkYXRhLWRyYXdp
+by1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRl
+ci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJk
+aXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZl
+dGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVu
+dHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+RGVj
+b21waWxlcjwvZGl2PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIzMCIgeT0i
+MTA5IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6
+ZT0iMTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+RGVjb21waWxlcjwvdGV4dD48L3N3aXRjaD48
+L2c+PC9nPjxzd2l0Y2g+PGcgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIv
+U1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ii8+PGEgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCwt
+NSkiIHhsaW5rOmhyZWY9Imh0dHBzOi8vd3d3LmRyYXdpby5jb20vZG9jL2ZhcS9zdmctZXhwb3J0
+LXRleHQtcHJvYmxlbXMiIHRhcmdldD0iX2JsYW5rIj48dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxl
+IiBmb250LXNpemU9IjEwcHgiIHg9IjUwJSIgeT0iMTAwJSI+VGV4dCBpcyBub3QgU1ZHIC0gY2Fu
+bm90IGRpc3BsYXk8L3RleHQ+PC9hPjwvc3dpdGNoPjwvc3ZnPg==
       </contents>
     </upload>
     <upload>
@@ -3618,14 +5018,14 @@ bm90IGRpc3BsYXk8L3RleHQ+PC9hPjwvc3dpdGNoPjwvc3ZnPg==
     <ns>12</ns>
     <id>63</id>
     <revision>
-      <id>66</id>
+      <id>68</id>
       <timestamp>2023-09-12T10:20:46Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
       <comment>/* Hier */</comment>
-      <origin>66</origin>
+      <origin>68</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="112" sha1="skefc40nn028itooiikdf4naq1d5zkd" xml:space="preserve">
@@ -3643,13 +5043,13 @@ bm90IGRpc3BsYXk8L3RleHQ+PC9hPjwvc3dpdGNoPjwvc3ZnPg==
     <ns>0</ns>
     <id>64</id>
     <revision>
-      <id>67</id>
+      <id>69</id>
       <timestamp>2023-09-13T15:58:04Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
-      <origin>67</origin>
+      <origin>69</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="348" sha1="4qwvkworr5ft4crn9tkktg0syzzx13z" xml:space="preserve">
@@ -3701,13 +5101,13 @@ Eine Turing Maschine ist
     <ns>12</ns>
     <id>65</id>
     <revision>
-      <id>68</id>
+      <id>70</id>
       <timestamp>2023-09-13T19:15:37Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
-      <origin>68</origin>
+      <origin>70</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="762" sha1="pu124m0znkgjxkzlmc2juuddygnxew5" xml:space="preserve">__HIDEHEAD__
@@ -3739,14 +5139,14 @@ two parts.</text>
     <ns>12</ns>
     <id>66</id>
     <revision>
-      <id>69</id>
+      <id>71</id>
       <timestamp>2023-09-14T16:25:32Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
       <comment>Created page with "  == Dante Tree ==  * A shift-click on to a Category link opens the category window as seperate popup window in small size and on the left of the screen. This proved helpful for quick deploy of a category window as an overview."</comment>
-      <origin>69</origin>
+      <origin>71</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="227" sha1="o0z473oro5adw6m9i6i1ipnkhm5a77m" xml:space="preserve">
@@ -3763,13 +5163,13 @@ popup window in small size and on the left of the screen. This proved helpful fo
     <ns>0</ns>
     <id>67</id>
     <revision>
-      <id>70</id>
+      <id>72</id>
       <timestamp>2023-09-15T20:54:35Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
-      <origin>70</origin>
+      <origin>72</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="136" sha1="nhlmneglg4fowz3ilg0e3dv96shn883" xml:space="preserve">
@@ -3791,13 +5191,13 @@ This is main text again.
     <ns>0</ns>
     <id>68</id>
     <revision>
-      <id>71</id>
+      <id>73</id>
       <timestamp>2023-09-15T21:22:28Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
-      <origin>71</origin>
+      <origin>73</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="42" sha1="3au7vn8yndv7oj60atbzl2u5zn4f5y8" xml:space="preserve">
@@ -3807,6 +5207,168 @@ Das &lt; ist ein &amp;lt;
 
 [[Category:backup]]</text>
       <sha1>3au7vn8yndv7oj60atbzl2u5zn4f5y8</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Wiki for Hot Development:General disclaimer</title>
+    <ns>4</ns>
+    <id>69</id>
+    <revision>
+      <id>76</id>
+      <parentid>75</parentid>
+      <timestamp>2023-10-29T01:03:04Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <comment>Blanked the page</comment>
+      <origin>76</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
+      <sha1>phoiac9h4m842xq45sp7s6u21eteeq1</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Disclaimerpage</title>
+    <ns>8</ns>
+    <id>70</id>
+    <revision>
+      <id>78</id>
+      <parentid>77</parentid>
+      <timestamp>2023-10-29T01:08:53Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <comment>Blanked the page</comment>
+      <origin>78</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
+      <sha1>phoiac9h4m842xq45sp7s6u21eteeq1</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWikiDisclaimerpage</title>
+    <ns>0</ns>
+    <id>71</id>
+    <revision>
+      <id>80</id>
+      <timestamp>2023-10-29T16:17:53Z</timestamp>
+      <contributor>
+        <username>Maintenance script</username>
+        <id>3</id>
+      </contributor>
+      <comment>Imported by wiki-init.sh</comment>
+      <origin>80</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
+      <sha1>phoiac9h4m842xq45sp7s6u21eteeq1</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWikiPrivacypage</title>
+    <ns>0</ns>
+    <id>72</id>
+    <revision>
+      <id>81</id>
+      <timestamp>2023-10-29T16:17:55Z</timestamp>
+      <contributor>
+        <username>Maintenance script</username>
+        <id>3</id>
+      </contributor>
+      <comment>Imported by wiki-init.sh</comment>
+      <origin>81</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
+      <sha1>phoiac9h4m842xq45sp7s6u21eteeq1</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Vorlesung</title>
+    <ns>0</ns>
+    <id>73</id>
+    <revision>
+      <id>84</id>
+      <parentid>83</parentid>
+      <timestamp>2023-10-29T21:35:32Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <origin>84</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="60" sha1="06pi06ei8kv0fm4hnwzar1u9ixwnl6p" xml:space="preserve">
+
+Das ist eine sehr schöne Vorlesung, die mir gut gefällt.</text>
+      <sha1>06pi06ei8kv0fm4hnwzar1u9ixwnl6p</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Main \Pag</title>
+    <ns>0</ns>
+    <id>74</id>
+    <revision>
+      <id>103</id>
+      <timestamp>2023-10-31T15:27:34Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "asd"</comment>
+      <origin>103</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="3" sha1="s5op7ycvjd36f7zhqh7velbpukh6l5c" xml:space="preserve">asd</text>
+      <sha1>s5op7ycvjd36f7zhqh7velbpukh6l5c</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:CategoryTree</title>
+    <ns>8</ns>
+    <id>75</id>
+    <revision>
+      <id>121</id>
+      <parentid>120</parentid>
+      <timestamp>2023-11-01T13:37:07Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <origin>121</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="156" sha1="0p8my7xtncb8m9zaf9spahk0tfsmrko" xml:space="preserve">
+== Compiler ==
+&lt;categorytree mode="all" showcount="on"&gt;Compiler&lt;/categorytree&gt;
+
+
+== System ==
+&lt;categorytree mode="all" showcount="on"&gt;System&lt;/categorytree&gt;</text>
+      <sha1>0p8my7xtncb8m9zaf9spahk0tfsmrko</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:CategoryCloud</title>
+    <ns>8</ns>
+    <id>76</id>
+    <revision>
+      <id>122</id>
+      <timestamp>2023-11-01T13:41:01Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "&lt;tagcloud&gt;exclude=television,television_series,celebrities,food,yoga&lt;/tagcloud&gt;"</comment>
+      <origin>122</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="79" sha1="bfssza87vjretanqf02vjg3aw9hm5pg" xml:space="preserve">&lt;tagcloud&gt;exclude=television,television_series,celebrities,food,yoga&lt;/tagcloud&gt;</text>
+      <sha1>bfssza87vjretanqf02vjg3aw9hm5pg</sha1>
     </revision>
   </page>
 </mediawiki>

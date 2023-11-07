@@ -198,6 +198,9 @@ composerInstall () {
   installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-NativeSvgHandler               NativeSvgHandler  REL1_39
 
 
+ installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-UniversalLanguageSelector       UniversalLanguageSelector  REL1_39
+
+
 
 #  installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-DrawioEditor                   DrawioEditor REL1_39
 # This extension is broken currently

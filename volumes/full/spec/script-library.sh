@@ -88,11 +88,16 @@ copyInMinimal () { # copy in minimal initial contents from here to template volu
   local TARGET=$1
   printf "\n*** Copying in minimal initial contents"
     mkdir -p ${TOP_DIR}/volumes/full/content/${TARGET}/assets
-    cp ${TOP_DIR}/assets/initial-contents/minimal-initial-contents.xml  ${TOP_DIR}/volumes/full/content/${TARGET}/assets/minimal-initial-contents.xml
-    cp "${TOP_DIR}/assets/initial-contents/Main Page" "${TOP_DIR}/volumes/full/content/${TARGET}/assets/Main Page"
-    cp "${TOP_DIR}/assets/initial-contents/Privacypage" "${TOP_DIR}/volumes/full/content/${TARGET}/assets/Privacypage"
-    cp "${TOP_DIR}/assets/initial-contents/Disclaimerpage" "${TOP_DIR}/volumes/full/content/${TARGET}/assets/Disclaimerpage"
-    cp "${TOP_DIR}/assets/initial-contents/Sidebar" "${TOP_DIR}/volumes/full/content/${TARGET}/assets/Sidebar"
+
+#    cp ${TOP_DIR}/assets/initial-contents/minimal-initial-contents.xml  ${TOP_DIR}/volumes/full/content/${TARGET}/assets/minimal-initial-contents.xml
+#    cp "${TOP_DIR}/assets/initial-contents/Main Page" "${TOP_DIR}/volumes/full/content/${TARGET}/assets/Main Page"
+#    cp "${TOP_DIR}/assets/initial-contents/Privacypage" "${TOP_DIR}/volumes/full/content/${TARGET}/assets/Privacypage"
+#    cp "${TOP_DIR}/assets/initial-contents/Disclaimerpage" "${TOP_DIR}/volumes/full/content/${TARGET}/assets/Disclaimerpage"
+#    cp "${TOP_DIR}/assets/initial-contents/Sidebar" "${TOP_DIR}/volumes/full/content/${TARGET}/assets/Sidebar"
+
+    cp "${TOP_DIR}/assets/initial-contents/*" "${TOP_DIR}/volumes/full/content/${TARGET}/assets/"
+
+
   printf "DONE copying in minimal initial contents\n\n"
 }
 
@@ -116,9 +121,12 @@ minimalInitialContents () {
 
   docker exec ${LAP_CONTAINER} php /var/www/html/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite  "${MOUNT}/${TARGET}/assets/Main Page"
 
-  docker exec ${LAP_CONTAINER} php /var/www/html/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite --prefix "MediaWiki" "${MOUNT}/${TARGET}/assets/Disclaimerpage"
-  docker exec ${LAP_CONTAINER} php /var/www/html/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite --prefix "MediaWiki" "${MOUNT}/${TARGET}/assets/Privacypage"
-
+# DO THIS as part of the initial minimal content dump
+#  docker exec ${LAP_CONTAINER} php /var/www/html/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite --prefix "MediaWiki" "${MOUNT}/${TARGET}/assets/Disclaimerpage"
+#  docker exec ${LAP_CONTAINER} php /var/www/html/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite --prefix "MediaWiki" "${MOUNT}/${TARGET}/assets/Privacypage"
+#  docker exec ${LAP_CONTAINER} php /var/www/html/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite --prefix "MediaWiki:Sidebar/" "${MOUNT}/${TARGET}/assets/Areas"
+#  docker exec ${LAP_CONTAINER} php /var/www/html/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite --prefix "MediaWiki:Sidebar/" "${MOUNT}/${TARGET}/assets/UI"
+#  docker exec ${LAP_CONTAINER} php /var/www/html/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite --prefix "MediaWiki:Sidebar/" "${MOUNT}/${TARGET}/assets/Social"
 
   printf "\n\n* rebuildrecentchanges\n"
     docker exec ${LAP_CONTAINER} php ${MOUNT}${TARGET}/maintenance/rebuildrecentchanges.php
@@ -177,15 +185,23 @@ installingDrawio () {
   echo "DONE installing drawio external service\n"
 }
 
+
+
+
+
 waitingForDatabase () {
   printf "*** Waiting for database to come up ... \n"
   printf "PLEASE WAIT AT LEAST 1 MINUTE UNTIL NO ERRORS ARE SHOWING UP ANY LONGER\n\n"
   while ! docker exec ${MYSQL_CONTAINER} mysql --user=root --password=${MYSQL_ROOT_PASSWORD} -e "SELECT 1"; do
-    sleep 1
+    sleep 2
     echo "   Still waiting for database to come up..."
   done
   printf "DONE: database container is up\n\n"
 }
+
+
+
+
 
 
 dropDatabase () {
@@ -212,7 +228,7 @@ dropUser () {
   local MYSQL_ROOT_PASSWORD=$2
   local MY_DB_USER=$3
 
-  printf "\n\n*** dropUser: Dropping default anonymous user \n"
+  printf "\n\n*** dropUser: Dropping default anonymous user \n\n"
 
 
   # CAVE: we also must drop MY_DB_USER as we might have created this user earlier and then with a different password
@@ -225,7 +241,7 @@ SELECT user, host, password from mysql.user;
 MYSQLSTUFF
 
   EXIT_CODE=$?
-  printf "DONE: Exit code of dropUser call: ${EXIT_CODE} \n\n"
+  printf "\nDONE: Exit code of dropUser call: ${EXIT_CODE} \n\n"
 }
 
 
@@ -302,6 +318,32 @@ removeLocalSettings () {
 }
 
 
+
+
+
+
+
+
+function fixPermissionsProduction() {
+  local TARGET="wiki-dir"
+  printf "\n *** Fixing local permissions for production" 
+    chmod -f 700 ${TOP_DIR}/CONF.sh
+    chmod -f 700 ${TOP_DIR}/../DANTE-BACKUP
+    chmod -f 700 ${TOP_DIR}/volumes/full/content/${TARGET}/LocalSettings.php
+    chmod -f 700 ${TOP_DIR}/volumes/full/content/${TARGET}/mediawiki-PRIVATE.php
+
+  printf "DONE fixing local permissions"
+}
+
+
+function fixPermissionsContainer() {
+  # 100.101 on alpine installations is apache.www-data
+  # This defines the target ownership for all files
+  local OWNERSHIP="100.101"
+  printf "*** Fixing permissions of files ... \n"
+    docker exec -it my-lap-container chown -R ${OWNERSHIP} /var/www/html/wiki-dir
+  printf "DONE fixing permissions of files\n\n"
+}
 
 
 

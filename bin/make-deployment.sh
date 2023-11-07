@@ -1,14 +1,14 @@
 #!/bin/bash
 
-# Prepares the deployment for a new version of DanteWiki by making a copy from a running instance
-# inside of the development environment
-#
-# Another approach would be a fresh installation directly from the githubs.
+# Prepares the deployment of a new version of DanteWiki.
+# 
+# Strategy: Make a copy from a running instance inside of the development environment to $TEMPLATE
 #
 
 # get directory where this script resides, wherever it is called from
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 TOP_DIR="${DIR}/../"
+
 
 PRODUCTION=${TOP_DIR}/../dante-wiki-production
 VOLUME=${TOP_DIR}/../dante-wiki-volume
@@ -28,10 +28,13 @@ cp -R ${TOP_DIR}/volumes/full/content/wiki-dir ${VOLUME}/
 ### removing stuff not really wanted (which should also be mentioned in .gitignore)
 rm -Rf ${VOLUME}/wiki-dir/parsifal-cache/*
 rm -Rf ${VOLUME}/wiki-dir/images/*
+# configuration files which we generate
 rm -f  ${VOLUME}/wiki-dir/LocalSettings.php
 rm -f  ${VOLUME}/wiki-dir/mediawiki-PRIVATE.php
+# git stuff
 rm -Rf ${VOLUME}/wiki-dir/.git
 rm -Rf ${VOLUME}/wiki-dir/extensions/Parsifal/.git
+# parsifal rubbish
 rm -Rf ${VOLUME}/wiki-dir/extensions/Parsifal/tests/*
 rm -Rf ${VOLUME}/wiki-dir/extensions/Parsifal/formats_latex/*.fmt
 rm -Rf ${VOLUME}/wiki-dir/extensions/Parsifal/formats_latex/*.fls
@@ -39,6 +42,8 @@ rm -Rf ${VOLUME}/wiki-dir/extensions/Parsifal/formats_latex/*.log
 rm -Rf ${VOLUME}/wiki-dir/extensions/Parsifal/formats_pdflatex/*.fmt
 rm -Rf ${VOLUME}/wiki-dir/extensions/Parsifal/formats_pdflatex/*.fls
 rm -Rf ${VOLUME}/wiki-dir/extensions/Parsifal/formats_pdflatex/*.log
+#
+# LOG files of any kind
 #
 rm -Rf ${VOLUME}/wiki-dir/extensions/DanteLinks/DANTELINKS-LOGFILE
 rm -Rf ${VOLUME}/wiki-dir/extensions/DanteTree/LOGFILE
@@ -50,6 +55,8 @@ rm -Rf ${VOLUME}/wiki-dir/extensions/Parsifal/log/*
 rm -Rf ${VOLUME}/wiki-dir/HISTORY
 rm -Rf ${VOLUME}/wiki-dir/tests
 rm -Rf ${VOLUME}/wiki-dir/docs
+
+
 
 # drawio is too large for the tar file - we must install it seperately in install-dante.sh
 rm -Rf ${VOLUME}/wiki-dir/external-services/draw-io/
@@ -70,6 +77,7 @@ find [a-c]*.json -exec rm {} \;
 find [f-z]*.json -exec rm {} \;
 
 printf "DONE making new directory\n\n"
+
 
 # we must remove the gitignore which was in use for dante
 rm ${VOLUME}/wiki-dir/.gitignore
@@ -100,16 +108,14 @@ mkdir -p ${PRODUCTION}/volumes/full/spec
 cp ${TOP_DIR}/images/lap/bin/run.sh ${PRODUCTION}/images/lap/bin/run.sh
 cp ${TOP_DIR}/images/lap/bin/both.sh ${PRODUCTION}/images/lap/bin/both.sh
 cp ${TOP_DIR}/images/my-mysql/bin/run.sh ${PRODUCTION}/images/my-mysql/bin/run.sh
-
 cp ${TOP_DIR}/volumes/full/spec/script-library.sh ${PRODUCTION}/volumes/full/spec/script-library.sh
 cp ${TOP_DIR}/volumes/full/spec/wiki-db-local-initialize.sh ${PRODUCTION}/volumes/full/spec/wiki-db-local-initialize.sh
 cp ${TOP_DIR}/volumes/full/spec/inject-keys.sh ${PRODUCTION}/volumes/full/spec/inject-keys.sh
 
 ## push this to the correct repository
 printf "*** Adding, commiting and pushing this to the repository ${PRODUCTION}\n"
-cd $PRODUCTION
-git add .
-git commit -m "From development git and force-pushed into dante-wiki-production git by make-deployment.sht"
-git push --force
-
+  cd $PRODUCTION
+  git add .
+  git commit -m "From development git and force-pushed into dante-wiki-production git by make-deployment.sht"
+  git push --force
 printf "DONE Production\n"
