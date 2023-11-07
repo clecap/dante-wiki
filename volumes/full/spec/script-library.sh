@@ -340,7 +340,7 @@ function fixPermissionsContainer() {
 
 
 
-runMWInstallScript () {# runMWInstallScript  MW_SITE_NAME  MW_SITE_SERVER  SITE_ACRONYM  WK_PASS
+runMWInstallScript () {  # runMWInstallScript  MW_SITE_NAME  MW_SITE_SERVER  SITE_ACRONYM  WK_PASS
   #    run the mediawiki install script and generate a LocalSettings.php
 
   printf "*** runMWInstallScript called with $# positional parameters \n\n"
