@@ -73,7 +73,19 @@ getSkins () {      #  copy in skins
 }
 
 
+function getDanteWikiVolume() {
 
+  local BRANCH=master
+
+  printf "*** wget branch ${BRANCH} from dante-wiki-volume ...\n"
+    rm -f ${DIR}/volumes/full/content/${BRANCH}.zip
+    wget https://github.com/clecap/dante-wiki-volume/archive/refs/heads/${BRANCH}.zip -O ${DIR}/volumes/full/content/${BRANCH}.zip
+    unzip -o ${DIR}/volumes/full/content/${BRANCH}.zip -d ${DIR}/volumes/full/content > unzip.log
+    rm -f  ${DIR}/volumes/full/content/${BRANCH}.zip 
+    mv ${DIR}/volumes/full/content/dante-wiki-volume-${BRANCH}/wiki-dir ${DIR}/volumes/full/content/
+    rmdir ${DIR}/volumes/full/content/dante-wiki-volume-${BRANCH}/
+  printf "DONE building template directory\n\n"
+}
 
 
 initialTemplates () { # imports an initial set of Parsifal templates from the wiki_dir into a running wiki
