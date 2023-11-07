@@ -204,8 +204,7 @@ waitingForDatabase () {
 
 
 
-dropDatabase () {
-# region dropDatabase  DB_NAME  DB_CONTAINER  MYSQL_ROOT_PASSWORD
+function dropDatabase () { #  dropDatabase  DB_NAME  DB_CONTAINER  MYSQL_ROOT_PASSWORD
 # drops a database. could be helpful before an addDatabase
   local MY_DB_NAME=$1
   local DB_CONTAINER=$2
@@ -220,16 +219,15 @@ MYSQLSTUFF
   EXIT_CODE=$?
   printf "DONE: Exit code of dropDatabase generated database call: ${EXIT_CODE} \n\n"
 }
-#endregion
 
 
-dropUser () {
+
+function dropUser () {
   local DB_CONTAINER=$1
   local MYSQL_ROOT_PASSWORD=$2
   local MY_DB_USER=$3
 
-  printf "\n\n*** dropUser: Dropping default anonymous user \n\n"
-
+  printf "\n\n*** dropUser: Dropping DB users we do not need and listing users of DB \n\n"
 
   # CAVE: we also must drop MY_DB_USER as we might have created this user earlier and then with a different password
   docker exec -i ${DB_CONTAINER} mysql -u root --password=${MYSQL_ROOT_PASSWORD} <<MYSQLSTUFF
@@ -245,9 +243,9 @@ MYSQLSTUFF
 }
 
 
-# region  addDatabase:  add a username and a database to the database engine
-##        addDatabase  DATABASE_NAME  DB_USER_NAME  DB_USER_PASSWORD  MYSQL_ROOT_PASSWORD  DB_CONTAINER
-addDatabase () {
+
+
+function addDatabase () { ##        addDatabase  DATABASE_NAME  DB_USER_NAME  DB_USER_PASSWORD  MYSQL_ROOT_PASSWORD  DB_CONTAINER
   local MY_DB_NAME=$1
   local MY_DB_USER=$2
   local MY_DB_PASS=$3
@@ -264,7 +262,7 @@ addDatabase () {
 #   which mysql is likely to see in a login attempt
 
 
-docker exec -i ${DB_CONTAINER} mysql -u root --password=${MYSQL_ROOT_PASSWORD} <<MYSQLSTUFF
+  docker exec -i ${DB_CONTAINER} mysql -u root --password=${MYSQL_ROOT_PASSWORD} <<MYSQLSTUFF
 CREATE DATABASE IF NOT EXISTS ${MY_DB_NAME} /*\!40100 DEFAULT CHARACTER SET utf8 */;
 --CREATE USER IF NOT EXISTS ${MY_DB_USER}@'%' IDENTIFIED BY '${MY_DB_PASS}';
 --CREATE USER IF NOT EXISTS ${MY_DB_USER}@localhost IDENTIFIED BY '${MY_DB_PASS}';
@@ -280,7 +278,7 @@ MYSQLSTUFF
 EXIT_CODE=$?
 printf "DONE: Exit code of addDatabase generated database call: ${EXIT_CODE}\n\n"
 }
-# endregion
+
 
 
 
@@ -302,11 +300,7 @@ cleanUpVolume () { # Code to clean up this directory
 }
 
 
-
-# region removeLocalSettings
-#
-# removes the LocalSettings.php file, reasonable before a (fresh) install
-removeLocalSettings () {
+function removeLocalSettings () {  # removes the LocalSettings.php file, reasonable before a (fresh) install
   local LAP_CONTAINER=$1 
   local MOUNT=$2 
   local VOLUME_PATH=$3
@@ -316,11 +310,6 @@ removeLocalSettings () {
   EXIT_CODE=$?
   printf "DONE: Exit code of removeLocalSettings docker exec call: ${EXIT_CODE}\n"
 }
-
-
-
-
-
 
 
 
@@ -349,9 +338,9 @@ function fixPermissionsContainer() {
 
 
 
-# region runMWInstallScript ()   run the mediawiki install script and generate a LocalSettings.php
-# runMWInstallScript  MW_SITE_NAME  MW_SITE_SERVER  SITE_ACRONYM  WK_PASS
-runMWInstallScript () {
+
+runMWInstallScript () {# runMWInstallScript  MW_SITE_NAME  MW_SITE_SERVER  SITE_ACRONYM  WK_PASS
+  #    run the mediawiki install script and generate a LocalSettings.php
 
   printf "*** runMWInstallScript called with $# positional parameters \n\n"
 
