@@ -25,7 +25,8 @@ function handle_error {
     do
       printf "    \e[1;31m FCT %-15s called in FILE %-15s at LINE %-15s\n" ${FUNCNAME[$i]}  ${BASH_SOURCE[$i+1]}  ${BASH_LINENO[$i]}
     done
-    exit $retval
+  printf "\e[0m";
+  exit $retval
 }
 
 # See https://stackoverflow.com/questions/24398691/how-to-get-the-real-line-number-of-a-failing-bash-command
