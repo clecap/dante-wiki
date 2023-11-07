@@ -5,6 +5,8 @@
 #
 
 
+SCRIPT_LIB_VERSION=2.10
+
 
 # propagate traps into called functions:
 set -E
