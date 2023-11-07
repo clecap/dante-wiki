@@ -566,15 +566,16 @@ function runDB() {
     fi
   else
     printf " *** Container '$CONTAINER_NAME' does not exist. Creating and running it\n"
-    docker run -d --name ${CONTAINER_NAME}                      \
-      --network ${NETWORK_NAME}                                      \
-      -h ${HOST_NAME}                                           \
-      --env USERNAME=${USERNAME}                                \
-      -e MYSQL_ROOT_PASSWORD="${MYSQL_ROOT_PASSWORD}"           \
-      -e MYSQL_DUMP_USER="${MYSQL_DUMP_USER}"                   \
-      -e MYSQL_DUMP_PASSWORD"${MYSQL_DUMP_PASSWORD}"            \
-      --volume ${DB_VOLUME_NAME}:/${MOUNT}                      \
-      ${CONTAINER_NAME}                          
+      docker run -d --name ${CONTAINER_NAME}                      \
+        --network ${NETWORK_NAME}                                      \
+        -h ${HOST_NAME}                                           \
+        --env USERNAME=${USERNAME}                                \
+        -e MYSQL_ROOT_PASSWORD="${MYSQL_ROOT_PASSWORD}"           \
+        -e MYSQL_DUMP_USER="${MYSQL_DUMP_USER}"                   \
+        -e MYSQL_DUMP_PASSWORD"${MYSQL_DUMP_PASSWORD}"            \
+        --volume ${DB_VOLUME_NAME}:/${MOUNT}                      \
+        ${CONTAINER_NAME}                          
+    printf " DONE \n\n"
   fi
 
 # export environment variables to the docker container for use there and in the entry point
@@ -598,15 +599,32 @@ function runLap() {
   local MODE=php
   local NETWORK_NAME=dante-network
 
+  if docker container inspect "$CONTAINER_NAME" > /dev/null 2>&1; then
+    if [ "$(docker container inspect -f '{{.State.Running}}' "$CONTAINER_NAME")" == "false" ]; then
+      printf " *** Container $CONTAINER_NAME exists but is stopped. Starting the container now.\n"
+        docker container start "$CONTAINER_NAME"
+      printf " DONE starting container $CONTAINER_NAME\n\n"
+    else
+      printf " *** Container '$CONTAINER_NAME' is already running.\n\n"
+    fi
+  else
+    printf " *** Container '$CONTAINER_NAME' does not exist. Creating and running it\n"
+      docker run -d --name ${CONTAINER_NAME} \
+        -p  ${PORT_HTTP}:80                       \
+        -p ${PORT_HTTPS}:443                      \
+        --network ${NETWORK_NAME}                     \
+        --volume ${VOLUME_NAME}:/${MOUNT_VOL}                     \
+        -h ${HOST_NAME}                 \
+        --env MODE=${MODE}              \
+        ${IMAGE_NAME}
+    printf " DONE\n\n"
+  fi
+
+
+
+
   printf " *** Starting ${IMAGE_NAME} as ${CONTAINER_NAME} \n"
-    docker run -d --name ${CONTAINER_NAME} \
-      -p  ${PORT_HTTP}:80                       \
-      -p ${PORT_HTTPS}:443                      \
-      --network ${NETWORK_NAME}                     \
-      --volume ${VOLUME_NAME}:/${MOUNT_VOL}                     \
-      -h ${HOST_NAME}                 \
-      --env MODE=${MODE}              \
-      ${IMAGE_NAME}
+ 
   printf " DONE\n\n"
 }
 
