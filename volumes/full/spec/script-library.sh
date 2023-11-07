@@ -319,8 +319,10 @@ function fixPermissionsProduction() {
   printf "\n *** Fixing local permissions for production" 
     [ -f  ${TOP_DIR}/CONF.sh] && chmod -f 700 ${TOP_DIR}/CONF.sh
     [ -d ${TOP_DIR}/../DANTE-BACKUP ] && chmod -f 700 ${TOP_DIR}/../DANTE-BACKUP
-    [ -f ${TOP_DIR}/volumes/full/content/${TARGET}/LocalSettings.php ]     &&  chmod -f 700 ${TOP_DIR}/volumes/full/content/${TARGET}/LocalSettings.php
-    [ -f ${TOP_DIR}/volumes/full/content/${TARGET}/mediawiki-PRIVATE.php ] && chmod -f 700 ${TOP_DIR}/volumes/full/content/${TARGET}/mediawiki-PRIVATE.php
+
+ [ -f ${TOP_DIR}/volumes/full/content/${TARGET}/LocalSettings.php ]     &&  printf "\n\n----------- exists \n\n"
+#    [ -f ${TOP_DIR}/volumes/full/content/${TARGET}/LocalSettings.php ]     &&  chmod -f 700 ${TOP_DIR}/volumes/full/content/${TARGET}/LocalSettings.php
+#    [ -f ${TOP_DIR}/volumes/full/content/${TARGET}/mediawiki-PRIVATE.php ] && chmod -f 700 ${TOP_DIR}/volumes/full/content/${TARGET}/mediawiki-PRIVATE.php
   printf "DONE fixing local permissions"
 }
 
