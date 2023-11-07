@@ -284,7 +284,22 @@ printf "DONE: Exit code of addDatabase generated database call: ${EXIT_CODE}\n\n
 
 
 
+function pullDockerImages() {
+  local DOCKER_TAG=$1
+  printf "*** Pulling Docker Images from docker hub, tag ${DOCKER_TAG} "
+    docker pull clecap/lap:${DOCKER_TAG}
+    docker pull clecap/my-mysql:${DOCKER_TAG}
+  printf "DONE pulling docker images\n\n"
+}
 
+
+function retagDockerImages() {
+  local DOCKER_TAG=$1
+  printf "*** Retagging docker images into local names for install mechanisms ... "
+    docker tag clecap/lap:${DOCKER_TAG} lap
+    docker tag clecap/my-mysql:${DOCKER_TAG} my-mysql
+  printf "DONE\n\n"
+}
 
 
 function injectKeys () {
@@ -495,6 +510,82 @@ else
 fi
 }
 # endregion
+
+
+
+
+#  both gets spec     --db my-test-db-volume --vol ${LAP_VOLUME}
+# DB_SPEC  --db my-test-db-volume
+
+
+function runDB() {
+ 
+  source CONF.sh
+  # provides MYSQL_ROOT_PASSWORD
+  # provides MYSQL_DUMP_USER
+  # provides MYSQL_DUMP_PASSWORD
+
+  local CONTAINER_NAME=my-mysql
+  local NETWORK_NAME=dante-network
+
+  local HOST_NAME=${CONTAINER_NAME}
+
+  # username only for ssh mechanism TODO:: still need and have that ???  check docker
+  local USERNAME=cap
+
+  local DB_VOLUME_NAME=mysql-volume
+  local MOUNT=/var/mysql
+
+  printf " *** creating docker network ${NETWORK_NAME} ..."
+    docker network create ${NETWORK_NAME}
+  printf "\n DONE creating docker network\n\n"
+
+  printf " *** Creating DB container ${CONTAINER_NAME} "
+
+# export environment variables to the docker container for use there and in the entry point
+
+  ## TODO: do we still want / need that ???
+  ## below: provide USERNAME to trigger ssh mechanism
+  docker run -d --name ${CONTAINER_NAME}                      \
+    --network ${NETWORK_NAME}                                      \
+    -h ${HOST_NAME}                                           \
+    --env USERNAME=${USERNAME}                                \
+    -e MYSQL_ROOT_PASSWORD="${MYSQL_ROOT_PASSWORD}"           \
+    -e MYSQL_DUMP_USER="${MYSQL_DUMP_USER}"                   \
+    -e MYSQL_DUMP_PASSWORD"${MYSQL_DUMP_PASSWORD}"            \
+    --volume ${DB_VOLUME_NAME}:/${MOUNT}                      \
+    ${CONTAINER_NAME}                          
+}
+
+
+function runLap() {
+  source CONF.sh
+
+  local CONTAINER_NAME=my-lap-container
+  local PORT_HTTP=8080
+  local PORT_HTTPS=4443
+  local IMAGE_NAME=lap
+  local HOST_NAME=${CONTAINER_NAME}
+
+  local MOUNT_VOL=/var/www/html
+  local VOLUME_NAME=
+
+  local MODE=php
+  local NETWORK_NAME=dante-network
+
+  printf " *** Starting ${IMAGE_NAME} as ${CONTAINER_NAME} \n"
+    docker run -d --name ${CONTAINER_NAME} \
+      -p  ${PORT_HTTP}:80                       \
+      -p ${PORT_HTTPS}:443                      \
+      --network ${NETWORK_NAME}                     \
+      --volume ${VOLUME_NAME}:/${MOUNT_VOL}                     \
+      -h ${HOST_NAME}                 \
+      --env MODE=${MODE}              \
+      ${IMAGE_NAME}
+  printf " DONE\n\n"
+}
+
+
 
 
 
