@@ -351,6 +351,46 @@ function injectKeys () {
 }
 
 
+function ensure() { # ensures if a list of variables is set; if not, provide suitable error message
+  for var_name in "$@"; do
+  if [[ -n ${!var_name+x} ]]; then
+    # echo "The variable '$1' is set."
+  else
+    printf " *** ERROR: The variable '$var_name' is not set\n\n"
+    false
+  fi
+}
+
+
+function makeMediawikiPrivate () { # during installation make mediawiki-PRIVATE.php file which is included by DanteSettings.php / LocalSettings.php
+  local MWP=${DIR}/conf/mediawiki-PRIVATE.php
+
+  printf "*** Generating mediawiki-PRIVATE configuration file at ${MWP}\n"
+    ensure SMTP_SENDER_ADDRESS  SMTP_HOSTNAME  SMTP_PORT  SMTP_USERNAME  SMTP_PASSWORD  LOCALTIMEZONE  
+
+    rm   -f ${MWP}
+    touch ${MWP}
+    chmod 600 ${MWP}
+    echo  "<?php "   >> ${MWP}
+    echo "\$wgPasswordSender='${SMTP_SENDER_ADDRESS}';          // address of the sending email account                            " >> ${MWP}
+    echo "\$wgSMTP = [                                                                                                             " >> ${MWP}
+    echo  "  'host'     => '${SMTP_HOSTNAME}',                 // hostname of the smtp server of the email account  " >> ${MWP}
+    echo  "  'IDHost'   => 'localhost',                        // sub(domain) of your wiki                                             " >> ${MWP}
+    echo  "  'port'     => ${SMTP_PORT},                       // SMTP port to be used      " >> ${MWP}
+    echo  "  'username' => '${SMTP_USERNAME}',                 // username of the email account   " >> ${MWP}
+    echo  "  'password' => '${SMTP_PASSWORD}',                 // password of the email account   " >> ${MWP}
+    echo  "  'auth'     => true                                // shall authentisation be used    " >> ${MWP}
+    echo "]; "                                      >> ${MWP}
+    echo "\$wgLocaltimezone='${LOCALTIMEZONE}';"    >> ${MWP}
+    echo "\$DEEPL_API_KEY='${DEEPL_API_KEY};'"      >> ${MWP}
+    echo "?>  "                                     >> ${MWP}
+    cp ${MWP}  ${DIR}/volumes/full/content/wiki-dir
+    chmod 600  ${DIR}/volumes/full/content/wiki-dir
+    rm ${MWP}
+  printf "DONE generating mediawiki-PRIVATE configuration file at ${MWP}\n\n"
+}
+
+
 
 
 
@@ -630,33 +670,22 @@ function runLap() {
 
 
 
-
-
-
-
-
-
-## addingReferenceToDante:  Injects into LocalSettings.php a line loading our own configuration for Dante
-# region  addingReferenceToDante MOUNT  VOLUME_PATH  LAP_CONTAINER
-addingReferenceToDante () {
+function addingReferenceToDante () {  # addingReferenceToDante MOUNT  VOLUME_PATH  LAP_CONTAINER
+  # Injects into LocalSettings.php a line loading our own configuration for Dante
   local MOUNT=$1
   local VOLUME_PATH=$2
   local LAP_CONTAINER=$3
 
-  echo ""
-  echo "*** Adding reference to DanteSettings.php"
-
-# NOTE: Doing this with include does not produce an error if the file goes missing
-
-  docker exec -w /${MOUNT}/${VOLUME_PATH}   ${LAP_CONTAINER}  sh -c "echo ' ' >> LocalSettings.php"
-  docker exec -w /${MOUNT}/${VOLUME_PATH}   ${LAP_CONTAINER}  sh -c "echo '###' >> LocalSettings.php"
-  docker exec -w /${MOUNT}/${VOLUME_PATH}   ${LAP_CONTAINER}  sh -c "echo '### Automagically injected by volume cmd.sh ' >> LocalSettings.php"
-  docker exec -w /${MOUNT}/${VOLUME_PATH}   ${LAP_CONTAINER}  sh -c "echo '###' >> LocalSettings.php  "
-  docker exec -w /${MOUNT}/${VOLUME_PATH}   ${LAP_CONTAINER}  sh -c "echo 'include (\"DanteSettings.php\"); ' >> LocalSettings.php "
-  echo "DONE adding a reference to DanteSettings.php"
-  echo ""
+  printf "*** Adding reference to DanteSettings.php ... "
+    docker exec -w /${MOUNT}/${VOLUME_PATH}   ${LAP_CONTAINER}  sh -c "echo ' ' >> LocalSettings.php"
+    docker exec -w /${MOUNT}/${VOLUME_PATH}   ${LAP_CONTAINER}  sh -c "echo '###' >> LocalSettings.php"
+    docker exec -w /${MOUNT}/${VOLUME_PATH}   ${LAP_CONTAINER}  sh -c "echo '### Automagically injected by volume cmd.sh ' >> LocalSettings.php"
+    docker exec -w /${MOUNT}/${VOLUME_PATH}   ${LAP_CONTAINER}  sh -c "echo '###' >> LocalSettings.php  "
+    # NOTE: Doing this with include does not produce an error if the file goes missing
+    docker exec -w /${MOUNT}/${VOLUME_PATH}   ${LAP_CONTAINER}  sh -c "echo 'include (\"DanteSettings.php\"); ' >> LocalSettings.php "
+  printf  "DONE\n\n"
 }
-# endregion
+
 
 
 
