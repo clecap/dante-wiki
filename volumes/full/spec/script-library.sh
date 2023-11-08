@@ -353,12 +353,13 @@ function injectKeys () {
 
 function ensure () { # ensures if a list of variables is set; if not, provide suitable error message
   for var_name in "$@"; do
-  if [[ -n ${!var_name+x} ]]; then
-    true
-  else
-    printf " *** ERROR: The variable '$var_name' is not set\n\n"
-    false
-  fi
+    if [[ -n ${!var_name+x} ]]; then
+      true
+    else
+      printf " *** ERROR: The variable '$var_name' is not set\n\n"
+      false
+    fi
+  done
 }
 
 
