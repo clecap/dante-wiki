@@ -219,90 +219,6 @@ installExtensionGithub https://github.com/Universal-Omega/DynamicPageList3 Dynam
 
 
 
-#runMWInstallScript () {
-##  run the mediawiki install script and generate a LocalSettings.php
-#  MEDIAWIKI_DB_HOST=my-mysql
-#  MEDIAWIKI_DB_TYPE=mysql
-#  MEDIAWIKI_DB_NAME=${DB_NAME}
-#  MEDIAWIKI_DB_PORT=3306
-#  MEDIAWIKI_DB_USER=${DB_USER}
-#  MEDIAWIKI_DB_PASSWORD=${DB_PASS}
-#  MEDIAWIKI_RUN_UPDATE_SCRIPT=true
-#
-#  MEDIAWIKI_SITE_NAME=${MW_SITE_NAME}
-#  # MEDIAWIKI_SITE_SERVER="https://${LAP_CONTAINER}"
-#  # TODO: problem: LAP_CONTAINER name is not resolved in the docker host
-################################################################## TODO: ADJUST 
-#######
-####### This should rather be a name, maybe localhost TODO: because other wise the different https things do not match
-#######
-##  MEDIAWIKI_SITE_SERVER="https://localhost"
-#  MEDIAWIKI_SITE_SERVER=${MW_SITE_SERVER}
-#  MEDIAWIKI_SCRIPT_PATH="/${VOLUME_PATH}"
-#  # TODO: make language variable inputable into script
-#  MEDIAWIKI_SITE_LANG=en
-#  MEDIAWIKI_ADMIN_USER=${WK_USER}
-#  MEDIAWIKI_ADMIN_PASS=${WK_PASS}
-#  MEDIAWIKI_ENABLE_SSL=true
-#
-#echo ________________
-#echo "*** MEDIAWIKI INSTALLATION PARAMETERS WILL BE: "
-#echo ""
-#echo  "DATABASE Parameters are: "
-#echo  "   MEDIAWIKI_DB_HOST            ${MEDIAWIKI_DB_HOST}"
-#echo  "   MEDIAWIKI_DB_TYPE            ${MEDIAWIKI_DB_TYPE}"
-#echo  "   MEDIAWIKI_DB_NAME            ${MEDIAWIKI_DB_NAME}"
-#echo  "   MEDIAWIKI_DB_PORT            ${MEDIAWIKI_DB_PORT}" 
-#echo  "   MEDIAWIKI_DB_USER            ${MEDIAWIKI_DB_USER}"
-#echo  "   MEDIAWIKI_DB_PASSWORD        ${MEDIAWIKI_DB_PASSWORD}"
-#echo  "   MEDIAWIKI_RUN_UPDATE_SCRIPT  ${MEDIAWIKI_RUN_UPDATE_SCRIPT}"
-#echo  ""
-#
-#echo "SITE Parameters are: "
-#echo  "   MEDIAWIKI_SITE_NAME"   ${MEDIAWIKI_SITE_NAME}
-#echo  "   MEDIAWIKI_SITE_SERVER  ${MEDIAWIKI_SITE_SERVER}"
-#echo  "   MEDIAWIKI_SCRIPT_PATH  ${MEDIAWIKI_SCRIPT_PATH}"
-#echo  "   MEDIAWIKI_SITE_LANG    ${MEDIAWIKI_SITE_LANG}"
-#echo  "   MEDIAWIKI_ADMIN_USER   ${MEDIAWIKI_ADMIN_USER}"
-#echo  "   MEDIAWIKI_ADMIN_PASS   ${MEDIAWIKI_ADMIN_PASS}"
-#echo  "   MEDIAWIKI_ENABLE_SSL   ${MEDIAWIKI_ENABLE_SSL}"
-#echo ""
-#
-#echo "*** CALLING MEDIAWIKI INSTALL ROUTINE"
-#echo ""
-#docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER} php maintenance/install.php \
-#    --confpath        ${MOUNT}/${VOLUME_PATH} \
-#    --dbname         "$MEDIAWIKI_DB_NAME" \
-#    --dbport         "$MEDIAWIKI_DB_PORT" \
-#    --dbserver       "$MEDIAWIKI_DB_HOST" \
-#    --dbtype         "$MEDIAWIKI_DB_TYPE" \
-#    --dbuser         "$MEDIAWIKI_DB_USER" \
-#    --dbpass         "$MEDIAWIKI_DB_PASSWORD" \
-#    --installdbuser  "$MEDIAWIKI_DB_USER" \
-#    --installdbpass  "$MEDIAWIKI_DB_PASSWORD" \
-#    --server         "$MEDIAWIKI_SITE_SERVER" \
-#    --scriptpath     "$MEDIAWIKI_SCRIPT_PATH" \
-#    --lang           "$MEDIAWIKI_SITE_LANG" \
-#    --pass           "$MEDIAWIKI_ADMIN_PASS" \
-#    "$MEDIAWIKI_SITE_NAME" \
-#    "$MEDIAWIKI_ADMIN_USER"
-#
-#
-#  echo "_______________________________________"
-#  echo ""
-#
-# check if we succeeded to generate LocalSettings.php
-#docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER}  [ -f "${MOUNT}/${VOLUME_PATH}/LocalSettings.php" ]
-#EXIT_VALUE=$?
-#echo "shell result $EXIT_VALUE"
-#if [ "$EXIT_VALUE" == "0" ]; then
-#  printf "\e[1;32m* SUCCESS:  ${MOUNT}/${VOLUME_PATH}/LocalSettings.php  generated \e[0m"
-#else
-#  printf "\e[1;41m* ERROR:  Could not generate ${MOUNT}/${VOLUME_PATH}/LocalSettings.php - *** ABORTING \e[0m \n"
-#fi
-#}
-# endregion
-
 
 
 # region patchingForChameleon: Chameleon skin patch
@@ -324,7 +240,6 @@ patchingForChameleon () {
 ## CAVE: wikis currently do this differently, by traversing the file system and picking up directories   ### TODO: make this uniform !!
 
 ## TODO: turn more stuff into parameter, particularly passwords and user names
-# region
 initWP () {
   USERNAME=$1
 
@@ -395,9 +310,6 @@ initWP () {
 #  printf "\nDONE setting permissions\n"
 
 }
-# endregion
-
-
 
 
 
@@ -454,35 +366,23 @@ initialize () {
 ##
 main () {
 
-WIKIS="${DIR}/../content/wiki-"*        # collect list of wikis from existing directory structure
+  WIKIS="${DIR}/../content/wiki-"*        # collect list of wikis from existing directory structure
+  printf "\n*** List of wiki subdirectories found: ${WIKIS} \n"
 
-printf "\n*** List of wiki subdirectories found: ${WIKIS} \n"
+  for WIKI in ${WIKIS}
+  do
+    printf "\n*** Initializing WIKI: ${WIKI}\n"
+    if [[ $WIKI =~ wiki-([a-zA-Z0-9_]+)$ ]]; 
+    then 
+      initialize ${BASH_REMATCH[1]}
+    else 
+      printf "\n*** Skipping ${WIKI} as it is not in proper format\n" 
+    fi
+  done
 
-for WIKI in ${WIKIS}
-do
-  printf "\n*** Initializing WIKI: ${WIKI}\n"
-  if [[ $WIKI =~ wiki-([a-zA-Z0-9_]+)$ ]]; 
-  then 
-    initialize ${BASH_REMATCH[1]}
-  else 
-    printf "\n*** Skipping ${WIKI} as it is not in proper format\n" 
-  fi
-done
-
-
-##### below runs very long probably due to parsifal cache or whatever ????
-
-#printf "\n*** Fix file ownerships..."
-#docker exec ${LAP_CONTAINER} /bin/sh -c "chown -R apache.apache /var/www/html"
-#printf "DONE fixing file ownerships\n\n"
-
-trap : EXIT         # switch trap command back to noop (:) on EXIT
-printf "*** We completed the entire wiki-init.sh script ***\n\n"
-
-printf "*** The Wiki is available at ${MW_SITE_SERVER} "
-
+  printf "*** We completed the entire wiki-init.sh script ***\n\n"
+  printf "*** The Wiki is available at ${MW_SITE_SERVER} \n\n"
 }
-# endregion
 
 
 main 
