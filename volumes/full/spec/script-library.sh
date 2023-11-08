@@ -5,7 +5,7 @@
 #
 
 
-SCRIPT_LIB_VERSION=2.11
+SCRIPT_LIB_VERSION=2.12
 
 
 # propagate traps into called functions:
@@ -431,7 +431,7 @@ function removeLocalSettings () {  # removes the LocalSettings.php file, reasona
 
 function fixPermissionsProduction() {
   local TARGET="wiki-dir"
-  printf "\n *** Fixing local permissions for production" 
+  printf "\n *** Fixing local permissions for production\n" 
     [ -f  ${TOP_DIR}/CONF.sh ] && printf "CONF.sh exists "
 
 #    [ -f  ${TOP_DIR}/CONF.sh ] && chmod -f 700 ${TOP_DIR}/CONF.sh
@@ -450,6 +450,7 @@ function fixPermissionsContainer() {
   local OWNERSHIP="100.101"
   printf "*** Fixing permissions of files ... \n"
     docker exec -it my-lap-container chown -R ${OWNERSHIP} /var/www/html/wiki-dir
+    docker exec -it my-lap-container chmod 700 /var/www/html/wiki-dir
   printf "DONE fixing permissions of files\n\n"
 }
 
