@@ -25,6 +25,7 @@ source ${TOP_DIR}/volumes/full/spec/git-clone-from-delta.sh
 source ${TOP_DIR}/volumes/full/spec/git-clone-from-parsifal.sh 
 
 getSkins wiki-dir
+
 addingImages wiki-dir
 installingDrawio wiki-dir
 
