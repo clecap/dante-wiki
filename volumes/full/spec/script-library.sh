@@ -5,7 +5,7 @@
 #
 
 
-SCRIPT_LIB_VERSION=2.10
+SCRIPT_LIB_VERSION=2.11
 
 
 # propagate traps into called functions:
