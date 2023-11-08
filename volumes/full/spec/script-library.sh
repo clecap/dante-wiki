@@ -625,7 +625,7 @@ function runLap() {
   local HOST_NAME=${CONTAINER_NAME}
 
   local MOUNT_VOL=/var/www/html
-  local VOLUME_NAME=
+  local VOLUME_NAME=lap-volume
 
   local MODE=php
   local NETWORK_NAME=dante-network
