@@ -378,7 +378,7 @@ function makeMediawikiPrivate () { # during installation make mediawiki-PRIVATE.
     echo "\$DEEPL_API_KEY='${DEEPL_API_KEY};'"      >> ${MWP}
     echo "?>  "                                     >> ${MWP}
     cp ${MWP}  ${DIR}/volumes/full/content/wiki-dir
-    chmod 600  ${DIR}/volumes/full/content/wiki-dir
+    chmod 700  ${DIR}/volumes/full/content/wiki-dir
     rm ${MWP}
   printf "DONE generating mediawiki-PRIVATE configuration file at ${MWP}\n\n"
 }
