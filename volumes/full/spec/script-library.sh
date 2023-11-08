@@ -351,7 +351,7 @@ function injectKeys () {
 }
 
 
-function ensure() { # ensures if a list of variables is set; if not, provide suitable error message
+function ensure () { # ensures if a list of variables is set; if not, provide suitable error message
   for var_name in "$@"; do
   if [[ -n ${!var_name+x} ]]; then
     # echo "The variable '$1' is set."
