@@ -434,7 +434,7 @@ initialize () {
 
   addDatabase ${DB_NAME} ${DB_USER} ${DB_PASS}  ${MYSQL_ROOT_PASSWORD}  ${DB_CONTAINER}
   docker exec ${LAP_CONTAINER} rm -f ${MOUNT}/${VOLUME_PATH}/LocalSettings.php      # remove to have a clean start for install routines, ignore if not existant
-  runMWInstallScript
+  runMWInstallScript "${MW_SITE_NAME}"  "${MW_SITE_SERVER}" "ACRONYM" "password-dir"
 
   addingReferenceToDante ${MOUNT}  ${VOLUME_PATH}  ${LAP_CONTAINER} 
   initialTemplates  
