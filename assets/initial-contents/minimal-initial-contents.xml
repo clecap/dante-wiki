@@ -37,24 +37,18 @@
     <ns>0</ns>
     <id>1</id>
     <revision>
-      <id>108</id>
-      <parentid>91</parentid>
-      <timestamp>2023-10-31T19:22:49Z</timestamp>
+      <id>242</id>
+      <parentid>145</parentid>
+      <timestamp>2023-11-08T12:38:53Z</timestamp>
       <contributor>
         <username>Dir</username>
         <id>1</id>
       </contributor>
-      <origin>108</origin>
+      <origin>242</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="84" sha1="bew2o5s90ptxe9aw7q0w7euokhiz8kp" xml:space="preserve">
-
-This is a freshly installed Dante Wiki.
-
-[[AAAVorlesung ]]
-
-[https://blog.fefe.de]</text>
-      <sha1>bew2o5s90ptxe9aw7q0w7euokhiz8kp</sha1>
+      <text bytes="39" sha1="eh65x2lnwyykdk7e1r8bqeipgnh2l8l" xml:space="preserve">This is a freshly installed Dante Wiki.</text>
+      <sha1>eh65x2lnwyykdk7e1r8bqeipgnh2l8l</sha1>
     </revision>
   </page>
   <page>
@@ -62,22 +56,22 @@ This is a freshly installed Dante Wiki.
     <ns>8</ns>
     <id>2</id>
     <revision>
-      <id>2</id>
-      <timestamp>2023-10-28T18:55:48Z</timestamp>
+      <id>228</id>
+      <parentid>159</parentid>
+      <timestamp>2023-11-08T12:06:51Z</timestamp>
       <contributor>
-        <username>Maintenance script</username>
-        <id>3</id>
+        <username>Dir</username>
+        <id>1</id>
       </contributor>
-      <comment>Imported from text file</comment>
-      <origin>2</origin>
+      <origin>228</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="13860" sha1="dqdab2xni0boq1u8a9tbokmh5iun9o8" xml:space="preserve">&lt;pre&gt;
+      <text bytes="14585" sha1="korss3nxe0bj5sf708nwtsmp6l4s8rh" xml:space="preserve">&lt;pre&gt;
 \documentclass[varwidth=15cm,margin=0.07cm]{standalone} 
 
 %%
 %% Standard package imports
-%%
+%% 
 
 \usepackage[T1]{fontenc}             % fontencoding - FIRST load fontencoding 
 \usepackage[utf8]{inputenc}          % and only THEN load UTF-8 see https://tex.stackexchange.com/questions/13067/
@@ -104,7 +98,9 @@ This is a freshly installed Dante Wiki.
 \usetikzlibrary{quotes,angles}
 \usetikzlibrary{mindmap}%  
 \usetikzlibrary{shadows}%                           % needed by mindmaps
+\usetikzlibrary{automata, arrows}
 
+\usepackage{tikz-qtree}
 
 \usepackage{qrcode}                                   % defines \qrcode[height=1cm,level=L]{ABCD} level: L M Q H for low medium ... quality
 \usepackage[percent]{overpic}                         % wrote some text directly over a picture, see 
@@ -120,6 +116,20 @@ This is a freshly installed Dante Wiki.
 
 \def\tikzrad{\pgfplotsset{trig format plots=rad}\tikzset{trig format=rad}}
 \def\tikzdeg{\pgfplotsset{trig format plots=deg}\tikzset{trig format=deg}}
+
+
+\def\tikzAutomaton{
+  \tikzdeg%
+  \tikzset{
+    -&gt;,                                       % makes the edges directed
+    &gt;=stealth,                                % makes the arrow heads bold
+    node distance=2cm,                        % specifies the minimum distance between two nodes. Change if necessary.
+    every state/.style={thick, fill=gray!10}, % sets the properties for each ’state’ node
+    initial text=$ $,                         % sets the text that appears on the start arrow
+  }%
+}
+
+
 
 %% TODO: what is this for ??
 \newcommand*{\info}[4][16.3]{%
@@ -211,7 +221,7 @@ This is a freshly installed Dante Wiki.
 
 \def\myInitialize{%   needed for initializations to be done after begin{document} which are taken out by the precompilation process
   \parindent 0pt
-  \parskip 0.25cm
+  \parskip 0.2cm
   \chcdisplayskipadjust
   \initializeVariants
 }
@@ -299,6 +309,9 @@ This is a freshly installed Dante Wiki.
     label=\textbf{(\arabic*)},
     after={\vspace*{1.5\parskip}}
   }
+  \setlist[enumerate,2]{
+    label=(\arabic*)
+  }
 }
 
 \enumerateWithBrackets
@@ -311,7 +324,8 @@ This is a freshly installed Dante Wiki.
 \setlist[itemize]{
   partopsep=1.0\parskip,
   topsep=-0.5\parskip,
-  itemsep=0cm
+  itemsep=0cm,
+  after={\vspace*{1.5\parskip}}
 }
 
 \setlist[description]{itemindent=-1.5em, labelsep=0pt,partopsep=\parskip,topsep=-\parskip}
@@ -345,7 +359,7 @@ This is a freshly installed Dante Wiki.
 %\usepackage{txfonts}
 
 \usepackage{stix}                  % needed for \operp and similar symbols
-\usepackage{stmaryrd}              % needed for \bigsqcap
+\usepackage{stmaryrd}               % needed for \bigsqcap
 \usepackage{fontawesome}           % make fontawesome with some additional symbols available, for example \faTV etc
 \usepackage{wasysym}               % some symbols
 \usepackage{eurosym}               % euro symbol
@@ -358,6 +372,8 @@ This is a freshly installed Dante Wiki.
 \def\be{\begin{equation}}
 \def\ee{\end{equation}}
 
+% underline boldface
+\def\ubf#1{\underline{\textbf{#1}}}
 
 
 % add shortcut for roman literals
@@ -564,9 +580,9 @@ magic-line-identifier-for-inclusion
 &lt;/pre&gt;
 
 
-[[Category:Boot]]
+[[Category:DanteInitialContents]]
 [[Category:ParsifalTemplate]]</text>
-      <sha1>dqdab2xni0boq1u8a9tbokmh5iun9o8</sha1>
+      <sha1>korss3nxe0bj5sf708nwtsmp6l4s8rh</sha1>
     </revision>
   </page>
   <page>
@@ -574,17 +590,17 @@ magic-line-identifier-for-inclusion
     <ns>8</ns>
     <id>3</id>
     <revision>
-      <id>3</id>
-      <timestamp>2023-10-28T18:56:15Z</timestamp>
+      <id>235</id>
+      <parentid>3</parentid>
+      <timestamp>2023-11-08T12:23:57Z</timestamp>
       <contributor>
-        <username>Maintenance script</username>
-        <id>3</id>
+        <username>Dir</username>
+        <id>1</id>
       </contributor>
-      <comment>Imported from text file</comment>
-      <origin>3</origin>
+      <origin>235</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="299" sha1="q0khbal9e0uodt2jcrnflvsfwlsfgw2" xml:space="preserve">&lt;pre&gt;
+      <text bytes="315" sha1="5ffffqosv1myjfq3rtt0xn0nvhxrrsq" xml:space="preserve">&lt;pre&gt;
 \documentclass{beamer}
 \begin{document}
 \title{Simple Beamer Class}   
@@ -599,9 +615,9 @@ magic-line-identifier-for-inclusion
 &lt;/pre&gt;
 
 
-[[Category:Boot]]
+[[Category:DanteInitialContents]]
 [[Category:ParsifalTemplate]]</text>
-      <sha1>q0khbal9e0uodt2jcrnflvsfwlsfgw2</sha1>
+      <sha1>5ffffqosv1myjfq3rtt0xn0nvhxrrsq</sha1>
     </revision>
   </page>
   <page>
@@ -609,17 +625,17 @@ magic-line-identifier-for-inclusion
     <ns>8</ns>
     <id>4</id>
     <revision>
-      <id>132</id>
-      <parentid>131</parentid>
-      <timestamp>2023-11-01T15:08:31Z</timestamp>
+      <id>234</id>
+      <parentid>134</parentid>
+      <timestamp>2023-11-08T12:23:39Z</timestamp>
       <contributor>
         <username>Dir</username>
         <id>1</id>
       </contributor>
-      <origin>132</origin>
+      <origin>234</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="87" sha1="3aynri3s8dqjeaq8rrbees2sug897fo" xml:space="preserve">* Areas
+      <text bytes="113" sha1="tcryiufomwyeair8l4zh9c5rldvyw7x" xml:space="preserve">* Areas
 
 * catus
 
@@ -627,12 +643,14 @@ magic-line-identifier-for-inclusion
 
 * UI
 
+* Social
+
 * SEARCH
 * TOOLBOX
 * LANGUAGES
 
-[[Category:Boot]]</text>
-      <sha1>3aynri3s8dqjeaq8rrbees2sug897fo</sha1>
+[[Category:DanteInitialContents]]</text>
+      <sha1>tcryiufomwyeair8l4zh9c5rldvyw7x</sha1>
     </revision>
   </page>
   <page>
@@ -640,14 +658,14 @@ magic-line-identifier-for-inclusion
     <ns>8</ns>
     <id>5</id>
     <revision>
-      <id>7</id>
-      <timestamp>2023-06-04T19:54:47Z</timestamp>
+      <id>161</id>
+      <parentid>7</parentid>
+      <timestamp>2023-10-03T12:50:23Z</timestamp>
       <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
+        <username>Maintenance script</username>
+        <id>3</id>
       </contributor>
-      <minor/>
-      <comment>1 revision imported</comment>
+      <comment>Imported from text file</comment>
       <origin>7</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
@@ -660,25 +678,25 @@ magic-line-identifier-for-inclusion
     <ns>8</ns>
     <id>6</id>
     <revision>
-      <id>133</id>
-      <parentid>8</parentid>
-      <timestamp>2023-11-01T15:21:15Z</timestamp>
+      <id>244</id>
+      <parentid>162</parentid>
+      <timestamp>2023-11-08T12:40:04Z</timestamp>
       <contributor>
         <username>Dir</username>
         <id>1</id>
       </contributor>
-      <origin>133</origin>
+      <origin>244</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="107" sha1="mq6i3dn7aixgko8ktqd66eqq1l1lsmn" xml:space="preserve">&lt;pre&gt;
+      <text bytes="118" sha1="julslx8xntvwx304m7imet4orlzmz6v" xml:space="preserve">&lt;pre&gt;
 {{#tree: extensions=["persist"] | 
-* '''[[Main Page]]'''
-* Compiler
-* DanteWiki
+*'''[[Main Page]]'''
+*DanteWiki
+**[[Talk on DanteWiki]]
 **[[Notes]]
 }}
 &lt;/pre&gt;</text>
-      <sha1>mq6i3dn7aixgko8ktqd66eqq1l1lsmn</sha1>
+      <sha1>julslx8xntvwx304m7imet4orlzmz6v</sha1>
     </revision>
   </page>
   <page>
@@ -686,59 +704,28 @@ magic-line-identifier-for-inclusion
     <ns>8</ns>
     <id>7</id>
     <revision>
-      <id>9</id>
-      <timestamp>2023-06-04T19:54:48Z</timestamp>
+      <id>218</id>
+      <parentid>138</parentid>
+      <timestamp>2023-11-08T11:36:05Z</timestamp>
       <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
+        <username>Dir</username>
+        <id>1</id>
       </contributor>
-      <minor/>
-      <comment>1 revision imported</comment>
-      <origin>9</origin>
+      <origin>218</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="154" sha1="e35gvb24uekb7x97qjbeiws5j392u94" xml:space="preserve">{{#tree: extensions=["persist"] | 
-*'''[[Main Page]]'''
+      <text bytes="371" sha1="ie7xpnedmhgi6axvwbqa6rrmblmuuz3" xml:space="preserve">&lt;pre&gt;
+{{#tree: extensions=["persist"] | 
+* [https://orcid.org/0000-0003-3958-6136 Orcid]
+* [https://scholar.google.com/citations?hl=en&amp;user=fAf_fA4AAAAJ Google Scholar]
+* [https://dblp.org/pid/49/2208.html DBLP]
+* [https://de.linkedin.com/in/clemens-h-cap-489691257 LinkedIn]
+* [https://www.xing.com/profile/ClemensH_Cap Xing]
+}}
+&lt;/pre&gt;
 
-*Private
-*More
-*Academic
-**[https://orcid.org]
-**[https://scholar.google.de Scholar]
-
-*Mediawi
-}}</text>
-      <sha1>e35gvb24uekb7x97qjbeiws5j392u94</sha1>
-    </revision>
-  </page>
-  <page>
-    <title>MediaWiki:Sidebar/socialus</title>
-    <ns>8</ns>
-    <id>8</id>
-    <revision>
-      <id>10</id>
-      <timestamp>2023-06-04T19:54:48Z</timestamp>
-      <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
-      </contributor>
-      <minor/>
-      <comment>1 revision imported</comment>
-      <origin>10</origin>
-      <model>wikitext</model>
-      <format>text/x-wiki</format>
-      <text bytes="163" sha1="bj33rw5yxlbyayzolixhn6zit32ahuk" xml:space="preserve">{{#tree: extensions=["persist"] | 
-*'''[[Main Page]]'''
-
-*This is socialus
-*More
-*Academic
-**[https://orcid.org]
-**[https://scholar.google.de Scholar]
-
-*Mediawi
-}}</text>
-      <sha1>bj33rw5yxlbyayzolixhn6zit32ahuk</sha1>
+[[Category:DanteInitialContents]]</text>
+      <sha1>ie7xpnedmhgi6axvwbqa6rrmblmuuz3</sha1>
     </revision>
   </page>
   <page>
@@ -746,16 +733,17 @@ magic-line-identifier-for-inclusion
     <ns>8</ns>
     <id>9</id>
     <revision>
-      <id>11</id>
-      <timestamp>2023-09-15T19:11:41Z</timestamp>
+      <id>256</id>
+      <parentid>240</parentid>
+      <timestamp>2023-11-08T13:01:21Z</timestamp>
       <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
+        <username>Dir</username>
+        <id>1</id>
       </contributor>
-      <origin>11</origin>
+      <origin>256</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="567" sha1="ftw6s03rvetjxq7eavgrzeof6l5whqp" xml:space="preserve">This page is a system page.
+      <text bytes="604" sha1="j06bpxm15xclnl7ky1olcxazzdjbb7y" xml:space="preserve">This page is a system page.
 
 It must conform to the following rules:
 
@@ -770,11 +758,14 @@ It must conform to the following rules:
 &lt;pre&gt;
 [
   {"root": "Root", "depth":4},
-  {"name": "Compiler", "style": "color:red;"},
-  {"name": "backup", "style": "color:green;"}
+  {"name": "Example", "style": "color:red;"},
+  {"name": "Testpage", "style": "color:green;"}
 ]
-&lt;/pre&gt;</text>
-      <sha1>ftw6s03rvetjxq7eavgrzeof6l5whqp</sha1>
+&lt;/pre&gt;
+
+
+[[Category:DanteInitialContents]]</text>
+      <sha1>j06bpxm15xclnl7ky1olcxazzdjbb7y</sha1>
     </revision>
   </page>
   <page>
@@ -990,29 +981,27 @@ buttonlabel=Create new article with this title
     <ns>8</ns>
     <id>18</id>
     <revision>
-      <id>130</id>
-      <parentid>129</parentid>
-      <timestamp>2023-11-01T15:07:42Z</timestamp>
+      <id>254</id>
+      <parentid>253</parentid>
+      <timestamp>2023-11-08T12:57:25Z</timestamp>
       <contributor>
         <username>Dir</username>
         <id>1</id>
       </contributor>
-      <origin>130</origin>
+      <origin>254</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="2896" sha1="ees1iup9vq06wjrlc9sigh4i4vpeqwt" xml:space="preserve">&lt;pre&gt;
+      <text bytes="3371" sha1="f7404m4vylc2ak1ebiarqht701hcyl0" xml:space="preserve">&lt;pre&gt;
 {{#tree: extensions=["persist"] | 
 * &lt;b&gt;[{{fullurl:Main Page}} Main Page]&lt;/b&gt;
 * [[MediaWiki:CreatePage|Create Page]]
 * [{{fullurl:Special:RecentChanges}} Recent Changes]
 
 * &lt;b&gt;Help&lt;/b&gt;
-** [https://blog.fefe.de Fefe]
 ** [https://help.fandom.com/wiki/Extension:DPL3/Manual DPL3]
 ** [[Help:Sidebar | Sidebar]]
 ** [[Help:Parsifal Cheat| Parsifal Cheat]]
 ** [[Help:Dante Cheat| Dante Cheat]]
-** [[Help:Links | Links Cheat]]
 ** [https://www.mediawiki.org/wiki/Help:Links Links WP]
 
 * &lt;b&gt;Sidebar Edits&lt;/b&gt;
@@ -1021,7 +1010,9 @@ buttonlabel=Create new article with this title
 ** [{{fullurl:MediaWiki:Sidebar/Categories|action=edit}} Categories]
 ** [{{fullurl:MediaWiki:Sidebar/Navigation|action=edit}} Navigation]
 ** [{{fullurl:MediaWiki:Sidebar/UI|action=edit}} UI]
-* &lt;b&gt;Queries&lt;/b&gt;
+
+* &lt;b title="Query for pages in specific namespaces"&gt;Queries &amp; Lists&lt;/b&gt;
+** [{{fullurl:Special:AllPages}} All Pages]
 ** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=8}} MediaWiki]
 ** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=14}} Category]
 ** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=10}} Template]
@@ -1029,14 +1020,22 @@ buttonlabel=Create new article with this title
 ** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=12}} Help]
 ** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=4}} Project]
 ** [{{fullurl:Special:ListFiles}} Files]
-* &lt;b&gt;Developer&lt;/b&gt;
-** [https://github.com/clecap/dante-delta/issues Dante Issues]
-** [https://github.com/clecap/Parsifal/issues Parsifal Issues]
-* &lt;b&gt;Operator&lt;/b&gt;
-* &lt;b&gt;Demos&lt;/b&gt;
+
+* &lt;b title="Found a bug"&gt;Issues&lt;/b&gt;
+** [https://github.com/clecap/dante-delta/issues DanteDelta Issues \s]
+** [https://github.com/clecap/dante-wiki/issues DanteWiki Issues \s]
+** [https://github.com/clecap/dante-wiki-production/issues DanteProduction Issues \s]
+** [https://github.com/clecap/Parsifal/issues Parsifal Issues \s]
+
+* &lt;b title="Check this regularly"&gt;Maintenance&lt;/b&gt;
+** [[Special:BrokenRedirects | Broken Redirects]]
+** [[Special:DoubleRedirects | Double Redirects]]
+** [[Special:UncategorizedPages | Uncat Pages]]
+** [[Special:WantedPages | Missing Pages]]
+
+* &lt;b&gt;Demos &amp; Tests&lt;/b&gt;
 ** [[Help:Demo for DanteLinks | Dante-Links]]
 ** [[Help:Demo for Parsifal | Parsifal]]
-* &lt;b&gt;Tests&lt;/b&gt;
 ** [[Help:Diverse Tests|Diverse Tests]]
 ** &lt;b&gt;[javascript:window.DANTE.testConsole() window.DANTE.testConsole()]&lt;/b&gt;
 ** &lt;b&gt;[javascript:Dante.testConsoleZwei() Dante.testConsoleZwei()]&lt;/b&gt;
@@ -1064,8 +1063,11 @@ buttonlabel=Create new article with this title
 ** [{{fullurl:Dummy:CiteThisPage}} Cite this page]
 ** [javascript:print(true) Printable version]
 }}
-&lt;/pre&gt;</text>
-      <sha1>ees1iup9vq06wjrlc9sigh4i4vpeqwt</sha1>
+&lt;/pre&gt;
+
+
+[[Category:DanteInitialContents]]</text>
+      <sha1>f7404m4vylc2ak1ebiarqht701hcyl0</sha1>
     </revision>
   </page>
   <page>
@@ -1290,23 +1292,28 @@ window.Dante.testDump=function(){
     <ns>8</ns>
     <id>26</id>
     <revision>
-      <id>28</id>
-      <timestamp>2023-09-15T16:04:00Z</timestamp>
+      <id>217</id>
+      <parentid>163</parentid>
+      <timestamp>2023-11-08T11:35:18Z</timestamp>
       <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
+        <username>Dir</username>
+        <id>1</id>
       </contributor>
-      <origin>28</origin>
+      <origin>217</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="231" sha1="smeg0o52ypx7a7anzqs5klmy8ncj1dy" xml:space="preserve">&lt;pre&gt;
+      <text bytes="392" sha1="1g9hhm4dyre7ps6y5r3n3w52xc8kygr" xml:space="preserve">&lt;pre&gt;
 {{#tree: extensions=["persist"] | 
 * &lt;b&gt;[javascript:PRT.limitSize(true) Limit Size ON]&lt;/b&gt;
 * &lt;b&gt;[javascript:PRT.limitSize(false) Limit Size OFF]&lt;/b&gt;
+* &lt;b&gt;[javascript:PRT.showVariants(true) Show Variants ON]&lt;/b&gt;
+* &lt;b&gt;[javascript:PRT.showVariants(false) Show Variants OFF]&lt;/b&gt;
 * &lt;b&gt;[javascript:window.persistCatWindow() Persist Cat Window]&lt;/b&gt;
 }}
-&lt;/pre&gt;</text>
-      <sha1>smeg0o52ypx7a7anzqs5klmy8ncj1dy</sha1>
+&lt;/pre&gt;
+
+[[Category:DanteInitialContents]]</text>
+      <sha1>1g9hhm4dyre7ps6y5r3n3w52xc8kygr</sha1>
     </revision>
   </page>
   <page>
@@ -1478,22 +1485,22 @@ Drei \url{https://www.ifi.ch}
     </revision>
   </page>
   <page>
-    <title>Test2</title>
+    <title>Test/Test2</title>
     <ns>0</ns>
     <id>31</id>
     <revision>
-      <id>34</id>
-      <timestamp>2023-06-04T19:54:47Z</timestamp>
+      <id>261</id>
+      <parentid>249</parentid>
+      <timestamp>2023-11-08T13:02:26Z</timestamp>
       <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
+        <username>Dir</username>
+        <id>1</id>
       </contributor>
-      <minor/>
-      <comment>1 revision imported</comment>
-      <origin>34</origin>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>261</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="715" sha1="fckb65y03c39vitkuu76u6wynvc23on" xml:space="preserve">asd asd asd asd asd asd asd asd asd asd asd 
+      <text bytes="737" sha1="6qppxad5klko1blt9f1433t9ygmr734" xml:space="preserve">asd asd asd asd asd asd asd asd asd asd asd 
 sdf sdf sdf sdf sdf sdf sdf sdf sdf sdf sdf
 sdf sdf 123 qwe 123 123 123 qwe asd qwe qwe 12123
 qwe qwe qwesdf sdf sdf234323 asdf sadf 
@@ -1571,49 +1578,51 @@ sdf\bigskip
 
 kk
 
-&lt;/amsmath&gt;</text>
-      <sha1>fckb65y03c39vitkuu76u6wynvc23on</sha1>
+&lt;/amsmath&gt;
+[[Category:Testpage]]</text>
+      <sha1>6qppxad5klko1blt9f1433t9ygmr734</sha1>
     </revision>
   </page>
   <page>
-    <title>Including a snippet</title>
+    <title>Test/Including a snippet</title>
     <ns>0</ns>
     <id>32</id>
     <revision>
-      <id>35</id>
-      <timestamp>2023-06-04T19:54:47Z</timestamp>
+      <id>255</id>
+      <parentid>246</parentid>
+      <timestamp>2023-11-08T13:00:40Z</timestamp>
       <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
+        <username>Dir</username>
+        <id>1</id>
       </contributor>
-      <minor/>
-      <comment>1 revision imported</comment>
-      <origin>35</origin>
+      <origin>255</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="29" sha1="hiqb4q469iv3blua2gtpov7j6k7bpf0" xml:space="preserve">now we get:
+      <text bytes="52" sha1="92oug6w7wqvc2xiht4eo7jx4vlk1rt3" xml:space="preserve">now we get:
 
-{{Snippet:Snip}}</text>
-      <sha1>hiqb4q469iv3blua2gtpov7j6k7bpf0</sha1>
+{{Snippet:Snip}}
+
+[[Category:Testpage]]</text>
+      <sha1>92oug6w7wqvc2xiht4eo7jx4vlk1rt3</sha1>
     </revision>
   </page>
   <page>
-    <title>Slides Test</title>
+    <title>Test/Slides Test</title>
     <ns>0</ns>
     <id>33</id>
     <revision>
-      <id>36</id>
-      <timestamp>2023-06-04T19:54:47Z</timestamp>
+      <id>260</id>
+      <parentid>248</parentid>
+      <timestamp>2023-11-08T13:02:22Z</timestamp>
       <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
+        <username>Dir</username>
+        <id>1</id>
       </contributor>
-      <minor/>
-      <comment>1 revision imported</comment>
-      <origin>36</origin>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>260</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="200" sha1="tj8xo3aqex1id0pjiiicv89tc266b05" xml:space="preserve">
+      <text bytes="222" sha1="lzwgmgbpsrl1s3nhl1d8siotutuy862" xml:space="preserve">
 __SLIDES__
 
 This requires a specific magic word here - ut it destroys the full view of the beamer. Why?
@@ -1628,71 +1637,9 @@ This
 Es ist $E = mc^2$.
 
 
-&lt;/amsmath&gt;</text>
-      <sha1>tj8xo3aqex1id0pjiiicv89tc266b05</sha1>
-    </revision>
-  </page>
-  <page>
-    <title>Compilerbau</title>
-    <ns>0</ns>
-    <id>34</id>
-    <revision>
-      <id>37</id>
-      <timestamp>2023-06-04T19:54:47Z</timestamp>
-      <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
-      </contributor>
-      <minor/>
-      <comment>1 revision imported</comment>
-      <origin>37</origin>
-      <model>wikitext</model>
-      <format>text/x-wiki</format>
-      <text bytes="132" sha1="23omq8liaw6gxwb6je7n4hydxbxyqes" xml:space="preserve">&lt;amsmath&gt;
-\section{Anwendungen Compilerbau}
-
-\begin{itemize}
-\item asd
-\end{itemize}
-
-
 &lt;/amsmath&gt;
-
-&lt;beamer&gt;
-Das ist also 
-
-&lt;/beamer&gt;</text>
-      <sha1>23omq8liaw6gxwb6je7n4hydxbxyqes</sha1>
-    </revision>
-  </page>
-  <page>
-    <title>Notes</title>
-    <ns>0</ns>
-    <id>35</id>
-    <revision>
-      <id>38</id>
-      <timestamp>2023-06-04T19:54:47Z</timestamp>
-      <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
-      </contributor>
-      <minor/>
-      <comment>1 revision imported</comment>
-      <origin>38</origin>
-      <model>wikitext</model>
-      <format>text/x-wiki</format>
-      <text bytes="376" sha1="a085dtv9c6d7cmajblo67bo3lufyi85" xml:space="preserve">Das ist jetzt ein Beispiel das wir uns gerne ansehen
-asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd qwd qwd qwd qwd qwd qwd asd asd a a 
-Das ist jetzt schon sehr gut.
-
-Wir wollen uns nicht ansehen, wie das im Detail funktioniertz. Denn das ist uns doch zu kompliziert. asd asd asd asd asd asd asd asd asd asd asd 123 sdf qwe qwe qwe
-
-&lt;amsmath&gt;
-
-asdasd
-
-&lt;/amsmath&gt;</text>
-      <sha1>a085dtv9c6d7cmajblo67bo3lufyi85</sha1>
+[[Category:Testpage]]</text>
+      <sha1>lzwgmgbpsrl1s3nhl1d8siotutuy862</sha1>
     </revision>
   </page>
   <page>
@@ -1716,28 +1663,6 @@ asdasd
 
 A generic about pages</text>
       <sha1>plbxldqkhns2zhvbn8yb75zpz7ajpdp</sha1>
-    </revision>
-  </page>
-  <page>
-    <title>Example Page</title>
-    <ns>0</ns>
-    <id>37</id>
-    <revision>
-      <id>40</id>
-      <timestamp>2023-06-04T19:54:47Z</timestamp>
-      <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
-      </contributor>
-      <minor/>
-      <comment>1 revision imported</comment>
-      <origin>40</origin>
-      <model>wikitext</model>
-      <format>text/x-wiki</format>
-      <text bytes="13" sha1="ajp6j7g939g7g08deo8r87ug3fal078" xml:space="preserve">
-
-= Example =</text>
-      <sha1>ajp6j7g939g7g08deo8r87ug3fal078</sha1>
     </revision>
   </page>
   <page>
@@ -1821,86 +1746,26 @@ def quick_sort(arr):
     </revision>
   </page>
   <page>
-    <title>Test/Syntax Hightlights</title>
-    <ns>0</ns>
-    <id>41</id>
-    <redirect title="Test/Syntax Highlights" />
-    <revision>
-      <id>44</id>
-      <timestamp>2023-06-04T19:54:48Z</timestamp>
-      <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
-      </contributor>
-      <minor/>
-      <comment>1 revision imported</comment>
-      <origin>44</origin>
-      <model>wikitext</model>
-      <format>text/x-wiki</format>
-      <text bytes="36" sha1="45mkiq63ik6r7rnx1s2pblxilhg8lm0" xml:space="preserve">#REDIRECT [[Test/Syntax Highlights]]</text>
-      <sha1>45mkiq63ik6r7rnx1s2pblxilhg8lm0</sha1>
-    </revision>
-  </page>
-  <page>
     <title>Test/Markdown</title>
     <ns>0</ns>
     <id>42</id>
     <revision>
-      <id>45</id>
-      <timestamp>2023-06-04T19:54:48Z</timestamp>
+      <id>259</id>
+      <parentid>45</parentid>
+      <timestamp>2023-11-08T13:02:18Z</timestamp>
       <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
+        <username>Dir</username>
+        <id>1</id>
       </contributor>
-      <minor/>
-      <comment>1 revision imported</comment>
-      <origin>45</origin>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>259</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="28" sha1="rayg7q1ygqih0pv5xj55ozzeyk7kzlz" xml:space="preserve">&lt;markdown&gt;
+      <text bytes="50" sha1="h0n1kkj4w855j2lpkvlcsr6qvp7947c" xml:space="preserve">&lt;markdown&gt;
 `asd`
-&lt;/markdown&gt;</text>
-      <sha1>rayg7q1ygqih0pv5xj55ozzeyk7kzlz</sha1>
-    </revision>
-  </page>
-  <page>
-    <title>Category:Boot</title>
-    <ns>14</ns>
-    <id>43</id>
-    <revision>
-      <id>46</id>
-      <timestamp>2023-06-04T19:54:48Z</timestamp>
-      <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
-      </contributor>
-      <minor/>
-      <comment>1 revision imported</comment>
-      <origin>46</origin>
-      <model>wikitext</model>
-      <format>text/x-wiki</format>
-      <text bytes="19" sha1="i84bxell5s45syub6c99pvyb3xjg9zk" xml:space="preserve">[[Category:System]]</text>
-      <sha1>i84bxell5s45syub6c99pvyb3xjg9zk</sha1>
-    </revision>
-  </page>
-  <page>
-    <title>Category:System</title>
-    <ns>14</ns>
-    <id>44</id>
-    <revision>
-      <id>47</id>
-      <timestamp>2023-06-04T19:54:48Z</timestamp>
-      <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
-      </contributor>
-      <minor/>
-      <comment>1 revision imported</comment>
-      <origin>47</origin>
-      <model>wikitext</model>
-      <format>text/x-wiki</format>
-      <text bytes="17" sha1="plgyxa9zdjtjany4tcftrk2sfqdwo6g" xml:space="preserve">[[Category:Root]]</text>
-      <sha1>plgyxa9zdjtjany4tcftrk2sfqdwo6g</sha1>
+&lt;/markdown&gt;
+[[Category:Testpage]]</text>
+      <sha1>h0n1kkj4w855j2lpkvlcsr6qvp7947c</sha1>
     </revision>
   </page>
   <page>
@@ -1935,18 +1800,28 @@ def quick_sort(arr):
     <ns>12</ns>
     <id>46</id>
     <revision>
-      <id>107</id>
-      <parentid>106</parentid>
-      <timestamp>2023-10-31T15:52:24Z</timestamp>
+      <id>243</id>
+      <parentid>107</parentid>
+      <timestamp>2023-11-08T12:39:25Z</timestamp>
       <contributor>
         <username>Dir</username>
         <id>1</id>
       </contributor>
-      <comment>/* All Link Types */</comment>
-      <origin>107</origin>
+      <origin>243</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="2550" sha1="9y03lfmusdqqh7h2qrhnlc4zv9dblv7" xml:space="preserve">[[Main \Pag]]
+      <text bytes="2676" sha1="fpyjd5rc79plz8od4ctp2jn5vcrxcrz" xml:space="preserve">
+
+
+Window
+* [https://blog.fefe.de \w]
+* [https://blog.fefe.de Fefe \w]
+
+
+Side
+* [https://blog.fefe.de \s]
+* [https://blog.fefe.de Fefe \s]
+
 
 '''Example'''
 * &lt;nowiki&gt;[[Main Page || doub]]&lt;/nowiki&gt;
@@ -2018,7 +1893,7 @@ rendering in text.
 
 
 [[:Category:Root]]</text>
-      <sha1>9y03lfmusdqqh7h2qrhnlc4zv9dblv7</sha1>
+      <sha1>fpyjd5rc79plz8od4ctp2jn5vcrxcrz</sha1>
     </revision>
   </page>
   <page>
@@ -2026,16 +1901,17 @@ rendering in text.
     <ns>12</ns>
     <id>47</id>
     <revision>
-      <id>50</id>
-      <timestamp>2023-06-06T18:54:24Z</timestamp>
+      <id>166</id>
+      <parentid>50</parentid>
+      <timestamp>2023-10-18T18:36:01Z</timestamp>
       <contributor>
-        <username>imported&gt;Dir</username>
+        <username>imported&gt;Admin</username>
         <id>0</id>
       </contributor>
-      <origin>50</origin>
+      <origin>166</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="53" sha1="qxp83972ncr5860dg2vgmhp9lm6nqxt" xml:space="preserve">
+      <text bytes="74" sha1="itmnmginc4iulo8zjt0bbpe1d8ovq6r" xml:space="preserve">
 __SLIDES__
 
 == one ==
@@ -2043,8 +1919,10 @@ bla
 &lt;amsmath&gt;
 asdq
 
+\ubf{q}w  \ubf wer 
+
 &lt;/amsmath&gt;</text>
-      <sha1>qxp83972ncr5860dg2vgmhp9lm6nqxt</sha1>
+      <sha1>itmnmginc4iulo8zjt0bbpe1d8ovq6r</sha1>
     </revision>
   </page>
   <page>
@@ -2052,17 +1930,17 @@ asdq
     <ns>12</ns>
     <id>48</id>
     <revision>
-      <id>51</id>
-      <timestamp>2023-09-04T21:20:50Z</timestamp>
+      <id>236</id>
+      <parentid>51</parentid>
+      <timestamp>2023-11-08T12:24:29Z</timestamp>
       <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
+        <username>Dir</username>
+        <id>1</id>
       </contributor>
-      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
-      <origin>51</origin>
+      <origin>236</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="3533" sha1="9kkn4uukbcuvranoi58gntiowa368ht" xml:space="preserve">&lt;amsmath style="border:10px solid green;"&gt;
+      <text bytes="3530" sha1="4bi88bcjos7hxrcg7d64zgxw5wl87f0" xml:space="preserve">&lt;amsmath style="border:10px solid green;"&gt;
 921iihj kjh ujkWe6697 i m a sdf  ke a meas urement and  get a r esu lt  $\omega$. We now assume we can talk of an object with the property $\omega$. We cannota
 say that the object is (or is in the state) $\omega$ as this description might not be precise enough in the sense that the object
 might have additional properties as well (The color red is an insufficient characterization of an object). We have the fantasy that
@@ -2108,9 +1986,9 @@ Before the measurement the object had that property only to a certain degree, an
 &lt;amsmath&gt;
 Ve ry s  m a ll k    
 &lt;/amsmath&gt;
-[[Category:System]]
-[[Category:Boot]]</text>
-      <sha1>9kkn4uukbcuvranoi58gntiowa368ht</sha1>
+
+[[Category:DanteInitialContents]]</text>
+      <sha1>4bi88bcjos7hxrcg7d64zgxw5wl87f0</sha1>
     </revision>
   </page>
   <page>
@@ -2264,26 +2142,28 @@ asd khjks
     </revision>
   </page>
   <page>
-    <title>Just a comment</title>
+    <title>Test/Just a comment</title>
     <ns>0</ns>
     <id>54</id>
     <revision>
-      <id>57</id>
-      <timestamp>2023-08-27T12:21:24Z</timestamp>
+      <id>258</id>
+      <parentid>247</parentid>
+      <timestamp>2023-11-08T13:02:14Z</timestamp>
       <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
+        <username>Dir</username>
+        <id>1</id>
       </contributor>
-      <comment>Created page with "Just  A  Comment"</comment>
-      <origin>57</origin>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>258</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="16" sha1="ppiclegmobn61eruux8zaa2xr1wgswd" xml:space="preserve">Just
+      <text bytes="38" sha1="ds0w45pl806g9njnei7xqmb2rv6pw5f" xml:space="preserve">Just
 
 A
 
-Comment</text>
-      <sha1>ppiclegmobn61eruux8zaa2xr1wgswd</sha1>
+Comment
+[[Category:Testpage]]</text>
+      <sha1>ds0w45pl806g9njnei7xqmb2rv6pw5f</sha1>
     </revision>
   </page>
   <page>
@@ -2291,16 +2171,22 @@ Comment</text>
     <ns>12</ns>
     <id>55</id>
     <revision>
-      <id>58</id>
-      <timestamp>2023-09-12T10:04:38Z</timestamp>
+      <id>167</id>
+      <parentid>58</parentid>
+      <timestamp>2023-10-22T12:43:59Z</timestamp>
       <contributor>
-        <username>imported&gt;Dir</username>
+        <username>imported&gt;Admin</username>
         <id>0</id>
       </contributor>
-      <origin>58</origin>
+      <origin>167</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="1847" sha1="d83d354zzoojuzpof5r2kbsybe3eeck" xml:space="preserve">
+      <text bytes="1910" sha1="ltgt506t8wwgv6j1cbf5p8sy3y3l6wv" xml:space="preserve">
+[[Main Page ¦ target=_blank]]
+
+[[Main Page ¦ target=_new]]
+
+
 [[Help:Transclusion Test]]
 
 = Level 1 =
@@ -2416,407 +2302,7 @@ child {node  (i) {F} child {node  (j) {2}}}
 == Level 1.3 ==
 
 === Level 1.3.1 ===</text>
-      <sha1>d83d354zzoojuzpof5r2kbsybe3eeck</sha1>
-    </revision>
-  </page>
-  <page>
-    <title>Compilerbau/Einführung</title>
-    <ns>0</ns>
-    <id>56</id>
-    <revision>
-      <id>59</id>
-      <timestamp>2023-09-15T19:24:53Z</timestamp>
-      <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
-      </contributor>
-      <origin>59</origin>
-      <model>wikitext</model>
-      <format>text/x-wiki</format>
-      <text bytes="6901" sha1="i3r3hm8iylzp8ea9pd9l6i9ylvu2nsq" xml:space="preserve">
-__HIDEHL__
-
-== Wozu Compiler? ==
-&lt;amsmath&gt;
-\title{Wozu Compiler?}
-  
-\begin{itemize}
-\item[(1)] Umwandlung von Beschreibungsformen
-\item[(2)] in andere Beschreibungsformen
-\item[(3)] unter Beibehaltung der Semantik
-\end{itemize}
-&lt;/amsmath&gt;
-
-===== =====
-&lt;amsmath&gt;
-\textbf{Beispiel 1:} 
-\begin{itemize}
-\item FORTRAN ist für den Physiker eine leicht schreibbare Programmiersprache. 
-\item Intel 8086 Binärcode ist für den Laptop ausführbar.
-\end{itemize}
-
-\textbf{Beispiel 2:} (Untypisch für \enquote{Compilerbau}, entspricht aber der Definition)
-\begin{itemize}
-\item \LaTeX ist für den Mathematiker gut geeignet.
-\item Postscript ist für den Drucker gut geeignet.
-\item BMP ist für den Bildschirm gut geeignet.
-\end{itemize}
-
-\textbf{Beispiel 3:} 
-\begin{itemize}
-\item Typescript ist für den App-Programmierer leicht nutzbar.
-\item Javascript ist für den Browser leicht ausführbar.
-\end{itemize}
-&lt;/amsmath&gt;
-
-== ==
-&lt;amsmath&gt;
-\title{Beibehaltung der Semantik}
-
-Nicht immer strenge Anwendung von formaler Semantik.
-
-Unbekannte Eigenschaften der Hardware
-
-Ressourcen Limitierungen: Wir compilieren für eine
-random-access-machine mit (virtuell) unendlich viel Speicherplatz.
-
-Computer-Arithmetik: Wir tun oft so, also ob auf der Zielmaschine
-$a+(b+c) = (a+b)+c$ gilt. das stimmt aber nicht!
-
-Wir ignorieren Laufzeit-Ausnahmen.
-&lt;/amsmath&gt;
-
-
-&lt;amsmath&gt;
-\title{Andere Formate}
-
-
-
-
-&lt;/amsmath&gt;
-
-== ==
-&lt;amsmath&gt;
-\title{Compilerbau}   
- 
-\begin{itemize}
-\item Altes und relative zentrales Problem der Informatik jk
-\item Bestehende Lösungen mit hohem Reifegrad
-\item Hersteller und Kunden sind Informatiker
-\item Durchgehende Fortsetzung von der Theorie in die Praxis
-\item Neue Sprachen und Sprachkonzepte benötigen immer wieder neue Compiler
-\end{itemize}
- 
-&lt;/amsmath&gt;
-
-== Compiler versus Interpreter ==
-&lt;drawio filename="compiler-und-interpreter"/&gt;
-
-&lt;amsmath&gt;
-\begin{tabular}[]{p{2.5cm}p{5cm}p{5cm}}
- &amp; \textbf{Compiler} &amp; \textbf{Interpreter} \\
-Ausführung &amp; Schnell &amp; Langsam \\
-Vorlauf &amp; Lang &amp; Kurz \\
-Abarbeitung &amp; 1-n Durchläufe &amp;  Schrittweise, inkrementell \\
-Statische Fehler &amp; Im gesamten Code gefunden &amp; Nur in ausgeführten Code-Teilen \\
-Symbolische Ausführung &amp; Schwierig\linebreak Mit symbolischem Debugger &amp; Banal, denn Interpretation\linebreak \textit{ist} symbolische Ausführung \\
-Modifikation &amp; Nur vor Compilation &amp; Auch zur Laufzeit \\
-Quellcode nötig &amp; Nur für Übersetzung &amp; Für jede Ausführung \\
-IP Schutz &amp; Leicht &amp; Schwer (obfuscation) \\
-Typische\linebreak Beispiele &amp; C, C++, Pascal, Modula, Fortran, Java, Swift &amp; JavaScript, Python, Shell-Sprachen, Postscript, Ruby, LISP, Haskell, Perl \\
-\end{tabular}
-
-Zunehmend Kombination beider Formen realisiert.
-&lt;/amsmath&gt;
-
-== Arten von Interpretern ==
-
-
-== Arten von Compilern ==
-
-===  ===
-&lt;amsmath&gt;
-\title{Nach der Umgebung}
-
-\begin{description}
-\item[Nativer Compiler ] übersetzt für das System auf dem der Compiler selber läuft.
-
-Beispiel: C-Compiler auf dem PC übersetzt für den PC.
-
-\item[Crosscompiler ] übersetzt für ein anderes System als jenes, auf dem
-der Compiler selber läuft.
-
-Beispiel: Swift-Compiler auf dem Mac Laptop übersetzt für das iPhone oder die Apple Watch.
-\end{description}
-&lt;/amsmath&gt;
-
-=== Nach der Abstraktionsstufe ===
-&lt;amsmath&gt;
-\title{Nach der Abstraktionsstufe}
-
-\begin{description}
-\item[Compiler ] übersetzt meistens von einer Sprache höherer Abstraktions-Stufe 
-in eine Sprache niedriger Abstraktions-Stufe.
-
-Beispiel: GNU C-Compiler übersetzt in Intel 8086 Maschinensprache.
-
-\item[Transpiler ] übersetzt von einer Hochsprache in eine andere Hochsprache.
-
-Beispiel: Babel Transpiler übersetzt ECMA-Script 6, JSX, Typescript in JavaScript nach ECMA-Script 5 Standard.
-
-Beispiel: Emscripten übersetzt C++ nach Javascript, im Umweg über die LLVM (Low Level Virtual Machine) Zwischensprache.
-
-\item[Recompiler ] übersetzt eine Sprache niedriger Abstraktions-Stufe in 
-einer Sprache niedriger Abstraktions-Stufe.
-
-Beispiel: LLVM Backend übersetzt LLVM in Intel 8086 Maschinensprache.
-
-\item[Decompiler ] übersetzt von Sprache niedriger Abstraktions-Stufe
-in eine Sprache hoher Abstraktions-Stufe.
-
-Beispiel: JEB decompiliert Java-Bytecode nach Java-Quellcode und
-Intel 8086 Maschinensprache nach C-Quellcode.
-
-\item[Assembler ] übersetzt symbolische Darstellung einer Maschinen-nahen 
-Sprache in die binäre Darstellung für eine Maschine.
-
-Beispiel: MASM übersetzt Intel 8086 Assembler in Intel 8086 Binärprogramme.
-
-\item[Bytecode Compiler ] übersetzt eine Hochsprache in eine Zwischensprache (Bytecode) für eine virtuelle Maschine.
-
-Beispiel: Compiler der LLVM Frontend Compiler übersetzen C und C++ nach LLVM.
-
-Beispiel: Java Bytecode Compiler übersetzt Java nach Java Bytecode.
-
-\end{description}
-&lt;/amsmath&gt;
-
-&lt;drawio filename="compiler-abstraktion" /&gt;
-
-=== Zeitpunkt ===
-&lt;amsmath&gt;
-
-\begin{description}
-\item[Ahead of Time (AOT) Compiler ] übersetzt vor der Ausführung.
-
-Beispiel: GNU C Compiler.
-
-\item[Just in Time (JIT) Compiler ] übersetzt bei der Ausführung.
-Versteckt eine de-facto AOT Compilation vor dem Benutzer.
-
-Kann mit Interpretations-Phase verbunden sein.
-
-\textit{Hotspot} Technologie: Nur wichtige Teile werden übersetzt, die anderen
-Teile bleiben interpretiert.
-
-Beispiel: V8 Compiler für JavaScript / Node.
-
-Beispiel: HHVM Compiler für PHP.
-
-\end{description}
-
-
-&lt;/amsmath&gt;
-
-== Begleitwerkzeuge ==
-&lt;amsmath&gt;
-\title{Begleitwerkzeuge}
-
-
-\begin{description}
-\item[Präprozessor ] Werkzeuge zur Vorbearbeitung von Quellcode.
-
-Beispiel: \href{https://en.cppreference.com/w/cpp/preprocessor}{cpp}: C Präprozessor.
-
-Beispiel: \href{https://webpack.js.org/}{Webpack}: JavaScript Bundler.
-
-\item[Assembler ] Werkzeuge zur Umwandlung einer symbolischen Darstellung einer Maschinen-nahen Sprache in die binäre Darstellung für eine Maschine.
-
-Beispiel: MASM übersetzt Intel 8086 Assembler in Intel 8086 Binärprogramme.
-
-\item[Linker/Lader ] Werkzeuge zum Zusammenfügen von Code-Bestandteilen
-mit Quer-Referenzen und symbolischen Adressen, meistens auf Ebene von
-Binärcode oder Maschinencode.
-
-Beispiel: \href{https://linux.die.net/man/8/ld.so}{ld.so, ld-linux.so}, \href{https://linux.die.net/man/8/ldconfig}{ldconfig.so}, \href{https://linux.die.net/man/1/ldd}{ldd} Linker/Lader Werkzeuge von Linux.
-
-\item[Linter ] Werkzeuge für statische Code-Analyse, meist auf Ebene
-von Quellcode. Machen auf bekannte oder mutmaßliche 
-
-Beispiel: \href{https://www.unix.com/man-page/v7/1/lint/}{lint} Linux lint Programm für C.
-
-\end{description}
-
-Literaturhinweis: S. Grover, Linux and Loaders, Linux Journal, 26. November 2002, \url{https://www.linuxjournal.com/article/6463}.
-
-&lt;/amsmath&gt;
-
-
-== Motivation ==
-&lt;beamer&gt;
-{\LARGE\bf Title} 
-
-\begin{itemize}
-\item Angewandte Theorie
-\end{itemize}
-&lt;/beamer&gt;
-
-
-&lt;hide&gt;
-Einige kleine Erklärungen.
-&lt;/hide&gt;
-
-Gerade noch ein wenig Zeugs
-
-== Compiler Bootstrapping ==
-asdasdasdasd
-
-
-[[Category:Compiler]]</text>
-      <sha1>i3r3hm8iylzp8ea9pd9l6i9ylvu2nsq</sha1>
-    </revision>
-  </page>
-  <page>
-    <title>Compilerbau/Semesterplan</title>
-    <ns>0</ns>
-    <id>57</id>
-    <revision>
-      <id>60</id>
-      <timestamp>2023-09-12T10:06:15Z</timestamp>
-      <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
-      </contributor>
-      <comment>/*  */</comment>
-      <origin>60</origin>
-      <model>wikitext</model>
-      <format>text/x-wiki</format>
-      <text bytes="1782" sha1="qgktnqczj0y3i8pkc0og00owfbl29nd" xml:space="preserve">
-== ==
-&lt;amsmath&gt;
-\def\UE#1{\hspace*{0.5cm}\color{green}UE#1 (Gaede)}
-\def\PK#1{\hspace*{0.5cm}\color{red}PK#1 (Gaede)}
-\def\VL#1{\color{blue}VL#1 (Cap)}
-
-\def\ue{\leavevmode\color{green}}
-\def\pk{\leavevmode\color{red}}
-\def\vl{\leavevmode\color{blue}}
-
-\textbf{\large Zeitplanung}
-
-\begin{tabular}[]{c|l|lp{5cm}}
-\textbf{Datum} &amp; \textbf{Veranstaltung} &amp; \textbf{Thema} &amp; \textbf{Inhalte} \\ \hline
-16. 10. &amp; \VL{1} \\
-18. 10. &amp; \UE1 &amp; \ue Wiederholung &amp; \ue\scriptsize Wiederholung reguläre Ausdrücke, DEA und NDEA\\
-23. 10. &amp; \VL{2} \\
-25. 10. &amp; \PK 1 &amp; \pk Lexikalische Analyse 1 &amp;  \pk\scriptsize Einarbeitung in 
-  C und make, Implementierung eines Quellcode-Filters \\
-30. 10. &amp; \VL{3} \\
-01. 11. &amp; \UE 2 \\
-06. 11. &amp; \VL{4} \\
-08. 11. &amp; \PK 2 &amp; \pk Lexikalische Analyse 2 &amp; \pk\scriptsize Klassifizieren lexikalischer Token, Einsortieren in eine Symboltabelle \\
-13. 11. &amp; \VL{5} \\
-15. 11. &amp; \UE 3 \\
-20. 11. &amp; \VL{6} \\
-22. 11. &amp; \PK 3 &amp; \pk Syntax Analyse 1 &amp; \pk\scriptsize LL(1) Parser für Modula 2 via LL-Algo \\
-27. 11. &amp; \VL{7} \\
-29. 11. &amp; \UE 4 \\
-04. 12. &amp; \VL{8} \\
-06. 12. &amp; \PK 4 &amp; \pk Syntax Analyse 2 &amp; \pk\scriptsize LALR(1) Parser für Modula 2 via Bison \\
-11. 12. &amp; \VL{9} \\
-13. 12. &amp; \UE 5 \\
-18. 12. &amp; \VL{10} \\
-20. 12. &amp; \PK 5 &amp; \pk Semantische Analyse &amp; \pk\scriptsize  Aufbau eines attributierten Syntaxbaumes mittels Kimwitu++\\
-03. 01. &amp; \PK 6 &amp; \pk Code Erzeugung &amp; \pk\scriptsize Ausgabe einer Übersetzung in der Sprache C\\
-08. 01. &amp; \VL{11} \\
-10. 01. &amp; \UE 6 \\
-15. 01. &amp; \VL{12} \\
-17. 01. &amp; \PK 7 &amp; \pk Zusammenfassung &amp; \pk\scriptsize Rückblick und Abschlußbesprechung\\
-22. 01. &amp; \VL{13} \\
-24. 01. &amp; \UE 7 &amp; \ue Zusammenfassung &amp; \ue\scriptsize Rückblick und Abschlußbesprechung
-\end{tabular}
-
-
-&lt;/amsmath&gt;
-[[Category:Compiler]]</text>
-      <sha1>qgktnqczj0y3i8pkc0og00owfbl29nd</sha1>
-    </revision>
-  </page>
-  <page>
-    <title>Compiler/Stoffgliederung</title>
-    <ns>0</ns>
-    <id>58</id>
-    <revision>
-      <id>61</id>
-      <timestamp>2023-09-07T18:55:16Z</timestamp>
-      <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
-      </contributor>
-      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
-      <origin>61</origin>
-      <model>wikitext</model>
-      <format>text/x-wiki</format>
-      <text bytes="52" sha1="6w2n7msedfu7da0uyzrdnoi5jqs6f3j" xml:space="preserve">= =
-&lt;amsmath&gt;
-asd
-
-
-&lt;/amsmath&gt;
-[[Category:Compiler]]</text>
-      <sha1>6w2n7msedfu7da0uyzrdnoi5jqs6f3j</sha1>
-    </revision>
-  </page>
-  <page>
-    <title>Category:Compiler</title>
-    <ns>14</ns>
-    <id>59</id>
-    <revision>
-      <id>62</id>
-      <timestamp>2023-09-07T18:55:44Z</timestamp>
-      <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
-      </contributor>
-      <comment>Created page with "Compilerbau Vorlesung"</comment>
-      <origin>62</origin>
-      <model>wikitext</model>
-      <format>text/x-wiki</format>
-      <text bytes="21" sha1="9hgj82tnju23y0gpupgkn2mdfcdkvt8" xml:space="preserve">Compilerbau Vorlesung</text>
-      <sha1>9hgj82tnju23y0gpupgkn2mdfcdkvt8</sha1>
-    </revision>
-  </page>
-  <page>
-    <title>Compilerbau/Literaturliste</title>
-    <ns>0</ns>
-    <id>60</id>
-    <revision>
-      <id>63</id>
-      <timestamp>2023-09-07T20:55:45Z</timestamp>
-      <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
-      </contributor>
-      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
-      <origin>63</origin>
-      <model>wikitext</model>
-      <format>text/x-wiki</format>
-      <text bytes="191" sha1="puk30bw7jost1ln3rnjyp8565dk7wq1" xml:space="preserve">
-
-
-&lt;amsmath&gt;
-
-\textbf{Wagenknecht:} C. Wagenknecht, M. Hielscher:
-
-Sehr gute Behandlung der LL(k) und LK(k) Theorie, sowie der
-grammatik-Transformationen.
-
-
-
-
-&lt;/amsmath&gt;
-[[Category:Compiler]]</text>
-      <sha1>puk30bw7jost1ln3rnjyp8565dk7wq1</sha1>
+      <sha1>ltgt506t8wwgv6j1cbf5p8sy3y3l6wv</sha1>
     </revision>
   </page>
   <page>
@@ -2824,19 +2310,19 @@ grammatik-Transformationen.
     <ns>6</ns>
     <id>61</id>
     <revision>
-      <id>65</id>
-      <parentid>64</parentid>
-      <timestamp>2023-10-28T19:33:32Z</timestamp>
+      <id>233</id>
+      <parentid>65</parentid>
+      <timestamp>2023-11-08T12:22:38Z</timestamp>
       <contributor>
-        <username>Imported&gt;Dir</username>
-        <id>0</id>
+        <username>Dir</username>
+        <id>1</id>
       </contributor>
-      <comment>Imported&gt;Dir uploaded [[File:Compiler-und-interpreter.svg]]</comment>
-      <origin>64</origin>
+      <comment>Blanked the page</comment>
+      <origin>233</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="19" sha1="1t2q86rx3lsjwwz2n9tjf1n9icfk64q" xml:space="preserve">[[Category:backup]]</text>
-      <sha1>1t2q86rx3lsjwwz2n9tjf1n9icfk64q</sha1>
+      <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
+      <sha1>phoiac9h4m842xq45sp7s6u21eteeq1</sha1>
     </revision>
     <upload>
       <timestamp>2023-09-08T12:49:50Z</timestamp>
@@ -5018,82 +4504,19 @@ bm90IGRpc3BsYXk8L3RleHQ+PC9hPjwvc3dpdGNoPjwvc3ZnPg==
     <ns>12</ns>
     <id>63</id>
     <revision>
-      <id>68</id>
-      <timestamp>2023-09-12T10:20:46Z</timestamp>
+      <id>173</id>
+      <parentid>68</parentid>
+      <timestamp>2023-10-15T13:15:17Z</timestamp>
       <contributor>
-        <username>imported&gt;Dir</username>
+        <username>imported&gt;Admin</username>
         <id>0</id>
       </contributor>
-      <comment>/* Hier */</comment>
-      <origin>68</origin>
+      <comment>Blanked the page</comment>
+      <origin>173</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="112" sha1="skefc40nn028itooiikdf4naq1d5zkd" xml:space="preserve">
-= Teil 1 =
-{{:Compilerbau/Semesterplan}}
-
-= Hier =
-
-{{#lst:Formale Werkzeuge zur Sprachbeschreibung|Maschinen}}</text>
-      <sha1>skefc40nn028itooiikdf4naq1d5zkd</sha1>
-    </revision>
-  </page>
-  <page>
-    <title>Formale Werkzeuge zur Sprachbeschreibung</title>
-    <ns>0</ns>
-    <id>64</id>
-    <revision>
-      <id>69</id>
-      <timestamp>2023-09-13T15:58:04Z</timestamp>
-      <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
-      </contributor>
-      <origin>69</origin>
-      <model>wikitext</model>
-      <format>text/x-wiki</format>
-      <text bytes="348" sha1="4qwvkworr5ft4crn9tkktg0syzzx13z" xml:space="preserve">
-
-== Sprachen ==
-&lt;amsmath&gt;
-\title{Sprachen}
-
-a
-&lt;/amsmath&gt;
-
-== Grammatiken ==
-&lt;amsmath&gt;
-\title{Grammatiken}
-
-Typ 0:
-
-Typ 1:
-
-Typ 2:
-
-Typ 3:
-&lt;/amsmath&gt;
-
-
-== Ableitungen und Ableitungsbäume ==
-&lt;amsmath&gt;
-
-
-&lt;/amsmath&gt;
-
-== Attributierte Bäume ==
-&lt;amsmath&gt;
-asd
-
-&lt;/amsmath&gt;
-
-== Maschinen ==
-Ünber Maschinen
-&lt;amsmath&gt;
-Eine Turing Maschine ist
-
-&lt;/amsmath&gt;</text>
-      <sha1>4qwvkworr5ft4crn9tkktg0syzzx13z</sha1>
+      <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
+      <sha1>phoiac9h4m842xq45sp7s6u21eteeq1</sha1>
     </revision>
   </page>
   <page>
@@ -5101,18 +4524,28 @@ Eine Turing Maschine ist
     <ns>12</ns>
     <id>65</id>
     <revision>
-      <id>70</id>
-      <timestamp>2023-09-13T19:15:37Z</timestamp>
+      <id>223</id>
+      <parentid>174</parentid>
+      <timestamp>2023-11-08T11:42:38Z</timestamp>
       <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
+        <username>Dir</username>
+        <id>1</id>
       </contributor>
-      <origin>70</origin>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>223</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="762" sha1="pu124m0znkgjxkzlmc2juuddygnxew5" xml:space="preserve">__HIDEHEAD__
+      <text bytes="958" sha1="5t0yi6dsqqujgyjk0bxya724xm044o6" xml:space="preserve">__HIDEHEAD__
 
 == Parsifal Cheat Sheet ==
+
+== Editor ==
+
+If the editor frame window is focused,
+you can adjust the font size of the editor
+using Cmd + or Cmd - without resizing the rest of the browser.
+
+
 
 === Attributes ===
 
@@ -5130,8 +4563,9 @@ For the presentation, there can be several scenarios:
 different portions of text. 
 * Continuation: We do not want to indicate this separation into two different portions of text. The second portion should be a seamless continuation of the
 first text. Nevertheless there should be a possibility for the reader to recognize the two parts and to invoke edit links and similar actions for the
-two parts.</text>
-      <sha1>pu124m0znkgjxkzlmc2juuddygnxew5</sha1>
+two parts.
+[[Category:DanteInitialContents]]</text>
+      <sha1>5t0yi6dsqqujgyjk0bxya724xm044o6</sha1>
     </revision>
   </page>
   <page>
@@ -5139,40 +4573,57 @@ two parts.</text>
     <ns>12</ns>
     <id>66</id>
     <revision>
-      <id>71</id>
-      <timestamp>2023-09-14T16:25:32Z</timestamp>
+      <id>230</id>
+      <parentid>222</parentid>
+      <timestamp>2023-11-08T12:13:11Z</timestamp>
       <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
+        <username>Dir</username>
+        <id>1</id>
       </contributor>
-      <comment>Created page with "  == Dante Tree ==  * A shift-click on to a Category link opens the category window as seperate popup window in small size and on the left of the screen. This proved helpful for quick deploy of a category window as an overview."</comment>
-      <origin>71</origin>
+      <comment>/* Dante Tree */</comment>
+      <origin>230</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="227" sha1="o0z473oro5adw6m9i6i1ipnkhm5a77m" xml:space="preserve">
+      <text bytes="747" sha1="icte5f0n2iwvoxxckdccto4sdov4q66" xml:space="preserve">
+
+== Dante Links ==
+* Provides a possibility to add attributes to links.
+* Ensures that links (A-elements) with target 
+** _window open in a separate window, next to the browser, of similar size
+** _side open in an 800x800 window left on the screen.
+
+* Provide markup for external links  which open in a separate window 
+[https://www.w3c.org W3C \w]
+as opposed to [https://www.w3c.org W3C]
+
+
 
 == Dante Tree ==
 
-* A shift-click on to a Category link opens the category window as seperate
-popup window in small size and on the left of the screen. This proved helpful for quick deploy of a category window as an overview.</text>
-      <sha1>o0z473oro5adw6m9i6i1ipnkhm5a77m</sha1>
+* A shift-click on to a Category link opens the category window as seperate popup window in small size and on the left of the screen. This proved helpful for quick deploy of a category window as an overview.
+
+* A shift-click on a link into a portal heading opens an edit window for that portal content.
+[[Category:DanteInitialContents]]</text>
+      <sha1>icte5f0n2iwvoxxckdccto4sdov4q66</sha1>
     </revision>
   </page>
   <page>
-    <title>Hide Test</title>
+    <title>Test/Hide Test</title>
     <ns>0</ns>
     <id>67</id>
     <revision>
-      <id>72</id>
-      <timestamp>2023-09-15T20:54:35Z</timestamp>
+      <id>262</id>
+      <parentid>245</parentid>
+      <timestamp>2023-11-08T13:03:15Z</timestamp>
       <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
+        <username>Dir</username>
+        <id>1</id>
       </contributor>
-      <origin>72</origin>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>262</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="136" sha1="nhlmneglg4fowz3ilg0e3dv96shn883" xml:space="preserve">
+      <text bytes="137" sha1="et2yblggnum3ub7p6imvtgljrce289q" xml:space="preserve">
 
 This is main text. It contains a &lt; and more stuff.
 
@@ -5181,32 +4632,8 @@ This is hidden text.
 &lt;/hide&gt;
 
 This is main text again.
-
-[[Category:backup]]</text>
-      <sha1>nhlmneglg4fowz3ilg0e3dv96shn883</sha1>
-    </revision>
-  </page>
-  <page>
-    <title>Metatest</title>
-    <ns>0</ns>
-    <id>68</id>
-    <revision>
-      <id>73</id>
-      <timestamp>2023-09-15T21:22:28Z</timestamp>
-      <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
-      </contributor>
-      <origin>73</origin>
-      <model>wikitext</model>
-      <format>text/x-wiki</format>
-      <text bytes="42" sha1="3au7vn8yndv7oj60atbzl2u5zn4f5y8" xml:space="preserve">
-
-Das &lt; ist ein &amp;lt;
-
-
-[[Category:backup]]</text>
-      <sha1>3au7vn8yndv7oj60atbzl2u5zn4f5y8</sha1>
+[[Category:Testpage]]</text>
+      <sha1>et2yblggnum3ub7p6imvtgljrce289q</sha1>
     </revision>
   </page>
   <page>
@@ -5288,68 +4715,30 @@ Das &lt; ist ein &amp;lt;
     </revision>
   </page>
   <page>
-    <title>Vorlesung</title>
-    <ns>0</ns>
-    <id>73</id>
-    <revision>
-      <id>84</id>
-      <parentid>83</parentid>
-      <timestamp>2023-10-29T21:35:32Z</timestamp>
-      <contributor>
-        <username>Dir</username>
-        <id>1</id>
-      </contributor>
-      <origin>84</origin>
-      <model>wikitext</model>
-      <format>text/x-wiki</format>
-      <text bytes="60" sha1="06pi06ei8kv0fm4hnwzar1u9ixwnl6p" xml:space="preserve">
-
-Das ist eine sehr schöne Vorlesung, die mir gut gefällt.</text>
-      <sha1>06pi06ei8kv0fm4hnwzar1u9ixwnl6p</sha1>
-    </revision>
-  </page>
-  <page>
-    <title>Main \Pag</title>
-    <ns>0</ns>
-    <id>74</id>
-    <revision>
-      <id>103</id>
-      <timestamp>2023-10-31T15:27:34Z</timestamp>
-      <contributor>
-        <username>Dir</username>
-        <id>1</id>
-      </contributor>
-      <comment>Created page with "asd"</comment>
-      <origin>103</origin>
-      <model>wikitext</model>
-      <format>text/x-wiki</format>
-      <text bytes="3" sha1="s5op7ycvjd36f7zhqh7velbpukh6l5c" xml:space="preserve">asd</text>
-      <sha1>s5op7ycvjd36f7zhqh7velbpukh6l5c</sha1>
-    </revision>
-  </page>
-  <page>
     <title>MediaWiki:CategoryTree</title>
     <ns>8</ns>
     <id>75</id>
     <revision>
-      <id>121</id>
-      <parentid>120</parentid>
-      <timestamp>2023-11-01T13:37:07Z</timestamp>
+      <id>227</id>
+      <parentid>226</parentid>
+      <timestamp>2023-11-08T12:05:02Z</timestamp>
       <contributor>
         <username>Dir</username>
         <id>1</id>
       </contributor>
-      <origin>121</origin>
+      <origin>227</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="156" sha1="0p8my7xtncb8m9zaf9spahk0tfsmrko" xml:space="preserve">
-== Compiler ==
-&lt;categorytree mode="all" showcount="on"&gt;Compiler&lt;/categorytree&gt;
+      <text bytes="310" sha1="rwdy3nm3qnnctu11386jvhtz4lw2ldy" xml:space="preserve">This page opens when clicking on the tree symbol. You can configure it according to your needs.
 
+== DanteInitialContents ==
+&lt;categorytree mode="all" showcount="on"&gt;DanteInitialContents&lt;/categorytree&gt;
 
 == System ==
-&lt;categorytree mode="all" showcount="on"&gt;System&lt;/categorytree&gt;</text>
-      <sha1>0p8my7xtncb8m9zaf9spahk0tfsmrko</sha1>
+&lt;categorytree mode="all" showcount="on"&gt;System&lt;/categorytree&gt;
+
+[[Category:DanteInitialContents]]</text>
+      <sha1>rwdy3nm3qnnctu11386jvhtz4lw2ldy</sha1>
     </revision>
   </page>
   <page>
@@ -5369,6 +4758,794 @@ Das ist eine sehr schöne Vorlesung, die mir gut gefällt.</text>
       <format>text/x-wiki</format>
       <text bytes="79" sha1="bfssza87vjretanqf02vjg3aw9hm5pg" xml:space="preserve">&lt;tagcloud&gt;exclude=television,television_series,celebrities,food,yoga&lt;/tagcloud&gt;</text>
       <sha1>bfssza87vjretanqf02vjg3aw9hm5pg</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:ParsifalTemplate/README</title>
+    <ns>8</ns>
+    <id>77</id>
+    <revision>
+      <id>158</id>
+      <timestamp>2023-10-03T12:50:22Z</timestamp>
+      <contributor>
+        <username>Maintenance script</username>
+        <id>3</id>
+      </contributor>
+      <comment>Imported from text file</comment>
+      <origin>158</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="99" sha1="ivgzptphp7jhyuftzb61no4eppia7xq" xml:space="preserve">The directory Parsifal/initial-templates contains the initial templates to be loaded into the wiki.</text>
+      <sha1>ivgzptphp7jhyuftzb61no4eppia7xq</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>File:T-diagram.svg</title>
+    <ns>6</ns>
+    <id>81</id>
+    <revision>
+      <id>180</id>
+      <parentid>179</parentid>
+      <timestamp>2023-11-06T19:22:17Z</timestamp>
+      <contributor>
+        <username>Imported&gt;Admin</username>
+        <id>0</id>
+      </contributor>
+      <comment>Imported&gt;Admin uploaded [[File:T-diagram.svg]]</comment>
+      <origin>179</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
+      <sha1>phoiac9h4m842xq45sp7s6u21eteeq1</sha1>
+    </revision>
+    <upload>
+      <timestamp>2023-10-15T15:17:54Z</timestamp>
+      <contributor>
+        <username>Imported&gt;Admin</username>
+        <id>0</id>
+      </contributor>
+      <comment deleted="deleted" />
+      <filename>T-diagram.svg</filename>
+      <src>https://localhost:4443/wiki-dir/images/2/25/T-diagram.svg</src>
+      <size>5412</size>
+      <sha1base36>j9zo9tl1k56rv91o9kf3gdy2dim4xtb</sha1base36>
+      <rel>2/25/T-diagram.svg</rel>
+      <contents encoding="base64">PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRw
+Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIyNDJweCIgaGVp
+Z2h0PSIxNjJweCIgdmlld0JveD0iLTAuNSAtMC41IDI0MiAxNjIiIGNvbnRlbnQ9IiZsdDtteGZp
+bGUgaG9zdD0mcXVvdDtpdWstZGFudGUuaW5mb3JtYXRpay51bmktcm9zdG9jay5kZSZxdW90OyBt
+b2RpZmllZD0mcXVvdDsyMDIzLTEwLTE1VDE1OjE3OjU0Ljg0MVomcXVvdDsgYWdlbnQ9JnF1b3Q7
+TW96aWxsYS81LjAgKE1hY2ludG9zaDsgSW50ZWwgTWFjIE9TIFggMTBfMTVfNykgQXBwbGVXZWJL
+aXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzExNy4wLjAuMCBTYWZhcmkvNTM3
+LjM2JnF1b3Q7IHZlcnNpb249JnF1b3Q7MjEuNS4wJnF1b3Q7IGV0YWc9JnF1b3Q7TmdtcjdIbDl5
+QUpMdkxUMm5wNncmcXVvdDsgdHlwZT0mcXVvdDtlbWJlZCZxdW90OyZndDsmbHQ7ZGlhZ3JhbSBp
+ZD0mcXVvdDtKak9GUGdUOUlSOGhxLUhrcS03dSZxdW90OyBuYW1lPSZxdW90O1BhZ2UtMSZxdW90
+OyZndDs1WmhOajVzd0VJWi9EWGV3R3pZOWJ0THR4NkZTcFZUcTJjS3pZTlZnNURpQjlOZDNDRFlm
+WnRPMEVWbFZ5eW40eFRPMjMyY0dCUUs2emV0UG1wWFpWOFZCQmlUa2RVQS9CSVJFNUdHRlA0MXlh
+cFU0amxvaDFZTGJTYjJ3RTcvQWlxRlZENExEZmpUUktDV05LTWRpb29vQ0VqUFNtTmFxR2s5N1Zu
+Szhhc2xTbUFpN2hNbXAra053azdYcWVoWDIrbWNRYWVaV2prSjdKMmR1c2hYMkdlT3FHa2owS2FC
+YnJaUnByL0o2QzdJeHovblN4bjI4Y0xmYm1JYkMvRTBBYVFPT1RCN3MyZXkrek1rZEZncisySGlH
+bzBJVktHNHlrMHNjUlhpcDFhSGcwQ1FMY2RUR0FwKzQxMjhuNmc2SjFRRXFCNk5QT0tYcWJYUXVa
+Z01IbmFaQk1pT080L1RNMGt5N2ROMEszNVRBaFVuWVZaN05jL0xHTHNWZUhYUUNObXBvbTVlSXhs
+Y1NHYVpUTUpORWVERTRkaStkcWJ4TWlDNmFFQWx2SkhRVjlYeUUzaTJLa0YvNk54TjZ4UjVhTFly
+UWJEM1VCVjVLTkIraGVGR0V5UHBPUFhSSFFnL0xJdVNYL3ZyLzc2SDFzZ2o1UFhRem9Xdk5PQito
+OThzaU5Gc1BYVU05SHlIM2hqbEF0RHZ2Y2dMS1FJMTJiZlpHcTUrd1ZWTHBIaG1USWkxd21DQUlR
+SDN6TEtUMDVneXdIa0ViZ1crWGp6WXNGNXczeTJ5cVRCallsU3hwMXF6d1hmcENEVFFKb1A3WEtu
+QUIxUHNmNXZBUHFpUitvVXBvZUxrZ1JnVCtaSGMwc2Z2N21lWGJ0ZHN2NWxlMW0wenMvcEtYYjlq
+cnlIdHdrTHQ1amNQK3EwMzc0T20vZmRHbjN3PT0mbHQ7L2RpYWdyYW0mZ3Q7Jmx0Oy9teGZpbGUm
+Z3Q7Ij48ZGVmcy8+PGc+PHBhdGggZD0iTSAwIDAgTCAyNDAgMCIgZmlsbD0ibm9uZSIgc3Ryb2tl
+PSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9InN0
+cm9rZSIvPjxwYXRoIGQ9Ik0gMCA4MCBMIDAgMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwg
+MCwgMCkiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIvPjxw
+YXRoIGQ9Ik0gMjQwIDgwIEwgMjQwIDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDAp
+IiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBk
+PSJNIDAgODAgTCA4MCA4MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9r
+ZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIvPjxwYXRoIGQ9Ik0gMTYw
+IDgwIEwgMjQwIDgwIiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tlLW1p
+dGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGggZD0iTSA4MCAxNjAg
+TCA4MCA4MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1taXRlcmxp
+bWl0PSIxMCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIvPjxwYXRoIGQ9Ik0gMTYwIDE2MCBMIDE2
+MCA4MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1taXRlcmxpbWl0
+PSIxMCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIvPjxwYXRoIGQ9Ik0gODAgMTYwIEwgMTYwIDE2
+MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1taXRlcmxpbWl0PSIx
+MCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIvPjxyZWN0IHg9IjEwIiB5PSIzMCIgd2lkdGg9IjYw
+IiBoZWlnaHQ9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUiIHBvaW50ZXItZXZlbnRzPSJh
+bGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dpdGNoPjxmb3JlaWdu
+T2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBy
+ZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVu
+c2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGlnbjogbGVmdDsiPjxk
+aXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OiBm
+bGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250ZW50OiB1bnNhZmUg
+Y2VudGVyOyB3aWR0aDogNThweDsgaGVpZ2h0OiAxcHg7IHBhZGRpbmctdG9wOiA0NXB4OyBtYXJn
+aW4tbGVmdDogMTFweDsiPjxkaXYgZGF0YS1kcmF3aW8tY29sb3JzPSJjb2xvcjogcmdiKDAsIDAs
+IDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXNpemU6IDBweDsgdGV4
+dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250
+LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7
+IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7IHdoaXRlLXNwYWNlOiBub3Jt
+YWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPlNvdXJjZTwvZGl2PjwvZGl2PjwvZGl2PjwvZm9y
+ZWlnbk9iamVjdD48dGV4dCB4PSI0MCIgeT0iNDkiIGZpbGw9InJnYigwLCAwLCAwKSIgZm9udC1m
+YW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5T
+b3VyY2U8L3RleHQ+PC9zd2l0Y2g+PC9nPjxyZWN0IHg9IjE2MCIgeT0iMzAiIHdpZHRoPSI2MCIg
+aGVpZ2h0PSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJub25lIiBwb2ludGVyLWV2ZW50cz0iYWxs
+Ii8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9i
+amVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVx
+dWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNp
+YmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2
+IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxl
+eDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNl
+bnRlcjsgd2lkdGg6IDU4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogNDVweDsgbWFyZ2lu
+LWxlZnQ6IDE2MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwg
+MCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0
+LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQt
+c2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsg
+bGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1h
+bDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+VGFyZ2V0PC9kaXY+PC9kaXY+PC9kaXY+PC9mb3Jl
+aWduT2JqZWN0Pjx0ZXh0IHg9IjE5MCIgeT0iNDkiIGZpbGw9InJnYigwLCAwLCAwKSIgZm9udC1m
+YW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5U
+YXJnZXQ8L3RleHQ+PC9zd2l0Y2g+PC9nPjxyZWN0IHg9IjkwIiB5PSIxMDAiIHdpZHRoPSI2MCIg
+aGVpZ2h0PSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJub25lIiBwb2ludGVyLWV2ZW50cz0iYWxs
+Ii8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9i
+amVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVx
+dWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNp
+YmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2
+IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxl
+eDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNl
+bnRlcjsgd2lkdGg6IDU4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogMTE1cHg7IG1hcmdp
+bi1sZWZ0OiA5MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwg
+MCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0
+LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQt
+c2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsg
+bGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1h
+bDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+SW1wPC9kaXY+PC9kaXY+PC9kaXY+PC9mb3JlaWdu
+T2JqZWN0Pjx0ZXh0IHg9IjEyMCIgeT0iMTE5IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQtZmFt
+aWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6ZT0iMTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+SW1w
+PC90ZXh0Pjwvc3dpdGNoPjwvZz48L2c+PHN3aXRjaD48ZyByZXF1aXJlZEZlYXR1cmVzPSJodHRw
+Oi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiLz48YSB0cmFuc2Zv
+cm09InRyYW5zbGF0ZSgwLC01KSIgeGxpbms6aHJlZj0iaHR0cHM6Ly93d3cuZHJhd2lvLmNvbS9k
+b2MvZmFxL3N2Zy1leHBvcnQtdGV4dC1wcm9ibGVtcyIgdGFyZ2V0PSJfYmxhbmsiPjx0ZXh0IHRl
+eHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTBweCIgeD0iNTAlIiB5PSIxMDAlIj5UZXh0
+IGlzIG5vdCBTVkcgLSBjYW5ub3QgZGlzcGxheTwvdGV4dD48L2E+PC9zd2l0Y2g+PC9zdmc+
+      </contents>
+    </upload>
+  </page>
+  <page>
+    <title>File:Flex.svg</title>
+    <ns>6</ns>
+    <id>97</id>
+    <revision>
+      <id>197</id>
+      <parentid>196</parentid>
+      <timestamp>2023-11-06T19:25:14Z</timestamp>
+      <contributor>
+        <username>Imported&gt;Admin</username>
+        <id>0</id>
+      </contributor>
+      <comment>Imported&gt;Admin uploaded [[File:Flex.svg]]</comment>
+      <origin>196</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
+      <sha1>phoiac9h4m842xq45sp7s6u21eteeq1</sha1>
+    </revision>
+    <upload>
+      <timestamp>2023-10-26T11:12:26Z</timestamp>
+      <contributor>
+        <username>Imported&gt;Admin</username>
+        <id>0</id>
+      </contributor>
+      <comment deleted="deleted" />
+      <filename>Flex.svg</filename>
+      <src>https://localhost:4443/wiki-dir/images/7/75/Flex.svg</src>
+      <size>10611</size>
+      <sha1base36>n2u4wvsryoqjvyec7a4rogjsnpyfkmy</sha1base36>
+      <rel>7/75/Flex.svg</rel>
+      <contents encoding="base64">PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRw
+Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSI2ODFweCIgaGVp
+Z2h0PSIxOTFweCIgdmlld0JveD0iLTAuNSAtMC41IDY4MSAxOTEiIGNvbnRlbnQ9IiZsdDtteGZp
+bGUgaG9zdD0mcXVvdDtpdWstZGFudGUuaW5mb3JtYXRpay51bmktcm9zdG9jay5kZSZxdW90OyBt
+b2RpZmllZD0mcXVvdDsyMDIzLTEwLTI2VDExOjEyOjI2LjY2M1omcXVvdDsgYWdlbnQ9JnF1b3Q7
+TW96aWxsYS81LjAgKE1hY2ludG9zaDsgSW50ZWwgTWFjIE9TIFggMTBfMTVfNykgQXBwbGVXZWJL
+aXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzExOC4wLjAuMCBTYWZhcmkvNTM3
+LjM2JnF1b3Q7IHZlcnNpb249JnF1b3Q7MjEuNS4wJnF1b3Q7IGV0YWc9JnF1b3Q7X1R2bXpIaFc4
+dElheDFvSHNNbEkmcXVvdDsgdHlwZT0mcXVvdDtlbWJlZCZxdW90OyZndDsmbHQ7ZGlhZ3JhbSBp
+ZD0mcXVvdDtoY3Rwdks1Z3hTMThsb2xCdmJqMCZxdW90OyBuYW1lPSZxdW90O1BhZ2UtMSZxdW90
+OyZndDs3VmxOYzVzd0VQMDFISnZoMitSWWs3UTl0RE9aU1dlYUhHVllRQk9CR0NISGtGOWZZU1FE
+Rms2Y2hOU1RKcWRvVjdzcjZlM2JsVVVNSjh6cjd3eVYyUzhhQXpGc002NE41OEt3YmN2MGZQR24x
+VFNkeHZldFRwRXlIRXVqWG5HTkgwQjVTdTBheDFDTkREbWxoT055ckl4b1VVREVSenJFR04yTXpS
+Skt4cXVXS0FWTmNSMGhvbXYvNEpobm5UYnd6RjcvQTNDYXFaVXRVODdrU0JsTFJaV2htRzRHS3Vm
+U2NFSkdLZTlHZVIwQ2FjRlR1SFIrM3c3TTdqYkdvT0RIT05pZHd6MGlhM2sydVMvZXFNTkNFWDl0
+TVJOU1JGQlY0Y2h3bGhuUGlWQllZc2pvdW9paGpXY0tDV3JNYitSTU83NXQ5V2VlbEM3cWdkbEZv
+NFNDcytabUtBeThXckYzMjByS3I5c3F4RnF5K3ROTFZVWFhMSkpXQzBrWXhGS1FWdTRPZVVGWm9E
+bUlWWVRKcHMrdFNtMDJTS3ZTTVNDSTQvdnhKcENrV0xvTHQxdmhpbUt4UGR0VTVSRElPSTBpK2Jr
+NCtTaEl0MzNwTjh6bVhpamIzUXVsQ2tZRjZnNnRCUktEd2NGNzFaWXMwOFJ4TmVMOGhOcXdmU0xB
+V2E2WUdLWHRLS1I1aVFrd2pWV2JESE80THRFMkt4dlJKc2FrUWxYWkZXNkM2NVpieXdRVEVsSkMy
+ZGJkU1pMRWpsb2lWcHpST3hqTXhQN0tGLzFGc2VNZUdJZjZjWDdvbVZkNG1tTThGMUljRUNPWUlF
+WmdIdWJBQ1BKSDhQVTBmTVAvRFYzWFBSbTZDdzFkQXZVWjBSRVdUVjljSVd4aW9vUUhuT0E3VWZt
+MDBQRHZlMklMOXhQWjJBTS85aUNJM1Nud0EzdmwrRE9CdjlkMGd1T3c5MmZBUHBqRXZtbk9vbWZB
+SDM0SnhhK0tlWEZIRUNTVHBQZWpBRmJKUExnNzlzbUFQLzk0ZDcycjMvWEJLZTk2eHg5bjMxbnM1
+ZlhZbTk2MTlnTFpiM2JUcTVVK0VtOENuVGZlSjIrZXlSdEw0ODNCZHI3RUJaTE43SDIxYzg4L1dU
+dTNQdURiemRQcjBqcVFvTS9DUEVnY1J5UE9GYU1wUTNuZXJrY3F2VDUvUTgxbnJVNnd4TS9jeFZS
+MW52c0xCNzNSQzJQM252c1g1YW0va0o5RVdTQlJ0SURrN3hCci8zUXZDa3QvTEw5Rkp6eXlEL2F0
+NzFaRm1MMFBxaEwrYklTdmFvVCs3THg1NFczNGtwdjNoY3hSMzh1SHpEbnA5ODkzd0J3aDlwL2tP
+L1ArSHh2TzVWOD0mbHQ7L2RpYWdyYW0mZ3Q7Jmx0Oy9teGZpbGUmZ3Q7Ij48ZGVmcy8+PGc+PHBh
+dGggZD0iTSA4MCA0MCBMIDExMy42MyA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwg
+MCkiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIvPjxwYXRo
+IGQ9Ik0gMTE4Ljg4IDQwIEwgMTExLjg4IDQzLjUgTCAxMTMuNjMgNDAgTCAxMTEuODggMzYuNSBa
+IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0ZXJs
+aW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48cmVjdCB4PSIxMjAiIHk9IjAiIHdpZHRo
+PSI4MCIgaGVpZ2h0PSI4MCIgZmlsbD0iI2ZmZjJjYyIgc3Ryb2tlPSIjZDZiNjU2IiBwb2ludGVy
+LWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRj
+aD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdo
+dD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVh
+dHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246
+IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0i
+ZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVu
+dDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDc4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDog
+NDBweDsgbWFyZ2luLWxlZnQ6IDEyMXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9y
+OiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6
+ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUt
+YmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJn
+YigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUt
+c3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+TGV4PGJyIC8+Q29tcGlsZXI8
+L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMTYwIiB5PSI0NCIgZmls
+bD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgi
+IHRleHQtYW5jaG9yPSJtaWRkbGUiPkxleC4uLjwvdGV4dD48L3N3aXRjaD48L2c+PHJlY3QgeD0i
+MzYwIiB5PSIwIiB3aWR0aD0iODAiIGhlaWdodD0iODAiIGZpbGw9IiNmZmYyY2MiIHN0cm9rZT0i
+I2Q2YjY1NiIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0w
+LjUgLTAuNSkiPjxzd2l0Y2g+PGZvcmVpZ25PYmplY3QgcG9pbnRlci1ldmVudHM9Im5vbmUiIHdp
+ZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMu
+b3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSIgc3R5bGU9Im92ZXJmbG93OiB2aXNp
+YmxlOyB0ZXh0LWFsaWduOiBsZWZ0OyI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5
+OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiB1bnNhZmUgY2VudGVy
+OyBqdXN0aWZ5LWNvbnRlbnQ6IHVuc2FmZSBjZW50ZXI7IHdpZHRoOiA3OHB4OyBoZWlnaHQ6IDFw
+eDsgcGFkZGluZy10b3A6IDQwcHg7IG1hcmdpbi1sZWZ0OiAzNjFweDsiPjxkaXYgZGF0YS1kcmF3
+aW8tY29sb3JzPSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3Jk
+ZXItYm94OyBmb250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0i
+ZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2
+ZXRpY2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZl
+bnRzOiBhbGw7IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPkM8
+YnIgLz5Db21waWxlcjwvZGl2PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSI0
+MDAiIHk9IjQ0IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGZv
+bnQtc2l6ZT0iMTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Qy4uLjwvdGV4dD48L3N3aXRjaD48
+L2c+PHJlY3QgeD0iMCIgeT0iMTAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI2MCIgcng9IjkiIHJ5PSI5
+IiBmaWxsPSIjZDVlOGQ0IiBzdHJva2U9IiM4MmIzNjYiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48
+ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dpdGNoPjxmb3JlaWduT2JqZWN0
+IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiByZXF1aXJl
+ZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxp
+dHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGlnbjogbGVmdDsiPjxkaXYgeG1s
+bnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OiBmbGV4OyBh
+bGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250ZW50OiB1bnNhZmUgY2VudGVy
+OyB3aWR0aDogNzhweDsgaGVpZ2h0OiAxcHg7IHBhZGRpbmctdG9wOiA0MHB4OyBtYXJnaW4tbGVm
+dDogMXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7ICIg
+c3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFsaWdu
+OiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTog
+MTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1o
+ZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsgb3Zl
+cmZsb3ctd3JhcDogbm9ybWFsOyI+bGV4Lmw8YnIgLz5TY2FubmVyPGJyIC8+U3BlemlmaWthdGlv
+bjwvZGl2PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSI0MCIgeT0iNDQiIGZp
+bGw9InJnYigwLCAwLCAwKSIgZm9udC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4
+IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5sZXgubC4uLjwvdGV4dD48L3N3aXRjaD48L2c+PHJlY3Qg
+eD0iMjQwIiB5PSIxMCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjYwIiByeD0iOSIgcnk9IjkiIGZpbGw9
+IiNkYWU4ZmMiIHN0cm9rZT0iIzZjOGViZiIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxnIHRyYW5z
+Zm9ybT0idHJhbnNsYXRlKC0wLjUgLTAuNSkiPjxzd2l0Y2g+PGZvcmVpZ25PYmplY3QgcG9pbnRl
+ci1ldmVudHM9Im5vbmUiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHJlcXVpcmVkRmVhdHVy
+ZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSIgc3R5
+bGU9Im92ZXJmbG93OiB2aXNpYmxlOyB0ZXh0LWFsaWduOiBsZWZ0OyI+PGRpdiB4bWxucz0iaHR0
+cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6IGZsZXg7IGFsaWduLWl0
+ZW1zOiB1bnNhZmUgY2VudGVyOyBqdXN0aWZ5LWNvbnRlbnQ6IHVuc2FmZSBjZW50ZXI7IHdpZHRo
+OiA3OHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6IDQwcHg7IG1hcmdpbi1sZWZ0OiAyNDFw
+eDsiPjxkaXYgZGF0YS1kcmF3aW8tY29sb3JzPSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxl
+PSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2Vu
+dGVyOyI+PGRpdiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7
+IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0
+OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93
+LXdyYXA6IG5vcm1hbDsiPmxleC55eS5jPGJyIC8+U2Nhbm5lcjxiciAvPkMtQ29kZTwvZGl2Pjwv
+ZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIyODAiIHk9IjQ0IiBmaWxsPSJyZ2Io
+MCwgMCwgMCkiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6ZT0iMTJweCIgdGV4dC1h
+bmNob3I9Im1pZGRsZSI+bGV4Lnl5LmMuLi48L3RleHQ+PC9zd2l0Y2g+PC9nPjxwYXRoIGQ9Ik0g
+MjAwIDQwIEwgMjMzLjYzIDQwIiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ry
+b2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGggZD0iTSAy
+MzguODggNDAgTCAyMzEuODggNDMuNSBMIDIzMy42MyA0MCBMIDIzMS44OCAzNi41IFoiIGZpbGw9
+InJnYigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1taXRlcmxpbWl0PSIx
+MCIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxwYXRoIGQ9Ik0gMzIwIDQwIEwgMzUzLjYzIDQwIiBm
+aWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBw
+b2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGggZD0iTSAzNTguODggNDAgTCAzNTEuODggNDMu
+NSBMIDM1My42MyA0MCBMIDM1MS44OCAzNi41IFoiIGZpbGw9InJnYigwLCAwLCAwKSIgc3Ryb2tl
+PSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9ImFs
+bCIvPjxyZWN0IHg9IjQ4MCIgeT0iMTAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI2MCIgcng9IjkiIHJ5
+PSI5IiBmaWxsPSIjZGFlOGZjIiBzdHJva2U9IiM2YzhlYmYiIHBvaW50ZXItZXZlbnRzPSJhbGwi
+Lz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dpdGNoPjxmb3JlaWduT2Jq
+ZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiByZXF1
+aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2li
+aWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGlnbjogbGVmdDsiPjxkaXYg
+eG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OiBmbGV4
+OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250ZW50OiB1bnNhZmUgY2Vu
+dGVyOyB3aWR0aDogNzhweDsgaGVpZ2h0OiAxcHg7IHBhZGRpbmctdG9wOiA0MHB4OyBtYXJnaW4t
+bGVmdDogNDgxcHg7Ij48ZGl2IGRhdGEtZHJhd2lvLWNvbG9ycz0iY29sb3I6IHJnYigwLCAwLCAw
+KTsgIiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9udC1zaXplOiAwcHg7IHRleHQt
+YWxpZ246IGNlbnRlcjsiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgZm9udC1z
+aXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAsIDApOyBs
+aW5lLWhlaWdodDogMS4yOyBwb2ludGVyLWV2ZW50czogYWxsOyB3aGl0ZS1zcGFjZTogbm9ybWFs
+OyBvdmVyZmxvdy13cmFwOiBub3JtYWw7Ij5TY2FubmVyPGJyIC8+QmluYXJ5PC9kaXY+PC9kaXY+
+PC9kaXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjUyMCIgeT0iNDQiIGZpbGw9InJnYigwLCAw
+LCAwKSIgZm9udC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hv
+cj0ibWlkZGxlIj5TY2FubmVyLi4uPC90ZXh0Pjwvc3dpdGNoPjwvZz48cGF0aCBkPSJNIDQ0MCA0
+MCBMIDQ3My42MyA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1t
+aXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIvPjxwYXRoIGQ9Ik0gNDc4Ljg4
+IDQwIEwgNDcxLjg4IDQzLjUgTCA0NzMuNjMgNDAgTCA0NzEuODggMzYuNSBaIiBmaWxsPSJyZ2Io
+MCwgMCwgMCkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBv
+aW50ZXItZXZlbnRzPSJhbGwiLz48cmVjdCB4PSIzNjAiIHk9IjEzMCIgd2lkdGg9IjgwIiBoZWln
+aHQ9IjYwIiByeD0iOSIgcnk9IjkiIGZpbGw9IiNlMWQ1ZTciIHN0cm9rZT0iIzk2NzNhNiIgcG9p
+bnRlci1ldmVudHM9ImFsbCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjUgLTAuNSkiPjxz
+d2l0Y2g+PGZvcmVpZ25PYmplY3QgcG9pbnRlci1ldmVudHM9Im5vbmUiIHdpZHRoPSIxMDAlIiBo
+ZWlnaHQ9IjEwMCUiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzEx
+L2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSIgc3R5bGU9Im92ZXJmbG93OiB2aXNpYmxlOyB0ZXh0LWFs
+aWduOiBsZWZ0OyI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5
+bGU9ImRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiB1bnNhZmUgY2VudGVyOyBqdXN0aWZ5LWNv
+bnRlbnQ6IHVuc2FmZSBjZW50ZXI7IHdpZHRoOiA3OHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10
+b3A6IDE2MHB4OyBtYXJnaW4tbGVmdDogMzYxcHg7Ij48ZGl2IGRhdGEtZHJhd2lvLWNvbG9ycz0i
+Y29sb3I6IHJnYigwLCAwLCAwKTsgIiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9u
+dC1zaXplOiAwcHg7IHRleHQtYWxpZ246IGNlbnRlcjsiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlu
+bGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xv
+cjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyBwb2ludGVyLWV2ZW50czogYWxsOyB3
+aGl0ZS1zcGFjZTogbm9ybWFsOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7Ij5Qcm9ncmFtbSBhbHM8
+YnIgLz5UZXh0PC9kaXY+PC9kaXY+PC9kaXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjQwMCIg
+eT0iMTY0IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQt
+c2l6ZT0iMTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+UHJvZ3JhbW0gYWxzLi4uPC90ZXh0Pjwv
+c3dpdGNoPjwvZz48cmVjdCB4PSI2MDAiIHk9IjEwIiB3aWR0aD0iODAiIGhlaWdodD0iNjAiIHJ4
+PSI5IiByeT0iOSIgZmlsbD0iI2UxZDVlNyIgc3Ryb2tlPSIjOTY3M2E2IiBwb2ludGVyLWV2ZW50
+cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9y
+ZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAw
+JSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNF
+eHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7
+Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxh
+eTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5z
+YWZlIGNlbnRlcjsgd2lkdGg6IDc4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogNDBweDsg
+bWFyZ2luLWxlZnQ6IDYwMXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2Io
+MCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4
+OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7
+IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAw
+LCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6
+IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+UHJvZ3JhbW0gYWxzPGJyIC8+VG9rZW5z
+dHJvbTwvZGl2PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSI2NDAiIHk9IjQ0
+IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6ZT0i
+MTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+UHJvZ3JhbW0gYWxzLi4uPC90ZXh0Pjwvc3dpdGNo
+PjwvZz48cGF0aCBkPSJNIDQ0MCAxMzAgTCA1MTQuOTEgNzMuODIiIGZpbGw9Im5vbmUiIHN0cm9r
+ZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJz
+dHJva2UiLz48cGF0aCBkPSJNIDUxOS4xMSA3MC42NyBMIDUxNS42MSA3Ny42NyBMIDUxNC45MSA3
+My44MiBMIDUxMS40MSA3Mi4wNyBaIiBmaWxsPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZT0icmdiKDAs
+IDAsIDApIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48cGF0
+aCBkPSJNIDU2MCA0MCBMIDU5My42MyA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwg
+MCkiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIvPjxwYXRo
+IGQ9Ik0gNTk4Ljg4IDQwIEwgNTkxLjg4IDQzLjUgTCA1OTMuNjMgNDAgTCA1OTEuODggMzYuNSBa
+IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0ZXJs
+aW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48L2c+PHN3aXRjaD48ZyByZXF1aXJlZEZl
+YXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHki
+Lz48YSB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLC01KSIgeGxpbms6aHJlZj0iaHR0cHM6Ly93d3cu
+ZHJhd2lvLmNvbS9kb2MvZmFxL3N2Zy1leHBvcnQtdGV4dC1wcm9ibGVtcyIgdGFyZ2V0PSJfYmxh
+bmsiPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTBweCIgeD0iNTAlIiB5
+PSIxMDAlIj5UZXh0IGlzIG5vdCBTVkcgLSBjYW5ub3QgZGlzcGxheTwvdGV4dD48L2E+PC9zd2l0
+Y2g+PC9zdmc+
+      </contents>
+    </upload>
+  </page>
+  <page>
+    <title>What is a DanteWiki (Lecture)</title>
+    <ns>0</ns>
+    <id>98</id>
+    <revision>
+      <id>198</id>
+      <timestamp>2023-11-02T14:27:56Z</timestamp>
+      <contributor>
+        <username>imported&gt;Admin</username>
+        <id>0</id>
+      </contributor>
+      <comment>/* Requirements for Base System */</comment>
+      <origin>198</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="4937" sha1="pi23o1bfkhuilnynwm33gpkrh8vpxj7" xml:space="preserve">== Motivation ==
+&lt;amsmath sans&gt;
+\begin{enumerate}
+\item To describe what a DanteWiki is.
+\item To outline possible Thesis work on DanteWiki-related questions. \hfill starting in Spring 2024
+\end{enumerate}
+\up\up
+&lt;/amsmath&gt;
+
+== Problem Description ==
+&lt;amsmath sans&gt;
+
+\textbf{Workflow:} \tabto{4cm}Dominated by institutions, not by the scientist.
+
+\textbf{Open:} \tabto{4cm}Allows all kinds of integrations when deemed necessary.
+
+\textbf{Notebook Mentality:} \tabto{4cm}Document everything you do.
+
+\textbf{Perpetual Beta:} \tabto{4cm}Idea, experiment, preprint, paper, revision, reception.
+
+\textbf{Lockin:} \tabto{4cm} You write for Obsidian, Wordpress, StudIP, ILIAS, Springer, $\ldots$
+&lt;/amsmath&gt;
+
+== Vision ==
+&lt;amsmath sans&gt;
+
+The one stop shop of publishing for the working scientist.
+
+\url{https://www.explainxkcd.com/wiki/index.php/927:_Standards}
+
+\begin{enumerate}
+\item Data, process, storage and workflow sovereignty.
+\item Every researcher has her own DanteWiki.
+\item Every DanteWiki has pull, push, subscribe interfaces.
+\item Distributed reading, writing, feedback and annotation.
+\end{enumerate}\up
+&lt;/amsmath&gt;
+
+== Why that Name? ==
+&lt;amsmath sans&gt;
+
+\textbf{Dante:}
+\begin{quote}
+Es gibt keine Wissenschaft \newline
+ohne die Aufzeichnung dessen, \newline was man begriffen hat. 
+\end{quote}
+
+Coined by {\sc Dante Alighieri} \\
+handed down by {\sc Nicolo Machiavelli} on October $10^\mbox{th}$ 1513\\ 
+in a letter to the Florentine
+ambassador {\sc Lorenzo di Medici}.
+
+\textbf{Wiki:} Hawaiian for {\color{red} fast} and: MediaWiki.
+&lt;/amsmath&gt;
+
+== Requirements for Base System ==
+&lt;amsmath sans&gt;
+
+\begin{enumerate}
+\item Open Source 
+\item Browser-based
+\item Desktop-capable, docker-capable
+\item \LaTeX-integration easy
+\end{enumerate}
+
+\textbf{Candidate Concepts:} Confluence, Obsidian, Bluespice
+&lt;/amsmath&gt;
+
+== Why MediaWiki? ==
+&lt;amsmath sans&gt;
+\begin{enumerate}
+\item Stable system.\\
+Stable as in reliable.\\
+Stable as in not a moving target.
+\item Concepts and UI widely known.
+\item Many extensions (some pretty bad, but: exten\textbf{sible}).
+\item Important and tedious stuff is already there.
+\item Good API with Rest, JS, PHP, bot libraries.
+\item The most important integration (\LaTeX) I built during Corona times.
+\end{enumerate}
+&lt;/amsmath&gt;
+
+== Why LaTeX? ==
+&lt;amsmath sans&gt;
+\tikzAutomaton
+
+\begin{center}
+\begin{tikzpicture}
+\node[state, initial]                (1)  {$1$};
+\node[state, right of=1] (2)  {$2$};
+\node[state, accepting, right of=2]            (3)  {$3$};
+\node[state, right of=3]            (4)  {$4$};
+\draw 
+(1) edge[above]                 node{$a$}    (2)
+(1) edge[above,bend left]            node{$b$}    (4)
+(2) edge[above,bend right]           node{$a$}    (3)
+(2) edge[above,loop below]            node{$b$}    (2)
+(3) edge[above,bend right]           node{$a$}    (4)
+(3) edge[above,bend left]            node{$b$}    (4)
+(4) edge[above,loop below]       node{$a$}    (4)
+(4) edge[above,loop above]        node{$b$}    (4)
+;
+\end{tikzpicture}
+\end{center}
+\up
+\[
+\xymatrix {
+A \ar[r]^0_1 &amp; B  \ar[d]^0_1 \ar[r]_{\vartheta (x) } &amp; C \ar[d]|{ ab ^*}\\
+D \ar[u]^0_1 &amp; E \ar[l]^0_1 &amp; F
+}
+\]
+
+&lt;/amsmath&gt;
+
+== Drawio and much more is there as well :-) ==
+&lt;drawio filename="example" /&gt;
+
+== Examples for Tasks and Theses ==
+&lt;amsmath sans&gt;
+
+\textbf{Synchronization Concepts:}
+\begin{enumerate}
+\item See what others write on topics I am interested in.
+\item See how others annotate on topics I have written.
+\item Share lecture material.
+\item Receive feedback from students and researchers.
+\item Provide feedback to students and researchers using a similar system.
+\end{enumerate}
+
+\textbf{Publishing Concepts:}
+\begin{enumerate}
+\item Identification and authentication of authors and readers.
+\item Trustworthy measurement of readership, citations and impact.
+\item Aspects of plagiarism.
+\end{enumerate}
+
+\textbf{Knowledge Graph:}
+\begin{enumerate}
+\item How to build a topic map based on the contents?
+\item How to interconnect with other systems based on the knowledge graph?
+\item How to find other, related DanteWiki systems?
+\end{enumerate}
+
+\textbf{Integration Tasks:}
+\begin{enumerate}
+\item AI support: \tabto{2.5cm}ChatGPT reading texts and generating \textit{Kontrollfragen}
+\item AI experiment: \tabto{2.5cm}Train your own custom LLM on the topic.
+\item Translation: \tabto{2.5cm}DeepL preparing and improving translations.\\
+ \tabto{2.5cm} Especially: \LaTeX\ translation.
+\item Search: \tabto{2.5cm} ACM, Google Scholar suggesting references.
+\item LMS: \tabto{2.5cm} Tweedback, Moodle, ILIAS, H5P
+\end{enumerate}
+
+\textbf{Security of Content Integration / Synchronization:}
+\begin{enumerate}
+\item Eg: \LaTeX\ reading and typesetting \texttt{/etc/passwd}
+\item Eg: SVG / XML reading in local files
+\item Eg: HTML performing Javascript and \texttt{&lt;script&gt;} injection
+\item Eg: Remote content loading such as \texttt{IMG} leaking IP addresses of visitors.
+\end{enumerate}
+&lt;/amsmath&gt;</text>
+      <sha1>pi23o1bfkhuilnynwm33gpkrh8vpxj7</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>File:Example.svg</title>
+    <ns>6</ns>
+    <id>99</id>
+    <revision>
+      <id>200</id>
+      <parentid>199</parentid>
+      <timestamp>2023-11-06T19:25:25Z</timestamp>
+      <contributor>
+        <username>Imported&gt;Admin</username>
+        <id>0</id>
+      </contributor>
+      <comment>Imported&gt;Admin uploaded [[File:Example.svg]]</comment>
+      <origin>199</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
+      <sha1>phoiac9h4m842xq45sp7s6u21eteeq1</sha1>
+    </revision>
+    <upload>
+      <timestamp>2023-11-02T09:22:22Z</timestamp>
+      <contributor>
+        <username>Imported&gt;Admin</username>
+        <id>0</id>
+      </contributor>
+      <comment deleted="deleted" />
+      <filename>Example.svg</filename>
+      <archivename>20231102142947!Example.svg</archivename>
+      <src>https://localhost:4443/wiki-dir/images/archive/8/84/20231102142947%21Example.svg</src>
+      <size>1888</size>
+      <sha1base36>ov63zi9duta292p91g12h5u7hd9ukws</sha1base36>
+      <rel>archive/8/84/20231102142947!Example.svg</rel>
+      <contents encoding="base64">PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRw
+Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIzMDFweCIgaGVp
+Z2h0PSIxNDFweCIgdmlld0JveD0iLTAuNSAtMC41IDMwMSAxNDEiIGNvbnRlbnQ9IiZsdDtteGZp
+bGUgaG9zdD0mcXVvdDtpdWstZGFudGUuaW5mb3JtYXRpay51bmktcm9zdG9jay5kZSZxdW90OyBt
+b2RpZmllZD0mcXVvdDsyMDIzLTExLTAyVDA5OjIyOjIxLjgzNFomcXVvdDsgYWdlbnQ9JnF1b3Q7
+TW96aWxsYS81LjAgKE1hY2ludG9zaDsgSW50ZWwgTWFjIE9TIFggMTBfMTVfNykgQXBwbGVXZWJL
+aXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzExOC4wLjAuMCBTYWZhcmkvNTM3
+LjM2JnF1b3Q7IHZlcnNpb249JnF1b3Q7MjEuNS4wJnF1b3Q7IGV0YWc9JnF1b3Q7TjY4Nk9FcDdS
+eHBHdjhDZEdaa1YmcXVvdDsgdHlwZT0mcXVvdDtlbWJlZCZxdW90OyZndDsmbHQ7ZGlhZ3JhbSBp
+ZD0mcXVvdDtCdUZkTm0yQnV4aWd6a1dNMkt1TCZxdW90OyBuYW1lPSZxdW90O1BhZ2UtMSZxdW90
+OyZndDtyWlZOVTRNd0VJWi9EVmVIajdiMnFxMGZGMGRuZWxDUE1Wa2hZeUJNQ0FMK2VrT3pBUUk0
+ZXZEVTdKUGR6ZWJkRFEyU1E5N2VLVkptRDVLQkNPS1F0VUZ5RE9JNGlqZXgrZWxKWjhsdUYxbVFL
+czdRYVFRbi9nVUlRNlExWjFCNWpscEtvWG5wUXlxTEFxajJHRkZLTnI3YnV4VCtxU1ZKWVFGT2xJ
+Z2xmZVpNWjVidXQrSEk3NEdubVRzNUNuRW5KODRaUVpVUkpwc0pTbTZDNUtDazFIYVZ0d2NRdlho
+T0Z4dDMrOFB1VUppQ1F2OGxBQnZ4U1VTTmQ4TzZkT2N1YTBvcysyV3BKSVhLS0hmZFpGekRxU1Mw
+eDQxcHNXR1p6b1d4SXJOOEkvUWpWYkl1MkdPdEJTOEFPUjRGU2tQN1k3blJJSUtaSHBBNWFOVVpG
+eGZnSk83Y0tLSGRqRzBZV0RacHdRNFp3YzZuUStwUkhMTkFmZGExU243WFNtVXlmNnYvb05FL2FK
+RmN6clRZTDdYWXIwaXgvd2NwTnI5TEFRVzc2cCthc2FnZ1ZjV3ByOEI1UUtEUEZ4b0xXcTVmY0tk
+ZnYvYjhZb3ZXc1oyNEhUdG5GS2JxbDZueE9qWEdvTFBsb215aHdCWXZmS2E3dVl5c0ZRWHZuV2lp
+VXRDVGNWaDJaNkwrZGtWOXh4UUlvdm1uWDhSYVMvQ0VKOGxOZVVQek42SGYvR0VZWEFwYlBFWk5Q
+d0R6UkxNWGxjU3pSUGJLaTBUbkNSbXV2VFkweGh5L1k5WjkvRGRJYnI0QiZsdDsvZGlhZ3JhbSZn
+dDsmbHQ7L214ZmlsZSZndDsiPjxkZWZzLz48Zz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTIw
+IiBoZWlnaHQ9IjYwIiBmaWxsPSJyZ2IoMjU1LCAyNTUsIDI1NSkiIHN0cm9rZT0icmdiKDAsIDAs
+IDApIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHBhdGggZD0iTSAxMiAwIEwgMTIgNjAgTSAxMDgg
+MCBMIDEwOCA2MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1taXRl
+cmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxwYXRoIGQ9Ik0gMjYwIDYwIEwgMzAw
+IDEwMCBMIDI2MCAxNDAgTCAyMjAgMTAwIFoiIGZpbGw9InJnYigyNTUsIDI1NSwgMjU1KSIgc3Ry
+b2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9
+ImFsbCIvPjxwYXRoIGQ9Ik0gMTIwIDMwIEwgMjM0LjEyIDc3LjU1IiBmaWxsPSJub25lIiBzdHJv
+a2U9InJnYigwLCAwLCAwKSIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0i
+c3Ryb2tlIi8+PHBhdGggZD0iTSAyMzguOTcgNzkuNTcgTCAyMzEuMTYgODAuMTEgTCAyMzQuMTIg
+NzcuNTUgTCAyMzMuODUgNzMuNjUgWiIgZmlsbD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigw
+LCAwLCAwKSIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PC9n
+Pjwvc3ZnPg==
+      </contents>
+    </upload>
+    <upload>
+      <timestamp>2023-11-02T14:29:47Z</timestamp>
+      <contributor>
+        <username>Imported&gt;Admin</username>
+        <id>0</id>
+      </contributor>
+      <comment deleted="deleted" />
+      <filename>Example.svg</filename>
+      <src>https://localhost:4443/wiki-dir/images/8/84/Example.svg</src>
+      <size>1890</size>
+      <sha1base36>sh822n66g8lt3knfidi7ngvp68l2sx2</sha1base36>
+      <rel>8/84/Example.svg</rel>
+      <contents encoding="base64">PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRw
+Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIyNjFweCIgaGVp
+Z2h0PSIxNDFweCIgdmlld0JveD0iLTAuNSAtMC41IDI2MSAxNDEiIGNvbnRlbnQ9IiZsdDtteGZp
+bGUgaG9zdD0mcXVvdDtpdWstZGFudGUuaW5mb3JtYXRpay51bmktcm9zdG9jay5kZSZxdW90OyBt
+b2RpZmllZD0mcXVvdDsyMDIzLTExLTAyVDE0OjI5OjQ3Ljg5OFomcXVvdDsgYWdlbnQ9JnF1b3Q7
+TW96aWxsYS81LjAgKE1hY2ludG9zaDsgSW50ZWwgTWFjIE9TIFggMTBfMTVfNykgQXBwbGVXZWJL
+aXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzExOC4wLjAuMCBTYWZhcmkvNTM3
+LjM2JnF1b3Q7IGV0YWc9JnF1b3Q7elYzMkNaUVZBcVQtR1pTSFQ5Z2MmcXVvdDsgdmVyc2lvbj0m
+cXVvdDsyMS41LjAmcXVvdDsgdHlwZT0mcXVvdDtlbWJlZCZxdW90OyZndDsmbHQ7ZGlhZ3JhbSBp
+ZD0mcXVvdDtCdUZkTm0yQnV4aWd6a1dNMkt1TCZxdW90OyBuYW1lPSZxdW90O1BhZ2UtMSZxdW90
+OyZndDtyWlhCY3Bzd0VJYWZobXNIVUhEY1kydW42YVhUenZqUTVLaElXOUJVSUVZSWcvdjBGZFlL
+SkVNbU9lVGkyZjIwdTFyOUsrU0VIT3J4VWRPMitxRTR5Q1JQK1ppUVk1TG45OFZuK3p1Qml3TzdY
+ZVpBcVFWM0tBQW44UThRcGtoN3dhR0xBbzFTMG9nMmhrdzFEVEFUTWFxMUd1S3dQMHJHdTdhMGhC
+VTRNU3JYOUxmZ3BuSjBYNlFML3c2aXJQek9XWW9yTmZYQkNMcUtjalVFaUR3azVLQ1ZNczZxeHdQ
+SVNUdXZpOHY3OXNycTNKaUd4cnduSVhjSlp5cDdQQnYyWlM3K3NMYkZkakpiclJoMFZybXZReVVN
+bkZyS0pqellDVnRXbVZwYUw3UG1DMlYvUzYzNmh2L3NqUlFOSUYvM2h1MmVRUnNZQTRTOVBvS3F3
+ZWlMRGZHckJIWERpNVB0MEIrV01XUmUyeW9ZZ1krak9QbHlMcjJJWXczVVoxc3I4clpXdWxMMVMv
+OE9qVDVBQzVMRldzeDNLdEJpdnlIRi9nT2t1SHRiQ21qNGwrbFRzeDZUdE9zRWl4VzRYaENZNnFY
+V2cxR1lKMXlaN09lSmZ5clFPNDVCMlBIaW5jWjIvUlE2ejZHekpGMDluL1dxOHAzcU5ZUG9zekJV
+bDJDaTZRT1Bub2IxZEFMMWl3MzFQZE1ncVJIbitFSFpHZ251OEVzSjIrODgvTHMwSGo2NXY1bXFP
+dzFtaFEvQWJhSGlwbEIrVThocHNDcDB2U0h6c2JjdWpYV1hkOHlGTDM4RzVPRS8mbHQ7L2RpYWdy
+YW0mZ3Q7Jmx0Oy9teGZpbGUmZ3Q7Ij48ZGVmcy8+PGc+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9
+IjEyMCIgaGVpZ2h0PSI2MCIgZmlsbD0icmdiKDI1NSwgMjU1LCAyNTUpIiBzdHJva2U9InJnYigw
+LCAwLCAwKSIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxwYXRoIGQ9Ik0gMTIgMCBMIDEyIDYwIE0g
+MTA4IDAgTCAxMDggNjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2Ut
+bWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48cGF0aCBkPSJNIDIyMCA2MCBM
+IDI2MCAxMDAgTCAyMjAgMTQwIEwgMTgwIDEwMCBaIiBmaWxsPSJyZ2IoMjU1LCAyNTUsIDI1NSki
+IHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZl
+bnRzPSJhbGwiLz48cGF0aCBkPSJNIDEyMCAzMCBMIDE5NC42IDc2LjYyIiBmaWxsPSJub25lIiBz
+dHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50
+cz0ic3Ryb2tlIi8+PHBhdGggZD0iTSAxOTkuMDUgNzkuNDEgTCAxOTEuMjYgNzguNjcgTCAxOTQu
+NiA3Ni42MiBMIDE5NC45NyA3Mi43MyBaIiBmaWxsPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZT0icmdi
+KDAsIDAsIDApIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48
+L2c+PC9zdmc+
+      </contents>
+    </upload>
+  </page>
+  <page>
+    <title>Category:DanteInitialContents</title>
+    <ns>14</ns>
+    <id>113</id>
+    <revision>
+      <id>237</id>
+      <parentid>221</parentid>
+      <timestamp>2023-11-08T12:26:40Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <origin>237</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="213" sha1="jq2krfwzhtv4pfyshg1b9g8ys6h6r5x" xml:space="preserve">This category contains pages used for bootstrapping Dantewiki.
+
+'''Important:''' We strongly recommend that you do not edit this category or use it in own pages as this might break your system.
+
+
+[[Category:Root]]</text>
+      <sha1>jq2krfwzhtv4pfyshg1b9g8ys6h6r5x</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Category:ParsifalTemplate</title>
+    <ns>14</ns>
+    <id>114</id>
+    <revision>
+      <id>229</id>
+      <timestamp>2023-11-08T12:08:41Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "This category contains all pages which may serve as templates for the Parsifal extension.  Usually, such templates are also in the MediaWiki: namespace and subpages of [[MediaWiki:ParsifalTemplate]]"</comment>
+      <origin>229</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="198" sha1="7on77fk4223w5cnzdknyt8e2v4suhnr" xml:space="preserve">This category contains all pages which may serve as templates for the Parsifal extension.
+
+Usually, such templates are also in the MediaWiki: namespace and subpages of [[MediaWiki:ParsifalTemplate]]</text>
+      <sha1>7on77fk4223w5cnzdknyt8e2v4suhnr</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Category:Root</title>
+    <ns>14</ns>
+    <id>115</id>
+    <revision>
+      <id>231</id>
+      <timestamp>2023-11-08T12:14:24Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "This is a generic root category.  It currently is there and we have no real use for it thus far ;-)"</comment>
+      <origin>231</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="99" sha1="lmjjz93kkso2pn2n5r8cuntpk1ds24f" xml:space="preserve">This is a generic root category.
+
+It currently is there and we have no real use for it thus far ;-)</text>
+      <sha1>lmjjz93kkso2pn2n5r8cuntpk1ds24f</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Category:Pages with syntax highlighting errors</title>
+    <ns>14</ns>
+    <id>116</id>
+    <revision>
+      <id>241</id>
+      <timestamp>2023-11-08T12:30:57Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "Do not remove this page. It is needed by the system itself."</comment>
+      <origin>241</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="59" sha1="5ju4138xr2ztyr517r6vv8pzibxx6qs" xml:space="preserve">Do not remove this page. It is needed by the system itself.</text>
+      <sha1>5ju4138xr2ztyr517r6vv8pzibxx6qs</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:ParsifalTemplate</title>
+    <ns>8</ns>
+    <id>117</id>
+    <revision>
+      <id>250</id>
+      <timestamp>2023-11-08T12:52:01Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "This page is the superpage of all parsifal templates."</comment>
+      <origin>250</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="53" sha1="nsd5h9zd5zoq531fqxbojlay02k09iz" xml:space="preserve">This page is the superpage of all parsifal templates.</text>
+      <sha1>nsd5h9zd5zoq531fqxbojlay02k09iz</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Category:Testpage</title>
+    <ns>14</ns>
+    <id>118</id>
+    <revision>
+      <id>257</id>
+      <timestamp>2023-11-08T13:01:53Z</timestamp>
+      <contributor>
+        <username>Dir</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "Pages in this category are for testing and demo purposes only."</comment>
+      <origin>257</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="62" sha1="jatsdv2pt9fqytxlti823i3znpqhg5z" xml:space="preserve">Pages in this category are for testing and demo purposes only.</text>
+      <sha1>jatsdv2pt9fqytxlti823i3znpqhg5z</sha1>
     </revision>
   </page>
 </mediawiki>
