@@ -626,7 +626,7 @@ function runLap() {
   local MOUNT_VOL=/var/www/html
   local VOLUME_NAME=lap-volume
 
-  local MODE=php
+  local MODE=PHP
   local NETWORK_NAME=dante-network
 
   if docker container inspect "$CONTAINER_NAME" > /dev/null 2>&1; then
