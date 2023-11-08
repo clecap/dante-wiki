@@ -103,15 +103,7 @@ copyInMinimal () { # copy in minimal initial contents from here to template volu
   local TARGET=$1
   printf "\n*** Copying in minimal initial contents \n"
     mkdir -p ${TOP_DIR}/volumes/full/content/${TARGET}/assets
-
-#    cp ${TOP_DIR}/assets/initial-contents/minimal-initial-contents.xml  ${TOP_DIR}/volumes/full/content/${TARGET}/assets/minimal-initial-contents.xml
-#    cp "${TOP_DIR}/assets/initial-contents/Main Page" "${TOP_DIR}/volumes/full/content/${TARGET}/assets/Main Page"
-#    cp "${TOP_DIR}/assets/initial-contents/Privacypage" "${TOP_DIR}/volumes/full/content/${TARGET}/assets/Privacypage"
-#    cp "${TOP_DIR}/assets/initial-contents/Disclaimerpage" "${TOP_DIR}/volumes/full/content/${TARGET}/assets/Disclaimerpage"
-#    cp "${TOP_DIR}/assets/initial-contents/Sidebar" "${TOP_DIR}/volumes/full/content/${TARGET}/assets/Sidebar"
-
-    cp "${TOP_DIR}/assets/initial-contents/*"  "${TOP_DIR}/volumes/full/content/${TARGET}/assets/"
-
+    cp ${TOP_DIR}/assets/initial-contents/*  ${TOP_DIR}/volumes/full/content/${TARGET}/assets/
   printf "DONE copying in minimal initial contents\n\n"
 }
 

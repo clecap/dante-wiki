@@ -13,7 +13,6 @@ TOP_DIR="${DIR}/../../../"
 # currently used in skin installer in script-library
 MW_VERSION=REL1_39
 
-
 source ${TOP_DIR}/volumes/full/spec/script-library.sh
 
 cleanUpVolume
@@ -27,6 +26,7 @@ source ${TOP_DIR}/volumes/full/spec/git-clone-from-parsifal.sh
 getSkins wiki-dir
 addingImages wiki-dir
 installingDrawio wiki-dir
+
 copyInMinimal wiki-dir
 
 printf "*** copying some private credentials from main directory into volume\n"
