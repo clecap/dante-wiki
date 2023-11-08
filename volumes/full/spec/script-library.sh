@@ -112,13 +112,11 @@ copyInMinimal () { # copy in minimal initial contents from here to template volu
 
     cp "${TOP_DIR}/assets/initial-contents/*" "${TOP_DIR}/volumes/full/content/${TARGET}/assets/"
 
-
   printf "DONE copying in minimal initial contents\n\n"
 }
 
 
-
-minimalInitialContents () {
+function minimalInitialContents () { # load the minimal initial content into a freshly initialized dantewiki
   MOUNT="/var/www/html/"
   LAP_CONTAINER=my-lap-container
   TARGET=wiki-dir
@@ -132,26 +130,20 @@ minimalInitialContents () {
   docker exec ${LAP_CONTAINER} php ${MOUNT}${TARGET}/maintenance/importDump.php --namespaces '10' --debug $CONT 
   docker exec ${LAP_CONTAINER} php ${MOUNT}${TARGET}/maintenance/importDump.php --uploads --debug $CONT  
 
+  # main page and sidebar need a separate check in to be up to date properly
   docker exec ${LAP_CONTAINER} php /var/www/html/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite --prefix "MediaWiki:" ${MOUNT}/${TARGET}/assets/Sidebar
-
   docker exec ${LAP_CONTAINER} php /var/www/html/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite  "${MOUNT}/${TARGET}/assets/Main Page"
 
-# DO THIS as part of the initial minimal content dump
-#  docker exec ${LAP_CONTAINER} php /var/www/html/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite --prefix "MediaWiki" "${MOUNT}/${TARGET}/assets/Disclaimerpage"
-#  docker exec ${LAP_CONTAINER} php /var/www/html/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite --prefix "MediaWiki" "${MOUNT}/${TARGET}/assets/Privacypage"
-#  docker exec ${LAP_CONTAINER} php /var/www/html/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite --prefix "MediaWiki:Sidebar/" "${MOUNT}/${TARGET}/assets/Areas"
-#  docker exec ${LAP_CONTAINER} php /var/www/html/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite --prefix "MediaWiki:Sidebar/" "${MOUNT}/${TARGET}/assets/UI"
-#  docker exec ${LAP_CONTAINER} php /var/www/html/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite --prefix "MediaWiki:Sidebar/" "${MOUNT}/${TARGET}/assets/Social"
-
-  printf "\n\n* rebuildrecentchanges\n"
-    docker exec ${LAP_CONTAINER} php ${MOUNT}${TARGET}/maintenance/rebuildrecentchanges.php
+  printf "\n\n**** RUNNING: initSiteStats \n"
+    docker exec ${LAP_CONTAINER} php ${MOUNT}${TARGET}/maintenance/initSiteStats.php --update
   printf "DONE\n"
 
+# Not needed since no images are uploaded
+#  printf "\n\n**** RUNNING: initSiteStats \n"
+#    docker exec ${LAP_CONTAINER} php ${MOUNT}${TARGET}/maintenance/rebuildImages.php
+#  printf "DONE\n"
 
-  docker exec ${LAP_CONTAINER} php ${MOUNT}${TARGET}/maintenance/initSiteStats.php --update
-  docker exec ${LAP_CONTAINER} php ${MOUNT}${TARGET}/maintenance/rebuildImages.php
-
-  printf "\n\n**** RUNNING: rebuildImages \n"
+  printf "\n\n**** RUNNING: rebuildall \n"
     docker exec ${LAP_CONTAINER} php ${MOUNT}${TARGET}/maintenance/rebuildall.php 
   printf "DONE\n"
 
@@ -159,12 +151,9 @@ minimalInitialContents () {
     docker exec ${LAP_CONTAINER} php ${MOUNT}${TARGET}/maintenance/checkImages.php
   printf "DONE\n"
 
-  printf "\n\n**** RUNNINF: refreshFileHeaders \n"
+  printf "\n\n**** RUNNING: refreshFileHeaders \n"
     docker exec ${LAP_CONTAINER} php ${MOUNT}${TARGET}/maintenance/refreshFileHeaders.php --verbose
   printf "DONE\n"
-
-
- 
 }
 
 
@@ -464,8 +453,6 @@ function fixPermissionsContainer() {
     docker exec -it my-lap-container chown -R ${OWNERSHIP} /var/www/html/wiki-dir
   printf "DONE fixing permissions of files\n\n"
 }
-
-
 
 
 
