@@ -224,7 +224,8 @@ function dropDatabase () { #  dropDatabase  DB_NAME  DB_CONTAINER  MYSQL_ROOT_PA
   local MY_DB_NAME=$1
   local DB_CONTAINER=$2
   local MYSQL_ROOT_PASSWORD=$3
-  
+  ensure MY_DB_NAME  DB_CONTAINER  MYSQL_ROOT_PASSWORD
+
   printf "\n\n*** dropDatabase: Dropping database ${MY_DB_NAME} in container ${DB_CONTAINER} \n"
 
   docker exec -i ${DB_CONTAINER} mysql -u root --password=${MYSQL_ROOT_PASSWORD} <<MYSQLSTUFF
@@ -266,6 +267,8 @@ function addDatabase () { ##        addDatabase  DATABASE_NAME  DB_USER_NAME  DB
   local MY_DB_PASS=$3
   local MYSQL_ROOT_PASSWORD=$4
   local DB_CONTAINER=$5
+
+  ensure MY_DB_NAME  MY_DB_USER  MY_DB_PASS  MYSQL_ROOT_PASSWORD  DB_CONTAINER
  
   printf "\n*** addDatabase: Making a database ${MY_DB_NAME} with user ${MY_DB_USER} and password ${MY_DB_PASS} in container ${DB_CONTAINER}\n"
 
@@ -726,15 +729,3 @@ makeWikiLocal () {
 
   echo "DONE"
 }
-
-
-
-
-# docker exec ${LAP_CONTAINER} rm -f ${MOUNT}/${VOLUME_PATH}/LocalSettings.php      # remove to have a clean start for install routines, ignore if not existant
-
-
-#  addDatabase ${DB_NAME} ${DB_USER} ${DB_PASS}
-
-
-
-
