@@ -439,10 +439,10 @@ function removeLocalSettings () {  # removes the LocalSettings.php file, reasona
 function fixPermissionsProduction() {
   local TARGET="wiki-dir"
   printf "\n *** Fixing local permissions for production" 
-    [ -f  ${TOP_DIR}/CONF.sh] && printf "CONF.sh exists "
+    [ -f  ${TOP_DIR}/CONF.sh ] && printf "CONF.sh exists "
 
 
-    [ -f  ${TOP_DIR}/CONF.sh] && chmod -f 700 ${TOP_DIR}/CONF.sh
+    [ -f  ${TOP_DIR}/CONF.sh ] && chmod -f 700 ${TOP_DIR}/CONF.sh
     [ -d ${TOP_DIR}/../DANTE-BACKUP ] && chmod -f 700 ${TOP_DIR}/../DANTE-BACKUP
 
  [ -f ${TOP_DIR}/volumes/full/content/${TARGET}/LocalSettings.php ]     &&  printf "\n\n----------- exists \n\n"
