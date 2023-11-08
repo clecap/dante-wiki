@@ -1,10 +1,7 @@
 #!/bin/sh
 
-
-
 # call the specific entrypoint of ssh docker
 source ssh-entry.sh
-
 
 echo ""
 echo "*** This is my-mysql:entrypoint.sh ***" 
@@ -16,11 +13,7 @@ echo "** Directory listing of /var/mysql:"
 ls -alg /var/mysql
 echo ""
 
-
-
-
 ####################################################  CAVE: we are not setting a mysql root password !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 
 mkdir -p /run/mysqld
 chown -R mysql:mysql /run/mysqld
@@ -36,7 +29,7 @@ chown -R mysql:mysql /var/mysql/mysql
 ## If the next level directory /var/mysql/mysql exists then the volume has been initialized already
 ##
 if [ -d /var/mysql/mysql ]; then
-  echo "*** MySQL directory /var/mysql/mysql already present, skipping creation"
+  echo "*** MySQL directory /var/mysql/mysql already present, skipping creation and initializations"
   chown -R mysql:mysql /var/mysql/mysql
 else
   echo "*** MySQL data directory /var/mysql/mysql not found, creating it"
@@ -71,8 +64,6 @@ CREATE USER '${MYSQL_DUMP_USER}'@'%' IDENTIFIED BY '${MYQSL_DUMP_PASSWORD}';
 GRANT SELECT, SHOW VIEW, LOCK TABLES, RELOAD, REPLICATION CLIENT ON DATABASE_NAME.* TO '${MYSQL_DUMP_USER}'@'%' IDENTIFIED BY '${MYSQL_DUMP_PASSWORD}';
 FLUSH PRIVILEGES ;
 EOF
-
-
 
 #     GRANT ALL ON *.* TO 'root'@'localhost' identified by '$MYSQL_ROOT_PASSWORD' WITH GRANT OPTION ;
 
