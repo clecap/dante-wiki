@@ -101,7 +101,7 @@ initialTemplates () { # imports an initial set of Parsifal templates from the wi
 
 copyInMinimal () { # copy in minimal initial contents from here to template volume
   local TARGET=$1
-  printf "\n*** Copying in minimal initial contents"
+  printf "\n*** Copying in minimal initial contents \n"
     mkdir -p ${TOP_DIR}/volumes/full/content/${TARGET}/assets
 
 #    cp ${TOP_DIR}/assets/initial-contents/minimal-initial-contents.xml  ${TOP_DIR}/volumes/full/content/${TARGET}/assets/minimal-initial-contents.xml
@@ -110,7 +110,7 @@ copyInMinimal () { # copy in minimal initial contents from here to template volu
 #    cp "${TOP_DIR}/assets/initial-contents/Disclaimerpage" "${TOP_DIR}/volumes/full/content/${TARGET}/assets/Disclaimerpage"
 #    cp "${TOP_DIR}/assets/initial-contents/Sidebar" "${TOP_DIR}/volumes/full/content/${TARGET}/assets/Sidebar"
 
-    cp "${TOP_DIR}/assets/initial-contents/*" "${TOP_DIR}/volumes/full/content/${TARGET}/assets/"
+    cp "${TOP_DIR}/assets/initial-contents/*"  "${TOP_DIR}/volumes/full/content/${TARGET}/assets/"
 
   printf "DONE copying in minimal initial contents\n\n"
 }
