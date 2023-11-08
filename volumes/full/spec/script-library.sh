@@ -251,7 +251,7 @@ function addDatabase () { ##        addDatabase  DATABASE_NAME  DB_USER_NAME  DB
 
   ensure MY_DB_NAME  MY_DB_USER  MY_DB_PASS  MYSQL_ROOT_PASSWORD  DB_CONTAINER
  
-  printf "\n*** addDatabase: Making a database ${MY_DB_NAME} with user ${MY_DB_USER} and password ${MY_DB_PASS} in container ${DB_CONTAINER}\n"
+  printf "\n*** addDatabase: Making a database=${MY_DB_NAME} with user=${MY_DB_USER} and password=${MY_DB_PASS} in container=${DB_CONTAINER}\n"
 
 # TODO: Adapt the permissions granted to the specific environment and run-time conditions.
 # TODO: CURRENTLY We ARE NOT USING A MYSQL_ROOT_PASSWORD (the empty passowrd works !!!)
@@ -390,7 +390,7 @@ function apacheRestartDocker () {  # restart the apaches
   printf "DONE\n\n"
 }
 
-cleanUpVolume () { # Code to clean up this directory
+cleanUpVolume () { # Code to clean up this local directory which later shall serve as volume 
   printf "\n*** Cleaning up volume at ${TOP_DIR} \n\n"
   # git somteimes produces awkward permissions
   if [ -d "${TOP_DIR}/volumes/full/content/${TARGET}.git" ]; then
@@ -471,7 +471,7 @@ runMWInstallScript () {  # runMWInstallScript  MW_SITE_NAME  MW_SITE_SERVER  SIT
   MEDIAWIKI_DB_PASSWORD=${DB_PASS}
   MEDIAWIKI_RUN_UPDATE_SCRIPT=true
 
-  MEDIAWIKI_SITE_NAME=${MW_SITE_NAME}
+  MEDIAWIKI_SITE_NAME="${MW_SITE_NAME}"
   # MEDIAWIKI_SITE_SERVER="https://${LAP_CONTAINER}"
   # TODO: problem: LAP_CONTAINER name is not resolved in the docker host
 ################################################################# TODO: ADJUST 
@@ -545,6 +545,48 @@ else
 fi
 }
 # endregion
+
+
+
+
+function addentry() { # add an entry into ${MOUNT}/index.html as startingpoint for the domain
+
+  # EXPECTS GLOBALS:
+  # MOUNT
+  # VOLUME_PATH
+  # LAP_CONTAINER
+
+  printf "*** Adding ${MOUNT}/${VOLUME_PATH} mount=${MOUNT} volpath=${VOLUME_PATH}"
+ 
+  printf "*   Touching ${MOUNT}/index.html"
+    docker exec -w /${MOUNT} ${LAP_CONTAINER} touch ${MOUNT}/index.html
+
+  docker exec ${LAP_CONTAINER} /bin/sh -c "echo \"<a href='/${VOLUME_PATH}/index.php'>${MOUNT}/${VOLUME_PATH}/index.php</a><br><br>\" >> ${MOUNT}/index.html"
+
+  printf " DONE \n\n"
+}
+
+
+function cleanUpDocker () { # cleaning up ressources to have a good fresh start; produces no error when not found
+  local CONTAINER=$1
+  local VOLUME=$2
+  printf "*** Cleaning up existing DANTE ressources"
+
+  printf " ** Attempting to stop container ${CONTAINER}, if it exists \n"
+    docker ps -a | grep '${CONTAINER}' && docker container stop  -f '${CONTAINER}' || printf "Container ${CONTAINER} was not found when attempting to stop   \n"
+  printf " DONE stopping container ${CONTAINER}\n\n"
+
+  printf " ** Attempting to remove container ${CONTAINER}, if it exists \n"
+    docker ps -a | grep '${CONTAINER}' && docker rm -f '${LAP_CONTAINER}'             || printf "Container ${CONTAINER} was not found when attempting to remove \n"
+  printf " DONE removing container ${CONTAINER}\n\n"
+
+  docker system prune
+
+  printf " ** Attempting to volume ${CONTAINER}, if it exists \n"
+    docker volume ls | grep '${VOLUME}' && docker volume rm  '${VOLUME}'             || printf "Volume ${VOLUME} was not found when attempting to remove \n"
+  printf " DONE removing volume ${VOLUME}\n\n"
+}
+
 
 
 

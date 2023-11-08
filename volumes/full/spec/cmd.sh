@@ -15,6 +15,7 @@ MW_VERSION=REL1_39
 
 source ${TOP_DIR}/volumes/full/spec/script-library.sh
 
+
 cleanUpVolume
 makeWikiLocal 1.39 0 wiki-dir
 

@@ -61,39 +61,26 @@ DB_CONTAINER=my-mysql
 
 
 
-# region  composerPermissions ()  
-#
-#  We must adjust the global configuration file of composer and the loca configuration file of composer to permit the use of certain plugins.
-#  The list of these plugins we must get form error messages in the composer runs
-#
-composerPermissions () {
+
+
+function composerPermissions () {
+  #  We must adjust the global configuration file of composer and the loca configuration file of composer to permit the use of certain plugins.
+  #  The list of these plugins we must get form error messages in the composer runs
+
   printf "\n** Configuring permissions for composer\n"
 
-  docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER}   sh -c " composer config --no-plugins allow-plugins.wikimedia/composer-merge-plugin true       "
-  docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER}   sh -c " composer config --no-plugins allow-plugins.composer/package-versions-deprecated true  "
-  docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER}   sh -c " composer config --no-plugins allow-plugins.composer/installers true  "  
+    docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER}   sh -c " composer config --no-plugins allow-plugins.wikimedia/composer-merge-plugin true       "
+    docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER}   sh -c " composer config --no-plugins allow-plugins.composer/package-versions-deprecated true  "
+    docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER}   sh -c " composer config --no-plugins allow-plugins.composer/installers true  "  
 
-  docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER}   sh -c " echo '{}' > composer.local.json"    # need the file to exist before being able to configure
+    docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER}   sh -c " echo '{}' > composer.local.json"    # need the file to exist before being able to configure
 
-  docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER}   sh -c " COMPOSER=${MOUNT}/${VOLUME_PATH}/composer.local.json composer config --no-plugins allow-plugins.wikimedia/composer-merge-plugin true       "
-  docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER}   sh -c " COMPOSER=${MOUNT}/${VOLUME_PATH}/composer.local.json composer config --no-plugins allow-plugins.composer/package-versions-deprecated true  "
-  docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER}   sh -c " COMPOSER=${MOUNT}/${VOLUME_PATH}/composer.local.json composer config --no-plugins allow-plugins.composer/installers true  "  
+    docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER}   sh -c " COMPOSER=${MOUNT}/${VOLUME_PATH}/composer.local.json composer config --no-plugins allow-plugins.wikimedia/composer-merge-plugin true       "
+    docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER}   sh -c " COMPOSER=${MOUNT}/${VOLUME_PATH}/composer.local.json composer config --no-plugins allow-plugins.composer/package-versions-deprecated true  "
+    docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER}   sh -c " COMPOSER=${MOUNT}/${VOLUME_PATH}/composer.local.json composer config --no-plugins allow-plugins.composer/installers true  "  
 
   printf "\nDONE configuring permissions for composer\n"
 }
-# endregion
-
-
-#
-#composerUpdate () {
-#  printf "\n*** Do a composer update on the global file\n"
-#  docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER}   sh -c " composer update --no-dev -o  --no-interaction "
-#  printf "DONE with the composer update on the global file\n"
-#
-#  printf "\n*** Do a composer update on the local file\n"
-#  docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER}   sh -c " COMPOSER=composer.local.json composer update --no-dev -o  --no-interaction "
-#  printf "DONE with local composer update\n"
-#}
 
 
 # region installExtensionGithub ()   
@@ -109,25 +96,30 @@ installExtensionGithub () {
 # LAP_CONTAINER
 
   printf "\n*** INSTALLING EXTENSION ${NAME} from ${URL} using branch ${BRANCH} ...\n"
-  printf "   Ensuring proper git postbuffer size"
-## https://stackoverflow.com/questions/21277806/fatal-early-eof-fatal-index-pack-failed/29355320#29355320
-  docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "git config --global http.postBuffer 524288000"
-  docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "git config --global core.packedGitLimit 512m"
-  docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "git config --global core.packedGitWindowSize 512m"
-  docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "git config --global pack.deltaCacheSize 2047m"
-  docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "git config --global pack.packSizeLimit 2047m"
-  docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "git config --global pack.windowMemory 2047m"
+
+  printf " * Ensuring proper git postbuffer size\n"
+    # https://stackoverflow.com/questions/21277806/fatal-early-eof-fatal-index-pack-failed/29355320#29355320
+    docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "git config --global http.postBuffer 524288000"
+    docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "git config --global core.packedGitLimit 512m"
+    docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "git config --global core.packedGitWindowSize 512m"
+    docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "git config --global pack.deltaCacheSize 2047m"
+    docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "git config --global pack.packSizeLimit 2047m"
+    docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "git config --global pack.windowMemory 2047m"
+  printf " DONE\n"
+
   printf "   Removing preexisting directory\n"
   docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "rm -Rf ${NAME} "
   printf "   Cloning ${URL} with branch ${BRANCH} into ${NAME}\n"
-  docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions ${LAP_CONTAINER}          sh -c " git clone --depth 1 ${URL} --branch ${BRANCH} ${NAME} "
+    docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions ${LAP_CONTAINER}          sh -c " git clone --depth 1 ${URL} --branch ${BRANCH} ${NAME} "
+
   printf "   Removing .git to save on space\n"
-  docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/${NAME} ${LAP_CONTAINER}  sh -c "rm -Rf .git "
+    docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/${NAME} ${LAP_CONTAINER}  sh -c "rm -Rf .git "
+
   printf "   Injecting installation into DanteDynamicInstalls.php\n"
-  docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER} sh -c "echo \"wfLoadExtension( '${NAME}' );\" >> DanteDynamicInstalls.php "
+    docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER} sh -c "echo \"wfLoadExtension( '${NAME}' );\" >> DanteDynamicInstalls.php "
   printf "*** COMPLETED INSTALLING EXTENSION ${NAME} from ${URL} using branch ${BRANCH}\n\n"
 }
-# endregion
+
 
 # region installExtensionGerrit ()   
 # INSTALL an extension which is hosted on gerrit
@@ -140,11 +132,7 @@ installExtensionGerrit () {
 # endregion
 
 
-# region  composerInstall:  Doing COMPOSER based installations
-#
-#
-composerInstall () {
-
+composerInstall () {  #  composerInstall:  Doing COMPOSER based installations
   printf "\n\n*** Doing COMPOSER based installations "
 
   # ensure we start with a clean DanteDynamicInstalls.php file as this file will autocollect loadings of installed extensions"
@@ -157,8 +145,6 @@ composerInstall () {
 ## 2) wait for security confirmations and answer yes
 ## 3) look at config.allow-plugins in the composer.json file, which gets modified in consequence of this
 ## 4) add the elements added to composer.json into this shell file
-
-  composerPermissions
 
 # TODO: do we need to make this ourselves ??? really
 # TODO: do we need to configure permissions locally AND globally ??? as above
@@ -197,10 +183,7 @@ composerInstall () {
   installExtensionGithub  https://github.com/wikimedia/mediawiki-extensions-RevisionSlider                RevisionSlider   REL1_39
   installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-NativeSvgHandler               NativeSvgHandler  REL1_39
 
-
  installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-UniversalLanguageSelector       UniversalLanguageSelector  REL1_39
-
-
 
 #  installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-DrawioEditor                   DrawioEditor REL1_39
 # This extension is broken currently
@@ -230,159 +213,94 @@ installExtensionGithub https://github.com/Universal-Omega/DynamicPageList3 Dynam
 
   printf "\n\n*** Doing a composer update on the global file\n\n"
   docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER}   sh -c " composer update"
-  printf "\n\n***DONE with composer update\n\n"
+  printf "\n\n***DONE with composerInstall \n\n"
 }
 # endregion
 
 
-# drops a database. could be helpful before an addDatabase
-dropDatabase () {
-  local MY_DB_NAME=$1
-  
-  printf "\n * dropDatabase: Dropping database ${MY_DB_NAME} \n"
 
-# TODO: Adapt the permissions granted to the specific environment and run-time conditions.
-docker exec -i ${DB_CONTAINER} mysql -u root --password=${MYSQL_ROOT_PASSWORD} <<MYSQLSTUFF
-DROP DATABASE ${MY_DB_NAME} /*\!40100 DEFAULT CHARACTER SET utf8 */;
-MYSQLSTUFF
-
-EXIT_CODE=$?
-printf "DONE: Exit code of dropDatabase generated database call: ${EXIT_CODE}"
-}
-#endregion
-
-
-# region  addDatabase:  add a username and a database to the database engine
-##        addDatabase  database-name   db-user-name   db-userpassword
-addDatabase () {
-  local MY_DB_NAME=$1
-  local MY_DB_USER=$2
-  local MY_DB_PASS=$3
- 
-  printf "\n\n*** addDatabase: Making a database ${MY_DB_NAME} with user ${MY_DB_USER} and password ${MY_DB_PASS} \n"
-
-# TODO: Adapt the permissions granted to the specific environment and run-time conditions.
-# TODO: CURRENTLY We ARE NOT USING A MYSQL_ROOT_PASSWORD (the empty passowrd works !!!)
-docker exec -i ${DB_CONTAINER} mysql -u root --password=${MYSQL_ROOT_PASSWORD} <<MYSQLSTUFF
-CREATE DATABASE IF NOT EXISTS ${MY_DB_NAME} /*\!40100 DEFAULT CHARACTER SET utf8 */;
-CREATE USER IF NOT EXISTS ${MY_DB_USER}@'%' IDENTIFIED BY '${MY_DB_PASS}';
-CREATE USER IF NOT EXISTS ${MY_DB_USER}@localhost IDENTIFIED BY '${MY_DB_PASS}';
--- CREATE USER IF NOT EXISTS ${MY_DB_USER}@'0.0.0.0/0.0.0.0' IDENTIFIED BY '${MY_DB_PASS}';
-GRANT ALL PRIVILEGES ON ${MY_DB_NAME}.* TO '${MY_DB_USER}'@'%';
-GRANT ALL PRIVILEGES ON ${MY_DB_NAME}.* TO '${MY_DB_USER}'@'localhost';
--- GRANT ALL PRIVILEGES ON ${MY_DB_NAME}.* TO '${MY_DB_USER}'@'0.0.0.0/0.0.0.0';
-FLUSH PRIVILEGES;
-MYSQLSTUFF
-
-EXIT_CODE=$?
-printf "DONE: Exit code of addDatabase generated database call: ${EXIT_CODE}\n\n"
-}
-
-
-
-runMWInstallScript () {
-#  run the mediawiki install script and generate a LocalSettings.php
-  MEDIAWIKI_DB_HOST=my-mysql
-  MEDIAWIKI_DB_TYPE=mysql
-  MEDIAWIKI_DB_NAME=${DB_NAME}
-  MEDIAWIKI_DB_PORT=3306
-  MEDIAWIKI_DB_USER=${DB_USER}
-  MEDIAWIKI_DB_PASSWORD=${DB_PASS}
-  MEDIAWIKI_RUN_UPDATE_SCRIPT=true
-
-  MEDIAWIKI_SITE_NAME=${MW_SITE_NAME}
-  # MEDIAWIKI_SITE_SERVER="https://${LAP_CONTAINER}"
-  # TODO: problem: LAP_CONTAINER name is not resolved in the docker host
-################################################################# TODO: ADJUST 
-######
-###### This should rather be a name, maybe localhost TODO: because other wise the different https things do not match
-######
-#  MEDIAWIKI_SITE_SERVER="https://localhost"
-  MEDIAWIKI_SITE_SERVER=${MW_SITE_SERVER}
-  MEDIAWIKI_SCRIPT_PATH="/${VOLUME_PATH}"
-  # TODO: make language variable inputable into script
-  MEDIAWIKI_SITE_LANG=en
-  MEDIAWIKI_ADMIN_USER=${WK_USER}
-  MEDIAWIKI_ADMIN_PASS=${WK_PASS}
-  MEDIAWIKI_ENABLE_SSL=true
-
-echo ________________
-echo "*** MEDIAWIKI INSTALLATION PARAMETERS WILL BE: "
-echo ""
-echo  "DATABASE Parameters are: "
-echo  "   MEDIAWIKI_DB_HOST            ${MEDIAWIKI_DB_HOST}"
-echo  "   MEDIAWIKI_DB_TYPE            ${MEDIAWIKI_DB_TYPE}"
-echo  "   MEDIAWIKI_DB_NAME            ${MEDIAWIKI_DB_NAME}"
-echo  "   MEDIAWIKI_DB_PORT            ${MEDIAWIKI_DB_PORT}" 
-echo  "   MEDIAWIKI_DB_USER            ${MEDIAWIKI_DB_USER}"
-echo  "   MEDIAWIKI_DB_PASSWORD        ${MEDIAWIKI_DB_PASSWORD}"
-echo  "   MEDIAWIKI_RUN_UPDATE_SCRIPT  ${MEDIAWIKI_RUN_UPDATE_SCRIPT}"
-echo  ""
-
-echo "SITE Parameters are: "
-echo  "   MEDIAWIKI_SITE_NAME"   ${MEDIAWIKI_SITE_NAME}
-echo  "   MEDIAWIKI_SITE_SERVER  ${MEDIAWIKI_SITE_SERVER}"
-echo  "   MEDIAWIKI_SCRIPT_PATH  ${MEDIAWIKI_SCRIPT_PATH}"
-echo  "   MEDIAWIKI_SITE_LANG    ${MEDIAWIKI_SITE_LANG}"
-echo  "   MEDIAWIKI_ADMIN_USER   ${MEDIAWIKI_ADMIN_USER}"
-echo  "   MEDIAWIKI_ADMIN_PASS   ${MEDIAWIKI_ADMIN_PASS}"
-echo  "   MEDIAWIKI_ENABLE_SSL   ${MEDIAWIKI_ENABLE_SSL}"
-echo ""
-
-echo "*** CALLING MEDIAWIKI INSTALL ROUTINE"
-echo ""
-docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER} php maintenance/install.php \
-    --confpath        ${MOUNT}/${VOLUME_PATH} \
-    --dbname         "$MEDIAWIKI_DB_NAME" \
-    --dbport         "$MEDIAWIKI_DB_PORT" \
-    --dbserver       "$MEDIAWIKI_DB_HOST" \
-    --dbtype         "$MEDIAWIKI_DB_TYPE" \
-    --dbuser         "$MEDIAWIKI_DB_USER" \
-    --dbpass         "$MEDIAWIKI_DB_PASSWORD" \
-    --installdbuser  "$MEDIAWIKI_DB_USER" \
-    --installdbpass  "$MEDIAWIKI_DB_PASSWORD" \
-    --server         "$MEDIAWIKI_SITE_SERVER" \
-    --scriptpath     "$MEDIAWIKI_SCRIPT_PATH" \
-    --lang           "$MEDIAWIKI_SITE_LANG" \
-    --pass           "$MEDIAWIKI_ADMIN_PASS" \
-    "$MEDIAWIKI_SITE_NAME" \
-    "$MEDIAWIKI_ADMIN_USER"
-
-
-  echo "_______________________________________"
-  echo ""
-
+#runMWInstallScript () {
+##  run the mediawiki install script and generate a LocalSettings.php
+#  MEDIAWIKI_DB_HOST=my-mysql
+#  MEDIAWIKI_DB_TYPE=mysql
+#  MEDIAWIKI_DB_NAME=${DB_NAME}
+#  MEDIAWIKI_DB_PORT=3306
+#  MEDIAWIKI_DB_USER=${DB_USER}
+#  MEDIAWIKI_DB_PASSWORD=${DB_PASS}
+#  MEDIAWIKI_RUN_UPDATE_SCRIPT=true
+#
+#  MEDIAWIKI_SITE_NAME=${MW_SITE_NAME}
+#  # MEDIAWIKI_SITE_SERVER="https://${LAP_CONTAINER}"
+#  # TODO: problem: LAP_CONTAINER name is not resolved in the docker host
+################################################################## TODO: ADJUST 
+#######
+####### This should rather be a name, maybe localhost TODO: because other wise the different https things do not match
+#######
+##  MEDIAWIKI_SITE_SERVER="https://localhost"
+#  MEDIAWIKI_SITE_SERVER=${MW_SITE_SERVER}
+#  MEDIAWIKI_SCRIPT_PATH="/${VOLUME_PATH}"
+#  # TODO: make language variable inputable into script
+#  MEDIAWIKI_SITE_LANG=en
+#  MEDIAWIKI_ADMIN_USER=${WK_USER}
+#  MEDIAWIKI_ADMIN_PASS=${WK_PASS}
+#  MEDIAWIKI_ENABLE_SSL=true
+#
+#echo ________________
+#echo "*** MEDIAWIKI INSTALLATION PARAMETERS WILL BE: "
+#echo ""
+#echo  "DATABASE Parameters are: "
+#echo  "   MEDIAWIKI_DB_HOST            ${MEDIAWIKI_DB_HOST}"
+#echo  "   MEDIAWIKI_DB_TYPE            ${MEDIAWIKI_DB_TYPE}"
+#echo  "   MEDIAWIKI_DB_NAME            ${MEDIAWIKI_DB_NAME}"
+#echo  "   MEDIAWIKI_DB_PORT            ${MEDIAWIKI_DB_PORT}" 
+#echo  "   MEDIAWIKI_DB_USER            ${MEDIAWIKI_DB_USER}"
+#echo  "   MEDIAWIKI_DB_PASSWORD        ${MEDIAWIKI_DB_PASSWORD}"
+#echo  "   MEDIAWIKI_RUN_UPDATE_SCRIPT  ${MEDIAWIKI_RUN_UPDATE_SCRIPT}"
+#echo  ""
+#
+#echo "SITE Parameters are: "
+#echo  "   MEDIAWIKI_SITE_NAME"   ${MEDIAWIKI_SITE_NAME}
+#echo  "   MEDIAWIKI_SITE_SERVER  ${MEDIAWIKI_SITE_SERVER}"
+#echo  "   MEDIAWIKI_SCRIPT_PATH  ${MEDIAWIKI_SCRIPT_PATH}"
+#echo  "   MEDIAWIKI_SITE_LANG    ${MEDIAWIKI_SITE_LANG}"
+#echo  "   MEDIAWIKI_ADMIN_USER   ${MEDIAWIKI_ADMIN_USER}"
+#echo  "   MEDIAWIKI_ADMIN_PASS   ${MEDIAWIKI_ADMIN_PASS}"
+#echo  "   MEDIAWIKI_ENABLE_SSL   ${MEDIAWIKI_ENABLE_SSL}"
+#echo ""
+#
+#echo "*** CALLING MEDIAWIKI INSTALL ROUTINE"
+#echo ""
+#docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER} php maintenance/install.php \
+#    --confpath        ${MOUNT}/${VOLUME_PATH} \
+#    --dbname         "$MEDIAWIKI_DB_NAME" \
+#    --dbport         "$MEDIAWIKI_DB_PORT" \
+#    --dbserver       "$MEDIAWIKI_DB_HOST" \
+#    --dbtype         "$MEDIAWIKI_DB_TYPE" \
+#    --dbuser         "$MEDIAWIKI_DB_USER" \
+#    --dbpass         "$MEDIAWIKI_DB_PASSWORD" \
+#    --installdbuser  "$MEDIAWIKI_DB_USER" \
+#    --installdbpass  "$MEDIAWIKI_DB_PASSWORD" \
+#    --server         "$MEDIAWIKI_SITE_SERVER" \
+#    --scriptpath     "$MEDIAWIKI_SCRIPT_PATH" \
+#    --lang           "$MEDIAWIKI_SITE_LANG" \
+#    --pass           "$MEDIAWIKI_ADMIN_PASS" \
+#    "$MEDIAWIKI_SITE_NAME" \
+#    "$MEDIAWIKI_ADMIN_USER"
+#
+#
+#  echo "_______________________________________"
+#  echo ""
+#
 # check if we succeeded to generate LocalSettings.php
-docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER}  [ -f "${MOUNT}/${VOLUME_PATH}/LocalSettings.php" ]
-EXIT_VALUE=$?
-echo "shell result $EXIT_VALUE"
-if [ "$EXIT_VALUE" == "0" ]; then
-  printf "\e[1;32m* SUCCESS:  ${MOUNT}/${VOLUME_PATH}/LocalSettings.php  generated \e[0m"
-else
-  printf "\e[1;41m* ERROR:  Could not generate ${MOUNT}/${VOLUME_PATH}/LocalSettings.php - *** ABORTING \e[0m \n"
-fi
-}
-# endregion
-
-
-
-## addingReferenceToDante:  Injects into LocalSettings.php a line loading our own configuration for Dante
-# region
-addingReferenceToDante () {
-
-  echo ""
-  echo "*** Adding reference to DanteSettings.php"
-
-# NOTE: Doing this with include does not produce an error if the file goes missing
-
-  docker exec -w /${MOUNT}/${VOLUME_PATH}   ${LAP_CONTAINER}   sh -c "echo ' ' >> LocalSettings.php"
-  docker exec -w /${MOUNT}/${VOLUME_PATH}   ${LAP_CONTAINER}  sh -c " echo '###' >> LocalSettings.php"
-  docker exec -w /${MOUNT}/${VOLUME_PATH}   ${LAP_CONTAINER}  sh -c "echo '### Automagically injected by volume cmd.sh ' >> LocalSettings.php"
-  docker exec -w /${MOUNT}/${VOLUME_PATH}   ${LAP_CONTAINER}  sh -c "echo '###' >> LocalSettings.php  "
-  docker exec -w /${MOUNT}/${VOLUME_PATH}   ${LAP_CONTAINER}  sh -c "echo 'include (\"DanteSettings.php\"); ' >> LocalSettings.php "
-  echo "DONE adding a reference to DanteSettings.php"
-  echo ""
-}
+#docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER}  [ -f "${MOUNT}/${VOLUME_PATH}/LocalSettings.php" ]
+#EXIT_VALUE=$?
+#echo "shell result $EXIT_VALUE"
+#if [ "$EXIT_VALUE" == "0" ]; then
+#  printf "\e[1;32m* SUCCESS:  ${MOUNT}/${VOLUME_PATH}/LocalSettings.php  generated \e[0m"
+#else
+#  printf "\e[1;41m* ERROR:  Could not generate ${MOUNT}/${VOLUME_PATH}/LocalSettings.php - *** ABORTING \e[0m \n"
+#fi
+#}
 # endregion
 
 
@@ -444,8 +362,11 @@ initWP () {
 
   # add database to DB system
   printf "\n** Generating database ${DB_NAME} and DB user ${DB_USER}\n"
-  dropDatabase ${DB_NAME}
-  addDatabase ${DB_NAME} ${DB_USER} ${DB_PASS}
+  dropDatabase ${DB_NAME}  ${DB_CONTAINER}  ${MYSQL_ROOT_PASSWORD}
+
+  printf "------- container ${DB_CONTAINER}"
+
+  addDatabase ${DB_NAME} ${DB_USER} ${DB_PASS}  ${MYSQL_ROOT_PASSWORD}  ${DB_CONTAINER}
   printf "DONE generating database\n"
 
   printf "\n** Generating OS User ${LINUX_USER} for Wordpress\n"
@@ -479,66 +400,6 @@ initWP () {
 
 
 
-# region initialContents
-#  Call this with one parameter (the target directory name)
-### TODO: THIS IS *CURRENTLY* DEPRECATED
-initialContents () { # load initial contents
-
-TARGET=$1
-
-printf "*** Copying initial content pages from the file system to the container at target=${TARGET}\n"
-
-printf "   Making directory ${TARGET}/initial-contents..."
-docker exec -w /${MOUNT} ${LAP_CONTAINER} mkdir -p ${TARGET}/initial-contents 
-printf "DONE\n"
-
-cd ${TOP_DIR}/assets/initial-contents
-for i in *; do
-  printf "\n\n***** Found ressource: $i\n"
-  if [[ $i =~ ([a-zA-Z0-9_:]+)\$([a-zA-Z0-9_.]+) ]]; then
-    PREFIX="${BASH_REMATCH[1]}"
-    NAME="${BASH_REMATCH[2]}"
-    echo "DOLLARMATCH   ${BASH_REMATCH}   SPLITS:   ${PREFIX}   and    ${NAME}"
-    printf "** Doing first a copy to prefix-free filename ${NAME} and then an import prefixed by ${PREFIX}\n"
-    echo "COMMAND: docker cp ${TOP_DIR}/assets/initial-contents/$i  ${LAP_CONTAINER}:/${MOUNT}/${TARGET}/${NAME}/assets/initial-contents"
-    docker cp ${TOP_DIR}/assets/initial-contents/$i  ${LAP_CONTAINER}:/${MOUNT}/${TARGET}/${NAME}/assets/initial-contents
-    docker exec ${LAP_CONTAINER} php /var/www/html/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite --prefix "${BASH_REMATCH[1]}" "${MOUNT}/${TARGET}/${BASH_REMATCH[2]}"
-  else 
-    printf "** Doing first a normal copy and then a normal import\n"
-    docker cp ${TOP_DIR}/assets/initial-contents/$i  ${LAP_CONTAINER}:/${MOUNT}/${TARGET}
-    docker exec ${LAP_CONTAINER} php /var/www/html/${TARGET}/maintenance/importTextFiles.php --rc -s 'Imported by wiki-init.sh' --overwrite "${MOUNT}/${TARGET}/$i"
-  fi
-done;
-
-printf "DONE copying"
-
-#PROJECT_SPACE=("Privacy_policy" "About" "General_disclaimer")
-#for p in ${!PROJECT_SPACE}; do
-#  docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER} php maintenance/importTextFiles.php --prefix "Project:"  --overwrite $p
-#done
-
-docker exec ${LAP_CONTAINER} ${MOUNT}/${TARGET}/extensions/Parsifal/sh/make-formats.sh
-}
-
-
-##
-## Add entry to /${MOUNT}/index.html
-##
-addentry () {
-echo ""
-echo ________________
-echo ""
-echo "*** Adding ${MOUNT}/${VOLUME_PATH} mount=${MOUNT} volpath=${VOLUME_PATH}"
-echo "*   Touching ${MOUNT}/index.html"
-docker exec -w /${MOUNT} ${LAP_CONTAINER} touch ${MOUNT}/index.html
-docker exec ${LAP_CONTAINER} /bin/sh -c "echo \"<a href='/${VOLUME_PATH}/index.php'>${MOUNT}/${VOLUME_PATH}/index.php</a><br><br>\" >> ${MOUNT}/index.html"
-
-echo "...DONE"
-}
-
-
-
-
 
 # region  INITIALIZE    Initialization function for an individual WIKI
 #
@@ -566,21 +427,18 @@ initialize () {
   fi
 
 
-  addDatabase ${DB_NAME} ${DB_USER} ${DB_PASS}
-
   # composer must run before the installscript so that the installscript has all the available extensions ready
   # this is necessary, since the installscript does an autoregistration of some components, for example the installed skins
+  composerPermissions
   composerInstall
 
-  addDatabase ${DB_NAME} ${DB_USER} ${DB_PASS}
-
+  addDatabase ${DB_NAME} ${DB_USER} ${DB_PASS}  ${MYSQL_ROOT_PASSWORD}  ${DB_CONTAINER}
   docker exec ${LAP_CONTAINER} rm -f ${MOUNT}/${VOLUME_PATH}/LocalSettings.php      # remove to have a clean start for install routines, ignore if not existant
   runMWInstallScript
 
-  addingReferenceToDante
+  addingReferenceToDante ${MOUNT}  ${VOLUME_PATH}  ${LAP_CONTAINER} 
   initialTemplates  
   minimalInitialContents
-  ##### initialContents ${VOLUME_PATH}   # currently not used 
   touchLocalSettings
 
   printf "\nDONE   *** INITIALIZING WIKI ***\n\n"
