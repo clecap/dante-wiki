@@ -18,6 +18,3 @@ jobs:
           echo -n "${{ steps.scc.outputs.scc }}"
           echo -n "${{ fromJson(steps.scc.outputs.scc)[0].Code }}"
 
-          - name: scc-docker-action              
-  uses: iRyanBell/scc-docker-action@v1.0.2
-
