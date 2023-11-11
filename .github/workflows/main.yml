@@ -5,16 +5,10 @@ jobs:
     runs-on: ubuntu-latest
     name: A job to count the lines of code.
     steps:
-      - name: Get lines of code (more sophisticated)
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Get the lines of code.
         id: scc
         uses: iryanbell/scc-docker-action@v1.0.2
         with:
-          args: ${{ env.workspace }} -i php --exclude-dir vendor --format json src
-
-      - name: Make lines of code badge
-        uses: emibcn/badge-action@v2.0.2
-        with:
-          label: Lines of Code
-          status: ${{ fromJson(steps.scc.outputs.scc)[0].Code }}
-          color: 'blue'
-          path: .github/lines.svg
+          args: ${{ env.workspace }} -i js,sh,html,css,tex
