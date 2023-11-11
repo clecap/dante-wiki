@@ -6,7 +6,7 @@
   <img alt="GitHub all releases" src="https://img.shields.io/github/downloads/clecap/dante-wiki/total">
 </div>
 
-[![Scc Count Badge](https://sloc.xyz/github/clecap/dante-wiki/)](https://github.com/clecap/Parsifal/)
+[![Scc Count Badge](https://sloc.xyz/github/clecap/dante-wiki/)](https://github.com/clecap/dante-wiki/)
 
 This is the main development repository for Dante-Wiki.
 
