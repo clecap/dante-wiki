@@ -6,8 +6,6 @@ ext.drawioeditor.js:
 in line 52 remove the slash before ?embed in src: this.baseUrl + '?embed=1&proto=json&spin=1&analytics=0&picker=0&lang=' + this.language + localAttr,
 
 
-
-
 # Do Due Diligence
 
 Check whether you have done the following:

@@ -8,14 +8,8 @@
 
 [![Scc Count Badge](https://sloc.xyz/github/clecap/dante-wiki/)](https://github.com/clecap/dante-wiki/)
 
-This is the main development repository for Dante-Wiki.
+This repository is for development work on Dante-Wiki.
 
-== Requirements ==
-* An installed wget
-* An installed docker
+It helps building up a hot-reload instance for working on DanteWiki.
 
-
-
-== Git Remarks ==
-
-
+End users who want to install a working copy of DanteWiki should consult https://github.com/clecap/dante-wiki-production

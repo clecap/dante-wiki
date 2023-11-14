@@ -1,5 +1,5 @@
 
-## Creating a certificate for localhost.
+## Creating a certificate for localhost on Mac
 
 ````
   brew install mkcert 

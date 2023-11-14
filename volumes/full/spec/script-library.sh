@@ -39,9 +39,33 @@ trap 'handle_error $LINENO ${BASH_LINENO[@]} $BASH_COMMAND' ERR
 
 
 
-simpleEntryPage () { #  dynamically generate a simple entry page on the target-less url
-  echo "<html><head></head><body><a href='wiki-dir'>Wiki</a></body></html>" >>  ${TOP_DIR}/volumes/full/content/index.html
+function simpleEntryPage () { #  dynamically generate a simple entry page on the target-less url
+  local TARGET=wiki-dir
+  echo "<html><head></head><body><a href='${TARGET}/index.php'>To Wiki ${TARGET}</a></body></html>" >>  ${TOP_DIR}/volumes/full/content/index.html
 }
+
+
+# currently not used anywhere - maybe we deprecate
+#
+#function addentry() { # add an entry into ${MOUNT}/index.html as startingpoint for the domain
+#  # EXPECTS GLOBALS:
+#  # MOUNT
+#  # VOLUME_PATH
+#  # LAP_CONTAINER
+#
+#  printf "*** Adding ${MOUNT}/${VOLUME_PATH} mount=${MOUNT} volpath=${VOLUME_PATH}"
+#  printf "*   Touching ${MOUNT}/index.html"
+#    docker exec -w /${MOUNT} ${LAP_CONTAINER} touch ${MOUNT}/index.html
+#
+#  docker exec ${LAP_CONTAINER} /bin/sh -c "echo \"<a href='/${VOLUME_PATH}/index.php'>${MOUNT}/${VOLUME_PATH}/index.php</a><br><br>\" >> ${MOUNT}/index.html"
+#
+#  printf " DONE \n\n"
+#}
+
+
+
+
+
 
 
 
@@ -97,6 +121,48 @@ initialTemplates () { # imports an initial set of Parsifal templates from the wi
     docker exec ${LAP_CONTAINER} php ${MOUNT}${TARGET}/maintenance/importTextFiles.php --prefix "MediaWiki:ParsifalTemplate/" --rc --overwrite ${MOUNT}${TARGET}/extensions/Parsifal/initial-templates/*
   printf "DONE\n\n"
 }  
+
+
+
+
+function installExtensionGithub () { # INSTALL an extension which is hosted on github
+  # EXAMPLE:   installExtensionGithub  https://github.com/kuenzign/WikiMarkdown  WikiMarkdown  main
+  local URL=$1
+  local NAME=$2
+  local BRANCH=$3
+
+  ## ASSUMES the global variables
+  # MOUNT
+  # VOLUME_PATH
+  # LAP_CONTAINER
+
+  printf "\n*** INSTALLING EXTENSION ${NAME} from ${URL} using branch ${BRANCH} ...\n"
+
+  printf " * Ensuring proper git postbuffer size\n"
+    # https://stackoverflow.com/questions/21277806/fatal-early-eof-fatal-index-pack-failed/29355320#29355320
+    docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "git config --global http.postBuffer 524288000"
+    docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "git config --global core.packedGitLimit 512m"
+    docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "git config --global core.packedGitWindowSize 512m"
+    docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "git config --global pack.deltaCacheSize 2047m"
+    docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "git config --global pack.packSizeLimit 2047m"
+    docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "git config --global pack.windowMemory 2047m"
+  printf " DONE\n"
+
+  printf "   Removing preexisting directory\n"
+  docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "rm -Rf ${NAME} "
+  printf "   Cloning ${URL} with branch ${BRANCH} into ${NAME}\n"
+    docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions ${LAP_CONTAINER}          sh -c " git clone --depth 1 ${URL} --branch ${BRANCH} ${NAME} "
+
+  printf "   Removing .git to save on space\n"
+    docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/${NAME} ${LAP_CONTAINER}  sh -c "rm -Rf .git "
+
+  printf "   Injecting installation into DanteDynamicInstalls.php\n"
+    docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER} sh -c "echo \"wfLoadExtension( '${NAME}' );\" >> DanteDynamicInstalls.php "
+  printf "*** COMPLETED INSTALLING EXTENSION ${NAME} from ${URL} using branch ${BRANCH}\n\n"
+}
+
+
+
 
 
 copyInMinimal () { # copy in minimal initial contents from here to template volume
@@ -547,24 +613,6 @@ fi
 # endregion
 
 
-
-
-function addentry() { # add an entry into ${MOUNT}/index.html as startingpoint for the domain
-
-  # EXPECTS GLOBALS:
-  # MOUNT
-  # VOLUME_PATH
-  # LAP_CONTAINER
-
-  printf "*** Adding ${MOUNT}/${VOLUME_PATH} mount=${MOUNT} volpath=${VOLUME_PATH}"
- 
-  printf "*   Touching ${MOUNT}/index.html"
-    docker exec -w /${MOUNT} ${LAP_CONTAINER} touch ${MOUNT}/index.html
-
-  docker exec ${LAP_CONTAINER} /bin/sh -c "echo \"<a href='/${VOLUME_PATH}/index.php'>${MOUNT}/${VOLUME_PATH}/index.php</a><br><br>\" >> ${MOUNT}/index.html"
-
-  printf " DONE \n\n"
-}
 
 
 function cleanUpDocker () { # cleaning up ressources to have a good fresh start; produces no error when not found

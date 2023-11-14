@@ -7,3 +7,13 @@
   path = volumes/full/content/wiki-dir/extensions/Parsifal
   url = https://github.com/clecap/Parsifal
   ignore = all
+
+[submodule "dantecategorybrowser"]
+  path = volumes/full/content/wiki-dir/extensions/DanteCategoryBrowser
+  url = https://github.com/clecapDanteCategoryBrowser
+  ignore = all
+
+
+
+
+
