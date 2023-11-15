@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "volumes/full/content/wiki-dir"
+		},
+		{
+			"path": "volumes/full/content/wiki-dir/extensions/DanteCategoryBrowser"
 		}
 	],
 	"settings": {

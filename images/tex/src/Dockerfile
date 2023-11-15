@@ -44,6 +44,8 @@ RUN apk --no-cache update &&              \
     apk --no-cache add gnuplot && \
     # graphviz
     apk --no-cache add graphviz && \
+    # fonts needed for graphviz
+    apk add --update font-bitstream-type1 ghostscript-fonts ttf-cantarell && \
     # inkscape
     apk --no-cache add inkscape && \
     # mupdf
