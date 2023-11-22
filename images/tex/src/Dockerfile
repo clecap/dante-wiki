@@ -1,23 +1,41 @@
-FROM clecap/ssh-copy
+FROM alpine:3.18.4
 
-# We are starting with our own, small ssh on alpine image
-# We are not starting with an image containing a larger configuration since 
-# 1) this will be changed more frequently and
-# 2) the TeX build takes quite some time.
 
 LABEL "vendor"="Clemens H. Cap"
-LABEL "maintainer"="clemens.cap@uni-rostock.de"
+LABEL "maintainer"="clemens@clemens-cap.de"
+LABEL "version"="1.01"
 
 ENV LANG=C.UTF-8 \
-  LC_ALL=C.UTF-8 \    
-  # ConTeXt cache can be created on runtime and does not need to increase image size
-  TEXLIVE_INSTALL_NO_CONTEXT_CACHE=1 \ 
-  # As we will not install regular documentation why would we want to install perl docs…
-  NOPERLDOC=1 \ 
-  # The base mirror is one of the mirrors of TUG's historic archive
-  TLHISTMIRRORURL=rsync://texlive.info/historic/systems/texlive \ 
-  # To get the latest packages available we always use the root mirror
-  TLMIRRORURL=http://dante.ctan.org/tex-archive/systems/texlive/tlnet
+    LC_ALL=C.UTF-8 \    
+    # ConTeXt cache can be created on runtime and does not need to increase image size
+    TEXLIVE_INSTALL_NO_CONTEXT_CACHE=1 \ 
+    # As we will not install regular documentation why would we want to install perl docs…
+    NOPERLDOC=1 \ 
+    # The base mirror is one of the mirrors of TUG's historic archive
+    TLHISTMIRRORURL=rsync://texlive.info/historic/systems/texlive \ 
+    # To get the latest packages available we always use the root mirror
+    TLMIRRORURL=http://dante.ctan.org/tex-archive/systems/texlive/tlnet \
+    # 
+    # the following environment variables are needed for TeX operations, for PARSIFAL and DANTEWIKI
+    # 
+    # main TeX directory
+    TEXDIR=/usr/local/texlive/2023  \
+    # director for site-wide local files
+    TEXMFLOCAL=/usr/local/texlive/texmf-local  \
+    # directory for variable and automatically generated data
+    TEXMFSYSVAR=/usr/local/texlive/2023/texmf-var  \
+    # directory for local configuration
+    TEXMFSYSCONFIG=/usr/local/texlive/2023/texmf-config \
+    # personal directory for variable and automatically generated data
+    TEXMFVAR=/var/www/.texlive2023/texmf-var         \           
+    # personal directory for local config
+    TEXMFCONFIG=/var/www/.texlive2023/texmf-config   \
+    # directory for user specific files
+    TEXMFHOME=/var/www/texmf       \
+    # TEXINPUTS might be amended outside of the container as part of Parsifal etc.
+    TEXINPUTS=/var/www/texinputs   \
+    #  We are setting the path so that we can more easily exercise and test commands inside of a docker exec shell
+    PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/texlive/2024/bin/x86_64-linuxmusl:/usr/local/texlive/2023/bin/x86_64-linuxmusl:/bin:/usr/local/texlive/2022/bin/x86_64-linuxmusl
 
 # Upgrade existing packages in the base image
 RUN apk --no-cache update &&              \  
@@ -73,5 +91,4 @@ RUN apk --no-cache update &&              \
     rm -Rf /tmp/* && \
     rm -Rf /var/cache/apk/*
 
-# There is already an entrypoint in the base image ssh
-# ENTRYPOINT ["/bin/sh","-c","sleep infinity"]
+ENTRYPOINT ["/bin/sh","-c","sleep infinity"]

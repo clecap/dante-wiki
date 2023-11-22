@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IMAGE_NAME=tex
+IMAGE_NAME=minimal
 
 # get directory this shell is running in
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"

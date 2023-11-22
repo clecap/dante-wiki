@@ -1,7 +1,7 @@
 FROM alpine:3.15
 
 LABEL "vendor"="Clemens H. Cap"
-LABEL "maintainer"="clemens.cap@uni-rostock.de"
+LABEL "maintainer"="clemens@clemens-cap.de"
 
     # Upgrade existing packages in the base image
 RUN apk update;                   \  

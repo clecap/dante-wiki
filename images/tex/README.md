@@ -1,6 +1,5 @@
 This directory is used to construct a TexLive docker image including many additional tools for using LaTeX,
 
-
 ### generate.sh ###
 
 Build a docker image which is derived from ssh and now gets added a Texlive installation.
