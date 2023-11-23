@@ -40,7 +40,7 @@ RUN apk --no-cache update &&   \
     apk --no-cache add ca-certificates &&\ 
 #   Needed for syntax highlighting mechanisms and for mupdf python
     apk --no-cache add python3-dev &&\
-#   Needed for mupdf python tooling ############################################################
+#   Needed for mupdf python tooling 
     ln -sf python3 /usr/bin/python  &&\
     python3 -m ensurepip &&\
     pip3 install --no-cache --upgrade pip setuptools &&\

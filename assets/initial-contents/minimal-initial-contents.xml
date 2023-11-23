@@ -37,18 +37,22 @@
     <ns>0</ns>
     <id>1</id>
     <revision>
-      <id>242</id>
-      <parentid>145</parentid>
-      <timestamp>2023-11-08T12:38:53Z</timestamp>
+      <id>216</id>
+      <parentid>215</parentid>
+      <timestamp>2023-11-11T17:36:38Z</timestamp>
       <contributor>
-        <username>Dir</username>
+        <username>Admin</username>
         <id>1</id>
       </contributor>
-      <origin>242</origin>
+      <origin>216</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="39" sha1="eh65x2lnwyykdk7e1r8bqeipgnh2l8l" xml:space="preserve">This is a freshly installed Dante Wiki.</text>
-      <sha1>eh65x2lnwyykdk7e1r8bqeipgnh2l8l</sha1>
+      <text bytes="115" sha1="l6rid7puwt00bukrdhli38nafrrw63g" xml:space="preserve">This is a freshly installed Dante Wiki.
+
+&lt;amsmath width="30cm"&gt;
+Testjk asd asd asd asd qwqqaasdqwhjqqasd
+&lt;/amsmath&gt;</text>
+      <sha1>l6rid7puwt00bukrdhli38nafrrw63g</sha1>
     </revision>
   </page>
   <page>
@@ -56,22 +60,26 @@
     <ns>8</ns>
     <id>2</id>
     <revision>
-      <id>228</id>
-      <parentid>159</parentid>
-      <timestamp>2023-11-08T12:06:51Z</timestamp>
+      <id>246</id>
+      <parentid>201</parentid>
+      <timestamp>2023-11-17T19:55:26Z</timestamp>
       <contributor>
-        <username>Dir</username>
+        <username>Admin</username>
         <id>1</id>
       </contributor>
-      <origin>228</origin>
+      <origin>246</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="14585" sha1="korss3nxe0bj5sf708nwtsmp6l4s8rh" xml:space="preserve">&lt;pre&gt;
-\documentclass[varwidth=15cm,margin=0.07cm]{standalone} 
+      <text bytes="13970" sha1="1jcbw5dav6elaoucicgp324poh51mtj" xml:space="preserve">&lt;pre&gt;
+\documentclass[]{standalone} 
 
+
+\pdfcompresslevel=0
+\pdfobjcompresslevel=0
+
+%%   
+%% Standard package imports        
 %%
-%% Standard package imports
-%% 
 
 \usepackage[T1]{fontenc}             % fontencoding - FIRST load fontencoding 
 \usepackage[utf8]{inputenc}          % and only THEN load UTF-8 see https://tex.stackexchange.com/questions/13067/
@@ -81,7 +89,13 @@
 \usepackage{csquotes}                % quotes
 \usepackage{tabto}                   % command \tabto{2cm}
 \usepackage[usenames]{color}         % Should load before tcolorbox                  
+
+
 \usepackage{tcolorbox}
+
+
+
+\usepackage{xstring}
 
 %% minted is included dynamically
 
@@ -98,9 +112,7 @@
 \usetikzlibrary{quotes,angles}
 \usetikzlibrary{mindmap}%  
 \usetikzlibrary{shadows}%                           % needed by mindmaps
-\usetikzlibrary{automata, arrows}
 
-\usepackage{tikz-qtree}
 
 \usepackage{qrcode}                                   % defines \qrcode[height=1cm,level=L]{ABCD} level: L M Q H for low medium ... quality
 \usepackage[percent]{overpic}                         % wrote some text directly over a picture, see 
@@ -116,20 +128,6 @@
 
 \def\tikzrad{\pgfplotsset{trig format plots=rad}\tikzset{trig format=rad}}
 \def\tikzdeg{\pgfplotsset{trig format plots=deg}\tikzset{trig format=deg}}
-
-
-\def\tikzAutomaton{
-  \tikzdeg%
-  \tikzset{
-    -&gt;,                                       % makes the edges directed
-    &gt;=stealth,                                % makes the arrow heads bold
-    node distance=2cm,                        % specifies the minimum distance between two nodes. Change if necessary.
-    every state/.style={thick, fill=gray!10}, % sets the properties for each ’state’ node
-    initial text=$ $,                         % sets the text that appears on the start arrow
-  }%
-}
-
-
 
 %% TODO: what is this for ??
 \newcommand*{\info}[4][16.3]{%
@@ -221,7 +219,7 @@
 
 \def\myInitialize{%   needed for initializations to be done after begin{document} which are taken out by the precompilation process
   \parindent 0pt
-  \parskip 0.2cm
+  \parskip 0.25cm
   \chcdisplayskipadjust
   \initializeVariants
 }
@@ -272,7 +270,8 @@
 %%
 %% LOCALIZATION
 %%  
-\usepackage[shorthands=off,german]{babel}%  localization; MUST turn off shorthands due to an interference with some xypic features
+%\usepackage[shorthands=off,german]{babel}%  localization; MUST turn off 
+% shorthands due to an interference with some xypic features
 
 
 
@@ -309,9 +308,6 @@
     label=\textbf{(\arabic*)},
     after={\vspace*{1.5\parskip}}
   }
-  \setlist[enumerate,2]{
-    label=(\arabic*)
-  }
 }
 
 \enumerateWithBrackets
@@ -324,8 +320,7 @@
 \setlist[itemize]{
   partopsep=1.0\parskip,
   topsep=-0.5\parskip,
-  itemsep=0cm,
-  after={\vspace*{1.5\parskip}}
+  itemsep=0cm
 }
 
 \setlist[description]{itemindent=-1.5em, labelsep=0pt,partopsep=\parskip,topsep=-\parskip}
@@ -359,7 +354,7 @@
 %\usepackage{txfonts}
 
 \usepackage{stix}                  % needed for \operp and similar symbols
-\usepackage{stmaryrd}               % needed for \bigsqcap
+\usepackage{stmaryrd}              % needed for \bigsqcap
 \usepackage{fontawesome}           % make fontawesome with some additional symbols available, for example \faTV etc
 \usepackage{wasysym}               % some symbols
 \usepackage{eurosym}               % euro symbol
@@ -372,8 +367,6 @@
 \def\be{\begin{equation}}
 \def\ee{\end{equation}}
 
-% underline boldface
-\def\ubf#1{\underline{\textbf{#1}}}
 
 
 % add shortcut for roman literals
@@ -549,6 +542,7 @@
 %%%  END OF TWEAK ITEMIZATIONS
 %%%
 
+\def\ubf#1{\underline{\textbf{#1}}}
 
 %%
 %% SPACING MACROS
@@ -579,10 +573,9 @@ magic-line-identifier-for-inclusion
 \end{document}
 &lt;/pre&gt;
 
-
-[[Category:DanteInitialContents]]
-[[Category:ParsifalTemplate]]</text>
-      <sha1>korss3nxe0bj5sf708nwtsmp6l4s8rh</sha1>
+[[Category:ParsifalTemplate]]
+[[Category:DanteInitialContents]]</text>
+      <sha1>1jcbw5dav6elaoucicgp324poh51mtj</sha1>
     </revision>
   </page>
   <page>
@@ -590,17 +583,18 @@ magic-line-identifier-for-inclusion
     <ns>8</ns>
     <id>3</id>
     <revision>
-      <id>235</id>
-      <parentid>3</parentid>
-      <timestamp>2023-11-08T12:23:57Z</timestamp>
+      <id>203</id>
+      <parentid>202</parentid>
+      <timestamp>2023-11-11T16:25:32Z</timestamp>
       <contributor>
-        <username>Dir</username>
+        <username>Admin</username>
         <id>1</id>
       </contributor>
-      <origin>235</origin>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>203</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="315" sha1="5ffffqosv1myjfq3rtt0xn0nvhxrrsq" xml:space="preserve">&lt;pre&gt;
+      <text bytes="315" sha1="77wde66imt8rtc83tqj7s55ib59bwb3" xml:space="preserve">&lt;pre&gt;
 \documentclass{beamer}
 \begin{document}
 \title{Simple Beamer Class}   
@@ -615,9 +609,9 @@ magic-line-identifier-for-inclusion
 &lt;/pre&gt;
 
 
-[[Category:DanteInitialContents]]
-[[Category:ParsifalTemplate]]</text>
-      <sha1>5ffffqosv1myjfq3rtt0xn0nvhxrrsq</sha1>
+[[Category:ParsifalTemplate]]
+[[Category:DanteInitialContents]]</text>
+      <sha1>77wde66imt8rtc83tqj7s55ib59bwb3</sha1>
     </revision>
   </page>
   <page>
@@ -625,17 +619,18 @@ magic-line-identifier-for-inclusion
     <ns>8</ns>
     <id>4</id>
     <revision>
-      <id>234</id>
-      <parentid>134</parentid>
-      <timestamp>2023-11-08T12:23:39Z</timestamp>
+      <id>206</id>
+      <parentid>205</parentid>
+      <timestamp>2023-11-11T16:27:07Z</timestamp>
       <contributor>
-        <username>Dir</username>
+        <username>Admin</username>
         <id>1</id>
       </contributor>
-      <origin>234</origin>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>206</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="113" sha1="tcryiufomwyeair8l4zh9c5rldvyw7x" xml:space="preserve">* Areas
+      <text bytes="112" sha1="47aneato1p0lg93mn0wlpml14z0ctor" xml:space="preserve">* Areas
 
 * catus
 
@@ -648,9 +643,8 @@ magic-line-identifier-for-inclusion
 * SEARCH
 * TOOLBOX
 * LANGUAGES
-
 [[Category:DanteInitialContents]]</text>
-      <sha1>tcryiufomwyeair8l4zh9c5rldvyw7x</sha1>
+      <sha1>47aneato1p0lg93mn0wlpml14z0ctor</sha1>
     </revision>
   </page>
   <page>
@@ -658,8 +652,7 @@ magic-line-identifier-for-inclusion
     <ns>8</ns>
     <id>5</id>
     <revision>
-      <id>161</id>
-      <parentid>7</parentid>
+      <id>7</id>
       <timestamp>2023-10-03T12:50:23Z</timestamp>
       <contributor>
         <username>Maintenance script</username>
@@ -678,14 +671,14 @@ magic-line-identifier-for-inclusion
     <ns>8</ns>
     <id>6</id>
     <revision>
-      <id>244</id>
-      <parentid>162</parentid>
-      <timestamp>2023-11-08T12:40:04Z</timestamp>
+      <id>128</id>
+      <parentid>127</parentid>
+      <timestamp>2023-11-10T12:34:52Z</timestamp>
       <contributor>
-        <username>Dir</username>
+        <username>Admin</username>
         <id>1</id>
       </contributor>
-      <origin>244</origin>
+      <origin>128</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="118" sha1="julslx8xntvwx304m7imet4orlzmz6v" xml:space="preserve">&lt;pre&gt;
@@ -704,14 +697,13 @@ magic-line-identifier-for-inclusion
     <ns>8</ns>
     <id>7</id>
     <revision>
-      <id>218</id>
-      <parentid>138</parentid>
+      <id>9</id>
       <timestamp>2023-11-08T11:36:05Z</timestamp>
       <contributor>
-        <username>Dir</username>
-        <id>1</id>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
       </contributor>
-      <origin>218</origin>
+      <origin>9</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="371" sha1="ie7xpnedmhgi6axvwbqa6rrmblmuuz3" xml:space="preserve">&lt;pre&gt;
@@ -731,16 +723,15 @@ magic-line-identifier-for-inclusion
   <page>
     <title>MediaWiki:Sidebar/Categories</title>
     <ns>8</ns>
-    <id>9</id>
+    <id>8</id>
     <revision>
-      <id>256</id>
-      <parentid>240</parentid>
+      <id>10</id>
       <timestamp>2023-11-08T13:01:21Z</timestamp>
       <contributor>
-        <username>Dir</username>
-        <id>1</id>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
       </contributor>
-      <origin>256</origin>
+      <origin>10</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="604" sha1="j06bpxm15xclnl7ky1olcxazzdjbb7y" xml:space="preserve">This page is a system page.
@@ -771,17 +762,16 @@ It must conform to the following rules:
   <page>
     <title>MediaWiki:Privacypage</title>
     <ns>8</ns>
-    <id>10</id>
+    <id>9</id>
     <revision>
-      <id>79</id>
-      <parentid>12</parentid>
+      <id>11</id>
       <timestamp>2023-10-29T01:14:16Z</timestamp>
       <contributor>
-        <username>Dir</username>
-        <id>1</id>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
       </contributor>
       <comment>Blanked the page</comment>
-      <origin>79</origin>
+      <origin>11</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
@@ -790,6 +780,26 @@ It must conform to the following rules:
   </page>
   <page>
     <title>MediaWiki:Aboutsite</title>
+    <ns>8</ns>
+    <id>10</id>
+    <revision>
+      <id>12</id>
+      <timestamp>2023-06-04T19:54:48Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>12</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="18" sha1="sy1if64yhgu4tenrajt4skhmg8ahcvh" xml:space="preserve">About {{SITENAME}}</text>
+      <sha1>sy1if64yhgu4tenrajt4skhmg8ahcvh</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Copyright</title>
     <ns>8</ns>
     <id>11</id>
     <revision>
@@ -804,12 +814,12 @@ It must conform to the following rules:
       <origin>13</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="18" sha1="sy1if64yhgu4tenrajt4skhmg8ahcvh" xml:space="preserve">About {{SITENAME}}</text>
-      <sha1>sy1if64yhgu4tenrajt4skhmg8ahcvh</sha1>
+      <text bytes="53" sha1="no9x9xeg81yiyx2piqrztgeuflab31a" xml:space="preserve">Content is available under $1 unless otherwise noted.</text>
+      <sha1>no9x9xeg81yiyx2piqrztgeuflab31a</sha1>
     </revision>
   </page>
   <page>
-    <title>MediaWiki:Copyright</title>
+    <title>MediaWiki:Copyrightwarning</title>
     <ns>8</ns>
     <id>12</id>
     <revision>
@@ -824,12 +834,13 @@ It must conform to the following rules:
       <origin>14</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="53" sha1="no9x9xeg81yiyx2piqrztgeuflab31a" xml:space="preserve">Content is available under $1 unless otherwise noted.</text>
-      <sha1>no9x9xeg81yiyx2piqrztgeuflab31a</sha1>
+      <text bytes="64" sha1="e30wd5b8xbsvz1n6xxsdvfg1fm8ankg" xml:space="preserve">Please note that all contributions to this system
+are copyright.</text>
+      <sha1>e30wd5b8xbsvz1n6xxsdvfg1fm8ankg</sha1>
     </revision>
   </page>
   <page>
-    <title>MediaWiki:Copyrightwarning</title>
+    <title>MediaWiki:Copyrightwarning2</title>
     <ns>8</ns>
     <id>13</id>
     <revision>
@@ -844,13 +855,13 @@ It must conform to the following rules:
       <origin>15</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="64" sha1="e30wd5b8xbsvz1n6xxsdvfg1fm8ankg" xml:space="preserve">Please note that all contributions to this system
-are copyright.</text>
-      <sha1>e30wd5b8xbsvz1n6xxsdvfg1fm8ankg</sha1>
+      <text bytes="65" sha1="nuesz9rhni3k0z7z8zdc3apc1c5wtbw" xml:space="preserve">Please note that all contributions to 
+this system are copyright.</text>
+      <sha1>nuesz9rhni3k0z7z8zdc3apc1c5wtbw</sha1>
     </revision>
   </page>
   <page>
-    <title>MediaWiki:Copyrightwarning2</title>
+    <title>MediaWiki:Deletereason-dropdown</title>
     <ns>8</ns>
     <id>14</id>
     <revision>
@@ -865,27 +876,6 @@ are copyright.</text>
       <origin>16</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="65" sha1="nuesz9rhni3k0z7z8zdc3apc1c5wtbw" xml:space="preserve">Please note that all contributions to 
-this system are copyright.</text>
-      <sha1>nuesz9rhni3k0z7z8zdc3apc1c5wtbw</sha1>
-    </revision>
-  </page>
-  <page>
-    <title>MediaWiki:Deletereason-dropdown</title>
-    <ns>8</ns>
-    <id>15</id>
-    <revision>
-      <id>17</id>
-      <timestamp>2023-06-04T19:54:48Z</timestamp>
-      <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
-      </contributor>
-      <minor/>
-      <comment>1 revision imported</comment>
-      <origin>17</origin>
-      <model>wikitext</model>
-      <format>text/x-wiki</format>
       <text bytes="104" sha1="nibcuv4myt6ub1l5h7vu1uysidqn80q" xml:space="preserve">* Common delete reasons
 ** Spam
 ** Vandalism
@@ -898,9 +888,9 @@ this system are copyright.</text>
   <page>
     <title>MediaWiki:CreatePage</title>
     <ns>8</ns>
-    <id>16</id>
+    <id>15</id>
     <revision>
-      <id>18</id>
+      <id>17</id>
       <timestamp>2023-06-04T19:54:48Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -908,7 +898,7 @@ this system are copyright.</text>
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>18</origin>
+      <origin>17</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="158" sha1="liq42mc4g5fvgmyvf25lutxryowaaww" xml:space="preserve">&lt;div style="float:left;"&gt;
@@ -924,9 +914,9 @@ buttonlabel=Create new article with this title
   <page>
     <title>MediaWiki:Sidebar/Navi</title>
     <ns>8</ns>
-    <id>17</id>
+    <id>16</id>
     <revision>
-      <id>19</id>
+      <id>18</id>
       <timestamp>2023-06-04T19:54:49Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -934,7 +924,7 @@ buttonlabel=Create new article with this title
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>19</origin>
+      <origin>18</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="1353" sha1="gr4gxqa24l66tjg0iiv1rencrz3mhk8" xml:space="preserve">&lt;pre&gt;
@@ -979,19 +969,19 @@ buttonlabel=Create new article with this title
   <page>
     <title>MediaWiki:Sidebar/Navigation</title>
     <ns>8</ns>
-    <id>18</id>
+    <id>17</id>
     <revision>
-      <id>254</id>
-      <parentid>253</parentid>
-      <timestamp>2023-11-08T12:57:25Z</timestamp>
+      <id>256</id>
+      <parentid>239</parentid>
+      <timestamp>2023-11-17T21:49:10Z</timestamp>
       <contributor>
-        <username>Dir</username>
+        <username>Admin</username>
         <id>1</id>
       </contributor>
-      <origin>254</origin>
+      <origin>256</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="3371" sha1="f7404m4vylc2ak1ebiarqht701hcyl0" xml:space="preserve">&lt;pre&gt;
+      <text bytes="3626" sha1="p0yxrzzedq5u0zazr1dhloymuc4m30c" xml:space="preserve">&lt;pre&gt;
 {{#tree: extensions=["persist"] | 
 * &lt;b&gt;[{{fullurl:Main Page}} Main Page]&lt;/b&gt;
 * [[MediaWiki:CreatePage|Create Page]]
@@ -1011,7 +1001,7 @@ buttonlabel=Create new article with this title
 ** [{{fullurl:MediaWiki:Sidebar/Navigation|action=edit}} Navigation]
 ** [{{fullurl:MediaWiki:Sidebar/UI|action=edit}} UI]
 
-* &lt;b title="Query for pages in specific namespaces"&gt;Queries &amp; Lists&lt;/b&gt;
+* &lt;b title="Query for pages in specific namespaces"&gt;Lists &amp; Queries&lt;/b&gt;
 ** [{{fullurl:Special:AllPages}} All Pages]
 ** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=8}} MediaWiki]
 ** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=14}} Category]
@@ -1034,25 +1024,33 @@ buttonlabel=Create new article with this title
 ** [[Special:WantedPages | Missing Pages]]
 
 * &lt;b&gt;Demos &amp; Tests&lt;/b&gt;
-** [[Help:Demo for DanteLinks | Dante-Links]]
-** [[Help:Demo for Parsifal | Parsifal]]
-** [[Help:Diverse Tests|Diverse Tests]]
-** &lt;b&gt;[javascript:window.DANTE.testConsole() window.DANTE.testConsole()]&lt;/b&gt;
-** &lt;b&gt;[javascript:Dante.testConsoleZwei() Dante.testConsoleZwei()]&lt;/b&gt;
-** &lt;b&gt;[javascript:Dante.testConsoleDrei() Dante.testConsoleDrei()]&lt;/b&gt;
-** &lt;b&gt;[javascript:console.log(Dante.testConsoleDrei); testprintfc]&lt;/b&gt;
-** &lt;b&gt;[javascript:console.log(Dante); Log Dante object]&lt;/b&gt;
-** &lt;b&gt;[javascript:console.log(Dante.testDump); Log Dante.testDump]&lt;/b&gt;
-** &lt;b&gt;[javascript:Dante.testDump(); Dante.testDump]&lt;/b&gt;
+** [[Test/Simple Test Page]]
+** Javascript Gadget Tests
+*** &lt;b&gt;[javascript:window.DANTE.testConsole() window.DANTE.testConsole()]&lt;/b&gt;
+*** &lt;b&gt;[javascript:Dante.testConsoleZwei() Dante.testConsoleZwei()]&lt;/b&gt;
+*** &lt;b&gt;[javascript:Dante.testConsoleDrei() Dante.testConsoleDrei()]&lt;/b&gt;
+*** &lt;b&gt;[javascript:console.log(Dante.testConsoleDrei); testprintfc]&lt;/b&gt;
+*** &lt;b&gt;[javascript:console.log(Dante); Log Dante object]&lt;/b&gt;
+*** &lt;b&gt;[javascript:console.log(Dante.testDump); Log Dante.testDump]&lt;/b&gt;
+*** &lt;b&gt;[javascript:Dante.testDump(); Dante.testDump]&lt;/b&gt;
 ** [[Help:Tests for Drawio|Drawio]]
-** [[Help:Parsifal Diverse Demo|Diverse Parsifal]]
-** [[Help:Test for DanteLinks|DanteLinks]]
-** [[Help:Parsifal Test|Parsifal General Tests]]
-** [[Help:Parsifal Raw Test|Parsifal Raw Tests]]
-** [[Help:Parsifal Page Width|Parsifal Page Width]]
-** [[Help:Slides Test Reveal|Slides Reveal]]
-** &lt;b&gt;[javascript:PRT.limitSize(true) Limit Size ON]&lt;/b&gt;
-** &lt;b&gt;[javascript:PRT.limitSize(false) Limit Size OFF]&lt;/b&gt;
+** Parsifal Tests
+*** [[Test/Parsifal Links]]
+*** [[Test/Parsifal Long Page Scroll Test]]
+*** [[Help:Parsifal Internal Links]]
+*** [[Help:Demo for DanteLinks | Dante-Links]]
+*** [[Help:Demo for Parsifal | Parsifal]]
+*** [[Help:Diverse Tests]]
+*** [[Test/Parsifal Section Heading Style]]
+*** [[Help:Parsifal Diverse Demo|Diverse Parsifal]]
+*** [[Help:Test for DanteLinks|DanteLinks]]
+*** [[Help:Parsifal Test|Parsifal General Tests]]
+*** [[Help:Parsifal Raw Test|Parsifal Raw Tests]]
+*** [[Help:Parsifal Page Width|Parsifal Page Width]]
+*** [[Help:Slides Test Reveal|Slides Reveal]]
+** Javascript PRT Tests
+*** &lt;b&gt;[javascript:PRT.limitSize(true) Limit Size ON]&lt;/b&gt;
+*** &lt;b&gt;[javascript:PRT.limitSize(false) Limit Size OFF]&lt;/b&gt;
 * [[Special:Upload| Upload file]]
 * [[Special:SpecialPages| Special pages]]
 * &lt;b&gt;Page Tools&lt;/b&gt;
@@ -1067,21 +1065,21 @@ buttonlabel=Create new article with this title
 
 
 [[Category:DanteInitialContents]]</text>
-      <sha1>f7404m4vylc2ak1ebiarqht701hcyl0</sha1>
+      <sha1>p0yxrzzedq5u0zazr1dhloymuc4m30c</sha1>
     </revision>
   </page>
   <page>
     <title>MediaWiki:Corefiles</title>
     <ns>8</ns>
-    <id>19</id>
+    <id>18</id>
     <revision>
-      <id>21</id>
+      <id>20</id>
       <timestamp>2023-09-15T19:12:14Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
-      <origin>21</origin>
+      <origin>20</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="68" sha1="1t92yq0rz89vcwih4874wy4lo1e3g5q" xml:space="preserve">Enter one file per line.
@@ -1096,9 +1094,9 @@ MediaWiki:Corefiles
   <page>
     <title>MediaWiki:Gadgets-definition</title>
     <ns>8</ns>
-    <id>20</id>
+    <id>19</id>
     <revision>
-      <id>22</id>
+      <id>21</id>
       <timestamp>2023-06-04T19:54:49Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -1106,7 +1104,7 @@ MediaWiki:Corefiles
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>22</origin>
+      <origin>21</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="146" sha1="619q71sg2v39xymslvtl6l3pt98ia68" xml:space="preserve">
@@ -1122,9 +1120,9 @@ MediaWiki:Corefiles
   <page>
     <title>MediaWiki:Gadget-danteGadgetTest.js</title>
     <ns>8</ns>
-    <id>21</id>
+    <id>20</id>
     <revision>
-      <id>23</id>
+      <id>22</id>
       <timestamp>2023-06-04T19:54:49Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -1132,7 +1130,7 @@ MediaWiki:Corefiles
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>23</origin>
+      <origin>22</origin>
       <model>javascript</model>
       <format>text/javascript</format>
       <text bytes="187" sha1="0ek8xmfckm3ouywxtkxf5k45ka3odq9" xml:space="preserve">window.Dante=window.Dante || {};
@@ -1151,9 +1149,9 @@ console.log ("*** inside dante gadget", window.Dante);
   <page>
     <title>MediaWiki:Common.js</title>
     <ns>8</ns>
-    <id>22</id>
+    <id>21</id>
     <revision>
-      <id>24</id>
+      <id>23</id>
       <timestamp>2023-06-04T19:54:49Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -1161,7 +1159,7 @@ console.log ("*** inside dante gadget", window.Dante);
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>24</origin>
+      <origin>23</origin>
       <model>javascript</model>
       <format>text/javascript</format>
       <text bytes="405" sha1="cupt0yavm500nuhqe7phw79rju72kt6" xml:space="preserve">/* Any JavaScript here will be loaded for all users on every page load. */
@@ -1190,9 +1188,9 @@ console.log ("******** Completed MediaWiki:Common.js");</text>
   <page>
     <title>MediaWiki:Gadget-danteDump1.js</title>
     <ns>8</ns>
-    <id>23</id>
+    <id>22</id>
     <revision>
-      <id>25</id>
+      <id>24</id>
       <timestamp>2023-06-04T19:54:50Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -1200,7 +1198,7 @@ console.log ("******** Completed MediaWiki:Common.js");</text>
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>25</origin>
+      <origin>24</origin>
       <model>javascript</model>
       <format>text/javascript</format>
       <text bytes="1080" sha1="epujlwy6slmgda06lpeaefxsn1lhi8z" xml:space="preserve">window.Dante=window.Dante || {};
@@ -1250,16 +1248,16 @@ window.Dante.testDump=function(){
   <page>
     <title>MediaWiki:Dantewikis</title>
     <ns>8</ns>
-    <id>24</id>
+    <id>23</id>
     <revision>
-      <id>26</id>
+      <id>25</id>
       <timestamp>2023-06-06T12:51:21Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
       <comment>Created page with " * abra * kadabra"</comment>
-      <origin>26</origin>
+      <origin>25</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="17" sha1="re6rh2bx5gy4bged2lc9bfuo3jwq5ko" xml:space="preserve">
@@ -1271,16 +1269,16 @@ window.Dante.testDump=function(){
   <page>
     <title>MediaWiki:ParsifalTemplate/tex</title>
     <ns>8</ns>
-    <id>25</id>
+    <id>24</id>
     <revision>
-      <id>27</id>
+      <id>26</id>
       <timestamp>2023-06-30T19:56:14Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
       <comment>Created page with "magic-line-identifier-for-inclusion"</comment>
-      <origin>27</origin>
+      <origin>26</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="35" sha1="r03s62hdhw16v7zc5iuazfm3chdfll8" xml:space="preserve">magic-line-identifier-for-inclusion</text>
@@ -1290,44 +1288,42 @@ window.Dante.testDump=function(){
   <page>
     <title>MediaWiki:Sidebar/UI</title>
     <ns>8</ns>
-    <id>26</id>
+    <id>25</id>
     <revision>
-      <id>217</id>
-      <parentid>163</parentid>
-      <timestamp>2023-11-08T11:35:18Z</timestamp>
+      <id>172</id>
+      <parentid>171</parentid>
+      <timestamp>2023-11-10T19:16:21Z</timestamp>
       <contributor>
-        <username>Dir</username>
+        <username>Admin</username>
         <id>1</id>
       </contributor>
-      <origin>217</origin>
+      <origin>172</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="392" sha1="1g9hhm4dyre7ps6y5r3n3w52xc8kygr" xml:space="preserve">&lt;pre&gt;
+      <text bytes="407" sha1="2wibqj59ggxdcdujsaqve3bzvaltwg5" xml:space="preserve">&lt;pre&gt;
 {{#tree: extensions=["persist"] | 
-* &lt;b&gt;[javascript:PRT.limitSize(true) Limit Size ON]&lt;/b&gt;
-* &lt;b&gt;[javascript:PRT.limitSize(false) Limit Size OFF]&lt;/b&gt;
-* &lt;b&gt;[javascript:PRT.showVariants(true) Show Variants ON]&lt;/b&gt;
-* &lt;b&gt;[javascript:PRT.showVariants(false) Show Variants OFF]&lt;/b&gt;
+* &lt;b id="limitSize" title="Change setting: Limit automagic growth of TeX areas."&gt;[javascript:PRT.toggleLimitSize() Limit Size:]&lt;/b&gt;
+* &lt;b id="variantShow" title="Change setting: Show variants of pages."&gt;[javascript:PRT.toggleVariants() Show Variants:]&lt;/b&gt;
 * &lt;b&gt;[javascript:window.persistCatWindow() Persist Cat Window]&lt;/b&gt;
 }}
 &lt;/pre&gt;
 
 [[Category:DanteInitialContents]]</text>
-      <sha1>1g9hhm4dyre7ps6y5r3n3w52xc8kygr</sha1>
+      <sha1>2wibqj59ggxdcdujsaqve3bzvaltwg5</sha1>
     </revision>
   </page>
   <page>
     <title>MediaWiki:Backupfiles</title>
     <ns>8</ns>
-    <id>27</id>
+    <id>26</id>
     <revision>
-      <id>29</id>
+      <id>28</id>
       <timestamp>2023-09-15T18:49:13Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
-      <origin>29</origin>
+      <origin>28</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="90" sha1="rdjd3ksfnwmybfpzu9pdyu6vlxhwl0o" xml:space="preserve">Enter one file per line.
@@ -1343,15 +1339,15 @@ MediaWiki:Backupfiles
   <page>
     <title>MediaWiki:Backupcategories</title>
     <ns>8</ns>
-    <id>28</id>
+    <id>27</id>
     <revision>
-      <id>30</id>
+      <id>29</id>
       <timestamp>2023-09-15T18:48:07Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
-      <origin>30</origin>
+      <origin>29</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="57" sha1="6z6foaroyykougagljbu6z6cdm0ej9w" xml:space="preserve">Enter one category per line.
@@ -1363,11 +1359,113 @@ Compiler
     </revision>
   </page>
   <page>
-    <title>File:CaravaggioJeromeValletta.jpg</title>
-    <ns>6</ns>
+    <title>MediaWiki:Disclaimerpage</title>
+    <ns>8</ns>
+    <id>28</id>
+    <revision>
+      <id>30</id>
+      <timestamp>2023-10-29T01:08:53Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment>Blanked the page</comment>
+      <origin>30</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
+      <sha1>phoiac9h4m842xq45sp7s6u21eteeq1</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:CategoryTree</title>
+    <ns>8</ns>
     <id>29</id>
     <revision>
+      <id>31</id>
+      <timestamp>2023-11-08T12:05:02Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <origin>31</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="310" sha1="rwdy3nm3qnnctu11386jvhtz4lw2ldy" xml:space="preserve">This page opens when clicking on the tree symbol. You can configure it according to your needs.
+
+== DanteInitialContents ==
+&lt;categorytree mode="all" showcount="on"&gt;DanteInitialContents&lt;/categorytree&gt;
+
+== System ==
+&lt;categorytree mode="all" showcount="on"&gt;System&lt;/categorytree&gt;
+
+[[Category:DanteInitialContents]]</text>
+      <sha1>rwdy3nm3qnnctu11386jvhtz4lw2ldy</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:CategoryCloud</title>
+    <ns>8</ns>
+    <id>30</id>
+    <revision>
       <id>32</id>
+      <timestamp>2023-11-01T13:41:01Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment>Created page with "&lt;tagcloud&gt;exclude=television,television_series,celebrities,food,yoga&lt;/tagcloud&gt;"</comment>
+      <origin>32</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="79" sha1="bfssza87vjretanqf02vjg3aw9hm5pg" xml:space="preserve">&lt;tagcloud&gt;exclude=television,television_series,celebrities,food,yoga&lt;/tagcloud&gt;</text>
+      <sha1>bfssza87vjretanqf02vjg3aw9hm5pg</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:ParsifalTemplate/README</title>
+    <ns>8</ns>
+    <id>31</id>
+    <revision>
+      <id>33</id>
+      <timestamp>2023-10-03T12:50:22Z</timestamp>
+      <contributor>
+        <username>Maintenance script</username>
+        <id>3</id>
+      </contributor>
+      <comment>Imported from text file</comment>
+      <origin>33</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="99" sha1="ivgzptphp7jhyuftzb61no4eppia7xq" xml:space="preserve">The directory Parsifal/initial-templates contains the initial templates to be loaded into the wiki.</text>
+      <sha1>ivgzptphp7jhyuftzb61no4eppia7xq</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:ParsifalTemplate</title>
+    <ns>8</ns>
+    <id>32</id>
+    <revision>
+      <id>34</id>
+      <timestamp>2023-11-08T12:52:01Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment>Created page with "This page is the superpage of all parsifal templates."</comment>
+      <origin>34</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="53" sha1="nsd5h9zd5zoq531fqxbojlay02k09iz" xml:space="preserve">This page is the superpage of all parsifal templates.</text>
+      <sha1>nsd5h9zd5zoq531fqxbojlay02k09iz</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>File:CaravaggioJeromeValletta.jpg</title>
+    <ns>6</ns>
+    <id>33</id>
+    <revision>
+      <id>36</id>
       <timestamp>2023-06-04T19:54:47Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -1375,7 +1473,7 @@ Compiler
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>32</origin>
+      <origin>36</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
@@ -1385,16 +1483,16 @@ Compiler
   <page>
     <title>Help:Parsifal Test</title>
     <ns>12</ns>
-    <id>30</id>
+    <id>34</id>
     <revision>
-      <id>33</id>
+      <id>37</id>
       <timestamp>2023-09-07T08:38:44Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
       <comment>/* Titel */</comment>
-      <origin>33</origin>
+      <origin>37</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="1170" sha1="1ezj2n2jevxrfrxue7svyd9f72f5fjx" xml:space="preserve">== Titel ==
@@ -1487,17 +1585,16 @@ Drei \url{https://www.ifi.ch}
   <page>
     <title>Test/Test2</title>
     <ns>0</ns>
-    <id>31</id>
+    <id>35</id>
     <revision>
-      <id>261</id>
-      <parentid>249</parentid>
+      <id>38</id>
       <timestamp>2023-11-08T13:02:26Z</timestamp>
       <contributor>
-        <username>Dir</username>
-        <id>1</id>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
       </contributor>
       <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
-      <origin>261</origin>
+      <origin>38</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="737" sha1="6qppxad5klko1blt9f1433t9ygmr734" xml:space="preserve">asd asd asd asd asd asd asd asd asd asd asd 
@@ -1586,16 +1683,15 @@ kk
   <page>
     <title>Test/Including a snippet</title>
     <ns>0</ns>
-    <id>32</id>
+    <id>36</id>
     <revision>
-      <id>255</id>
-      <parentid>246</parentid>
+      <id>39</id>
       <timestamp>2023-11-08T13:00:40Z</timestamp>
       <contributor>
-        <username>Dir</username>
-        <id>1</id>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
       </contributor>
-      <origin>255</origin>
+      <origin>39</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="52" sha1="92oug6w7wqvc2xiht4eo7jx4vlk1rt3" xml:space="preserve">now we get:
@@ -1609,17 +1705,16 @@ kk
   <page>
     <title>Test/Slides Test</title>
     <ns>0</ns>
-    <id>33</id>
+    <id>37</id>
     <revision>
-      <id>260</id>
-      <parentid>248</parentid>
+      <id>40</id>
       <timestamp>2023-11-08T13:02:22Z</timestamp>
       <contributor>
-        <username>Dir</username>
-        <id>1</id>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
       </contributor>
       <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
-      <origin>260</origin>
+      <origin>40</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="222" sha1="lzwgmgbpsrl1s3nhl1d8siotutuy862" xml:space="preserve">
@@ -1645,29 +1740,6 @@ Es ist $E = mc^2$.
   <page>
     <title>About</title>
     <ns>0</ns>
-    <id>36</id>
-    <revision>
-      <id>39</id>
-      <timestamp>2023-06-04T19:54:47Z</timestamp>
-      <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
-      </contributor>
-      <minor/>
-      <comment>1 revision imported</comment>
-      <origin>39</origin>
-      <model>wikitext</model>
-      <format>text/x-wiki</format>
-      <text bytes="24" sha1="plbxldqkhns2zhvbn8yb75zpz7ajpdp" xml:space="preserve">
-
-
-A generic about pages</text>
-      <sha1>plbxldqkhns2zhvbn8yb75zpz7ajpdp</sha1>
-    </revision>
-  </page>
-  <page>
-    <title>General disclaimer</title>
-    <ns>0</ns>
     <id>38</id>
     <revision>
       <id>41</id>
@@ -1681,12 +1753,15 @@ A generic about pages</text>
       <origin>41</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
-      <sha1>phoiac9h4m842xq45sp7s6u21eteeq1</sha1>
+      <text bytes="24" sha1="plbxldqkhns2zhvbn8yb75zpz7ajpdp" xml:space="preserve">
+
+
+A generic about pages</text>
+      <sha1>plbxldqkhns2zhvbn8yb75zpz7ajpdp</sha1>
     </revision>
   </page>
   <page>
-    <title>Privacy policy</title>
+    <title>General disclaimer</title>
     <ns>0</ns>
     <id>39</id>
     <revision>
@@ -1701,6 +1776,26 @@ A generic about pages</text>
       <origin>42</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
+      <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
+      <sha1>phoiac9h4m842xq45sp7s6u21eteeq1</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Privacy policy</title>
+    <ns>0</ns>
+    <id>40</id>
+    <revision>
+      <id>43</id>
+      <timestamp>2023-06-04T19:54:47Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>1 revision imported</comment>
+      <origin>43</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
       <text bytes="34" sha1="2nkdpdzxjgzhf5ldmmauopso2cmpc0t" xml:space="preserve">
 Some privacy blurb
 
@@ -1711,9 +1806,9 @@ Some privacy blurb
   <page>
     <title>Test/Syntax Highlights</title>
     <ns>0</ns>
-    <id>40</id>
+    <id>41</id>
     <revision>
-      <id>43</id>
+      <id>44</id>
       <timestamp>2023-06-04T19:54:48Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -1721,7 +1816,7 @@ Some privacy blurb
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>43</origin>
+      <origin>44</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="265" sha1="nogir1v349frb06thkm8e0szpdt8q5x" xml:space="preserve">
@@ -1750,15 +1845,14 @@ def quick_sort(arr):
     <ns>0</ns>
     <id>42</id>
     <revision>
-      <id>259</id>
-      <parentid>45</parentid>
+      <id>45</id>
       <timestamp>2023-11-08T13:02:18Z</timestamp>
       <contributor>
-        <username>Dir</username>
-        <id>1</id>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
       </contributor>
       <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
-      <origin>259</origin>
+      <origin>45</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="50" sha1="h0n1kkj4w855j2lpkvlcsr6qvp7947c" xml:space="preserve">&lt;markdown&gt;
@@ -1771,9 +1865,9 @@ def quick_sort(arr):
   <page>
     <title>Help:Sidebar</title>
     <ns>12</ns>
-    <id>45</id>
+    <id>43</id>
     <revision>
-      <id>48</id>
+      <id>46</id>
       <timestamp>2023-06-04T19:54:48Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -1781,7 +1875,7 @@ def quick_sort(arr):
       </contributor>
       <minor/>
       <comment>1 revision imported</comment>
-      <origin>48</origin>
+      <origin>46</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="223" sha1="eraooa0up3b1a9vp5vpfvja9527k8tj" xml:space="preserve">
@@ -1798,16 +1892,15 @@ def quick_sort(arr):
   <page>
     <title>Help:Demo for DanteLinks</title>
     <ns>12</ns>
-    <id>46</id>
+    <id>44</id>
     <revision>
-      <id>243</id>
-      <parentid>107</parentid>
+      <id>47</id>
       <timestamp>2023-11-08T12:39:25Z</timestamp>
       <contributor>
-        <username>Dir</username>
-        <id>1</id>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
       </contributor>
-      <origin>243</origin>
+      <origin>47</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="2676" sha1="fpyjd5rc79plz8od4ctp2jn5vcrxcrz" xml:space="preserve">
@@ -1899,45 +1992,67 @@ rendering in text.
   <page>
     <title>Help:Demo for Parsifal</title>
     <ns>12</ns>
-    <id>47</id>
+    <id>45</id>
     <revision>
-      <id>166</id>
-      <parentid>50</parentid>
-      <timestamp>2023-10-18T18:36:01Z</timestamp>
+      <id>270</id>
+      <parentid>189</parentid>
+      <timestamp>2023-11-20T18:40:00Z</timestamp>
       <contributor>
-        <username>imported&gt;Admin</username>
-        <id>0</id>
+        <username>Admin</username>
+        <id>1</id>
       </contributor>
-      <origin>166</origin>
+      <comment>/* one */</comment>
+      <origin>270</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="74" sha1="itmnmginc4iulo8zjt0bbpe1d8ovq6r" xml:space="preserve">
+      <text bytes="401" sha1="6odhxdrngwzeg518mc46mqwb9toifxy" xml:space="preserve">
 __SLIDES__
 
 == one ==
 bla
 &lt;amsmath&gt;
-asdq
+asdqh
+a
+\ubf{q}w  \ubf{w}er \ubf janus
 
-\ubf{q}w  \ubf wer 
+&lt;/amsmath&gt;
 
-&lt;/amsmath&gt;</text>
-      <sha1>itmnmginc4iulo8zjt0bbpe1d8ovq6r</sha1>
+== Link ==
+&lt;amsmath&gt;
+\dref{Main Page}  
+
+\dref{Help: Demo for Parsifal}
+
+\dref{Help: Demo for DanteLinks}
+
+\dref{Test/Parsifal Section Heading Style}
+
+\dref{Test/Parsifal Section Heading Style#h4}
+
+\url{https://www.clemenscap.de} 
+
+
+
+&lt;/amsmath&gt;
+
+[[Test/Parsifal Section Heading Style#h4]]
+
+[[Demo für Parsifal]]</text>
+      <sha1>6odhxdrngwzeg518mc46mqwb9toifxy</sha1>
     </revision>
   </page>
   <page>
     <title>Help:Parsifal Diverse Demo</title>
     <ns>12</ns>
-    <id>48</id>
+    <id>46</id>
     <revision>
-      <id>236</id>
-      <parentid>51</parentid>
+      <id>49</id>
       <timestamp>2023-11-08T12:24:29Z</timestamp>
       <contributor>
-        <username>Dir</username>
-        <id>1</id>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
       </contributor>
-      <origin>236</origin>
+      <origin>49</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="3530" sha1="4bi88bcjos7hxrcg7d64zgxw5wl87f0" xml:space="preserve">&lt;amsmath style="border:10px solid green;"&gt;
@@ -1994,15 +2109,15 @@ Ve ry s  m a ll k
   <page>
     <title>Help:Test for DanteLinks</title>
     <ns>12</ns>
-    <id>49</id>
+    <id>47</id>
     <revision>
-      <id>52</id>
+      <id>50</id>
       <timestamp>2023-06-20T19:27:56Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
-      <origin>52</origin>
+      <origin>50</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="177" sha1="34brh7em6shfxd9xx2fq18qel0twxhs" xml:space="preserve">* Broken pipes for the internal links do not yet work.
@@ -2016,16 +2131,16 @@ Ve ry s  m a ll k
   <page>
     <title>Help:Slides Test Reveal</title>
     <ns>12</ns>
-    <id>50</id>
+    <id>48</id>
     <revision>
-      <id>53</id>
+      <id>51</id>
       <timestamp>2023-08-27T16:23:01Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
       <comment>/* Four */</comment>
-      <origin>53</origin>
+      <origin>51</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="195" sha1="gr9isow5fn3myykj4pvw6g30dce0mcg" xml:space="preserve">
@@ -2066,9 +2181,9 @@ asd asdv
   <page>
     <title>Help:Tests for Drawio</title>
     <ns>12</ns>
-    <id>51</id>
+    <id>49</id>
     <revision>
-      <id>54</id>
+      <id>52</id>
       <timestamp>2023-06-20T19:21:37Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
@@ -2076,7 +2191,7 @@ asd asdv
       </contributor>
       <minor/>
       <comment>Dir moved page [[Tests for Drawio]] to [[Help:Tests for Drawio]] without leaving a redirect</comment>
-      <origin>54</origin>
+      <origin>52</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="45" sha1="tc9pijlp9xgslwze9td1wygmkfnxxy3" xml:space="preserve">
@@ -2088,18 +2203,20 @@ asd asdv
   <page>
     <title>Help:Parsifal Page Width</title>
     <ns>12</ns>
-    <id>52</id>
+    <id>50</id>
     <revision>
-      <id>55</id>
-      <timestamp>2023-06-28T12:18:19Z</timestamp>
+      <id>162</id>
+      <parentid>161</parentid>
+      <timestamp>2023-11-10T18:30:33Z</timestamp>
       <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
+        <username>Admin</username>
+        <id>1</id>
       </contributor>
-      <origin>55</origin>
+      <comment>/* Setting Page Width */</comment>
+      <origin>162</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="275" sha1="fovg555xwpewgloylt0qfuvssu62zuz" xml:space="preserve">== Test for Parsifal Page Width ==
+      <text bytes="1621" sha1="fr6m9hsv8hay4c8d8crgdtlb1s9jt98" xml:space="preserve">== Test for Parsifal Page Width ==
 Pre
 &lt;amsmath&gt;
 Ei nz el test aq qwehj hjk hjk 789
@@ -2112,22 +2229,122 @@ Rule of 15cm
 
 Rule of 16cm
 \hrule height 1px depth 1px width 16cm \relax
+&lt;/amsmath&gt;
+
+== Setting Page Width ==
+&lt;amsmath slim b&gt;
+This is a slim page 
+&lt;/amsmath&gt;
+
+&lt;amsmath width="25cm"&gt;
+Width 25cm 
+&lt;/amsmath&gt;
+
+&lt;amsmath width="5cm"&gt;
+Width 5cm 
+&lt;/amsmath&gt;
+
+&lt;amsmath width="15cm"&gt;
+Width 15cm 
+&lt;/amsmath&gt;
+
+&lt;amsmath width="14cm"&gt;
+Width 14cm 
+&lt;/amsmath&gt;
+
+&lt;amsmath width="13cm"&gt;
+Width 13cm 
+&lt;/amsmath&gt;
+
+
+
+&lt;amsmath width="50cm"&gt;
+Width 50cm  
+&lt;/amsmath&gt;
+
+== Wide Page ==
+&lt;amsmath wide&gt;
+This is a wide page which is able to contain quite
+a lot of text provided we enter enough text to fill the
+the page which has a lot of space.  
+
+{\color{red}asd asd asd asd asd asd asd asd}
+
+\begin{enumerate}
+\item a
+\item b
+\end{enumerate}
+aSome more
+
+&lt;/amsmath&gt;
+
+&lt;amsmath wide&gt;
+This is a wide pagej
+&lt;/amsmath&gt;
+
+&lt;amsmath&gt;
+This is a normal page.
+&lt;/amsmath&gt;
+
+== Setting Size ==
+&lt;amsmath width="1cm" scale="3" b&gt;
+One centimetersss s
+
+&lt;/amsmath&gt;
+
+== PDF Scale Adjustment ==
+&lt;amsmath pdfscale="7"&gt;
+7
+&lt;/amsmath&gt;
+
+&lt;amsmath pdfscale="8"&gt;
+8
+&lt;/amsmath&gt;
+
+&lt;amsmath pdfscale="9"&gt;
+9
+&lt;/amsmath&gt;
+
+&lt;amsmath pdfscale="20"&gt;
+20
+&lt;/amsmath&gt;
+
+&lt;amsmath pdfscale="1"&gt;
+1 20
+&lt;/amsmath&gt;
+
+
+== Margin adjustment ==
+&lt;amsmath&gt;
+No margin adjustments
+&lt;/amsmath&gt;
+
+&lt;amsmath margin="0.07cm"&gt;
+Now margin=0.07cm
+&lt;/amsmath&gt;
+
+&lt;amsmath margin="0.5cm"&gt;
+Now margin=0.5cm
+&lt;/amsmath&gt;
+
+&lt;amsmath margin="{0.0cm 0.0cm 0.0cm 3cm}"&gt;
+Now margin=0.0cm 0.0cm 0.0cm 3cm  as in left bottom right top
 &lt;/amsmath&gt;</text>
-      <sha1>fovg555xwpewgloylt0qfuvssu62zuz</sha1>
+      <sha1>fr6m9hsv8hay4c8d8crgdtlb1s9jt98</sha1>
     </revision>
   </page>
   <page>
     <title>Help:Parsifal Raw Test</title>
     <ns>12</ns>
-    <id>53</id>
+    <id>51</id>
     <revision>
-      <id>56</id>
+      <id>54</id>
       <timestamp>2023-06-30T20:52:51Z</timestamp>
       <contributor>
         <username>imported&gt;Dir</username>
         <id>0</id>
       </contributor>
-      <origin>56</origin>
+      <origin>54</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="91" sha1="brrf0hy184ebx0xw2u318hfe8hm3q5d" xml:space="preserve">
@@ -2144,17 +2361,16 @@ asd khjks
   <page>
     <title>Test/Just a comment</title>
     <ns>0</ns>
-    <id>54</id>
+    <id>52</id>
     <revision>
-      <id>258</id>
-      <parentid>247</parentid>
+      <id>55</id>
       <timestamp>2023-11-08T13:02:14Z</timestamp>
       <contributor>
-        <username>Dir</username>
-        <id>1</id>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
       </contributor>
       <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
-      <origin>258</origin>
+      <origin>55</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="38" sha1="ds0w45pl806g9njnei7xqmb2rv6pw5f" xml:space="preserve">Just
@@ -2169,19 +2385,20 @@ Comment
   <page>
     <title>Help:Diverse Tests</title>
     <ns>12</ns>
-    <id>55</id>
+    <id>53</id>
     <revision>
-      <id>167</id>
-      <parentid>58</parentid>
-      <timestamp>2023-10-22T12:43:59Z</timestamp>
+      <id>117</id>
+      <parentid>116</parentid>
+      <timestamp>2023-11-09T22:51:47Z</timestamp>
       <contributor>
-        <username>imported&gt;Admin</username>
-        <id>0</id>
+        <username>Admin</username>
+        <id>1</id>
       </contributor>
-      <origin>167</origin>
+      <comment>/* Level 1.1.1.1 */</comment>
+      <origin>117</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="1910" sha1="ltgt506t8wwgv6j1cbf5p8sy3y3l6wv" xml:space="preserve">
+      <text bytes="2452" sha1="clz9c1xt6imn7zk56dtx2qq8d6pm8ma" xml:space="preserve">
 [[Main Page ¦ target=_blank]]
 
 [[Main Page ¦ target=_new]]
@@ -2193,7 +2410,7 @@ Comment
 
 
 &lt;amsmath&gt;
-Blabla this is an example for an entire line filling the entire area of the browser to get a demonstration for the autoscaling feature.
+Blabla this is an ekjhkjh kjhkjh kjhkjh kjhkjh xample for an entire line filling the entire area of the browser to get a demonstration for the autoscaling feature. 
 &lt;/amsmath&gt;
 
 == Level 1.1 ==
@@ -2204,15 +2421,15 @@ Blabla this is an example for an entire line filling the entire area of the brow
 &lt;/amsmath&gt;
 
 &lt;amsmath&gt;
-Blabla s
+Blab wer qwer qwer qwer qwer qsdf sdf dsf sdf sdf sdf sdf df sdf er qwer qwer qwer qwer qwer qwer qerqwerqewrqerqerqewrqwerqwerqwer sdf sdfsdfsdfsdf sdfsdfsdfsdf sdfsdf gggggggggggggggggggggggggggggg ggggggggggggggggggsdf
 
 \bigskip\bigskip\bigskip
 
-this 
+this hjkhjk hjk hjk hjk hjk hjkhjk hjk hjk hjk hjkhjk
 
 \bigskip\bigskip\bigskip
 
-is 
+is kjh hjk hjk
 
 \bigskip\bigskip\bigskip
 
@@ -2253,6 +2470,7 @@ area of the browser to get a demonstration for the autoscaling feature.
 ==== Level 1.1.1.1 ====
 
 &lt;amsmath&gt;
+\tikzdeg
 \begin{figure} 
 \centering
 \begin{tikzpicture}
@@ -2282,10 +2500,17 @@ child {node  (i) {F} child {node  (j) {2}}}
 \end{tikzpicture}
 
 \end{figure}
-
+k hjhjk hjkhjk hj fgh fgh tzutzu
 &lt;/amsmath&gt;
 
 ===== Level 1.1.1.1.1 =====
+&lt;amsmath sans&gt;
+Test asd asd a aqqqqjhgjhgjhgjhgjhgjhgjhgjhgjhgjhgjhgjhgjhgj
+Ich glaube es ist jetzt schon nicht so ganz einfach mit dem
+scheduling dessen, was wir im backendsehen. hjkjhj
+
+&lt;/amsmath&gt;
+
 
 ====== Level 1.1.1.1.1.1 ======
 
@@ -2302,23 +2527,23 @@ child {node  (i) {F} child {node  (j) {2}}}
 == Level 1.3 ==
 
 === Level 1.3.1 ===</text>
-      <sha1>ltgt506t8wwgv6j1cbf5p8sy3y3l6wv</sha1>
+      <sha1>clz9c1xt6imn7zk56dtx2qq8d6pm8ma</sha1>
     </revision>
   </page>
   <page>
     <title>File:Compiler-und-interpreter.svg</title>
     <ns>6</ns>
-    <id>61</id>
+    <id>54</id>
     <revision>
-      <id>233</id>
-      <parentid>65</parentid>
-      <timestamp>2023-11-08T12:22:38Z</timestamp>
+      <id>58</id>
+      <parentid>57</parentid>
+      <timestamp>2023-11-08T21:59:39Z</timestamp>
       <contributor>
-        <username>Dir</username>
-        <id>1</id>
+        <username>Imported&gt;Dir</username>
+        <id>0</id>
       </contributor>
-      <comment>Blanked the page</comment>
-      <origin>233</origin>
+      <comment>Imported&gt;Dir uploaded [[File:Compiler-und-interpreter.svg]]</comment>
+      <origin>57</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
@@ -2591,17 +2816,17 @@ YW5ub3QgZGlzcGxheTwvdGV4dD48L2E+PC9zd2l0Y2g+PC9zdmc+
   <page>
     <title>File:Compiler-abstraktion.svg</title>
     <ns>6</ns>
-    <id>62</id>
+    <id>55</id>
     <revision>
-      <id>67</id>
-      <parentid>66</parentid>
-      <timestamp>2023-10-28T19:33:32Z</timestamp>
+      <id>60</id>
+      <parentid>59</parentid>
+      <timestamp>2023-11-08T21:59:39Z</timestamp>
       <contributor>
         <username>Imported&gt;Dir</username>
         <id>0</id>
       </contributor>
       <comment>Imported&gt;Dir uploaded [[File:Compiler-abstraktion.svg]]</comment>
-      <origin>66</origin>
+      <origin>59</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
@@ -2777,1382 +3002,6 @@ azpocmVmPSJodHRwczovL3d3dy5kcmF3aW8uY29tL2RvYy9mYXEvc3ZnLWV4cG9ydC10ZXh0LXBy
 b2JsZW1zIiB0YXJnZXQ9Il9ibGFuayI+PHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1z
 aXplPSIxMHB4IiB4PSI1MCUiIHk9IjEwMCUiPlRleHQgaXMgbm90IFNWRyAtIGNhbm5vdCBkaXNw
 bGF5PC90ZXh0PjwvYT48L3N3aXRjaD48L3N2Zz4=
-      </contents>
-    </upload>
-    <upload>
-      <timestamp>2023-09-08T14:41:30Z</timestamp>
-      <contributor>
-        <username>Imported&gt;Dir</username>
-        <id>0</id>
-      </contributor>
-      <comment deleted="deleted" />
-      <filename>Compiler-abstraktion.svg</filename>
-      <archivename>20230908144145!Compiler-abstraktion.svg</archivename>
-      <src>https://localhost:4443/wiki-dir/images/archive/4/48/20230908144145%21Compiler-abstraktion.svg</src>
-      <size>8921</size>
-      <sha1base36>6ogt6uzw3kfhrbi93cbeskwkdond8t9</sha1base36>
-      <rel>archive/4/48/20230908144145!Compiler-abstraktion.svg</rel>
-      <contents encoding="base64">PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRw
-Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIzNDFweCIgaGVp
-Z2h0PSIyNDFweCIgdmlld0JveD0iLTAuNSAtMC41IDM0MSAyNDEiIGNvbnRlbnQ9IiZsdDtteGZp
-bGUgaG9zdD0mcXVvdDtsb2NhbGhvc3QmcXVvdDsgbW9kaWZpZWQ9JnF1b3Q7MjAyMy0wOS0wOFQx
-NDo0MToyOC44NDVaJnF1b3Q7IGFnZW50PSZxdW90O01vemlsbGEvNS4wIChNYWNpbnRvc2g7IElu
-dGVsIE1hYyBPUyBYIDEwXzE1XzcpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vj
-a28pIENocm9tZS8xMTYuMC4wLjAgU2FmYXJpLzUzNy4zNiZxdW90OyB2ZXJzaW9uPSZxdW90OzIx
-LjUuMCZxdW90OyBldGFnPSZxdW90O0ZJajFqNHlLbFZwUERIdzhmamdKJnF1b3Q7IHR5cGU9JnF1
-b3Q7ZW1iZWQmcXVvdDsmZ3Q7Jmx0O2RpYWdyYW0gaWQ9JnF1b3Q7S2lLZnh1ZUVnZXJQNFJ1QkMw
-UzgmcXVvdDsgbmFtZT0mcXVvdDtQYWdlLTEmcXVvdDsmZ3Q7N1ZoTmM5c2dFUDAxdW1hRXZtSWZF
-enR0THUxa21zNjBQVkpCSktaSWFCQ083Zjc2TGhGSVFqaXhKM1djYVpPVDJjZnVndDQrd2NwQnZL
-ZzJIeVZ1eWsrQ1VCNUVJZGtFOFRLSUlwUW1jL2pSeUxaRHNneDFRQ0VaTVU0RGNNdCtVd09HQmww
-eFFsdkhVUW5CRld0Y01CZDFUWFBsWUZoS3NYYmQ3Z1IzVjIxd1FUM2dOc2ZjUjc4eG9zb09uYVho
-Z0Y5VFZwUjJaUlNhbVFwYlp3TzBKU1ppUFlMaXF5QmVTQ0ZVTjZvMkM4bzFlWmFYTHU3REk3UDl4
-aVN0MVNFQlVSZHdqL25LUE51MXlNc2d5amlFWC82VU1DcjBxRzBremt0cU5xMjJsZ25JQnFTRGNi
-a3VtYUszRGM3MXpCcnFEbGlwS2c0V2dxRlpoMHBGTjQvdUZmVU1nSFNvcUtpU1czQ3hBWlkwbzVy
-RW1PdWhCTDFMT2FKL1pqQnNxbDcwbVFkaVlHQzQyYzFUN1BIMG1WRkM1Yi9CVkJTZWtLcHpqeXFQ
-aTN3bDd5a3h6MHRyY3FIZlNUQnpqdHVXNVM0ZlVxeHE4dUFkUG5qRGRyNzNvV0Q4R0J2THpkaHZ1
-YlhXaHFrK0NNWS9SdmdRb2cwYjBlMlpFdThnMkZ1REVjZnBEb290SmluSGl0Mjc2WGZ4YmxhNEVR
-d1c3a3NjeFc2SkVacVVyaFVybVZNVE5UNEI5aVNLVU9JbVVsZ1dWSG1Kb0daNE8zSnJ0RVA3eEli
-bmt3MW56c2tFZ3k3am9MR2UwNE5rTjN1WDNRbGtoL2FwNVZEWlRSTjUrajJTN002bnFrdU9xcnI1
-eTZyTzZDYzhtOCtqc1liTzBubnlwSTYwY1VNbGcwZUJTK29wRFlkN05IeW9JdUdaSDBydjlCVmRF
-VWZRYStrMkNWMGR4Tk9iN2xEZEp1a2tVZnd5dXAxdU9JMk9xbHY3dHIwTDkvVnU4R1J5bE1iUk0y
-OXcyNTNhUk5uc2hTU0pkcTV6TkUwaVQ1TmZKYTdiaG5IZGFFL1VDZDJ4Y2lYWUtpbCswWVhnUWd1
-bkZyVnV0dThZNXhNSWMxYlVXc2VnQTYyeFM5MXJNL2k2dXpBVEZTT0VQOWFwdTBJUC9yNVpqNUdy
-Z3l3TnByMTZ0a09GMDNQbk9hMDY4ai8vdnRCY1ZHK01jWGlsVDBkNTZsRysrTzhKOTdvd3krUXBD
-TTg4d3BkdlFlTW5ZeHpNNGYrcTd0Z2YvdldMci80QSZsdDsvZGlhZ3JhbSZndDsmbHQ7L214Zmls
-ZSZndDsiPjxkZWZzLz48Zz48ZWxsaXBzZSBjeD0iMTUwIiBjeT0iNDAiIHJ4PSI2MCIgcnk9IjQw
-IiBmaWxsPSJyZ2IoMjU1LCAyNTUsIDI1NSkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBwb2ludGVy
-LWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRj
-aD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdo
-dD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVh
-dHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246
-IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0i
-ZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVu
-dDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDExOHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6
-IDQwcHg7IG1hcmdpbi1sZWZ0OiA5MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9y
-OiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6
-ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUt
-YmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJn
-YigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUt
-c3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+SG9jaDxiciAvPnNwcmFjaGU8
-L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMTUwIiB5PSI0NCIgZmls
-bD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgi
-IHRleHQtYW5jaG9yPSJtaWRkbGUiPkhvY2guLi48L3RleHQ+PC9zd2l0Y2g+PC9nPjxlbGxpcHNl
-IGN4PSIxNTAiIGN5PSIyMDAiIHJ4PSI2MCIgcnk9IjQwIiBmaWxsPSJyZ2IoMjU1LCAyNTUsIDI1
-NSkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNm
-b3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBwb2ludGVy
-LWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJl
-cz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5IiBzdHls
-ZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRw
-Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRl
-bXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6
-IDExOHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6IDIwMHB4OyBtYXJnaW4tbGVmdDogOTFw
-eDsiPjxkaXYgZGF0YS1kcmF3aW8tY29sb3JzPSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxl
-PSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2Vu
-dGVyOyI+PGRpdiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7
-IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0
-OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93
-LXdyYXA6IG5vcm1hbDsiPk5pZWRlcjxiciAvPnNwcmFjaGU8L2Rpdj48L2Rpdj48L2Rpdj48L2Zv
-cmVpZ25PYmplY3Q+PHRleHQgeD0iMTUwIiB5PSIyMDQiIGZpbGw9InJnYigwLCAwLCAwKSIgZm9u
-dC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hvcj0ibWlkZGxl
-Ij5OaWVkZXIuLi48L3RleHQ+PC9zd2l0Y2g+PC9nPjxwYXRoIGQ9Ik0gMjAwIDcwIFEgMjYwIDEy
-MCAyMDQuNzMgMTY5Ljc0IiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tl
-LW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGggZD0iTSAyMDAu
-ODMgMTczLjI1IEwgMjAzLjY5IDE2NS45NyBMIDIwNC43MyAxNjkuNzQgTCAyMDguMzggMTcxLjE3
-IFoiIGZpbGw9InJnYigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1taXRl
-cmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxwYXRoIGQ9Ik0gMTAwIDE3NCBRIDQw
-IDEyNCA5NS4yNyA3NC4yNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9r
-ZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIvPjxwYXRoIGQ9Ik0gOTku
-MTcgNzAuNzUgTCA5Ni4zMSA3OC4wMyBMIDk1LjI3IDc0LjI2IEwgOTEuNjIgNzIuODMgWiIgZmls
-bD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tlLW1pdGVybGltaXQ9
-IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHBhdGggZD0iTSAyMDkuMDQgNDcuNTIgUSAzNzAg
-MTIgMTk4Ljc5IDExLjczIiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tl
-LW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGggZD0iTSAxOTMu
-NTQgMTEuNzIgTCAyMDAuNTUgOC4yMyBMIDE5OC43OSAxMS43MyBMIDIwMC41NCAxNS4yMyBaIiBm
-aWxsPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0ZXJsaW1p
-dD0iMTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48cGF0aCBkPSJNIDIxMCAxOTIgUSAzNzEgMjI4
-IDE5OS4zNyAyMjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0
-ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBkPSJNIDE5NC4xMiAy
-MjggTCAyMDEuMTIgMjI0LjUgTCAxOTkuMzcgMjI4IEwgMjAxLjEyIDIzMS41IFoiIGZpbGw9InJn
-YigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIg
-cG9pbnRlci1ldmVudHM9ImFsbCIvPjxyZWN0IHg9IjI4MCIgeT0iMjUiIHdpZHRoPSI2MCIgaGVp
-Z2h0PSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJub25lIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+
-PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVj
-dCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWly
-ZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmls
-aXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHht
-bG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsg
-YWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRl
-cjsgd2lkdGg6IDU4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogNDBweDsgbWFyZ2luLWxl
-ZnQ6IDI4MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7
-ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFs
-aWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6
-ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGlu
-ZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsg
-b3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+VHJhbnNwaWxlcjwvZGl2PjwvZGl2PjwvZGl2PjwvZm9y
-ZWlnbk9iamVjdD48dGV4dCB4PSIzMTAiIHk9IjQ0IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQt
-ZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6ZT0iMTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+
-VHJhbnNwaWxlcjwvdGV4dD48L3N3aXRjaD48L2c+PHJlY3QgeD0iMjgwIiB5PSIxODUiIHdpZHRo
-PSI2MCIgaGVpZ2h0PSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJub25lIiBwb2ludGVyLWV2ZW50
-cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9y
-ZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAw
-JSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNF
-eHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7
-Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxh
-eTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5z
-YWZlIGNlbnRlcjsgd2lkdGg6IDU4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogMjAwcHg7
-IG1hcmdpbi1sZWZ0OiAyODFweDsiPjxkaXYgZGF0YS1kcmF3aW8tY29sb3JzPSJjb2xvcjogcmdi
-KDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXNpemU6IDBw
-eDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2Nr
-OyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwg
-MCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7IHdoaXRlLXNwYWNl
-OiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPlJlY29tcGlsZXI8L2Rpdj48L2Rpdj48
-L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMzEwIiB5PSIyMDQiIGZpbGw9InJnYigwLCAw
-LCAwKSIgZm9udC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hv
-cj0ibWlkZGxlIj5SZWNvbXBpbGVyPC90ZXh0Pjwvc3dpdGNoPjwvZz48cmVjdCB4PSIyNDAiIHk9
-IjkwIiB3aWR0aD0iNjAiIGhlaWdodD0iMzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0ibm9uZSIgcG9p
-bnRlci1ldmVudHM9ImFsbCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjUgLTAuNSkiPjxz
-d2l0Y2g+PGZvcmVpZ25PYmplY3QgcG9pbnRlci1ldmVudHM9Im5vbmUiIHdpZHRoPSIxMDAlIiBo
-ZWlnaHQ9IjEwMCUiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzEx
-L2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSIgc3R5bGU9Im92ZXJmbG93OiB2aXNpYmxlOyB0ZXh0LWFs
-aWduOiBsZWZ0OyI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5
-bGU9ImRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiB1bnNhZmUgY2VudGVyOyBqdXN0aWZ5LWNv
-bnRlbnQ6IHVuc2FmZSBjZW50ZXI7IHdpZHRoOiA1OHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10
-b3A6IDEwNXB4OyBtYXJnaW4tbGVmdDogMjQxcHg7Ij48ZGl2IGRhdGEtZHJhd2lvLWNvbG9ycz0i
-Y29sb3I6IHJnYigwLCAwLCAwKTsgIiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9u
-dC1zaXplOiAwcHg7IHRleHQtYWxpZ246IGNlbnRlcjsiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlu
-bGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xv
-cjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyBwb2ludGVyLWV2ZW50czogYWxsOyB3
-aGl0ZS1zcGFjZTogbm9ybWFsOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7Ij5Db21waWxlcjwvZGl2
-PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIyNzAiIHk9IjEwOSIgZmlsbD0i
-cmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRl
-eHQtYW5jaG9yPSJtaWRkbGUiPkNvbXBpbGVyPC90ZXh0Pjwvc3dpdGNoPjwvZz48cmVjdCB4PSIw
-IiB5PSI5MCIgd2lkdGg9IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUi
-IHBvaW50ZXItZXZlbnRzPSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUp
-Ij48c3dpdGNoPjxmb3JlaWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAw
-JSIgaGVpZ2h0PSIxMDAlIiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9T
-VkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4
-dC1hbGlnbjogbGVmdDsiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwi
-IHN0eWxlPSJkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlm
-eS1jb250ZW50OiB1bnNhZmUgY2VudGVyOyB3aWR0aDogNThweDsgaGVpZ2h0OiAxcHg7IHBhZGRp
-bmctdG9wOiAxMDVweDsgbWFyZ2luLWxlZnQ6IDFweDsiPjxkaXYgZGF0YS1kcmF3aW8tY29sb3Jz
-PSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBm
-b250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0iZGlzcGxheTog
-aW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNv
-bG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7
-IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPkRlY29tcGlsZXI8
-L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMzAiIHk9IjEwOSIgZmls
-bD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgi
-IHRleHQtYW5jaG9yPSJtaWRkbGUiPkRlY29tcGlsZXI8L3RleHQ+PC9zd2l0Y2g+PC9nPjwvZz48
-c3dpdGNoPjxnIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzExL2Zl
-YXR1cmUjRXh0ZW5zaWJpbGl0eSIvPjxhIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAsLTUpIiB4bGlu
-azpocmVmPSJodHRwczovL3d3dy5kcmF3aW8uY29tL2RvYy9mYXEvc3ZnLWV4cG9ydC10ZXh0LXBy
-b2JsZW1zIiB0YXJnZXQ9Il9ibGFuayI+PHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1z
-aXplPSIxMHB4IiB4PSI1MCUiIHk9IjEwMCUiPlRleHQgaXMgbm90IFNWRyAtIGNhbm5vdCBkaXNw
-bGF5PC90ZXh0PjwvYT48L3N3aXRjaD48L3N2Zz4=
-      </contents>
-    </upload>
-    <upload>
-      <timestamp>2023-09-08T14:41:30Z</timestamp>
-      <contributor>
-        <username>Imported&gt;Dir</username>
-        <id>0</id>
-      </contributor>
-      <comment deleted="deleted" />
-      <filename>Compiler-abstraktion.svg</filename>
-      <archivename>20230908144145!Compiler-abstraktion.svg</archivename>
-      <src>https://localhost:4443/wiki-dir/images/archive/4/48/20230908144145%21Compiler-abstraktion.svg</src>
-      <size>8921</size>
-      <sha1base36>6ogt6uzw3kfhrbi93cbeskwkdond8t9</sha1base36>
-      <rel>archive/4/48/20230908144145!Compiler-abstraktion.svg</rel>
-      <contents encoding="base64">PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRw
-Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIzNDFweCIgaGVp
-Z2h0PSIyNDFweCIgdmlld0JveD0iLTAuNSAtMC41IDM0MSAyNDEiIGNvbnRlbnQ9IiZsdDtteGZp
-bGUgaG9zdD0mcXVvdDtsb2NhbGhvc3QmcXVvdDsgbW9kaWZpZWQ9JnF1b3Q7MjAyMy0wOS0wOFQx
-NDo0MToyOC44NDVaJnF1b3Q7IGFnZW50PSZxdW90O01vemlsbGEvNS4wIChNYWNpbnRvc2g7IElu
-dGVsIE1hYyBPUyBYIDEwXzE1XzcpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vj
-a28pIENocm9tZS8xMTYuMC4wLjAgU2FmYXJpLzUzNy4zNiZxdW90OyB2ZXJzaW9uPSZxdW90OzIx
-LjUuMCZxdW90OyBldGFnPSZxdW90O0ZJajFqNHlLbFZwUERIdzhmamdKJnF1b3Q7IHR5cGU9JnF1
-b3Q7ZW1iZWQmcXVvdDsmZ3Q7Jmx0O2RpYWdyYW0gaWQ9JnF1b3Q7S2lLZnh1ZUVnZXJQNFJ1QkMw
-UzgmcXVvdDsgbmFtZT0mcXVvdDtQYWdlLTEmcXVvdDsmZ3Q7N1ZoTmM5c2dFUDAxdW1hRXZtSWZF
-enR0THUxa21zNjBQVkpCSktaSWFCQ083Zjc2TGhGSVFqaXhKM1djYVpPVDJjZnVndDQrd2NwQnZL
-ZzJIeVZ1eWsrQ1VCNUVJZGtFOFRLSUlwUW1jL2pSeUxaRHNneDFRQ0VaTVU0RGNNdCtVd09HQmww
-eFFsdkhVUW5CRld0Y01CZDFUWFBsWUZoS3NYYmQ3Z1IzVjIxd1FUM2dOc2ZjUjc4eG9zb09uYVho
-Z0Y5VFZwUjJaUlNhbVFwYlp3TzBKU1ppUFlMaXF5QmVTQ0ZVTjZvMkM4bzFlWmFYTHU3REk3UDl4
-aVN0MVNFQlVSZHdqL25LUE51MXlNc2d5amlFWC82VU1DcjBxRzBremt0cU5xMjJsZ25JQnFTRGNi
-a3VtYUszRGM3MXpCcnFEbGlwS2c0V2dxRlpoMHBGTjQvdUZmVU1nSFNvcUtpU1czQ3hBWlkwbzVy
-RW1PdWhCTDFMT2FKL1pqQnNxbDcwbVFkaVlHQzQyYzFUN1BIMG1WRkM1Yi9CVkJTZWtLcHpqeXFQ
-aTN3bDd5a3h6MHRyY3FIZlNUQnpqdHVXNVM0ZlVxeHE4dUFkUG5qRGRyNzNvV0Q4R0J2THpkaHZ1
-YlhXaHFrK0NNWS9SdmdRb2cwYjBlMlpFdThnMkZ1REVjZnBEb290SmluSGl0Mjc2WGZ4YmxhNEVR
-d1c3a3NjeFc2SkVacVVyaFVybVZNVE5UNEI5aVNLVU9JbVVsZ1dWSG1Kb0daNE8zSnJ0RVA3eEli
-bmt3MW56c2tFZ3k3am9MR2UwNE5rTjN1WDNRbGtoL2FwNVZEWlRSTjUrajJTN002bnFrdU9xcnI1
-eTZyTzZDYzhtOCtqc1liTzBubnlwSTYwY1VNbGcwZUJTK29wRFlkN05IeW9JdUdaSDBydjlCVmRF
-VWZRYStrMkNWMGR4Tk9iN2xEZEp1a2tVZnd5dXAxdU9JMk9xbHY3dHIwTDkvVnU4R1J5bE1iUk0y
-OXcyNTNhUk5uc2hTU0pkcTV6TkUwaVQ1TmZKYTdiaG5IZGFFL1VDZDJ4Y2lYWUtpbCswWVhnUWd1
-bkZyVnV0dThZNXhNSWMxYlVXc2VnQTYyeFM5MXJNL2k2dXpBVEZTT0VQOWFwdTBJUC9yNVpqNUdy
-Z3l3TnByMTZ0a09GMDNQbk9hMDY4ai8vdnRCY1ZHK01jWGlsVDBkNTZsRysrTzhKOTdvd3krUXBD
-TTg4d3BkdlFlTW5ZeHpNNGYrcTd0Z2YvdldMci80QSZsdDsvZGlhZ3JhbSZndDsmbHQ7L214Zmls
-ZSZndDsiPjxkZWZzLz48Zz48ZWxsaXBzZSBjeD0iMTUwIiBjeT0iNDAiIHJ4PSI2MCIgcnk9IjQw
-IiBmaWxsPSJyZ2IoMjU1LCAyNTUsIDI1NSkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBwb2ludGVy
-LWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRj
-aD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdo
-dD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVh
-dHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246
-IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0i
-ZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVu
-dDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDExOHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6
-IDQwcHg7IG1hcmdpbi1sZWZ0OiA5MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9y
-OiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6
-ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUt
-YmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJn
-YigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUt
-c3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+SG9jaDxiciAvPnNwcmFjaGU8
-L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMTUwIiB5PSI0NCIgZmls
-bD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgi
-IHRleHQtYW5jaG9yPSJtaWRkbGUiPkhvY2guLi48L3RleHQ+PC9zd2l0Y2g+PC9nPjxlbGxpcHNl
-IGN4PSIxNTAiIGN5PSIyMDAiIHJ4PSI2MCIgcnk9IjQwIiBmaWxsPSJyZ2IoMjU1LCAyNTUsIDI1
-NSkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNm
-b3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBwb2ludGVy
-LWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJl
-cz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5IiBzdHls
-ZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRw
-Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRl
-bXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6
-IDExOHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6IDIwMHB4OyBtYXJnaW4tbGVmdDogOTFw
-eDsiPjxkaXYgZGF0YS1kcmF3aW8tY29sb3JzPSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxl
-PSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2Vu
-dGVyOyI+PGRpdiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7
-IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0
-OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93
-LXdyYXA6IG5vcm1hbDsiPk5pZWRlcjxiciAvPnNwcmFjaGU8L2Rpdj48L2Rpdj48L2Rpdj48L2Zv
-cmVpZ25PYmplY3Q+PHRleHQgeD0iMTUwIiB5PSIyMDQiIGZpbGw9InJnYigwLCAwLCAwKSIgZm9u
-dC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hvcj0ibWlkZGxl
-Ij5OaWVkZXIuLi48L3RleHQ+PC9zd2l0Y2g+PC9nPjxwYXRoIGQ9Ik0gMjAwIDcwIFEgMjYwIDEy
-MCAyMDQuNzMgMTY5Ljc0IiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tl
-LW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGggZD0iTSAyMDAu
-ODMgMTczLjI1IEwgMjAzLjY5IDE2NS45NyBMIDIwNC43MyAxNjkuNzQgTCAyMDguMzggMTcxLjE3
-IFoiIGZpbGw9InJnYigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1taXRl
-cmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxwYXRoIGQ9Ik0gMTAwIDE3NCBRIDQw
-IDEyNCA5NS4yNyA3NC4yNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9r
-ZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIvPjxwYXRoIGQ9Ik0gOTku
-MTcgNzAuNzUgTCA5Ni4zMSA3OC4wMyBMIDk1LjI3IDc0LjI2IEwgOTEuNjIgNzIuODMgWiIgZmls
-bD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tlLW1pdGVybGltaXQ9
-IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHBhdGggZD0iTSAyMDkuMDQgNDcuNTIgUSAzNzAg
-MTIgMTk4Ljc5IDExLjczIiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tl
-LW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGggZD0iTSAxOTMu
-NTQgMTEuNzIgTCAyMDAuNTUgOC4yMyBMIDE5OC43OSAxMS43MyBMIDIwMC41NCAxNS4yMyBaIiBm
-aWxsPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0ZXJsaW1p
-dD0iMTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48cGF0aCBkPSJNIDIxMCAxOTIgUSAzNzEgMjI4
-IDE5OS4zNyAyMjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0
-ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBkPSJNIDE5NC4xMiAy
-MjggTCAyMDEuMTIgMjI0LjUgTCAxOTkuMzcgMjI4IEwgMjAxLjEyIDIzMS41IFoiIGZpbGw9InJn
-YigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIg
-cG9pbnRlci1ldmVudHM9ImFsbCIvPjxyZWN0IHg9IjI4MCIgeT0iMjUiIHdpZHRoPSI2MCIgaGVp
-Z2h0PSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJub25lIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+
-PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVj
-dCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWly
-ZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmls
-aXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHht
-bG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsg
-YWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRl
-cjsgd2lkdGg6IDU4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogNDBweDsgbWFyZ2luLWxl
-ZnQ6IDI4MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7
-ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFs
-aWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6
-ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGlu
-ZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsg
-b3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+VHJhbnNwaWxlcjwvZGl2PjwvZGl2PjwvZGl2PjwvZm9y
-ZWlnbk9iamVjdD48dGV4dCB4PSIzMTAiIHk9IjQ0IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQt
-ZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6ZT0iMTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+
-VHJhbnNwaWxlcjwvdGV4dD48L3N3aXRjaD48L2c+PHJlY3QgeD0iMjgwIiB5PSIxODUiIHdpZHRo
-PSI2MCIgaGVpZ2h0PSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJub25lIiBwb2ludGVyLWV2ZW50
-cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9y
-ZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAw
-JSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNF
-eHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7
-Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxh
-eTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5z
-YWZlIGNlbnRlcjsgd2lkdGg6IDU4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogMjAwcHg7
-IG1hcmdpbi1sZWZ0OiAyODFweDsiPjxkaXYgZGF0YS1kcmF3aW8tY29sb3JzPSJjb2xvcjogcmdi
-KDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXNpemU6IDBw
-eDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2Nr
-OyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwg
-MCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7IHdoaXRlLXNwYWNl
-OiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPlJlY29tcGlsZXI8L2Rpdj48L2Rpdj48
-L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMzEwIiB5PSIyMDQiIGZpbGw9InJnYigwLCAw
-LCAwKSIgZm9udC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hv
-cj0ibWlkZGxlIj5SZWNvbXBpbGVyPC90ZXh0Pjwvc3dpdGNoPjwvZz48cmVjdCB4PSIyNDAiIHk9
-IjkwIiB3aWR0aD0iNjAiIGhlaWdodD0iMzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0ibm9uZSIgcG9p
-bnRlci1ldmVudHM9ImFsbCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjUgLTAuNSkiPjxz
-d2l0Y2g+PGZvcmVpZ25PYmplY3QgcG9pbnRlci1ldmVudHM9Im5vbmUiIHdpZHRoPSIxMDAlIiBo
-ZWlnaHQ9IjEwMCUiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzEx
-L2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSIgc3R5bGU9Im92ZXJmbG93OiB2aXNpYmxlOyB0ZXh0LWFs
-aWduOiBsZWZ0OyI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5
-bGU9ImRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiB1bnNhZmUgY2VudGVyOyBqdXN0aWZ5LWNv
-bnRlbnQ6IHVuc2FmZSBjZW50ZXI7IHdpZHRoOiA1OHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10
-b3A6IDEwNXB4OyBtYXJnaW4tbGVmdDogMjQxcHg7Ij48ZGl2IGRhdGEtZHJhd2lvLWNvbG9ycz0i
-Y29sb3I6IHJnYigwLCAwLCAwKTsgIiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9u
-dC1zaXplOiAwcHg7IHRleHQtYWxpZ246IGNlbnRlcjsiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlu
-bGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xv
-cjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyBwb2ludGVyLWV2ZW50czogYWxsOyB3
-aGl0ZS1zcGFjZTogbm9ybWFsOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7Ij5Db21waWxlcjwvZGl2
-PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIyNzAiIHk9IjEwOSIgZmlsbD0i
-cmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRl
-eHQtYW5jaG9yPSJtaWRkbGUiPkNvbXBpbGVyPC90ZXh0Pjwvc3dpdGNoPjwvZz48cmVjdCB4PSIw
-IiB5PSI5MCIgd2lkdGg9IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUi
-IHBvaW50ZXItZXZlbnRzPSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUp
-Ij48c3dpdGNoPjxmb3JlaWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAw
-JSIgaGVpZ2h0PSIxMDAlIiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9T
-VkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4
-dC1hbGlnbjogbGVmdDsiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwi
-IHN0eWxlPSJkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlm
-eS1jb250ZW50OiB1bnNhZmUgY2VudGVyOyB3aWR0aDogNThweDsgaGVpZ2h0OiAxcHg7IHBhZGRp
-bmctdG9wOiAxMDVweDsgbWFyZ2luLWxlZnQ6IDFweDsiPjxkaXYgZGF0YS1kcmF3aW8tY29sb3Jz
-PSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBm
-b250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0iZGlzcGxheTog
-aW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNv
-bG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7
-IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPkRlY29tcGlsZXI8
-L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMzAiIHk9IjEwOSIgZmls
-bD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgi
-IHRleHQtYW5jaG9yPSJtaWRkbGUiPkRlY29tcGlsZXI8L3RleHQ+PC9zd2l0Y2g+PC9nPjwvZz48
-c3dpdGNoPjxnIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzExL2Zl
-YXR1cmUjRXh0ZW5zaWJpbGl0eSIvPjxhIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAsLTUpIiB4bGlu
-azpocmVmPSJodHRwczovL3d3dy5kcmF3aW8uY29tL2RvYy9mYXEvc3ZnLWV4cG9ydC10ZXh0LXBy
-b2JsZW1zIiB0YXJnZXQ9Il9ibGFuayI+PHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1z
-aXplPSIxMHB4IiB4PSI1MCUiIHk9IjEwMCUiPlRleHQgaXMgbm90IFNWRyAtIGNhbm5vdCBkaXNw
-bGF5PC90ZXh0PjwvYT48L3N3aXRjaD48L3N2Zz4=
-      </contents>
-    </upload>
-    <upload>
-      <timestamp>2023-09-08T14:41:30Z</timestamp>
-      <contributor>
-        <username>Imported&gt;Dir</username>
-        <id>0</id>
-      </contributor>
-      <comment deleted="deleted" />
-      <filename>Compiler-abstraktion.svg</filename>
-      <archivename>20230908144145!Compiler-abstraktion.svg</archivename>
-      <src>https://localhost:4443/wiki-dir/images/archive/4/48/20230908144145%21Compiler-abstraktion.svg</src>
-      <size>8921</size>
-      <sha1base36>6ogt6uzw3kfhrbi93cbeskwkdond8t9</sha1base36>
-      <rel>archive/4/48/20230908144145!Compiler-abstraktion.svg</rel>
-      <contents encoding="base64">PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRw
-Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIzNDFweCIgaGVp
-Z2h0PSIyNDFweCIgdmlld0JveD0iLTAuNSAtMC41IDM0MSAyNDEiIGNvbnRlbnQ9IiZsdDtteGZp
-bGUgaG9zdD0mcXVvdDtsb2NhbGhvc3QmcXVvdDsgbW9kaWZpZWQ9JnF1b3Q7MjAyMy0wOS0wOFQx
-NDo0MToyOC44NDVaJnF1b3Q7IGFnZW50PSZxdW90O01vemlsbGEvNS4wIChNYWNpbnRvc2g7IElu
-dGVsIE1hYyBPUyBYIDEwXzE1XzcpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vj
-a28pIENocm9tZS8xMTYuMC4wLjAgU2FmYXJpLzUzNy4zNiZxdW90OyB2ZXJzaW9uPSZxdW90OzIx
-LjUuMCZxdW90OyBldGFnPSZxdW90O0ZJajFqNHlLbFZwUERIdzhmamdKJnF1b3Q7IHR5cGU9JnF1
-b3Q7ZW1iZWQmcXVvdDsmZ3Q7Jmx0O2RpYWdyYW0gaWQ9JnF1b3Q7S2lLZnh1ZUVnZXJQNFJ1QkMw
-UzgmcXVvdDsgbmFtZT0mcXVvdDtQYWdlLTEmcXVvdDsmZ3Q7N1ZoTmM5c2dFUDAxdW1hRXZtSWZF
-enR0THUxa21zNjBQVkpCSktaSWFCQ083Zjc2TGhGSVFqaXhKM1djYVpPVDJjZnVndDQrd2NwQnZL
-ZzJIeVZ1eWsrQ1VCNUVJZGtFOFRLSUlwUW1jL2pSeUxaRHNneDFRQ0VaTVU0RGNNdCtVd09HQmww
-eFFsdkhVUW5CRld0Y01CZDFUWFBsWUZoS3NYYmQ3Z1IzVjIxd1FUM2dOc2ZjUjc4eG9zb09uYVho
-Z0Y5VFZwUjJaUlNhbVFwYlp3TzBKU1ppUFlMaXF5QmVTQ0ZVTjZvMkM4bzFlWmFYTHU3REk3UDl4
-aVN0MVNFQlVSZHdqL25LUE51MXlNc2d5amlFWC82VU1DcjBxRzBremt0cU5xMjJsZ25JQnFTRGNi
-a3VtYUszRGM3MXpCcnFEbGlwS2c0V2dxRlpoMHBGTjQvdUZmVU1nSFNvcUtpU1czQ3hBWlkwbzVy
-RW1PdWhCTDFMT2FKL1pqQnNxbDcwbVFkaVlHQzQyYzFUN1BIMG1WRkM1Yi9CVkJTZWtLcHpqeXFQ
-aTN3bDd5a3h6MHRyY3FIZlNUQnpqdHVXNVM0ZlVxeHE4dUFkUG5qRGRyNzNvV0Q4R0J2THpkaHZ1
-YlhXaHFrK0NNWS9SdmdRb2cwYjBlMlpFdThnMkZ1REVjZnBEb290SmluSGl0Mjc2WGZ4YmxhNEVR
-d1c3a3NjeFc2SkVacVVyaFVybVZNVE5UNEI5aVNLVU9JbVVsZ1dWSG1Kb0daNE8zSnJ0RVA3eEli
-bmt3MW56c2tFZ3k3am9MR2UwNE5rTjN1WDNRbGtoL2FwNVZEWlRSTjUrajJTN002bnFrdU9xcnI1
-eTZyTzZDYzhtOCtqc1liTzBubnlwSTYwY1VNbGcwZUJTK29wRFlkN05IeW9JdUdaSDBydjlCVmRF
-VWZRYStrMkNWMGR4Tk9iN2xEZEp1a2tVZnd5dXAxdU9JMk9xbHY3dHIwTDkvVnU4R1J5bE1iUk0y
-OXcyNTNhUk5uc2hTU0pkcTV6TkUwaVQ1TmZKYTdiaG5IZGFFL1VDZDJ4Y2lYWUtpbCswWVhnUWd1
-bkZyVnV0dThZNXhNSWMxYlVXc2VnQTYyeFM5MXJNL2k2dXpBVEZTT0VQOWFwdTBJUC9yNVpqNUdy
-Z3l3TnByMTZ0a09GMDNQbk9hMDY4ai8vdnRCY1ZHK01jWGlsVDBkNTZsRysrTzhKOTdvd3krUXBD
-TTg4d3BkdlFlTW5ZeHpNNGYrcTd0Z2YvdldMci80QSZsdDsvZGlhZ3JhbSZndDsmbHQ7L214Zmls
-ZSZndDsiPjxkZWZzLz48Zz48ZWxsaXBzZSBjeD0iMTUwIiBjeT0iNDAiIHJ4PSI2MCIgcnk9IjQw
-IiBmaWxsPSJyZ2IoMjU1LCAyNTUsIDI1NSkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBwb2ludGVy
-LWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRj
-aD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdo
-dD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVh
-dHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246
-IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0i
-ZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVu
-dDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDExOHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6
-IDQwcHg7IG1hcmdpbi1sZWZ0OiA5MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9y
-OiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6
-ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUt
-YmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJn
-YigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUt
-c3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+SG9jaDxiciAvPnNwcmFjaGU8
-L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMTUwIiB5PSI0NCIgZmls
-bD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgi
-IHRleHQtYW5jaG9yPSJtaWRkbGUiPkhvY2guLi48L3RleHQ+PC9zd2l0Y2g+PC9nPjxlbGxpcHNl
-IGN4PSIxNTAiIGN5PSIyMDAiIHJ4PSI2MCIgcnk9IjQwIiBmaWxsPSJyZ2IoMjU1LCAyNTUsIDI1
-NSkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNm
-b3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBwb2ludGVy
-LWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJl
-cz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5IiBzdHls
-ZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRw
-Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRl
-bXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6
-IDExOHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6IDIwMHB4OyBtYXJnaW4tbGVmdDogOTFw
-eDsiPjxkaXYgZGF0YS1kcmF3aW8tY29sb3JzPSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxl
-PSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2Vu
-dGVyOyI+PGRpdiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7
-IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0
-OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93
-LXdyYXA6IG5vcm1hbDsiPk5pZWRlcjxiciAvPnNwcmFjaGU8L2Rpdj48L2Rpdj48L2Rpdj48L2Zv
-cmVpZ25PYmplY3Q+PHRleHQgeD0iMTUwIiB5PSIyMDQiIGZpbGw9InJnYigwLCAwLCAwKSIgZm9u
-dC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hvcj0ibWlkZGxl
-Ij5OaWVkZXIuLi48L3RleHQ+PC9zd2l0Y2g+PC9nPjxwYXRoIGQ9Ik0gMjAwIDcwIFEgMjYwIDEy
-MCAyMDQuNzMgMTY5Ljc0IiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tl
-LW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGggZD0iTSAyMDAu
-ODMgMTczLjI1IEwgMjAzLjY5IDE2NS45NyBMIDIwNC43MyAxNjkuNzQgTCAyMDguMzggMTcxLjE3
-IFoiIGZpbGw9InJnYigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1taXRl
-cmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxwYXRoIGQ9Ik0gMTAwIDE3NCBRIDQw
-IDEyNCA5NS4yNyA3NC4yNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9r
-ZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIvPjxwYXRoIGQ9Ik0gOTku
-MTcgNzAuNzUgTCA5Ni4zMSA3OC4wMyBMIDk1LjI3IDc0LjI2IEwgOTEuNjIgNzIuODMgWiIgZmls
-bD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tlLW1pdGVybGltaXQ9
-IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHBhdGggZD0iTSAyMDkuMDQgNDcuNTIgUSAzNzAg
-MTIgMTk4Ljc5IDExLjczIiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tl
-LW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGggZD0iTSAxOTMu
-NTQgMTEuNzIgTCAyMDAuNTUgOC4yMyBMIDE5OC43OSAxMS43MyBMIDIwMC41NCAxNS4yMyBaIiBm
-aWxsPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0ZXJsaW1p
-dD0iMTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48cGF0aCBkPSJNIDIxMCAxOTIgUSAzNzEgMjI4
-IDE5OS4zNyAyMjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0
-ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBkPSJNIDE5NC4xMiAy
-MjggTCAyMDEuMTIgMjI0LjUgTCAxOTkuMzcgMjI4IEwgMjAxLjEyIDIzMS41IFoiIGZpbGw9InJn
-YigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIg
-cG9pbnRlci1ldmVudHM9ImFsbCIvPjxyZWN0IHg9IjI4MCIgeT0iMjUiIHdpZHRoPSI2MCIgaGVp
-Z2h0PSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJub25lIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+
-PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVj
-dCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWly
-ZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmls
-aXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHht
-bG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsg
-YWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRl
-cjsgd2lkdGg6IDU4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogNDBweDsgbWFyZ2luLWxl
-ZnQ6IDI4MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7
-ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFs
-aWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6
-ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGlu
-ZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsg
-b3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+VHJhbnNwaWxlcjwvZGl2PjwvZGl2PjwvZGl2PjwvZm9y
-ZWlnbk9iamVjdD48dGV4dCB4PSIzMTAiIHk9IjQ0IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQt
-ZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6ZT0iMTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+
-VHJhbnNwaWxlcjwvdGV4dD48L3N3aXRjaD48L2c+PHJlY3QgeD0iMjgwIiB5PSIxODUiIHdpZHRo
-PSI2MCIgaGVpZ2h0PSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJub25lIiBwb2ludGVyLWV2ZW50
-cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9y
-ZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAw
-JSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNF
-eHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7
-Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxh
-eTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5z
-YWZlIGNlbnRlcjsgd2lkdGg6IDU4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogMjAwcHg7
-IG1hcmdpbi1sZWZ0OiAyODFweDsiPjxkaXYgZGF0YS1kcmF3aW8tY29sb3JzPSJjb2xvcjogcmdi
-KDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXNpemU6IDBw
-eDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2Nr
-OyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwg
-MCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7IHdoaXRlLXNwYWNl
-OiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPlJlY29tcGlsZXI8L2Rpdj48L2Rpdj48
-L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMzEwIiB5PSIyMDQiIGZpbGw9InJnYigwLCAw
-LCAwKSIgZm9udC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hv
-cj0ibWlkZGxlIj5SZWNvbXBpbGVyPC90ZXh0Pjwvc3dpdGNoPjwvZz48cmVjdCB4PSIyNDAiIHk9
-IjkwIiB3aWR0aD0iNjAiIGhlaWdodD0iMzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0ibm9uZSIgcG9p
-bnRlci1ldmVudHM9ImFsbCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjUgLTAuNSkiPjxz
-d2l0Y2g+PGZvcmVpZ25PYmplY3QgcG9pbnRlci1ldmVudHM9Im5vbmUiIHdpZHRoPSIxMDAlIiBo
-ZWlnaHQ9IjEwMCUiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzEx
-L2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSIgc3R5bGU9Im92ZXJmbG93OiB2aXNpYmxlOyB0ZXh0LWFs
-aWduOiBsZWZ0OyI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5
-bGU9ImRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiB1bnNhZmUgY2VudGVyOyBqdXN0aWZ5LWNv
-bnRlbnQ6IHVuc2FmZSBjZW50ZXI7IHdpZHRoOiA1OHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10
-b3A6IDEwNXB4OyBtYXJnaW4tbGVmdDogMjQxcHg7Ij48ZGl2IGRhdGEtZHJhd2lvLWNvbG9ycz0i
-Y29sb3I6IHJnYigwLCAwLCAwKTsgIiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9u
-dC1zaXplOiAwcHg7IHRleHQtYWxpZ246IGNlbnRlcjsiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlu
-bGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xv
-cjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyBwb2ludGVyLWV2ZW50czogYWxsOyB3
-aGl0ZS1zcGFjZTogbm9ybWFsOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7Ij5Db21waWxlcjwvZGl2
-PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIyNzAiIHk9IjEwOSIgZmlsbD0i
-cmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRl
-eHQtYW5jaG9yPSJtaWRkbGUiPkNvbXBpbGVyPC90ZXh0Pjwvc3dpdGNoPjwvZz48cmVjdCB4PSIw
-IiB5PSI5MCIgd2lkdGg9IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUi
-IHBvaW50ZXItZXZlbnRzPSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUp
-Ij48c3dpdGNoPjxmb3JlaWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAw
-JSIgaGVpZ2h0PSIxMDAlIiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9T
-VkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4
-dC1hbGlnbjogbGVmdDsiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwi
-IHN0eWxlPSJkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlm
-eS1jb250ZW50OiB1bnNhZmUgY2VudGVyOyB3aWR0aDogNThweDsgaGVpZ2h0OiAxcHg7IHBhZGRp
-bmctdG9wOiAxMDVweDsgbWFyZ2luLWxlZnQ6IDFweDsiPjxkaXYgZGF0YS1kcmF3aW8tY29sb3Jz
-PSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBm
-b250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0iZGlzcGxheTog
-aW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNv
-bG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7
-IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPkRlY29tcGlsZXI8
-L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMzAiIHk9IjEwOSIgZmls
-bD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgi
-IHRleHQtYW5jaG9yPSJtaWRkbGUiPkRlY29tcGlsZXI8L3RleHQ+PC9zd2l0Y2g+PC9nPjwvZz48
-c3dpdGNoPjxnIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzExL2Zl
-YXR1cmUjRXh0ZW5zaWJpbGl0eSIvPjxhIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAsLTUpIiB4bGlu
-azpocmVmPSJodHRwczovL3d3dy5kcmF3aW8uY29tL2RvYy9mYXEvc3ZnLWV4cG9ydC10ZXh0LXBy
-b2JsZW1zIiB0YXJnZXQ9Il9ibGFuayI+PHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1z
-aXplPSIxMHB4IiB4PSI1MCUiIHk9IjEwMCUiPlRleHQgaXMgbm90IFNWRyAtIGNhbm5vdCBkaXNw
-bGF5PC90ZXh0PjwvYT48L3N3aXRjaD48L3N2Zz4=
-      </contents>
-    </upload>
-    <upload>
-      <timestamp>2023-09-08T14:41:30Z</timestamp>
-      <contributor>
-        <username>Imported&gt;Dir</username>
-        <id>0</id>
-      </contributor>
-      <comment deleted="deleted" />
-      <filename>Compiler-abstraktion.svg</filename>
-      <archivename>20230908144145!Compiler-abstraktion.svg</archivename>
-      <src>https://localhost:4443/wiki-dir/images/archive/4/48/20230908144145%21Compiler-abstraktion.svg</src>
-      <size>8921</size>
-      <sha1base36>6ogt6uzw3kfhrbi93cbeskwkdond8t9</sha1base36>
-      <rel>archive/4/48/20230908144145!Compiler-abstraktion.svg</rel>
-      <contents encoding="base64">PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRw
-Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIzNDFweCIgaGVp
-Z2h0PSIyNDFweCIgdmlld0JveD0iLTAuNSAtMC41IDM0MSAyNDEiIGNvbnRlbnQ9IiZsdDtteGZp
-bGUgaG9zdD0mcXVvdDtsb2NhbGhvc3QmcXVvdDsgbW9kaWZpZWQ9JnF1b3Q7MjAyMy0wOS0wOFQx
-NDo0MToyOC44NDVaJnF1b3Q7IGFnZW50PSZxdW90O01vemlsbGEvNS4wIChNYWNpbnRvc2g7IElu
-dGVsIE1hYyBPUyBYIDEwXzE1XzcpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vj
-a28pIENocm9tZS8xMTYuMC4wLjAgU2FmYXJpLzUzNy4zNiZxdW90OyB2ZXJzaW9uPSZxdW90OzIx
-LjUuMCZxdW90OyBldGFnPSZxdW90O0ZJajFqNHlLbFZwUERIdzhmamdKJnF1b3Q7IHR5cGU9JnF1
-b3Q7ZW1iZWQmcXVvdDsmZ3Q7Jmx0O2RpYWdyYW0gaWQ9JnF1b3Q7S2lLZnh1ZUVnZXJQNFJ1QkMw
-UzgmcXVvdDsgbmFtZT0mcXVvdDtQYWdlLTEmcXVvdDsmZ3Q7N1ZoTmM5c2dFUDAxdW1hRXZtSWZF
-enR0THUxa21zNjBQVkpCSktaSWFCQ083Zjc2TGhGSVFqaXhKM1djYVpPVDJjZnVndDQrd2NwQnZL
-ZzJIeVZ1eWsrQ1VCNUVJZGtFOFRLSUlwUW1jL2pSeUxaRHNneDFRQ0VaTVU0RGNNdCtVd09HQmww
-eFFsdkhVUW5CRld0Y01CZDFUWFBsWUZoS3NYYmQ3Z1IzVjIxd1FUM2dOc2ZjUjc4eG9zb09uYVho
-Z0Y5VFZwUjJaUlNhbVFwYlp3TzBKU1ppUFlMaXF5QmVTQ0ZVTjZvMkM4bzFlWmFYTHU3REk3UDl4
-aVN0MVNFQlVSZHdqL25LUE51MXlNc2d5amlFWC82VU1DcjBxRzBremt0cU5xMjJsZ25JQnFTRGNi
-a3VtYUszRGM3MXpCcnFEbGlwS2c0V2dxRlpoMHBGTjQvdUZmVU1nSFNvcUtpU1czQ3hBWlkwbzVy
-RW1PdWhCTDFMT2FKL1pqQnNxbDcwbVFkaVlHQzQyYzFUN1BIMG1WRkM1Yi9CVkJTZWtLcHpqeXFQ
-aTN3bDd5a3h6MHRyY3FIZlNUQnpqdHVXNVM0ZlVxeHE4dUFkUG5qRGRyNzNvV0Q4R0J2THpkaHZ1
-YlhXaHFrK0NNWS9SdmdRb2cwYjBlMlpFdThnMkZ1REVjZnBEb290SmluSGl0Mjc2WGZ4YmxhNEVR
-d1c3a3NjeFc2SkVacVVyaFVybVZNVE5UNEI5aVNLVU9JbVVsZ1dWSG1Kb0daNE8zSnJ0RVA3eEli
-bmt3MW56c2tFZ3k3am9MR2UwNE5rTjN1WDNRbGtoL2FwNVZEWlRSTjUrajJTN002bnFrdU9xcnI1
-eTZyTzZDYzhtOCtqc1liTzBubnlwSTYwY1VNbGcwZUJTK29wRFlkN05IeW9JdUdaSDBydjlCVmRF
-VWZRYStrMkNWMGR4Tk9iN2xEZEp1a2tVZnd5dXAxdU9JMk9xbHY3dHIwTDkvVnU4R1J5bE1iUk0y
-OXcyNTNhUk5uc2hTU0pkcTV6TkUwaVQ1TmZKYTdiaG5IZGFFL1VDZDJ4Y2lYWUtpbCswWVhnUWd1
-bkZyVnV0dThZNXhNSWMxYlVXc2VnQTYyeFM5MXJNL2k2dXpBVEZTT0VQOWFwdTBJUC9yNVpqNUdy
-Z3l3TnByMTZ0a09GMDNQbk9hMDY4ai8vdnRCY1ZHK01jWGlsVDBkNTZsRysrTzhKOTdvd3krUXBD
-TTg4d3BkdlFlTW5ZeHpNNGYrcTd0Z2YvdldMci80QSZsdDsvZGlhZ3JhbSZndDsmbHQ7L214Zmls
-ZSZndDsiPjxkZWZzLz48Zz48ZWxsaXBzZSBjeD0iMTUwIiBjeT0iNDAiIHJ4PSI2MCIgcnk9IjQw
-IiBmaWxsPSJyZ2IoMjU1LCAyNTUsIDI1NSkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBwb2ludGVy
-LWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRj
-aD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdo
-dD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVh
-dHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246
-IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0i
-ZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVu
-dDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDExOHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6
-IDQwcHg7IG1hcmdpbi1sZWZ0OiA5MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9y
-OiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6
-ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUt
-YmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJn
-YigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUt
-c3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+SG9jaDxiciAvPnNwcmFjaGU8
-L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMTUwIiB5PSI0NCIgZmls
-bD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgi
-IHRleHQtYW5jaG9yPSJtaWRkbGUiPkhvY2guLi48L3RleHQ+PC9zd2l0Y2g+PC9nPjxlbGxpcHNl
-IGN4PSIxNTAiIGN5PSIyMDAiIHJ4PSI2MCIgcnk9IjQwIiBmaWxsPSJyZ2IoMjU1LCAyNTUsIDI1
-NSkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNm
-b3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBwb2ludGVy
-LWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJl
-cz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5IiBzdHls
-ZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRw
-Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRl
-bXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6
-IDExOHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6IDIwMHB4OyBtYXJnaW4tbGVmdDogOTFw
-eDsiPjxkaXYgZGF0YS1kcmF3aW8tY29sb3JzPSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxl
-PSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2Vu
-dGVyOyI+PGRpdiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7
-IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0
-OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93
-LXdyYXA6IG5vcm1hbDsiPk5pZWRlcjxiciAvPnNwcmFjaGU8L2Rpdj48L2Rpdj48L2Rpdj48L2Zv
-cmVpZ25PYmplY3Q+PHRleHQgeD0iMTUwIiB5PSIyMDQiIGZpbGw9InJnYigwLCAwLCAwKSIgZm9u
-dC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hvcj0ibWlkZGxl
-Ij5OaWVkZXIuLi48L3RleHQ+PC9zd2l0Y2g+PC9nPjxwYXRoIGQ9Ik0gMjAwIDcwIFEgMjYwIDEy
-MCAyMDQuNzMgMTY5Ljc0IiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tl
-LW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGggZD0iTSAyMDAu
-ODMgMTczLjI1IEwgMjAzLjY5IDE2NS45NyBMIDIwNC43MyAxNjkuNzQgTCAyMDguMzggMTcxLjE3
-IFoiIGZpbGw9InJnYigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1taXRl
-cmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxwYXRoIGQ9Ik0gMTAwIDE3NCBRIDQw
-IDEyNCA5NS4yNyA3NC4yNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9r
-ZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIvPjxwYXRoIGQ9Ik0gOTku
-MTcgNzAuNzUgTCA5Ni4zMSA3OC4wMyBMIDk1LjI3IDc0LjI2IEwgOTEuNjIgNzIuODMgWiIgZmls
-bD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tlLW1pdGVybGltaXQ9
-IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHBhdGggZD0iTSAyMDkuMDQgNDcuNTIgUSAzNzAg
-MTIgMTk4Ljc5IDExLjczIiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tl
-LW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGggZD0iTSAxOTMu
-NTQgMTEuNzIgTCAyMDAuNTUgOC4yMyBMIDE5OC43OSAxMS43MyBMIDIwMC41NCAxNS4yMyBaIiBm
-aWxsPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0ZXJsaW1p
-dD0iMTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48cGF0aCBkPSJNIDIxMCAxOTIgUSAzNzEgMjI4
-IDE5OS4zNyAyMjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0
-ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBkPSJNIDE5NC4xMiAy
-MjggTCAyMDEuMTIgMjI0LjUgTCAxOTkuMzcgMjI4IEwgMjAxLjEyIDIzMS41IFoiIGZpbGw9InJn
-YigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIg
-cG9pbnRlci1ldmVudHM9ImFsbCIvPjxyZWN0IHg9IjI4MCIgeT0iMjUiIHdpZHRoPSI2MCIgaGVp
-Z2h0PSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJub25lIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+
-PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVj
-dCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWly
-ZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmls
-aXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHht
-bG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsg
-YWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRl
-cjsgd2lkdGg6IDU4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogNDBweDsgbWFyZ2luLWxl
-ZnQ6IDI4MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7
-ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFs
-aWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6
-ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGlu
-ZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsg
-b3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+VHJhbnNwaWxlcjwvZGl2PjwvZGl2PjwvZGl2PjwvZm9y
-ZWlnbk9iamVjdD48dGV4dCB4PSIzMTAiIHk9IjQ0IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQt
-ZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6ZT0iMTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+
-VHJhbnNwaWxlcjwvdGV4dD48L3N3aXRjaD48L2c+PHJlY3QgeD0iMjgwIiB5PSIxODUiIHdpZHRo
-PSI2MCIgaGVpZ2h0PSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJub25lIiBwb2ludGVyLWV2ZW50
-cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9y
-ZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAw
-JSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNF
-eHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7
-Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxh
-eTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5z
-YWZlIGNlbnRlcjsgd2lkdGg6IDU4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogMjAwcHg7
-IG1hcmdpbi1sZWZ0OiAyODFweDsiPjxkaXYgZGF0YS1kcmF3aW8tY29sb3JzPSJjb2xvcjogcmdi
-KDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXNpemU6IDBw
-eDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2Nr
-OyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwg
-MCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7IHdoaXRlLXNwYWNl
-OiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPlJlY29tcGlsZXI8L2Rpdj48L2Rpdj48
-L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMzEwIiB5PSIyMDQiIGZpbGw9InJnYigwLCAw
-LCAwKSIgZm9udC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hv
-cj0ibWlkZGxlIj5SZWNvbXBpbGVyPC90ZXh0Pjwvc3dpdGNoPjwvZz48cmVjdCB4PSIyNDAiIHk9
-IjkwIiB3aWR0aD0iNjAiIGhlaWdodD0iMzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0ibm9uZSIgcG9p
-bnRlci1ldmVudHM9ImFsbCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjUgLTAuNSkiPjxz
-d2l0Y2g+PGZvcmVpZ25PYmplY3QgcG9pbnRlci1ldmVudHM9Im5vbmUiIHdpZHRoPSIxMDAlIiBo
-ZWlnaHQ9IjEwMCUiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzEx
-L2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSIgc3R5bGU9Im92ZXJmbG93OiB2aXNpYmxlOyB0ZXh0LWFs
-aWduOiBsZWZ0OyI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5
-bGU9ImRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiB1bnNhZmUgY2VudGVyOyBqdXN0aWZ5LWNv
-bnRlbnQ6IHVuc2FmZSBjZW50ZXI7IHdpZHRoOiA1OHB4OyBoZWlnaHQ6IDFweDsgcGFkZGluZy10
-b3A6IDEwNXB4OyBtYXJnaW4tbGVmdDogMjQxcHg7Ij48ZGl2IGRhdGEtZHJhd2lvLWNvbG9ycz0i
-Y29sb3I6IHJnYigwLCAwLCAwKTsgIiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9u
-dC1zaXplOiAwcHg7IHRleHQtYWxpZ246IGNlbnRlcjsiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlu
-bGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xv
-cjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyBwb2ludGVyLWV2ZW50czogYWxsOyB3
-aGl0ZS1zcGFjZTogbm9ybWFsOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7Ij5Db21waWxlcjwvZGl2
-PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIyNzAiIHk9IjEwOSIgZmlsbD0i
-cmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRl
-eHQtYW5jaG9yPSJtaWRkbGUiPkNvbXBpbGVyPC90ZXh0Pjwvc3dpdGNoPjwvZz48cmVjdCB4PSIw
-IiB5PSI5MCIgd2lkdGg9IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUi
-IHBvaW50ZXItZXZlbnRzPSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUp
-Ij48c3dpdGNoPjxmb3JlaWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAw
-JSIgaGVpZ2h0PSIxMDAlIiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9T
-VkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4
-dC1hbGlnbjogbGVmdDsiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwi
-IHN0eWxlPSJkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlm
-eS1jb250ZW50OiB1bnNhZmUgY2VudGVyOyB3aWR0aDogNThweDsgaGVpZ2h0OiAxcHg7IHBhZGRp
-bmctdG9wOiAxMDVweDsgbWFyZ2luLWxlZnQ6IDFweDsiPjxkaXYgZGF0YS1kcmF3aW8tY29sb3Jz
-PSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBm
-b250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0iZGlzcGxheTog
-aW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNv
-bG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRzOiBhbGw7
-IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPkRlY29tcGlsZXI8
-L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMzAiIHk9IjEwOSIgZmls
-bD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgi
-IHRleHQtYW5jaG9yPSJtaWRkbGUiPkRlY29tcGlsZXI8L3RleHQ+PC9zd2l0Y2g+PC9nPjwvZz48
-c3dpdGNoPjxnIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzExL2Zl
-YXR1cmUjRXh0ZW5zaWJpbGl0eSIvPjxhIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAsLTUpIiB4bGlu
-azpocmVmPSJodHRwczovL3d3dy5kcmF3aW8uY29tL2RvYy9mYXEvc3ZnLWV4cG9ydC10ZXh0LXBy
-b2JsZW1zIiB0YXJnZXQ9Il9ibGFuayI+PHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1z
-aXplPSIxMHB4IiB4PSI1MCUiIHk9IjEwMCUiPlRleHQgaXMgbm90IFNWRyAtIGNhbm5vdCBkaXNw
-bGF5PC90ZXh0PjwvYT48L3N3aXRjaD48L3N2Zz4=
-      </contents>
-    </upload>
-    <upload>
-      <timestamp>2023-09-08T14:41:45Z</timestamp>
-      <contributor>
-        <username>Imported&gt;Dir</username>
-        <id>0</id>
-      </contributor>
-      <comment deleted="deleted" />
-      <filename>Compiler-abstraktion.svg</filename>
-      <archivename>20230908144149!Compiler-abstraktion.svg</archivename>
-      <src>https://localhost:4443/wiki-dir/images/archive/4/48/20230908144149%21Compiler-abstraktion.svg</src>
-      <size>8929</size>
-      <sha1base36>tq5oxsfvpj6z3antmi3wzza7q0ienos</sha1base36>
-      <rel>archive/4/48/20230908144149!Compiler-abstraktion.svg</rel>
-      <contents encoding="base64">PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRw
-Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIzNDFweCIgaGVp
-Z2h0PSIyNDFweCIgdmlld0JveD0iLTAuNSAtMC41IDM0MSAyNDEiIGNvbnRlbnQ9IiZsdDtteGZp
-bGUgaG9zdD0mcXVvdDtsb2NhbGhvc3QmcXVvdDsgbW9kaWZpZWQ9JnF1b3Q7MjAyMy0wOS0wOFQx
-NDo0MTo0NC40MDRaJnF1b3Q7IGFnZW50PSZxdW90O01vemlsbGEvNS4wIChNYWNpbnRvc2g7IElu
-dGVsIE1hYyBPUyBYIDEwXzE1XzcpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vj
-a28pIENocm9tZS8xMTYuMC4wLjAgU2FmYXJpLzUzNy4zNiZxdW90OyB2ZXJzaW9uPSZxdW90OzIx
-LjUuMCZxdW90OyBldGFnPSZxdW90O0ZTOHE5SmpFbm54UnBKV2ZYOW9YJnF1b3Q7IHR5cGU9JnF1
-b3Q7ZW1iZWQmcXVvdDsmZ3Q7Jmx0O2RpYWdyYW0gaWQ9JnF1b3Q7S2lLZnh1ZUVnZXJQNFJ1QkMw
-UzgmcXVvdDsgbmFtZT0mcXVvdDtQYWdlLTEmcXVvdDsmZ3Q7N1ZoTmI5c3dEUDAxdmhiK3JuTnNr
-MjY5YkNqV0FWdVBxc1RZd21RcmtKVW0yYThmSGNzZnN0TW1hSk1VV0h1SytFUlMwdU96VE1jSnB2
-bjZxeUtMN0p0a0lCemZaV3NubURtKzcwWGhCSDhxWkZNamNlelZRS280TTA0ZGNNLy9nZ0ZkZ3k0
-NWc5SnkxRklLelJjMlNHVlJBTlVXUnBTU0s5dHRMb1c5Nm9La01BTHVLUkZqOUJkbk9xdlJKSEk3
-L0JaNG1qVXJlNjZaeVVuamJJQXlJMHl1ZWxCdzR3UlRKYVd1Ui9sNkNxSWlyK0dsanZ2eXpHeTdN
-UVdGUGlUQXJ3T2VpRmlhczkxS21qbCtMREQ4K2xIaEtLMUc1VUlSbW9IWnRONDBUR0EySkIyTjYx
-WEdOZHd2Q0sxbVZsaDN4REtkQzdROEhNNjVFRk1wcE5yR0JZeEFNcWRWWXEza0grak54RFNCeHpu
-T21KMkIwckIrOW5SZXl4bUtEV1FPV20zUXBRbG9hRFk2QzQyNTZvcld1bVM5Z2lVR0kwWW5hWnU1
-b3hJSGhzM2R6QVlqWnI5ellLQk96KzA4b1VCM2N2dVlSQ0dLOUNUYyt1NFp5YjBja1R0aWp5N1ZF
-ekRERUJUc3FucnUwYVNDbENXbk5vTktMZ3UyOVhhMzNyaWQzMjBvR2c5OVk3YnUrODAyamJYbXVn
-M0M4VU1QNzBJcW80bW85d3hzZE5uc3JVR1A0MmdIeFEybVFCRE5uK3owdTNnM0s5eEpqZ3UzSmZZ
-RHU4U2VOeWhkS1plS2dvbnEzeko3RXZsZWFDZlNSS1dnUjRtd1ptVFRjMXRVRHVVTEc1NE1OaHhi
-dHg4TzZveWR4bHBPRDVKZDhpbTdNOGpPMjZlV1EyVTNURFRTNzVGa2R6bFVYWGhVMVUxT3F6cWpI
-L2RpTXZIN0dycUlKdUdMT3FxTU8xQWNqd0xxUlEyN2V6UjhxQ0x4ek52U1c3MUxYY1FlOUY2NkRW
-MWJCOEh3VFhlb2JzTm9rQ2c0alc2SEc0NzhvK3EyZWRvK2hmdCtiL0J3Y0pVRy9pdmY0RTAvMnlT
-S2t4TkowdHU1enRFMDZZMDArVk9Sb2x4d1ViWG1BM1ZpZDZ4dENkb3RkU0VMR1BUZkJpS0NwMFds
-WTlSQnBiSHJxdGZtK0FWNVpTWnl6cGg0cnJlM2hlNjh2VmtQUEZzSGNlUU1lL1Y0aHdxSDk4NXJX
-blZ2L0luNUE2ak1QeGpqK0VpZmovSm9SUG4wdnlkODFJVTFUSjZEOEhoRStPd2phUHhzaktQWi9T
-ZFdYL3ZkUDR2QnpUOD0mbHQ7L2RpYWdyYW0mZ3Q7Jmx0Oy9teGZpbGUmZ3Q7Ij48ZGVmcy8+PGc+
-PGVsbGlwc2UgY3g9IjE1MCIgY3k9IjQwIiByeD0iNjAiIHJ5PSI0MCIgZmlsbD0iI2RhZThmYyIg
-c3Ryb2tlPSIjNmM4ZWJmIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFu
-c2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0i
-bm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDov
-L3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZs
-b3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3Lncz
-Lm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2Fm
-ZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDExOHB4OyBo
-ZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6IDQwcHg7IG1hcmdpbi1sZWZ0OiA5MXB4OyI+PGRpdiBk
-YXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXpp
-bmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2
-IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1p
-bHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9p
-bnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9y
-bWFsOyI+SG9jaDxiciAvPnNwcmFjaGU8L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+
-PHRleHQgeD0iMTUwIiB5PSI0NCIgZmlsbD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVs
-dmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkhvY2guLi48L3Rl
-eHQ+PC9zd2l0Y2g+PC9nPjxlbGxpcHNlIGN4PSIxNTAiIGN5PSIyMDAiIHJ4PSI2MCIgcnk9IjQw
-IiBmaWxsPSIjZjhjZWNjIiBzdHJva2U9IiNiODU0NTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48
-ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dpdGNoPjxmb3JlaWduT2JqZWN0
-IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiByZXF1aXJl
-ZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxp
-dHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGlnbjogbGVmdDsiPjxkaXYgeG1s
-bnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OiBmbGV4OyBh
-bGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250ZW50OiB1bnNhZmUgY2VudGVy
-OyB3aWR0aDogMTE4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogMjAwcHg7IG1hcmdpbi1s
-ZWZ0OiA5MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7
-ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFs
-aWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6
-ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGlu
-ZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsg
-b3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+TmllZGVyPGJyIC8+c3ByYWNoZTwvZGl2PjwvZGl2Pjwv
-ZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIxNTAiIHk9IjIwNCIgZmlsbD0icmdiKDAsIDAs
-IDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRleHQtYW5jaG9y
-PSJtaWRkbGUiPk5pZWRlci4uLjwvdGV4dD48L3N3aXRjaD48L2c+PHBhdGggZD0iTSAyMDAgNzAg
-USAyNjAgMTIwIDIwNC43MyAxNjkuNzQiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDAp
-IiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBk
-PSJNIDIwMC44MyAxNzMuMjUgTCAyMDMuNjkgMTY1Ljk3IEwgMjA0LjczIDE2OS43NCBMIDIwOC4z
-OCAxNzEuMTcgWiIgZmlsbD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ry
-b2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHBhdGggZD0iTSAxMDAg
-MTc0IFEgNDAgMTI0IDk1LjI3IDc0LjI2IiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAw
-KSIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGgg
-ZD0iTSA5OS4xNyA3MC43NSBMIDk2LjMxIDc4LjAzIEwgOTUuMjcgNzQuMjYgTCA5MS42MiA3Mi44
-MyBaIiBmaWxsPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0
-ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48cGF0aCBkPSJNIDIwOS4wNCA0Ny41
-MiBRIDM3MCAxMiAxOTguNzkgMTEuNzMiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDAp
-IiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBk
-PSJNIDE5My41NCAxMS43MiBMIDIwMC41NSA4LjIzIEwgMTk4Ljc5IDExLjczIEwgMjAwLjU0IDE1
-LjIzIFoiIGZpbGw9InJnYigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1t
-aXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxwYXRoIGQ9Ik0gMjEwIDE5MiBR
-IDM3MSAyMjggMTk5LjM3IDIyOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0
-cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIvPjxwYXRoIGQ9Ik0g
-MTk0LjEyIDIyOCBMIDIwMS4xMiAyMjQuNSBMIDE5OS4zNyAyMjggTCAyMDEuMTIgMjMxLjUgWiIg
-ZmlsbD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tlLW1pdGVybGlt
-aXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHJlY3QgeD0iMjgwIiB5PSIyNSIgd2lkdGg9
-IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUiIHBvaW50ZXItZXZlbnRz
-PSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dpdGNoPjxmb3Jl
-aWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAl
-IiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4
-dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGlnbjogbGVmdDsi
-PjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5
-OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250ZW50OiB1bnNh
-ZmUgY2VudGVyOyB3aWR0aDogNThweDsgaGVpZ2h0OiAxcHg7IHBhZGRpbmctdG9wOiA0MHB4OyBt
-YXJnaW4tbGVmdDogMjgxcHg7Ij48ZGl2IGRhdGEtZHJhd2lvLWNvbG9ycz0iY29sb3I6IHJnYigw
-LCAwLCAwKTsgIiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9udC1zaXplOiAwcHg7
-IHRleHQtYWxpZ246IGNlbnRlcjsiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsg
-Zm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAs
-IDApOyBsaW5lLWhlaWdodDogMS4yOyBwb2ludGVyLWV2ZW50czogYWxsOyB3aGl0ZS1zcGFjZTog
-bm9ybWFsOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7Ij5UcmFuc3BpbGVyPC9kaXY+PC9kaXY+PC9k
-aXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjMxMCIgeT0iNDQiIGZpbGw9InJnYigwLCAwLCAw
-KSIgZm9udC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hvcj0i
-bWlkZGxlIj5UcmFuc3BpbGVyPC90ZXh0Pjwvc3dpdGNoPjwvZz48cmVjdCB4PSIyODAiIHk9IjE4
-NSIgd2lkdGg9IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUiIHBvaW50
-ZXItZXZlbnRzPSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dp
-dGNoPjxmb3JlaWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVp
-Z2h0PSIxMDAlIiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9m
-ZWF0dXJlI0V4dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGln
-bjogbGVmdDsiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxl
-PSJkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250
-ZW50OiB1bnNhZmUgY2VudGVyOyB3aWR0aDogNThweDsgaGVpZ2h0OiAxcHg7IHBhZGRpbmctdG9w
-OiAyMDBweDsgbWFyZ2luLWxlZnQ6IDI4MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNv
-bG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQt
-c2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxp
-bmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6
-IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hp
-dGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+UmVjb21waWxlcjwvZGl2
-PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIzMTAiIHk9IjIwNCIgZmlsbD0i
-cmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRl
-eHQtYW5jaG9yPSJtaWRkbGUiPlJlY29tcGlsZXI8L3RleHQ+PC9zd2l0Y2g+PC9nPjxyZWN0IHg9
-IjI0MCIgeT0iOTAiIHdpZHRoPSI2MCIgaGVpZ2h0PSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJu
-b25lIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAt
-MC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9
-IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcv
-VFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7
-IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3ho
-dG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1
-c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDU4cHg7IGhlaWdodDogMXB4OyBw
-YWRkaW5nLXRvcDogMTA1cHg7IG1hcmdpbi1sZWZ0OiAyNDFweDsiPjxkaXYgZGF0YS1kcmF3aW8t
-Y29sb3JzPSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXIt
-Ym94OyBmb250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0iZGlz
-cGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRp
-Y2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRz
-OiBhbGw7IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPkNvbXBp
-bGVyPC9kaXY+PC9kaXY+PC9kaXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjI3MCIgeT0iMTA5
-IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6ZT0i
-MTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Q29tcGlsZXI8L3RleHQ+PC9zd2l0Y2g+PC9nPjxy
-ZWN0IHg9IjAiIHk9IjkwIiB3aWR0aD0iNjAiIGhlaWdodD0iMzAiIGZpbGw9Im5vbmUiIHN0cm9r
-ZT0ibm9uZSIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0w
-LjUgLTAuNSkiPjxzd2l0Y2g+PGZvcmVpZ25PYmplY3QgcG9pbnRlci1ldmVudHM9Im5vbmUiIHdp
-ZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMu
-b3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSIgc3R5bGU9Im92ZXJmbG93OiB2aXNp
-YmxlOyB0ZXh0LWFsaWduOiBsZWZ0OyI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5
-OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiB1bnNhZmUgY2VudGVy
-OyBqdXN0aWZ5LWNvbnRlbnQ6IHVuc2FmZSBjZW50ZXI7IHdpZHRoOiA1OHB4OyBoZWlnaHQ6IDFw
-eDsgcGFkZGluZy10b3A6IDEwNXB4OyBtYXJnaW4tbGVmdDogMXB4OyI+PGRpdiBkYXRhLWRyYXdp
-by1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRl
-ci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJk
-aXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZl
-dGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVu
-dHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+RGVj
-b21waWxlcjwvZGl2PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIzMCIgeT0i
-MTA5IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6
-ZT0iMTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+RGVjb21waWxlcjwvdGV4dD48L3N3aXRjaD48
-L2c+PC9nPjxzd2l0Y2g+PGcgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIv
-U1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ii8+PGEgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCwt
-NSkiIHhsaW5rOmhyZWY9Imh0dHBzOi8vd3d3LmRyYXdpby5jb20vZG9jL2ZhcS9zdmctZXhwb3J0
-LXRleHQtcHJvYmxlbXMiIHRhcmdldD0iX2JsYW5rIj48dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxl
-IiBmb250LXNpemU9IjEwcHgiIHg9IjUwJSIgeT0iMTAwJSI+VGV4dCBpcyBub3QgU1ZHIC0gY2Fu
-bm90IGRpc3BsYXk8L3RleHQ+PC9hPjwvc3dpdGNoPjwvc3ZnPg==
-      </contents>
-    </upload>
-    <upload>
-      <timestamp>2023-09-08T14:41:45Z</timestamp>
-      <contributor>
-        <username>Imported&gt;Dir</username>
-        <id>0</id>
-      </contributor>
-      <comment deleted="deleted" />
-      <filename>Compiler-abstraktion.svg</filename>
-      <archivename>20230908144149!Compiler-abstraktion.svg</archivename>
-      <src>https://localhost:4443/wiki-dir/images/archive/4/48/20230908144149%21Compiler-abstraktion.svg</src>
-      <size>8929</size>
-      <sha1base36>tq5oxsfvpj6z3antmi3wzza7q0ienos</sha1base36>
-      <rel>archive/4/48/20230908144149!Compiler-abstraktion.svg</rel>
-      <contents encoding="base64">PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRw
-Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIzNDFweCIgaGVp
-Z2h0PSIyNDFweCIgdmlld0JveD0iLTAuNSAtMC41IDM0MSAyNDEiIGNvbnRlbnQ9IiZsdDtteGZp
-bGUgaG9zdD0mcXVvdDtsb2NhbGhvc3QmcXVvdDsgbW9kaWZpZWQ9JnF1b3Q7MjAyMy0wOS0wOFQx
-NDo0MTo0NC40MDRaJnF1b3Q7IGFnZW50PSZxdW90O01vemlsbGEvNS4wIChNYWNpbnRvc2g7IElu
-dGVsIE1hYyBPUyBYIDEwXzE1XzcpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vj
-a28pIENocm9tZS8xMTYuMC4wLjAgU2FmYXJpLzUzNy4zNiZxdW90OyB2ZXJzaW9uPSZxdW90OzIx
-LjUuMCZxdW90OyBldGFnPSZxdW90O0ZTOHE5SmpFbm54UnBKV2ZYOW9YJnF1b3Q7IHR5cGU9JnF1
-b3Q7ZW1iZWQmcXVvdDsmZ3Q7Jmx0O2RpYWdyYW0gaWQ9JnF1b3Q7S2lLZnh1ZUVnZXJQNFJ1QkMw
-UzgmcXVvdDsgbmFtZT0mcXVvdDtQYWdlLTEmcXVvdDsmZ3Q7N1ZoTmI5c3dEUDAxdmhiK3JuTnNr
-MjY5YkNqV0FWdVBxc1RZd21RcmtKVW0yYThmSGNzZnN0TW1hSk1VV0h1SytFUlMwdU96VE1jSnB2
-bjZxeUtMN0p0a0lCemZaV3NubURtKzcwWGhCSDhxWkZNamNlelZRS280TTA0ZGNNLy9nZ0ZkZ3k0
-NWc5SnkxRklLelJjMlNHVlJBTlVXUnBTU0s5dHRMb1c5Nm9La01BTHVLUkZqOUJkbk9xdlJKSEk3
-L0JaNG1qVXJlNjZaeVVuamJJQXlJMHl1ZWxCdzR3UlRKYVd1Ui9sNkNxSWlyK0dsanZ2eXpHeTdN
-UVdGUGlUQXJ3T2VpRmlhczkxS21qbCtMREQ4K2xIaEtLMUc1VUlSbW9IWnRONDBUR0EySkIyTjYx
-WEdOZHd2Q0sxbVZsaDN4REtkQzdROEhNNjVFRk1wcE5yR0JZeEFNcWRWWXEza0grak54RFNCeHpu
-T21KMkIwckIrOW5SZXl4bUtEV1FPV20zUXBRbG9hRFk2QzQyNTZvcld1bVM5Z2lVR0kwWW5hWnU1
-b3hJSGhzM2R6QVlqWnI5ellLQk96KzA4b1VCM2N2dVlSQ0dLOUNUYyt1NFp5YjBja1R0aWp5N1ZF
-ekRERUJUc3FucnUwYVNDbENXbk5vTktMZ3UyOVhhMzNyaWQzMjBvR2c5OVk3YnUrODAyamJYbXVn
-M0M4VU1QNzBJcW80bW85d3hzZE5uc3JVR1A0MmdIeFEybVFCRE5uK3owdTNnM0s5eEpqZ3UzSmZZ
-RHU4U2VOeWhkS1plS2dvbnEzeko3RXZsZWFDZlNSS1dnUjRtd1ptVFRjMXRVRHVVTEc1NE1OaHhi
-dHg4TzZveWR4bHBPRDVKZDhpbTdNOGpPMjZlV1EyVTNURFRTNzVGa2R6bFVYWGhVMVUxT3F6cWpI
-L2RpTXZIN0dycUlKdUdMT3FxTU8xQWNqd0xxUlEyN2V6UjhxQ0x4ek52U1c3MUxYY1FlOUY2NkRW
-MWJCOEh3VFhlb2JzTm9rQ2c0alc2SEc0NzhvK3EyZWRvK2hmdCtiL0J3Y0pVRy9pdmY0RTAvMnlT
-S2t4TkowdHU1enRFMDZZMDArVk9Sb2x4d1ViWG1BM1ZpZDZ4dENkb3RkU0VMR1BUZkJpS0NwMFds
-WTlSQnBiSHJxdGZtK0FWNVpTWnl6cGg0cnJlM2hlNjh2VmtQUEZzSGNlUU1lL1Y0aHdxSDk4NXJX
-blZ2L0luNUE2ak1QeGpqK0VpZmovSm9SUG4wdnlkODFJVTFUSjZEOEhoRStPd2phUHhzaktQWi9T
-ZFdYL3ZkUDR2QnpUOD0mbHQ7L2RpYWdyYW0mZ3Q7Jmx0Oy9teGZpbGUmZ3Q7Ij48ZGVmcy8+PGc+
-PGVsbGlwc2UgY3g9IjE1MCIgY3k9IjQwIiByeD0iNjAiIHJ5PSI0MCIgZmlsbD0iI2RhZThmYyIg
-c3Ryb2tlPSIjNmM4ZWJmIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFu
-c2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0i
-bm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDov
-L3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZs
-b3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3Lncz
-Lm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2Fm
-ZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDExOHB4OyBo
-ZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6IDQwcHg7IG1hcmdpbi1sZWZ0OiA5MXB4OyI+PGRpdiBk
-YXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXpp
-bmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2
-IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1p
-bHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9p
-bnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9y
-bWFsOyI+SG9jaDxiciAvPnNwcmFjaGU8L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+
-PHRleHQgeD0iMTUwIiB5PSI0NCIgZmlsbD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVs
-dmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkhvY2guLi48L3Rl
-eHQ+PC9zd2l0Y2g+PC9nPjxlbGxpcHNlIGN4PSIxNTAiIGN5PSIyMDAiIHJ4PSI2MCIgcnk9IjQw
-IiBmaWxsPSIjZjhjZWNjIiBzdHJva2U9IiNiODU0NTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48
-ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dpdGNoPjxmb3JlaWduT2JqZWN0
-IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiByZXF1aXJl
-ZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxp
-dHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGlnbjogbGVmdDsiPjxkaXYgeG1s
-bnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OiBmbGV4OyBh
-bGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250ZW50OiB1bnNhZmUgY2VudGVy
-OyB3aWR0aDogMTE4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogMjAwcHg7IG1hcmdpbi1s
-ZWZ0OiA5MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7
-ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFs
-aWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6
-ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGlu
-ZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsg
-b3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+TmllZGVyPGJyIC8+c3ByYWNoZTwvZGl2PjwvZGl2Pjwv
-ZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIxNTAiIHk9IjIwNCIgZmlsbD0icmdiKDAsIDAs
-IDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRleHQtYW5jaG9y
-PSJtaWRkbGUiPk5pZWRlci4uLjwvdGV4dD48L3N3aXRjaD48L2c+PHBhdGggZD0iTSAyMDAgNzAg
-USAyNjAgMTIwIDIwNC43MyAxNjkuNzQiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDAp
-IiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBk
-PSJNIDIwMC44MyAxNzMuMjUgTCAyMDMuNjkgMTY1Ljk3IEwgMjA0LjczIDE2OS43NCBMIDIwOC4z
-OCAxNzEuMTcgWiIgZmlsbD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ry
-b2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHBhdGggZD0iTSAxMDAg
-MTc0IFEgNDAgMTI0IDk1LjI3IDc0LjI2IiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAw
-KSIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGgg
-ZD0iTSA5OS4xNyA3MC43NSBMIDk2LjMxIDc4LjAzIEwgOTUuMjcgNzQuMjYgTCA5MS42MiA3Mi44
-MyBaIiBmaWxsPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0
-ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48cGF0aCBkPSJNIDIwOS4wNCA0Ny41
-MiBRIDM3MCAxMiAxOTguNzkgMTEuNzMiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDAp
-IiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBk
-PSJNIDE5My41NCAxMS43MiBMIDIwMC41NSA4LjIzIEwgMTk4Ljc5IDExLjczIEwgMjAwLjU0IDE1
-LjIzIFoiIGZpbGw9InJnYigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1t
-aXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxwYXRoIGQ9Ik0gMjEwIDE5MiBR
-IDM3MSAyMjggMTk5LjM3IDIyOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0
-cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIvPjxwYXRoIGQ9Ik0g
-MTk0LjEyIDIyOCBMIDIwMS4xMiAyMjQuNSBMIDE5OS4zNyAyMjggTCAyMDEuMTIgMjMxLjUgWiIg
-ZmlsbD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tlLW1pdGVybGlt
-aXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHJlY3QgeD0iMjgwIiB5PSIyNSIgd2lkdGg9
-IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUiIHBvaW50ZXItZXZlbnRz
-PSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dpdGNoPjxmb3Jl
-aWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAl
-IiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4
-dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGlnbjogbGVmdDsi
-PjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5
-OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250ZW50OiB1bnNh
-ZmUgY2VudGVyOyB3aWR0aDogNThweDsgaGVpZ2h0OiAxcHg7IHBhZGRpbmctdG9wOiA0MHB4OyBt
-YXJnaW4tbGVmdDogMjgxcHg7Ij48ZGl2IGRhdGEtZHJhd2lvLWNvbG9ycz0iY29sb3I6IHJnYigw
-LCAwLCAwKTsgIiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9udC1zaXplOiAwcHg7
-IHRleHQtYWxpZ246IGNlbnRlcjsiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsg
-Zm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAs
-IDApOyBsaW5lLWhlaWdodDogMS4yOyBwb2ludGVyLWV2ZW50czogYWxsOyB3aGl0ZS1zcGFjZTog
-bm9ybWFsOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7Ij5UcmFuc3BpbGVyPC9kaXY+PC9kaXY+PC9k
-aXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjMxMCIgeT0iNDQiIGZpbGw9InJnYigwLCAwLCAw
-KSIgZm9udC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hvcj0i
-bWlkZGxlIj5UcmFuc3BpbGVyPC90ZXh0Pjwvc3dpdGNoPjwvZz48cmVjdCB4PSIyODAiIHk9IjE4
-NSIgd2lkdGg9IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUiIHBvaW50
-ZXItZXZlbnRzPSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dp
-dGNoPjxmb3JlaWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVp
-Z2h0PSIxMDAlIiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9m
-ZWF0dXJlI0V4dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGln
-bjogbGVmdDsiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxl
-PSJkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250
-ZW50OiB1bnNhZmUgY2VudGVyOyB3aWR0aDogNThweDsgaGVpZ2h0OiAxcHg7IHBhZGRpbmctdG9w
-OiAyMDBweDsgbWFyZ2luLWxlZnQ6IDI4MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNv
-bG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQt
-c2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxp
-bmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6
-IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hp
-dGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+UmVjb21waWxlcjwvZGl2
-PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIzMTAiIHk9IjIwNCIgZmlsbD0i
-cmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRl
-eHQtYW5jaG9yPSJtaWRkbGUiPlJlY29tcGlsZXI8L3RleHQ+PC9zd2l0Y2g+PC9nPjxyZWN0IHg9
-IjI0MCIgeT0iOTAiIHdpZHRoPSI2MCIgaGVpZ2h0PSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJu
-b25lIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAt
-MC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9
-IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcv
-VFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7
-IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3ho
-dG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1
-c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDU4cHg7IGhlaWdodDogMXB4OyBw
-YWRkaW5nLXRvcDogMTA1cHg7IG1hcmdpbi1sZWZ0OiAyNDFweDsiPjxkaXYgZGF0YS1kcmF3aW8t
-Y29sb3JzPSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXIt
-Ym94OyBmb250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0iZGlz
-cGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRp
-Y2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRz
-OiBhbGw7IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPkNvbXBp
-bGVyPC9kaXY+PC9kaXY+PC9kaXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjI3MCIgeT0iMTA5
-IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6ZT0i
-MTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Q29tcGlsZXI8L3RleHQ+PC9zd2l0Y2g+PC9nPjxy
-ZWN0IHg9IjAiIHk9IjkwIiB3aWR0aD0iNjAiIGhlaWdodD0iMzAiIGZpbGw9Im5vbmUiIHN0cm9r
-ZT0ibm9uZSIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0w
-LjUgLTAuNSkiPjxzd2l0Y2g+PGZvcmVpZ25PYmplY3QgcG9pbnRlci1ldmVudHM9Im5vbmUiIHdp
-ZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMu
-b3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSIgc3R5bGU9Im92ZXJmbG93OiB2aXNp
-YmxlOyB0ZXh0LWFsaWduOiBsZWZ0OyI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5
-OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiB1bnNhZmUgY2VudGVy
-OyBqdXN0aWZ5LWNvbnRlbnQ6IHVuc2FmZSBjZW50ZXI7IHdpZHRoOiA1OHB4OyBoZWlnaHQ6IDFw
-eDsgcGFkZGluZy10b3A6IDEwNXB4OyBtYXJnaW4tbGVmdDogMXB4OyI+PGRpdiBkYXRhLWRyYXdp
-by1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRl
-ci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJk
-aXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZl
-dGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVu
-dHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+RGVj
-b21waWxlcjwvZGl2PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIzMCIgeT0i
-MTA5IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6
-ZT0iMTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+RGVjb21waWxlcjwvdGV4dD48L3N3aXRjaD48
-L2c+PC9nPjxzd2l0Y2g+PGcgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIv
-U1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ii8+PGEgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCwt
-NSkiIHhsaW5rOmhyZWY9Imh0dHBzOi8vd3d3LmRyYXdpby5jb20vZG9jL2ZhcS9zdmctZXhwb3J0
-LXRleHQtcHJvYmxlbXMiIHRhcmdldD0iX2JsYW5rIj48dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxl
-IiBmb250LXNpemU9IjEwcHgiIHg9IjUwJSIgeT0iMTAwJSI+VGV4dCBpcyBub3QgU1ZHIC0gY2Fu
-bm90IGRpc3BsYXk8L3RleHQ+PC9hPjwvc3dpdGNoPjwvc3ZnPg==
-      </contents>
-    </upload>
-    <upload>
-      <timestamp>2023-09-08T14:41:45Z</timestamp>
-      <contributor>
-        <username>Imported&gt;Dir</username>
-        <id>0</id>
-      </contributor>
-      <comment deleted="deleted" />
-      <filename>Compiler-abstraktion.svg</filename>
-      <archivename>20230908144149!Compiler-abstraktion.svg</archivename>
-      <src>https://localhost:4443/wiki-dir/images/archive/4/48/20230908144149%21Compiler-abstraktion.svg</src>
-      <size>8929</size>
-      <sha1base36>tq5oxsfvpj6z3antmi3wzza7q0ienos</sha1base36>
-      <rel>archive/4/48/20230908144149!Compiler-abstraktion.svg</rel>
-      <contents encoding="base64">PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRw
-Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIzNDFweCIgaGVp
-Z2h0PSIyNDFweCIgdmlld0JveD0iLTAuNSAtMC41IDM0MSAyNDEiIGNvbnRlbnQ9IiZsdDtteGZp
-bGUgaG9zdD0mcXVvdDtsb2NhbGhvc3QmcXVvdDsgbW9kaWZpZWQ9JnF1b3Q7MjAyMy0wOS0wOFQx
-NDo0MTo0NC40MDRaJnF1b3Q7IGFnZW50PSZxdW90O01vemlsbGEvNS4wIChNYWNpbnRvc2g7IElu
-dGVsIE1hYyBPUyBYIDEwXzE1XzcpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vj
-a28pIENocm9tZS8xMTYuMC4wLjAgU2FmYXJpLzUzNy4zNiZxdW90OyB2ZXJzaW9uPSZxdW90OzIx
-LjUuMCZxdW90OyBldGFnPSZxdW90O0ZTOHE5SmpFbm54UnBKV2ZYOW9YJnF1b3Q7IHR5cGU9JnF1
-b3Q7ZW1iZWQmcXVvdDsmZ3Q7Jmx0O2RpYWdyYW0gaWQ9JnF1b3Q7S2lLZnh1ZUVnZXJQNFJ1QkMw
-UzgmcXVvdDsgbmFtZT0mcXVvdDtQYWdlLTEmcXVvdDsmZ3Q7N1ZoTmI5c3dEUDAxdmhiK3JuTnNr
-MjY5YkNqV0FWdVBxc1RZd21RcmtKVW0yYThmSGNzZnN0TW1hSk1VV0h1SytFUlMwdU96VE1jSnB2
-bjZxeUtMN0p0a0lCemZaV3NubURtKzcwWGhCSDhxWkZNamNlelZRS280TTA0ZGNNLy9nZ0ZkZ3k0
-NWc5SnkxRklLelJjMlNHVlJBTlVXUnBTU0s5dHRMb1c5Nm9La01BTHVLUkZqOUJkbk9xdlJKSEk3
-L0JaNG1qVXJlNjZaeVVuamJJQXlJMHl1ZWxCdzR3UlRKYVd1Ui9sNkNxSWlyK0dsanZ2eXpHeTdN
-UVdGUGlUQXJ3T2VpRmlhczkxS21qbCtMREQ4K2xIaEtLMUc1VUlSbW9IWnRONDBUR0EySkIyTjYx
-WEdOZHd2Q0sxbVZsaDN4REtkQzdROEhNNjVFRk1wcE5yR0JZeEFNcWRWWXEza0grak54RFNCeHpu
-T21KMkIwckIrOW5SZXl4bUtEV1FPV20zUXBRbG9hRFk2QzQyNTZvcld1bVM5Z2lVR0kwWW5hWnU1
-b3hJSGhzM2R6QVlqWnI5ellLQk96KzA4b1VCM2N2dVlSQ0dLOUNUYyt1NFp5YjBja1R0aWp5N1ZF
-ekRERUJUc3FucnUwYVNDbENXbk5vTktMZ3UyOVhhMzNyaWQzMjBvR2c5OVk3YnUrODAyamJYbXVn
-M0M4VU1QNzBJcW80bW85d3hzZE5uc3JVR1A0MmdIeFEybVFCRE5uK3owdTNnM0s5eEpqZ3UzSmZZ
-RHU4U2VOeWhkS1plS2dvbnEzeko3RXZsZWFDZlNSS1dnUjRtd1ptVFRjMXRVRHVVTEc1NE1OaHhi
-dHg4TzZveWR4bHBPRDVKZDhpbTdNOGpPMjZlV1EyVTNURFRTNzVGa2R6bFVYWGhVMVUxT3F6cWpI
-L2RpTXZIN0dycUlKdUdMT3FxTU8xQWNqd0xxUlEyN2V6UjhxQ0x4ek52U1c3MUxYY1FlOUY2NkRW
-MWJCOEh3VFhlb2JzTm9rQ2c0alc2SEc0NzhvK3EyZWRvK2hmdCtiL0J3Y0pVRy9pdmY0RTAvMnlT
-S2t4TkowdHU1enRFMDZZMDArVk9Sb2x4d1ViWG1BM1ZpZDZ4dENkb3RkU0VMR1BUZkJpS0NwMFds
-WTlSQnBiSHJxdGZtK0FWNVpTWnl6cGg0cnJlM2hlNjh2VmtQUEZzSGNlUU1lL1Y0aHdxSDk4NXJX
-blZ2L0luNUE2ak1QeGpqK0VpZmovSm9SUG4wdnlkODFJVTFUSjZEOEhoRStPd2phUHhzaktQWi9T
-ZFdYL3ZkUDR2QnpUOD0mbHQ7L2RpYWdyYW0mZ3Q7Jmx0Oy9teGZpbGUmZ3Q7Ij48ZGVmcy8+PGc+
-PGVsbGlwc2UgY3g9IjE1MCIgY3k9IjQwIiByeD0iNjAiIHJ5PSI0MCIgZmlsbD0iI2RhZThmYyIg
-c3Ryb2tlPSIjNmM4ZWJmIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFu
-c2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0i
-bm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDov
-L3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZs
-b3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3Lncz
-Lm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2Fm
-ZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDExOHB4OyBo
-ZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6IDQwcHg7IG1hcmdpbi1sZWZ0OiA5MXB4OyI+PGRpdiBk
-YXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXpp
-bmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2
-IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1p
-bHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9p
-bnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9y
-bWFsOyI+SG9jaDxiciAvPnNwcmFjaGU8L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+
-PHRleHQgeD0iMTUwIiB5PSI0NCIgZmlsbD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVs
-dmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkhvY2guLi48L3Rl
-eHQ+PC9zd2l0Y2g+PC9nPjxlbGxpcHNlIGN4PSIxNTAiIGN5PSIyMDAiIHJ4PSI2MCIgcnk9IjQw
-IiBmaWxsPSIjZjhjZWNjIiBzdHJva2U9IiNiODU0NTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48
-ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dpdGNoPjxmb3JlaWduT2JqZWN0
-IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiByZXF1aXJl
-ZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxp
-dHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGlnbjogbGVmdDsiPjxkaXYgeG1s
-bnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OiBmbGV4OyBh
-bGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250ZW50OiB1bnNhZmUgY2VudGVy
-OyB3aWR0aDogMTE4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogMjAwcHg7IG1hcmdpbi1s
-ZWZ0OiA5MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7
-ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFs
-aWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6
-ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGlu
-ZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsg
-b3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+TmllZGVyPGJyIC8+c3ByYWNoZTwvZGl2PjwvZGl2Pjwv
-ZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIxNTAiIHk9IjIwNCIgZmlsbD0icmdiKDAsIDAs
-IDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRleHQtYW5jaG9y
-PSJtaWRkbGUiPk5pZWRlci4uLjwvdGV4dD48L3N3aXRjaD48L2c+PHBhdGggZD0iTSAyMDAgNzAg
-USAyNjAgMTIwIDIwNC43MyAxNjkuNzQiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDAp
-IiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBk
-PSJNIDIwMC44MyAxNzMuMjUgTCAyMDMuNjkgMTY1Ljk3IEwgMjA0LjczIDE2OS43NCBMIDIwOC4z
-OCAxNzEuMTcgWiIgZmlsbD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ry
-b2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHBhdGggZD0iTSAxMDAg
-MTc0IFEgNDAgMTI0IDk1LjI3IDc0LjI2IiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAw
-KSIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGgg
-ZD0iTSA5OS4xNyA3MC43NSBMIDk2LjMxIDc4LjAzIEwgOTUuMjcgNzQuMjYgTCA5MS42MiA3Mi44
-MyBaIiBmaWxsPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0
-ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48cGF0aCBkPSJNIDIwOS4wNCA0Ny41
-MiBRIDM3MCAxMiAxOTguNzkgMTEuNzMiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDAp
-IiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBk
-PSJNIDE5My41NCAxMS43MiBMIDIwMC41NSA4LjIzIEwgMTk4Ljc5IDExLjczIEwgMjAwLjU0IDE1
-LjIzIFoiIGZpbGw9InJnYigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1t
-aXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxwYXRoIGQ9Ik0gMjEwIDE5MiBR
-IDM3MSAyMjggMTk5LjM3IDIyOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0
-cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIvPjxwYXRoIGQ9Ik0g
-MTk0LjEyIDIyOCBMIDIwMS4xMiAyMjQuNSBMIDE5OS4zNyAyMjggTCAyMDEuMTIgMjMxLjUgWiIg
-ZmlsbD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tlLW1pdGVybGlt
-aXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHJlY3QgeD0iMjgwIiB5PSIyNSIgd2lkdGg9
-IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUiIHBvaW50ZXItZXZlbnRz
-PSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dpdGNoPjxmb3Jl
-aWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAl
-IiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4
-dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGlnbjogbGVmdDsi
-PjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5
-OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250ZW50OiB1bnNh
-ZmUgY2VudGVyOyB3aWR0aDogNThweDsgaGVpZ2h0OiAxcHg7IHBhZGRpbmctdG9wOiA0MHB4OyBt
-YXJnaW4tbGVmdDogMjgxcHg7Ij48ZGl2IGRhdGEtZHJhd2lvLWNvbG9ycz0iY29sb3I6IHJnYigw
-LCAwLCAwKTsgIiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9udC1zaXplOiAwcHg7
-IHRleHQtYWxpZ246IGNlbnRlcjsiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsg
-Zm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAs
-IDApOyBsaW5lLWhlaWdodDogMS4yOyBwb2ludGVyLWV2ZW50czogYWxsOyB3aGl0ZS1zcGFjZTog
-bm9ybWFsOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7Ij5UcmFuc3BpbGVyPC9kaXY+PC9kaXY+PC9k
-aXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjMxMCIgeT0iNDQiIGZpbGw9InJnYigwLCAwLCAw
-KSIgZm9udC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hvcj0i
-bWlkZGxlIj5UcmFuc3BpbGVyPC90ZXh0Pjwvc3dpdGNoPjwvZz48cmVjdCB4PSIyODAiIHk9IjE4
-NSIgd2lkdGg9IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUiIHBvaW50
-ZXItZXZlbnRzPSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dp
-dGNoPjxmb3JlaWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVp
-Z2h0PSIxMDAlIiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9m
-ZWF0dXJlI0V4dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGln
-bjogbGVmdDsiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxl
-PSJkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250
-ZW50OiB1bnNhZmUgY2VudGVyOyB3aWR0aDogNThweDsgaGVpZ2h0OiAxcHg7IHBhZGRpbmctdG9w
-OiAyMDBweDsgbWFyZ2luLWxlZnQ6IDI4MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNv
-bG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQt
-c2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxp
-bmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6
-IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hp
-dGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+UmVjb21waWxlcjwvZGl2
-PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIzMTAiIHk9IjIwNCIgZmlsbD0i
-cmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRl
-eHQtYW5jaG9yPSJtaWRkbGUiPlJlY29tcGlsZXI8L3RleHQ+PC9zd2l0Y2g+PC9nPjxyZWN0IHg9
-IjI0MCIgeT0iOTAiIHdpZHRoPSI2MCIgaGVpZ2h0PSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJu
-b25lIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAt
-MC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9
-IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcv
-VFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7
-IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3ho
-dG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1
-c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDU4cHg7IGhlaWdodDogMXB4OyBw
-YWRkaW5nLXRvcDogMTA1cHg7IG1hcmdpbi1sZWZ0OiAyNDFweDsiPjxkaXYgZGF0YS1kcmF3aW8t
-Y29sb3JzPSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXIt
-Ym94OyBmb250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0iZGlz
-cGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRp
-Y2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRz
-OiBhbGw7IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPkNvbXBp
-bGVyPC9kaXY+PC9kaXY+PC9kaXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjI3MCIgeT0iMTA5
-IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6ZT0i
-MTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Q29tcGlsZXI8L3RleHQ+PC9zd2l0Y2g+PC9nPjxy
-ZWN0IHg9IjAiIHk9IjkwIiB3aWR0aD0iNjAiIGhlaWdodD0iMzAiIGZpbGw9Im5vbmUiIHN0cm9r
-ZT0ibm9uZSIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0w
-LjUgLTAuNSkiPjxzd2l0Y2g+PGZvcmVpZ25PYmplY3QgcG9pbnRlci1ldmVudHM9Im5vbmUiIHdp
-ZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMu
-b3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSIgc3R5bGU9Im92ZXJmbG93OiB2aXNp
-YmxlOyB0ZXh0LWFsaWduOiBsZWZ0OyI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5
-OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiB1bnNhZmUgY2VudGVy
-OyBqdXN0aWZ5LWNvbnRlbnQ6IHVuc2FmZSBjZW50ZXI7IHdpZHRoOiA1OHB4OyBoZWlnaHQ6IDFw
-eDsgcGFkZGluZy10b3A6IDEwNXB4OyBtYXJnaW4tbGVmdDogMXB4OyI+PGRpdiBkYXRhLWRyYXdp
-by1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRl
-ci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJk
-aXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZl
-dGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVu
-dHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+RGVj
-b21waWxlcjwvZGl2PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIzMCIgeT0i
-MTA5IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6
-ZT0iMTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+RGVjb21waWxlcjwvdGV4dD48L3N3aXRjaD48
-L2c+PC9nPjxzd2l0Y2g+PGcgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIv
-U1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ii8+PGEgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCwt
-NSkiIHhsaW5rOmhyZWY9Imh0dHBzOi8vd3d3LmRyYXdpby5jb20vZG9jL2ZhcS9zdmctZXhwb3J0
-LXRleHQtcHJvYmxlbXMiIHRhcmdldD0iX2JsYW5rIj48dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxl
-IiBmb250LXNpemU9IjEwcHgiIHg9IjUwJSIgeT0iMTAwJSI+VGV4dCBpcyBub3QgU1ZHIC0gY2Fu
-bm90IGRpc3BsYXk8L3RleHQ+PC9hPjwvc3dpdGNoPjwvc3ZnPg==
-      </contents>
-    </upload>
-    <upload>
-      <timestamp>2023-09-08T14:41:45Z</timestamp>
-      <contributor>
-        <username>Imported&gt;Dir</username>
-        <id>0</id>
-      </contributor>
-      <comment deleted="deleted" />
-      <filename>Compiler-abstraktion.svg</filename>
-      <archivename>20230908144149!Compiler-abstraktion.svg</archivename>
-      <src>https://localhost:4443/wiki-dir/images/archive/4/48/20230908144149%21Compiler-abstraktion.svg</src>
-      <size>8929</size>
-      <sha1base36>tq5oxsfvpj6z3antmi3wzza7q0ienos</sha1base36>
-      <rel>archive/4/48/20230908144149!Compiler-abstraktion.svg</rel>
-      <contents encoding="base64">PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRw
-Oi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIzNDFweCIgaGVp
-Z2h0PSIyNDFweCIgdmlld0JveD0iLTAuNSAtMC41IDM0MSAyNDEiIGNvbnRlbnQ9IiZsdDtteGZp
-bGUgaG9zdD0mcXVvdDtsb2NhbGhvc3QmcXVvdDsgbW9kaWZpZWQ9JnF1b3Q7MjAyMy0wOS0wOFQx
-NDo0MTo0NC40MDRaJnF1b3Q7IGFnZW50PSZxdW90O01vemlsbGEvNS4wIChNYWNpbnRvc2g7IElu
-dGVsIE1hYyBPUyBYIDEwXzE1XzcpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vj
-a28pIENocm9tZS8xMTYuMC4wLjAgU2FmYXJpLzUzNy4zNiZxdW90OyB2ZXJzaW9uPSZxdW90OzIx
-LjUuMCZxdW90OyBldGFnPSZxdW90O0ZTOHE5SmpFbm54UnBKV2ZYOW9YJnF1b3Q7IHR5cGU9JnF1
-b3Q7ZW1iZWQmcXVvdDsmZ3Q7Jmx0O2RpYWdyYW0gaWQ9JnF1b3Q7S2lLZnh1ZUVnZXJQNFJ1QkMw
-UzgmcXVvdDsgbmFtZT0mcXVvdDtQYWdlLTEmcXVvdDsmZ3Q7N1ZoTmI5c3dEUDAxdmhiK3JuTnNr
-MjY5YkNqV0FWdVBxc1RZd21RcmtKVW0yYThmSGNzZnN0TW1hSk1VV0h1SytFUlMwdU96VE1jSnB2
-bjZxeUtMN0p0a0lCemZaV3NubURtKzcwWGhCSDhxWkZNamNlelZRS280TTA0ZGNNLy9nZ0ZkZ3k0
-NWc5SnkxRklLelJjMlNHVlJBTlVXUnBTU0s5dHRMb1c5Nm9La01BTHVLUkZqOUJkbk9xdlJKSEk3
-L0JaNG1qVXJlNjZaeVVuamJJQXlJMHl1ZWxCdzR3UlRKYVd1Ui9sNkNxSWlyK0dsanZ2eXpHeTdN
-UVdGUGlUQXJ3T2VpRmlhczkxS21qbCtMREQ4K2xIaEtLMUc1VUlSbW9IWnRONDBUR0EySkIyTjYx
-WEdOZHd2Q0sxbVZsaDN4REtkQzdROEhNNjVFRk1wcE5yR0JZeEFNcWRWWXEza0grak54RFNCeHpu
-T21KMkIwckIrOW5SZXl4bUtEV1FPV20zUXBRbG9hRFk2QzQyNTZvcld1bVM5Z2lVR0kwWW5hWnU1
-b3hJSGhzM2R6QVlqWnI5ellLQk96KzA4b1VCM2N2dVlSQ0dLOUNUYyt1NFp5YjBja1R0aWp5N1ZF
-ekRERUJUc3FucnUwYVNDbENXbk5vTktMZ3UyOVhhMzNyaWQzMjBvR2c5OVk3YnUrODAyamJYbXVn
-M0M4VU1QNzBJcW80bW85d3hzZE5uc3JVR1A0MmdIeFEybVFCRE5uK3owdTNnM0s5eEpqZ3UzSmZZ
-RHU4U2VOeWhkS1plS2dvbnEzeko3RXZsZWFDZlNSS1dnUjRtd1ptVFRjMXRVRHVVTEc1NE1OaHhi
-dHg4TzZveWR4bHBPRDVKZDhpbTdNOGpPMjZlV1EyVTNURFRTNzVGa2R6bFVYWGhVMVUxT3F6cWpI
-L2RpTXZIN0dycUlKdUdMT3FxTU8xQWNqd0xxUlEyN2V6UjhxQ0x4ek52U1c3MUxYY1FlOUY2NkRW
-MWJCOEh3VFhlb2JzTm9rQ2c0alc2SEc0NzhvK3EyZWRvK2hmdCtiL0J3Y0pVRy9pdmY0RTAvMnlT
-S2t4TkowdHU1enRFMDZZMDArVk9Sb2x4d1ViWG1BM1ZpZDZ4dENkb3RkU0VMR1BUZkJpS0NwMFds
-WTlSQnBiSHJxdGZtK0FWNVpTWnl6cGg0cnJlM2hlNjh2VmtQUEZzSGNlUU1lL1Y0aHdxSDk4NXJX
-blZ2L0luNUE2ak1QeGpqK0VpZmovSm9SUG4wdnlkODFJVTFUSjZEOEhoRStPd2phUHhzaktQWi9T
-ZFdYL3ZkUDR2QnpUOD0mbHQ7L2RpYWdyYW0mZ3Q7Jmx0Oy9teGZpbGUmZ3Q7Ij48ZGVmcy8+PGc+
-PGVsbGlwc2UgY3g9IjE1MCIgY3k9IjQwIiByeD0iNjAiIHJ5PSI0MCIgZmlsbD0iI2RhZThmYyIg
-c3Ryb2tlPSIjNmM4ZWJmIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFu
-c2xhdGUoLTAuNSAtMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0i
-bm9uZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDov
-L3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZs
-b3c6IHZpc2libGU7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3Lncz
-Lm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2Fm
-ZSBjZW50ZXI7IGp1c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDExOHB4OyBo
-ZWlnaHQ6IDFweDsgcGFkZGluZy10b3A6IDQwcHg7IG1hcmdpbi1sZWZ0OiA5MXB4OyI+PGRpdiBk
-YXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXpp
-bmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2
-IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1p
-bHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9p
-bnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9y
-bWFsOyI+SG9jaDxiciAvPnNwcmFjaGU8L2Rpdj48L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+
-PHRleHQgeD0iMTUwIiB5PSI0NCIgZmlsbD0icmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVs
-dmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkhvY2guLi48L3Rl
-eHQ+PC9zd2l0Y2g+PC9nPjxlbGxpcHNlIGN4PSIxNTAiIGN5PSIyMDAiIHJ4PSI2MCIgcnk9IjQw
-IiBmaWxsPSIjZjhjZWNjIiBzdHJva2U9IiNiODU0NTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48
-ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dpdGNoPjxmb3JlaWduT2JqZWN0
-IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiByZXF1aXJl
-ZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxp
-dHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGlnbjogbGVmdDsiPjxkaXYgeG1s
-bnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OiBmbGV4OyBh
-bGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250ZW50OiB1bnNhZmUgY2VudGVy
-OyB3aWR0aDogMTE4cHg7IGhlaWdodDogMXB4OyBwYWRkaW5nLXRvcDogMjAwcHg7IG1hcmdpbi1s
-ZWZ0OiA5MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7
-ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFs
-aWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6
-ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGlu
-ZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsg
-b3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+TmllZGVyPGJyIC8+c3ByYWNoZTwvZGl2PjwvZGl2Pjwv
-ZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIxNTAiIHk9IjIwNCIgZmlsbD0icmdiKDAsIDAs
-IDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRleHQtYW5jaG9y
-PSJtaWRkbGUiPk5pZWRlci4uLjwvdGV4dD48L3N3aXRjaD48L2c+PHBhdGggZD0iTSAyMDAgNzAg
-USAyNjAgMTIwIDIwNC43MyAxNjkuNzQiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDAp
-IiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBk
-PSJNIDIwMC44MyAxNzMuMjUgTCAyMDMuNjkgMTY1Ljk3IEwgMjA0LjczIDE2OS43NCBMIDIwOC4z
-OCAxNzEuMTcgWiIgZmlsbD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ry
-b2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHBhdGggZD0iTSAxMDAg
-MTc0IFEgNDAgMTI0IDk1LjI3IDc0LjI2IiBmaWxsPSJub25lIiBzdHJva2U9InJnYigwLCAwLCAw
-KSIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ic3Ryb2tlIi8+PHBhdGgg
-ZD0iTSA5OS4xNyA3MC43NSBMIDk2LjMxIDc4LjAzIEwgOTUuMjcgNzQuMjYgTCA5MS42MiA3Mi44
-MyBaIiBmaWxsPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZT0icmdiKDAsIDAsIDApIiBzdHJva2UtbWl0
-ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48cGF0aCBkPSJNIDIwOS4wNCA0Ny41
-MiBRIDM3MCAxMiAxOTguNzkgMTEuNzMiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiKDAsIDAsIDAp
-IiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJzdHJva2UiLz48cGF0aCBk
-PSJNIDE5My41NCAxMS43MiBMIDIwMC41NSA4LjIzIEwgMTk4Ljc5IDExLjczIEwgMjAwLjU0IDE1
-LjIzIFoiIGZpbGw9InJnYigwLCAwLCAwKSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0cm9rZS1t
-aXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxwYXRoIGQ9Ik0gMjEwIDE5MiBR
-IDM3MSAyMjggMTk5LjM3IDIyOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2IoMCwgMCwgMCkiIHN0
-cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9InN0cm9rZSIvPjxwYXRoIGQ9Ik0g
-MTk0LjEyIDIyOCBMIDIwMS4xMiAyMjQuNSBMIDE5OS4zNyAyMjggTCAyMDEuMTIgMjMxLjUgWiIg
-ZmlsbD0icmdiKDAsIDAsIDApIiBzdHJva2U9InJnYigwLCAwLCAwKSIgc3Ryb2tlLW1pdGVybGlt
-aXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PHJlY3QgeD0iMjgwIiB5PSIyNSIgd2lkdGg9
-IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUiIHBvaW50ZXItZXZlbnRz
-PSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dpdGNoPjxmb3Jl
-aWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAl
-IiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4
-dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGlnbjogbGVmdDsi
-PjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5
-OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250ZW50OiB1bnNh
-ZmUgY2VudGVyOyB3aWR0aDogNThweDsgaGVpZ2h0OiAxcHg7IHBhZGRpbmctdG9wOiA0MHB4OyBt
-YXJnaW4tbGVmdDogMjgxcHg7Ij48ZGl2IGRhdGEtZHJhd2lvLWNvbG9ycz0iY29sb3I6IHJnYigw
-LCAwLCAwKTsgIiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9udC1zaXplOiAwcHg7
-IHRleHQtYWxpZ246IGNlbnRlcjsiPjxkaXYgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsg
-Zm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAs
-IDApOyBsaW5lLWhlaWdodDogMS4yOyBwb2ludGVyLWV2ZW50czogYWxsOyB3aGl0ZS1zcGFjZTog
-bm9ybWFsOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7Ij5UcmFuc3BpbGVyPC9kaXY+PC9kaXY+PC9k
-aXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjMxMCIgeT0iNDQiIGZpbGw9InJnYigwLCAwLCAw
-KSIgZm9udC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC1zaXplPSIxMnB4IiB0ZXh0LWFuY2hvcj0i
-bWlkZGxlIj5UcmFuc3BpbGVyPC90ZXh0Pjwvc3dpdGNoPjwvZz48cmVjdCB4PSIyODAiIHk9IjE4
-NSIgd2lkdGg9IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUiIHBvaW50
-ZXItZXZlbnRzPSJhbGwiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMC41IC0wLjUpIj48c3dp
-dGNoPjxmb3JlaWduT2JqZWN0IHBvaW50ZXItZXZlbnRzPSJub25lIiB3aWR0aD0iMTAwJSIgaGVp
-Z2h0PSIxMDAlIiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9m
-ZWF0dXJlI0V4dGVuc2liaWxpdHkiIHN0eWxlPSJvdmVyZmxvdzogdmlzaWJsZTsgdGV4dC1hbGln
-bjogbGVmdDsiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxl
-PSJkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogdW5zYWZlIGNlbnRlcjsganVzdGlmeS1jb250
-ZW50OiB1bnNhZmUgY2VudGVyOyB3aWR0aDogNThweDsgaGVpZ2h0OiAxcHg7IHBhZGRpbmctdG9w
-OiAyMDBweDsgbWFyZ2luLWxlZnQ6IDI4MXB4OyI+PGRpdiBkYXRhLWRyYXdpby1jb2xvcnM9ImNv
-bG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQt
-c2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJkaXNwbGF5OiBpbmxp
-bmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6
-IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVudHM6IGFsbDsgd2hp
-dGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+UmVjb21waWxlcjwvZGl2
-PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIzMTAiIHk9IjIwNCIgZmlsbD0i
-cmdiKDAsIDAsIDApIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXNpemU9IjEycHgiIHRl
-eHQtYW5jaG9yPSJtaWRkbGUiPlJlY29tcGlsZXI8L3RleHQ+PC9zd2l0Y2g+PC9nPjxyZWN0IHg9
-IjI0MCIgeT0iOTAiIHdpZHRoPSI2MCIgaGVpZ2h0PSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJu
-b25lIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNSAt
-MC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9
-IjEwMCUiIGhlaWdodD0iMTAwJSIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcv
-VFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5IiBzdHlsZT0ib3ZlcmZsb3c6IHZpc2libGU7
-IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3ho
-dG1sIiBzdHlsZT0iZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IHVuc2FmZSBjZW50ZXI7IGp1
-c3RpZnktY29udGVudDogdW5zYWZlIGNlbnRlcjsgd2lkdGg6IDU4cHg7IGhlaWdodDogMXB4OyBw
-YWRkaW5nLXRvcDogMTA1cHg7IG1hcmdpbi1sZWZ0OiAyNDFweDsiPjxkaXYgZGF0YS1kcmF3aW8t
-Y29sb3JzPSJjb2xvcjogcmdiKDAsIDAsIDApOyAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXIt
-Ym94OyBmb250LXNpemU6IDBweDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiBzdHlsZT0iZGlz
-cGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRp
-Y2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHBvaW50ZXItZXZlbnRz
-OiBhbGw7IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsiPkNvbXBp
-bGVyPC9kaXY+PC9kaXY+PC9kaXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjI3MCIgeT0iMTA5
-IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6ZT0i
-MTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Q29tcGlsZXI8L3RleHQ+PC9zd2l0Y2g+PC9nPjxy
-ZWN0IHg9IjAiIHk9IjkwIiB3aWR0aD0iNjAiIGhlaWdodD0iMzAiIGZpbGw9Im5vbmUiIHN0cm9r
-ZT0ibm9uZSIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0w
-LjUgLTAuNSkiPjxzd2l0Y2g+PGZvcmVpZ25PYmplY3QgcG9pbnRlci1ldmVudHM9Im5vbmUiIHdp
-ZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMu
-b3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSIgc3R5bGU9Im92ZXJmbG93OiB2aXNp
-YmxlOyB0ZXh0LWFsaWduOiBsZWZ0OyI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5
-OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiB1bnNhZmUgY2VudGVy
-OyBqdXN0aWZ5LWNvbnRlbnQ6IHVuc2FmZSBjZW50ZXI7IHdpZHRoOiA1OHB4OyBoZWlnaHQ6IDFw
-eDsgcGFkZGluZy10b3A6IDEwNXB4OyBtYXJnaW4tbGVmdDogMXB4OyI+PGRpdiBkYXRhLWRyYXdp
-by1jb2xvcnM9ImNvbG9yOiByZ2IoMCwgMCwgMCk7ICIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRl
-ci1ib3g7IGZvbnQtc2l6ZTogMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHN0eWxlPSJk
-aXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZl
-dGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgcG9pbnRlci1ldmVu
-dHM6IGFsbDsgd2hpdGUtc3BhY2U6IG5vcm1hbDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyI+RGVj
-b21waWxlcjwvZGl2PjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIzMCIgeT0i
-MTA5IiBmaWxsPSJyZ2IoMCwgMCwgMCkiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtc2l6
-ZT0iMTJweCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+RGVjb21waWxlcjwvdGV4dD48L3N3aXRjaD48
-L2c+PC9nPjxzd2l0Y2g+PGcgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIv
-U1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ii8+PGEgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCwt
-NSkiIHhsaW5rOmhyZWY9Imh0dHBzOi8vd3d3LmRyYXdpby5jb20vZG9jL2ZhcS9zdmctZXhwb3J0
-LXRleHQtcHJvYmxlbXMiIHRhcmdldD0iX2JsYW5rIj48dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxl
-IiBmb250LXNpemU9IjEwcHgiIHg9IjUwJSIgeT0iMTAwJSI+VGV4dCBpcyBub3QgU1ZHIC0gY2Fu
-bm90IGRpc3BsYXk8L3RleHQ+PC9hPjwvc3dpdGNoPjwvc3ZnPg==
       </contents>
     </upload>
     <upload>
@@ -4502,17 +3351,16 @@ bm90IGRpc3BsYXk8L3RleHQ+PC9hPjwvc3dpdGNoPjwvc3ZnPg==
   <page>
     <title>Help:Transclusion Test</title>
     <ns>12</ns>
-    <id>63</id>
+    <id>56</id>
     <revision>
-      <id>173</id>
-      <parentid>68</parentid>
+      <id>61</id>
       <timestamp>2023-10-15T13:15:17Z</timestamp>
       <contributor>
         <username>imported&gt;Admin</username>
         <id>0</id>
       </contributor>
       <comment>Blanked the page</comment>
-      <origin>173</origin>
+      <origin>61</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
@@ -4522,17 +3370,16 @@ bm90IGRpc3BsYXk8L3RleHQ+PC9hPjwvc3dpdGNoPjwvc3ZnPg==
   <page>
     <title>Help:Parsifal Cheat</title>
     <ns>12</ns>
-    <id>65</id>
+    <id>57</id>
     <revision>
-      <id>223</id>
-      <parentid>174</parentid>
+      <id>62</id>
       <timestamp>2023-11-08T11:42:38Z</timestamp>
       <contributor>
-        <username>Dir</username>
-        <id>1</id>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
       </contributor>
       <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
-      <origin>223</origin>
+      <origin>62</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="958" sha1="5t0yi6dsqqujgyjk0bxya724xm044o6" xml:space="preserve">__HIDEHEAD__
@@ -4571,17 +3418,16 @@ two parts.
   <page>
     <title>Help:Dante Cheat</title>
     <ns>12</ns>
-    <id>66</id>
+    <id>58</id>
     <revision>
-      <id>230</id>
-      <parentid>222</parentid>
+      <id>63</id>
       <timestamp>2023-11-08T12:13:11Z</timestamp>
       <contributor>
-        <username>Dir</username>
-        <id>1</id>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
       </contributor>
       <comment>/* Dante Tree */</comment>
-      <origin>230</origin>
+      <origin>63</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="747" sha1="icte5f0n2iwvoxxckdccto4sdov4q66" xml:space="preserve">
@@ -4610,17 +3456,16 @@ as opposed to [https://www.w3c.org W3C]
   <page>
     <title>Test/Hide Test</title>
     <ns>0</ns>
-    <id>67</id>
+    <id>59</id>
     <revision>
-      <id>262</id>
-      <parentid>245</parentid>
+      <id>64</id>
       <timestamp>2023-11-08T13:03:15Z</timestamp>
       <contributor>
-        <username>Dir</username>
-        <id>1</id>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
       </contributor>
       <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
-      <origin>262</origin>
+      <origin>64</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="137" sha1="et2yblggnum3ub7p6imvtgljrce289q" xml:space="preserve">
@@ -4639,37 +3484,16 @@ This is main text again.
   <page>
     <title>Wiki for Hot Development:General disclaimer</title>
     <ns>4</ns>
-    <id>69</id>
+    <id>60</id>
     <revision>
-      <id>76</id>
-      <parentid>75</parentid>
+      <id>65</id>
       <timestamp>2023-10-29T01:03:04Z</timestamp>
       <contributor>
-        <username>Dir</username>
-        <id>1</id>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
       </contributor>
       <comment>Blanked the page</comment>
-      <origin>76</origin>
-      <model>wikitext</model>
-      <format>text/x-wiki</format>
-      <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
-      <sha1>phoiac9h4m842xq45sp7s6u21eteeq1</sha1>
-    </revision>
-  </page>
-  <page>
-    <title>MediaWiki:Disclaimerpage</title>
-    <ns>8</ns>
-    <id>70</id>
-    <revision>
-      <id>78</id>
-      <parentid>77</parentid>
-      <timestamp>2023-10-29T01:08:53Z</timestamp>
-      <contributor>
-        <username>Dir</username>
-        <id>1</id>
-      </contributor>
-      <comment>Blanked the page</comment>
-      <origin>78</origin>
+      <origin>65</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
@@ -4679,16 +3503,16 @@ This is main text again.
   <page>
     <title>MediaWikiDisclaimerpage</title>
     <ns>0</ns>
-    <id>71</id>
+    <id>61</id>
     <revision>
-      <id>80</id>
+      <id>66</id>
       <timestamp>2023-10-29T16:17:53Z</timestamp>
       <contributor>
         <username>Maintenance script</username>
         <id>3</id>
       </contributor>
       <comment>Imported by wiki-init.sh</comment>
-      <origin>80</origin>
+      <origin>66</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
@@ -4698,16 +3522,16 @@ This is main text again.
   <page>
     <title>MediaWikiPrivacypage</title>
     <ns>0</ns>
-    <id>72</id>
+    <id>62</id>
     <revision>
-      <id>81</id>
+      <id>67</id>
       <timestamp>2023-10-29T16:17:55Z</timestamp>
       <contributor>
         <username>Maintenance script</username>
         <id>3</id>
       </contributor>
       <comment>Imported by wiki-init.sh</comment>
-      <origin>81</origin>
+      <origin>67</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
@@ -4715,84 +3539,19 @@ This is main text again.
     </revision>
   </page>
   <page>
-    <title>MediaWiki:CategoryTree</title>
-    <ns>8</ns>
-    <id>75</id>
-    <revision>
-      <id>227</id>
-      <parentid>226</parentid>
-      <timestamp>2023-11-08T12:05:02Z</timestamp>
-      <contributor>
-        <username>Dir</username>
-        <id>1</id>
-      </contributor>
-      <origin>227</origin>
-      <model>wikitext</model>
-      <format>text/x-wiki</format>
-      <text bytes="310" sha1="rwdy3nm3qnnctu11386jvhtz4lw2ldy" xml:space="preserve">This page opens when clicking on the tree symbol. You can configure it according to your needs.
-
-== DanteInitialContents ==
-&lt;categorytree mode="all" showcount="on"&gt;DanteInitialContents&lt;/categorytree&gt;
-
-== System ==
-&lt;categorytree mode="all" showcount="on"&gt;System&lt;/categorytree&gt;
-
-[[Category:DanteInitialContents]]</text>
-      <sha1>rwdy3nm3qnnctu11386jvhtz4lw2ldy</sha1>
-    </revision>
-  </page>
-  <page>
-    <title>MediaWiki:CategoryCloud</title>
-    <ns>8</ns>
-    <id>76</id>
-    <revision>
-      <id>122</id>
-      <timestamp>2023-11-01T13:41:01Z</timestamp>
-      <contributor>
-        <username>Dir</username>
-        <id>1</id>
-      </contributor>
-      <comment>Created page with "&lt;tagcloud&gt;exclude=television,television_series,celebrities,food,yoga&lt;/tagcloud&gt;"</comment>
-      <origin>122</origin>
-      <model>wikitext</model>
-      <format>text/x-wiki</format>
-      <text bytes="79" sha1="bfssza87vjretanqf02vjg3aw9hm5pg" xml:space="preserve">&lt;tagcloud&gt;exclude=television,television_series,celebrities,food,yoga&lt;/tagcloud&gt;</text>
-      <sha1>bfssza87vjretanqf02vjg3aw9hm5pg</sha1>
-    </revision>
-  </page>
-  <page>
-    <title>MediaWiki:ParsifalTemplate/README</title>
-    <ns>8</ns>
-    <id>77</id>
-    <revision>
-      <id>158</id>
-      <timestamp>2023-10-03T12:50:22Z</timestamp>
-      <contributor>
-        <username>Maintenance script</username>
-        <id>3</id>
-      </contributor>
-      <comment>Imported from text file</comment>
-      <origin>158</origin>
-      <model>wikitext</model>
-      <format>text/x-wiki</format>
-      <text bytes="99" sha1="ivgzptphp7jhyuftzb61no4eppia7xq" xml:space="preserve">The directory Parsifal/initial-templates contains the initial templates to be loaded into the wiki.</text>
-      <sha1>ivgzptphp7jhyuftzb61no4eppia7xq</sha1>
-    </revision>
-  </page>
-  <page>
     <title>File:T-diagram.svg</title>
     <ns>6</ns>
-    <id>81</id>
+    <id>63</id>
     <revision>
-      <id>180</id>
-      <parentid>179</parentid>
-      <timestamp>2023-11-06T19:22:17Z</timestamp>
+      <id>69</id>
+      <parentid>68</parentid>
+      <timestamp>2023-11-08T21:59:39Z</timestamp>
       <contributor>
         <username>Imported&gt;Admin</username>
         <id>0</id>
       </contributor>
       <comment>Imported&gt;Admin uploaded [[File:T-diagram.svg]]</comment>
-      <origin>179</origin>
+      <origin>68</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
@@ -4911,17 +3670,17 @@ IGlzIG5vdCBTVkcgLSBjYW5ub3QgZGlzcGxheTwvdGV4dD48L2E+PC9zd2l0Y2g+PC9zdmc+
   <page>
     <title>File:Flex.svg</title>
     <ns>6</ns>
-    <id>97</id>
+    <id>64</id>
     <revision>
-      <id>197</id>
-      <parentid>196</parentid>
-      <timestamp>2023-11-06T19:25:14Z</timestamp>
+      <id>71</id>
+      <parentid>70</parentid>
+      <timestamp>2023-11-08T21:59:39Z</timestamp>
       <contributor>
         <username>Imported&gt;Admin</username>
         <id>0</id>
       </contributor>
       <comment>Imported&gt;Admin uploaded [[File:Flex.svg]]</comment>
-      <origin>196</origin>
+      <origin>70</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
@@ -5132,16 +3891,16 @@ Y2g+PC9zdmc+
   <page>
     <title>What is a DanteWiki (Lecture)</title>
     <ns>0</ns>
-    <id>98</id>
+    <id>65</id>
     <revision>
-      <id>198</id>
+      <id>72</id>
       <timestamp>2023-11-02T14:27:56Z</timestamp>
       <contributor>
         <username>imported&gt;Admin</username>
         <id>0</id>
       </contributor>
       <comment>/* Requirements for Base System */</comment>
-      <origin>198</origin>
+      <origin>72</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="4937" sha1="pi23o1bfkhuilnynwm33gpkrh8vpxj7" xml:space="preserve">== Motivation ==
@@ -5311,17 +4070,17 @@ D \ar[u]^0_1 &amp; E \ar[l]^0_1 &amp; F
   <page>
     <title>File:Example.svg</title>
     <ns>6</ns>
-    <id>99</id>
+    <id>66</id>
     <revision>
-      <id>200</id>
-      <parentid>199</parentid>
-      <timestamp>2023-11-06T19:25:25Z</timestamp>
+      <id>74</id>
+      <parentid>73</parentid>
+      <timestamp>2023-11-08T21:59:49Z</timestamp>
       <contributor>
         <username>Imported&gt;Admin</username>
         <id>0</id>
       </contributor>
       <comment>Imported&gt;Admin uploaded [[File:Example.svg]]</comment>
-      <origin>199</origin>
+      <origin>73</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="0" sha1="phoiac9h4m842xq45sp7s6u21eteeq1" xml:space="preserve" />
@@ -5428,16 +4187,15 @@ L2c+PC9zdmc+
   <page>
     <title>Category:DanteInitialContents</title>
     <ns>14</ns>
-    <id>113</id>
+    <id>67</id>
     <revision>
-      <id>237</id>
-      <parentid>221</parentid>
+      <id>75</id>
       <timestamp>2023-11-08T12:26:40Z</timestamp>
       <contributor>
-        <username>Dir</username>
-        <id>1</id>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
       </contributor>
-      <origin>237</origin>
+      <origin>75</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="213" sha1="jq2krfwzhtv4pfyshg1b9g8ys6h6r5x" xml:space="preserve">This category contains pages used for bootstrapping Dantewiki.
@@ -5452,16 +4210,16 @@ L2c+PC9zdmc+
   <page>
     <title>Category:ParsifalTemplate</title>
     <ns>14</ns>
-    <id>114</id>
+    <id>68</id>
     <revision>
-      <id>229</id>
+      <id>76</id>
       <timestamp>2023-11-08T12:08:41Z</timestamp>
       <contributor>
-        <username>Dir</username>
-        <id>1</id>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
       </contributor>
       <comment>Created page with "This category contains all pages which may serve as templates for the Parsifal extension.  Usually, such templates are also in the MediaWiki: namespace and subpages of [[MediaWiki:ParsifalTemplate]]"</comment>
-      <origin>229</origin>
+      <origin>76</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="198" sha1="7on77fk4223w5cnzdknyt8e2v4suhnr" xml:space="preserve">This category contains all pages which may serve as templates for the Parsifal extension.
@@ -5473,16 +4231,16 @@ Usually, such templates are also in the MediaWiki: namespace and subpages of [[M
   <page>
     <title>Category:Root</title>
     <ns>14</ns>
-    <id>115</id>
+    <id>69</id>
     <revision>
-      <id>231</id>
+      <id>77</id>
       <timestamp>2023-11-08T12:14:24Z</timestamp>
       <contributor>
-        <username>Dir</username>
-        <id>1</id>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
       </contributor>
       <comment>Created page with "This is a generic root category.  It currently is there and we have no real use for it thus far ;-)"</comment>
-      <origin>231</origin>
+      <origin>77</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="99" sha1="lmjjz93kkso2pn2n5r8cuntpk1ds24f" xml:space="preserve">This is a generic root category.
@@ -5494,16 +4252,16 @@ It currently is there and we have no real use for it thus far ;-)</text>
   <page>
     <title>Category:Pages with syntax highlighting errors</title>
     <ns>14</ns>
-    <id>116</id>
+    <id>70</id>
     <revision>
-      <id>241</id>
+      <id>78</id>
       <timestamp>2023-11-08T12:30:57Z</timestamp>
       <contributor>
-        <username>Dir</username>
-        <id>1</id>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
       </contributor>
       <comment>Created page with "Do not remove this page. It is needed by the system itself."</comment>
-      <origin>241</origin>
+      <origin>78</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="59" sha1="5ju4138xr2ztyr517r6vv8pzibxx6qs" xml:space="preserve">Do not remove this page. It is needed by the system itself.</text>
@@ -5511,41 +4269,985 @@ It currently is there and we have no real use for it thus far ;-)</text>
     </revision>
   </page>
   <page>
-    <title>MediaWiki:ParsifalTemplate</title>
-    <ns>8</ns>
-    <id>117</id>
-    <revision>
-      <id>250</id>
-      <timestamp>2023-11-08T12:52:01Z</timestamp>
-      <contributor>
-        <username>Dir</username>
-        <id>1</id>
-      </contributor>
-      <comment>Created page with "This page is the superpage of all parsifal templates."</comment>
-      <origin>250</origin>
-      <model>wikitext</model>
-      <format>text/x-wiki</format>
-      <text bytes="53" sha1="nsd5h9zd5zoq531fqxbojlay02k09iz" xml:space="preserve">This page is the superpage of all parsifal templates.</text>
-      <sha1>nsd5h9zd5zoq531fqxbojlay02k09iz</sha1>
-    </revision>
-  </page>
-  <page>
     <title>Category:Testpage</title>
     <ns>14</ns>
-    <id>118</id>
+    <id>71</id>
     <revision>
-      <id>257</id>
+      <id>79</id>
       <timestamp>2023-11-08T13:01:53Z</timestamp>
       <contributor>
-        <username>Dir</username>
-        <id>1</id>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
       </contributor>
       <comment>Created page with "Pages in this category are for testing and demo purposes only."</comment>
-      <origin>257</origin>
+      <origin>79</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="62" sha1="jatsdv2pt9fqytxlti823i3znpqhg5z" xml:space="preserve">Pages in this category are for testing and demo purposes only.</text>
       <sha1>jatsdv2pt9fqytxlti823i3znpqhg5z</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Test/Parsifal Section Heading Style</title>
+    <ns>0</ns>
+    <id>72</id>
+    <revision>
+      <id>98</id>
+      <parentid>97</parentid>
+      <timestamp>2023-11-09T17:39:50Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <origin>98</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="735" sha1="21bseb0dd4rvew605jovi0cyica4xtg" xml:space="preserve">This page demonstrates and tests the styling of the heading, which happens
+in Parsifal/latex.css
+
+= h1 =
+In h1  qw
+
+&lt;amsmath sans&gt;
+\LaTeX In h1     
+   
+\nonexistant
+\noindent\hrulefill
+&lt;/amsmath&gt;
+
+== h2 ==
+In h2
+
+&lt;amsmath sans&gt;
+\LaTeX In h2
+
+\noindent\hrulefill   
+&lt;/amsmath&gt;
+
+=== h3 ===
+In h3
+
+&lt;amsmath sans&gt;
+\LaTeX In h3
+
+\noindent\hrulefill
+&lt;/amsmath&gt;
+
+==== h4 ====
+In h4
+
+&lt;amsmath sans&gt;
+\LaTeX In h4
+
+\noindent\hrulefill
+&lt;/amsmath&gt;
+
+===== h5 =====
+In h5
+
+&lt;amsmath sans&gt;
+\LaTeX In h5
+
+\noindent\hrulefill
+&lt;/amsmath&gt;
+
+====== h6 ======
+In h6
+
+&lt;amsmath sans&gt;
+\LaTeX In h6
+
+\noindent\hrulefill
+&lt;/amsmath&gt;
+
+======= h7 =======
+In h7
+
+&lt;amsmath sans&gt;
+\LaTeX In h7
+
+%\noindent\hrulefill
+&lt;/amsmath&gt;
+
+&lt;amsmath sans&gt;
+second element
+
+&lt;/amsmath&gt;</text>
+      <sha1>21bseb0dd4rvew605jovi0cyica4xtg</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Test/Preamble</title>
+    <ns>0</ns>
+    <id>73</id>
+    <revision>
+      <id>119</id>
+      <parentid>118</parentid>
+      <timestamp>2023-11-10T11:19:06Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <origin>119</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="228" sha1="nuo98wmuw3w69fwr6um063quoxcg3b9" xml:space="preserve">
+This is a test for the preamble features of Parsifal.
+
+&lt;amsmath pa="\def\babalu{I AM THE MACRO BABALU}"&gt;
+
+Hallo \babalu
+as asdfgj
+&lt;/amsmath&gt;
+
+
+== Template Page ==
+&lt;amsmath pa="[[PreambleTest]]"&gt;
+
+Hallo \iamapreamble
+
+&lt;/amsmath&gt;</text>
+      <sha1>nuo98wmuw3w69fwr6um063quoxcg3b9</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:ParsifalTemplate/PreambleTest</title>
+    <ns>8</ns>
+    <id>74</id>
+    <revision>
+      <id>102</id>
+      <timestamp>2023-11-09T19:52:35Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "&lt;pre&gt; \def\iamapreamble{I am a test of the preamble feature}   &lt;/pre&gt;"</comment>
+      <origin>102</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="69" sha1="5y538lylh8wt5kjvkqcce14tjgrepio" xml:space="preserve">&lt;pre&gt;
+\def\iamapreamble{I am a test of the preamble feature}
+
+
+&lt;/pre&gt;</text>
+      <sha1>5y538lylh8wt5kjvkqcce14tjgrepio</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Parsifal Internal Links</title>
+    <ns>12</ns>
+    <id>75</id>
+    <revision>
+      <id>192</id>
+      <parentid>191</parentid>
+      <timestamp>2023-11-11T15:15:41Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <origin>192</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="85" sha1="hcckdmocvuayxensc8tlklp9qzn15kc" xml:space="preserve">
+&lt;amsmath&gt;
+
+\dref{Help:Demo for Parsifal}
+
+\dref{Help:Demo für Parsifal}
+
+&lt;/amsmath&gt;</text>
+      <sha1>hcckdmocvuayxensc8tlklp9qzn15kc</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Demo für Parsifal</title>
+    <ns>12</ns>
+    <id>76</id>
+    <revision>
+      <id>193</id>
+      <timestamp>2023-11-11T15:16:05Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with " Demo und Test seite."</comment>
+      <origin>193</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="21" sha1="5dil1t9zy9ka0ie85ulejstpihup4e8" xml:space="preserve">
+Demo und Test seite.</text>
+      <sha1>5dil1t9zy9ka0ie85ulejstpihup4e8</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki/CategoryCloud</title>
+    <ns>0</ns>
+    <id>77</id>
+    <revision>
+      <id>218</id>
+      <parentid>217</parentid>
+      <timestamp>2023-11-14T13:37:30Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <origin>218</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="146" sha1="1arrc9tepkb1rce8sjk5xar5i0eb9jy" xml:space="preserve">This page can be configured according to the instructions on https://www.mediawiki.org/wiki/Extension:WikiCategoryTagCloud
+
+
+&lt;tagcloud&gt;&lt;/tagcloud&gt;</text>
+      <sha1>1arrc9tepkb1rce8sjk5xar5i0eb9jy</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Category:Empty</title>
+    <ns>14</ns>
+    <id>78</id>
+    <revision>
+      <id>219</id>
+      <timestamp>2023-11-15T12:24:43Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "This is an empty category  [[Category:Root]]"</comment>
+      <origin>219</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="44" sha1="poyycxm5xlksqrdbw0oo0j5ih8p4eqc" xml:space="preserve">This is an empty category
+
+[[Category:Root]]</text>
+      <sha1>poyycxm5xlksqrdbw0oo0j5ih8p4eqc</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Page belonging to a non-existant category</title>
+    <ns>0</ns>
+    <id>79</id>
+    <revision>
+      <id>220</id>
+      <timestamp>2023-11-15T12:36:45Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "  [[Category:Thisdoesnotexist]]"</comment>
+      <origin>220</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="31" sha1="9w7baq02c7xlgvdgnf9l5fsrelmnvyj" xml:space="preserve">
+
+[[Category:Thisdoesnotexist]]</text>
+      <sha1>9w7baq02c7xlgvdgnf9l5fsrelmnvyj</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Test/Parsifal Long Page Scroll Test</title>
+    <ns>0</ns>
+    <id>81</id>
+    <revision>
+      <id>255</id>
+      <parentid>254</parentid>
+      <timestamp>2023-11-17T21:43:26Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <origin>255</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="13503" sha1="1bku6a5z2lp6wn3w3g5h71mt1xgczii" xml:space="preserve">&lt;amsmath&gt;
+This 
+
+\bigskip
+
+is a
+
+This 
+
+\bigskip
+
+is 
+
+\bigskip
+
+a 
+
+\bigskip
+
+very 
+
+\bigskip
+
+long
+
+\bigskip
+
+page 
+
+\bigskip
+
+which 
+
+\bigskip
+
+we
+
+\bigskip
+
+need 
+
+\bigskip
+
+for 
+
+\bigskip
+
+doing 
+
+\bigskip
+
+some 
+
+\bigskip
+
+tests
+
+\bigskip
+
+a 
+
+\bigskip
+
+very 
+
+\bigskip
+
+long
+
+\bigskip
+
+page 
+
+\bigskip
+
+which 
+
+\bigskip
+
+we
+
+\bigskip
+
+need 
+
+\bigskip
+
+for 
+
+\bigskip
+
+doing 
+
+\bigskip
+
+some 
+
+\bigskip
+
+tests
+
+\bigskip
+
+This 
+
+\bigskip
+
+is 
+
+\bigskip
+
+a 
+
+\bigskip
+
+very 
+
+\bigskip
+
+long
+
+\bigskip
+
+page 
+
+\bigskip
+
+which 
+
+\bigskip
+
+we
+
+\bigskip
+
+need 
+
+\bigskip
+
+for  gh
+
+\bigskip
+
+doing 
+
+\bigskip
+
+some 
+
+\bigskip
+
+tests hgh jhg j gh jhg jgjhgjhg g gjgjgjgjgjgjgjhg gjggjhgjh  gjgjgjgjhg gjgj
+
+\bigskip
+
+And now we are jk lj kjkj jl jk actually very low down on the page because we want to
+test the scrolling behavior of the system for situations where
+we add some more text and want to ssee if the page automagically adpats in the lengt
+
+asa
+
+qwaweddasa
+
+1234321234321234321234321234321234321234321234321234321234321234321234321234321234321234321234ijkhzhbfghg-t867qkgopl29imokqqq
+&lt;/amsmath&gt;
+
+
+
+
+
+&lt;amsmath sans&gt;
+
+\textbf{Stack:} 
+\begin{itemize}
+\item Selbe Aufgabe wie in jedem akzeptzierenden Keller-Automaten.
+\item Konvention: Stack wächst von links nach rechts. \\
+Damit ändert das Befüllen des Stacks nicht die Leserichtung.\\
+Das macht die reduce Schritte einfacher.
+\end{itemize}
+
+\textbf{Heap:} 
+\begin{itemize}
+\item Bereich zur Konstruktion von Teilen des Ableitungsbaums.
+\item Zusätzlich zur Funktion des akzeptierenden Keller-Automaten.
+\item Kann auch vom Stack mit übernommen werden,\\ wenn dieser nicht nur Symbole speichert sondern auch Zeiger auf Teilbäume.
+\end{itemize}
+
+Aktionen des Parsers:
+ 
+\textbf{Shift:}
+\begin{enumerate}
+\item Entferne das nächste Symbol vom Input.
+\item Baue aus diesem Symbol einen neuen einknotigen Parsebaum.
+\end{enumerate}
+
+\textbf{Reduce:}
+\begin{enumerate}
+\item Wende eine Grammatikregel auf Top of Stack (liegt rechts!) an.
+\item Fasse die betroffenen Symbole zu einem Parsebaum zusammen.
+\end{enumerate}
+
+\textbf{Terminate:}
+\begin{enumerate}
+\item Der Input ist leer (kein weiterer Shift Übergang ist mehr möglich).
+\item Kein weiterer Reduce Übergang ist mehr möglich.
+\item Es liegt nur mehr das Startsymbol auf dem Stack.
+\end{enumerate}
+
+
+
+&lt;/amsmath&gt;
+
+== Beispiel ==
+&lt;amsmath sans&gt;
+\def\to{\mbox{$\rightarrow$ }}
+\def\r#1{{\color{red}#1}}
+
+Die Grammatik habe als Terminale die Token $\{$ \r{ID}, \r{INT}, \r{*}, \r{+}, \r{=} $\}$. \\
+Lexikalische Ausprägungen der Token \r{ID} seien $\{$ A, B, C, D $\}$.\\
+Lexikalische Ausprägungen der Token \r{INT} seien $\{$ 1, 2, 3, 4 $\}$.\\
+Die übrigen Token stehen lexikalisch für sich selbst.
+
+Die Grammatik habe die Nichtterminale $\{$ Val, Prod, Sum, Ass $\}$.
+
+Startsymbol sei Ass.
+
+Die Grammatik sei gegeben durch die Regeln:
+
+\mright\begin{minipage}{10cm}
+Val \to \r{ID} \\
+Val \to \r{INT} \\
+Prod \to Val \\
+Prod \to Prod \r{*} Val \\
+Sum \to Prod \\
+Sum \to Sum \r{+} Prod \\
+Ass \to \r{ID} \r{=} Sum
+\end{minipage}
+
+Zu parsen sei die Eingabe A = B + C * 2
+ 
+
+\begin{tabular}[]{llllll}
+\textbf{Nr.} &amp; \textbf{Stack} &amp; \textbf{LA} &amp; \textbf{Input-Buffer} &amp;  \textbf{Action} \\ 
+1&amp;        &amp;  \r{ID(A)} &amp; A = B + C * 2 &amp; Shift ID(A) \\
+2&amp;\r{ID}  &amp;  \r=  &amp;  = B + C * 2 &amp; Shift =\\
+3&amp; \r{ID} \r{=} &amp; \r{ID(B)}    &amp;  B + C * 2 &amp; Shift ID(B)\\
+4&amp;\r{ID} \r{=} \r{ID}&amp; \r+ &amp; + C * 2 &amp; Reduce  Val \to ID\\
+5&amp;\r{ID} \r{=}   Val &amp; \r+ &amp;  + C * 2 &amp; Reduce Prod \to Val \\
+6&amp;\r{ID} \r{=} Prod  &amp; \r{+} &amp; + C * 2 &amp; Reduce Sum \to Prod \\
+7&amp;\r{ID}  \r{=} Sum   &amp; \r{+} &amp; + C * 2 &amp; Shift +\\
+8&amp;\r{ID} \r{=}  Sum \r{+} &amp; \r{ID(C)}  &amp; C * 2 &amp; Shift ID(C) \\
+9&amp;\r{ID} \r{=} Sum \r{+} \r{ID}&amp; \r{*} &amp; * 2 &amp; Reduce Val \to ID\\
+10&amp;\r{ID} \r{=} Sum \r{+} Val &amp; \r{*}&amp; * 2 &amp; Reduce Prod \to Val \\
+11&amp;\r{ID} \r{=} Sum \r{+} Prod  &amp; \r{*} &amp; * 2  &amp; Shift * \\
+12&amp;\r{ID} \r{=} Sum  \r{+} Prod \r{*} &amp; \r{INT(2)} &amp; 2 &amp; Shift INT(2) \\
+13&amp;\r{ID} \r{=} Sum \r{+}  Prod \r{*} \r{INT} &amp;  &amp; &amp;  Reduce Val \to INT \\
+14&amp;\r{ID} \r{=} Sum \r{+} Prod \r{*} Val &amp;  &amp; &amp; Reduce Prod \to Prod * Val\\
+15&amp;\r{ID} = Sum  +  Prod &amp;  &amp; &amp; Reduce Sum \to Sum + Prod\\
+16&amp; \r{ID} \r{=} Sum &amp;  &amp; &amp; Reduce Ass \to ID = Sum\\
+17 &amp; Ass &amp;  &amp;  &amp;Terminate Startsymbol Ass
+\end{tabular}
+
+\textbf{Wesentlich:} 
+Es \textit{existiert} ein solcher Ablauf im Keller-Automaten.
+
+Dieser Ablauf im Keller-Automaten entspricht der folgenden Rechts-Ableitung:
+
+Ass \\ 
+\to ID = \underline{Sum} \\ 
+\to ID = Sum + \underline{Prod} \\
+\to ID = Sum + Prod * \underline{Val} \\
+\to ID = Sum + \underline{Prod} * INT\\
+\to ID = Sum + \underline{Val} * INT\\
+\to ID = \underline{Sum} + ID * INT\\
+\to ID = \underline{Prod} + ID * INT\\
+\to ID = \underline{Val} + ID * INT\\
+\to ID = ID + ID * INT
+&lt;/amsmath&gt;
+
+== 1. Blick auf den Heap ==
+&lt;amsmath sans&gt;
+In Zeile 4 stehen die drei Zeichen ID = ID auf dem Stack, die auf
+drei einsymbolige, unverbundene Teilbäume im Heap verweisen: 
+
+
+\begin{tikzpicture}
+\node[] (a) {ID};
+\node[right=of a] (b) {=};
+\node[right=of b] (c) {ID};
+\end{tikzpicture}
+
+Nun erfolgt ein Reduce Schritt mit der Regel Val $\to$ ID. Im Ergebnis
+stehen auf dem Stack die drei Zeichen ID = Val. Der Heap reflektiert diese Operation
+mit mehr Details und stellt in seinem rechten Teilbaum den
+Ableitungsbaum her, der dieser Regelanwendung entspricht:
+
+\begin{tikzpicture}
+\node[] (a) {ID};
+\node[right=of a] (b) {=};
+\node[right=of b] (c) {Val};
+\node[below=of c] (d) {ID};
+\draw (c) -- (d);
+\end{tikzpicture}
+
+Man kann sich das auch so vorstellen, daß die Speicherstelle im Stack, die das
+Element Val repräsentiert, auf diesen neuen Teilbaum verweist.
+
+&lt;/amsmath&gt;
+
+== 2. Blick auf den Heap ==
+&lt;amsmath&gt;
+
+Nach demselben Muster werden nun zwei weitere Reduce Schritte angewendet.
+Der erste entspricht der Regel Prod $\to$ Val und führt auf diese Situation im Heap:
+
+\begin{tikzpicture}
+\node[] (a) {ID};
+\node[right=of a] (b) {=};
+\node[right=of b] (c) {Prod};
+\node[below=of c] (d) {Val};
+\node[below=of d] (e) {ID};
+
+\draw (c) -- (d);
+\draw (d) -- (e);
+\end{tikzpicture}
+
+Der zweite entspricht der Regel Sum $\to$ Prod und führt auf diese Situation im Heap:
+ 
+\begin{tikzpicture}
+\node[] (a) {ID};
+\node[right=of a] (b) {=};
+\node[right=of b] (c) {Sum};
+\node[below=of c] (d) {Prod};
+\node[below=of d] (e) {Val};
+\node[below=of e] (f) {ID};
+
+\draw (c) -- (d);
+\draw (d) -- (e);
+\draw (e) -- (f);
+\end{tikzpicture}
+
+&lt;/amsmath&gt;
+
+== 3. Blick auf den Heap ==
+&lt;amsmath sans&gt;
+
+Nun folgen zwei Shift Schritte, welche zwei einsymbolige, isolierte
+Teilbäume hinzufügen:
+
+\begin{tikzpicture}
+\node (x) {ID};
+\node[right=of x] (y) {=};
+\node[right=of y] (z) {Sum};
+\node[right=of z] (qw) {+};
+\node[right=of qw] (qe) {ID}
+
+\node[] (a) {ID};
+\node[right=of a] (b) {=};
+\node[right=of b] (c) {Sum};
+\node[below=of c] (d) {Prod};
+\node[below=of d] (e) {Val};
+\node[below=of e] (f) {ID};
+
+\draw (c) -- (d);
+\draw (d) -- (e);
+\draw (e) -- (f);
+\end{tikzpicture}
+
+Es folgen zwei Reduce Schritte, erst mit der Regel
+Val $\to$ ID:
+
+
+\begin{tikzpicture}
+\node (x) {ID};
+\node[right=of x] (y) {=};
+\node[right=of y] (z) {Sum};
+\node[right=of z] (qw) {+};
+\node[right=of qw] (qe) {Val};
+\node[below=of qe] (qx) {ID};
+\draw (qe) -- (qx);
+
+\node[] (a) {ID};
+\node[right=of a] (b) {=};
+\node[right=of b] (c) {Sum};
+\node[below=of c] (d) {Prod};
+\node[below=of d] (e) {Val};
+\node[below=of e] (f) {ID};
+
+\draw (c) -- (d);
+\draw (d) -- (e);
+\draw (e) -- (f);
+\end{tikzpicture}
+
+und dann mit der Regel Prod $\to$ Val:
+
+\begin{tikzpicture}
+\node (x) {ID};
+\node[right=of x] (y) {=};
+\node[right=of y] (z) {Sum};
+\node[right=of z] (qw) {+};
+\node[right=of qw] (qe) {Prod};
+\node[below=of qe] (qx) {Val};
+\node[below=of qx] (qxx) {ID};
+\draw (qe) -- (qx);
+\draw (qx) -- (qxx);
+
+\node[] (a) {ID};
+\node[right=of a] (b) {=};
+\node[right=of b] (c) {Sum};
+\node[below=of c] (d) {Prod};
+\node[below=of d] (e) {Val};
+\node[below=of e] (f) {ID};
+
+\draw (c) -- (d);
+\draw (d) -- (e);
+\draw (e) -- (f);
+\end{tikzpicture}
+
+
+&lt;/amsmath&gt;
+
+
+== 4. Blick auf den Heap ==
+&lt;amsmath sans&gt;
+
+Nun geschehen zwei Shift Schritte, die wieder zwei isolierte,
+einsymbolige Teilbäume hinzufügen
+
+\begin{tikzpicture}
+\node (x) {ID};
+\node[right=of x] (y) {=};
+\node[right=of y] (z) {Sum};
+\node[right=of z] (qw) {+};
+\node[right=of qw] (qe) {Prod};
+\node[below=of qe] (qx) {Val};
+\node[below=of qx] (qxx) {ID};
+\draw (qe) -- (qx);
+\draw (qx) -- (qxx);
+
+\node[right=of qe] (qxxc) {*};
+\node[right=of qxxc] (qxxc) {INT};
+
+
+\node[] (a) {ID};
+\node[right=of a] (b) {=};
+\node[right=of b] (c) {Sum};
+\node[below=of c] (d) {Prod};
+\node[below=of d] (e) {Val};
+\node[below=of e] (f) {ID};
+
+\draw (c) -- (d);
+\draw (d) -- (e);
+\draw (e) -- (f);
+\end{tikzpicture}
+
+und ein einfacher Reduce Schritt mit der Regel Val $\to$ INT.
+
+\begin{tikzpicture}
+\node (x) {ID};
+\node[right=of x] (y) {=};
+\node[right=of y] (z) {Sum};
+\node[right=of z] (qw) {+};
+\node[right=of qw] (qe) {Prod};
+\node[below=of qe] (qx) {Val};
+\node[below=of qx] (qxx) {ID};
+\draw (qe) -- (qx);
+\draw (qx) -- (qxx);
+
+\node[right=of qe] (qxxc) {*};
+\node[right=of qxxc] (qxxc) {Val};
+\node[below=of qxxc] (op) {INT};
+\draw (qxxc) -- (op);
+
+
+\node[] (a) {ID};
+\node[right=of a] (b) {=};
+\node[right=of b] (c) {Sum};
+\node[below=of c] (d) {Prod};
+\node[below=of d] (e) {Val};
+\node[below=of e] (f) {ID};
+
+\draw (c) -- (d);
+\draw (d) -- (e);
+\draw (e) -- (f);
+\end{tikzpicture}
+
+&lt;/amsmath&gt;
+
+== 5. Blick auf den Heap ==
+&lt;amsmath sans&gt;
+
+Der nächste Reduce Schritt mit der Regel 
+Prod $\to$ Prod * Val hat größere Auswirkungen auf den Heap, da er drei
+bisher unverbundene Teilbäume zusammenbindet:
+
+\begin{tikzpicture}
+\node (x) {ID};
+\node[right=of x] (y) {=};
+\node[right=of y] (z) {Sum};
+\node[right=of z] (qw) {+};
+\node[right=of qw] (df) {Prod}
+
+
+\node[below left=of df] (qe) {Prod};
+\node[below=of qe] (qx) {Val};
+\node[below=of qx] (qxx) {ID};
+\draw (qe) -- (qx);
+\draw (qx) -- (qxx);
+
+\node[right=of qe] (qxxc) {*};
+\node[right=of qxxc] (qac) {Val};
+\node[below=of qac] (op) {INT};
+\draw (qac) -- (op);
+
+
+\draw (df) -- (qe);
+\draw (df) -- (qxxc);
+\draw (df) -- (qac);
+
+
+
+\node[] (a) {ID};
+\node[right=of a] (b) {=};
+\node[right=of b] (c) {Sum};
+\node[below=of c] (d) {Prod};
+\node[below=of d] (e) {Val};
+\node[below=of e] (f) {ID};
+
+\draw (c) -- (d);
+\draw (d) -- (e);
+\draw (e) -- (f);
+\end{tikzpicture}
+
+Auch der nächste Reduce Schritt mit der Regel Sum $\to$ Sum + Prod
+hat ähnlich große Auswirkungen, bindet er doch wiederum drei Teilbäume unter
+einer neuen Wurzel zusammen:
+
+\begin{tikzpicture}
+\node (x) {ID};
+\node[right=of x] (y) {=};
+\node[right=of y]  (new) {Sum}
+
+\node[below left=of new] (z) {Sum};
+\node[below=of new] (qw) {+};
+\node[below right=of new] (df) {Prod}
+
+\draw (new) -- (z);
+\draw (new) -- (qw);
+\draw (new) -- (df);
+
+\node[below left=of df] (qe) {Prod};
+\node[below=of qe] (qx) {Val};
+\node[below=of qx] (qxx) {ID};
+\draw (qe) -- (qx);
+\draw (qx) -- (qxx);
+
+\node[right=of qe] (qxxc) {*};
+\node[right=of qxxc] (qac) {Val};
+\node[below=of qac] (op) {INT};
+\draw (qac) -- (op);
+
+
+\draw (df) -- (qe);
+\draw (df) -- (qxxc);
+\draw (df) -- (qac);
+
+\node[below=of z] (d) {Prod};
+\node[below=of d] (e) {Val};
+\node[below=of e] (f) {ID};
+
+\draw (z) -- (d);
+\draw (d) -- (e);
+\draw (e) -- (f);
+\end{tikzpicture}
+
+Der letzte Reduce Schritt ass $\to$ ID = Sum schließlich fügt diese
+drei Teilbäume unter dem Startsymbol zu einem einzigen Ableitungsbaum zusammen:
+
+
+\begin{tikzpicture}
+\node (x) {ID};
+\node[right=of x] (y) {=};
+\node[right=of y]  (new) {Sum}
+
+\node[below left=of new] (z) {Sum};
+\node[below=of new] (qw) {+};
+\node[below right=of new] (df) {Prod}
+
+\draw (new) -- (z);
+\draw (new) -- (qw);
+\draw (new) -- (df);
+
+\node[below left=of df] (qe) {Prod};
+\node[below=of qe] (qx) {Val};
+\node[below=of qx] (qxx) {ID};
+\draw (qe) -- (qx);
+\draw (qx) -- (qxx);
+
+\node[right=of qe] (qxxc) {*};
+\node[right=of qxxc] (qac) {Val};
+\node[below=of qac] (op) {INT};
+\draw (qac) -- (op);
+
+
+\draw (df) -- (qe);
+\draw (df) -- (qxxc);
+\draw (df) -- (qac);
+
+\node[below=of z] (d) {Prod};
+\node[below=of d] (e) {Val};
+\node[below=of e] (f) {ID};
+
+\draw (z) -- (d);
+\draw (d) -- (e);
+\draw (e) -- (f);
+
+
+\node[above=of y] (ass) {Ass}
+\draw (ass) -- (x);
+\draw (ass) -- (y);
+\draw (ass) -- (new);
+\end{tikzpicture}
+
+Wir haben also einena einzigen,h zaaadusAammenhäqngeknden Ableitungsbaum,
+dessen Wurzel mit dema Startsymbol attribunmaatjkjiaert ist und dessen Blätter
+(genauer: deren Attributierungen) in dera Ordnaunng des Baumes gelesen
+den vollständigen Input ergeben. Damit vkodpqnebaarfkaaügaqena wir neben einem Nachweis
+der Korrektheit des Inputs auch über jqkeinen kAbleitaujngsbaum!
+
+und nun ist das jetzt schon ein sehr interessante ding, in dem wir
+hier eigentlich noch überprüfen sollten, weshalb es gelegentlich
+zu einer langsamen reaktion des editors kommen kann, basei der wir eigentlich eine langsame reaktion habe, labngsamer als das, was
+ich erwartet hätte.asdad asdaaasqlkx qweqwe qwe qwe qwe qwe 
+qwe qwe qwe qwe qotwe qwe qwae qwe qwekuif
+ qwe qwe kqwe qwe qwe qwe j qweqq qe qwe qwe qwe qwe qwe
+asd ad addd aa da qw qwe qe qe qe qe qwe qwe qw jhohqwehj ghj ghj ghj
+yxc yxc yxc yxca yxc yxc yxca yxc yxc yxc yxcrtz ztrdfghdfgh dfghdfgh dfg dfg dfg dfg dfghgfd dfghgd dfgfd d dgfgf56 678o9jlasstzuz 1 22xqdsqvq3456451qqqqsaqsqweqasdf1234 24 4342 234 234234 bnb 89 456 67666rtghu hjh qweqwqweqw qweqw qweqw qweqw qweqw qweqw qweqw qweqw 
+qweqw qweqw qweqw qweqw qweqw qweqw 12asdasdasdasd asd312 123q12 12312 12312 1112233ijhq12 \url{https://blog.fefe.de}
+&lt;/amsmath&gt;</text>
+      <sha1>1bku6a5z2lp6wn3w3g5h71mt1xgczii</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Test/Simple Test Page</title>
+    <ns>0</ns>
+    <id>82</id>
+    <revision>
+      <id>274</id>
+      <parentid>273</parentid>
+      <timestamp>2023-11-20T21:56:33Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <origin>274</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="228" sha1="3ehkpsk1q0dc9jsrw39p9ut0bzu5zv0" xml:space="preserve">Simple test page without tag.
+gas
+
+&lt;amsmath&gt;
+abqid hh hcaa qwje qwe qwe das ist jetzt sehr lang 
+abqidcaa qwe qwaaasdasdasd asd asd
+asd asd ad asd asd q uu wd asd asd qwd qwd 
+e qwe das ist jet zt sehr lang 
+abqidcaa 
+&lt;/amsmath&gt;</text>
+      <sha1>3ehkpsk1q0dc9jsrw39p9ut0bzu5zv0</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Test/Parsifal Links</title>
+    <ns>0</ns>
+    <id>83</id>
+    <revision>
+      <id>269</id>
+      <parentid>268</parentid>
+      <timestamp>2023-11-18T14:24:21Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <origin>269</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="72" sha1="af0ql2c71cjdc8rs09jgijvsv8nzk50" xml:space="preserve">&lt;amsmath&gt;
+\url{https://www.spiegel.de}
+ ajjhlqq jqaq qwjokdkz
+&lt;/amsmath&gt;</text>
+      <sha1>af0ql2c71cjdc8rs09jgijvsv8nzk50</sha1>
     </revision>
   </page>
 </mediawiki>

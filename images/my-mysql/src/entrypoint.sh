@@ -67,7 +67,7 @@ EOF
 
 #     GRANT ALL ON *.* TO 'root'@'localhost' identified by '$MYSQL_ROOT_PASSWORD' WITH GRANT OPTION ;
 
-    echo "*** Will now set root password ${MYSQL_ROOT_PASSWORD}"
+    echo "*** Will now set root password to: ${MYSQL_ROOT_PASSWORD}"
 
 #   we MUST provide some passwords otherwise we cannot 
   /usr/bin/mysqld --user=mysql --bootstrap --skip-name-resolve --verbose=0  --skip-networking=0 < $tfile

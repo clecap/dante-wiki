@@ -23,7 +23,7 @@ PMA_CONTAINER_NAME=my-phpmyadmin-${NAME}
 echo "*** Cleaning up existing ressources"
 echo -n "* Stopping container: "
 # -t 0 since the LAP can be shot down quickly
-docker container stop ${PMA_ONTAINER_NAME} -t 0
+docker container stop ${PMA_CONTAINER_NAME} -t 0
 
 echo -n "*    Removing container: "
 docker container rm   ${PMA_CONTAINER_NAME}
