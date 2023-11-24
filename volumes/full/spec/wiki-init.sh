@@ -243,12 +243,7 @@ initWP () {
   VOLUME_PATH="wp-${USERNAME}"
 
   # add database to DB system
-  printf "\n** Generating database ${DB_NAME} and DB user ${DB_USER}\n"
-  dropDatabase ${DB_NAME}  ${DB_CONTAINER}  ${MYSQL_ROOT_PASSWORD}
-
-  printf "------- container ${DB_CONTAINER}"
-
-  addDatabase ${DB_NAME} ${DB_USER} ${DB_PASS}  ${MYSQL_ROOT_PASSWORD}  ${DB_CONTAINER}
+##  addDatabase ${DB_NAME} ${DB_USER} ${DB_PASS} ${DB_CONTAINER}
   printf "DONE generating database\n"
 
   printf "\n** Generating OS User ${LINUX_USER} for Wordpress\n"
@@ -308,10 +303,10 @@ initialize () {
 
   # composer must run before the installscript so that the installscript has all the available extensions ready
   # this is necessary, since the installscript does an autoregistration of some components, for example the installed skins
+
   composerPermissions
   composerInstall
-
-  addDatabase ${DB_NAME} ${DB_USER} ${DB_PASS}  ${MYSQL_ROOT_PASSWORD}  ${DB_CONTAINER}
+  addDatabase ${DB_NAME} ${DB_USER} ${DB_PASS}  ${DB_CONTAINER}
   docker exec ${LAP_CONTAINER} rm -f ${MOUNT}/${VOLUME_PATH}/LocalSettings.php      # remove to have a clean start for install routines, ignore if not existant
   runMWInstallScript "${MW_SITE_NAME}"  "${MW_SITE_SERVER}" "ACRONYM" "password-dir"
 

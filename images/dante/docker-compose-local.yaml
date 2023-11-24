@@ -15,8 +15,13 @@ services:
       interval: 10s
       timeout: 5s
       retries: 10     
+    secrets:
+     - mysql_root_password
     environment:
-      MYSQL_RANDOM_ROOT_PASSWORD: true
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
+      
+
+
     command: 
 
 #  database:
@@ -61,3 +66,9 @@ networks:
 
 volumes:
   my-test-db-volume:
+
+secrets:
+  mysql_root_password:
+    file: ../../private/mysql-root-password.txt
+
+

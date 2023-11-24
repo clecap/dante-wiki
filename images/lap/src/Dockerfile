@@ -93,7 +93,6 @@ COPY . .
 
 
 #COPY mediawiki-alpine-lamp-php.ini           /etc/php7/mediawiki-alpine-lamp-php.ini
-
 #COPY localhost-key.pem                       /etc/ssl/apache2/server.key
 #COPY localhost.pem                           /etc/ssl/apache2/server.pem
 #COPY entrypoint.sh                           /

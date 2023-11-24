@@ -9,12 +9,13 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 TOP_DIR="${DIR}/../../../"
 
+
 # todo !!! what is this ?
 # currently used in skin installer in script-library
 MW_VERSION=REL1_39
 
-source ${TOP_DIR}/volumes/full/spec/script-library.sh
 
+source ${TOP_DIR}/volumes/full/spec/script-library.sh
 
 cleanUpVolume
 makeWikiLocal 1.39 0 wiki-dir
@@ -24,7 +25,14 @@ makeWikiLocal 1.39 0 wiki-dir
 source ${TOP_DIR}/volumes/full/spec/git-clone-from-delta.sh 
 source ${TOP_DIR}/volumes/full/spec/git-clone-from-parsifal.sh 
 
-getSkins wiki-dir
+#
+# Install skins
+#
+echo "<?php " >> ${TOP_DIR}/volumes/full/content/${TARGET}/DanteSkinsInstalled.php
+getSkinGerrit wiki-dir Modern
+getSkinGerrit wiki-dir Refreshed
+
+
 
 addingImages wiki-dir
 installingDrawio wiki-dir

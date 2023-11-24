@@ -1,11 +1,6 @@
 {
   "version": "2.0.0",
   "tasks": [
-    {"label": "000 BUILD ssh image:                   ssh/bin/buildAll.sh",                               "command": "images/ssh/bin/buildAll.sh"},
-    {"label": "001 BUILD tex image:                    tex/bin/generate.sh",                               "command": "images/tex/bin/generate.sh"},
-    {"label": "002 BUILD lap image:                    lap/bin/generate.sh",                               "command": "images/lap/bin/generate.sh"},
-    {"label": "003 BUILD my-mysql image:         my-mysql/bin/generate.sh",                          "command": "images/my-mysql/bin/generate.sh"},
-    {"label": "003a PULL images from Hub:              lap/bin/pull-images.sh",                          "command": "images/lap/bin/pull-images.sh"},
     {"label": "004 generate volume full:              volumes/full/spec/cmd.sh",                          "command": "volumes/full/spec/cmd.sh"},
     {"label": "005 run lap and my-mysql (cleaned):          images/lap/bin/both.sh with cleand",      "command": "images/lap/bin/both.sh",   "args": ["--cleandb", "my-test-db-volume",  "--dir", "full"] },
     {"label": "006 run lap and my-mysql (NO clean):          images/lap/bin/both.sh ",               "command": "images/lap/bin/both.sh",   "args": ["--db", "my-test-db-volume",  "--dir", "full"] },

@@ -8,6 +8,11 @@
 SCRIPT_LIB_VERSION=2.12
 
 
+
+SECRET_FILE="${TOP_DIR}/private/mysql-root-password.txt"
+
+
+
 # propagate traps into called functions:
 set -E
 
@@ -67,34 +72,59 @@ function simpleEntryPage () { #  dynamically generate a simple entry page on the
 
 
 
+# deprecate
+#
+#getSkins () {      #  copy in skins
+#  TARGET=$1
+#
+#  local SKIN_DIR=${TOP_DIR}/volumes/full/content/${TARGET}/skins
+#  cd ${SKIN_DIR}
+#
+#  echo "<?php " >> ${TOP_DIR}/volumes/full/content/${TARGET}/DanteSkinsInstalled.php
+#
+#  # Modern
+#  printf "*** Installing skin Modern\n"
+#  mkdir ${SKIN_DIR}/Modern
+#  git clone -b $MW_VERSION --single-branch https://gerrit.wikimedia.org/r/mediawiki/skins/Modern Modern
+#  rm -Rf ${SKIN_DIR}/Modern/.git
+#  echo "wfLoadSkin( 'Modern' );" >> ${TOP_DIR}/volumes/full/content/${TARGET}/DanteSkinsInstalled.php
+#  printf "DONE installing skin Modern\n\n"
+#
+#  # Refreshed
+#  printf "*** Installing skin Refreshed"
+#  mkdir ${SKIN_DIR}/Refreshed
+#  git clone -b $MW_VERSION --single-branch https://gerrit.wikimedia.org/r/mediawiki/skins/Refreshed Refreshed
+#  rm -Rf ${SKIN_DIR}/Refreshed/.git
+#  echo "wfLoadSkin( 'Refreshed' );" >> ${TOP_DIR}/volumes/full/content/${TARGET}/DanteSkinsInstalled.php
+#
+  # Chameleon          skin is broken
+  # CologneBlue        uses a method which is deprecated in 1.39
+#}
 
 
-getSkins () {      #  copy in skins
-  TARGET=$1
+
+function getSkinGerrit () {
+  local TARGET=$1
+  local SKIN=$2
 
   local SKIN_DIR=${TOP_DIR}/volumes/full/content/${TARGET}/skins
   cd ${SKIN_DIR}
 
-  echo "<?php " >> ${TOP_DIR}/volumes/full/content/${TARGET}/DanteSkinsInstalled.php
+
 
   # Modern
   printf "*** Installing skin Modern\n"
-  mkdir ${SKIN_DIR}/Modern
-  git clone -b $MW_VERSION --single-branch https://gerrit.wikimedia.org/r/mediawiki/skins/Modern Modern
-  rm -Rf ${SKIN_DIR}/Modern/.git
-  echo "wfLoadSkin( 'Modern' );" >> ${TOP_DIR}/volumes/full/content/${TARGET}/DanteSkinsInstalled.php
-  printf "DONE installing skin Modern\n\n"
-
-  # Refreshed
-  printf "*** Installing skin Refreshed"
-  mkdir ${SKIN_DIR}/Refreshed
-  git clone -b $MW_VERSION --single-branch https://gerrit.wikimedia.org/r/mediawiki/skins/Refreshed Refreshed
-  rm -Rf ${SKIN_DIR}/Refreshed/.git
-  echo "wfLoadSkin( 'Refreshed' );" >> ${TOP_DIR}/volumes/full/content/${TARGET}/DanteSkinsInstalled.php
+  mkdir ${SKIN_DIR}/${SKIN}
+  git clone -b $MW_VERSION --single-branch https://gerrit.wikimedia.org/r/mediawiki/skins/${SKIND} ${SKIN}
+  rm -Rf ${SKIN_DIR}/${SKIND}/.git
+  echo "wfLoadSkin( '${SKIND}' );" >> ${TOP_DIR}/volumes/full/content/${TARGET}/DanteSkinsInstalled.php
+  printf "DONE installing skin ${SKIND}\n\n"
 
   # Chameleon          skin is broken
   # CologneBlue        uses a method which is deprecated in 1.39
 }
+
+
 
 
 function getDanteWikiVolume() {
@@ -138,7 +168,7 @@ function installExtensionGithub () { # INSTALL an extension which is hosted on g
 
   printf "\n*** INSTALLING EXTENSION ${NAME} from ${URL} using branch ${BRANCH} ...\n"
 
-  printf " * Ensuring proper git postbuffer size\n"
+  printf " * Ensuring proper git postbuffer size..."
     # https://stackoverflow.com/questions/21277806/fatal-early-eof-fatal-index-pack-failed/29355320#29355320
     docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "git config --global http.postBuffer 524288000"
     docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "git config --global core.packedGitLimit 512m"
@@ -148,8 +178,10 @@ function installExtensionGithub () { # INSTALL an extension which is hosted on g
     docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "git config --global pack.windowMemory 2047m"
   printf " DONE\n"
 
-  printf "   Removing preexisting directory\n"
-  docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "rm -Rf ${NAME} "
+  printf " * Removing preexisting directory..."
+    docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions/ ${LAP_CONTAINER}  sh -c "rm -Rf ${NAME} "
+  printf " DONE\n"
+
   printf "   Cloning ${URL} with branch ${BRANCH} into ${NAME}\n"
     docker exec -w /${MOUNT}/${VOLUME_PATH}/extensions ${LAP_CONTAINER}          sh -c " git clone --depth 1 ${URL} --branch ${BRANCH} ${NAME} "
 
@@ -261,84 +293,33 @@ waitingForDatabase () {
   printf "DONE: database container is up\n\n"
 }
 
-
-
-
-
-
-function dropDatabase () { #  dropDatabase  DB_NAME  DB_CONTAINER  MYSQL_ROOT_PASSWORD
-# drops a database. could be helpful before an addDatabase
-  local MY_DB_NAME=$1
-  local DB_CONTAINER=$2
-  local MYSQL_ROOT_PASSWORD=$3
-  ensure MY_DB_NAME  DB_CONTAINER  MYSQL_ROOT_PASSWORD
-
-  printf "\n\n*** dropDatabase: Dropping database ${MY_DB_NAME} in container ${DB_CONTAINER} \n"
-
-  docker exec -i ${DB_CONTAINER} mysql -u root --password=${MYSQL_ROOT_PASSWORD} <<MYSQLSTUFF
-DROP DATABASE IF EXISTS ${MY_DB_NAME} /*\!40100 DEFAULT CHARACTER SET utf8 */;
-MYSQLSTUFF
-
-  EXIT_CODE=$?
-  printf "DONE: Exit code of dropDatabase generated database call: ${EXIT_CODE} \n\n"
-}
-
-
-
-function dropUser () {
-  local DB_CONTAINER=$1
-  local MYSQL_ROOT_PASSWORD=$2
-  local MY_DB_USER=$3
-
-  printf "\n\n*** dropUser: Dropping DB users we do not need and listing users of DB \n\n"
-
-  # CAVE: we also must drop MY_DB_USER as we might have created this user earlier and then with a different password
-  docker exec -i ${DB_CONTAINER} mysql -u root --password=${MYSQL_ROOT_PASSWORD} <<MYSQLSTUFF
-DROP USER IF EXISTS ''@'localhost';
-DROP USER IF EXISTS ""@"${DB_CONTAINER}";
-DROP USER IF EXISTS "${MY_DB_USER}"@"172.16.0.0/255.240.0.0";
-DROP USER IF EXISTS "${MY_DB_USER}"@"192.168.0.0/255.255.0.0";
-SELECT user, host, password from mysql.user;
-MYSQLSTUFF
-
-  EXIT_CODE=$?
-  printf "\nDONE: Exit code of dropUser call: ${EXIT_CODE} \n\n"
-}
-
-
-
-
-function addDatabase () { ##        addDatabase  DATABASE_NAME  DB_USER_NAME  DB_USER_PASSWORD  MYSQL_ROOT_PASSWORD  DB_CONTAINER
+# this rather should be performed by the php script itself, given the mysql root
+# only keep it in should we need it later
+function addDatabase () { ##        addDatabase  DATABASE_NAME  DB_USER_NAME  DB_USER_PASSWORD  DB_CONTAINER
   local MY_DB_NAME=$1
   local MY_DB_USER=$2
   local MY_DB_PASS=$3
-  local MYSQL_ROOT_PASSWORD=$4
-  local DB_CONTAINER=$5
+  local DB_CONTAINER=$4
 
-  ensure MY_DB_NAME  MY_DB_USER  MY_DB_PASS  MYSQL_ROOT_PASSWORD  DB_CONTAINER
+  ensure MY_DB_NAME  MY_DB_USER  MY_DB_PASS  DB_CONTAINER
  
   printf "\n*** addDatabase: Making a database=${MY_DB_NAME} with user=${MY_DB_USER} and password=${MY_DB_PASS} in container=${DB_CONTAINER}\n"
-
-# TODO: Adapt the permissions granted to the specific environment and run-time conditions.
-# TODO: CURRENTLY We ARE NOT USING A MYSQL_ROOT_PASSWORD (the empty passowrd works !!!)
-
 
 # 172.16.0.0/255.240.0.0 is the IP range which is used for the docker bridge and which is most likely the IP address
 #   which mysql is likely to see in a login attempt
 
+  local MYSQL_ROOT_PASSWORD=$(cat "${SECRET_FILE}")
 
-  docker exec -i ${DB_CONTAINER} mysql -u root --password=${MYSQL_ROOT_PASSWORD} <<MYSQLSTUFF
+# docker exec -e MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} -i ${DB_CONTAINER} mysql -u root --password=${MYSQL_ROOT_PASSWORD} <<MYSQLSTUFF
+docker exec -i ${DB_CONTAINER} mysql -u root --password=${MYSQL_ROOT_PASSWORD} <<MYSQLSTUFF
 CREATE DATABASE IF NOT EXISTS ${MY_DB_NAME} /*\!40100 DEFAULT CHARACTER SET utf8 */;
---CREATE USER IF NOT EXISTS ${MY_DB_USER}@'%' IDENTIFIED BY '${MY_DB_PASS}';
---CREATE USER IF NOT EXISTS ${MY_DB_USER}@localhost IDENTIFIED BY '${MY_DB_PASS}';
 CREATE USER IF NOT EXISTS ${MY_DB_USER}@'172.16.0.0/255.240.0.0' IDENTIFIED BY '${MY_DB_PASS}';
 CREATE USER IF NOT EXISTS ${MY_DB_USER}@'192.168.0.0/255.255.0.0' IDENTIFIED BY '${MY_DB_PASS}';
---GRANT ALL PRIVILEGES ON ${MY_DB_NAME}.* TO '${MY_DB_USER}'@'%';
---GRANT ALL PRIVILEGES ON ${MY_DB_NAME}.* TO '${MY_DB_USER}'@'localhost';
 GRANT ALL PRIVILEGES ON ${MY_DB_NAME}.* TO '${MY_DB_USER}'@'172.16.0.0/255.240.0.0';
 GRANT ALL PRIVILEGES ON ${MY_DB_NAME}.* TO '${MY_DB_USER}'@'192.168.0.0/255.255.0.0';
 FLUSH PRIVILEGES;
 MYSQLSTUFF
+
 
 EXIT_CODE=$?
 printf "DONE: Exit code of addDatabase generated database call: ${EXIT_CODE}\n\n"
@@ -649,6 +630,9 @@ function runDB() {
   # provides MYSQL_ROOT_PASSWORD
   # provides MYSQL_DUMP_USER
   # provides MYSQL_DUMP_PASSWORD
+  ## TODO remove MYSQL ROOT PASSWORD from CONF.sh everywhere
+
+  local MYSQL_ROOT_PASSWORD=$(cat "${SECRET_FILE}")
 
   local CONTAINER_NAME=my-mysql
   local NETWORK_NAME=dante-network

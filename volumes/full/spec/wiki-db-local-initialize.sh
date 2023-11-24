@@ -50,13 +50,9 @@ echo ""; echo "*** DB_CONTAINER IS: ${DB_CONTAINER}"
 # abort on any error
 set -e
 
-dropUser ${DB_CONTAINER} ${MYSQL_ROOT_PASSWORD} ${DB_USER}
+echo "*** Calling: addDatabase DB_NAME=${DB_NAME} DB_USER=${DB_USER} DB_PASS=${DB_PASS} DB_CONTAINER=${DB_CONTAINER} "
 
-dropDatabase ${DB_NAME} ${DB_CONTAINER} ${MYSQL_ROOT_PASSWORD}
-
-echo "*** Calling: addDatabase DB_NAME=${DB_NAME} DB_USER=${DB_USER} DB_PASS=${DB_PASS} MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} DB_CONTAINER=${DB_CONTAINER} "
-
-addDatabase ${DB_NAME} ${DB_USER} ${DB_PASS} ${MYSQL_ROOT_PASSWORD} ${DB_CONTAINER}
+addDatabase ${DB_NAME} ${DB_USER} ${DB_PASS} ${DB_CONTAINER}
 
 removeLocalSettings ${LAP_CONTAINER} ${MOUNT} ${VOLUME_PATH}
 
