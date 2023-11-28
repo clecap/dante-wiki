@@ -1,0 +1,58 @@
+#
+#
+#
+#
+version: '3.1'
+
+services:
+
+  database:
+    image: mysql
+    container_name: my-mysql
+    networks:
+      - dante-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10     
+    secrets:
+     - mysql_root_password
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
+    command: 
+
+  webserver:
+    image: lap
+    container_name: my-lap-container
+    depends_on:
+      database:
+        condition: service_healthy
+    volumes:
+      - ../../volumes/full/content:/var/www/html
+    ports:
+      - "8080:80"
+      - "4443:443"
+    networks: 
+      - dante-network
+    environment:
+      MODE: PHP
+
+  phpmyadmin:
+    image: phpmyadmin:5.0
+    ports: 
+      - "9090:80"
+    container_name: my-php-myadmin
+    networks: 
+      - dante-network
+    environment:
+      PMA_HOST: my-mysql
+
+networks:
+  dante-network:
+
+secrets:
+  mysql_root_password:
+    file: ../../private/mysql-root-password.txt
+
+
