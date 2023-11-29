@@ -1,0 +1,3 @@
+{
+"dante/src/Dockerfile": "../bin/generate.sh"
+}

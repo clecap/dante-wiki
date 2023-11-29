@@ -20,5 +20,6 @@
 			"volumes/full/content/wiki-dir/extensions/Parsifal",
 			"volumes/full/content/wiki-dir/extensions/DanteCategoryBrowser"
 		],
+  "docker.commands.build": "${containerCommand} build --rm -f \"${dockerfile}\" -t ${configurationFile} ",
 	}
 }

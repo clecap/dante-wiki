@@ -1,6 +1,9 @@
 #
+# Copy in from volume template-volume to our local file.
 #
-#
+#  TODO: prepare connection to git for push upstream stuff !!!
+#  TODO: use fresh and empty database volume from scratch !!
+#  TODO: need to have local .git and git submodules for the correct treatment of git push upstream functionality
 #
 version: '3.1'
 
@@ -9,6 +12,9 @@ services:
   database:
     image: mysql
     container_name: my-mysql
+    depends_on:
+      copy-in-service:
+        condition: service_completed_successfully
     networks:
       - dante-network
     healthcheck:
@@ -20,7 +26,7 @@ services:
      - mysql_root_password
     environment:
       MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
-    command: 
+
 
   webserver:
     image: lap
@@ -28,6 +34,8 @@ services:
     depends_on:
       database:
         condition: service_healthy
+      copy-in-service:
+        condition: service_completed_successfully
     volumes:
       - ../../volumes/full/content:/var/www/html
     ports:
@@ -38,6 +46,16 @@ services:
     environment:
       MODE: PHP
 
+
+  copy-in-service:
+    image: alpine
+    volumes:
+      - source_template:/from
+      - /Users/cap/DOCKER/dante-wiki/volumes/full/content:/to
+    command: >
+      /bin/ash -c "cd /from && cp -a . /to ; sleep infinity"
+
+
   phpmyadmin:
     image: phpmyadmin:5.0
     ports: 
@@ -47,6 +65,17 @@ services:
       - dante-network
     environment:
       PMA_HOST: my-mysql
+    depends_on:
+      - database
+      - webserver
+
+volumes:
+  source_template:
+    name: volume-builder_volume-to-make
+
+
+
+
 
 networks:
   dante-network:
