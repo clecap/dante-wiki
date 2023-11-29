@@ -160,12 +160,51 @@ printf "\n *** Installing extensions...\n"
   installExtensionGithub   https://github.com/wikimedia/mediawiki-extensions-WikiCategoryTagCloud  WikiCategoryTagCloud  REL1_39
  
   installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-Cargo Cargo REL1_39
-
-
-
 printf " DONE installing extensions\n\n"
 
+
+printf "\n *** Installing Parsifal\n"
+  printf " ** Removing preexisting Parsifal to ensure clean start ... "
+    rm -Rf Parsifal
+  printf " DONE removing\n"
+
+  printf " ** Cloning Parsifal from branch dante ... "
+    git clone --depth 1 --branch dante https://github.com/clecap/Parsifal
+  printf "DONE cloning branch dante of Parsifal\n\n"
+printf " DONE installing Parsifal\n\n"
+
+
+if [ "$DELETE_PARSIFAL_GIT" = "true" ]; then
+  printf " ** Production needs to delete Parsifal .git directory\n"
+
+  printf " DONE deleting Parsifal .git directory\n"
+else
+  printf " ** Development environment leaves Parsifal .git in place\n"
+fi
+
+
+printf " *** Installing Dante Delta\n"
+
 cd ..
+  printf "*** Initializing a git..."
+    git init --initial-branch=master                                        # initialize; silence hint on other branch names
+    git config --local core.excludesfile ${DIR}/../../spec/.gitignore       # configure this git to use spec/.gitignore
+  printf "DONE initializing a git\n\n"
+
+  printf "** adding github as remote..."
+    git remote add origin https://github.com/clecap/dante-delta.git
+  printf "DONE adding github as remote\n\n"
+
+  printf "** fetching origin..."
+    git fetch origin
+  printf "DONE fetching origin\n\n"
+
+  printf "** doing a hard reset on local git and pulling from master "
+    git reset --hard origin/master
+    git pull origin master
+    git push --set-upstream origin master
+  printf "DONE hard reset\n\n"
+printf " DONE installing dante delta\n"
 
 
 printf "\n\n*** Doing a composer update on the global file\n\n"
