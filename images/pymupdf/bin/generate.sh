@@ -2,7 +2,7 @@
 
 # generate a local docker image for the docker context in images/${CONTAINER_NAME}/src
 
-IMAGE_NAME=dante
+IMAGE_NAME=pymupdf
 
 # get directory this shell is running in
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"

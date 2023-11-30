@@ -35,18 +35,7 @@ RUN  apk add --no-cache mesa-gl glu libx11 libxi libxrandr && \
 ## END MUTOOL INSTALLATION
 ##
 
-
-
-# Install openssh
-RUN apk add --update --no-cache openssh 
-RUN echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config
-RUN adduser -h /home/sshuser -s /bin/sh -D sshuser
-RUN echo -n 'sshuser:some-password' | chpasswd
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["tail", "-f", "/dev/null"]
 
 # copy in a local file
 COPY entrypoint.sh /
-
-EXPOSE 22
-EXPOSE 80
-EXPOSE 443

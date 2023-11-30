@@ -1,9 +1,11 @@
 #!/bin/bash
 
+# This entrypoint builds the docker lap volume from the original sources
+# Depending on the yaml file this generates a docker volume or a host volume
+# Depending on the yaml file this allows editing / pushing to the dante-delta and Parsifal gits or not.
 
 WIKI_VERSION_MAJOR=1.39
 WIKI_VERSION_MINOR=0
-
 
 
 function composerInstallDocker () {  #  composerInstall:  Doing COMPOSER based installations
@@ -61,8 +63,6 @@ function initGit () {
     git config --global pack.windowMemory 2047m
   printf " DONE\n"
 }
-
-
 
 function installExtensionGithub () { # INSTALL an extension which is hosted on github
   # EXAMPLE:   installExtensionGithub  https://github.com/kuenzign/WikiMarkdown  WikiMarkdown  main
@@ -157,9 +157,8 @@ printf "\n *** Installing extensions...\n"
 ### currently to be done manually 
 ###  installExtensionGithub  https://github.com/clecap/Parsifal  Parsifal  dante
 
-  installExtensionGithub   https://github.com/wikimedia/mediawiki-extensions-WikiCategoryTagCloud  WikiCategoryTagCloud  REL1_39
- 
-  installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-Cargo Cargo REL1_39
+  installExtensionGithub   https://github.com/wikimedia/mediawiki-extensions-WikiCategoryTagCloud    WikiCategoryTagCloud   REL1_39
+  installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-Cargo                     Cargo                  REL1_39
 printf " DONE installing extensions\n\n"
 
 

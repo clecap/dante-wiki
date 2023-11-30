@@ -1,3 +1,6 @@
 {
-"dante/src/Dockerfile": "images/dante/bin/generate.sh"
+  "dante/src/Dockerfile":     "images/dante/bin/generate.sh",
+  "lap/src/Dockerfile":       "images/lap/bin/generate.sh",
+  "tex/src/Dockerfile":       "images/tex/bin/generate.sh",
+  "pymupdf/src/Dockerfile":   "images/pymupdf/bin/generate.sh"
 }

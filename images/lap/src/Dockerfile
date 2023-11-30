@@ -4,7 +4,7 @@ FROM clecap/tex
 # FROM alpine: 3.15
 
 LABEL "vendor"="Clemens H. Cap"
-LABEL "maintainer"="clemens.cap@uni-rostock.de"
+LABEL "maintainer"="clemens@clemens-cap.de"
 
 ENV PHP_INI_DIR /etc/php/7.4
 
@@ -34,20 +34,8 @@ RUN apk --no-cache update &&   \
     pecl channel-update pecl.php.net && \
 #   * install ds
     pecl install ds && \
-#   * utilities we need at different places    
-    apk --no-cache add wget curl &&\
 #   * enable proper https resolution for apache
     apk --no-cache add ca-certificates &&\ 
-#   Needed for syntax highlighting mechanisms and for mupdf python
-    apk --no-cache add python3-dev &&\
-#   Needed for mupdf python tooling 
-    ln -sf python3 /usr/bin/python  &&\
-    python3 -m ensurepip &&\
-    pip3 install --no-cache --upgrade pip setuptools &&\
-    pip3 install python-config &&\
-    cd /usr/lib/python3.9/config-3.9-x86_64-linux-musl &&\
-    pip3 install pymupdf &&\
-#
 #   Mediawiki needs php dependency tool composer
 #   this is a bit tricky and only this helped: https://stackoverflow.com/questions/51443557/how-to-install-php-composer-inside-a-docker-container
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
@@ -81,31 +69,17 @@ RUN apk --no-cache update &&   \
     apk --no-cache add aws-cli && \
 #   we want mysql client cli available to be able to make dumps and restores via webserver interaction and via mediawiki special pages
     apk --no-cache add mysql-client && \
+### TODO: some cleanups, maybe more
+#   we no longer need g++
+    apk del g++ make && \
 #   cleanup
     rm -Rf /var/cache/apk/*
 
-
-##
-## COPY in the Apache configuration files
-##
-
+## COPY in docker context
 COPY . .
-
-
-#COPY mediawiki-alpine-lamp-php.ini           /etc/php7/mediawiki-alpine-lamp-php.ini
-#COPY localhost-key.pem                       /etc/ssl/apache2/server.key
-#COPY localhost.pem                           /etc/ssl/apache2/server.pem
-#COPY entrypoint.sh                           /
 
 # Expose for http and https
 EXPOSE 80
 EXPOSE 443
 
-# Expose for nfs 4  TODO: test if this really is necessary ???
-# EXPOSE 2049
-
-# TODO fix this 
 ENTRYPOINT ["/entrypoint.sh"]
-
-# Entrypoint for debugging dockerfile, deriving from alpine
-# ENTRYPOINT ["/bin/sh","-c","sleep infinity"]
