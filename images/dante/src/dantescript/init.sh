@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This entrypoint shell script initializes the database, generates LocalSettings.php and runs update.php
+# This entrypoint initializes the database, generates LocalSettings.php and runs update.php
 
 runMWInstallScript () {  # runMWInstallScript  MW_SITE_NAME  MW_SITE_SERVER  SITE_ACRONYM  WK_PASS
   #    run the mediawiki install script and generate a LocalSettings.php

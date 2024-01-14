@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# This entrypoint builds the docker lap volume from the original sources
+# This entrypoint builds /var/www/html from the original sources
+#
 # Depending on the yaml file this generates a docker volume or a host volume
 # Depending on the yaml file this allows editing / pushing to the dante-delta and Parsifal gits or not.
 
 WIKI_VERSION_MAJOR=1.39
 WIKI_VERSION_MINOR=0
-
 
 function composerInstallDocker () {  #  composerInstall:  Doing COMPOSER based installations
   printf "\n\n*** Doing COMPOSER based installations "

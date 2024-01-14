@@ -36,41 +36,46 @@ ENV LANG=C.UTF-8 \
     PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/texlive/2024/bin/x86_64-linuxmusl:/usr/local/texlive/2023/bin/x86_64-linuxmusl:/bin:/usr/local/texlive/2022/bin/x86_64-linuxmusl
 
 # Upgrade existing packages in the base image
-RUN apk --no-cache update             &&    \  
-    apk --no-cache upgrade            &&    \
-    apk --no-cache add wget           &&    \
-    apk --no-cache add curl           &&    \
-    apk --no-cache add rsync          &&   \
-    apk --no-cache add unzip          &&   \
-    apk --no-cache add git            &&   \
-    apk --no-cache add gpg            &&   \
-    apk --no-cache add tar            && \
-    apk --no-cache add xorriso        && \
-    apk --no-cache add fontconfig     && \
-    apk --no-cache add perl           && \
-    apk --no-cache add openjdk11-jre  && \
-    apk --no-cache add ncurses-libs && \
-    apk --no-cache add perl-unicode-linebreak && \
-    apk --no-cache add python3 && \
-    apk --no-cache add python3-dev &&\
-#   Needed for mupdf python tooling 
-    apk --no-cache add build-base      && \
-    apk --no-cache add linux-headers  && \
-    ln -sf python3 /usr/bin/python  &&\
-    python3 -m ensurepip &&\
-    pip3 install --no-cache --upgrade pip setuptools &&\
-    pip3 install python-config &&\
-#    cd /usr/lib/python3.9/config-3.9-x86_64-linux-musl &&\
-    pip3 install pymupdf &&\
-    apk --no-cache add py3-pygments && \
-    apk --no-cache add ghostscript && \
-    apk --no-cache add gnuplot && \
-    apk --no-cache add graphviz && \
+RUN apk --no-cache update                       &&    \  
+    apk --no-cache upgrade                      &&    \
+    apk --no-cache add wget                     &&    \
+    apk --no-cache add curl                     &&    \
+    apk --no-cache add rsync                    &&   \
+    apk --no-cache add unzip                    &&   \
+    apk --no-cache add git                      &&   \
+    apk --no-cache add gpg                      &&   \
+    apk --no-cache add tar                      && \
+    apk --no-cache add xorriso                  && \
+    apk --no-cache add fontconfig               && \
+    apk --no-cache add perl                     && \
+    apk --no-cache add openjdk11-jre            && \
+    apk --no-cache add ncurses-libs             && \
+    apk --no-cache add perl-unicode-linebreak   && \
+    echo "*** Now building pymupdf "                   && \
+    apk --no-cache add build-base                      && \
+    apk --no-cache add linux-headers                   && \
+    apk --no-cache add python3                         && \
+    apk --no-cache add python3-dev                     &&\
+    ln -sf python3 /usr/bin/python                     &&\
+    python3 -m ensurepip                               &&\
+    pip3 install --no-cache --upgrade pip setuptools   &&\
+    pip3 install python-config                         &&\
+    pip3 install pymupdf                               &&\
+    echo "*** *** *** DONE building pymupdf "          && \
+    apk --no-cache add py3-pygments                    && \
+    apk --no-cache add ghostscript                     && \
+    apk --no-cache add gnuplot                         && \
+    apk --no-cache add inkscape                        && \
+# TODO: will be needed later for mediawiki extension Diagrams, but needs a separate source install for alpine
+#    apk --no-cache add mscgen                          && \
+    apk --no-cache add plantuml                        && \
+    apk --no-cache add graphviz                        && \
     # fonts needed for graphviz
     apk add --update font-bitstream-type1 ghostscript-fonts ttf-cantarell && \
-    apk --no-cache add inkscape && \
-    apk --no-cache add mupdf && \
-    apk --no-cache add mupdf-tools && \
+    # no longer needed as we use pymupdf  # TODO should adjust Parsifal to this
+    ### apk --no-cache add mupdf && \
+    ### apk --no-cache add mupdf-tools && \
+    echo "*** *** *** Now installing Texlive "         && \
     cd /tmp && \
     wget https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && \
     zcat install-tl-unx.tar.gz | tar xf - && \
@@ -87,12 +92,10 @@ RUN apk --no-cache update             &&    \
     echo "tlpdbopt_sys_bin /usr/bin" >> install.profile && \
     # actually install TeX Live
     ./install-tl -profile install.profile  && \
-    # cleanup
-    ###
-    apk del python3-dev, rsync, gpg, tar, make    && \
+    echo "*** *** *** Now doing a layer cleanup "    && \
+    apk del wget curl rsync git gpg tar python3-dev build-base linux-headers    && \
     cd /tmp && \
     rm -Rf /tmp/* && \
     rm -Rf /var/cache/apk/*
-
 
 ENTRYPOINT ["/bin/sh","-c","sleep infinity"]

@@ -1,10 +1,4 @@
-FROM clecap/tex
-
-# FROM tex
-# FROM alpine: 3.15
-
-LABEL "vendor"="Clemens H. Cap"
-LABEL "maintainer"="clemens@clemens-cap.de"
+FROM tex
 
 ENV PHP_INI_DIR /etc/php/7.4
 
@@ -28,7 +22,7 @@ RUN apk --no-cache update &&   \
     apk --no-cache add php-phar && \
 #   PEAR will temporarily need a c compiler and a make utility
     apk --no-cache add g++ make && \
-#   * PHP UTILITIES:  pear and pecl are needed for installing the DS data type, which we need in Parsifal for cleaning up
+#   * PHP UTILITIES:  pear and pecl are needed for installing the DS data type, which we need in Parsifal for cleaning up #### TODO: do we still use this ???
     apk --no-cache add php7-dev php-pear && \
 #   * honor an explicit request by pecl
     pecl channel-update pecl.php.net && \
@@ -69,8 +63,8 @@ RUN apk --no-cache update &&   \
     apk --no-cache add aws-cli && \
 #   we want mysql client cli available to be able to make dumps and restores via webserver interaction and via mediawiki special pages
     apk --no-cache add mysql-client && \
-### TODO: some cleanups, maybe more
-#   we no longer need g++
+### TODO: more
+    echo "*** *** Doing cleanups of layer "   && \
     apk del g++ make && \
 #   cleanup
     rm -Rf /var/cache/apk/*
@@ -82,4 +76,4 @@ COPY . .
 EXPOSE 80
 EXPOSE 443
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/lap-entrypoint.sh"]
