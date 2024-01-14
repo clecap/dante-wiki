@@ -485,8 +485,8 @@ function fixPermissionsContainer() {
   # This defines the target ownership for all files
   local OWNERSHIP="100.101"
   printf "*** Fixing permissions of files ... \n"
-    docker exec -it my-lap-container chown -R ${OWNERSHIP} /var/www/html/wiki-dir
-    docker exec -it my-lap-container chmod 700 /var/www/html/wiki-dir
+    docker exec my-lap-container chown -R ${OWNERSHIP} /var/www/html/wiki-dir
+    docker exec my-lap-container chmod 700 /var/www/html/wiki-dir
   printf "DONE fixing permissions of files\n\n"
 }
 
