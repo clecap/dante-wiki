@@ -361,8 +361,8 @@ function injectKeys () {
       chmod 400 ${PRIVATE_KEY}
       printf "*** Found a private key at ${PRIVATE_KEY}, copying it in and fixing permissions ... \n" 
       docker cp $PRIVATE_KEY    $LAP_CONTAINER:/etc/ssl/apache2/server.key
-      docker exec -it $LAP_CONTAINER   chown root.root /etc/ssl/apache2/server.key
-      docker exec -it $LAP_CONTAINER   chmod 400 /etc/ssl/apache2/server.key
+      docker exec $LAP_CONTAINER   chown root.root /etc/ssl/apache2/server.key
+      docker exec $LAP_CONTAINER   chmod 400 /etc/ssl/apache2/server.key
       printf "DONE\n\n"
     else
       printf "%b" "\e[1;31m *** ERROR: Found no private key, checked at ${PRIVATE_KEY} *** *** \e[0m"
@@ -372,8 +372,8 @@ function injectKeys () {
       printf "*** Found a public key at ${PUBLIC_KEY}, copying it in and fixing permissions ... \n" 
       chmod 444 ${PUBLIC_KEY}
       docker cp $PUBLIC_KEY $LAP_CONTAINER:/etc/ssl/apache2/server.pem
-      docker exec -it $LAP_CONTAINER   chown root.root /etc/ssl/apache2/server.pem
-      docker exec -it $LAP_CONTAINER   chmod 444 /etc/ssl/apache2/server.pem
+      docker exec $LAP_CONTAINER   chown root.root /etc/ssl/apache2/server.pem
+      docker exec $LAP_CONTAINER   chmod 444 /etc/ssl/apache2/server.pem
       printf "DONE\n\n"
     else
       printf "%b" "\e[1;31m *** ERROR: Found no private key, checked at ${PRIVATE_KEY} *** *** \e[0m"
@@ -430,7 +430,7 @@ function apacheRestartDocker () {  # restart the apaches
   printf "DONE\n\n"
 
   printf "*** Restarting apaches\n"
-    docker exec -it $LAP_CONTAINER  httpd
+    docker exec $LAP_CONTAINER  httpd
   printf "DONE\n\n"
 }
 
