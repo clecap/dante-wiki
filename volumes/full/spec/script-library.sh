@@ -425,7 +425,7 @@ function makeMediawikiPrivate () { # during installation make mediawiki-PRIVATE.
 
 function apacheRestartDocker () {  # restart the apaches
   printf "*** Killing apaches and waiting 10 seconds for processes to settle\n"
-    docker exec -it $LAP_CONTAINER  killall httpd
+    docker exec $LAP_CONTAINER  killall httpd
     sleep 10
   printf "DONE\n\n"
 
