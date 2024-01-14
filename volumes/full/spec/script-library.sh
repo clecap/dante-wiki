@@ -426,7 +426,7 @@ function makeMediawikiPrivate () { # during installation make mediawiki-PRIVATE.
 function apacheRestartDocker () {  # restart the apaches
   printf "*** Killing apaches and waiting 10 seconds for processes to settle\n"
     # below necessary to prevent error status when no process was found
-    docker exec $LAP_CONTAINER bash -c "killall httpd || echo 'No process running' "
+    docker exec $LAP_CONTAINER /bin/ash -c "killall httpd || echo 'No process running' "
     sleep 10
   printf "DONE\n\n"
 
