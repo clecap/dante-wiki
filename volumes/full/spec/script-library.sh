@@ -425,7 +425,8 @@ function makeMediawikiPrivate () { # during installation make mediawiki-PRIVATE.
 
 function apacheRestartDocker () {  # restart the apaches
   printf "*** Killing apaches and waiting 10 seconds for processes to settle\n"
-    docker exec $LAP_CONTAINER  killall httpd
+    # below necessary to prevent error status when no process was found
+    docker exec $LAP_CONTAINER bash -c "killall httpd || echo 'No process running' "
     sleep 10
   printf "DONE\n\n"
 
@@ -476,7 +477,7 @@ function fixPermissionsProduction() {
 #  [ -f ${TOP_DIR}/volumes/full/content/${TARGET}/LocalSettings.php ]     &&  printf "\n\n----------- exists \n\n"
 #    [ -f ${TOP_DIR}/volumes/full/content/${TARGET}/LocalSettings.php ]     &&  chmod -f 700 ${TOP_DIR}/volumes/full/content/${TARGET}/LocalSettings.php
 #    [ -f ${TOP_DIR}/volumes/full/content/${TARGET}/mediawiki-PRIVATE.php ] && chmod -f 700 ${TOP_DIR}/volumes/full/content/${TARGET}/mediawiki-PRIVATE.php
-  printf "DONE fixing local permissions"
+  printf "DONE fixing local permissions\n\n"
 }
 
 
