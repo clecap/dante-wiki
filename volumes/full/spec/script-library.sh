@@ -662,7 +662,7 @@ function runDB() {
   else
     printf " *** Container '$CONTAINER_NAME' does not exist. Creating and running it\n"
       docker run -d --name ${CONTAINER_NAME}                      \
-        --network ${NETWORK_NAME}                                      \
+        --network ${NETWORK_NAME}                                 \
         -h ${HOST_NAME}                                           \
         --env USERNAME=${USERNAME}                                \
         -e MYSQL_ROOT_PASSWORD="${MYSQL_ROOT_PASSWORD}"           \
@@ -679,12 +679,32 @@ function runDB() {
 }
 
 
-function runLap() {
-  source CONF.sh
+function runLap() { # runs the lap container  
+  # Parameter 1:    string value:  https or http
+  # Parameter 2:    port number under which the service is exposed at the host computer running the service
+
+# TODO deprecated  
+#  source CONF.sh  
+
+  local SERVICE=$1
+  local PORT=$2
+
+  local PORT_SPEC=""
+
+  if [ "$SERVICE" = "https"]; then
+    PORTSPEC=" -p ${PORT}:443 "
+  else
+    if [ "$SERVICE" = "http"]; then
+      PORTSPEC=" -p ${PORT}:80 "
+    else
+      printf "\e[1;31m***\n*** ERROR at runLap: Incorrect service specification, must be http or https, is ${SERVICE}\n\n"
+      return 1
+    fi
+  fi
 
   local CONTAINER_NAME=my-lap-container
-  local PORT_HTTP=8080
-  local PORT_HTTPS=4443
+#  local PORT_HTTP=8080
+#  local PORT_HTTPS=4443
   local IMAGE_NAME=lap
   local HOST_NAME=${CONTAINER_NAME}
 
@@ -704,23 +724,18 @@ function runLap() {
     fi
   else
     printf " *** Container '$CONTAINER_NAME' does not exist. Creating and running it\n"
-      docker run -d --name ${CONTAINER_NAME} \
-        -p  ${PORT_HTTP}:80                       \
-        -p ${PORT_HTTPS}:443                      \
-        --network ${NETWORK_NAME}                     \
-        --volume ${VOLUME_NAME}:/${MOUNT_VOL}                     \
-        -h ${HOST_NAME}                 \
-        --env MODE=${MODE}              \
+      docker run -d --name ${CONTAINER_NAME}      \
+        ${PORTSPEC}                               \
+        --network ${NETWORK_NAME}                 \
+        --volume ${VOLUME_NAME}:/${MOUNT_VOL}     \
+        -h ${HOST_NAME}                           \
+        --env MODE=${MODE}                        \
         ${IMAGE_NAME}
     printf " DONE\n\n"
   fi
 
-
-
-
-  printf " *** Starting ${IMAGE_NAME} as ${CONTAINER_NAME} \n"
- 
-  printf " DONE\n\n"
+  printf " *** Starting image ${IMAGE_NAME} as container ${CONTAINER_NAME} \n"
+  printf " DONE runLap \n\n"
 }
 
 
