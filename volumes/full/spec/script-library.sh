@@ -703,8 +703,6 @@ function runLap() { # runs the lap container
   fi
 
   local CONTAINER_NAME=my-lap-container
-#  local PORT_HTTP=8080
-#  local PORT_HTTPS=4443
   local IMAGE_NAME=lap
   local HOST_NAME=${CONTAINER_NAME}
 
