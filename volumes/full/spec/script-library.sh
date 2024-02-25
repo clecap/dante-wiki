@@ -691,10 +691,10 @@ function runLap() { # runs the lap container
 
   local PORT_SPEC=""
 
-  if [ "$SERVICE" = "https"]; then
+  if [ "$SERVICE" = "https" ]; then
     PORTSPEC=" -p ${PORT}:443 "
   else
-    if [ "$SERVICE" = "http"]; then
+    if [ "$SERVICE" = "http" ]; then
       PORTSPEC=" -p ${PORT}:80 "
     else
       printf "\e[1;31m***\n*** ERROR at runLap: Incorrect service specification, must be http or https, is ${SERVICE}\n\n"
