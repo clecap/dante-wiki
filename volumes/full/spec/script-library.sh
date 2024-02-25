@@ -681,13 +681,15 @@ function runDB() {
 
 
 
-
-function cleanContainers() {
-  printf " *** cleanContainers called ... "
+# this is the new function
+function cleanDocker() {
+  printf " *** cleanDocker called ... "
     docker stop my-lap-container
     docker stop my-mysql
     docker container rm my-lap-container
     docker container rm my-mysql
+    docker volume rm lap-volume
+    docker volume rm mysql-volume´
   printf " DONE"
 }
 
