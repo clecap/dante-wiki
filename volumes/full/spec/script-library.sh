@@ -679,19 +679,30 @@ function runDB() {
 }
 
 
+# new function
+function cleanDockerContainer() {
+  local CONTAINER=$1
+  printf " ** Attempting to stop container ${CONTAINER}, if it exists \n"
+    docker ps -a | grep '${CONTAINER}' && docker container stop  -f '${CONTAINER}' || printf "Container ${CONTAINER} was not found when attempting to stop   \n"
+  printf " DONE stopping container ${CONTAINER}\n\n"
 
-
-# this is the new function
-function cleanDocker() {
-  printf " *** cleanDocker called ... "
-    docker stop my-lap-container
-    docker stop my-mysql
-    docker container rm my-lap-container
-    docker container rm my-mysql
-    docker volume rm lap-volume
-    docker volume rm mysql-volume´
-  printf " DONE"
+  printf " ** Attempting to remove container ${CONTAINER}, if it exists \n"
+    docker ps -a | grep '${CONTAINER}' && docker rm -f '${CONTAINER}'             || printf "Container ${CONTAINER} was not found when attempting to remove \n"
+  printf " DONE removing container ${CONTAINER}\n\n"
 }
+
+# new function
+function cleanDockerVolume() {
+  local VOLUME=$1
+  printf " ** Attempting to remove volume ${VOLUME}, if it exists \n"
+    docker volume ls | grep '${VOLUME}' && docker volume rm  '${VOLUME}'             || printf "Volume ${VOLUME} was not found when attempting to remove \n"
+  printf " DONE removing volume ${VOLUME}\n\n"
+}
+
+
+
+
+
 
 
 function runLap() { # runs the lap container  
