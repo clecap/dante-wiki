@@ -683,6 +683,8 @@ function runLap() { # runs the lap container
   # Parameter 1:    string value:  https or http
   # Parameter 2:    port number under which the service is exposed at the host computer running the service
 
+  printf " *** runLap: called with $1 $2 \n"
+
   local SERVICE=$1
   local PORT=$2
 
@@ -709,20 +711,19 @@ function runLap() { # runs the lap container
   local MODE=PHP
   local NETWORK_NAME=dante-network
 
-
-  printf " *** Starting image ${IMAGE_NAME} as container ${CONTAINER_NAME} \n"
-  printf " *** Port specification is: ${PORTSPEC} \n "
+  printf " *** runLap: Starting image ${IMAGE_NAME} as container ${CONTAINER_NAME} \n"
+  printf " *** runLap: Port specification is: ${PORTSPEC} \n "
 
   if docker container inspect "$CONTAINER_NAME" > /dev/null 2>&1; then
     if [ "$(docker container inspect -f '{{.State.Running}}' "$CONTAINER_NAME")" == "false" ]; then
-      printf " *** Container $CONTAINER_NAME exists but is stopped. Starting the container now.\n"
+      printf " *** runLap: Container $CONTAINER_NAME exists but is stopped. Starting the container now.\n"
         docker container start "$CONTAINER_NAME"
       printf " DONE starting container $CONTAINER_NAME\n\n"
     else
-      printf " *** Container '$CONTAINER_NAME' is already running.\n\n"
+      printf " *** runLap: Container '$CONTAINER_NAME' is already running.\n\n"
     fi
   else
-    printf " *** Container '$CONTAINER_NAME' does not exist. Creating and running it\n"
+    printf " *** runLap: Container '$CONTAINER_NAME' does not exist. Creating and running it\n"
       docker run -d --name ${CONTAINER_NAME}      \
         ${PORTSPEC}                               \
         --network ${NETWORK_NAME}                 \
