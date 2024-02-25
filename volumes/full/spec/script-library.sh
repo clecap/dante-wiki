@@ -683,9 +683,6 @@ function runLap() { # runs the lap container
   # Parameter 1:    string value:  https or http
   # Parameter 2:    port number under which the service is exposed at the host computer running the service
 
-# TODO deprecated  
-#  source CONF.sh  
-
   local SERVICE=$1
   local PORT=$2
 
@@ -712,6 +709,10 @@ function runLap() { # runs the lap container
   local MODE=PHP
   local NETWORK_NAME=dante-network
 
+
+  printf " *** Starting image ${IMAGE_NAME} as container ${CONTAINER_NAME} \n"
+  printf " *** Port specification is: ${PORTSPEC} \n "
+
   if docker container inspect "$CONTAINER_NAME" > /dev/null 2>&1; then
     if [ "$(docker container inspect -f '{{.State.Running}}' "$CONTAINER_NAME")" == "false" ]; then
       printf " *** Container $CONTAINER_NAME exists but is stopped. Starting the container now.\n"
@@ -732,7 +733,6 @@ function runLap() { # runs the lap container
     printf " DONE\n\n"
   fi
 
-  printf " *** Starting image ${IMAGE_NAME} as container ${CONTAINER_NAME} \n"
   printf " DONE runLap \n\n"
 }
 
