@@ -679,6 +679,19 @@ function runDB() {
 }
 
 
+
+
+
+function cleanContainers() {
+  printf " *** cleanContainers called ... "
+    docker stop my-lap-container
+    docker stop my-mysql
+    docker container rm my-lap-container
+    docker container rm my-mysql
+  printf " DONE"
+}
+
+
 function runLap() { # runs the lap container  
   # Parameter 1:    string value:  https or http
   # Parameter 2:    port number under which the service is exposed at the host computer running the service
