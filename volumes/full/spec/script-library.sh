@@ -468,8 +468,10 @@ function removeLocalSettings () {  # removes the LocalSettings.php file, reasona
 
 function fixPermissionsProduction() {
   local TARGET="wiki-dir"
-  printf "\n *** Fixing local permissions for production\n" 
-    [ -f  ${TOP_DIR}/CONF.sh ] && printf "CONF.sh exists\n"
+  printf "\n *** Fixing local permissions for production\n"
+
+  # TODO: fix this function
+  #    [ -f  ${TOP_DIR}/CONF.sh ] && printf "CONF.sh exists\n"
 
 #    [ -f  ${TOP_DIR}/CONF.sh ] && chmod -f 700 ${TOP_DIR}/CONF.sh
 #    [ -d ${TOP_DIR}/../DANTE-BACKUP ] && chmod -f 700 ${TOP_DIR}/../DANTE-BACKUP
@@ -624,7 +626,8 @@ function cleanUpDocker () { # cleaning up ressources to have a good fresh start;
 
 function runDB() {
  
-  source CONF.sh
+  # TODO: reprecate this code
+  # source CONF.sh
   # provides MYSQL_ROOT_PASSWORD
   # provides MYSQL_DUMP_USER
   # provides MYSQL_DUMP_PASSWORD
