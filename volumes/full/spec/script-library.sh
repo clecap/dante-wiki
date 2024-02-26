@@ -630,11 +630,11 @@ function cleanDockerContainer() {
   trap - ERR
 
   printf " ** Attempting to stop container ${CONTAINER}, if it exists \n"
-  docker container stop '${CONTAINER}' 
+  docker container stop ${CONTAINER} 
   printf " DONE stopping container ${CONTAINER}\n\n"
 
   printf " ** Attempting to remove container ${CONTAINER}, if it exists \n"
-  docker rm -f '${CONTAINER}'
+  docker rm -f ${CONTAINER}
   printf " DONE removing container ${CONTAINER}\n\n"
 
   trap 'handle_error $LINENO ${BASH_LINENO[@]} $BASH_COMMAND' ERR
