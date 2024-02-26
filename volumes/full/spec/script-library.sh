@@ -610,7 +610,7 @@ function cleanUpDocker () { # cleaning up ressources to have a good fresh start;
     docker ps -a | grep '${CONTAINER}' && docker rm -f '${LAP_CONTAINER}'             || printf "Container ${CONTAINER} was not found when attempting to remove \n"
   printf " DONE removing container ${CONTAINER}\n\n"
 
-  docker system prune
+  docker system prune --force --all
 
   printf " ** Attempting to volume ${CONTAINER}, if it exists \n"
     docker volume ls | grep '${VOLUME}' && docker volume rm  '${VOLUME}'             || printf "Volume ${VOLUME} was not found when attempting to remove \n"
