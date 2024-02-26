@@ -30,7 +30,7 @@ function handle_error {
   printf "\e[0m";
   exit $retval
 }
-
+ 
 # See https://stackoverflow.com/questions/24398691/how-to-get-the-real-line-number-of-a-failing-bash-command
 if (( ${BASH_VERSION%%.*} <= 3 )) || [[ ${BASH_VERSION%.*} = 4.0 ]]; then
   trap '[[ $FUNCNAME = handle_error ]] || { last_lineno=$real_lineno; real_lineno=$LINENO; }' DEBUG
