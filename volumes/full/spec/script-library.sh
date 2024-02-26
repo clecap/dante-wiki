@@ -573,7 +573,7 @@ docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER} php maintenance/install
     --server         "$MEDIAWIKI_SITE_SERVER" \
     --scriptpath     "$MEDIAWIKI_SCRIPT_PATH" \
     --lang           "$MEDIAWIKI_SITE_LANG" \
-    --pass           meinadministrator \
+    --pass           "$MEDIAWIKI_ADMIN_PASS" \
     "$MEDIAWIKI_SITE_NAME" \
     "$MEDIAWIKI_ADMIN_USER"
 
