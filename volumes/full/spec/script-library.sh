@@ -596,7 +596,7 @@ fi
 
 
 
-
+# deprecate this function TODO
 function cleanUpDocker () { # cleaning up ressources to have a good fresh start; produces no error when not found
   local CONTAINER=$1
   local VOLUME=$2
