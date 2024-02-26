@@ -4,7 +4,7 @@
 # This is a library of bash script functions
 #
 
-SCRIPT_LIB_VERSION=2.50
+SCRIPT_LIB_VERSION=2.51
 
 SECRET_FILE="${TOP_DIR}/private/mysql-root-password.txt"
 
