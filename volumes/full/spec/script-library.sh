@@ -4,14 +4,9 @@
 # This is a library of bash script functions
 #
 
-
 SCRIPT_LIB_VERSION=2.50
 
-
-
 SECRET_FILE="${TOP_DIR}/private/mysql-root-password.txt"
-
-
 
 # propagate traps into called functions:
 set -E
@@ -50,67 +45,12 @@ function simpleEntryPage () { #  dynamically generate a simple entry page on the
 }
 
 
-# currently not used anywhere - maybe we deprecate
-#
-#function addentry() { # add an entry into ${MOUNT}/index.html as startingpoint for the domain
-#  # EXPECTS GLOBALS:
-#  # MOUNT
-#  # VOLUME_PATH
-#  # LAP_CONTAINER
-#
-#  printf "*** Adding ${MOUNT}/${VOLUME_PATH} mount=${MOUNT} volpath=${VOLUME_PATH}"
-#  printf "*   Touching ${MOUNT}/index.html"
-#    docker exec -w /${MOUNT} ${LAP_CONTAINER} touch ${MOUNT}/index.html
-#
-#  docker exec ${LAP_CONTAINER} /bin/sh -c "echo \"<a href='/${VOLUME_PATH}/index.php'>${MOUNT}/${VOLUME_PATH}/index.php</a><br><br>\" >> ${MOUNT}/index.html"
-#
-#  printf " DONE \n\n"
-#}
-
-
-
-
-
-
-# deprecate
-#
-#getSkins () {      #  copy in skins
-#  TARGET=$1
-#
-#  local SKIN_DIR=${TOP_DIR}/volumes/full/content/${TARGET}/skins
-#  cd ${SKIN_DIR}
-#
-#  echo "<?php " >> ${TOP_DIR}/volumes/full/content/${TARGET}/DanteSkinsInstalled.php
-#
-#  # Modern
-#  printf "*** Installing skin Modern\n"
-#  mkdir ${SKIN_DIR}/Modern
-#  git clone -b $MW_VERSION --single-branch https://gerrit.wikimedia.org/r/mediawiki/skins/Modern Modern
-#  rm -Rf ${SKIN_DIR}/Modern/.git
-#  echo "wfLoadSkin( 'Modern' );" >> ${TOP_DIR}/volumes/full/content/${TARGET}/DanteSkinsInstalled.php
-#  printf "DONE installing skin Modern\n\n"
-#
-#  # Refreshed
-#  printf "*** Installing skin Refreshed"
-#  mkdir ${SKIN_DIR}/Refreshed
-#  git clone -b $MW_VERSION --single-branch https://gerrit.wikimedia.org/r/mediawiki/skins/Refreshed Refreshed
-#  rm -Rf ${SKIN_DIR}/Refreshed/.git
-#  echo "wfLoadSkin( 'Refreshed' );" >> ${TOP_DIR}/volumes/full/content/${TARGET}/DanteSkinsInstalled.php
-#
-  # Chameleon          skin is broken
-  # CologneBlue        uses a method which is deprecated in 1.39
-#}
-
-
-
 function getSkinGerrit () {
   local TARGET=$1
   local SKIN=$2
 
   local SKIN_DIR=${TOP_DIR}/volumes/full/content/${TARGET}/skins
   cd ${SKIN_DIR}
-
-
 
   # Modern
   printf "*** Installing skin Modern\n"
@@ -695,18 +635,26 @@ function cleanDockerContainer() {
   printf " DONE removing container ${CONTAINER}\n\n"
 }
 
+
+function volumeExists {
+  #  trick used from https://sidshome.wordpress.com/2021/12/17/how-to-check-in-bash-script-if-a-docker-volume-does-not-exist/
+  if [ "$(docker volume ls -f name=$1 | awk '{print $NF}' | grep -E '^'$1'$')" ]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
 # new function
 function cleanDockerVolume() {
   local VOLUME=$1
-  printf " ** Attempting to remove volume ${VOLUME}, if it exists \n"
-    docker volume ls | grep '${VOLUME}' && docker volume rm  '${VOLUME}'             || printf "Volume ${VOLUME} was not found when attempting to remove \n"
+  if volumeExists ${VOLUME}; then
+    docker volume rm ${VOLUME}
+  else
+    printf " DONE. Volume ${VOLUME} did not exist any more "
+  fi
   printf " DONE removing volume ${VOLUME}\n\n"
 }
-
-
-
-
-
 
 
 function runLap() { # runs the lap container  
