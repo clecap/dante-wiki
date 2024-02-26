@@ -626,13 +626,18 @@ function runDB() {
 # new function
 function cleanDockerContainer() {
   local CONTAINER=$1
+
+  trap - ERR
+
   printf " ** Attempting to stop container ${CONTAINER}, if it exists \n"
-    docker ps -a | grep '${CONTAINER}' && docker container stop  -f '${CONTAINER}' || printf "Container ${CONTAINER} was not found when attempting to stop   \n"
+  docker container stop '${CONTAINER}' 
   printf " DONE stopping container ${CONTAINER}\n\n"
 
   printf " ** Attempting to remove container ${CONTAINER}, if it exists \n"
-    docker ps -a | grep '${CONTAINER}' && docker rm -f '${CONTAINER}'             || printf "Container ${CONTAINER} was not found when attempting to remove \n"
+  docker rm -f '${CONTAINER}'
   printf " DONE removing container ${CONTAINER}\n\n"
+
+  trap 'handle_error $LINENO ${BASH_LINENO[@]} $BASH_COMMAND' ERR
 }
 
 
