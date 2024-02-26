@@ -577,7 +577,6 @@ docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER} php maintenance/install
     "$MEDIAWIKI_SITE_NAME" \
     "$MEDIAWIKI_ADMIN_USER"
 
-  echo !!
 
   echo ""
   echo "_______________________________________"
