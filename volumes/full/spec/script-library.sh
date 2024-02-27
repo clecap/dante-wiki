@@ -544,11 +544,12 @@ function setUserPreferences () {
 # assume we have global  MOUNT   VOLUME_PATH   LAP_CONTAINER   set  
   local WK_USER="Admin"
 
-  docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER} php maintenance/update.php  --user "${WK_USER}"  --setpref aws-accesskey="One"
-  docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER} php maintenance/update.php  --user "${WK_USER}"  --setpref aws-secretaccesskey="Two"
-  docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER} php maintenance/update.php  --user "${WK_USER}"  --setpref aws-bucketname="Three"
-  docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER} php maintenance/update.php  --user "${WK_USER}"  --setpref aws-region="Four Region"
-  docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER} php maintenance/update.php  --user "${WK_USER}"  --setpref aws-encpw="Pass Word"
+# error of ChatGPT to suggest this
+#  docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER} php maintenance/update.php  --user "${WK_USER}"  --setpref aws-accesskey="One"
+#  docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER} php maintenance/update.php  --user "${WK_USER}"  --setpref aws-secretaccesskey="Two"
+#  docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER} php maintenance/update.php  --user "${WK_USER}"  --setpref aws-bucketname="Three"
+#  docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER} php maintenance/update.php  --user "${WK_USER}"  --setpref aws-region="Four Region"
+#  docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER} php maintenance/update.php  --user "${WK_USER}"  --setpref aws-encpw="Pass Word"
 }
 
 # deprecate this function TODO
