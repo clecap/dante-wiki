@@ -15,4 +15,16 @@ $wgLocaltimezone="Europe/Berlin";
 
 $DEEPL_API_KEY="INSERT-API-KEY";
 
+
+
+
+
+
+
+
+
+
+
+
+
 ?>
