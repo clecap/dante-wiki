@@ -55,10 +55,10 @@ function getSkinGerrit () {
   # Modern
   printf "*** Installing skin Modern\n"
   mkdir ${SKIN_DIR}/${SKIN}
-  git clone -b $MW_VERSION --single-branch https://gerrit.wikimedia.org/r/mediawiki/skins/${SKIND} ${SKIN}
-  rm -Rf ${SKIN_DIR}/${SKIND}/.git
-  echo "wfLoadSkin( '${SKIND}' );" >> ${TOP_DIR}/volumes/full/content/${TARGET}/DanteSkinsInstalled.php
-  printf "DONE installing skin ${SKIND}\n\n"
+  git clone -b $MW_VERSION --single-branch https://gerrit.wikimedia.org/r/mediawiki/skins/${SKIN} ${SKIN}
+  rm -Rf ${SKIN_DIR}/${SKIN}/.git
+  echo "wfLoadSkin( '${SKIN}' );" >> ${TOP_DIR}/volumes/full/content/${TARGET}/DanteSkinsInstalled.php
+  printf "DONE installing skin ${SKIN}\n\n"
 
   # Chameleon          skin is broken
   # CologneBlue        uses a method which is deprecated in 1.39
@@ -410,8 +410,11 @@ function fixPermissionsProduction() {
   local TARGET="wiki-dir"
   printf "\n *** Fixing local permissions for production\n"
 
-  # TODO: fix this function
+
   #    [ -f  ${TOP_DIR}/CONF.sh ] && printf "CONF.sh exists\n"
+
+
+#  chmod -f 700 ${TOP_DIR}/CONF.sh
 
 #    [ -f  ${TOP_DIR}/CONF.sh ] && chmod -f 700 ${TOP_DIR}/CONF.sh
 #    [ -d ${TOP_DIR}/../DANTE-BACKUP ] && chmod -f 700 ${TOP_DIR}/../DANTE-BACKUP
@@ -423,6 +426,7 @@ function fixPermissionsProduction() {
 }
 
 
+# fixes permissions inside of the container, using docker exec
 function fixPermissionsContainer() {
   # 100.101 on alpine installations is apache.www-data
   # This defines the target ownership for all files
@@ -538,7 +542,6 @@ fi
 
 function setUserPreferences () {
 # assume we have global  MOUNT   VOLUME_PATH   LAP_CONTAINER   set  
-
   local WK_USER="Admin"
 
   docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER} php maintenance/update.php  --user "${WK_USER}"  --setpref aws-accesskey="One"
@@ -546,7 +549,6 @@ function setUserPreferences () {
   docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER} php maintenance/update.php  --user "${WK_USER}"  --setpref aws-bucketname="Three"
   docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER} php maintenance/update.php  --user "${WK_USER}"  --setpref aws-region="Four Region"
   docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER} php maintenance/update.php  --user "${WK_USER}"  --setpref aws-encpw="Pass Word"
-
 }
 
 # deprecate this function TODO
