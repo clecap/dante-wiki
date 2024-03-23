@@ -65,7 +65,7 @@ RUN apk --no-cache update &&   \
     apk --no-cache add mysql-client && \
 #   need msmtp to write simple mails to inform about backup job completion and more
     apk --no-cache add msmtp && \
-### TODO: more
+#
     echo "*** *** Doing cleanups of layer "   && \
     apk del g++ make && \
 #   cleanup
