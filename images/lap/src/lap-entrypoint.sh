@@ -12,7 +12,7 @@
 chmod 400 /etc/ssl/apache2/server.key
 chmod 444 /etc/ssl/apache2/server.pem
 
-# Iterate over each argument
+# Iterate over each argument in the list of arguments we are called on
 for script in "$@"; do
     # Check if the file exists and is a regular file
     if [ -f "$script" ]; then

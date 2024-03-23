@@ -354,7 +354,17 @@ function makeMediawikiPrivate () { # during installation make mediawiki-PRIVATE.
     echo  "  'auth'     => true                                // shall authentisation be used    " >> ${MWP}
     echo "]; "                                      >> ${MWP}
     echo "\$wgLocaltimezone='${LOCALTIMEZONE}';"    >> ${MWP}
+
     echo "\$DEEPL_API_KEY='${DEEPL_API_KEY};'"      >> ${MWP}
+
+    # AWS data for an S3 user restricted to backup   dantebackup.iuk.one
+    echo "\$wgDefaultUserOptions['aws-accesskey']       = '${AWS_ACCESSKEY}';"      >> ${MWP}
+    echo "\$wgDefaultUserOptions['aws-secretaccesskey'] = '${AWS_SECRETACCESSKEY}';"    >> ${MWP}
+    echo "\$wgDefaultUserOptions['aws-bucketname']      =  '${AWS_BUCKETNAME}';"    >> ${MWP}
+    echo "\$wgDefaultUserOptions['aws-region']          =  '${AWS_REGION}';"    >> ${MWP}
+    echo "\$wgDefaultUserOptions['aws-encpw']           =  '${AWS_ENCPW}';"    >> ${MWP}
+
+
     echo "?>  "                                     >> ${MWP}
     cp ${MWP}  ${DIR}/volumes/full/content/wiki-dir
     chmod 700  ${DIR}/volumes/full/content/wiki-dir
@@ -753,7 +763,6 @@ function addingReferenceToDante () {  # addingReferenceToDante MOUNT  VOLUME_PAT
     docker exec -w /${MOUNT}/${VOLUME_PATH}   ${LAP_CONTAINER}  sh -c "echo 'include (\"DanteSettings.php\"); ' >> LocalSettings.php "
   printf  "DONE\n\n"
 }
-
 
 
 

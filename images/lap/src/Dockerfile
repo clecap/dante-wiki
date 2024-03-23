@@ -59,10 +59,12 @@ RUN apk --no-cache update &&   \
     mkdir -p /var/www/html &&                         \
 #   remove remaining alpine container mount point
     rm -Rf /var/www/localhost && \
-#   want access to aws client tools
+#   need access to aws client tools for the backup system to aws
     apk --no-cache add aws-cli && \
-#   we want mysql client cli available to be able to make dumps and restores via webserver interaction and via mediawiki special pages
+#   need mysql client cli to make dumps and restores via webserver interaction and via mediawiki special pages
     apk --no-cache add mysql-client && \
+#   need msmtp to write simple mails to inform about backup job completion and more
+    apk --no-cache add msmtp && \
 ### TODO: more
     echo "*** *** Doing cleanups of layer "   && \
     apk del g++ make && \
