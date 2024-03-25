@@ -1,4 +1,4 @@
-FROM tex
+FROM clecap/tex
 
 ENV PHP_INI_DIR /etc/php/7.4
 
