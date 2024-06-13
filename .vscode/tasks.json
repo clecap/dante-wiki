@@ -15,7 +15,7 @@
     {"label": "113 CLONE PARSIFAL from github:      volumes/full/spec/git-clone-from-parsifal.sh",          "command": "volumes/full/spec/git-clone-from-parsifal.sh"}
   ,
  {
-      "label": "Run docker-compose up",
+      "label": "2 Run docker-compose up",
       "type": "docker-compose",
       "dockerCompose": {
         "up": {
