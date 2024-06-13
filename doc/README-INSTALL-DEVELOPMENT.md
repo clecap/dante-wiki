@@ -4,24 +4,6 @@ This is the README file for a development machine.
 
 ## Concepts
 
-
-### Paths and Proxies
-
-We are constructing an HTTP based server which offers access to a number of different services which are
-residing on the same web server and distinguished from each other by a path prefix.
-
-The mapping of a domain name, possibly with a path prefix, will be done by a reverse proxy.
-
-This reverse proxy will also take care of access restrictions.
-
-
-#### Example
-
-Proxy delegates https://www.clemenscap.de/dante1 to http://192.168.3.250:8080/wiki-dir
-
-192.168.3.250:8080 offers 
-
-
 ## Prepare Requirements on Target Machine
 
 ### 1. Install Docker on Target Machine
@@ -41,13 +23,22 @@ Proxy delegates https://www.clemenscap.de/dante1 to http://192.168.3.250:8080/wi
 
   ```git clone https://github.com/clecap/continuous-deployment-test ```
 
-## Build Docker Images
+## Build Docker Images 
+
+We use 3 docker images:
+1. `tex`: Very long build time, contains the complete latex installation and a time consuming pymupdf installation
+2. `lap`: linux-apache-php stack.
+3. `mysql`: Mysql stack
+
+### Build Locally
+
+1. Build tex image: ```images/tex/bin/generate.sh```
+2. Build lap, based on tex image: ```images/lap/bin/generate.sh```
+3. Build mysql image: ```images/my-mysql/bin/generate.sh```
+
+### Build on DockerHub
 
 
-1. Build ssh image: `images/ssh/bin/buildAll.sh`
-2. Build tex image, based on ssh image: ```images/tex/bin/generate.sh```
-3. Build linux-apache-php image, based on tex image: ```images/lap/bin/generate.sh```
-4. Build mysql image: ```images/my-mysql/bin/generate.sh```
 
 ## Configure
 1. Prepare file ```conf/customize-PRIVATE.sh``` following ```customize-SAMPLE.sh```

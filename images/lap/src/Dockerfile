@@ -51,6 +51,13 @@ RUN apk --no-cache update &&   \
 ################    apk --no-cache add netpbm  && \       
 #   No xpdf in Alpine - using poppler-utils as replacement
     apk --no-cache add poppler-utils && \
+#   mscgen is needed for mediawiki extension Diagrams and has no package in Alpine
+    cd '/tmp' && \
+    curl -fsSL "http://www.mcternan.me.uk/mscgen/software/mscgen-static-0.20.tar.gz" -o '/tmp/mscgen.tar.gz' && \
+    tar -zxvf '/tmp/mscgen.tar.gz' && \
+    mkdir -p /opt/mscgen  && \
+    mv /tmp/mscgen-0.20/bin/mscgen /opt/mscgen/ && \
+    rm -rf /tmp/mscgen-* \
 #   SVG support in mediawiki
     apk --no-cache add librsvg && \
 #   /run/apache2 is pid directory for apache

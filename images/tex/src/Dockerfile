@@ -1,7 +1,7 @@
 #
 # Use fixed version number in the interest of reporducible builds
 #
-FROM alpine:3.18.4
+FROM alpine:3.20
 
 ENV LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \    
@@ -17,17 +17,17 @@ ENV LANG=C.UTF-8 \
     # the following environment variables are needed for TeX operations, for PARSIFAL and DANTEWIKI
     # 
     # main TeX directory
-    TEXDIR=/usr/local/texlive/2023  \
+    TEXDIR=/usr/local/texlive/2024  \
     # director for site-wide local files
     TEXMFLOCAL=/usr/local/texlive/texmf-local  \
     # directory for variable and automatically generated data
-    TEXMFSYSVAR=/usr/local/texlive/2023/texmf-var  \
+    TEXMFSYSVAR=/usr/local/texlive/2024/texmf-var  \
     # directory for local configuration
-    TEXMFSYSCONFIG=/usr/local/texlive/2023/texmf-config \
+    TEXMFSYSCONFIG=/usr/local/texlive/2024/texmf-config \
     # personal directory for variable and automatically generated data
-    TEXMFVAR=/var/www/.texlive2023/texmf-var         \           
+    TEXMFVAR=/var/www/.texlive2024/texmf-var         \           
     # personal directory for local config
-    TEXMFCONFIG=/var/www/.texlive2023/texmf-config   \
+    TEXMFCONFIG=/var/www/.texlive2024/texmf-config   \
     # directory for user specific files
     TEXMFHOME=/var/www/texmf       \
     # TEXINPUTS might be amended outside of the container as part of Parsifal etc.
@@ -55,26 +55,25 @@ RUN apk --no-cache update                       &&    \
     apk --no-cache add build-base                      && \
     apk --no-cache add linux-headers                   && \
     apk --no-cache add python3                         && \
-    apk --no-cache add python3-dev                     &&\
+    echo "*** python3 is now ready"                    && \
     ln -sf python3 /usr/bin/python                     &&\
-    python3 -m ensurepip                               &&\
-    pip3 install --no-cache --upgrade pip setuptools   &&\
-    pip3 install python-config                         &&\
-    pip3 install pymupdf                               &&\
+    apk --no-cache add python3-dev                     && \
+    apk --no-cache add py3-pip                         && \
+    pip3 install --no-cache --upgrade pip setuptools --break-system-packages   &&\
+    pip3 install python-config --break-system-packages                        &&\
+    pip3 install pymupdf --break-system-packages                              &&\
     echo "*** *** *** DONE building pymupdf "          && \
+   # no longer need mupdf as we use pymupdf 
+    ### apk --no-cache add mupdf && \
+    ### apk --no-cache add mupdf-tools && \
     apk --no-cache add py3-pygments                    && \
     apk --no-cache add ghostscript                     && \
     apk --no-cache add gnuplot                         && \
     apk --no-cache add inkscape                        && \
-# TODO: will be needed later for mediawiki extension Diagrams, but needs a separate source install for alpine
-#    apk --no-cache add mscgen                          && \
     apk --no-cache add plantuml                        && \
     apk --no-cache add graphviz                        && \
     # fonts needed for graphviz
     apk add --update font-bitstream-type1 ghostscript-fonts ttf-cantarell && \
-    # no longer needed as we use pymupdf  # TODO should adjust Parsifal to this
-    ### apk --no-cache add mupdf && \
-    ### apk --no-cache add mupdf-tools && \
     echo "*** *** *** Now installing Texlive "         && \
     cd /tmp && \
     wget https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && \
