@@ -14,7 +14,6 @@ TOP_DIR="${DIR}/../../../"
 # currently used in skin installer in script-library
 MW_VERSION=REL1_39
 
-
 source ${TOP_DIR}/volumes/full/spec/script-library.sh
 
 cleanUpVolume
@@ -32,9 +31,9 @@ echo "<?php " >> ${TOP_DIR}/volumes/full/content/${TARGET}/DanteSkinsInstalled.p
 getSkinGerrit wiki-dir Modern
 getSkinGerrit wiki-dir Refreshed
 
-
-
+# add image files
 addingImages wiki-dir
+
 installingDrawio wiki-dir
 
 copyInMinimal wiki-dir

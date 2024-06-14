@@ -1,7 +1,7 @@
 #
 # Use fixed version number in the interest of reporducible builds
 #
-FROM alpine:3.20
+FROM alpine:3.18.4
 
 ENV LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \    

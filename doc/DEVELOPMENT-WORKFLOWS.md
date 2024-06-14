@@ -1,6 +1,5 @@
 # Development Workflow #
 
-
 ## Directory Based Workflow ##
 
 The workflow is supported using vscode tasks defined in .vscode and available in task manager. The shaded areas below reference such tasks.
