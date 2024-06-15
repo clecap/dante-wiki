@@ -1,3 +1,4 @@
+#### Description
 
 LAP is a LINUX APACHE PHP stack (without MySQL or other DB), configured for the purposes of the DANTE project.
 
@@ -5,22 +6,15 @@ LAP is a LINUX APACHE PHP stack (without MySQL or other DB), configured for the 
 
 `generate.sh` generate the image from the dockerfile and docker context in /src
 
-# Additional Files #
+# Apache / PHP Remarks
+
+## PHP Integration 
 
 
-
-
-# Apache / PHP Remarks #
-
-## PHP Integration ##
-
-
-### Situation ###
+### Situation 
 The container provides two different possibilities for a PHP integration:
 * PHP FPM
 * MOD_PHP
-
-### Reason ###
 
 PHP FPM is the more efficient and modern integration. However, we had some cases of unexplained crashes
 due to PHP problems in FPM which did not show up in MOD_PHP. We therefore want an easy possibility of 

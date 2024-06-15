@@ -7,6 +7,8 @@ echo "** Starting fpm in background..."
 echo "DONE with starting fpm in the background"
 
 echo "** Starting apache..."
+  MODE=FPM
+  export MODE
   /usr/sbin/httpd
 echo "DONE with starting apache"
 

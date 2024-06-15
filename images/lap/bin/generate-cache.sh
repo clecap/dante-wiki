@@ -1,17 +1,16 @@
 #!/bin/bash
 
-# generate a local docker image for the docker context in images/${CONTAINER_NAME}/src
+# generate a local docker image for the docker context in images/${IMAGE_NAME}/src
 
-IMAGE_NAME=dante
+IMAGE_NAME=lap
 
 # get directory this shell is running in
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-TOP_DIR="${DIR}/../../../"
 
 echo ""
 echo "BUILDING image with name ${IMAGE_NAME} from docker context at ${DIR}/../src"
 echo ""
 
-docker build -t ${IMAGE_NAME} --no-cache  ${DIR}/../src
+docker build -t ${IMAGE_NAME} ${DIR}/../src
 
 echo " "; echo "DONE" ; echo " "

@@ -1,6 +1,6 @@
-# Development Workflow #
+# Development Workflow
 
-## Directory Based Workflow ##
+## Directory Based Workflow
 
 The workflow is supported using vscode tasks defined in .vscode and available in task manager. The shaded areas below reference such tasks.
 
@@ -20,11 +20,6 @@ Execute the following **vscodium tasks**:
 * **Execute** task `push dante changes to github`
 * **Execute** task  `push Parsifal changes to github/dante`
 
-## Remote Based Workflow
-
-The following commands are to be executed in the target machine.
-
-* We want to get a **shell into the lap container**  ```dev/dshell.sh```
 
 ## References ##
 

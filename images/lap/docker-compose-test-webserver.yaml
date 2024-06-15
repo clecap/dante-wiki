@@ -1,0 +1,17 @@
+#
+# starts lap in test mode only for the webserver
+#
+# should provide a file at http://localhost:8080/phpinfo.php to see the php parameters
+# this file will be overwritten by a mounted volume (and thus become inaccessible) in operational settings
+#
+
+services:
+
+  webserver:
+    image: lap
+    container_name: my-lap-container
+    command: "run-apache.sh"
+    network_mode: bridge
+    ports:
+      - "8080:80"
+      - "4443:443"
