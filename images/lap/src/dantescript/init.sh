@@ -16,12 +16,14 @@ runMWInstallScript () {  # runMWInstallScript  MW_SITE_NAME  MW_SITE_SERVER  SIT
 
   local WK_USER="Admin"
 
-  MEDIAWIKI_DB_HOST=my-mysql
+  MEDIAWIKI_DB_HOST=my-dante-mysql
   MEDIAWIKI_DB_TYPE=mysql
-  MEDIAWIKI_DB_NAME=${DB_NAME}
+  MEDIAWIKI_DB_NAME=${MY_DB_NAME}
   MEDIAWIKI_DB_PORT=3306
-  MEDIAWIKI_DB_USER=${DB_USER}
-  MEDIAWIKI_DB_PASSWORD=${DB_PASS}
+  MEDIAWIKI_DB_USER=${MY_DB_USER}
+
+  MEDIAWIKI_DB_PASSWORD=${MY_DB_PASS}
+
   MEDIAWIKI_RUN_UPDATE_SCRIPT=true
 
   MEDIAWIKI_SITE_NAME="${MW_SITE_NAME}"
@@ -66,7 +68,13 @@ echo ""
 
 echo "*** CALLING MEDIAWIKI INSTALL ROUTINE"
 echo ""
-docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER} php maintenance/install.php \
+
+
+
+MOUNT=/var/www/html/
+VOLUME_PATH=/wiki-dir
+
+php ${MOUNT}${VOLUME_PATH}/maintenance/install.php \
     --confpath        ${MOUNT}/${VOLUME_PATH} \
     --dbname         "$MEDIAWIKI_DB_NAME" \
     --dbport         "$MEDIAWIKI_DB_PORT" \
@@ -84,29 +92,28 @@ docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER} php maintenance/install
     "$MEDIAWIKI_ADMIN_USER"
 
   echo ""
-  echo "_______________________________________"
+  echo "________________________________  we are past maintenance/install.php __________________"
   echo ""
 
 # check if we succeeded to generate LocalSettings.php
-docker exec -w /${MOUNT}/${VOLUME_PATH} ${LAP_CONTAINER}  [ -f "${MOUNT}/${VOLUME_PATH}/LocalSettings.php" ]
-EXIT_VALUE=$?
-echo "shell result $EXIT_VALUE"
-if [ "$EXIT_VALUE" == "0" ]; then
+if [ -e "${MOUNT}/${VOLUME_PATH}/LocalSettings.php" ]; then
   printf "\e[1;32m* SUCCESS:  ${MOUNT}/${VOLUME_PATH}/LocalSettings.php  generated \e[0m \n"
 else
   printf "\033[0;31m *ERROR:  Could not generate ${MOUNT}/${VOLUME_PATH}/LocalSettings.php - *** ABORTING \033[0m\n"
 fi
+
+
 }
-# endregion
 
 
-
+echo " "
+echo "** THIS IS init.sh ***** "
 
 
 
 rm -f LocalSettings.php    
 
-runMWInstallScript "${MW_SITE_NAME}"  "${MW_SITE_SERVER}" "ACRONYM" "password-dir"
+runMWInstallScript "mw-sitename"  "mw-siteserver" "ACRONYM" "password-dir"
 
 printf "*** Adding reference to DanteSettings.php ... "
   echo ' ' >> LocalSettings.php
@@ -120,7 +127,7 @@ printf  "DONE\n\n"
 
 
 printf "\n\n*** Doing a mediawiki maintenance update ... "
-  php maintenance/update.php
+  php ${MOUNT}${VOLUME_PATH}/maintenance/update.php
 printf "DONE"
 
 
@@ -129,29 +136,27 @@ printf "*** Importing initial set of Parsifal templates..."
   php maintenance/importTextFiles.php --prefix "MediaWiki:ParsifalTemplate/" --rc --overwrite extensions/Parsifal/initial-templates/*
 printf " DONE\n"
 
-
-
-  php maintenance/importDump.php --namespaces '8' --debug assets/minimal-initial-contents.xml
-  php maintenance/importDump.php --namespaces '10' --debug assets/minimal-initial-contents.xml
-  php maintenance/importDump.php --uploads --debug assets/minimal-initial-contents.xml
+  php ${MOUNT}${VOLUME_PATH}/maintenance/importDump.php --namespaces '8' --debug assets/minimal-initial-contents.xml
+  php ${MOUNT}${VOLUME_PATH}/maintenance/importDump.php --namespaces '10' --debug assets/minimal-initial-contents.xml
+  php ${MOUNT}${VOLUME_PATH}/maintenance/importDump.php --uploads --debug assets/minimal-initial-contents.xml
 
   # main page and sidebar need a separate check in to be up to date properly
-  php maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite --prefix "MediaWiki:" assets/Sidebar
-  php maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite assets/Main Page
+  php ${MOUNT}${VOLUME_PATH}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite --prefix "MediaWiki:" assets/Sidebar
+  php ${MOUNT}${VOLUME_PATH}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite assets/Main Page
 
   printf "\n\n**** RUNNING: initSiteStats \n"
-    php maintenance/initSiteStats.php --update
+    php ${MOUNT}${VOLUME_PATH}/maintenance/initSiteStats.php --update
   printf "DONE\n"
 
   printf "\n\n**** RUNNING: rebuildall \n"
-    php maintenance/rebuildall.php 
+    php ${MOUNT}${VOLUME_PATH}/maintenance/rebuildall.php 
   printf "DONE\n"
 
   printf "\n\n**** RUNNING: checkImages \n"
-    php maintenance/checkImages.php
+    php ${MOUNT}${VOLUME_PATH}/maintenance/checkImages.php
   printf "DONE\n"
 
   printf "\n\n**** RUNNING: refreshFileHeaders \n"
-    php maintenance/refreshFileHeaders.php --verbose
+    php ${MOUNT}${VOLUME_PATH}/maintenance/refreshFileHeaders.php --verbose
   printf "DONE\n"
 

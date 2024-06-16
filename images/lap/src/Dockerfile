@@ -10,12 +10,11 @@ ENV  PHP_VERSION=php-8.2.0
 
 ### MUST also adapt the minor version for php82-apache below !!
 
-
-RUN apk --no-cache update  && \
-    apk --no-cache upgrade && \
 ###
 ### BUILD PHP 
 ###
+RUN apk --no-cache update  && \
+    apk --no-cache upgrade && \
     apk add --no-cache libxml2 curl oniguruma libpng libjpeg-turbo libxpm freetype libzip openssl pcre bzip2       --virtual runtimes && \
     apk --no-cache add autoconf gcc g++ make cmake pkgconf bison build-base re2c                                   --virtual build-tools && \
     apk --no-cache add curl-dev libxml2-dev sqlite-dev oniguruma-dev libpng-dev libjpeg-turbo-dev libxpm-dev \
@@ -26,7 +25,7 @@ RUN apk --no-cache update  && \
     ./configure   \
       --prefix=/usr/local \
       --with-openssl \
-      --with-gd --with-avif  --with-jpeg  --with-png  --with-xpm  --with-webp \
+      --with-avif  --with-jpeg  --with-xpm  --with-webp \
       --with-curl \
       --with-pear \
       --with-zlib \
@@ -48,6 +47,31 @@ RUN apk --no-cache update  && \
     apk del -r build-tools build-deps && \
     rm -rf /var/cache/apk/*   && \
     rm -rf "/tmp/*"   
+
+##
+## BUILD PHP APCU
+##
+RUN apk --no-cache update  && \
+    apk --no-cache upgrade && \
+    apk --no-cache add autoconf gcc g++ make cmake build-base --virtual build-tools-apcu && \
+    cd /opt && \
+    wget https://pecl.php.net/get/apcu-5.1.22.tgz && \
+    tar -xzf apcu-5.1.22.tgz && \
+    cd apcu-5.1.22 && \
+    phpize && \
+    ./configure --enable-apcu && \
+    make && \
+    make install && \
+    make clean && \
+    echo "extension=apcu.so" | sudo tee -a /etc/php8/php.ini && \
+    php -m  && \
+    apk del -r build-tools-apcu && \
+    rm -rf /var/cache/apk/*   && \
+    rm -rf "/tmp/*"   
+
+
+########## TODO php.ini check stuff !!!!!!!!!!!!!!
+########## TODO: clean sources in /opt
 
 ##
 ## INSTALL COMPOSER 

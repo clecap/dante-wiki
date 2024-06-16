@@ -10,8 +10,8 @@
 services:
 
   database:
-    image: mysql
-    container_name: my-mysql
+    image: dante-mysql
+    container_name: my-dante-mysql
     networks:
       - dante-network
     healthcheck:
@@ -20,9 +20,9 @@ services:
       timeout: 5s
       retries: 10     
     secrets:
-     - mysql_root_password
-    environment:
-      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
+     - configuration
+    volumes:
+      - ./mysql-init:/docker-entrypoint-initdb.d
 
 
   webserver:
@@ -37,16 +37,11 @@ services:
     ports:
       - "8080:80"
       - "4443:443"
+    secrets:
+      - configuration
     networks: 
       - dante-network
-
-#  copy-in-service:
-#    image: alpine
-#    volumes:
-#      - source_template:/from
-#      - /Users/cap/DOCKER/dante-wiki/volumes/full/content:/to
-#    command: >
-#      /bin/ash -c "cd /from && cp -a . /to ; sleep infinity"
+    command: "run-apache.sh init.sh"
 
 
   phpmyadmin:
@@ -66,7 +61,5 @@ networks:
   dante-network:
 
 secrets:
-  mysql_root_password:
-    file: ../../private/mysql-root-password.txt
-
-
+  configuration:
+    file: ../../private/configuration.sh

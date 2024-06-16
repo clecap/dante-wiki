@@ -9,7 +9,24 @@
 # run-apache-fpm
 # sleep
 
-echo "/lap-entrypoint.sh: I was started"
+echo "*** This is /lap-entrypoint.sh"
+
+
+echo "*** /lap-entrypoint.sh sees the following secret files:"
+ls -alg /run/secrets
+echo ""
+if [ -f "/run/secrets/configuration" ]; then
+    echo "*** /lap-entrypoint.sh will now load configuration"
+    source /run/secrets/configuration
+    echo "*** /lap-entrypoint.sh did load configuration"
+  else
+    echo "*** /lap-entrypoint.sh could not find configuration file, EXITING "
+    exit 1
+fi
+
+
+
+
 
 chmod 400 /etc/ssl/apache2/server.key
 chmod 444 /etc/ssl/apache2/server.pem

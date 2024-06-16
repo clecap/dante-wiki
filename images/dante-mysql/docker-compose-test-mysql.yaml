@@ -1,0 +1,40 @@
+#
+# Starts a container for testing mysql status
+#
+
+
+services:
+
+  database:
+    image: dante-mysql
+    container_name: my-dante-mysql
+    networks:
+      - dante-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10     
+    secrets:
+      - configuration
+    volumes:
+      - ./mysql-init:/docker-entrypoint-initdb.d
+
+  phpmyadmin:
+    image: phpmyadmin:5.0
+    ports: 
+      - "9090:80"
+    container_name: my-php-myadmin
+    networks: 
+      - dante-network
+    environment:
+      PMA_HOST: my-mysql
+    depends_on:
+      - database
+
+networks:   
+  dante-network:    
+
+secrets:
+  configuration:
+    file: ../../private/configuration.sh
