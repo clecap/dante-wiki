@@ -24,16 +24,6 @@ if [ -f "/run/secrets/configuration" ]; then
     exit 1
 fi
 
-
-
-
-
-chmod 400 /etc/ssl/apache2/server.key
-chmod 444 /etc/ssl/apache2/server.pem
-
-crond
-echo "/lap-entrypoint.sh: Started crond"
-
 echo "/lap-entrypoint.sh: Now iterating ( $@ )"
 # Iterate over each argument in the list of arguments we are called on
 for script in "$@"; do

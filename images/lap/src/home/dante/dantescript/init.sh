@@ -2,45 +2,37 @@
 
 # This entrypoint initializes the database, generates LocalSettings.php and runs update.php
 
-runMWInstallScript () {  # runMWInstallScript  MW_SITE_NAME  MW_SITE_SERVER  SITE_ACRONYM  WK_PASS
-  #    run the mediawiki install script and generate a LocalSettings.php
 
-  printf "*** runMWInstallScript called with $# positional parameters \n\n"
+echo " "
+echo "** THIS IS /dantescript/init.sh ***** "
 
-  local MW_SITE_NAME=$1
-  local MW_SITE_SERVER=$2
-  local SITE_ACRONYM=$3
-  local WK_PASS=$4
 
-   printf "*** runMWInstallScript parsed the parameters as follows: MW_SITE_NAME= (${MW_SITE_NAME}) MW_SITE_SERVER=(${MW_SITE_SERVER}) SITE_ACRONYM=(${SITE_ACRONYM}) WK_PASS=(${WK_PASS})\n\n"
+rm -f LocalSettings.php
 
-  local WK_USER="Admin"
+runMWInstallScript 
 
-  MEDIAWIKI_DB_HOST=my-dante-mysql
-  MEDIAWIKI_DB_TYPE=mysql
-  MEDIAWIKI_DB_NAME=${MY_DB_NAME}
-  MEDIAWIKI_DB_PORT=3306
-  MEDIAWIKI_DB_USER=${MY_DB_USER}
 
-  MEDIAWIKI_DB_PASSWORD=${MY_DB_PASS}
+MEDIAWIKI_DB_HOST=my-dante-mysql
+MEDIAWIKI_DB_TYPE=mysql
+MEDIAWIKI_DB_NAME=${MY_DB_NAME}
+MEDIAWIKI_DB_PORT=3306
+MEDIAWIKI_DB_USER=${MY_DB_USER}
+MEDIAWIKI_DB_PASSWORD=${MY_DB_PASS}
 
-  MEDIAWIKI_RUN_UPDATE_SCRIPT=true
+MEDIAWIKI_RUN_UPDATE_SCRIPT=true
 
-  MEDIAWIKI_SITE_NAME="${MW_SITE_NAME}"
-  # MEDIAWIKI_SITE_SERVER="https://${LAP_CONTAINER}"
-  # TODO: problem: LAP_CONTAINER name is not resolved in the docker host
-################################################################# TODO: ADJUST 
-######
-###### This should rather be a name, maybe localhost TODO: because other wise the different https things do not match
-######
-#  MEDIAWIKI_SITE_SERVER="https://localhost"
-  MEDIAWIKI_SITE_SERVER=${MW_SITE_SERVER}
-  MEDIAWIKI_SCRIPT_PATH="/${VOLUME_PATH}"
-  # TODO: make language variable inputable into script
-  MEDIAWIKI_SITE_LANG=en
-  MEDIAWIKI_ADMIN_USER=${WK_USER}
-  MEDIAWIKI_ADMIN_PASS=${WK_PASS}
-  MEDIAWIKI_ENABLE_SSL=true
+MEDIAWIKI_SITE_NAME="${MW_SITE_NAME}"
+
+
+
+MEDIAWIKI_SITE_SERVER=${MW_SITE_SERVER}
+MEDIAWIKI_SCRIPT_PATH="/${VOLUME_PATH}"
+# TODO: make language variable inputable into script
+MEDIAWIKI_SITE_LANG=en
+MEDIAWIKI_ADMIN_USER=${WK_ADMIN_USER}
+MEDIAWIKI_ADMIN_PASS=${WK_ADMIN_PASS}
+MEDIAWIKI_ENABLE_SSL=true
+
 
 echo ""
 echo ________________
@@ -68,8 +60,6 @@ echo ""
 
 echo "*** CALLING MEDIAWIKI INSTALL ROUTINE"
 echo ""
-
-
 
 MOUNT=/var/www/html/
 VOLUME_PATH=/wiki-dir
@@ -103,17 +93,6 @@ else
 fi
 
 
-}
-
-
-echo " "
-echo "** THIS IS init.sh ***** "
-
-
-
-rm -f LocalSettings.php    
-
-runMWInstallScript "mw-sitename"  "mw-siteserver" "ACRONYM" "password-dir"
 
 printf "*** Adding reference to DanteSettings.php ... "
   echo ' ' >> LocalSettings.php
@@ -129,7 +108,6 @@ printf  "DONE\n\n"
 printf "\n\n*** Doing a mediawiki maintenance update ... "
   php ${MOUNT}${VOLUME_PATH}/maintenance/update.php
 printf "DONE"
-
 
 
 printf "*** Importing initial set of Parsifal templates..."

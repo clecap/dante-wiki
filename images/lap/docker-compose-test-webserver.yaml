@@ -15,3 +15,10 @@ services:
     ports:
       - "8080:80"
       - "4443:443"
+    secrets:
+      - configuration
+
+
+secrets:
+  configuration:
+    file: ../../private/configuration.sh

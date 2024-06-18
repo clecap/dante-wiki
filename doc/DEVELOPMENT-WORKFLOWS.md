@@ -4,7 +4,7 @@
 
 The workflow is supported using vscode tasks defined in .vscode and available in task manager. The shaded areas below reference such tasks.
 
-### Preparations ###
+### Preparations
 Execute the following **vscodium tasks**:
 * `generate image lap` 
 * `generate image my-mysql` 

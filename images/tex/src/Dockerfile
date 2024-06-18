@@ -1,7 +1,9 @@
 #
 # Use fixed version number in the interest of reporducible builds
 #
-FROM alpine:3.18.4
+FROM debian:bookworm-slim
+
+ENV DEBIAN_FRONTEND=noninteractive
 
 ENV LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \    
@@ -33,47 +35,13 @@ ENV LANG=C.UTF-8 \
     # TEXINPUTS might be amended outside of the container as part of Parsifal etc.
     TEXINPUTS=/var/www/texinputs   \
     #  We are setting the path so that we can more easily exercise and test commands inside of a docker exec shell
-    PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/texlive/2024/bin/x86_64-linuxmusl:/usr/local/texlive/2023/bin/x86_64-linuxmusl:/bin:/usr/local/texlive/2022/bin/x86_64-linuxmusl
+    PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/texlive/2024/bin/x86_64-linuxmusl:/bin:
 
 # Upgrade existing packages in the base image
-RUN apk --no-cache update                       &&    \  
-    apk --no-cache upgrade                      &&    \
-    apk --no-cache add wget                     &&    \
-    apk --no-cache add curl                     &&    \
-    apk --no-cache add rsync                    &&   \
-    apk --no-cache add unzip                    &&   \
-    apk --no-cache add git                      &&   \
-    apk --no-cache add gpg                      &&   \
-    apk --no-cache add tar                      && \
-    apk --no-cache add xorriso                  && \
-    apk --no-cache add fontconfig               && \
-    apk --no-cache add perl                     && \
-    apk --no-cache add openjdk11-jre            && \
-    apk --no-cache add ncurses-libs             && \
-    apk --no-cache add perl-unicode-linebreak   && \
-    echo "*** Now building pymupdf "                   && \
-    apk --no-cache add build-base                      && \
-    apk --no-cache add linux-headers                   && \
-    apk --no-cache add python3                         && \
-    echo "*** python3 is now ready"                    && \
-    ln -sf python3 /usr/bin/python                     &&\
-    apk --no-cache add python3-dev                     && \
-    apk --no-cache add py3-pip                         && \
-    pip3 install --no-cache --upgrade pip setuptools --break-system-packages   &&\
-    pip3 install python-config --break-system-packages                        &&\
-    pip3 install pymupdf --break-system-packages                              &&\
-    echo "*** *** *** DONE building pymupdf "          && \
-   # no longer need mupdf as we use pymupdf 
-    ### apk --no-cache add mupdf && \
-    ### apk --no-cache add mupdf-tools && \
-    apk --no-cache add py3-pygments                    && \
-    apk --no-cache add ghostscript                     && \
-    apk --no-cache add gnuplot                         && \
-    apk --no-cache add inkscape                        && \
-    apk --no-cache add plantuml                        && \
-    apk --no-cache add graphviz                        && \
-    # fonts needed for graphviz
-    apk add --update font-bitstream-type1 ghostscript-fonts ttf-cantarell && \
+
+RUN apt-get update && \
+    apt-get install -y   --no-install-recommends\
+      wget perl ghostscript libx11-dev libxaw7-dev ca-certificates && \
     echo "*** *** *** Now installing Texlive "         && \
     cd /tmp && \
     wget https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && \
@@ -91,10 +59,60 @@ RUN apk --no-cache update                       &&    \
     echo "tlpdbopt_sys_bin /usr/bin" >> install.profile && \
     # actually install TeX Live
     ./install-tl -profile install.profile  && \
-    echo "*** *** *** Now doing a layer cleanup "    && \
-    apk del wget curl rsync git gpg tar python3-dev build-base linux-headers    && \
-    cd /tmp && \
-    rm -Rf /tmp/* && \
-    rm -Rf /var/cache/apk/*
+    echo "*** *** *** Now doing a layer cleanup "  && \
+#    apk del wget curl rsync git gpg tar python3-dev build-base linux-headers    && \
+    apt-get autoremove -y && \
+    apt-get clean && \
+    rm -rf /usr/share/doc \
+      /usr/share/man \
+      /usr/share/locale/* \
+      /usr/share/info \
+      /var/cache/apt/* \
+      /var/cache/man/* \
+      /tmp/*
+
+#      /var/cache/debconf/*-old \
+#      /var/lib/apt/lists/* \
+#      /var/lib/dpkg/*-old \
+#      /var/lib/dpkg/info/* \
+
+
 
 ENTRYPOINT ["/bin/sh","-c","sleep infinity"]
+
+
+
+
+#curl                     &&    \
+# rsync                    &&   \
+# unzip                    &&   \
+# git                      &&   \
+# gpg                      &&   \
+# tar                      && \
+# xorriso                  && \
+#fontconfig               && \
+# perl                     && \
+# openjdk11-jre            && \
+# ncurses-libs             && \
+# perl-unicode-linebreak   && \
+# build-base                      && \
+#linux-headers                   && \
+# python3                         && \
+#    ln -sf python3 /usr/bin/python                     &&\
+# python3-dev                     && \
+# py3-pip                         && \
+#    pip3 install --no-cache --upgrade pip setuptools --break-system-packages   &&\
+#    pip3 install python-config --break-system-packages                        &&\
+#    pip3 install pymupdf --break-system-packages                              &&\
+#    echo "*** *** *** DONE building pymupdf "          && \
+   # no longer need mupdf as we use pymupdf 
+    ### apk --no-cache add mupdf && \
+    ### apk --no-cache add mupdf-tools && \
+#    apk --no-cache add py3-pygments                    && \
+#    apt-get install -y --no-install-recommends ghostscript                     && \
+#    gnuplot                         && \
+#    inkscape                        && \
+#     plantuml                        && \
+#     graphviz                        && \
+    # fonts needed for graphviz
+#    apk add --update font-bitstream-type1 ghostscript-fonts ttf-cantarell && \
