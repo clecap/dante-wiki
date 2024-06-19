@@ -11,6 +11,10 @@
 
 [![Scc Count Badge](https://sloc.xyz/github/clecap/dante-wiki/)](https://github.com/clecap/dante-wiki/)
 
+[![SBOM](https://img.shields.io/badge/SBOM-available-brightgreen)](https://github.com/clecap/doc/sbom.json)
+
+Description of your project.
+
 
 This repository is for development work on Dante-Wiki.
 

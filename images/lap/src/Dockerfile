@@ -106,3 +106,11 @@ CMD ["run-apache.sh"]
 ## Specify entrypoint, which will itself execute scripts provided as parameter
 ##
 ENTRYPOINT ["/lap-entrypoint.sh"]
+
+
+
+
+
+
+
+
