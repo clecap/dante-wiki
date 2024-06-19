@@ -13,11 +13,12 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 #   imagemagick  THUMBNAIL support in mediawiki
 #   DEFAULT-mysql-client      make dumps and restores via webserver interaction and via mediawiki special pages
 #   msmtp             write simple mails to inform about backup job completion and more
+#   php-curl:   must include this for the composer to run faster
 
 RUN apt-get update && \
     apt-get install -y   --no-install-recommends apache2 ca-certificates apache2-utils openssl && \
     apt-get install -y   --no-install-recommends php && \
-    apt-get install -y   --no-install-recommends php-common php-mysqli php-intl php-apcu php-mbstring php- php-gd php-json php-xml php-bcmath php-tokenizer php-igbinary php-opcache php-pear && \
+    apt-get install -y   --no-install-recommends php-common php-mysqli php-intl php-apcu php-mbstring php- php-gd php-json php-xml php-bcmath php-tokenizer php-igbinary php-opcache php-pear php-curl && \
     apt-get install -y   --no-install-recommends libapache2-mod-php default-mysql-client && \
     apt-get install -y   --no-install-recommends wget curl unzip git diffutils  && \
     apt-get install -y   --no-install-recommends imagemagick netpbm djvulibre-bin librsvg2-bin xpdf mscgen msmtp gnuplot-nox graphviz && \
@@ -78,10 +79,124 @@ RUN apt-get install -y --no-install-recommends python3.11-venv  && \
       /var/cache/man/* \
       /tmp/*
 
+
+
+
+
+# Set up args (does not create a new layer but provides formal symbols for the process)
+ARG MEDIAWIKI_VERSION=1.39.0
+ARG MEDIAWIKI_TARBALL=mediawiki-$MEDIAWIKI_VERSION.tar.gz
+ARG MEDIAWIKI_URL=https://releases.wikimedia.org/mediawiki/1.39/$MEDIAWIKI_TARBALL
+ARG TARGET=/wiki-dir
+
+ENV COMPOSER_ROOT_VERSION=${MEDIAWIKI_VERSION}
+
+
+ARG TOP_PATH=/var/www/html/wiki-dir
+
+# Download and extract MediaWiki
+RUN curl -o /tmp/$MEDIAWIKI_TARBALL $MEDIAWIKI_URL      && \
+    tar -xzf /tmp/$MEDIAWIKI_TARBALL -C /tmp   && \
+    rm /tmp/$MEDIAWIKI_TARBALL && \
+    mv /tmp/mediawiki-$MEDIAWIKI_VERSION /var/www/html/${TARGET} && \
+    chown -R www-data:www-data /var/www/html/${TARGET} && \
+  rm -Rf /var/www/html/${TARGET}/skins/Refreshed/.git
+
+
+
 ##
 ## COPY in docker context
 ##
 COPY . /
+
+
+## we need to open composer or we get problems with composer permission details
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
+
+#  We must adjust the global configuration file of composer and the loca configuration file of composer to permit the use of certain plugins.
+#  The list of these plugins we must get form error messages in the composer runs
+
+## the following is braindamaged composer construction
+## to find out, we must
+## 1) run the below composer install commands interactively in a shell
+## 2) wait for security confirmations and answer yes
+## 3) look at config.allow-plugins in the composer.json file, which gets modified in consequence of this
+## 4) add the elements added to composer.json into this shell file
+
+# TODO: do we need to make this ourselves ??? really
+# TODO: do we need to configure permissions locally AND globally ??? as above
+# TODO: do we really need that --no-interaction here ??
+# TODO: do we really need to mka ethe directory for bootstrap ourselves ??
+# TODO:
+# The skins autoregister in the installation routine, however Bootstrap does not. But then, Bootstrap must be loaded before some skins.
+# Therefore we must FIRST do the installation THEN install Bootstrap and inject that into the settings and only then install the skins and inject them (as they will now no longer autoregister)
+
+############################################ phpinfo.php rausnehmen !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+# composer wants us to do stuff as non-root  problem: git then cannot write to var www .git 
+# USER www-data
+
+WORKDIR ${TOP_PATH}
+
+RUN composer config --no-plugins allow-plugins.wikimedia/composer-merge-plugin true       
+
+RUN  composer config --no-plugins allow-plugins.composer/package-versions-deprecated true  && \
+    composer config --no-plugins allow-plugins.composer/installers true
+
+# need the file to exist before being able to configure
+RUN echo '{}' > ${TOP_PATH}/composer.local.json    && \
+       composer config --global allow-plugins true && \
+###    COMPOSER=${TOP_PATH}/composer.local.json composer config --no-plugins allow-plugins.wikimedia/composer-merge-plugin true   && \
+###    COMPOSER=${TOP_PATH}/composer.local.json composer config --no-plugins allow-plugins.composer/package-versions-deprecated true  && \
+###    COMPOSER=${TOP_PATH}/composer.local.json composer config --no-plugins allow-plugins.composer/installers true  && \
+    echo "<?php " > ${TOP_PATH}/DanteDynamicInstalls.php && \
+#   Install markdown parser https://github.com/erusev/parsedown
+    COMPOSER=${TOP_PATH}/composer.local.json  composer require erusev/parsedown && \
+    COMPOSER=${TOP_PATH}/composer.local.json  composer require erusev/parsedown && \
+#   Install markdown-extra https://michelf.ca/projects/php-markdown/extra/
+    COMPOSER=${TOP_PATH}/composer.local.json  composer require erusev/parsedown-extra && \
+    COMPOSER=${TOP_PATH}/composer.local.json  composer require benjaminhoegh/parsedown-extended 
+#   Install requirements for deepl integration in DantePresentations
+## TODO: has some small dependency problem which we solve later
+##    COMPOSER=${TOP_PATH}/composer.local.json  composer require deeplcom/deepl-php
+
+
+
+RUN /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/kuenzign/WikiMarkdown                                        WikiMarkdown                 main && \
+    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-MobileFrontend                MobileFrontend               REL1_39 && \
+#  installExtensionGithub  https://github.com/labster/HideSection/                                         HideSection master
+    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-RandomSelection               RandomSelection              REL1_39  && \
+    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-LabeledSectionTransclusion    LabeledSectionTransclusion   REL1_39 && \
+    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-RevisionSlider                RevisionSlider               REL1_39 && \
+    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-NativeSvgHandler              NativeSvgHandler             REL1_39 && \
+    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-UniversalLanguageSelector     UniversalLanguageSelector    REL1_39 && \
+#  installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-DrawioEditor                   DrawioEditor REL1_39
+# This extension is broken currently
+#  Use my own version - see my mediawiki-extensions-DrawioEditor Patch
+    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/clecap/mediawiki-extensions-DrawioEditor                      DrawioEditor                master && \
+# PATHCES:
+    wget https://raw.githubusercontent.com/clecap/mediawiki-extensions-DrawioEditor/master/PATCH-UploadedFile.php -O includes/libs/ParamValidator/Util/UploadedFile.php && \
+    wget https://raw.githubusercontent.com/clecap/mediawiki-extensions-DrawioEditor/master/PATCH-UploadBase.php -O includes/upload/UploadBase.php   && \
+##  looks like this extension is broken
+##  installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-WikEdDiff WikEdDiff REL1_39
+##  The following is broken currently in REL1_38 only, might be fine in higher releases
+    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/Universal-Omega/DynamicPageList3                  DynamicPageList3         REL1_39  && \
+##  installExtensionGithub https://github.com/clecap/DynamicPageList3 DynamicPageList3 master
+###### HACK: see README-DynamicPageList3-Clemens.md in TOPD_DIR/own for more details.
+##  docker cp $TOP_DIR/own/DynamicPageList3/ ${LAP_CONTAINER}:/${MOUNT}/${VOLUME_PATH}/extensions
+##
+##
+### currently to be done manually 
+###  installExtensionGithub  https://github.com/clecap/Parsifal  Parsifal  dante
+    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-WikiCategoryTagCloud  WikiCategoryTagCloud  REL1_39 && \
+    composer update
+
+
+
+
+
 
 ## 
 ## Adhere to default non-root user policy promoted by dockerhub
@@ -92,14 +207,14 @@ COPY . /
 #  Give non-root user ownership of the application files
 #  Set the default user
 
+USER root
+
 RUN useradd -m dante && echo "dante:password" | chpasswd && adduser dante sudo
-    WORKDIR /home/dante
-    RUN chown -R dante:dante /home/dante
-    USER dante
 
 
-
-
+WORKDIR /home/dante
+RUN chown -R dante:dante /home/dante
+USER dante
 
 
 

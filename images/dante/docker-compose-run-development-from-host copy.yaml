@@ -22,7 +22,7 @@ services:
     secrets:
      - configuration
     volumes:
-      - ./mysql-init:/docker-entrypoint-initdb.d
+#      - ./mysql-init:/docker-entrypoint-initdb.d
 
 
   webserver:
@@ -32,8 +32,7 @@ services:
       database:
         condition: service_healthy
     volumes:
-      - ../../volumes/full/content:/var/www/html
-      - ../../volumes/full/spec:/dantespec
+      - ../../activeVolume:/var/www/html
     ports:
       - "8080:80"
       - "4443:443"
