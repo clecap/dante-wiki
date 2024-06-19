@@ -97,6 +97,12 @@ RUN useradd -m dante && echo "dante:password" | chpasswd && adduser dante sudo
     RUN chown -R dante:dante /home/dante
     USER dante
 
+
+
+
+
+
+
 ##
 ## Default parameters for the entrypoint script below
 ##
