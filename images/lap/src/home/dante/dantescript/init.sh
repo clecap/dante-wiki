@@ -17,20 +17,16 @@ set -e                                  # abort execution on any error
 trap 'abort' EXIT                       # call abort on EXIT
 
 
-
-
 ###### send mail upon completion ????
 #### favicon must be included into the thing - and at the dockerfile level ## todo
-
 #### check if we are already initialized ##### TODO
-
 ####### crontab entries for backup and for job queue TODO
 
 MOUNT=/var/www/html/
 TARGET=wiki-dir
 
-####### TODO: directory where to pick up the minimal initial contents
-  CONT=/home/dante/initial-contents/generic 
+# directory where to pick up the minimal initial contents
+CONT=/home/dante/initial-contents/generic 
 
 
 
@@ -48,9 +44,6 @@ MEDIAWIKI_DB_PASSWORD=${MY_DB_PASS}
 MEDIAWIKI_RUN_UPDATE_SCRIPT=true
 
 MEDIAWIKI_SITE_NAME="${MW_SITE_NAME}"
-
-
-
 MEDIAWIKI_SITE_SERVER=${MW_SITE_SERVER}
 MEDIAWIKI_SCRIPT_PATH="/${TARGET}"
 # TODO: make language variable inputable into script
@@ -58,7 +51,6 @@ MEDIAWIKI_SITE_LANG=en
 MEDIAWIKI_ADMIN_USER=${WK_ADMIN_USER}
 MEDIAWIKI_ADMIN_PASS=${WK_ADMIN_PASS}
 MEDIAWIKI_ENABLE_SSL=true
-
 
 echo ""
 echo ________________
@@ -86,9 +78,6 @@ echo ""
 
 echo "*** CALLING MEDIAWIKI INSTALL ROUTINE"
 echo ""
-
-
-
 
 
 php ${MOUNT}${TARGET}/maintenance/install.php \
@@ -131,74 +120,6 @@ printf "*** Adding reference to DanteSettings.php ... "
 printf  "DONE\n\n"
 
 
-
-
-
-
-
-
-# the wiki directory into which we clone the files
-WIKI=${DIR}/../content/wiki-dir
-
-# the name of the branch to which we will clone
-BRANCH=master
-
-# the local git we use for all of this
-GIT_DIR=${WIKI}/.git
-
-# the remote repository
-REMOTE_REPO=https://github.com/clecap/dante-delta.git
-
-cd ${WIKI}
-
-
-# We must FIRST have a gitignore in place. If NOT then this triggers the scan of Visual Studio Codium,
-#   which detects all Mediawiki files as changed (too much), shuts down the rescanning and never sees the gitignore
-#
-printf "*** Pick up gitignore file from repository ..."
-  wget https://raw.githubusercontent.com/clecap/dante-delta/${BRANCH}/.gitignore
-printf "DONE\n\n"
-
-if [ -d "$GIT_DIR" ]; then
-  printf "*** Git directory ${GIT_DIR} already exists ... nothing DONE\n\n"
-else
-  printf "*** Git directory ${GIT_DIR} does not exist, initializing and setting to branch master ... \n"
-  git --git-dir=$GIT_DIR  init --initial-branch=$BRANCH
-  git --git-dir=$GIT_DIR  remote add origin $REMOTE_REPO
-###  git --git-dir=$GIT_DIR  config --local core.excludesfile ${DIR}/../../spec/git-ignore-for-delta       # configure this git to use spec/.gitignore
-##  git --git-dir=$GIT_DIR  
-  printf "DONE initializing a git\n\n"
-fi
-
-printf "*** Fetching origin ... "
-git --git-dir=$GIT_DIR --work-tree=${WIKI} fetch origin
-printf "DONE fetching origin\n\n"
-
-printf "*** Hard reset on local git ... "
-  git --git-dir=$GIT_DIR --work-tree=${WIKI}  reset --hard origin/master
-printf "DONE hard reset\n\n"
-
-printf "*** Pulling from ${BRANCH} ..."
-  git --git-dir=$GIT_DIR --work-tree=${WIKI}  pull origin master
-printf "DONE pulling \n\n"
-
-printf "*** Push once to connect..."
-  git push --set-upstream origin master
-printf "DONE pushing once\n\n"
-
-printf "\033[1;32m completed git-pull-from-delta.sh \033[0m \n"
-
-
-
-
-
-
-
-
-
-
-######## TODO #   docker exec ${LAP_CONTAINER} php ${MOUNT}${TARGET}/maintenance/importTextFiles.php --prefix "MediaWiki:ParsifalTemplate/" --rc --overwrite ${MOUNT}${TARGET}/extensions/Parsifal/initial-templates/*
-
 php ${MOUNT}${TARGET}/maintenance/importDump.php --namespaces '8' --debug $CONT/minimal-initial-contents.xml
 php ${MOUNT}${TARGET}/maintenance/importDump.php --namespaces '10' --debug $CONT/minimal-initial-contents.xml
 php ${MOUNT}${TARGET}/maintenance/importDump.php --uploads --debug $CONT/minimal-initial-contents.xml
@@ -211,8 +132,6 @@ php ${MOUNT}/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki
 printf "\n\n*** Doing a mediawiki maintenance update ... "
   php ${MOUNT}/${TARGET}/maintenance/update.php
 printf "DONE"
-
-
 
 
 printf "*** Importing initial set of Parsifal templates..."
