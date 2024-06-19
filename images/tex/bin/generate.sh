@@ -1,15 +1,19 @@
 #!/bin/bash
 
+# generate a local docker image for the docker context
+
 IMAGE_NAME=tex
 
-source ../../../version.sh
-
-
-# get directory this shell is running in
+TOP_DIR=$(git rev-parse --show-toplevel 2>/dev/null || echo "$PWD")
+source ${TOP_DIR}/VERSION.sh
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+echo "VERSION: $DANTE_VERSION"
 
-docker build -t ${IMAGE_NAME}:latest -t ${IMAGE_NAME}:${VERSION} ${DIR}/../src
+echo ""
+echo "BUILDING image with name ${IMAGE_NAME} from docker context at ${DIR}/../src"
+echo ""
 
-# docker scout quickview 
-# docker scout cves minimal:latest
+docker build -t ${IMAGE_NAME}:latest -t ${IMAGE_NAME}:${DANTE_VERSION} ${DIR}/../src
+
+echo " "; echo "DONE" ; echo " "

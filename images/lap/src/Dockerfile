@@ -6,10 +6,7 @@ WORKDIR /tmp
 # this is necessary for some of the commands we use
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-## TODO: injet tags 
-
 ######################### DO WE REALLY NEED mupdf and mupdf-tools ?????????????????????????????????????????
-
 
 # Install necessary packages
 #   git          get proper hashes in Special:Version and in other places
@@ -17,16 +14,15 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 #   DEFAULT-mysql-client      make dumps and restores via webserver interaction and via mediawiki special pages
 #   msmtp             write simple mails to inform about backup job completion and more
 
-RUN  apt-get update && \
-    apt-get install -y   --no-install-recommends apache2 ca-certificates apache2-utils openssl \
-    php \
-    php-common php-mysqli php-intl php-apcu php-mbstring php- php-gd php-json php-xml php-bcmath php-tokenizer php-igbinary php-opcache \
-    php-pear \
-    libapache2-mod-php default-mysql-client \
-    wget curl unzip git diffutils \
-    imagemagick netpbm djvulibre-bin librsvg2-bin xpdf mscgen msmtp gnuplot-nox graphviz && \
+RUN apt-get update && \
+    apt-get install -y   --no-install-recommends apache2 ca-certificates apache2-utils openssl && \
+    apt-get install -y   --no-install-recommends php && \
+    apt-get install -y   --no-install-recommends php-common php-mysqli php-intl php-apcu php-mbstring php- php-gd php-json php-xml php-bcmath php-tokenizer php-igbinary php-opcache php-pear && \
+    apt-get install -y   --no-install-recommends libapache2-mod-php default-mysql-client && \
+    apt-get install -y   --no-install-recommends wget curl unzip git diffutils  && \
+    apt-get install -y   --no-install-recommends imagemagick netpbm djvulibre-bin librsvg2-bin xpdf mscgen msmtp gnuplot-nox graphviz && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
-    apt-get install -y php-dev make --no-install-recommends && \
+    apt-get install -y --no-install-recommends php-dev make && \
     pecl channel-update pecl.php.net && \
     pecl install ds && \
 ##
@@ -35,7 +31,6 @@ RUN  apt-get update && \
     apt-get install -y --no-install-recommends mupdf mupdf-tools python3 python3-pip && \
     ln -sf python3 /usr/bin/python && \
     apt-get install -y --no-install-recommends python3-setuptools 
-
 
 #
 ## Install pymupdf
@@ -51,8 +46,6 @@ RUN  apt-get update && \
 #    python3 -m venv myenv && \
 #    /bin/bash -c "source myenv/bin/activate" && \
 
-
-
 RUN apt-get install -y --no-install-recommends python3.11-venv  && \
     cd /opt && \
     python3 -m venv myenv && \
@@ -63,7 +56,7 @@ RUN apt-get install -y --no-install-recommends python3.11-venv  && \
 ## AMAZON CLOUD COMMAND LINE (for backup)
 ##
     cd /tmp && \
-    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
+    curl -s "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
     unzip awscliv2.zip && \
     ./aws/install && \
     rm -rf awscliv2.zip aws && \
@@ -85,9 +78,6 @@ RUN apt-get install -y --no-install-recommends python3.11-venv  && \
       /var/cache/man/* \
       /tmp/*
 
-# rsync                    &&   \
-
-
 ##
 ## COPY in docker context
 ##
@@ -102,7 +92,7 @@ COPY . /
 #  Give non-root user ownership of the application files
 #  Set the default user
 
-RUN useradd -m dante && echo "dante:password" | chpasswd && adduser myuser sudo
+RUN useradd -m dante && echo "dante:password" | chpasswd && adduser dante sudo
     WORKDIR /home/dante
     RUN chown -R dante:dante /home/dante
     USER dante

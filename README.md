@@ -5,7 +5,8 @@
   <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/clecap/dante-wiki">
   <img alt="GitHub all releases" src="https://img.shields.io/github/downloads/clecap/dante-wiki/total">
   <img alt="AGPL V3 license" src="https://img.shields.io/badge/License-AGPL%20v3-blue.svg">
-  <img alt="Repository File Count" src="https://img.shields.io/github/directory-file-count/clecap/dante-wiki/%2Fimages">
+  <img alt="Repository code size" src="https://img.shields.io/github/languages/code-size/clecap/dante-wiki
+  ">
 </div>
 
 [![Scc Count Badge](https://sloc.xyz/github/clecap/dante-wiki/)](https://github.com/clecap/dante-wiki/)
