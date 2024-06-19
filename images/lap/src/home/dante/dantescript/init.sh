@@ -7,7 +7,18 @@ echo " "
 echo "** THIS IS /dantescript/init.sh ***** "
 
 
-#######  terminate on error   TODO
+### set terminate on error 
+abort()
+{
+  printf "%b" "\e[1;31m *** *** *** ABORTED *** *** *** \e[0m"
+  exit 1
+}
+set -e                                  # abort execution on any error
+trap 'abort' EXIT                       # call abort on EXIT
+
+
+
+
 ###### send mail upon completion ????
 #### favicon must be included into the thing - and at the dockerfile level ## todo
 
@@ -122,20 +133,7 @@ printf  "DONE\n\n"
 
 
 
-#
-# Clone clecap/dante-delta from github
-#
 
-### CAVE: We MUST NOT clone dante-delta since we do not want a directory dante-delta but want to overwrite in volumes
-
-abort()
-{
-  printf "%b" "\e[1;31m *** *** *** ABORTED *** *** *** \e[0m"
-  exit 1
-}
-
-set -e                                  # abort execution on any error
-trap 'abort' EXIT                       # call abort on EXIT
 
 
 
@@ -189,6 +187,7 @@ printf "*** Push once to connect..."
 printf "DONE pushing once\n\n"
 
 printf "\033[1;32m completed git-pull-from-delta.sh \033[0m \n"
+
 
 
 
