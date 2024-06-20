@@ -18,6 +18,6 @@ docker build -t ${IMAGE_NAME}:latest -t ${IMAGE_NAME}:${DANTE_VERSION} ${DIR}/..
 
 echo " "; echo "DONE" ; echo " "
 
-syft -v dante-mysql:latest -o cyclonedx-json > sbom.json
+# syft -v dante-mysql:latest -o cyclonedx-json > sbom.json
 
-echo "DONE SYFT"
+# echo "DONE SYFT"

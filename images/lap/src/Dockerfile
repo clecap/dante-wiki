@@ -104,11 +104,6 @@ RUN curl -o /tmp/$MEDIAWIKI_TARBALL $MEDIAWIKI_URL      && \
 
 
 
-##
-## COPY in docker context
-##
-COPY . /
-
 
 ## we need to open composer or we get problems with composer permission details
 ENV COMPOSER_ALLOW_SUPERUSER=1
@@ -162,7 +157,10 @@ RUN echo '{}' > ${TOP_PATH}/composer.local.json    && \
 ## TODO: has some small dependency problem which we solve later
 ##    COMPOSER=${TOP_PATH}/composer.local.json  composer require deeplcom/deepl-php
 
-
+##
+## COPY in docker context
+##
+COPY . /
 
 RUN /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/kuenzign/WikiMarkdown                                        WikiMarkdown                 main && \
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-MobileFrontend                MobileFrontend               REL1_39 && \
@@ -214,7 +212,8 @@ RUN useradd -m dante && echo "dante:password" | chpasswd && adduser dante sudo
 
 WORKDIR /home/dante
 RUN chown -R dante:dante /home/dante
-USER dante
+
+###### USER dante
 
 
 

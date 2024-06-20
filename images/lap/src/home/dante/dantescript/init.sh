@@ -50,7 +50,9 @@ MEDIAWIKI_SCRIPT_PATH="/${TARGET}"
 MEDIAWIKI_SITE_LANG=en
 MEDIAWIKI_ADMIN_USER=${WK_ADMIN_USER}
 MEDIAWIKI_ADMIN_PASS=${WK_ADMIN_PASS}
-MEDIAWIKI_ENABLE_SSL=true
+
+############# TODO !!
+MEDIAWIKI_ENABLE_SSL=false
 
 echo ""
 echo ________________
@@ -119,19 +121,25 @@ printf "*** Adding reference to DanteSettings.php ... "
   echo 'include (\"DanteSettings.php\"); ' >> LocalSettings.php
 printf  "DONE\n\n"
 
-
-php ${MOUNT}${TARGET}/maintenance/importDump.php --namespaces '8' --debug $CONT/minimal-initial-contents.xml
-php ${MOUNT}${TARGET}/maintenance/importDump.php --namespaces '10' --debug $CONT/minimal-initial-contents.xml
-php ${MOUNT}${TARGET}/maintenance/importDump.php --uploads --debug $CONT/minimal-initial-contents.xml
+printf "*** Adding initial contents..."
+  php ${MOUNT}${TARGET}/maintenance/importDump.php --namespaces '8' --debug $CONT/minimal-initial-contents.xml
+  php ${MOUNT}${TARGET}/maintenance/importDump.php --namespaces '10' --debug $CONT/minimal-initial-contents.xml
+  php ${MOUNT}${TARGET}/maintenance/importDump.php --uploads --debug $CONT/minimal-initial-contents.xml
+printf "DONE\n\n"
 
 # main page and sidebar need a separate check in to show the proper dates
-php ${MOUNT}/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite --prefix "MediaWiki:" $CONT/Sidebar
-php ${MOUNT}/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite  $CONT/Main Page
+printf "*** Checking in sidebar..."
+   php ${MOUNT}/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite --prefix "MediaWiki:" $CONT/Sidebar
+printf "DONE\n\n"
+
+printf "*** Checking in MainPage..."
+  php ${MOUNT}/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite  $CONT/Main Page
+printf "DONE\n\n"
 
 # Must do an update, since we have installed all kinds of extensions earlier
 printf "\n\n*** Doing a mediawiki maintenance update ... "
   php ${MOUNT}/${TARGET}/maintenance/update.php
-printf "DONE"
+printf "DONE\n\n"
 
 
 printf "*** Importing initial set of Parsifal templates..."

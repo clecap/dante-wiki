@@ -29,9 +29,9 @@ echo "/lap-entrypoint.sh: Now iterating ( $@ )"
 for script in "$@"; do
     # Check if the file exists and is a regular file
     echo "/lap-entrypoint.sh: Checking file $script"
-    if [ -f "/dantescript/$script" ]; then
-        echo "/lap-entrypoint.sh: Executing dantescript: /dantescript/$script"
-        /bin/bash "/dantescript/$script"
+    if [ -f "/home/dante/dantescript/$script" ]; then
+        echo "/lap-entrypoint.sh: Executing dantescript: /home/dante/dantescript/$script"
+        /bin/bash "/home/dante/dantescript/$script"
     else
         echo "/lap-entrypoint.sh: Error: File '$script' not found or is not a regular file."
     fi

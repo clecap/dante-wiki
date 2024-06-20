@@ -15,14 +15,15 @@ services:
     networks:
       - dante-network
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
       interval: 10s
       timeout: 5s
       retries: 10     
+      start_period: 40s
     secrets:
      - configuration
     volumes:
-#      - ./mysql-init:/docker-entrypoint-initdb.d
+      - ../dante-mysql/mysql-init:/docker-entrypoint-initdb.d
 
 
   webserver:
@@ -31,8 +32,8 @@ services:
     depends_on:
       database:
         condition: service_healthy
-    volumes:
-      - ../../activeVolume:/var/www/html
+#    volumes:
+#      - ../../activeVolume:/var/www/html
     ports:
       - "8080:80"
       - "4443:443"
@@ -51,7 +52,7 @@ services:
     networks: 
       - dante-network
     environment:
-      PMA_HOST: my-mysql
+      PMA_HOST: my-dante-mysql
     depends_on:
       - database
       - webserver
