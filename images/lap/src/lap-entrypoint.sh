@@ -10,6 +10,10 @@
 # sleep
 
 echo "*** This is /lap-entrypoint.sh"
+echo ""
+
+echo "*** /lap-entrypoint.sh sees the following mounted volumes:"
+
 
 
 echo "*** /lap-entrypoint.sh sees the following secret files:"
