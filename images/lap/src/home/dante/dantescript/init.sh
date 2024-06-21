@@ -3,6 +3,10 @@
 # This entrypoint initializes the database, generates LocalSettings.php and runs update.php
 
 
+PARSIFAL_BRANCH="dante"
+
+
+
 echo " "
 echo "** THIS IS /dantescript/init.sh ***** "
 
@@ -117,6 +121,20 @@ if [ -e "${MOUNT}/${TARGET}/LocalSettings.php" ]; then
 else
   printf "\033[0;31m *ERROR:  Could not generate ${MOUNT}/${TARGET}/LocalSettings.php - *** ABORTING \033[0m\n"
 fi
+
+
+
+##
+## Install Parsifal development version
+##
+printf "*** Cloning Parsifal from branch $PARSIFAL_BRANCH ... "
+  git clone --depth 1 --branch $BRANCH https://github.com/clecap/Parsifal
+printf "DONE cloning branch $BRANCH of Parsifal\n\n"
+
+
+
+
+
 
 
 

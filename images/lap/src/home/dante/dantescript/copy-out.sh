@@ -28,7 +28,7 @@ TARGET=wiki-dir
 ## copy out what we have just produced from 
 cp -a ${MOUNT}/${TARGET} /mnt
 
-
+printf "** /home/dante/dantescript/copy-out.sh has completed and will now terminate. GOOD BYE"
 
 
 

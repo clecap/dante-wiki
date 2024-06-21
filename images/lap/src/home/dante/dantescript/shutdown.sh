@@ -1,9 +1,5 @@
 #!/bin/bash
 
+# The only task is to signal to the caller (lap-entrypoint.sh) to shut down the service
 
-export SHALL_SHUTDOWN=1
-
-
-
-
-
+export RETURN_VALUE="shutdown"
