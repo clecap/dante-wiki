@@ -195,6 +195,6 @@ printf "\n\n**** Touching LocalSettings.php to refresh the cache..."
 touch ${MOUNT}/${TARGET}/LocalSettings.php
 printf "\n----DONE touching LocalSettings.php\n\n"
 
-export RETURN_VALUE="shutdown"
+
 
 printf "\n\n*** /home/dante/dantescript/init.sh COMPLETED \n\n"

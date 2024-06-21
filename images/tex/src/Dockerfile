@@ -44,7 +44,8 @@ RUN apt-get update && \
       wget perl ghostscript libx11-dev libxaw7-dev ca-certificates && \
     echo "*** *** *** Now installing Texlive "         && \
     cd /tmp && \
-    wget https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && \
+    wget https://ctan.net/systems/texlive/tlnet/install-tl-unx.tar.gz && \
+#    wget https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && \
     zcat install-tl-unx.tar.gz | tar xf - && \
     cd install-tl-* && \
     # select full installation

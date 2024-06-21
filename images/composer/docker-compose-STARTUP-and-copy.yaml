@@ -37,6 +37,7 @@ services:
   webserver-init:
     image: lap
     container_name: my-lap-container-copy
+    restart: "no"
     depends_on:
       database:
         condition: service_healthy
