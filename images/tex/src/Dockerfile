@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 ENV LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \    
-    # ConTeXt cache can be created on runtime and does not need to increase image size
+    # ConTeXt cache can be created on runtime and does not need to increase image size  
     TEXLIVE_INSTALL_NO_CONTEXT_CACHE=1 \ 
     # As we will not install regular documentation why would we want to install perl docs…
     NOPERLDOC=1 \ 
@@ -37,7 +37,7 @@ ENV LANG=C.UTF-8 \
     #  We are setting the path so that we can more easily exercise and test commands inside of a docker exec shell
     PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/texlive/2024/bin/x86_64-linuxmusl:/bin:
 
-# Upgrade existing packages in the base image
+# Upgrade existing packages in the base image 
 
 RUN apt-get update && \
     apt-get install -y   --no-install-recommends\
@@ -59,7 +59,7 @@ RUN apt-get update && \
     echo "tlpdbopt_sys_bin /usr/bin" >> install.profile && \
     # exclude some packages which we do not want to install
     # tlcockpit, since it contains many security vulnerabilities and only provides an interactive UI which we do not need
-    tlpdbopt_exclude tlcockpit
+    tlpdbopt_exclude tlcockpit && \
     # actually install TeX Live
     ./install-tl -profile install.profile  && \
     echo "*** *** *** Now doing a layer cleanup "  && \
