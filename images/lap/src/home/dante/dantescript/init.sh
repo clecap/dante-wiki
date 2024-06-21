@@ -175,8 +175,11 @@ printf "\n\n**** RUNNING: refreshFileHeaders \n"
   php ${MOUNT}/${TARGET}/maintenance/refreshFileHeaders.php --verbose
 printf "DONE\n"
 
-
 # touch the file LocalSettings.php to refresh the cache
-touch ${MOUNT}/${TARGET}/LocalSettings.php"
+printf "\n\n**** Touching LocalSettings.php to refresh the cache..."
+touch ${MOUNT}/${TARGET}/LocalSettings.php
+printf "DONE\n\n"
 
 export RETURN_VALUE="shutdown"
+
+printf "\n\n*** /home/dante/dantescript/init.sh COMPLETED \n\n"
