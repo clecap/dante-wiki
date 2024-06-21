@@ -8,9 +8,21 @@ echo "*** dante/mysqlinit.sh running now"
 
 
 
+echo "*** /lap-entrypoint.sh sees the following secrets file:"
+ls -alg /run/secrets
+echo ""
+if [ -f "/run/secrets/configuration" ]; then
+    echo "*** /lap-entrypoint.sh will now load configuration"
+    source /run/secrets/configuration
+    echo "*** /lap-entrypoint.sh did load configuration"
+  else
+    echo "*** /lap-entrypoint.sh could not find configuration file, EXITING "
+    exit 1
+fi
 
+export MYSQL_PWD=${MYSQL_ROOT_PASSWORD}
 
-mysql -u root -p"${MYSQL_ROOT_PASSWORD}" <<-EOF
+mysql -u root <<-EOF
   CREATE DATABASE IF NOT EXISTS ${MY_DB_NAME} /*\!40100 DEFAULT CHARACTER SET utf8 */;
   CREATE USER IF NOT EXISTS ${MY_DB_USER}@'172.16.0.0/255.240.0.0' IDENTIFIED BY '${MY_DB_PASS}';
   CREATE USER IF NOT EXISTS ${MY_DB_USER}@'192.168.0.0/255.255.0.0' IDENTIFIED BY '${MY_DB_PASS}';

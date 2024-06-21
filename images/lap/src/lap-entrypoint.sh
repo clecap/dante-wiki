@@ -16,7 +16,7 @@ echo "*** /lap-entrypoint.sh sees the following mounted volumes:"
 
 
 
-echo "*** /lap-entrypoint.sh sees the following secret files:"
+echo "*** /lap-entrypoint.sh sees the following secrets file:"
 ls -alg /run/secrets
 echo ""
 if [ -f "/run/secrets/configuration" ]; then
