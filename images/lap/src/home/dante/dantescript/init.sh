@@ -36,12 +36,6 @@ CONT=/home/dante/initial-contents/generic
 
 
 
-
-
-
-
-
-
 ### TODO: really ??????
 rm -f LocalSettings.php
 
