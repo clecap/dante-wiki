@@ -1,6 +1,0 @@
-{
-	"extends": [
-		"../../resources/js/.eslintrc.json",
-		"wikimedia/qunit"
-	]
-}

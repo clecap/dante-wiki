@@ -1,8 +1,0 @@
-{
-	"@metadata": {
-		"authors": [
-			"Gazeb"
-		]
-	},
-	"lst-desc": "Придасть функції <code>{{#lst:}}</code> a <code>{{#lstx:}}</code> a tag <code>&lt;section&gt;</code>, доволюють трансклузію означеных частей тексту"
-}

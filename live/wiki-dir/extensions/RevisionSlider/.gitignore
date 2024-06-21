@@ -1,6 +1,0 @@
-.idea/
-composer.lock
-node_modules/
-vendor/
-.eslintcache
-/tests/selenium/log
