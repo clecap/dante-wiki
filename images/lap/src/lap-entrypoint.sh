@@ -34,13 +34,13 @@ for script in "$@"; do
   # Check if the file exists and is a regular file
   echo "/lap-entrypoint.sh: Checking file $script"
   if [ -f "/home/dante/dantescript/$script" ]; then
-      echo "/lap-entrypoint.sh: Executing dantescript: /home/dante/dantescript/$script"
+      printf "\n/lap-entrypoint.sh: Executing dantescript: /home/dante/dantescript/$script\n"
       RETURN_VALUE="returnvalue-initialized"
       source "/home/dante/dantescript/$script"
-      echo "/lap-entrypoint.sh: Has finished executing dantescript: /home/dante/dantescript/$script with return value ${RETURN_VALUE}"
+      printf "\n/lap-entrypoint.sh: Has finished executing dantescript: /home/dante/dantescript/$script with return value ${RETURN_VALUE}\n"
 # Check if the variable has the value "shutdown"
       if [ "$RETURN_VALUE" = "shutdown" ]; then
-        shutdown -h now
+        /sbin/shutdown -h now
       fi
     else
       echo "/lap-entrypoint.sh: Error: File '$script' not found or is not a regular file."
@@ -50,9 +50,8 @@ done
 
 
 
-echo " "
-echo "/lap-entrypoint.sh: Completed loop - which should not have been - to keep container alive I will now sleep"
-echo " "
+printf "\n\n/lap-entrypoint.sh: Completed loop - which should not have been - to keep container alive I will now sleep\n\n"
+
 
 sleep infinity
 

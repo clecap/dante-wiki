@@ -116,13 +116,14 @@ else
   printf "\033[0;31m *ERROR:  Could not generate ${MOUNT}/${TARGET}/LocalSettings.php - *** ABORTING \033[0m\n"
 fi
 
-
+echo " "
+echo " " 
 
 ##
 ## Install Parsifal development version
 ##
-printf "*** Cloning Parsifal from branch $PARSIFAL_BRANCH ... "
-  git clone --depth 1 --branch $BRANCH https://github.com/clecap/Parsifal
+printf "\n*** Cloning Parsifal from branch $PARSIFAL_BRANCH ... \n"
+  git clone --depth 1 --branch $PARSIFAL_BRANCH https://github.com/clecap/Parsifal
 printf "DONE cloning branch $BRANCH of Parsifal\n\n"
 
 
@@ -162,35 +163,37 @@ printf "DONE\n\n"
 # Must do an update, since we have installed all kinds of extensions earlier
 printf "\n\n*** Doing a mediawiki maintenance update ... "
   php ${MOUNT}/${TARGET}/maintenance/update.php
-printf "DONE\n\n"
+printf "DONE update.php\n\n"
 
 
-printf "*** Importing initial set of Parsifal templates..."
-  php ${MOUNT}/${TARGET}/maintenance/importTextFiles.php --prefix "MediaWiki:ParsifalTemplate/" --rc --overwrite extensions/Parsifal/initial-templates/*
-printf " DONE\n"
+# parsifal is not yet installed at this place ?????
+####
+####printf "*** Importing initial set of Parsifal templates..."
+####  php ${MOUNT}/${TARGET}/maintenance/importTextFiles.php --prefix "MediaWiki:ParsifalTemplate/" --rc --overwrite extensions/Parsifal/initial-templates/*
+#### printf " DONE\n"
 
 
 
 printf "\n\n**** RUNNING: initSiteStats \n"
   php ${MOUNT}/${TARGET}/maintenance/initSiteStats.php --update
-printf "DONE\n"
+printf "DONE initSiteStats.php\n"
 
-printf "\n\n**** RUNNING: rebuildall \n"
+printf "\n\n**** RUNNING: rebuildall \n\n"
   php ${MOUNT}/${TARGET}/maintenance/rebuildall.php 
-printf "DONE\n"
+printf "\n----DONE rebuildall.php\n\n"
 
 printf "\n\n**** RUNNING: checkImages \n"
   php ${MOUNT}/${TARGET}/maintenance/checkImages.php
-printf "DONE\n"
+printf "\n----DONE checkImages.php\n"
 
 printf "\n\n**** RUNNING: refreshFileHeaders \n"
   php ${MOUNT}/${TARGET}/maintenance/refreshFileHeaders.php --verbose
-printf "DONE\n"
+printf "\n----DONE refreshFileHeaders.php\n\n"
 
 # touch the file LocalSettings.php to refresh the cache
 printf "\n\n**** Touching LocalSettings.php to refresh the cache..."
 touch ${MOUNT}/${TARGET}/LocalSettings.php
-printf "DONE\n\n"
+printf "\n----DONE touching LocalSettings.php\n\n"
 
 export RETURN_VALUE="shutdown"
 

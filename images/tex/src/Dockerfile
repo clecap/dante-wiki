@@ -59,7 +59,7 @@ RUN apt-get update && \
     echo "tlpdbopt_sys_bin /usr/bin" >> install.profile && \
     # exclude some packages which we do not want to install
     # tlcockpit, since it contains many security vulnerabilities and only provides an interactive UI which we do not need
-    echo "tlpdbopt_exclude tlcockpit" >> install.profile  && \
+    echo "depend tlcockpit 0" >> install.profile  && \
     # actually install TeX Live
     ./install-tl -profile install.profile  && \
     echo "*** *** *** Now doing a layer cleanup "  && \
