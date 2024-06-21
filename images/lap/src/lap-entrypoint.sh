@@ -39,7 +39,7 @@ for script in "$@"; do
       source "/home/dante/dantescript/$script"
       printf "\n/lap-entrypoint.sh: Has finished executing dantescript: /home/dante/dantescript/$script with return value ${RETURN_VALUE}\n"
 # Check if the variable has the value "shutdown"
-      if [ "$RETURN_VALUE" = "shutdown" ]; then
+      if [ "$RETURN_VALUE" == "shutdown" ]; then
         /sbin/shutdown -h now
       fi
     else
