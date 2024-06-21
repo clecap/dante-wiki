@@ -2,22 +2,21 @@
 
 
 echo "*** This is /dante-mysql-entrypoint.sh"
-
+echo " "
 
 echo "*** /dante-mysql-entrypoint.sh sees the following secret files:"
 ls -alg /run/secrets
 echo ""
 if [ -f "/run/secrets/configuration" ]; then
-    echo "*** /dante-mysql-entrypoint.sh will now load configuration"
+    printf "*** /dante-mysql-entrypoint.sh will now load configuration..."
     source /run/secrets/configuration
-    echo "*** /dante-mysql-entrypoint.sh did load configuration"
+    printf "DONE\n"
   else
-    echo "*** /dante-mysql-entrypoint.sh could not find configuration file, EXITING "
+    printf "\n*** ERROR: /dante-mysql-entrypoint.sh could not find configuration file, EXITING "
     exit 1
 fi
 
-echo "*** /dante-mysql-entrypoint.sh sees the following configuration: "
-
+# echo "*** /dante-mysql-entrypoint.sh sees the following configuration: "
 ## uncomment only for debugging - we do not want the private data to be in some log files
 #echo "  MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}"
 #echo "  MY_DB_NAME: ${MY_DB_NAME}"
@@ -25,7 +24,7 @@ echo "*** /dante-mysql-entrypoint.sh sees the following configuration: "
 #echo "  MY_DB_PASS: ${MY_DB_PASS}"
 
 
-echo "REGENERATE_PRIVATE_KEY is $REGENERATE_PRIVATE_KEY"
+printf "\n***: /dante-mysql-entrypoint.sh: REGENERATE_PRIVATE_KEY is $REGENERATE_PRIVATE_KEY"
 
 if [ "$REGENERATE_PRIVATE_KEY" = "true" ]; then
     echo "Environment variable requested us to regenerate the private key"
@@ -75,10 +74,8 @@ fi
 
 
 
-echo ""
-echo "*** /dante-mysql-entrypoint.sh now calling the original entrypoint of the basic docker file"
+printf "\n\n*** /dante-mysql-entrypoint.sh now calling the original entrypoint of the basic docker file---------\n"
 
 /usr/local/bin/docker-entrypoint.sh mysqld
 
-echo ""
-echo "*** /dante-mysql-entrypoint.sh COMPLETED the original entrypoint of the basic docker file"
+printf "\n\n *** /dante-mysql-entrypoint.sh COMPLETED the original entrypoint of the basic docker file"

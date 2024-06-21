@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"BaRaN6161 TURK",
+			"Element303",
+			"Gomoko",
+			"MPlauche",
+			"Od1n",
+			"Orlodrim",
+			"Thibaut120094",
+			"Verdy p",
+			"Wladek92"
+		]
+	},
+	"apihelp-parse-param-mobileformat": "Retourner la sortie de l’analyse dans un format adapté aux appareils mobiles.",
+	"apihelp-parse-param-noimages": "Désactiver les images dans la sortie pour appareil mobile.",
+	"apihelp-parse-param-mainpage": "Appliquer les transformations pour appareil mobile spécifiques à la page d’accueil.",
+	"apihelp-webapp-manifest-description": "Retourne un manifeste de « webapp ».",
+	"apihelp-webapp-manifest-summary": "Retourne un manifeste de « webapp »."
+}

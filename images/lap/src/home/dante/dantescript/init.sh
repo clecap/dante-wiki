@@ -13,8 +13,9 @@ abort()
   printf "%b" "\e[1;31m *** *** *** ABORTED *** *** *** \e[0m"
   exit 1
 }
-set -e                                  # abort execution on any error
-trap 'abort' EXIT                       # call abort on EXIT
+
+## set -e                                  # abort execution on any error
+## trap 'abort' EXIT                       # call abort on EXIT
 
 
 ###### send mail upon completion ????
@@ -130,8 +131,11 @@ printf  "DONE\n\n"
 
 printf "*** Adding initial contents..."
   php ${MOUNT}${TARGET}/maintenance/importDump.php --namespaces '8' --debug $CONT/minimal-initial-contents.xml
+  printf " namespace 8 done ";
   php ${MOUNT}${TARGET}/maintenance/importDump.php --namespaces '10' --debug $CONT/minimal-initial-contents.xml
+  printf " namespace 10 done ";
   php ${MOUNT}${TARGET}/maintenance/importDump.php --uploads --debug $CONT/minimal-initial-contents.xml
+  printf " uploads done ";
 printf "DONE\n\n"
 
 # main page and sidebar need a separate check in to show the proper dates
@@ -174,3 +178,5 @@ printf "DONE\n"
 
 # touch the file LocalSettings.php to refresh the cache
 touch ${MOUNT}/${TARGET}/LocalSettings.php"
+
+export RETURN_VALUE="shutdown"

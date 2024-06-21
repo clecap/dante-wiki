@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Iwan Novirion",
+			"Kenrick95"
+		]
+	},
+	"apihelp-parse-param-noimages": "Nonaktifkan gambar pada tampilan HP.",
+	"apihelp-parse-param-mainpage": "Terapkan tranformasi halaman utama seluler.",
+	"apihelp-webapp-manifest-description": "Balikkan manifes webapp."
+}

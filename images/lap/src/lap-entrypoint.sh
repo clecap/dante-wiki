@@ -31,17 +31,28 @@ fi
 echo "/lap-entrypoint.sh: Now iterating ( $@ )"
 # Iterate over each argument in the list of arguments we are called on
 for script in "$@"; do
-    # Check if the file exists and is a regular file
-    echo "/lap-entrypoint.sh: Checking file $script"
-    if [ -f "/home/dante/dantescript/$script" ]; then
-        echo "/lap-entrypoint.sh: Executing dantescript: /home/dante/dantescript/$script"
-        /bin/bash "/home/dante/dantescript/$script"
+  # Check if the file exists and is a regular file
+  echo "/lap-entrypoint.sh: Checking file $script"
+  if [ -f "/home/dante/dantescript/$script" ]; then
+      echo "/lap-entrypoint.sh: Executing dantescript: /home/dante/dantescript/$script"
+      RETURN_VALUE="returnvalue-initialized"
+      source "/home/dante/dantescript/$script"
+      echo "/lap-entrypoint.sh: Has finished executing dantescript: /home/dante/dantescript/$script with return value ${RETURN_VALUE}"
+# Check if the variable has the value "shutdown"
+      if [ "$RETURN_VALUE" = "shutdown" ]; then
+        shutdown -h now
+      fi
     else
-        echo "/lap-entrypoint.sh: Error: File '$script' not found or is not a regular file."
+      echo "/lap-entrypoint.sh: Error: File '$script' not found or is not a regular file."
     fi
 done
+  
 
+
+
+echo " "
 echo "/lap-entrypoint.sh: Completed loop - which should not have been - to keep container alive I will now sleep"
+echo " "
 
 sleep infinity
 

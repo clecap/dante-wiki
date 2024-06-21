@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Fierodelveneto",
+			"Starladin"
+		]
+	},
+	"uls-plang-title-languages": "Lingac",
+	"jquery-ime-other-languages": "Atres lingac",
+	"ext-uls-compact-link-count": "{{PLURAL:$1|N'atra|$1 atres}}"
+}

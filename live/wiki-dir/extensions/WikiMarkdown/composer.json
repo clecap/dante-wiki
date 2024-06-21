@@ -1,0 +1,36 @@
+{
+	"name": "mediawiki/wikimarkdown",
+	"description": "Markdown syntax for MediaWiki",
+	"require": {
+		"erusev/parsedown": "^1.8.0-beta-7",
+		"erusev/parsedown-extra": "^0.8.1",
+		"benjaminhoegh/parsedown-extended": "^1.1.2"
+	},
+	"require-dev": {
+		"mediawiki/mediawiki-codesniffer": "31.0.0",
+		"mediawiki/minus-x": "1.1.0",
+		"php-parallel-lint/php-console-highlighter": "0.5.0",
+		"php-parallel-lint/php-parallel-lint": "1.2.0"
+	},
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Nathan Kuenzig"
+		}
+	],
+	"suggest": {
+		"erusev/parsedown-extra": "Optional extra package",
+		"benjaminhoegh/parsedown-extended": "Optional extra package"
+	},
+	"scripts": {
+		"fix": [
+			"minus-x fix .",
+			"phpcbf"
+		],
+		"test": [
+			"parallel-lint . --exclude vendor --exclude node_modules",
+			"phpcs -p -s",
+			"minus-x check ."
+		]
+	}
+}

@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jun Misugi"
+		]
+	},
+	"uls-plang-title-languages": "Schbroochen",
+	"ext-uls-compact-link-count": "{{PLURAL:$1|Eene weidorre|$1 weidorre}}"
+}

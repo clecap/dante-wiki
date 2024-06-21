@@ -57,6 +57,9 @@ RUN apt-get update && \
     echo "tlpdbopt_autobackup 0" >> install.profile && \
     # furthermore we want our symlinks in the system binary folder to avoid
     echo "tlpdbopt_sys_bin /usr/bin" >> install.profile && \
+    # exclude some packages which we do not want to install
+    # tlcockpit, since it contains many security vulnerabilities and only provides an interactive UI which we do not need
+    tlpdbopt_exclude tlcockpit
     # actually install TeX Live
     ./install-tl -profile install.profile  && \
     echo "*** *** *** Now doing a layer cleanup "  && \

@@ -1,0 +1,29 @@
+{
+	"root": true,
+	"extends": [
+		"wikimedia/client-es6",
+		"../.eslintshared.js"
+	],
+	"parserOptions": {
+		"sourceType": "module"
+	},
+	"env": {
+		"browser": true,
+		"commonjs": true
+	},
+	"rules": {
+		"no-var": "off",
+		"no-shadow": "warn",
+		"jsdoc/check-tag-names": "off",
+		"jsdoc/no-undefined-types": "off",
+		"jsdoc/require-returns": "off",
+		"jsdoc/require-property-type": "off",
+		"jsdoc/valid-types": "off"
+	},
+	"settings": {
+		"polyfills": [
+			"URL",
+			"URLSearchParams"
+		]
+	}
+}

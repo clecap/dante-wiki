@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Akapochtli",
+			"Languaeditor"
+		]
+	},
+	"revisionslider-label-username": "{{GENDER:$1|Tekitiketl}}"
+}

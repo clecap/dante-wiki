@@ -1,0 +1,92 @@
+#
+# Copy in from volume template-volume to our local file.
+#
+#  TODO: prepare connection to git for push upstream stuff !!!
+#  TODO: use fresh and empty database volume from scratch !!
+#  TODO: need to have local .git and git submodules for the correct treatment of git push upstream functionality
+#
+
+
+# Start up database and webserver
+# initialize webserver
+# copy out to live
+
+
+
+########################### TODO: we might want to have two database container startups ??? to have it settle first...
+
+services:
+
+  database:
+    image: dante-mysql
+    container_name: my-dante-mysql
+    networks:
+      - dante-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root"]
+      interval: 10s
+      timeout: 5s
+      retries: 10     
+      start_period: 40s
+    secrets:
+     - configuration
+    volumes:
+      - ../dante-mysql/mysql-init:/docker-entrypoint-initdb.d
+
+
+  webserver-init:
+    image: lap
+    container_name: my-lap-container-copy
+    depends_on:
+      database:
+        condition: service_healthy
+    volumes:
+      - ../../live:/mnt
+    ports:
+      - "8080:80"
+      - "4443:443"
+    secrets:
+      - configuration
+    networks: 
+      - dante-network
+    command: "run-apache.sh init.sh copy-out.sh shutdown.sh"
+
+
+  webserver:
+    image: lap
+    container_name: my-lap-container
+    depends_on:
+      webserver-init:
+        condition: service_completed_successfully
+    volumes:
+      - ../../live:/mnt
+    ports:
+      - "8080:80"
+      - "4443:443"
+    secrets:
+      - configuration
+    networks: 
+      - dante-network
+    command: "run-apache.sh"
+
+
+
+  phpmyadmin:
+    image: phpmyadmin:5.0
+    ports: 
+      - "9090:80"
+    container_name: my-php-myadmin
+    networks: 
+      - dante-network
+    environment:
+      PMA_HOST: my-dante-mysql
+    depends_on:
+      - database
+      - webserver
+
+networks:
+  dante-network:
+
+secrets:
+  configuration:
+    file: ../../private/configuration.sh

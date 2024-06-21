@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Khanmarat",
+			"Sorbat"
+		]
+	},
+	"mobile-frontend-changeslist-nocomment": "Төсәтеүнең аңнатмасы йуҡ",
+	"mobile-frontend-copyright": "Мәғлүмәтне $1-та ҡарап пулаты (әгәр пашҡасы күрсәтелмәсә).",
+	"mobile-frontend-featured-article": "Пөгөнкө сайланҡан материал",
+	"mobile-frontend-last-modified-date": "$1 $2-гә суңҡы тапҡыр төсәтелгән",
+	"mobile-frontend-news-items": "Йаңалыҡлар",
+	"mobile-frontend-privacy-link-text": "Серне саҡлау",
+	"mobile-frontend-terms-text": "Ошланыуның шартлары",
+	"mobile-frontend-view": "Мобиль аңыш",
+	"mobile-frontend-view-desktop": "Эшләү өстәл",
+	"tag-mobile_edit": "Мобиль ҡоралтан төсәтеү",
+	"tag-mobile_web_edit": "Мобиль версиятан төсәткәле"
+}

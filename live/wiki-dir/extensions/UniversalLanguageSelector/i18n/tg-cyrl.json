@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"ToJack",
+			"Xð",
+			"ZulfiqorF"
+		]
+	},
+	"uls-plang-title-languages": "Забонҳо",
+	"ext-uls-display-settings-language-tab": "Забон",
+	"ext-uls-compact-link-count": "{{PLURAL:$1|тои дигар|$1 бештар\n}}"
+}

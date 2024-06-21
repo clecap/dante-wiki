@@ -1,0 +1,67 @@
+{
+	"name": "WikiMarkdown",
+	"version": "1.1.3",
+	"author": [
+		"Nathan Kuenzig"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:WikiMarkdown",
+	"descriptionmsg": "wikimarkdown-desc",
+	"license-name": "MIT",
+	"type": "parserhook",
+	"requires": {
+		"MediaWiki": ">= 1.34"
+	},
+	"MessagesDirs": {
+		"WikiMarkdown": [
+			"i18n"
+		]
+	},
+	"AutoloadClasses": {
+		"WikiMarkdown": "includes/WikiMarkdown.php",
+		"ResourceLoaderWikiMarkdownVisualEditorModule": "includes/ResourceLoaderWikiMarkdownVisualEditorModule.php",
+		"MarkdownContentHandler": "includes/MarkdownContentHandler.php",
+		"MarkdownContent": "includes/MarkdownContent.php"
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "modules",
+		"remoteExtPath": "WikiMarkdown/modules"
+	},
+	"Hooks": {
+		"ParserFirstCallInit": "WikiMarkdown::onParserFirstCallInit",
+		"ResourceLoaderRegisterModules": "WikiMarkdown::onResourceLoaderRegisterModules",
+		"ContentHandlerDefaultModelFor": "WikiMarkdown::onContentHandlerDefaultModelFor",
+		"CodeEditorGetPageLanguage": "WikiMarkdown::onCodeEditorGetPageLanguage"
+	},
+	"attributes": {
+		"VisualEditor": {
+			"PluginModules": [
+				"ext.wikimarkdown.visualEditor"
+			]
+		}
+	},
+	"callback": "WikiMarkdown::onRegistration",
+	"config": {
+		"AllowMarkdownExtra": {
+			"value": false
+		},
+		"AllowMarkdownExtended": {
+			"value": false
+		},
+		"ParsedownExtendedParameters": {
+			"value": {
+				"math": {
+					"single_dollar": true
+				},
+				"sup": true,
+				"sub": true
+			}
+		}
+	},
+	"ContentHandlers": {
+		"markdown": "MarkdownContentHandler"
+	},
+	"TrackingCategories": [
+		"markdown-error-category"
+	],
+	"manifest_version": 2
+}

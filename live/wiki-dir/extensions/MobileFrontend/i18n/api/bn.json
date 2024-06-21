@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"আফতাবুজ্জামান"
+		]
+	},
+	"apihelp-parse-param-noimages": "মোবাইল আউটপুটে চিত্র নিষ্ক্রিয় করে।",
+	"apihelp-parse-param-mainpage": "মোবাইল প্রধান পাতা রূপান্তর প্রয়োগ করুন।"
+}

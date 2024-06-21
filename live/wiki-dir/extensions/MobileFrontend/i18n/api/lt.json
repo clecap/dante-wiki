@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Albertas",
+			"Manvydasz"
+		]
+	},
+	"apihelp-parse-param-mobileformat": "Grąžinti išanalizuotą išvestį formatu, tinkamu mobiliems įrenginiams.",
+	"apihelp-parse-param-noimages": "Išjungti paveikslėlius mobiliajame įrenginyje.",
+	"apihelp-parse-param-mainpage": "Pritaikyti mobilių pagrindinio puslapio transformacijas."
+}

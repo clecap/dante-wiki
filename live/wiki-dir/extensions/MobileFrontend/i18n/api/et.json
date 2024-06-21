@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Pikne"
+		]
+	},
+	"apihelp-parse-param-mobileformat": "Tagasta parsimisväljund mobiiliseadmetele sobivas vormingus.",
+	"apihelp-parse-param-noimages": "Keela pildid mobiiliväljundis.",
+	"apihelp-parse-param-mainpage": "Rakenda transformatsioone mobiiliversiooni esilehel."
+}

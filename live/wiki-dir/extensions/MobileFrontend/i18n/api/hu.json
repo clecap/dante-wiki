@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bencemac",
+			"Tacsipacsi"
+		]
+	},
+	"apihelp-parse-param-mobileformat": "A feldolgozás eredményének visszaadása mobileszközöknek megfelelő formátumban.",
+	"apihelp-parse-param-noimages": "Képek letiltása a mobilkimenetben.",
+	"apihelp-parse-param-mainpage": "Mobilkezdőlap-átalakítások érvényesítése."
+}

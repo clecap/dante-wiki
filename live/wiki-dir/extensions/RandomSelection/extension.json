@@ -1,0 +1,32 @@
+{
+	"name": "RandomSelection",
+	"version": "2.3.0",
+	"author": [
+		"Ross McClure",
+		"Jack Phoenix",
+		"..."
+	],
+	"license-name": "GPL-2.0-or-later",
+	"url": "https://www.mediawiki.org/wiki/Extension:RandomSelection",
+	"descriptionmsg": "randomselection-desc",
+	"type": "parserhook",
+	"requires": {
+		"MediaWiki": ">= 1.31.0"
+	},
+	"MessagesDirs": {
+		"RandomSelection": [
+			"i18n"
+		]
+	},
+	"AutoloadClasses": {
+		"RandomSelection": "src/RandomSelection.php"
+	},
+	"ExtensionMessagesFiles": {
+		"RandomSelectionMagic": "RandomSelection.i18n.magic.php"
+	},
+	"Hooks": {
+		"ParserFirstCallInit": "RandomSelection::register",
+		"MagicWordwgVariableIDs": "RandomSelection::variableIds"
+	},
+	"manifest_version": 2
+}

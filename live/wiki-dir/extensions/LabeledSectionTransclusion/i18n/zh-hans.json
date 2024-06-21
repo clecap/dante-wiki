@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Shinjiman",
+			"Xiaomingyan",
+			"LittlePaw365"
+		]
+	},
+	"lst-desc": "添加<code>#lst</code>、<code>#lstx</code>函数和<code>&lt;section&gt;</code>标签，使标记的文本部分能够嵌入引用"
+}
