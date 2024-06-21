@@ -39,7 +39,7 @@ ENV LANG=C.UTF-8 \
 
 # Upgrade existing packages in the base image 
 
-RUN apt-get update && \
+RUN apt-get update && \ 
     apt-get install -y   --no-install-recommends\
       wget perl ghostscript libx11-dev libxaw7-dev ca-certificates && \
     echo "*** *** *** Now installing Texlive "         && \
