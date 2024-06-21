@@ -40,7 +40,11 @@ for script in "$@"; do
       printf "\n/lap-entrypoint.sh: Has finished executing dantescript: /home/dante/dantescript/$script with return value ${RETURN_VALUE}\n"
 # Check if the variable has the value "shutdown"
       if [ "$RETURN_VALUE" == "shutdown" ]; then
-        /sbin/shutdown -h now
+          printf "\n/lap-entrypoint.sh: Found returnvalue of shutdown, shutting down now"
+          exit 0
+          printf "\n Post exit 0"
+        else
+           printf "\n/lap-entrypoint.sh: Found different returnvalue, skipping shutdown"
       fi
     else
       echo "/lap-entrypoint.sh: Error: File '$script' not found or is not a regular file."

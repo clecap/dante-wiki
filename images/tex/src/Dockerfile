@@ -57,15 +57,13 @@ RUN apt-get update && \
     echo "tlpdbopt_autobackup 0" >> install.profile && \
     # furthermore we want our symlinks in the system binary folder to avoid
     echo "tlpdbopt_sys_bin /usr/bin" >> install.profile && \
-    # exclude some packages which we do not want to install
-    # tlcockpit, since it contains many security vulnerabilities and only provides an interactive UI which we do not need
-    #   depend tlcockpit 0 does not work
-# tlpdbopt_exclude 
-    echo "tlcockpit 0" >> install.profile  && \
     # actually install TeX Live
     ./install-tl -profile install.profile  && \
+    # tlcockpit contains packages where docker reports severe security issues - and we do not need it since it is a GUI tool
+    # since i did not really manage to exclude it in the installation - I here remove it the brutal way
+    rm -rf /usr/local/texlive/2024/texmf-dist/scripts/tlcockpit && \
+    rm -rf /usr/local/texlive/2024/bin/x86_64-linux/tlcockpit && \
     echo "*** *** *** Now doing a layer cleanup "  && \
-#    apk del wget curl rsync git gpg tar python3-dev build-base linux-headers    && \
     apt-get autoremove -y && \
     apt-get clean && \
     rm -rf /usr/share/doc \

@@ -20,6 +20,7 @@ if [ -f "/run/secrets/configuration" ]; then
     exit 1
 fi
 
+# do this to prevent warning about passwords being used on the command line
 export MYSQL_PWD=${MYSQL_ROOT_PASSWORD}
 
 mysql -u root <<-EOF
@@ -31,25 +32,25 @@ mysql -u root <<-EOF
   FLUSH PRIVILEGES;
 EOF
 
-mysql -u root -p"${MYSQL_ROOT_PASSWORD}" <<-EOF
+mysql -u root <<-EOF
   SHOW DATABASES;
 EOF
 
 echo " "
 echo "*** USERS: "
 
-mysql -u root -p"${MYSQL_ROOT_PASSWORD}" <<-EOF
+mysql -u root <<-EOF
   SELECT User, Host, authentication_string FROM mysql.user;
 EOF
 
 
-#mysql -u root -p"${MYSQL_ROOT_PASSWORD}" <<-EOF
+#mysql -u root <<-EOF
 #  UPDATE mysql.user SET Host='192.168.0.0/255.255.0.0' WHERE User='root';
 #  FLUSH PRIVILEGES;
 #EOF
 
 
-#mysql -u root -p"${MYSQL_ROOT_PASSWORD}" <<-EOF
+#mysql -u root <<-EOF
 #  UPDATE mysql.user SET Host='192.168.0.0/255.255.0.0' WHERE User='root';
 #  FLUSH PRIVILEGES;
 #EOF
@@ -58,13 +59,13 @@ EOF
 echo " "
 echo "*** USERS: "
 
-mysql -u root -p"${MYSQL_ROOT_PASSWORD}" <<-EOF
+mysql -u root <<-EOF
   SELECT User, Host FROM mysql.user;
 EOF
 
 
 
-#mysql -u root -p"${MYSQL_ROOT_PASSWORD}" <<-EOF
+#mysql -u root <<-EOF
 #  DELETE FROM mysql.user WHERE User='';
 #  DROP DATABASE IF EXISTS test;
 #  DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
