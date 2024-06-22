@@ -6,7 +6,7 @@ ARG YEAR=2024
 
 # could also be mirror.ctan.org
 
-ENV DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND=noninteractive  \
     LANG=C.UTF-8      \
     LC_ALL=C.UTF-8    \
     # ConTeXt cache can be created on runtime and does not need to increase image size  
