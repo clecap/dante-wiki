@@ -33,18 +33,8 @@ TARGET=wiki-dir
 # directory where to pick up the minimal initial contents
 CONT=/home/dante/initial-contents/generic 
 
-
-
-# cleaning the target
-printf "/home/dante/dantescript/init.sh: Listing current MOUNT=${MOUNT} "
-ls -alg ${MOUNT}
-
-rm -rf ${MOUNT}/${TARGET}/*
-
-# include base files as required
-
-
-
+rm ${MOUNT}/phpinfo.php
+cp /home/dante/dantescript/html/index.html ${MOUNT}
 
 MEDIAWIKI_DB_HOST=my-dante-mysql
 MEDIAWIKI_DB_TYPE=mysql

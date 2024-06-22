@@ -9,6 +9,9 @@ FROM debian:stable-slim
 ARG CTAN=ctan.net
 ARG YEAR=2024
 
+LABEL maintainer="Clemens H. Cap"
+LABEL description="A texlive base image for dantewiki."
+
 ENV DEBIAN_FRONTEND=noninteractive  \
     LANG=C.UTF-8      \
     LC_ALL=C.UTF-8    \
@@ -88,7 +91,7 @@ RUN apt-get update && \
 #
     tlmgr remove --force tlcockpit  && \
     tlmgr remove --force texplate   && \
-    tlmrg remove --force arara      && \
+    tlmgr remove --force arara      && \
     tlmgr remove --force latex2nemeth      && \
     tlmgr update --self && \
     tlmgr update --all && \

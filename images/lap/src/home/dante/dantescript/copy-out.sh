@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# This entrypoint initializes the database, generates LocalSettings.php and runs update.php
-
-
 printf "\n\n*** THIS IS /home/dante/dantescript/copy-out.sh *****\n\n "
 
 
@@ -23,9 +20,7 @@ printf "\n\n*** THIS IS /home/dante/dantescript/copy-out.sh *****\n\n "
 MOUNT=/var/www/html/
 TARGET=wiki-dir
 
-printf "\n\n***  /home/dante/dantescript/copy-out.sh: before copying out: clean up stuff which might have been there in /mnt\n "
-rm -rf /mnt/info.php
-rm -rf /mnt/index.html
+printf "\n\n***  /home/dante/dantescript/copy-out.sh: before copying out: clean up stuff which might have been there in the prior /mnt\n "
 rm -rf /mnt/${TARGET}
 printf "\n DONE"
 
