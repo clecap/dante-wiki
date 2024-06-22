@@ -27,7 +27,7 @@ RUN microdnf update && \
 
 COPY . .
 
-# Set default time zone if needed
+# Set default time zone if needed 
 ENV TZ=UTC
 
 # CMD ["mysqld"]
