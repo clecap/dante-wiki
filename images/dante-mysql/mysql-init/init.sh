@@ -24,6 +24,12 @@ fi
 export MYSQL_PWD=${MYSQL_ROOT_PASSWORD}
 
 
+printf "*** List of DATABASES: \n"
+mysql -u root <<-EOF
+  SHOW DATABASES;
+EOF
+printf "*** DONE DATABASES\n\n"
+
 printf "\n\n*** Creating databases:\n"
 mysql -u root <<-EOF
   CREATE DATABASE IF NOT EXISTS ${MY_DB_NAME} /*\!40100 DEFAULT CHARACTER SET utf8 */;
@@ -33,15 +39,15 @@ mysql -u root <<-EOF
   GRANT ALL PRIVILEGES ON ${MY_DB_NAME}.* TO '${MY_DB_USER}'@'192.168.0.0/255.255.0.0';
   FLUSH PRIVILEGES;
 EOF
-printf "\n*** DONE creatign databases\n\n"
+printf "*** DONE creating databases\n\n"
 
-printf "\n\n*** DATABASES: \n"
+printf "*** List of DATABASES: \n"
 mysql -u root <<-EOF
   SHOW DATABASES;
 EOF
-printf "\n*** DONE DATABASES\n\n"
+printf "*** DONE DATABASES\n\n"
 
-printf "\n\n*** USERS:\n"
+printf "*** List of USERS:\n"
 mysql -u root <<-EOF
   SELECT User, Host, authentication_string FROM mysql.user;
 EOF
@@ -52,9 +58,9 @@ printf "\n*** DONE USERS\n\n"
 #  FLUSH PRIVILEGES;
 #EOF
 
-printf "\n\n*** USERS:\n"
+printf "*** List of USERS:\n"
 mysql -u root <<-EOF
-  SELECT User, Host, authentication FROM mysql.user;
+  SELECT User, Host, authentication_string FROM mysql.user;
 EOF
 printf "\n*** DONE USERS\n\n"
 
@@ -68,6 +74,7 @@ printf "\n*** DONE USERS\n\n"
 #  SHOW USERS;
 #EOF
 
+printf "*** Generating mail\n"
 # Name of a temporary file for building up the mail
 TMPFILE=`mktemp`
 
@@ -77,6 +84,6 @@ echo "From: $SMTP_FROM"       >> $TMPFILE
 echo "Subject: Mysql initialized " >> $TMPFILE
 
 msmtp --host=${SMTP_HOST} --port=${SMTP_PORT} --auth=on --user=${SMTP_USER} --passwordeval="echo $SMTP_PASSWORD" --tls=on --from=${SMTP_FROM}  ${SMTP_TO} < $TMPFILE
+printf "DONE generating mail\n\n"
 
-echo " "
-echo "*** Completed dante/mysql-init/init.sh"
+printf "*** Completed dante/mysql-init/init.sh\n"

@@ -19,10 +19,23 @@
   </tr>
   <tr>
     <td><b>Docker</b></td>
-    <td><a href=""><img alt="Docker Image Version" src="https://img.shields.io/docker/v/clecap/lap?sort=date&label=Pulls%20for%20Lap"></a>&nbsp;
-<a href=""><img alt="" src="https://img.shields.io/docker/image-size/clecap/lap?sort=date&label=Image%20size%20for%20Lap"></a>&nbsp;
-<a href=""><img alt="" src="https://img.shields.io/docker/stars/clecap/lap"></a>&nbsp;
-<a>  <img alt="Docker Automated build" src="https://img.shields.io/docker/automated/clecap/lap"></a></td>
+    <td>
+      <a href=""><img alt="Docker Image Version" src="https://img.shields.io/docker/v/clecap/lap?sort=date&label=Pulls%20for%20Lap"></a>&nbsp;
+      <a href=""><img alt="Docker Image Size"    src="https://img.shields.io/docker/image-size/clecap/lap?sort=date&label=Image%20size%20for%20Lap"></a>&nbsp;
+      <a href=""><img alt="Docker Image Stars"   src="https://img.shields.io/docker/stars/clecap/lap"></a>&nbsp;
+      <a href=""><img alt="Docker Image Build"   src="https://img.shields.io/docker/automated/clecap/lap"></a>
+
+      <a href=""><img alt="Docker Image Version" src="https://img.shields.io/docker/v/clecap/tex?sort=date&label=Pulls%20for%20Tex"></a>&nbsp;
+      <a href=""><img alt="Docker Image Size"    src="https://img.shields.io/docker/image-size/clecap/tex?sort=date&label=Image%20size%20for%20Tex"></a>&nbsp;
+      <a href=""><img alt="Docker Image Stars"   src="https://img.shields.io/docker/stars/clecap/tex"></a>&nbsp;
+      <a href=""><img alt="Docker Image Build"   src="https://img.shields.io/docker/automated/clecap/tex"></a>
+
+      <a href=""><img alt="Docker Image Version" src="https://img.shields.io/docker/v/clecap/dante-mysql?sort=date&label=Pulls%20for%20dante-mysql"></a>&nbsp;
+      <a href=""><img alt="Docker Image Size"    src="https://img.shields.io/docker/image-size/clecap/dante-mysql?sort=date&label=Image%20size%20for%20dante-mysql"></a>&nbsp;
+      <a href=""><img alt="Docker Image Stars"   src="https://img.shields.io/docker/stars/clecap/dante-mysql"></a>&nbsp;
+      <a href=""><img alt="Docker Image Build"   src="https://img.shields.io/docker/automated/clecap/dante-mysql"></a>
+
+    </td>
   </tr>
   <tr>
      <td><b>Security</b></td>
