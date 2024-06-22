@@ -37,7 +37,7 @@
 
 <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/clecap/dante-wiki/main/scan_results.json">
 
-<table style="border-collapse: collapse;">
+<table border=0 style="border-collapse: collapse;">
   <tr>
     <td style="border: none;"><b>License</b></td>
     <td style="border: none;"><a href=""><img alt="AGPL V3 license" src="https://img.shields.io/badge/License-AGPL%20v3-blue.svg">&nbsp;</a></td>
