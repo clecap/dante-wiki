@@ -123,11 +123,13 @@ echo " "
 ## Install Parsifal development version
 ##
 printf "\n*** Cloning Parsifal from branch $PARSIFAL_BRANCH ... \n"
-  git clone --depth 1 --branch $PARSIFAL_BRANCH https://github.com/clecap/Parsifal
+  git clone --depth 1 --branch $PARSIFAL_BRANCH https://github.com/clecap/Parsifal ${MOUNT}/$TARGET/extensions
 printf "DONE cloning branch $BRANCH of Parsifal\n\n"
 
 
-
+################## TODO: we must ensure that this leads to an error / ABORT if the branch does not exist 
+################ TODO: we need to get a clear abort in numersou situations - and TODO clean up the existin live area before filling it in !!!!!!
+######## CAVE not delete too much !!!!!
 
 
 
@@ -166,7 +168,7 @@ printf "\n\n*** Doing a mediawiki maintenance update ... "
 printf "DONE update.php\n\n"
 
 
-# parsifal is not yet installed at this place ?????
+# parsifal is not yet installed at this place - so do not yet do this TODO
 ####
 ####printf "*** Importing initial set of Parsifal templates..."
 ####  php ${MOUNT}/${TARGET}/maintenance/importTextFiles.php --prefix "MediaWiki:ParsifalTemplate/" --rc --overwrite extensions/Parsifal/initial-templates/*

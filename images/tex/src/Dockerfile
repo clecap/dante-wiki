@@ -1,11 +1,7 @@
-#
-# Use fixed version number in the interest of reporducible builds
-#
-FROM debian:bookworm-slim
+FROM debian:stable-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
-
-ENV LANG=C.UTF-8 \
+    LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \    
     # ConTeXt cache can be created on runtime and does not need to increase image size  
     TEXLIVE_INSTALL_NO_CONTEXT_CACHE=1 \ 
@@ -37,11 +33,8 @@ ENV LANG=C.UTF-8 \
     #  We are setting the path so that we can more easily exercise and test commands inside of a docker exec shell
     PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/texlive/2024/bin/x86_64-linuxmusl:/bin:
 
-# Upgrade existing packages in the base image 
-
 RUN apt-get update && \ 
-    apt-get install -y   --no-install-recommends\
-      wget perl ghostscript libx11-dev libxaw7-dev ca-certificates && \
+    apt-get install -y   --no-install-recommends  wget perl ghostscript libx11-dev libxaw7-dev ca-certificates && \
     echo "*** *** *** Now installing Texlive "         && \
     cd /tmp && \
     wget https://ctan.net/systems/texlive/tlnet/install-tl-unx.tar.gz && \
@@ -60,10 +53,19 @@ RUN apt-get update && \
     echo "tlpdbopt_sys_bin /usr/bin" >> install.profile && \
     # actually install TeX Live
     ./install-tl -profile install.profile  && \
+##
+##  Adjust for present vulnerabilities
+##
     # tlcockpit contains packages where docker reports severe security issues - and we do not need it since it is a GUI tool
     # since i did not really manage to exclude it in the installation - I here remove it the brutal way
     rm -rf /usr/local/texlive/2024/texmf-dist/scripts/tlcockpit && \
     rm -rf /usr/local/texlive/2024/bin/x86_64-linux/tlcockpit && \
+    rm -rf /usr/local/texlive/2024/texmf-dist/scripts/texplate && \
+    rm -rf /usr/local/texlive/2024/texmf-dist/scripts/arara  && \
+    rm -rf /usr/local/texlive/2024/texmf-dist/scripts/latex2nemeth && \
+##
+##  Now cleanup
+##
     echo "*** *** *** Now doing a layer cleanup "  && \
     apt-get autoremove -y && \
     apt-get clean && \
@@ -75,48 +77,13 @@ RUN apt-get update && \
       /var/cache/man/* \
       /tmp/*
 
+### Do not delete the package files or later installation steps might be troubled
 #      /var/cache/debconf/*-old \
 #      /var/lib/apt/lists/* \
 #      /var/lib/dpkg/*-old \
 #      /var/lib/dpkg/info/* \
 
-
-
 ENTRYPOINT ["/bin/sh","-c","sleep infinity"]
 
 
 
-
-#curl                     &&    \
-# rsync                    &&   \
-# unzip                    &&   \
-# git                      &&   \
-# gpg                      &&   \
-# tar                      && \
-# xorriso                  && \
-#fontconfig               && \
-# perl                     && \
-# openjdk11-jre            && \
-# ncurses-libs             && \
-# perl-unicode-linebreak   && \
-# build-base                      && \
-#linux-headers                   && \
-# python3                         && \
-#    ln -sf python3 /usr/bin/python                     &&\
-# python3-dev                     && \
-# py3-pip                         && \
-#    pip3 install --no-cache --upgrade pip setuptools --break-system-packages   &&\
-#    pip3 install python-config --break-system-packages                        &&\
-#    pip3 install pymupdf --break-system-packages                              &&\
-#    echo "*** *** *** DONE building pymupdf "          && \
-   # no longer need mupdf as we use pymupdf 
-    ### apk --no-cache add mupdf && \
-    ### apk --no-cache add mupdf-tools && \
-#    apk --no-cache add py3-pygments                    && \
-#    apt-get install -y --no-install-recommends ghostscript                     && \
-#    gnuplot                         && \
-#    inkscape                        && \
-#     plantuml                        && \
-#     graphviz                        && \
-    # fonts needed for graphviz
-#    apk add --update font-bitstream-type1 ghostscript-fonts ttf-cantarell && \
