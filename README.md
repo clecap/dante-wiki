@@ -5,10 +5,10 @@
   </tr>
   <tr>
     <td><b>Github</b></td>
-    <td><a href=""><img alt="GitHub issues" src="https://img.shields.io/github/issues/clecap/dante-wiki">&nbsp;</a>
-<a href=""><img alt="GitHub closed issues" src="https://img.shields.io/github/issues-closed/clecap/dante-wiki">&nbsp;</a>
-<a href=""><img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/clecap/dante-wiki">&nbsp;</a>
-<a href=""><img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/clecap/dante-wiki">&nbsp;</a>
+    <td><a href=""><img alt="GitHub issues" src="https://img.shields.io/github/issues/clecap/dante-wiki"></a>&nbsp;
+<a href=""><img alt="GitHub closed issues" src="https://img.shields.io/github/issues-closed/clecap/dante-wiki"></a>&nbsp;
+<a href=""><img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/clecap/dante-wiki"></a>&nbsp;
+<a href=""><img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/clecap/dante-wiki"></a>&nbsp;
 <a href=""><img alt="GitHub all releases" src="https://img.shields.io/github/downloads/clecap/dante-wiki/total"></a></td>
   </tr>
   <tr>

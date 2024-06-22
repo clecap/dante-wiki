@@ -23,16 +23,13 @@ printf "\n\n*** THIS IS /home/dante/dantescript/copy-out.sh *****\n\n "
 MOUNT=/var/www/html/
 TARGET=wiki-dir
 
+printf "\n\n***  /home/dante/dantescript/copy-out.sh: before copying out: clean up stuff which might have been there in /mnt\n "
 rm -rf /mnt/info.php
 rm -rf /mnt/index.html
 rm -rf /mnt/${TARGET}
+printf "\n DONE"
 
 ## copy out what we have just produced from 
 cp -a ${MOUNT}/${TARGET} /mnt
 
-printf "*** /home/dante/dantescript/copy-out.sh has completed and will now terminate. GOOD BYE\n\n"
-
-
-
-
-
+printf "*** /home/dante/dantescript/copy-out.sh has completed. GOOD BYE\n\n"

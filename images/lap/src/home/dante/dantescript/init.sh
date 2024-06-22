@@ -35,8 +35,10 @@ CONT=/home/dante/initial-contents/generic
 
 
 
-
 # cleaning the target
+printf "/home/dante/dantescript/init.sh: Listing current MOUNT=${MOUNT} "
+ls -alg ${MOUNT}
+
 rm -rf ${MOUNT}/${TARGET}/*
 
 # include base files as required
