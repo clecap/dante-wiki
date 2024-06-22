@@ -23,6 +23,10 @@ printf "\n\n*** THIS IS /home/dante/dantescript/copy-out.sh *****\n\n "
 MOUNT=/var/www/html/
 TARGET=wiki-dir
 
+rm -rf /mnt/info.php
+rm -rf /mnt/index.html
+rm -rf /mnt/${TARGET}
+
 ## copy out what we have just produced from 
 cp -a ${MOUNT}/${TARGET} /mnt
 
