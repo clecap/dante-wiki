@@ -36,8 +36,12 @@ CONT=/home/dante/initial-contents/generic
 
 
 
-### TODO: really ??????
-rm -f LocalSettings.php
+# cleaning the target
+rm -rf ${MOUNT}/${TARGET}/*
+
+# include base files as required
+
+
 
 
 MEDIAWIKI_DB_HOST=my-dante-mysql
