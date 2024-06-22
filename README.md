@@ -1,7 +1,7 @@
 <table border=0 style="border-collapse: collapse;">
   <tr>
     <td><b>License</b></td>
-    <td><a href=""><img alt="AGPL V3 license" src="https://img.shields.io/badge/License-AGPL%20v3-blue.svg">&nbsp;</a></td>
+    <td><a href=""><img alt="AGPL V3 license" src="https://img.shields.io/badge/License-AGPL%20v3-blue.svg"></a></td>
   </tr>
   <tr>
     <td><b>Github</b></td>
@@ -14,14 +14,14 @@
   <tr>
     <td><b>Size</b></td>
     <td>
-      <a href=""><img alt="Repository code size" src="https://img.shields.io/github/languages/code-size/clecap/dante-wiki">&nbsp;</a>
+      <a href=""><img alt="Repository code size" src="https://img.shields.io/github/languages/code-size/clecap/dante-wiki"></a>&nbsp;
       <a href=""><img alt="Repository LoC" src="https://sloc.xyz/github/clecap/dante-wiki/"></a></td>
   </tr>
   <tr>
     <td><b>Docker</b></td>
-    <td><a href=""><img alt="Docker Image Version" src="https://img.shields.io/docker/v/clecap/lap?sort=date&label=Pulls%20for%20Lap">&nbsp;</a>
-<a href=""><img alt="" src="https://img.shields.io/docker/image-size/clecap/lap?sort=date&label=Image%20size%20for%20Lap">&nbsp;</a>
-<a href=""><img alt="" src="https://img.shields.io/docker/stars/clecap/lap">&nbsp;</a>
+    <td><a href=""><img alt="Docker Image Version" src="https://img.shields.io/docker/v/clecap/lap?sort=date&label=Pulls%20for%20Lap"></a>&nbsp;
+<a href=""><img alt="" src="https://img.shields.io/docker/image-size/clecap/lap?sort=date&label=Image%20size%20for%20Lap"></a>&nbsp;
+<a href=""><img alt="" src="https://img.shields.io/docker/stars/clecap/lap"></a>&nbsp;
 <a>  <img alt="Docker Automated build" src="https://img.shields.io/docker/automated/clecap/lap"></a></td>
   </tr>
   <tr>
