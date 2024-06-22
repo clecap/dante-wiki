@@ -1,10 +1,13 @@
 FROM debian:stable-slim
 
+## Variable CTAN designates the site where to obtain texlive from.
+#  We mmight want to set it to a different value when there is a problem with a site assigned by mirror.ctan.org
+#  CTAN could be mirror.ctan.org
+#  CTAN could also designate a specific mirror, such as ctan.net
+
 
 ARG CTAN=ctan.net
 ARG YEAR=2024
-
-# could also be mirror.ctan.org
 
 ENV DEBIAN_FRONTEND=noninteractive  \
     LANG=C.UTF-8      \
@@ -80,10 +83,15 @@ RUN apt-get update && \
 #    rm -rf /usr/local/texlive/2024/texmf-dist/scripts/arara  && \
 #    rm -rf /usr/local/texlive/2024/texmf-dist/scripts/latex2nemeth && \
 # 
-    tlmgr remove tlcockpit  && \
-    tlmgr remove texplate   && \
-    tlmrg remove arara      && \
-    tlmgr latex2nemeth      && \
+#  tlcockpit removal without --force is refused, so add it here
+#  need to update the database 
+#
+    tlmgr remove --force tlcockpit  && \
+    tlmgr remove --force texplate   && \
+    tlmrg remove --force arara      && \
+    tlmgr remove --force latex2nemeth      && \
+    tlmgr update --self && \
+    tlmgr update --all && \
 ##
 ##
     echo "*** *** *** Verify Version "  && \
