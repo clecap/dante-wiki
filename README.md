@@ -3,7 +3,9 @@
 
 
 <details>
-  <summary>Click to expand!</summary>
+  <summary>
+![PRETEXT](https://img.shields.io/badge/Build%20Viewout-brightgreen)
+</summary>
 
 
 <table border=0 style="border-collapse: collapse;">
