@@ -33,8 +33,28 @@ TARGET=wiki-dir
 # directory where to pick up the minimal initial contents
 CONT=/home/dante/initial-contents/generic 
 
-rm ${MOUNT}/phpinfo.php
+printf "\n*** Listing of ${MOUNT}\n"
+ls -alg ${MOUNT}
+printf "\nDONE\n"
+printf "\n*** Listing of ${MOUNT}/${TARGET}\n"
+ls -alg ${MOUNT}/${TARGET}
+printf "\nDONE\n"
+
+printf "\n\n*** Deleting phpinfo.php..."
+rm -f ${MOUNT}/phpinfo.php
+printf "DONE\n"
+
+printf "\n\n*** Copying in index.html..."
 cp /home/dante/dantescript/html/index.html ${MOUNT}
+printf "DONE\n\n"
+
+printf "\n*** Listing of ${MOUNT}\n"
+ls -alg ${MOUNT}
+printf "\nDONE\n"
+printf "\n*** Listing of ${MOUNT}/${TARGET}\n"
+ls -alg ${MOUNT}/${TARGET}
+printf "\nDONE\n"
+
 
 MEDIAWIKI_DB_HOST=my-dante-mysql
 MEDIAWIKI_DB_TYPE=mysql
@@ -118,9 +138,16 @@ echo " "
 ##
 ## Install Parsifal development version
 ##
-printf "\n*** Cloning Parsifal from branch $PARSIFAL_BRANCH ... \n"
-  git clone --depth 1 --branch $PARSIFAL_BRANCH https://github.com/clecap/Parsifal ${MOUNT}/$TARGET/extensions
+printf "\n*** Cloning Parsifal from branch $PARSIFAL_BRANCH into ${MOUNT}/${TARGET}/extensions... \n"
+  git clone --depth 1 --branch $PARSIFAL_BRANCH https://github.com/clecap/Parsifal ${MOUNT}/$TARGET/extensions/Parsifal
 printf "DONE cloning branch $BRANCH of Parsifal\n\n"
+
+
+printf "\n*** error check: Cloning Parsifal from branch $PARSIFAL_BRANCH into ${MOUNT}/${TARGET}/extensions... \n"
+  git clone --depth 1 --branch NONEXISTANT https://github.com/clecap/Parsifal ${MOUNT}/$TARGET/extensions/Parsifal
+printf "DONE cloning branch $BRANCH of Parsifal\n\n"
+
+
 
 
 ################## TODO: we must ensure that this leads to an error / ABORT if the branch does not exist 

@@ -22,27 +22,20 @@ services:
     container_name: my-dante-mysql
     networks:
       - dante-network
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root"]
-      interval: 10s
-      timeout: 5s
-      retries: 10     
-      start_period: 40s
     secrets:
      - configuration
     volumes:
-      - ../dante-mysql/mysql-init:/docker-entrypoint-initdb.d
+      - ../images/dante-mysql/mysql-init:/docker-entrypoint-initdb.d
 
-
-  webserver-init:
+  copy:
     image: lap
     container_name: my-lap-container-copy
     restart: "no"
-    depends_on:
-      database:
-        condition: service_healthy
+#    depends_on:
+#      database:
+#        condition: service_healthy
     volumes:
-      - ../../live:/mnt
+      - ../live:/mnt
     ports:
       - "8080:80"
       - "4443:443"
@@ -50,17 +43,16 @@ services:
       - configuration
     networks: 
       - dante-network
-    command: "run-apache.sh init.sh copy-out.sh shutdown.sh"
+    command: "wait-for-mysql.sh init.sh copy-out.sh shutdown.sh"
 
-
-  webserver:
+  webserver-after-copy:
     image: lap
     container_name: my-lap-container
     depends_on:
-      webserver-init:
+      copy:
         condition: service_completed_successfully
     volumes:
-      - ../../live:/mnt
+      - ../live:/var/www/html
     ports:
       - "8080:80"
       - "4443:443"
@@ -69,6 +61,7 @@ services:
     networks: 
       - dante-network
     command: "run-apache.sh"
+
 
 
 
@@ -83,11 +76,10 @@ services:
       PMA_HOST: my-dante-mysql
     depends_on:
       - database
-      - webserver
 
 networks:
   dante-network:
 
 secrets:
   configuration:
-    file: ../../private/configuration.sh
+    file: ../private/configuration.sh

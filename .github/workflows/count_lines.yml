@@ -1,6 +1,6 @@
 name: Count Lines of Code
 
-on: [push]
+on:
   push:
     branches:
       - main

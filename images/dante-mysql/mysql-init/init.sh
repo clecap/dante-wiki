@@ -6,8 +6,6 @@ set -e
 echo " "
 echo "*** dante/mysqlinit.sh running now"
 
-
-
 echo "*** /lap-entrypoint.sh sees the following secrets file:"
 ls -alg /run/secrets
 echo ""
@@ -24,13 +22,19 @@ fi
 export MYSQL_PWD=${MYSQL_ROOT_PASSWORD}
 
 
+printf "*** List of USERS:\n"
+mysql -u root <<-EOF
+  SELECT User, Host, authentication_string FROM mysql.user;
+EOF
+printf "\n*** DONE USERS\n\n"
+
 printf "*** List of DATABASES: \n"
 mysql -u root <<-EOF
   SHOW DATABASES;
 EOF
 printf "*** DONE DATABASES\n\n"
 
-printf "\n\n*** Creating databases:\n"
+printf "\n\n*** Creating required databases and users:\n"
 mysql -u root <<-EOF
   CREATE DATABASE IF NOT EXISTS ${MY_DB_NAME} /*\!40100 DEFAULT CHARACTER SET utf8 */;
   CREATE USER IF NOT EXISTS ${MY_DB_USER}@'172.16.0.0/255.240.0.0' IDENTIFIED BY '${MY_DB_PASS}';
@@ -41,28 +45,22 @@ mysql -u root <<-EOF
 EOF
 printf "*** DONE creating databases\n\n"
 
+
+printf "*** List of USERS:\n"
+mysql -u root <<-EOF
+  SELECT User, Host, authentication_string FROM mysql.user;
+EOF
+printf "\n*** DONE USERS\n\n"
+
 printf "*** List of DATABASES: \n"
 mysql -u root <<-EOF
   SHOW DATABASES;
 EOF
 printf "*** DONE DATABASES\n\n"
 
-printf "*** List of USERS:\n"
-mysql -u root <<-EOF
-  SELECT User, Host, authentication_string FROM mysql.user;
-EOF
-printf "\n*** DONE USERS\n\n"
 
-#mysql -u root <<-EOF
-#  UPDATE mysql.user SET Host='192.168.0.0/255.255.0.0' WHERE User='root';
-#  FLUSH PRIVILEGES;
-#EOF
 
-printf "*** List of USERS:\n"
-mysql -u root <<-EOF
-  SELECT User, Host, authentication_string FROM mysql.user;
-EOF
-printf "\n*** DONE USERS\n\n"
+
 
 
 #mysql -u root <<-EOF

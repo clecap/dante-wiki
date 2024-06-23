@@ -16,6 +16,5 @@
 			"volumes/full/content/wiki-dir",
 			"volumes/full/content/wiki-dir/extensions/Parsifal"
 		],
-  "docker.commands.build": "${containerCommand} build --rm -f \"${dockerfile}\" -t ${configurationFile} ",
 	}
 }
