@@ -1,12 +1,8 @@
+## Description
 
+Dante-Wiki is a note taking, publishing and peer reviewing system for scientists, based on Mediawiki and LaTeX.
 
-
-
-<details>
-  <summary>
-<img src="https://img.shields.io/badge/Build%20Viewout-brightgreen">
-</summary>
-
+## Shields
 
 <table border=0 style="border-collapse: collapse;">
   <tr>
@@ -69,14 +65,7 @@
   </tr>
 </table>
 
-</details>
 
-
-## Description
-
-Dante-Wiki is a note taking and publishing system for scientists, based on Mediawiki and LaTeX.
-
-End users who want to install a working copy of DanteWiki should consult https://github.com/clecap/dante-wiki-production
 
 
 
