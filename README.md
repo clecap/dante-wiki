@@ -20,18 +20,35 @@
   <tr>
     <td><b>Docker</b></td>
     <td>
-      <b>Lap: </b><a href=""><img alt="Docker Image Version" src="https://img.shields.io/docker/v/clecap/lap?sort=date&label=Pulls"></a>&nbsp;
-      <a href=""><img alt="Docker Image Size"    src="https://img.shields.io/docker/image-size/clecap/lap?sort=date&label=Size"></a>&nbsp;
-      <a href=""><img alt="Docker Image Stars"   src="https://img.shields.io/docker/stars/clecap/lap"></a>&nbsp;
-      <a href=""><img alt="Docker Image Build"   src="https://img.shields.io/docker/automated/clecap/lap"></a><br>
-      <b>TeX: </b><a href=""><img alt="Docker Image Version" src="https://img.shields.io/docker/v/clecap/tex?sort=date&label=Pulls"></a>&nbsp;
-      <a href=""><img alt="Docker Image Size"    src="https://img.shields.io/docker/image-size/clecap/tex?sort=date&label=Size"></a>&nbsp;
-      <a href=""><img alt="Docker Image Stars"   src="https://img.shields.io/docker/stars/clecap/tex"></a>&nbsp;
-      <a href=""><img alt="Docker Image Build"   src="https://img.shields.io/docker/automated/clecap/tex"></a><br>
-      <b>Dante-Mysql: </b><a href=""><img alt="Docker Image Version" src="https://img.shields.io/docker/v/clecap/dante-mysql?sort=date&label=Pulls"></a>&nbsp;
-      <a href=""><img alt="Docker Image Size"    src="https://img.shields.io/docker/image-size/clecap/dante-mysql?sort=date&label=Size"></a>&nbsp;
-      <a href=""><img alt="Docker Image Stars"   src="https://img.shields.io/docker/stars/clecap/dante-mysql"></a>&nbsp;
-      <a href=""><img alt="Docker Image Build"   src="https://img.shields.io/docker/automated/clecap/dante-mysql"></a>
+      <table>
+      <tr>
+        <td><b>Lap: </b></td>
+        <td>
+          <a href=""><img alt="Docker Image Version" src="https://img.shields.io/docker/v/clecap/lap?sort=date&label=Pulls"></a>&nbsp;
+          <a href=""><img alt="Docker Image Size"    src="https://img.shields.io/docker/image-size/clecap/lap?sort=date&label=Size"></a>&nbsp;
+          <a href=""><img alt="Docker Image Stars"   src="https://img.shields.io/docker/stars/clecap/lap"></a>&nbsp;
+          <a href=""><img alt="Docker Image Build"   src="https://img.shields.io/docker/automated/clecap/lap"></a>
+        </td>
+      </tr>
+      <tr>
+        <td><b>Lap: </b></td>
+        <td>
+          <a href=""><img alt="Docker Image Version" src="https://img.shields.io/docker/v/clecap/lap?sort=date&label=Pulls"></a>&nbsp;
+          <a href=""><img alt="Docker Image Size"    src="https://img.shields.io/docker/image-size/clecap/lap?sort=date&label=Size"></a>&nbsp;
+          <a href=""><img alt="Docker Image Stars"   src="https://img.shields.io/docker/stars/clecap/lap"></a>&nbsp;
+          <a href=""><img alt="Docker Image Build"   src="https://img.shields.io/docker/automated/clecap/lap"></a>
+        </td>
+      </tr>
+      <tr>
+        <td><b>Lap: </b></td>
+        <td>
+          <a href=""><img alt="Docker Image Version" src="https://img.shields.io/docker/v/clecap/lap?sort=date&label=Pulls"></a>&nbsp;
+          <a href=""><img alt="Docker Image Size"    src="https://img.shields.io/docker/image-size/clecap/lap?sort=date&label=Size"></a>&nbsp;
+          <a href=""><img alt="Docker Image Stars"   src="https://img.shields.io/docker/stars/clecap/lap"></a>&nbsp;
+          <a href=""><img alt="Docker Image Build"   src="https://img.shields.io/docker/automated/clecap/lap"></a>
+        </td>
+      </tr>
+      </table>
     </td>
   </tr>
   <tr>
@@ -46,9 +63,7 @@
 
 ## Description
 
-This repository is for development work on Dante-Wiki.
-
-It helps building up a hot-reload instance for working on DanteWiki.
+Dante-Wiki is a note taking and publishing system for scientists, based on Mediawiki and LaTeX.
 
 End users who want to install a working copy of DanteWiki should consult https://github.com/clecap/dante-wiki-production
 
