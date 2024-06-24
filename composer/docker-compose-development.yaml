@@ -19,7 +19,7 @@ services:
 
   database:
     image: dante-mysql
-    container_name: my-dante-mysql
+    container_name: my-dante-m dysql
     networks:
       - dante-network
     secrets:
@@ -53,8 +53,6 @@ services:
     depends_on:
       copy-to-host:
         condition: service_completed_successfully
-    environment:
-      - DANTE_WIKI_MODE=development
     volumes:
       - ../live:/var/www/html
     ports:
@@ -64,7 +62,7 @@ services:
       - configuration
     networks: 
       - dante-network
-    command: "run-apache.sh"
+    command: "run-apache-no-cache.sh"
 
 
 

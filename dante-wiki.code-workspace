@@ -14,7 +14,7 @@
 		"git.repositoryScanMaxDepth": 1,
 		"git.scanRepositories": [
 			"volumes/full/content/wiki-dir",
-			"volumes/full/content/wiki-dir/extensions/Parsifal"
+			"live/wiki-dir/extensions/Parsifal"
 		],
 	}
 }
