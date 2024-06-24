@@ -15,11 +15,17 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 #   msmtp             write simple mails to inform about backup job completion and more
 #   php-curl:   must include this for the composer to run faster
 
-RUN apt-get update && \
+RUN \
+#   ensure docker desktop tab opens with a bash allowing dommand line editing and noy with sh or dash which does not 
+    rm /bin/sh && \
+    ln -sf /bin/bash /bin/sh && \
+    apt-get update && \
     apt-get install -y   --no-install-recommends apache2 ca-certificates apache2-utils openssl && \
     apt-get install -y   --no-install-recommends php && \
     apt-get install -y   --no-install-recommends php-common php-mysqli php-intl php-apcu php-mbstring php- php-gd php-json php-xml php-bcmath php-tokenizer php-igbinary php-opcache php-pear php-curl && \
-    apt-get install -y   --no-install-recommends libapache2-mod-php default-mysql-client && \
+    apt-get install -y   --no-install-recommends default-mysql-client && \
+#    apt-get install -y   --no-install-recommends libapache2-mod-php && \
+    apt-get install -y   --no-install-recommends php-fpm && \
     apt-get install -y   --no-install-recommends wget curl unzip git diffutils  && \
     apt-get install -y   --no-install-recommends imagemagick netpbm djvulibre-bin librsvg2-bin xpdf mscgen msmtp gnuplot-nox graphviz && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
@@ -99,7 +105,6 @@ RUN curl -o /tmp/$MEDIAWIKI_TARBALL $MEDIAWIKI_URL      && \
     tar -xzf /tmp/$MEDIAWIKI_TARBALL -C /tmp   && \
     rm /tmp/$MEDIAWIKI_TARBALL && \
     mv /tmp/mediawiki-$MEDIAWIKI_VERSION /var/www/html/${TARGET} && \
-    chown -R www-data:www-data /var/www/html/${TARGET} && \
   rm -Rf /var/www/html/${TARGET}/skins/Refreshed/.git
 
 
@@ -192,8 +197,35 @@ RUN /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://gi
     composer update
 
 
-
-
+RUN \
+#   select intended operating mode
+    a2dismod php8.2                 && \
+    a2dismod mpm_prefork            && \
+    a2enmod proxy                   && \ 
+    a2enmod proxy_fcgi              && \
+    a2enmod setenvif                && \
+############################    a2enconf php-fpm                && \
+    a2enmod mpm_event               && \
+# remove default apache sites
+    a2dissite 000-default.conf      && \
+    a2dissite default-ssl.conf      && \
+# remove some apache modules
+    a2dismod userdir                && \
+# configure apache for security
+    a2enmod ssl                     && \
+    a2enmod auth_basic              && \
+    a2enmod auth_digest             && \
+# configure apache for speed
+    a2enmod cache                   && \
+    a2enmod cache_disk              && \
+    a2enmod headers                 && \
+    a2enmod expires                 && \
+    a2enmod deflate                 && \
+    a2enmod http2                   && \
+# configure apache for 
+    a2enmod rewrite                 && \
+    a2enmod alias                   && \
+    a2enmod include
 
 
 ## 

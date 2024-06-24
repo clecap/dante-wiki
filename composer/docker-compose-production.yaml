@@ -27,13 +27,11 @@ services:
     volumes:
       - ../images/dante-mysql/mysql-init:/docker-entrypoint-initdb.d
 
-  copy:
+
+  copy-to-host:
     image: lap
     container_name: my-lap-container-copy
     restart: "no"
-#    depends_on:
-#      database:
-#        condition: service_healthy
     volumes:
       - ../live:/mnt
     ports:
@@ -45,12 +43,18 @@ services:
       - dante-network
     command: "wait-for-mysql.sh init.sh copy-out.sh shutdown.sh"
 
+# NOTE: wait for mysql not via health check but via script, since we want a more fine granular control over this
+#       than seems to work with the docker healthcheck approach
+
+
   webserver-after-copy:
     image: lap
     container_name: my-lap-container
     depends_on:
       copy:
         condition: service_completed_successfully
+    environment:
+      - DANTE_WIKI_MODE=production        
     volumes:
       - ../live:/var/www/html
     ports:
@@ -61,7 +65,6 @@ services:
     networks: 
       - dante-network
     command: "run-apache.sh"
-
 
 
 

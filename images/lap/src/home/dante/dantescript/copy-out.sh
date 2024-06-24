@@ -1,7 +1,6 @@
 #!/bin/bash
 
-printf "\n\n*** THIS IS /home/dante/dantescript/copy-out.sh *****\n\n "
-
+printf "\n*** *** *** THIS IS /home/dante/dantescript/copy-out.sh ***** "
 
 ### set terminate on error 
 #abort()
@@ -12,19 +11,46 @@ printf "\n\n*** THIS IS /home/dante/dantescript/copy-out.sh *****\n\n "
 #set -e                                  # abort execution on any error
 #trap 'abort' EXIT                       # call abort on EXIT
 
-###### send mail upon completion ????
-#### favicon must be included into the thing - and at the dockerfile level ## todo
-#### check if we are already initialized ##### TODO
-####### crontab entries for backup and for job queue TODO
-
 MOUNT=/var/www/html/
 TARGET=wiki-dir
 
-printf "\n\n***  /home/dante/dantescript/copy-out.sh: before copying out: clean up stuff which might have been there in the prior /mnt\n "
-rm -rf /mnt/${TARGET}
-printf "\n DONE"
+exec 1>&1 2>&2
+
+printf "\n***  /home/dante/dantescript/copy-out.sh: cleaning up old stuff...\n "
+  chown -R www-data:www-data /mnt/${TARGET}
+  exec 1>&1 2>&2
+printf "DONE cleaning up old stuff\n"
+
+printf "\n***  /home/dante/dantescript/copy-out.sh: cleaning up old stuff...\n "
+  rm -rf /mnt/${TARGET}
+  exec 1>&1 2>&2
+printf "DONE cleaning up old stuff\n"
+
+
+printf "\n***  /home/dante/dantescript/copy-out.sh: cleaning up old stuff..LS-LA.\n "
+  ls -la /mnt/${TARGET}
+  exec 1>&1 2>&2
+printf "DONE cleaning up old stuff\n"
+
+
+printf "\n***  /home/dante/dantescript/copy-out.sh: cleaning up old stuff..LS-LD.\n "
+  ls -ld /mnt/${TARGET}
+  exec 1>&1 2>&2
+printf "DONE cleaning up old stuff\n"
 
 ## copy out what we have just produced from 
-cp -a ${MOUNT}/${TARGET} /mnt
+printf "\n\n***  /home/dante/dantescript/copy-out.sh: copying out...\n"
+  cp -a ${MOUNT}/${TARGET} /mnt
+  cp -a ${MOUNT}/index.html /mnt
+  exec 1>&1 2>&2
+printf "DONE cleaning up old stuff\n"
 
-printf "*** /home/dante/dantescript/copy-out.sh has completed. GOOD BYE\n\n"
+printf "\n***  /home/dante/dantescript/copy-out.sh: doing an LS-LA after the copying operation \n "
+  ls -la /mnt/${TARGET}
+  exec 1>&1 2>&2
+printf "DONE cleaning up old stuff\n"
+
+
+
+
+printf "*** /home/dante/dantescript/copy-out.sh has completed. GOOD BYE\n"

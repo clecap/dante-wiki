@@ -34,25 +34,33 @@ TARGET=wiki-dir
 CONT=/home/dante/initial-contents/generic 
 
 printf "\n*** Listing of ${MOUNT}\n"
-ls -alg ${MOUNT}
+  ls -alg ${MOUNT}
+  exec 1>&1 2>&2
 printf "\nDONE\n"
+
 printf "\n*** Listing of ${MOUNT}/${TARGET}\n"
-ls -alg ${MOUNT}/${TARGET}
+  ls -alg ${MOUNT}/${TARGET}
+  exec 1>&1 2>&2
 printf "\nDONE\n"
 
 printf "\n\n*** Deleting phpinfo.php..."
-rm -f ${MOUNT}/phpinfo.php
+  rm -f ${MOUNT}/phpinfo.php
+  exec 1>&1 2>&2
 printf "DONE\n"
 
 printf "\n\n*** Copying in index.html..."
-cp /home/dante/dantescript/html/index.html ${MOUNT}
+  cp /home/dante/html/index.html ${MOUNT}
+  exec 1>&1 2>&2
 printf "DONE\n\n"
 
 printf "\n*** Listing of ${MOUNT}\n"
-ls -alg ${MOUNT}
+  ls -alg ${MOUNT}
+  exec 1>&1 2>&2
 printf "\nDONE\n"
+
 printf "\n*** Listing of ${MOUNT}/${TARGET}\n"
-ls -alg ${MOUNT}/${TARGET}
+  ls -alg ${MOUNT}/${TARGET}
+  exec 1>&1 2>&2
 printf "\nDONE\n"
 
 
@@ -182,7 +190,7 @@ printf "*** Checking in sidebar..."
 printf "DONE\n\n"
 
 printf "*** Checking in MainPage..."
-  php ${MOUNT}/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite  $CONT/Main Page
+  php ${MOUNT}/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite  "$CONT/Main Page"
 printf "DONE\n\n"
 
 # Must do an update, since we have installed all kinds of extensions earlier
@@ -219,6 +227,11 @@ printf "\n----DONE refreshFileHeaders.php\n\n"
 printf "\n\n**** Touching LocalSettings.php to refresh the cache..."
 touch ${MOUNT}/${TARGET}/LocalSettings.php
 printf "\n----DONE touching LocalSettings.php\n\n"
+
+
+printf "\n*** chown all files to www-data...\n"
+   chown -R www-data:www-data ${MOUNT}/${TARGET}
+printf "\n----DONE chwoning all files\n"
 
 
 
