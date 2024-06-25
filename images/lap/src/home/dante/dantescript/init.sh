@@ -5,13 +5,18 @@
 
 PARSIFAL_BRANCH="dante"
 
+MOUNT=/var/www/html/
+TARGET=wiki-dir
+
+# directory where to pick up the minimal initial contents
+CONT=/home/dante/initial-contents/generic 
+
 RESET="\e[0m"
 ERROR="\e[1;31m"
 GREEN="\e[32m"
 
-echo " "
-echo "** THIS IS /dantescript/init.sh ***** "
 
+printf "${GREEN}*** THIS IS /dantescript/init.sh ***** "
 
 ### set terminate on error 
 abort()
@@ -29,11 +34,6 @@ abort()
 #### check if we are already initialized ##### TODO
 ####### crontab entries for backup and for job queue TODO
 
-MOUNT=/var/www/html/
-TARGET=wiki-dir
-
-# directory where to pick up the minimal initial contents
-CONT=/home/dante/initial-contents/generic 
 
 printf "\n*** init.sh: Listing of ${MOUNT}\n"
   ls -alg ${MOUNT}
@@ -78,6 +78,7 @@ MEDIAWIKI_RUN_UPDATE_SCRIPT=true
 MEDIAWIKI_SITE_NAME="${MW_SITE_NAME}"
 MEDIAWIKI_SITE_SERVER=${MW_SITE_SERVER}
 MEDIAWIKI_SCRIPT_PATH="/${TARGET}"
+
 # TODO: make language variable inputable into script
 MEDIAWIKI_SITE_LANG=en
 MEDIAWIKI_ADMIN_USER=${WK_ADMIN_USER}
@@ -131,11 +132,15 @@ php ${MOUNT}${TARGET}/maintenance/install.php \
     "$MEDIAWIKI_SITE_NAME" \
     "$MEDIAWIKI_ADMIN_USER"
 
+exec 1>&1 2>&2
+
   echo ""
   echo "________________________________  we are past maintenance/install.php __________________"
   echo ""
 
-    exec 1>&1 2>&2
+exec 1>&1 2>&2
+
+
 
 # check if we succeeded to generate LocalSettings.php
 if [ -e "${MOUNT}/${TARGET}/LocalSettings.php" ]; then
