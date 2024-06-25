@@ -1,10 +1,20 @@
 #!/bin/bash
 
-echo "*** THIS IS run-apache.sh"
+RESET="\e[0m"
+ERROR="\e[1;31m"
+GREEN="\e[32m"
 
-echo "** Starting apache..."
+printf "*** THIS IS run-apache-no-cache.sh\n\n"
+
+printf "*** run-apache-no-cache.sh: Starting apache..."
   service php8.2-fpm start
-  apachectl start -D NO_CACHE
-echo "DONE with starting apache"
+  exec 1>&1 2>&2
+  apachectl -D DUMP_INCLUDES 
+  exec 1>&1 2>&2
+  apachectl -D DUMP_MODULES 
+  exec 1>&1 2>&2
+  apachectl  -D NO_CACHE start
+  exec 1>&1 2>&2
+printf "DONE with starting apache"
 
-echo "*** EXITING run-apache.sh"
+printf "*** EXITING run-apache-no-cache.sh"

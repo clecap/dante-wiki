@@ -9,8 +9,8 @@ openssl req -x509 -out /etc/ssl/apache2/server.crt -keyout /etc/ssl/apache2/serv
   -subj '/CN=localhost' -extensions EXT -config <( \
    printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
 
-chmod 600 /etc/ssl/apache2/localhost.key
-chmod 644 /etc/ssl/apache2/localhost.crt
+chmod 600 /etc/ssl/apache2/server.key
+chmod 644 /etc/ssl/apache2/server.crt
 
     # Name of a temporary file for building up the mail
     TMPFILE=`mktemp`

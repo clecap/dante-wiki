@@ -161,12 +161,6 @@ printf "\n*** init.sh: Cloning Parsifal from branch $PARSIFAL_BRANCH into ${MOUN
 printf "DONE cloning branch $BRANCH of Parsifal\n"
 
 
-#printf "*** error check: Cloning Parsifal from branch $PARSIFAL_BRANCH into ${MOUNT}/${TARGET}/extensions... \n"
-#  git clone --depth 1 --branch NONEXISTANT https://github.com/clecap/Parsifal ${MOUNT}/$TARGET/extensions/Parsifal
-#printf "DONE cloning branch $BRANCH of Parsifal\n\n"
-
-
-
 ################## TODO: we must ensure that this leads to an error / ABORT if the branch does not exist 
 ################ TODO: we need to get a clear abort in numersou situations - and TODO clean up the existin live area before filling it in !!!!!!
 ######## CAVE not delete too much !!!!!
@@ -182,9 +176,10 @@ printf "*** Adding reference to DanteSettings.php ... "
   echo '###' >> LocalSettings.php
     # NOTE: Doing this with include does not produce an error if the file goes missing
   echo 'include (\"DanteSettings.php\"); ' >> LocalSettings.php
-printf  "DONE\n\n"
+  exec 1>&1 2>&2
+printf  "DONE\n"
 
-printf "*** Adding initial contents..."
+printf "\n*** Adding initial contents..."
   php ${MOUNT}${TARGET}/maintenance/importDump.php --namespaces '8' --debug $CONT/minimal-initial-contents.xml
   exec 1>&1 2>&2
   printf " namespace 8 done ";
@@ -194,21 +189,24 @@ printf "*** Adding initial contents..."
   php ${MOUNT}${TARGET}/maintenance/importDump.php --uploads --debug $CONT/minimal-initial-contents.xml
   exec 1>&1 2>&2
   printf " uploads done ";
-printf "DONE\n\n"
+printf "DONE\n"
 
 # main page and sidebar need a separate check in to show the proper dates
-printf "*** Checking in sidebar..."
+printf "\n*** Checking in sidebar..."
    php ${MOUNT}/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite --prefix "MediaWiki:" $CONT/Sidebar
-printf "DONE\n\n"
+  exec 1>&1 2>&2
+printf "DONE\n"
 
-printf "*** Checking in MainPage..."
+printf "\n*** Checking in MainPage..."
   php ${MOUNT}/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite  "$CONT/Main Page"
-printf "DONE\n\n"
+  exec 1>&1 2>&2
+printf "DONE\n"
 
 # Must do an update, since we have installed all kinds of extensions earlier
-printf "\n\n*** Doing a mediawiki maintenance update ... "
+printf "\n*** Doing a mediawiki maintenance update ... "
   php ${MOUNT}/${TARGET}/maintenance/update.php
-printf "DONE update.php\n\n"
+  exec 1>&1 2>&2
+printf "DONE update.php\n"
 
 
 # parsifal is not yet installed at this place - so do not yet do this TODO
@@ -227,23 +225,23 @@ printf "DONE initSiteStats.php\n"
 printf "\n\n**** init.sh: RUNNING: rebuildall \n\n"
   php ${MOUNT}/${TARGET}/maintenance/rebuildall.php 
   exec 1>&1 2>&2
-printf "\n----DONE rebuildall.php\n\n"
+printf "----DONE rebuildall.php\n"
 
-printf "\n\n**** init.sh: RUNNING: checkImages \n"
+printf "\n**** init.sh: RUNNING: checkImages \n"
   php ${MOUNT}/${TARGET}/maintenance/checkImages.php
   exec 1>&1 2>&2
-printf "\n----DONE checkImages.php\n"
+printf "----DONE checkImages.php\n"
 
-printf "\n\n**** init.sh RUNNING: refreshFileHeaders \n"
+printf "\n**** init.sh RUNNING: refreshFileHeaders \n"
   php ${MOUNT}/${TARGET}/maintenance/refreshFileHeaders.php --verbose
   exec 1>&1 2>&2
-printf "\n----DONE refreshFileHeaders.php\n\n"
+printf "\n----DONE refreshFileHeaders.php\n"
 
 # touch the file LocalSettings.php to refresh the cache
 printf "\n\n**** init.sh: Touching LocalSettings.php to refresh the cache..."
   touch ${MOUNT}/${TARGET}/LocalSettings.php
   exec 1>&1 2>&2
-printf "\n----DONE touching LocalSettings.php\n\n"
+printf "\n----DONE touching LocalSettings.php\n"
 
 
 printf "\n*** init.sh: chown all files to www-data...\n"

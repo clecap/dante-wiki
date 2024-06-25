@@ -84,11 +84,11 @@ printf "DONE working on directories\n\n"
 git --git-dir=$GIT_DIR  --work-tree=${WIKI}  config --local advice.addIgnoredFile true
 
 printf "*** Now commiting:\n"
-git --git-dir=$GIT_DIR  --work-tree=${WIKI}  commit -m "Commit from git-push-delta.sh"
+  git --git-dir=$GIT_DIR  --work-tree=${WIKI}  commit -m "Commit from git-push-delta.sh"
 printf "DONE: Commiting\n\n"
 
 printf "*** Pushing to upstream\n"
-git --git-dir=$GIT_DIR  --work-tree=${WIKI}  push -f --set-upstream origin $BRANCH --verbose
+  git --git-dir=$GIT_DIR  --work-tree=${WIKI}  push -f --set-upstream origin $BRANCH --verbose
 printf "DONE pushing to upstream\n\n"
 
 printf "%b" "\e[1;32m PUSH TO DANTE DELTA COMPLETED \e[0m \n"
