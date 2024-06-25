@@ -21,10 +21,18 @@ printf "\n***  /home/dante/dantescript/copy-out.sh: cleaning up old stuff...\n "
   exec 1>&1 2>&2
 printf "DONE cleaning up old stuff\n"
 
+
+#
+# Delete old stuff. Must do this for ${TARGET} and ***NOT*** for /mnt, since there are
+# some files we still need !
+#
 printf "\n***  /home/dante/dantescript/copy-out.sh: cleaning up old stuff...\n "
   rm -rf /mnt/${TARGET}
   exec 1>&1 2>&2
 printf "DONE cleaning up old stuff\n"
+
+
+## TODO: some stuff does not get deleted properly. why? check this !! problem, if there is an old file still there which gets used
 
 
 printf "\n***  /home/dante/dantescript/copy-out.sh: cleaning up old stuff..LS-LA.\n "

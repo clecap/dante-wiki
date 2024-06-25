@@ -35,41 +35,7 @@ volumes/full/content/wiki-dir
 
 live/wiki-dir
 
-!live/wiki-dir/README-patch-test.md
-
-### Files which we must re-include
-
-!README-dantepatch.md
-
-#!includes/import/WikiImporter.php
-#!includes/media/SVGReader.php
-#!DantePolyfill.php
-#!DanteSettings.php
-#!DanteSettings-production.php
-#!DanteSettings-development.php
-#!README-dante-delta.md
-#!.gitignore
-
-### Directories which we want to include
-#!extensions/DanteSynch
-#!extensions/DanteHideSection
-#!extensions/DanteBread
-#!extensions/DanteLinks
-#!extensions/DanteSnippets
-#!extensions/DanteTree
-#!extensions/DantePresentations
-#!extensions/DanteBackup
-#!extensions/DanteSyntax
-#!skins/skinny
-#!skins/DantePresentationSkin
-
-
-
-
-
-
-
-
+# in live there is another .gitignore file which does some reincludes!
 
 
 .vscode/tasks-min.json

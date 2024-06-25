@@ -4,7 +4,7 @@
 			"path": "."
 		},
 		{
-			"path": "volumes/full/content/wiki-dir/extensions/Parsifal"
+			"path": "live/wiki-dir/extensions/Parsifal"
 		},
 		{
 			"path": "volumes/full/content/wiki-dir"
@@ -13,7 +13,7 @@
 	"settings": {
 		"git.repositoryScanMaxDepth": 1,
 		"git.scanRepositories": [
-			"volumes/full/content/wiki-dir",
+
 			"live/wiki-dir/extensions/Parsifal"
 		],
 	}
