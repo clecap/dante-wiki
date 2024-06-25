@@ -225,29 +225,29 @@ printf "DONE initSiteStats.php\n"
 printf "\n\n**** init.sh: RUNNING: rebuildall \n\n"
   php ${MOUNT}/${TARGET}/maintenance/rebuildall.php 
   exec 1>&1 2>&2
-printf "----DONE rebuildall.php\n"
+printf "DONE rebuildall.php\n"
 
 printf "\n**** init.sh: RUNNING: checkImages \n"
   php ${MOUNT}/${TARGET}/maintenance/checkImages.php
   exec 1>&1 2>&2
-printf "----DONE checkImages.php\n"
+printf "DONE checkImages.php\n"
 
 printf "\n**** init.sh RUNNING: refreshFileHeaders \n"
   php ${MOUNT}/${TARGET}/maintenance/refreshFileHeaders.php --verbose
   exec 1>&1 2>&2
-printf "\n----DONE refreshFileHeaders.php\n"
+printf "DONE refreshFileHeaders.php\n"
 
 # touch the file LocalSettings.php to refresh the cache
 printf "\n\n**** init.sh: Touching LocalSettings.php to refresh the cache..."
   touch ${MOUNT}/${TARGET}/LocalSettings.php
   exec 1>&1 2>&2
-printf "\n----DONE touching LocalSettings.php\n"
+printf "DONE touching LocalSettings.php\n"
 
 
 printf "\n*** init.sh: chown all files to www-data...\n"
    chown -R www-data:www-data ${MOUNT}/${TARGET}
   exec 1>&1 2>&2
-printf "\n----DONE chwoning all files\n"
+printf "DONE chwoning all files\n"
 
 
 printf "\n\n*** /home/dante/dantescript/init.sh COMPLETED \n\n"
