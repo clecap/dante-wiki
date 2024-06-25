@@ -4,13 +4,23 @@
 # Mails the public key to SMTP_TO
 # Installs the public and private key
 
-openssl req -x509 -out /etc/ssl/apache2/server.crt -keyout /etc/ssl/apache2/server.key \
-  -newkey rsa:2048 -nodes -sha256 \
-  -subj '/CN=localhost' -extensions EXT -config <( \
-   printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
 
-chmod 600 /etc/ssl/apache2/server.key
-chmod 644 /etc/ssl/apache2/server.crt
+
+printf "*** This is make-localhost-certificate.sh"
+
+if [ -e "/etc/ssl/apache2/server.crt" ] && [ -e "/etc/ssl/apache2/server.key" ]; then
+  printf "/etc/ssl/apache2/server.crt and /etc/ssl/apache2/server.key both exist \n"
+else
+
+  printf "One of /etc/ssl/apache2/server.crt or /etc/ssl/apache2/server.key both missing, recreating \n"
+
+  openssl req -x509 -out /etc/ssl/apache2/server.crt -keyout /etc/ssl/apache2/server.key \
+    -newkey rsa:2048 -nodes -sha256 \
+    -subj '/CN=localhost' -extensions EXT -config <( \
+     printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
+
+  chmod 600 /etc/ssl/apache2/server.key
+  chmod 644 /etc/ssl/apache2/server.crt
 
     # Name of a temporary file for building up the mail
     TMPFILE=`mktemp`
@@ -42,3 +52,5 @@ chmod 644 /etc/ssl/apache2/server.crt
     } > $TMPFILE
     msmtp --host=${SMTP_HOST} --port=${SMTP_PORT} --auth=on --user=${SMTP_USER} --passwordeval="echo $SMTP_PASSWORD" --tls=on --from=${SMTP_FROM}  ${SMTP_TO} < $TMPFILE
     echo "  New key mailed"
+
+fi

@@ -8,11 +8,19 @@ printf "\n*** *** *** THIS IS /home/dante/dantescript/copy-out.sh ***** "
 #  printf "%b" "\e[1;31m *** *** *** ABORTED *** *** *** \e[0m"
 #  exit 1
 #}
-#set -e                                  # abort execution on any error
+
+set -e                                  # abort execution on any error
 #trap 'abort' EXIT                       # call abort on EXIT
 
 MOUNT=/var/www/html/
 TARGET=wiki-dir
+
+
+
+
+
+
+
 
 exec 1>&1 2>&2
 
@@ -36,13 +44,13 @@ printf "DONE cleaning up old stuff\n"
 
 
 printf "\n***  /home/dante/dantescript/copy-out.sh: cleaning up old stuff..LS-LA.\n "
-  ls -la /mnt/${TARGET}
+  ls -la /mnt
   exec 1>&1 2>&2
 printf "DONE cleaning up old stuff\n"
 
 
 printf "\n***  /home/dante/dantescript/copy-out.sh: cleaning up old stuff..LS-LD.\n "
-  ls -ld /mnt/${TARGET}
+  ls -ld /mnt
   exec 1>&1 2>&2
 printf "DONE cleaning up old stuff\n"
 
@@ -54,7 +62,7 @@ printf "\n\n***  /home/dante/dantescript/copy-out.sh: copying out...\n"
 printf "DONE cleaning up old stuff\n"
 
 printf "\n***  /home/dante/dantescript/copy-out.sh: doing an LS-LA after the copying operation \n "
-  ls -la /mnt/${TARGET}
+  ls -la /mnt
   exec 1>&1 2>&2
 printf "DONE cleaning up old stuff\n"
 

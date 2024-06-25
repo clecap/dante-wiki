@@ -1,0 +1,26 @@
+name: Sync Labels from Dante-Wiki Repository
+
+on:
+  schedule:
+    - cron: '0 0 * * 0' # Runs weekly
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout this repository
+        uses: actions/checkout@v4
+
+      - name: Checkout central labels repository
+        uses: actions/checkout@v4
+        with:
+          repository: clecap/dante-wiki
+          path: central
+
+      - name: Sync labels
+        uses: reposync/labeler@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          labels: ${{ toJson(fromYaml(file('dante-wiki/workflows/labels.yml'))) }}

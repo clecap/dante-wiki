@@ -1,0 +1,31 @@
+labels:
+  - name: bug
+    color: #d73a4a
+    description: An issue with the system.
+  - name: documentation
+    color: #0075ca
+    description: Improvements or additions to documentation.
+  - name: enhancement
+    color: #a2eeef
+    description: New feature or request.
+  - name: question
+    color: d876e3
+    description: Further information is requested.
+  - name: major
+    color: d876e3
+    description: This is of bigger importance
+  - name: minor
+    color: d876e3
+    description: This is of smaller importance
+  - name: URGENT
+    color: d876e3
+    description: This should be fixed soon
+  - name: IMPORTANT
+    color: d876e3
+    description: This should not be forgotten
+  - name: duplicate
+    color: #ffffff
+    description: This issue or pull request already exists.    
+  - name: wontfix
+    color: ffffff
+    description: This will not be worked on.

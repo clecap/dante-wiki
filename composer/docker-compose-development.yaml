@@ -39,7 +39,7 @@ services:
       - configuration
     networks: 
       - dante-network
-    command: "wait-for-mysql.sh init.sh copy-out.sh make-localhost-certificate.sh shutdown.sh"
+    command: "wait-for-mysql.sh init.sh copy-out.sh shutdown.sh"
 
 # NOTE: wait for mysql not via health check but via script, since we want a more fine granular control over this
 #       than seems to work with the docker healthcheck approach
@@ -60,7 +60,7 @@ services:
       - configuration
     networks: 
       - dante-network
-    command: "run-apache-no-cache.sh"
+    command: "make-localhost-certificate.sh run-apache-no-cache.sh"
 
 
 

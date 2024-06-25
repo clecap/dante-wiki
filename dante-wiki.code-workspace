@@ -7,7 +7,7 @@
 			"path": "live/wiki-dir/extensions/Parsifal"
 		},
 		{
-			"path": "volumes/full/content/wiki-dir"
+			"path": "live/wiki-dir"
 		}
 	],
 	"settings": {
