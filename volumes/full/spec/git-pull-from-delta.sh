@@ -36,7 +36,5 @@ git reset --hard origin/master
 git pull origin master
 git push --set-upstream origin master
 #printf "DONE hard reset\n\n"
-  
-
 
 printf "\033[31m completed git-pull-from-delta.sh \033[0m \n"
