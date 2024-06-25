@@ -5,7 +5,9 @@
 
 PARSIFAL_BRANCH="dante"
 
-
+RESET="\e[0m"
+ERROR="\e[1;31m"
+GREEN="\e[32m"
 
 echo " "
 echo "** THIS IS /dantescript/init.sh ***** "
@@ -33,35 +35,35 @@ TARGET=wiki-dir
 # directory where to pick up the minimal initial contents
 CONT=/home/dante/initial-contents/generic 
 
-printf "\n*** Listing of ${MOUNT}\n"
+printf "\n*** init.sh: Listing of ${MOUNT}\n"
   ls -alg ${MOUNT}
   exec 1>&1 2>&2
-printf "\nDONE\n"
+printf "DONE\n"
 
-printf "\n*** Listing of ${MOUNT}/${TARGET}\n"
+printf "\n*** init.sh: Listing of ${MOUNT}/${TARGET}\n"
   ls -alg ${MOUNT}/${TARGET}
   exec 1>&1 2>&2
-printf "\nDONE\n"
+printf "DONE\n"
 
-printf "\n\n*** Deleting phpinfo.php..."
+printf "\n*** init.sh: Deleting phpinfo.php..."
   rm -f ${MOUNT}/phpinfo.php
   exec 1>&1 2>&2
 printf "DONE\n"
 
-printf "\n\n*** Copying in index.html..."
+printf "\n*** init.sh: Copying in index.html..."
   cp /home/dante/html/index.html ${MOUNT}
   exec 1>&1 2>&2
-printf "DONE\n\n"
+printf "DONE\n"
 
-printf "\n*** Listing of ${MOUNT}\n"
+printf "\n*** init.sh: Listing of ${MOUNT}\n"
   ls -alg ${MOUNT}
   exec 1>&1 2>&2
-printf "\nDONE\n"
+printf "DONE\n"
 
-printf "\n*** Listing of ${MOUNT}/${TARGET}\n"
+printf "\n*** init.sh: Listing of ${MOUNT}/${TARGET}\n"
   ls -alg ${MOUNT}/${TARGET}
   exec 1>&1 2>&2
-printf "\nDONE\n"
+printf "DONE\n"
 
 
 MEDIAWIKI_DB_HOST=my-dante-mysql
@@ -85,7 +87,7 @@ MEDIAWIKI_ADMIN_PASS=${WK_ADMIN_PASS}
 MEDIAWIKI_ENABLE_SSL=false
 
 echo ""
-echo ________________
+echo ________________________________________________
 echo "*** MEDIAWIKI INSTALLATION PARAMETERS WILL BE: "
 echo ""
 echo  "DATABASE Parameters are: "
@@ -133,6 +135,8 @@ php ${MOUNT}${TARGET}/maintenance/install.php \
   echo "________________________________  we are past maintenance/install.php __________________"
   echo ""
 
+    exec 1>&1 2>&2
+
 # check if we succeeded to generate LocalSettings.php
 if [ -e "${MOUNT}/${TARGET}/LocalSettings.php" ]; then
   printf "\e[1;32m* SUCCESS:  ${MOUNT}/${TARGET}/LocalSettings.php  generated \e[0m \n"
@@ -146,15 +150,15 @@ echo " "
 ##
 ## Install Parsifal development version
 ##
-printf "\n*** Cloning Parsifal from branch $PARSIFAL_BRANCH into ${MOUNT}/${TARGET}/extensions... \n"
+printf "\n*** init.sh: Cloning Parsifal from branch $PARSIFAL_BRANCH into ${MOUNT}/${TARGET}/extensions... \n"
   git clone --depth 1 --branch $PARSIFAL_BRANCH https://github.com/clecap/Parsifal ${MOUNT}/$TARGET/extensions/Parsifal
-printf "DONE cloning branch $BRANCH of Parsifal\n\n"
+  exec 1>&1 2>&2
+printf "DONE cloning branch $BRANCH of Parsifal\n"
 
 
-printf "\n*** error check: Cloning Parsifal from branch $PARSIFAL_BRANCH into ${MOUNT}/${TARGET}/extensions... \n"
-  git clone --depth 1 --branch NONEXISTANT https://github.com/clecap/Parsifal ${MOUNT}/$TARGET/extensions/Parsifal
-printf "DONE cloning branch $BRANCH of Parsifal\n\n"
-
+#printf "*** error check: Cloning Parsifal from branch $PARSIFAL_BRANCH into ${MOUNT}/${TARGET}/extensions... \n"
+#  git clone --depth 1 --branch NONEXISTANT https://github.com/clecap/Parsifal ${MOUNT}/$TARGET/extensions/Parsifal
+#printf "DONE cloning branch $BRANCH of Parsifal\n\n"
 
 
 
@@ -177,10 +181,13 @@ printf  "DONE\n\n"
 
 printf "*** Adding initial contents..."
   php ${MOUNT}${TARGET}/maintenance/importDump.php --namespaces '8' --debug $CONT/minimal-initial-contents.xml
+  exec 1>&1 2>&2
   printf " namespace 8 done ";
   php ${MOUNT}${TARGET}/maintenance/importDump.php --namespaces '10' --debug $CONT/minimal-initial-contents.xml
+  exec 1>&1 2>&2
   printf " namespace 10 done ";
   php ${MOUNT}${TARGET}/maintenance/importDump.php --uploads --debug $CONT/minimal-initial-contents.xml
+  exec 1>&1 2>&2
   printf " uploads done ";
 printf "DONE\n\n"
 
@@ -207,32 +214,37 @@ printf "DONE update.php\n\n"
 
 
 
-printf "\n\n**** RUNNING: initSiteStats \n"
+printf "\n\n**** init.sh: RUNNING: initSiteStats \n"
   php ${MOUNT}/${TARGET}/maintenance/initSiteStats.php --update
+  exec 1>&1 2>&2
 printf "DONE initSiteStats.php\n"
 
-printf "\n\n**** RUNNING: rebuildall \n\n"
+printf "\n\n**** init.sh: RUNNING: rebuildall \n\n"
   php ${MOUNT}/${TARGET}/maintenance/rebuildall.php 
+  exec 1>&1 2>&2
 printf "\n----DONE rebuildall.php\n\n"
 
-printf "\n\n**** RUNNING: checkImages \n"
+printf "\n\n**** init.sh: RUNNING: checkImages \n"
   php ${MOUNT}/${TARGET}/maintenance/checkImages.php
+  exec 1>&1 2>&2
 printf "\n----DONE checkImages.php\n"
 
-printf "\n\n**** RUNNING: refreshFileHeaders \n"
+printf "\n\n**** init.sh RUNNING: refreshFileHeaders \n"
   php ${MOUNT}/${TARGET}/maintenance/refreshFileHeaders.php --verbose
+  exec 1>&1 2>&2
 printf "\n----DONE refreshFileHeaders.php\n\n"
 
 # touch the file LocalSettings.php to refresh the cache
-printf "\n\n**** Touching LocalSettings.php to refresh the cache..."
-touch ${MOUNT}/${TARGET}/LocalSettings.php
+printf "\n\n**** init.sh: Touching LocalSettings.php to refresh the cache..."
+  touch ${MOUNT}/${TARGET}/LocalSettings.php
+  exec 1>&1 2>&2
 printf "\n----DONE touching LocalSettings.php\n\n"
 
 
-printf "\n*** chown all files to www-data...\n"
+printf "\n*** init.sh: chown all files to www-data...\n"
    chown -R www-data:www-data ${MOUNT}/${TARGET}
+  exec 1>&1 2>&2
 printf "\n----DONE chwoning all files\n"
-
 
 
 printf "\n\n*** /home/dante/dantescript/init.sh COMPLETED \n\n"

@@ -24,7 +24,7 @@ jobs:
       run: sudo apt-get install cloc
 
     - name: Run count_lines.sh script
-      run: ./count_lines.sh
+      run: .workflows/scripts/count_lines.sh
 
     - name: Commit and push lines_of_code.txt
       run: |

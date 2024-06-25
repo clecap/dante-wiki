@@ -1,6 +1,4 @@
 #
-# Copy in from volume template-volume to our local file.
-#
 #  TODO: prepare connection to git for push upstream stuff !!!
 #  TODO: use fresh and empty database volume from scratch !!
 #  TODO: need to have local .git and git submodules for the correct treatment of git push upstream functionality
@@ -19,7 +17,7 @@ services:
 
   database:
     image: dante-mysql
-    container_name: my-dante-m dysql
+    container_name: my-dante-mysql
     networks:
       - dante-network
     secrets:
@@ -41,7 +39,7 @@ services:
       - configuration
     networks: 
       - dante-network
-    command: "wait-for-mysql.sh init.sh copy-out.sh shutdown.sh"
+    command: "wait-for-mysql.sh init.sh copy-out.sh make-localhost-certificate.sh shutdown.sh"
 
 # NOTE: wait for mysql not via health check but via script, since we want a more fine granular control over this
 #       than seems to work with the docker healthcheck approach

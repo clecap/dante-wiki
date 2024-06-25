@@ -9,22 +9,23 @@
 # run-apache-fpm
 # sleep
 
+RESET="\e[0m"
+ERROR="\e[1;31m"
+GREEN="\e[32m"
+
 echo "*** This is /lap-entrypoint.sh"
 echo ""
 
-echo "*** /lap-entrypoint.sh sees the following mounted volumes:"
+#echo "*** /lap-entrypoint.sh sees the following secrets file:"
+#ls -alg /run/secrets
+#echo ""
 
-
-
-echo "*** /lap-entrypoint.sh sees the following secrets file:"
-ls -alg /run/secrets
-echo ""
 if [ -f "/run/secrets/configuration" ]; then
-    echo "*** /lap-entrypoint.sh will now load configuration"
+    printf "$GREEN*** /lap-entrypoint.sh will now load configuration... "
     source /run/secrets/configuration
-    echo "*** /lap-entrypoint.sh did load configuration"
+    echo "DONE loading configuration\n"
   else
-    echo "*** /lap-entrypoint.sh could not find configuration file, EXITING "
+    printf "$ERROR*** /lap-entrypoint.sh could not find configuration file, EXITING $RESET\n"
     exit 1
 fi
 

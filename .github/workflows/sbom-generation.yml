@@ -1,0 +1,48 @@
+name: Generate SBOM for Dockerfiles
+
+on:
+  push:
+    branches:
+      - main
+      - 'release/*'
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  generate-sbom:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python environment
+      uses: actions/setup-python@v4.7.0
+      with:
+        python-version: '3.x'
+
+    - name: Install syft
+      run: |
+        pip install syft
+
+    - name: Generate SBOM for Dockerfile in dir1
+      run: |
+        syft dir:images/lap --output json > sbom-lap.json
+
+    - name: Generate SBOM for Dockerfile in dir2
+      run: |
+        syft dir:images/dante-mysql --output json > sbom-dante-mysql.json
+
+    - name: Generate SBOM for Dockerfile in dir3
+      run: |
+        syft dir:images/tex/ --output json > sbom-tex.json
+
+    - name: Upload SBOM artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: SBOM
+        path: |
+          sbom-lap.json
+          sbom-dante-mysql.json
+          sbom-tex.json

@@ -4,14 +4,13 @@
 # Mails the public key
 # Installs the public and private key
 
-
 openssl req -x509 -out /etc/ssl/apache2/localhost.crt -keyout /etc/ssl/apache2/localhost.key \
   -newkey rsa:2048 -nodes -sha256 \
   -subj '/CN=localhost' -extensions EXT -config <( \
    printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
 
-
-
+chmod 600 /etc/ssl/apache2/localhost.key
+chmod 644 /etc/ssl/apache2/localhost.crt
 
     # Name of a temporary file for building up the mail
     TMPFILE=`mktemp`
