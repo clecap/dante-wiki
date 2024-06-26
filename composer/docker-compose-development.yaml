@@ -39,7 +39,7 @@ services:
       - configuration
     networks: 
       - dante-network
-    command: "wait-for-mysql.sh init.sh copy-out.sh shutdown.sh"
+    command: "common-defs.sh wait-for-mysql.sh init.sh copy-out.sh shutdown.sh"
 
 # NOTE: wait for mysql not via health check but via script, since we want a more fine granular control over this
 #       than seems to work with the docker healthcheck approach
@@ -59,8 +59,10 @@ services:
     secrets:
       - configuration
     networks: 
-      - dante-network
-    command: "make-localhost-certificate.sh run-apache-no-cache.sh"
+      dante-network:
+        aliases: 
+          - dante.local
+    command: "common-defs.sh make-localhost-certificate.sh run-apache-no-cache.sh"
 
 
 
@@ -70,7 +72,9 @@ services:
       - "9090:80"
     container_name: my-php-myadmin
     networks: 
-      - dante-network
+      dante-network:
+        aliases:
+          - phpmyadmin.local
     environment:
       PMA_HOST: my-dante-mysql
     depends_on:

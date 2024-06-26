@@ -237,7 +237,7 @@ RUN \
 #  Give non-root user ownership of the application files
 #  Set the default user
 
-USER root
+# USER root
 
 RUN useradd -m dante && echo "dante:password" | chpasswd && adduser dante sudo
 

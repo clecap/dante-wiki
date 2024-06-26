@@ -4,9 +4,7 @@
 # Mails the public key to SMTP_TO
 # Installs the public and private key
 
-
-
-printf "*** This is make-localhost-certificate.sh"
+printf "*** This is make-localhost-certificate.sh\n"
 
 if [ -e "/etc/ssl/apache2/server.crt" ] && [ -e "/etc/ssl/apache2/server.key" ]; then
   printf "/etc/ssl/apache2/server.crt and /etc/ssl/apache2/server.key both exist \n"

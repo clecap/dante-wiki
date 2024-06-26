@@ -26,6 +26,14 @@ TOP_DIR=$(git rev-parse --show-toplevel 2>/dev/null || echo "$PWD")
 #### get directory this shell is running in
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+
+## Arrow keys Issue in Shell
+
+The reason is that docker and debian usually has /bin/sh linked to /bin/dash instead of /bin/bash.
+Solution is to make a fresh link.
+
+
+
 ## Docker logs
 
 Sometimes the docker logs do not produce the logs of events in the right sequence. This may be due to

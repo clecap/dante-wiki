@@ -3,17 +3,6 @@
 # This entrypoint initializes the database, generates LocalSettings.php and runs update.php
 
 
-PARSIFAL_BRANCH="dante"
-
-MOUNT=/var/www/html/
-TARGET=wiki-dir
-
-# directory where to pick up the minimal initial contents
-CONT=/home/dante/initial-contents/generic 
-
-RESET="\e[0m"  ;  ERROR="\e[1;31m"  ;  GREEN="\e[32m"
-
-
 printf "${GREEN}*** THIS IS /dantescript/init.sh ***** "
 
 ### set terminate on error 
@@ -242,10 +231,10 @@ printf "\n\n**** init.sh: Touching LocalSettings.php to refresh the cache..."
 printf "DONE touching LocalSettings.php\n"
 
 
-printf "\n*** init.sh: chown all files to www-data...\n"
-   chown -R www-data:www-data ${MOUNT}/${TARGET}
-  exec 1>&1 2>&2
-printf "DONE chwoning all files\n"
+#printf "\n*** init.sh: chown all files to www-data...\n"
+#   chown -R www-data:www-data ${MOUNT}/${TARGET}
+#  exec 1>&1 2>&2
+#printf "DONE chwoning all files\n"
 
 
 printf "\n\n*** /home/dante/dantescript/init.sh COMPLETED \n\n"

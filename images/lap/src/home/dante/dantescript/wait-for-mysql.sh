@@ -7,7 +7,7 @@ DB_NAME="Dante"
 
 MAX_RETRIES=100  ;  SLEEP_INTERVAL=5  ;  RETRY_COUNT=0
 
-RESET="\e[0m"  ;  ERROR="\e[1;31m"  ;  GREEN="\e[32m"
+RESET="\e[0m"  ;  ERROR="\e[1;31m"  ;  GREEN="\e[1;32m"
 
 
 MYSQL_PWD=$MY_DB_PASS
@@ -23,10 +23,10 @@ check_database_exists() {
 }
 
 # Main script logic
-printf "\n*** wait-for-mysql: waiting for $MY_DB_HOST to come up\n"
+printf "\n$GREEN*** This is wait-for-mysql: we are waiting for $MY_DB_HOST to come up\n"
 while [[ $RETRY_COUNT -lt $MAX_RETRIES ]]; do
   if check_database_exists; then
-      printf "*** wait-for-mysql: Database ${DB_NAME} exists, exiting script at retrycount=$RETRY_COUNT\n" 
+      printf "$GREEN*** wait-for-mysql: SUCCESS: Database ${DB_NAME} exists, exiting script at retrycount=$RETRY_COUNT\n" 
       return 0
     else
       printf "Database ${DB_NAME} does not exist. Will sleep ${SLEEP_INTERVAL} seconds and then retry at retry count $RETRY_COUNT\n"
@@ -37,5 +37,5 @@ while [[ $RETRY_COUNT -lt $MAX_RETRIES ]]; do
   fi
 done
 
-printf "\n\n $ERROR\nDatabase ${DB_NAME} was not found after ${MAX_RETRIES} retries.\n\n"
+printf "\n\n $ERROR*** wait-for-mysql: ERROR: Database ${DB_NAME} was not found after ${MAX_RETRIES} retries.\n\n"
 exit 1
