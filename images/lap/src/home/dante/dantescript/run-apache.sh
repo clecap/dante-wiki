@@ -1,10 +1,25 @@
 #!/bin/bash
 
-echo "*** THIS IS run-apache.sh"
+RESET="\e[0m"
+ERROR="\e[1;31m"
+GREEN="\e[32m"
 
-echo "** Starting apache..."
-  service php8.2-fpm start
-  apachectl start -D DO_CACHE
-echo "DONE with starting apache"
+printf "*** THIS IS run-apache.sh\n\n"
 
-echo "*** EXITING run-apache.sh"
+printf "*** run-apache.sh: Starting fpm...\n"
+  service php8.2-fpm start ; exec 1>&1 2>&2
+printf "DONE\n"
+
+printf "\n*** run-apache.sh: Listing apache includes...\n"
+  apachectl -D DUMP_INCLUDES ; exec 1>&1 2>&2
+printf "DONE\n"
+
+printf "\n*** run-apache.sh: Listing apache modules...\n"
+  apachectl -D DUMP_MODULES ; exec 1>&1 2>&2
+printf "DONE\n"
+
+printf "\n*** run-apache.sh: Starting apache with DO-CACHE ...\n"
+  apachectl  -D DO_CACHE -k start ; exec 1>&1 2>&2
+printf "DONE with starting apache\n"
+
+printf "${GREEN}*** EXITING run-apache.sh\n\n"

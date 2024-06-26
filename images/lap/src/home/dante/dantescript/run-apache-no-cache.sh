@@ -19,7 +19,7 @@ printf "\n*** run-apache-no-cache.sh: Listing apache modules...\n"
 printf "DONE\n"
 
 printf "\n*** run-apache-no-cache.sh: Starting apache NO-CACHE ...\n"
-  apachectl  -D NO_CACHE start ; exec 1>&1 2>&2
+  apachectl  -D NO_CACHE -k start ; exec 1>&1 2>&2
 printf "DONE with starting apache\n"
 
 printf "${GREEN}*** EXITING run-apache-no-cache.sh\n\n"
