@@ -31,7 +31,9 @@ jobs:
         DOCKER_HUB_REPO: 'tex'
         DOCKER_HUB_TAG: 'latest'
       run: |
-        python ../workflows/scripts/fetch_scan_results.py
+        python ./workflows/scripts/fetch_scan_results.py
+
+#        ../workflows/scripts/fetch_scan_results.py   was not found
 
     - name: Commit JSON file
       run: |

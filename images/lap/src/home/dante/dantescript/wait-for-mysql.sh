@@ -3,9 +3,12 @@
 # set -e
 
 DB_NAME="Dante"
-MAX_RETRIES=100
-SLEEP_INTERVAL=5
-RETRY_COUNT=0
+
+
+MAX_RETRIES=100  ;  SLEEP_INTERVAL=5  ;  RETRY_COUNT=0
+
+RESET="\e[0m"  ;  ERROR="\e[1;31m"  ;  GREEN="\e[32m"
+
 
 MYSQL_PWD=$MY_DB_PASS
 
@@ -20,21 +23,19 @@ check_database_exists() {
 }
 
 # Main script logic
-printf "*** wait-for-mysql: entering loop $MY_DB_HOST\n"
+printf "\n*** wait-for-mysql: waiting for $MY_DB_HOST to come up\n"
 while [[ $RETRY_COUNT -lt $MAX_RETRIES ]]; do
-  printf "*** wait-for-mysql: will do a check now\n"
   if check_database_exists; then
-      printf "*** wait-for-mysql: Database ${DB_NAME} exists, exiting script\n" 
+      printf "*** wait-for-mysql: Database ${DB_NAME} exists, exiting script at retrycount=$RETRY_COUNT\n" 
       return 0
     else
-      printf "Database ${DB_NAME} does not exist. Will sleep ${SLEEP_INTERVAL} seconds and then retry...\n"
+      printf "Database ${DB_NAME} does not exist. Will sleep ${SLEEP_INTERVAL} seconds and then retry at retry count $RETRY_COUNT\n"
       sleep $SLEEP_INTERVAL
-      printf "*** wait-for-mysql: woke up after sleeping\n"
+#      printf "*** wait-for-mysql: woke up after sleeping\n"
       ((RETRY_COUNT++))
-      printf "*** just increased retry count to $RETRY_COUNT \n"
+#      printf "*** just increased retry count to $RETRY_COUNT \n"
   fi
 done
 
-printf "Database ${DB_NAME} was not found after ${MAX_RETRIES} retries.\n\n"
+printf "\n\n $ERROR\nDatabase ${DB_NAME} was not found after ${MAX_RETRIES} retries.\n\n"
 exit 1
-

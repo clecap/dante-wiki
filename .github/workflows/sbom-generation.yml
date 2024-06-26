@@ -5,9 +5,8 @@ on:
     branches:
       - main
       - 'release/*'
-  pull_request:
-    branches:
-      - master
+  schedule:
+    - cron: '0 0 * * *'  # Runs every day at midnight      
 
 jobs:
   generate-sbom:

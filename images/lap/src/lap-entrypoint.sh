@@ -1,62 +1,39 @@
 #!/bin/bash
 
-# entrypoint of lap
+# entrypoint of image lap
+# Takes as parameter a list of scripts residing in /home/dante/dantescript
 
-# possible commands are:
-#
-# run-ssh
-# run-apache
-# run-apache-fpm
-# sleep
+RESET="\e[0m"  ;  ERROR="\e[1;31m"  ;  GREEN="\e[32m"
 
-RESET="\e[0m"
-ERROR="\e[1;31m"
-GREEN="\e[32m"
+## Say hello
+printf "\n *** *** This is /lap-entrypoint.sh\n"
 
-echo "*** This is /lap-entrypoint.sh"
-echo ""
-
-#echo "*** /lap-entrypoint.sh sees the following secrets file:"
-#ls -alg /run/secrets
-#echo ""
-
+## Load the secret configuration file
 if [ -f "/run/secrets/configuration" ]; then
     printf "$GREEN*** /lap-entrypoint.sh will now load configuration... "
-    source /run/secrets/configuration
-    echo "DONE loading configuration\n"
+    source /run/secrets/configuration ; exec 1>&1 2>&2
+    printf "DONE loading configuration\n"
   else
     printf "$ERROR*** /lap-entrypoint.sh could not find configuration file, EXITING $RESET\n"
     exit 1
 fi
 
-echo "/lap-entrypoint.sh: Now iterating ( $@ )"
-# Iterate over each argument in the list of arguments we are called on
+## Iterate over each argument in the list of arguments we are called on
+printf "$GREEN*** /lap-entrypoint.sh: Now iterating ( $@ )\n"
 for script in "$@"; do
-  # Check if the file exists and is a regular file
-  echo "/lap-entrypoint.sh: Checking file $script"
   if [ -f "/home/dante/dantescript/$script" ]; then
-      printf "\n/lap-entrypoint.sh: Executing dantescript: /home/dante/dantescript/$script\n"
-      RETURN_VALUE="returnvalue-initialized"
-      source "/home/dante/dantescript/$script"
-      printf "\n/lap-entrypoint.sh: Has finished executing dantescript: /home/dante/dantescript/$script with return value ${RETURN_VALUE}\n"
-# Check if the variable has the value "shutdown"
+      printf "$GREEN***/lap-entrypoint.sh: Executing dantescript: /home/dante/dantescript/$script\n"
+      RETURN_VALUE="returnvalue-initialized" ; source "/home/dante/dantescript/$script" ; exec 1>&1 2>&2
       if [ "$RETURN_VALUE" == "shutdown" ]; then
-          printf "\n/lap-entrypoint.sh: Found returnvalue of shutdown, shutting down now"
-          exit 0
-          printf "\n Post exit 0"
+          printf "\n/lap-entrypoint.sh: $script returned $RETURN_VALUE, shutting down now\n" ; exit 0
         else
-           printf "\n/lap-entrypoint.sh: Found different returnvalue, skipping shutdown"
+           printf "\n/lap-entrypoint.sh: $script returned $RETURN_VALUE, moving on\n"
       fi
     else
-      echo "/lap-entrypoint.sh: Error: File '$script' not found or is not a regular file."
+      printf "\n${ERROR}/lap-entrypoint.sh: Error: File '$script' not found or is not a regular file.\n"
     fi
 done
-  
 
-
-
-printf "\n\n/lap-entrypoint.sh: Completed loop - which should not have been - to keep container alive I will now sleep\n\n"
-
+printf "\n\n/lap-entrypoint.sh: Completed all commands. To keep container alive I will now sleep\n\n"
 
 sleep infinity
-

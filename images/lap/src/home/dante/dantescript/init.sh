@@ -11,9 +11,7 @@ TARGET=wiki-dir
 # directory where to pick up the minimal initial contents
 CONT=/home/dante/initial-contents/generic 
 
-RESET="\e[0m"
-ERROR="\e[1;31m"
-GREEN="\e[32m"
+RESET="\e[0m"  ;  ERROR="\e[1;31m"  ;  GREEN="\e[32m"
 
 
 printf "${GREEN}*** THIS IS /dantescript/init.sh ***** "
