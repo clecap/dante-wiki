@@ -1,24 +1,10 @@
-# Development Workflow
+# Development Workflows
 
-## Directory Based Workflow
 
-The workflow is supported using vscode tasks defined in .vscode and available in task manager. The shaded areas below reference such tasks.
 
-### Preparations
-Execute the following **vscodium tasks**:
-* `generate image lap` 
-* `generate image my-mysql` 
-* `generate volume full` 
-* `run lap and my-mysql images` 
-* `initialize mediawiki`
 
-### Edit Cycle ###
-* **Add** files to `volumes/full/spec/git-init.sh`
-* **Execute** task `get dante modifications from github`
-* **Edit** directly in directory `full`
-* **Save** files & check results in browser
-* **Execute** task `push dante changes to github`
-* **Execute** task  `push Parsifal changes to github/dante`
+
+
 
 
 ## References ##

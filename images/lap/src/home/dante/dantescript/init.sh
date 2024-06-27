@@ -136,21 +136,6 @@ else
   printf "\033[0;31m *ERROR:  Could not generate ${MOUNT}/${TARGET}/LocalSettings.php - *** ABORTING \033[0m\n"
 fi
 
-echo " "
-echo " " 
-
-##
-## Install Parsifal development version
-##
-printf "\n*** init.sh: Cloning Parsifal from branch $PARSIFAL_BRANCH into ${MOUNT}/${TARGET}/extensions... \n"
-  git clone --depth 1 --branch $PARSIFAL_BRANCH https://github.com/clecap/Parsifal ${MOUNT}/$TARGET/extensions/Parsifal
-  exec 1>&1 2>&2
-printf "DONE cloning branch $BRANCH of Parsifal\n"
-
-
-################## TODO: we must ensure that this leads to an error / ABORT if the branch does not exist 
-################ TODO: we need to get a clear abort in numersou situations - and TODO clean up the existin live area before filling it in !!!!!!
-######## CAVE not delete too much !!!!!
 
 
 
@@ -194,15 +179,6 @@ printf "\n*** Doing a mediawiki maintenance update ... "
   php ${MOUNT}/${TARGET}/maintenance/update.php
   exec 1>&1 2>&2
 printf "DONE update.php\n"
-
-
-# parsifal is not yet installed at this place - so do not yet do this TODO
-####
-####printf "*** Importing initial set of Parsifal templates..."
-####  php ${MOUNT}/${TARGET}/maintenance/importTextFiles.php --prefix "MediaWiki:ParsifalTemplate/" --rc --overwrite extensions/Parsifal/initial-templates/*
-#### printf " DONE\n"
-
-
 
 printf "\n\n**** init.sh: RUNNING: initSiteStats \n"
   php ${MOUNT}/${TARGET}/maintenance/initSiteStats.php --update

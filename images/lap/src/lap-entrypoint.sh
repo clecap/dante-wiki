@@ -3,7 +3,7 @@
 # entrypoint of image lap
 # Takes as parameter a list of scripts residing in /home/dante/dantescript
 
-RESET="\e[0m"  ;  ERROR="\e[1;31m"  ;  GREEN="\e[32m"
+source /home/dante/dantescript/common-defs.sh
 
 ## Say hello
 printf "\n *** *** This is /lap-entrypoint.sh\n"

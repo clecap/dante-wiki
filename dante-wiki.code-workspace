@@ -1,14 +1,9 @@
 {
+  "name": "Dante",
 	"folders": [
-		{
-			"path": "."
-		},
-		{
-			"path": "live/wiki-dir/extensions/Parsifal"
-		},
-		{
-			"path": "live/wiki-dir"
-		}
+		{"path": "."},
+		{"path": "live/wiki-dir/extensions/Parsifal"},
+		{"path": "live/wiki-dir"}
 	],
 	"settings": {
 		"git.repositoryScanMaxDepth": 1,
