@@ -28,7 +28,7 @@ printf "\n***  /home/dante/dantescript/copy-out.sh: verifying removal of old stu
   ls -la /mnt ; exec 1>&1 2>&2
 printf "DONE cleaning up old stuff\n"
 
-printf "\n***  /home/dante/dantescript/copy-out.sh: cleaning up old stuff..LS-LD.\n "
+printf "\n***  /home/dante/dantescript/copy-out.sh: cleaning up old stuff..LS \n "
   ls -ld /mnt ; exec 1>&1 2>&2
 printf "DONE cleaning up old stuff\n"
 
@@ -39,8 +39,8 @@ printf "\n\n***  /home/dante/dantescript/copy-out.sh: copying out...\n"
   exec 1>&1 2>&2
 printf "DONE cleaning up old stuff\n"
 
-printf "\n***  /home/dante/dantescript/copy-out.sh: doing an LS-LA after the copying operation \n "
-  ls -la /mnt ; exec 1>&1 2>&2
+printf "\n***  /home/dante/dantescript/copy-out.sh: doing an LS after the copying operation \n "
+  ls -lag /mnt ; exec 1>&1 2>&2
 printf "DONE cleaning up old stuff\n"
 
 printf "*** /home/dante/dantescript/copy-out.sh has completed. GOOD BYE\n"

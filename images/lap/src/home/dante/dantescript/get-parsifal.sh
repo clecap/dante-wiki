@@ -11,12 +11,11 @@ PARSIFAL_BRANCH=dante
 
 if [ -d "$MOUNT/$TARGET/extensions/Parsifal/.git" ]; then
     printf "\n*** get-parsifal.sh: Git directory ${MOUNT}/$TARGET/.git already exists ... doing a PULL \n"
-      git -C ${MOUNT}/${TARGET} pull origin ${BRANCH}
+      git -C ${MOUNT}/${TARGET} pull origin ${BRANCH} ;       exec 1>&1 2>&2
     printf "DONE"
   else
     printf "\n*** get-parsifal.sh: Cloning Parsifal from branch $PARSIFAL_BRANCH into ${MOUNT}/${TARGET}/extensions... \n"
-      git clone --depth 1 --branch $PARSIFAL_BRANCH https://github.com/clecap/Parsifal ${MOUNT}/$TARGET/extensions/Parsifal
-      exec 1>&1 2>&2
+      git clone --depth 1 --branch $PARSIFAL_BRANCH https://github.com/clecap/Parsifal ${MOUNT}/$TARGET/extensions/Parsifal ;      exec 1>&1 2>&2
     printf "DONE get-parsifal.sh_ cloning branch $BRANCH of Parsifal\n"
 fi
 

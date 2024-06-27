@@ -27,6 +27,8 @@ RUN \
 #    apt-get install -y   --no-install-recommends libapache2-mod-php && \
     apt-get install -y   --no-install-recommends php-fpm && \
     apt-get install -y   --no-install-recommends wget curl unzip git diffutils  && \
+#   prevent hints about the default branch master
+    git config --global init.defaultBranch master && \
     apt-get install -y   --no-install-recommends imagemagick netpbm djvulibre-bin librsvg2-bin xpdf mscgen msmtp gnuplot-nox graphviz && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
     apt-get install -y --no-install-recommends php-dev make && \

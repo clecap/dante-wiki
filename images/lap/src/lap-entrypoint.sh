@@ -22,7 +22,7 @@ fi
 printf "$GREEN*** /lap-entrypoint.sh: Iterating the $# arguments: $* \n"
 for script in "$@"; do
   if [ -f "/home/dante/dantescript/$script" ]; then
-      printf "$\nGREEN***/lap-entrypoint.sh: Executing dantescript: /home/dante/dantescript/$script ---------- $script \n"
+      printf "\n$GREEN***/lap-entrypoint.sh: Executing dantescript: /home/dante/dantescript/$script ---------- $script \n"
       RETURN_VALUE="returnvalue-initialized" ; source "/home/dante/dantescript/$script" ; exec 1>&1 2>&2
       if [ "$RETURN_VALUE" == "shutdown" ]; then
           printf "\n/lap-entrypoint.sh: $script returned $RETURN_VALUE, shutting down now\n" ; exit 0
