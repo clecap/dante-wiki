@@ -8,25 +8,29 @@ BRANCH=master
 # the remote repository
 REMOTE_REPO=https://github.com/clecap/dante-delta.git
 
+#### TODO MUST ABORT COMPLETEL including upstream in case of error - also for some of the other dante scripts. and need an abotzt in lapentry-.sh
 
+if [ -d "$MOUNT/$TARGET/.git" ]; then
+    printf "\n*** get-dante.sj: Git directory ${MOUNT}/$TARGET/.git already exists ... doing a PULL \n"
+      git -C ${MOUNT}/${TARGET} pull origin ${BRANCH} ;       exec 1>&1 2>&2
+    printf "DONE"
+  else
+    printf "\n*** get-dante.sh: Initialize a git...\n"
+      git init ${MOUNT}/${TARGET} ;       exec 1>&1 2>&2
+    printf "DONE"
 
-printf "\n*** Initialize a git...\n"
-  git init ${MOUNT}/${TARGET}
-printf "DONE"
+    printf "\n*** get-dante.sh: remote add origin to dante-delta ...\n"
+      git -C ${MOUNT}/${TARGET} remote add origin https://github.com/clecap/dante-delta.git ;       exec 1>&1 2>&2
+    printf "DONE"
 
-printf "\n*** Initialize a git...\n"
-  git -C ${MOUNT}/${TARGET} remote add origin https://github.com/clecap/Parsifal.git
-printf "DONE"
+    printf "\n*** get-dante.sh: fetching dante-delta ...\n"
+      git -C ${MOUNT}/${TARGET} fetch --depth 1 origin ${BRANCH} ;       exec 1>&1 2>&2
+    printf "DONE"
 
-printf "\n*** Initialize a git...\n"
-  git -C ${MOUNT}/${TARGET} fetch --depth 1 origin ${BRANCH}
-printf "DONE"
-
-printf "\n*** Initialize a git...\n"
-  git -C ${MOUNT}/${TARGET} checkout -t origin/${BRANCH}
-printf "DONE"
-
-
+    printf "\n*** get-dante.sh:  checking out dante-delta ...\n"
+      git -C ${MOUNT}/${TARGET} checkout -t origin/${BRANCH};       exec 1>&1 2>&2
+    printf "DONE"
+fi
 
 
 

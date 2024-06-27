@@ -5,7 +5,7 @@ on:
     - cron: '0 0 * * *' # Runs daily at midnight
   push:
     branches:
-      - main
+      - master
 
 jobs:
   scan:
@@ -16,7 +16,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v4.7.0
+      uses: actions/setup-python@v4.8.0
       with:
         python-version: 3.x
 
@@ -31,9 +31,7 @@ jobs:
         DOCKER_HUB_REPO: 'tex'
         DOCKER_HUB_TAG: 'latest'
       run: |
-        python ./workflows/scripts/fetch_scan_results.py
-
-#        ../workflows/scripts/fetch_scan_results.py   was not found
+        python ./.github/scripts/fetch_scan_results.py
 
     - name: Commit JSON file
       run: |

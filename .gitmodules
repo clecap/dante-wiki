@@ -1,7 +1,7 @@
-#[submodule "dantedelta"]
-#  path = volumes/full/content/wiki-dir
-#  url =  https://github.com/clecap/dante-delta
-#  ignore = all
+[submodule "dantedelta"]
+  path = live/wiki-dir
+  url =  https://github.com/clecap/dante-delta
+  ignore = all
 
 [submodule "parsifal"]
   path = live/wiki-dir/extensions/Parsifal
