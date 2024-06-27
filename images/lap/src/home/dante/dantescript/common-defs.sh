@@ -26,4 +26,16 @@ export CONT=/home/dante/initial-contents/generic
 ##
 export RESET="\e[0m"
 export ERROR="\e[1;31m"
-export GREEN="\e[1;32m"
+
+# 32m for green
+# 92m for bold green
+export GREEN="\e[1;92m"
+
+
+
+### set terminate on error 
+abort() 
+{
+  printf "%b" "\e[1;31m *** *** *** ABORTED *** *** *** \e[0m"; exit 1 
+}
+

@@ -1,6 +1,8 @@
 #!/bin/bash
 
 
+source /home/dante/dantescript/common-defs.sh
+
 TOP_DIR=$1
 URL=$2
 NAME=$3

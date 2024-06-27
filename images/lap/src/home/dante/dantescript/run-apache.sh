@@ -1,8 +1,6 @@
 #!/bin/bash
 
-RESET="\e[0m"
-ERROR="\e[1;31m"
-GREEN="\e[32m"
+source /home/dante/dantescript/common-defs.sh
 
 printf "*** THIS IS run-apache.sh\n\n"
 

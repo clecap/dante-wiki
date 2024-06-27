@@ -2,6 +2,7 @@
 
 # BROKEN currently - does not do what we want
 
+source /home/dante/dantescript/common-defs.sh
 
 # Define the URL to check
 URL="http://localhost:8080"

@@ -39,7 +39,7 @@ services:
       - configuration
     networks: 
       - dante-network
-    command: "common-defs.sh wait-for-mysql.sh get-dante.sh get-parsifal.sh init.sh copy-out.sh shutdown.sh"
+    command: "wait-for-mysql.sh get-dante.sh get-parsifal.sh init.sh copy-out.sh shutdown.sh"
 
 # NOTE: wait for mysql not via health check but via script, since we want a more fine granular control over this
 #       than seems to work with the docker healthcheck approach
@@ -66,7 +66,7 @@ services:
       dante-network:
         aliases: 
           - dante.local
-    command: "common-defs.sh make-localhost-certificate.sh get-dante.sh get-parsifal.sh run-apache-no-cache.sh"
+    command: "make-localhost-certificate.sh get-dante.sh get-parsifal.sh run-apache-no-cache.sh"
 
 
 

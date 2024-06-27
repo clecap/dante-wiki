@@ -4,6 +4,8 @@
 # Mails the public key to SMTP_TO
 # Installs the public and private key
 
+source /home/dante/dantescript/common-defs.sh
+
 printf "*** This is make-localhost-certificate.sh\n"
 
 if [ -e "/etc/ssl/apache2/server.crt" ] && [ -e "/etc/ssl/apache2/server.key" ]; then

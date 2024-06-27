@@ -1,12 +1,14 @@
 #!/bin/bash
 
-
+source /home/dante/dantescript/common-defs.sh
 
 # the name of the branch to which we will clone
 BRANCH=master
 
 # the remote repository
 REMOTE_REPO=https://github.com/clecap/dante-delta.git
+
+
 
 #### TODO MUST ABORT COMPLETEL including upstream in case of error - also for some of the other dante scripts. and need an abotzt in lapentry-.sh
 
@@ -28,7 +30,7 @@ if [ -d "$MOUNT/$TARGET/.git" ]; then
     printf "DONE"
 
     printf "\n*** get-dante.sh:  checking out dante-delta ...\n"
-      git -C ${MOUNT}/${TARGET} checkout -t origin/${BRANCH};       exec 1>&1 2>&2
+      git -C ${MOUNT}/${TARGET} checkout -f -t origin/${BRANCH};       exec 1>&1 2>&2
     printf "DONE"
 fi
 

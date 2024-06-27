@@ -42,3 +42,13 @@ Sometimes the docker logs do not produce the logs of events in the right sequenc
 
 As a relief we can try to flush stdout and stderr explicitely using:
   exec 1>&1 2>&2
+
+
+## Vscodium Automatic installation of an extension
+``` 
+NAME=file-action-0.0.31.vsix
+rm -f /tmp/${NAME}
+wget https://raw.githubusercontent.com/clecap/file-action/main/${NAME}  -O /tmp/${NAME}
+codium --install-extension /tmp/${NAME}
+rm -f /tmp/${NAME}
+```  

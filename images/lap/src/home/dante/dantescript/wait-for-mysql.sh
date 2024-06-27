@@ -7,8 +7,7 @@ DB_NAME="Dante"
 
 MAX_RETRIES=100  ;  SLEEP_INTERVAL=5  ;  RETRY_COUNT=0
 
-RESET="\e[0m"  ;  ERROR="\e[1;31m"  ;  GREEN="\e[1;32m"
-
+source /home/dante/dantescript/common-defs.sh
 
 MYSQL_PWD=$MY_DB_PASS
 

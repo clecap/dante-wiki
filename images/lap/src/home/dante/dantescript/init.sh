@@ -2,15 +2,11 @@
 
 # This entrypoint initializes the database, generates LocalSettings.php and runs update.php
 
+source /home/dante/dantescript/common-defs.sh
 
 printf "${GREEN}*** THIS IS /dantescript/init.sh ***** "
 
-### set terminate on error 
-abort()
-{
-  printf "%b" "\e[1;31m *** *** *** ABORTED *** *** *** \e[0m"
-  exit 1
-}
+
 
 ## set -e                                  # abort execution on any error
 ## trap 'abort' EXIT                       # call abort on EXIT
@@ -87,18 +83,16 @@ echo  "   MEDIAWIKI_DB_USER            ${MEDIAWIKI_DB_USER}"
 echo  "   MEDIAWIKI_DB_PASSWORD        ${MEDIAWIKI_DB_PASSWORD}"
 echo  "   MEDIAWIKI_RUN_UPDATE_SCRIPT  ${MEDIAWIKI_RUN_UPDATE_SCRIPT}"
 echo  ""
-
 echo "SITE Parameters are: "
-echo  "   MEDIAWIKI_SITE_NAME"   ${MEDIAWIKI_SITE_NAME}
-echo  "   MEDIAWIKI_SITE_SERVER  ${MEDIAWIKI_SITE_SERVER}"
-echo  "   MEDIAWIKI_SCRIPT_PATH  ${MEDIAWIKI_SCRIPT_PATH}"
-echo  "   MEDIAWIKI_SITE_LANG    ${MEDIAWIKI_SITE_LANG}"
-echo  "   MEDIAWIKI_ADMIN_USER   ${MEDIAWIKI_ADMIN_USER}"
-echo  "   MEDIAWIKI_ADMIN_PASS   ${MEDIAWIKI_ADMIN_PASS}"
-echo  "   MEDIAWIKI_ENABLE_SSL   ${MEDIAWIKI_ENABLE_SSL}"
+echo  "   MEDIAWIKI_SITE_NAME"         ${MEDIAWIKI_SITE_NAME}
+echo  "   MEDIAWIKI_SITE_SERVER        ${MEDIAWIKI_SITE_SERVER}"
+echo  "   MEDIAWIKI_SCRIPT_PATH        ${MEDIAWIKI_SCRIPT_PATH}"
+echo  "   MEDIAWIKI_SITE_LANG          ${MEDIAWIKI_SITE_LANG}"
+echo  "   MEDIAWIKI_ADMIN_USER         ${MEDIAWIKI_ADMIN_USER}"
+echo  "   MEDIAWIKI_ADMIN_PASS         ${MEDIAWIKI_ADMIN_PASS}"
+echo  "   MEDIAWIKI_ENABLE_SSL         ${MEDIAWIKI_ENABLE_SSL}"
 echo ""
-
-echo "*** CALLING MEDIAWIKI INSTALL ROUTINE"
+echo "*** CALLING MEDIAWIKI INSTALL ROUTINE maintenance/install.php ------------------------- "
 echo ""
 
 
@@ -122,7 +116,7 @@ php ${MOUNT}${TARGET}/maintenance/install.php \
 exec 1>&1 2>&2
 
   echo ""
-  echo "________________________________  we are past maintenance/install.php __________________"
+  echo "________________________________  completed maintenance/install.php __________________"
   echo ""
 
 exec 1>&1 2>&2

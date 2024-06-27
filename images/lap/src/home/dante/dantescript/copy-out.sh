@@ -1,12 +1,9 @@
 #!/bin/bash
 
+source /home/dante/dantescript/common-defs.sh
+
 printf "\n*** *** *** THIS IS /home/dante/dantescript/copy-out.sh ***** "
 
-### set terminate on error 
-abort() 
-{
-  printf "%b" "\e[1;31m *** *** *** ABORTED *** *** *** \e[0m"; exit 1 
-}
 
 set -e                                 # abort execution on any error
 trap 'abort' ERR                       # call abort on error
