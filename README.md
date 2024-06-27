@@ -21,7 +21,11 @@ Dante-Wiki is a note taking, publishing and peer reviewing system for scientists
     <td><b>Size</b></td>
     <td>
       <a href=""><img alt="Repository code size" src="https://img.shields.io/github/languages/code-size/clecap/dante-wiki"></a>&nbsp;
-      <a href=""><img alt="Repository LoC" src="https://sloc.xyz/github/clecap/dante-wiki/"></a></td>
+      <a href=""><img alt="Repository LoC" src="https://sloc.xyz/github/clecap/dante-wiki/"></a>
+
+[![Count Lines of Code](https://github.com/clecap/dante-wiki/actions/workflows/count_lines.yml/badge.svg)](https://github.com/clecap/dante-wiki/actions/workflows/count_lines.yml)
+
+</td>
   </tr>
   <tr>
     <td><b>Docker</b></td>
@@ -61,6 +65,8 @@ Dante-Wiki is a note taking, publishing and peer reviewing system for scientists
      <td><b>Security</b></td>
      <td>
        <a href="https://github.com/clecap/dante-wiki/blob/master/doc/sbom.json"><img src="https://img.shields.io/badge/SBOM-available-brightgreen?label=SBOM%20of%20lap">
+      <a href=""><img src="https://github.com/clecap/dante-wiki/actions/workflows/github-code-scanning/codeql/badge.svg">
+  <img src="https://github.com/clecap/dante-wiki/actions/workflows/docker-scan.yml/badge.svg">
     </td>
   </tr>
 </table>

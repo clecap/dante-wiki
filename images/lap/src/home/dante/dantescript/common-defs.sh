@@ -7,6 +7,12 @@
 ##
 export PARSIFAL_BRANCH="dante"
 
+# the name of the branch to which we will clone
+DANTE_BRANCH=master
+
+# the remote repository for dante-delta
+REMOTE_REPO_DANTE=https://github.com/clecap/dante-delta.git
+
 
 ##
 ## Conventions we use

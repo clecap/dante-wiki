@@ -14,17 +14,10 @@ else
 
   printf "One of /etc/ssl/apache2/server.crt or /etc/ssl/apache2/server.key both missing, recreating \n"
 
-#  openssl req -x509 -out /etc/ssl/apache2/server.crt -keyout /etc/ssl/apache2/server.key \
-#    -newkey rsa:2048 -nodes -sha256 \
-#    -subj '/CN=localhost' -extensions EXT -config <( \
-#     printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
-
-openssl req -x509 -out /etc/ssl/apache2/server.crt -keyout /etc/ssl/apache2/server.key \
+  openssl req -x509 -out /etc/ssl/apache2/server.crt -keyout /etc/ssl/apache2/server.key \
     -newkey rsa:2048 -nodes -sha256 \
-    -subj '/CN=localhost' -extensions v3_req -config <( \
-    printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[req_extensions]\nextendedKeyUsage=serverAuth\nsubjectAltName=@alt_names\n[v3_req]\nkeyUsage = keyEncipherment, dataEncipherment\nextendedKeyUsage = serverAuth\nsubjectAltName = @alt_names\n[alt_names]\nDNS.1 = localhost\nDNS.2 = dante.local")
-
-
+    -subj '/CN=localhost' -extensions EXT -config <( \
+     printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
 
   chmod 600 /etc/ssl/apache2/server.key
   chmod 644 /etc/ssl/apache2/server.crt

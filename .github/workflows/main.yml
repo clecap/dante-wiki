@@ -6,7 +6,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Generate SBOM
       run: |
@@ -15,18 +15,7 @@ jobs:
         echo '{"sbom": "example"}' > doc/sbom.json
 
     - name: Upload SBOM artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: sbom
         path: doc/sbom.json
-
-#    - name: Update README with SBOM link
-#      run: |
-#        SBOM_URL=$(echo "https://github.com/yourusername/yourrepo/actions/artifacts/sbom")
-#        BADGE="[![SBOM](https://img.shields.io/badge/SBOM-available-brightgreen)]($SBOM_URL)"
-#        sed -i 's|\[!\[SBOM\].*|'"$BADGE"'|' README.md
-#        git config --global user.name 'github-actions'
-#        git config --global user.email 'github-actions@github.com'
-#        git add README.md
-#        git commit -m "Update SBOM badge"
-#        git push

@@ -30,10 +30,10 @@ jobs:
       id: save-results
       run: |
         cloc . > cloc_results.txt
-        echo "::set-output name=cloc-output::$(cat cloc_results.txt)"
+        echo "cloc-output=$(cat cloc_results.txt)" >> $GITHUB_OUTPUT
 
     - name: Upload cloc results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: cloc-results
         path: cloc_results.txt
