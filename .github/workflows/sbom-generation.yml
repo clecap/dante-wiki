@@ -17,7 +17,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Set up Python environment
-      uses: actions/setup-python@v4.8.0
+      uses: actions/setup-python@v4.8.1
       with:
         python-version: '3.x'
 
@@ -38,7 +38,7 @@ jobs:
         syft dir:images/tex/ --output json > sbom-tex.json
 
     - name: Upload SBOM artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: SBOM
         path: |
