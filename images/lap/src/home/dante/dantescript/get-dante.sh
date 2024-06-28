@@ -29,18 +29,49 @@ fi
 
 
 #   inject only, after LocalSettings.php has been generated
-if [ -d "$MOUNT/$TARGET/LocalSettings.php" ]; then
+if [ -f "$MOUNT/$TARGET/LocalSettings.php" ]; then
     printf "\n*** get-dante.sh:  connecting to Mediawiki via an injection into LocalSettings.pgp ...\n"
     cat <<EOF >> ${MOUNT}/$TARGET/LocalSettings.php
 ###
 ### Automagically injected by volume cmd.sh 
 ###
 require_once ("DanteSettings.php"); 
-EOF
+EOF;
     printf "\n*** get-dante.sh: injecting ...\n"
   else
     printf "\n*** +++++++++++++++++++++++++++++ get-dante.sh: no LocalSettings.php found, cannot inject \n"
 fi
+
+
+cat <<EOF >> ${MOUNT}/$TARGET/mediawiki-PRIVATE.php
+<?php
+
+$wgPasswordSender = "${SMTP_FROM}";          // address of the sending email account
+
+$wgSMTP = [
+    'host'     => '${SMTP_HOST}',                // hostname of the smtp server of the email account
+    'IDHost'   => '${MY_DOMAINNAME}',            // sub(domain) of your wiki
+    'port'     => ${SMTP_PORT},                  // SMTP port to be used
+    'username' => '${SMTP_USER}',                // username of the email account
+    'password' => '${SMTP_PASSWORD}',            // password of the email account
+    'auth'     => true                           // shall authentisation be used
+];
+
+$wgLocaltimezone="${MW:TIMEZONE}";
+
+$DEEPL_API_KEY="${DEEPL_API_KEY}";
+
+// AWS data for an S3 user restricted to backup   dantebackup.iuk.one
+$wgDefaultUserOptions['aws-accesskey']       = '${AWS_ACCESS_KEY_ID}';
+$wgDefaultUserOptions['aws-secretaccesskey'] = '${AWS_SECRET_ACCESS_KEY}';
+$wgDefaultUserOptions['aws-bucketname']      =  '${AWS_BUCKETNAME}';
+$wgDefaultUserOptions['aws-region']          =  '${AWS_DEFAULT_REGION}';
+$wgDefaultUserOptions['aws-encpw']           =  '${MY-AWS_CRYPTO_PASSWORD}';
+
+?>
+EOF;
+
+
 
 
 
