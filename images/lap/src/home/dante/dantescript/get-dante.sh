@@ -5,7 +5,7 @@ source /home/dante/dantescript/common-defs.sh
 #### TODO MUST ABORT COMPLETEL including upstream in case of error - also for some of the other dante scripts. and need an abotzt in lapentry-.sh
 
 if [ -d "$MOUNT/$TARGET/.git" ]; then
-    printf "\n*** get-dante.sj: Git directory ${MOUNT}/$TARGET/.git already exists ... doing a PULL \n"
+    printf "\n*** get-dante.sh: Git directory ${MOUNT}/$TARGET/.git already exists ... doing a PULL \n"
       git -C ${MOUNT}/${TARGET} pull origin ${DANTE_BRANCH} ;       exec 1>&1 2>&2
     printf "DONE"
   else
@@ -24,23 +24,25 @@ if [ -d "$MOUNT/$TARGET/.git" ]; then
     printf "\n*** get-dante.sh:  checking out dante-delta ...\n"
       git -C ${MOUNT}/${TARGET} checkout -f -t origin/${DANTE_BRANCH};       exec 1>&1 2>&2
     printf "DONE"
+## todo we might need to run update again, as the last time we did do so, the dante extensions had not been installed into LocalSettings.php yet
+fi
+
 
 #   inject only, after LocalSettings.php has been generated
-    if [ -d "$MOUNT/$TARGET/LocalSettings.php" ]; then
-        printf "\n*** get-dante.sh:  connecting to Mediawiki via an injection into LocalSettings.pgp ...\n"
-        cat <<EOF >> ${MOUNT}/$TARGET/LocalSettings.php
+if [ -d "$MOUNT/$TARGET/LocalSettings.php" ]; then
+    printf "\n*** get-dante.sh:  connecting to Mediawiki via an injection into LocalSettings.pgp ...\n"
+    cat <<EOF >> ${MOUNT}/$TARGET/LocalSettings.php
 ###
 ### Automagically injected by volume cmd.sh 
 ###
 require_once ("DanteSettings.php"); 
 EOF
-        printf "\n*** get-dante.sh: injecting ...\n"
-      else
-        printf "\n*** +++++++++++++++++++++++++++++ get-dante.sh: no LocalSettings.php found, cannot inject \n"
-    fi
-
-## todo we might need to run update again, as the last time we did do so, the dante extensions had not been installed into LocalSettings.php yet
-
+    printf "\n*** get-dante.sh: injecting ...\n"
+  else
+    printf "\n*** +++++++++++++++++++++++++++++ get-dante.sh: no LocalSettings.php found, cannot inject \n"
 fi
+
+
+
 
 # trap : EXIT         # switch trap command back to noop (:) on EXIT
