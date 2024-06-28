@@ -6,8 +6,6 @@ WORKDIR /tmp
 # this is necessary for some of the commands we use
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-######################### DO WE REALLY NEED mupdf and mupdf-tools ?????????????????????????????????????????
-
 # Install necessary packages
 #   git          get proper hashes in Special:Version and in other places
 #   imagemagick  THUMBNAIL support in mediawiki
@@ -19,41 +17,31 @@ RUN \
 #   ensure docker desktop tab opens with a bash allowing dommand line editing and noy with sh or dash which does not 
     rm /bin/sh && \
     ln -sf /bin/bash /bin/sh && \
+#   update apt-get and start installation
     apt-get update && \
     apt-get install -y   --no-install-recommends apache2 ca-certificates apache2-utils openssl && \
     apt-get install -y   --no-install-recommends php && \
     apt-get install -y   --no-install-recommends php-common php-mysqli php-intl php-apcu php-mbstring php- php-gd php-json php-xml php-bcmath php-tokenizer php-igbinary php-opcache php-pear php-curl && \
     apt-get install -y   --no-install-recommends default-mysql-client && \
-#    apt-get install -y   --no-install-recommends libapache2-mod-php && \
     apt-get install -y   --no-install-recommends php-fpm && \
     apt-get install -y   --no-install-recommends wget curl unzip git diffutils  && \
-#   prevent hints about the default branch master
+#   prevent hints about the default branch master TODO: put into /etc/git ????
     git config --global init.defaultBranch master && \
     apt-get install -y   --no-install-recommends imagemagick netpbm djvulibre-bin librsvg2-bin xpdf mscgen msmtp gnuplot-nox graphviz && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
     apt-get install -y --no-install-recommends php-dev make && \
     pecl channel-update pecl.php.net && \
     pecl install ds && \
-##
-## Get python and pip and then PYMUPDF and PYGMENTS for supporting TeX and Parsifal
-##
-    apt-get install -y --no-install-recommends mupdf mupdf-tools python3 python3-pip && \
+#  Get python and pip and then PYGMENTS for supporting TeX and Parsifal
+    apt-get install -y --no-install-recommends python3 python3-pip && \
     ln -sf python3 /usr/bin/python && \
     apt-get install -y --no-install-recommends python3-setuptools 
-
 #
 ## Install pymupdf
 #
-#  This is a bit tricky, since
 #    1) Installations with pip should use a virtual python environment or a --break-system-package (which is not recommended)
 #    2) For some reason the active shell has no source command and we need to switch to bash
 #    3) This also is an issue when the install triggers for python3.11-venv are activated
-
-
-#RUN /bin/bash -c "apt-get install -y --no-install-recommends python3.11-venv"  && \
-#    cd /opt && \
-#    python3 -m venv myenv && \
-#    /bin/bash -c "source myenv/bin/activate" && \
 
 RUN apt-get install -y --no-install-recommends python3.11-venv  && \
     cd /opt && \
@@ -61,17 +49,14 @@ RUN apt-get install -y --no-install-recommends python3.11-venv  && \
     source myenv/bin/activate && \
     /opt/myenv/bin/pip3 install --no-cache-dir pymupdf && \
     exit && \
-##
+## TODO: can we later clear up /opt or do we have to keep it ???
 ## AMAZON CLOUD COMMAND LINE (for backup)
-##
     cd /tmp && \
     curl -s "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
     unzip -q awscliv2.zip && \
     ./aws/install && \
     rm -rf awscliv2.zip aws && \
-##
 ## FINAL CLEANUP
-##
     apt-get purge -y php-dev build-base linux-headers && \
     apt-get autoremove -y && \
     apt-get clean && \
@@ -86,9 +71,6 @@ RUN apt-get install -y --no-install-recommends python3.11-venv  && \
       /var/cache/apt/* \
       /var/cache/man/* \
       /tmp/*
-
-
-
 
 
 # Set up args (does not create a new layer but provides formal symbols for the process)
@@ -171,17 +153,18 @@ COPY . /
 
 RUN /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/kuenzign/WikiMarkdown                                        WikiMarkdown                 main && \
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-MobileFrontend                MobileFrontend               REL1_39 && \
-#  installExtensionGithub  https://github.com/labster/HideSection/                                         HideSection master
+
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-RandomSelection               RandomSelection              REL1_39  && \
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-LabeledSectionTransclusion    LabeledSectionTransclusion   REL1_39 && \
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-RevisionSlider                RevisionSlider               REL1_39 && \
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-NativeSvgHandler              NativeSvgHandler             REL1_39 && \
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-UniversalLanguageSelector     UniversalLanguageSelector    REL1_39 && \
+#  installExtensionGithub  https://github.com/labster/HideSection/                                         HideSection master
 #  installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-DrawioEditor                   DrawioEditor REL1_39
 # This extension is broken currently
 #  Use my own version - see my mediawiki-extensions-DrawioEditor Patch
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/clecap/mediawiki-extensions-DrawioEditor                      DrawioEditor                master && \
-# PATHCES:
+# PATHCES: ## TODO: maybe at a different place and not in dockerfile !!!
     wget https://raw.githubusercontent.com/clecap/mediawiki-extensions-DrawioEditor/master/PATCH-UploadedFile.php -O includes/libs/ParamValidator/Util/UploadedFile.php && \
     wget https://raw.githubusercontent.com/clecap/mediawiki-extensions-DrawioEditor/master/PATCH-UploadBase.php -O includes/upload/UploadBase.php   && \
 ##  looks like this extension is broken
@@ -191,10 +174,6 @@ RUN /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://gi
 ##  installExtensionGithub https://github.com/clecap/DynamicPageList3 DynamicPageList3 master
 ###### HACK: see README-DynamicPageList3-Clemens.md in TOPD_DIR/own for more details.
 ##  docker cp $TOP_DIR/own/DynamicPageList3/ ${LAP_CONTAINER}:/${MOUNT}/${VOLUME_PATH}/extensions
-##
-##
-### currently to be done manually 
-###  installExtensionGithub  https://github.com/clecap/Parsifal  Parsifal  dante
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-WikiCategoryTagCloud  WikiCategoryTagCloud  REL1_39 && \
     composer update
 
@@ -206,7 +185,7 @@ RUN \
     a2enmod proxy                   && \ 
     a2enmod proxy_fcgi              && \
     a2enmod setenvif                && \
-############################    a2enconf php-fpm                && \
+############################    a2enconf php-fpm                && \  ## TODO ??
     a2enmod mpm_event               && \
 # remove default apache sites
     a2dissite 000-default.conf      && \
@@ -237,12 +216,13 @@ RUN \
 #  Set the home directory and working directory for the new user
 #  Copy your application code to the container
 #  Give non-root user ownership of the application files
-#  Set the default user
+#  Set the default user ## TODO: do we want this? is it compatible with the deletion strategies we need ???
 
 # USER root
 
-RUN useradd -m dante && echo "dante:password" | chpasswd && adduser dante sudo
 
+## TODO: do we really need this ???
+RUN useradd -m dante && echo "dante:password" | chpasswd && adduser dante sudo
 
 WORKDIR /home/dante
 RUN chown -R dante:dante /home/dante

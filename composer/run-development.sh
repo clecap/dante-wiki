@@ -1,5 +1,8 @@
 #!/bin/bash
 
+
+SERVICE_CONTAINER=my-lap-container
+
 # get directory where this script resides wherever it is called from
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 TOP_DIR=${DIR}/.. 
@@ -31,15 +34,12 @@ printf "$GREEN---DONE$RESET\n"
 
 printf "\n$GREEN---Starting up configuration...$RESET\n" 
 # do this in detached mode so as to allow the waiting for the service to start
-  docker-compose -d -f $TOP_DIR/composer/docker-compose-development.yaml up 
+  docker-compose -f $TOP_DIR/composer/docker-compose-development.yaml up -d
 printf "$GREEN---DONE$RESET\n"
-
-
 
 # Function to check the health status of a service
 check_health() {
-  service=$1
-  status=$(docker inspect --format='{{.State.Health.Status}}' )
+  status=$(docker inspect --format='{{.State.Health.Status}}' $SERVICE_CONTAINER)
   echo $status
 }
 
@@ -47,15 +47,14 @@ check_health() {
 services=("web")
 
 # Loop until all services are healthy
-for service in "${services[@]}"; do
-  while [ "$(check_health $service)" != "healthy" ]; do
-    echo "Waiting for $service to be healthy..."
-    sleep 5
-  done
-  echo "$service is healthy!"
+
+while [ "$(check_health $service)" != "healthy" ]; do
+  printf "Waiting for $service to be healthy...\n"
+  sleep 5
 done
+printf "WEbserver is healthy is healthy!\n"
 
 if [ `uname` == "Darwin" ]; then 
-  echo ""; echo "*** Attempting to start a local Chrome browser - this may fail"; echo "";
-  open -a "Google Chrome"  http://localhost:8080/index.html
+  printf "\n *** Attempting to start a local Chrome browser\n";
+  open -na "Google Chrome" --args --new-window http://localhost:8080/index.html
 fi

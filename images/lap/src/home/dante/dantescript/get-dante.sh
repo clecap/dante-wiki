@@ -2,8 +2,6 @@
 
 source /home/dante/dantescript/common-defs.sh
 
-
-
 #### TODO MUST ABORT COMPLETEL including upstream in case of error - also for some of the other dante scripts. and need an abotzt in lapentry-.sh
 
 if [ -d "$MOUNT/$TARGET/.git" ]; then
@@ -26,10 +24,15 @@ if [ -d "$MOUNT/$TARGET/.git" ]; then
     printf "\n*** get-dante.sh:  checking out dante-delta ...\n"
       git -C ${MOUNT}/${TARGET} checkout -f -t origin/${DANTE_BRANCH};       exec 1>&1 2>&2
     printf "DONE"
+
+    printf "\n*** get-dante.sh:  connecting to Mediawiki via an injection into LocalSettings.pgp ...\n"
+      cat <<EOF >> ${MOUNT}/$TARGET/LocalSettings.php
+###
+### Automagically injected by volume cmd.sh 
+###
+require_once ("DanteSettings.php"); 
+EOF
+    printf "\n*** get-dante.sh: injecting ...\n"
 fi
-
-
-
-#printf "\033[1;32m completed git-pull-from-delta.sh \033[0m \n"
 
 # trap : EXIT         # switch trap command back to noop (:) on EXIT
