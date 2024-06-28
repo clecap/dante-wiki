@@ -27,14 +27,16 @@ if [ -d "$MOUNT/$TARGET/.git" ]; then
 
 #   inject only, after LocalSettings.php has been generated
     if [ -d "$MOUNT/$TARGET/LocalSettings.php" ]; then
-      printf "\n*** get-dante.sh:  connecting to Mediawiki via an injection into LocalSettings.pgp ...\n"
-      cat <<EOF >> ${MOUNT}/$TARGET/LocalSettings.php
+        printf "\n*** get-dante.sh:  connecting to Mediawiki via an injection into LocalSettings.pgp ...\n"
+        cat <<EOF >> ${MOUNT}/$TARGET/LocalSettings.php
 ###
 ### Automagically injected by volume cmd.sh 
 ###
 require_once ("DanteSettings.php"); 
 EOF
-      printf "\n*** get-dante.sh: injecting ...\n"
+        printf "\n*** get-dante.sh: injecting ...\n"
+      else
+        printf "\n*** +++++++++++++++++++++++++++++ get-dante.sh: no LocalSettings.php found, cannot inject \n"
     fi
 
 ## todo we might need to run update again, as the last time we did do so, the dante extensions had not been installed into LocalSettings.php yet
