@@ -52,3 +52,7 @@ wget https://raw.githubusercontent.com/clecap/file-action/main/${NAME}  -O /tmp/
 codium --install-extension /tmp/${NAME}
 rm -f /tmp/${NAME}
 ```  
+
+## VSCODIUM
+
+* Need extension "Ansi Colors" to see colours in output window.

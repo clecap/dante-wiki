@@ -31,7 +31,7 @@ jobs:
         DOCKER_HUB_REPO: 'tex'
         DOCKER_HUB_TAG: 'latest'
       run: |
-        python ./.github/scripts/fetch_scan_results.py
+        python .github/scripts/fetch_scan_results.py
 
     - name: Commit JSON file
       run: |

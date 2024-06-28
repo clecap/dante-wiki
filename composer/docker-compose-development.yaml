@@ -67,7 +67,11 @@ services:
         aliases: 
           - dante.local
     command: "make-localhost-certificate.sh get-dante.sh get-parsifal.sh run-apache-no-cache.sh"
-
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
 
   phpmyadmin:
