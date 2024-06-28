@@ -60,7 +60,7 @@ if [ -f "$MOUNT/$TARGET/mediawiki-PRIVATE.php" ]; then
     'auth'     => true                           // shall authentisation be used
 ];
 
-\$wgLocaltimezone="${MW:TIMEZONE}";
+\$wgLocaltimezone="${MW_TIMEZONE}";
 
 \$DEEPL_API_KEY="${DEEPL_API_KEY}";
 
