@@ -14,22 +14,5 @@
     {"label": "111 PUSH PARSIFAL changes to github/Parsifal dante branch ",                               "command": "volumes/full/spec/git-push-to-parsifal.sh"} ,
     {"label": "112 CLONE DELTA from github:         volumes/full/spec/git-clone-from-delta.sh",          "command": "volumes/full/spec/git-clone-from-delta.sh"},
     {"label": "113 CLONE PARSIFAL from github:      volumes/full/spec/git-clone-from-parsifal.sh",          "command": "volumes/full/spec/git-clone-from-parsifal.sh"}
-  ,
- {
-      "label": "2 Run docker-compose up",
-      "type": "docker-compose",
-      "dockerCompose": {
-        "up": {
-          "detached": true,
-          "build": true,
-          "services": ["myservice"]
-        },
-        "files": [
-          "${workspaceFolder}/docker-compose-local.yml",
-          "${workspaceFolder}/docker-compose.debug.yml"
-        ]
-      }
-    }
-
 ]
 }

@@ -25,14 +25,20 @@ if [ -d "$MOUNT/$TARGET/.git" ]; then
       git -C ${MOUNT}/${TARGET} checkout -f -t origin/${DANTE_BRANCH};       exec 1>&1 2>&2
     printf "DONE"
 
-    printf "\n*** get-dante.sh:  connecting to Mediawiki via an injection into LocalSettings.pgp ...\n"
+#   inject only, after LocalSettings.php has been generated
+    if [ -d "$MOUNT/$TARGET/LocalSettings.php" ]; then
+      printf "\n*** get-dante.sh:  connecting to Mediawiki via an injection into LocalSettings.pgp ...\n"
       cat <<EOF >> ${MOUNT}/$TARGET/LocalSettings.php
 ###
 ### Automagically injected by volume cmd.sh 
 ###
 require_once ("DanteSettings.php"); 
 EOF
-    printf "\n*** get-dante.sh: injecting ...\n"
+      printf "\n*** get-dante.sh: injecting ...\n"
+    fi
+
+## todo we might need to run update again, as the last time we did do so, the dante extensions had not been installed into LocalSettings.php yet
+
 fi
 
 # trap : EXIT         # switch trap command back to noop (:) on EXIT

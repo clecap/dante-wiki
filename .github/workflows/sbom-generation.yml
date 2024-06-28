@@ -25,23 +25,24 @@ jobs:
       run: |
         pip install syft
 
-    - name: Generate SBOM for Dockerfile in dir1
+    - name: Generate SBOM for Dockerfile
       run: |
         syft dir:images/lap --output json > sbom-lap.json
 
-    - name: Generate SBOM for Dockerfile in dir2
+    - name: Generate SBOM for Dockerfile
       run: |
         syft dir:images/dante-mysql --output json > sbom-dante-mysql.json
 
-    - name: Generate SBOM for Dockerfile in dir3
+    - name: Generate SBOM for Dockerfile
       run: |
         syft dir:images/tex/ --output json > sbom-tex.json
 
-    - name: Upload SBOM artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: SBOM
-        path: |
-          sbom-lap.json
-          sbom-dante-mysql.json
-          sbom-tex.json
+    - name: Commit and push SBOM files
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git add sbom-*.json
+        git commit -m "Add generated SBOM files"
+        git push origin ${{ github.ref }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

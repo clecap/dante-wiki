@@ -1,4 +1,4 @@
-name: "CodeQL"
+name: "CodeQL (mine)"
 
 on:
   push:
@@ -26,7 +26,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'javascript', 'typescript', 'go', 'ruby', 'cpp', 'java' ] # List your languages here
+        language: [ 'javascript', 'typescript' ] # List your languages here
 
     steps:
     - name: Checkout repository
