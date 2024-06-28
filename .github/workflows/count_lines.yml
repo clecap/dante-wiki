@@ -32,7 +32,7 @@ jobs:
         cloc . > cloc_results.txt
         cloc_output=$(cat cloc_results.txt | sed ':a;N;$!ba;s/\n/\\n/g')
         echo "cloc-output=${cloc_output}" >> $GITHUB_ENV
-        cloc -json . > .github/results/cloc_results.json
+        cloc -json . > cloc_results.json
 
     - name: Upload cloc results
       uses: actions/upload-artifact@v4
