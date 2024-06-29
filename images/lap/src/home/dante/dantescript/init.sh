@@ -33,8 +33,9 @@ printf "\n*** init.sh: Deleting phpinfo.php..."
   exec 1>&1 2>&2
 printf "DONE\n"
 
-printf "\n*** init.sh: Copying in index.html..."
-  cp /home/dante/html/index.html ${MOUNT}
+printf "\n*** init.sh: Copying in index.html and favicon.ico to ${MOUNT}..."
+  cp /home/dante/html/index.html  ${MOUNT}
+  cp /home/dante/html/favicon.ico ${MOUNT}
   exec 1>&1 2>&2
 printf "DONE\n"
 

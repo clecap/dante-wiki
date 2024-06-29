@@ -19,8 +19,14 @@ jobs:
           repository: clecap/dante-wiki
           path: central
 
+      - name: Convert YAML to JSON
+        run: |
+          cat dante-wiki/workflows/labels.yml | jq -c . > labels.json
+        shell: bash
+
       - name: Sync labels
         uses: reposync/labeler@v2
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          labels: ${{ toJson(fromYaml(file('dante-wiki/workflows/labels.yml'))) }}
+          labels: ${{ secrets.GITHUB_TOKEN }}
+          labels: ${{ toJson(file('labels.json')) }}

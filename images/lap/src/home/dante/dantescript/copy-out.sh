@@ -10,10 +10,6 @@ trap 'abort' ERR                       # call abort on error
 
 exec 1>&1 2>&2
 
-#printf "\n***  /home/dante/dantescript/copy-out.sh: cleaning up old stuff...\n "
-#  chown -R www-data:www-data /mnt/${TARGET} ; exec 1>&1 2>&2
-#printf "DONE cleaning up old stuff\n"
-
 #
 # Delete old stuff. Must do this for ${TARGET} and ***NOT*** for /mnt, since there are
 # some files we still need !
@@ -35,7 +31,6 @@ printf "DONE cleaning up old stuff\n"
 ## copy out what we have just produced from 
 printf "\n\n***  /home/dante/dantescript/copy-out.sh: copying out...\n"
   cp -a ${MOUNT}/${TARGET} /mnt
-  cp -a ${MOUNT}/index.html /mnt
   exec 1>&1 2>&2
 printf "DONE cleaning up old stuff\n"
 
