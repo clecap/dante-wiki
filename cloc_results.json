@@ -1,0 +1,89 @@
+
+{"header" : {
+  "cloc_url"           : "github.com/AlDanial/cloc",
+  "cloc_version"       : "1.90",
+  "elapsed_seconds"    : 0.397186040878296,
+  "n_files"            : 366,
+  "n_lines"            : 83646,
+  "files_per_second"   : 921.48253546541,
+  "lines_per_second"   : 210596.525031529},
+"JSON" :{
+  "nFiles": 16,
+  "blank": 1,
+  "comment": 0,
+  "code": 18050},
+"PHP" :{
+  "nFiles": 63,
+  "blank": 3724,
+  "comment": 6806,
+  "code": 14233},
+"XML" :{
+  "nFiles": 5,
+  "blank": 1007,
+  "comment": 0,
+  "code": 6563},
+"JavaScript" :{
+  "nFiles": 53,
+  "blank": 2343,
+  "comment": 2607,
+  "code": 5592},
+"HTML" :{
+  "nFiles": 32,
+  "blank": 1195,
+  "comment": 53,
+  "code": 4150},
+"CSS" :{
+  "nFiles": 17,
+  "blank": 619,
+  "comment": 375,
+  "code": 3251},
+"Bourne Shell" :{
+  "nFiles": 95,
+  "blank": 1341,
+  "comment": 791,
+  "code": 3131},
+"Sass" :{
+  "nFiles": 19,
+  "blank": 565,
+  "comment": 144,
+  "code": 2512},
+"Markdown" :{
+  "nFiles": 29,
+  "blank": 740,
+  "comment": 0,
+  "code": 2510},
+"YAML" :{
+  "nFiles": 16,
+  "blank": 100,
+  "comment": 71,
+  "code": 475},
+"Dockerfile" :{
+  "nFiles": 11,
+  "blank": 115,
+  "comment": 201,
+  "code": 280},
+"Python" :{
+  "nFiles": 1,
+  "blank": 9,
+  "comment": 0,
+  "code": 32},
+"JSON5" :{
+  "nFiles": 6,
+  "blank": 0,
+  "comment": 0,
+  "code": 26},
+"C++" :{
+  "nFiles": 2,
+  "blank": 4,
+  "comment": 2,
+  "code": 10},
+"INI" :{
+  "nFiles": 1,
+  "blank": 4,
+  "comment": 5,
+  "code": 9},
+"SUM": {
+  "blank": 11767,
+  "comment": 11055,
+  "code": 60824,
+  "nFiles": 366} }

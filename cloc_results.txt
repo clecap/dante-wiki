@@ -2,7 +2,7 @@
 classified 408 filesDuplicate file check 408 files (371 known unique)Unique:      100 files                                          Unique:      200 files                                          Unique:      300 files                                               394 unique files.                              
 Counting:  100Counting:  200Counting:  300      55 files ignored.
 
-github.com/AlDanial/cloc v 1.90  T=0.40 s (909.6 files/s, 207878.9 lines/s)
+github.com/AlDanial/cloc v 1.90  T=0.40 s (918.3 files/s, 209861.6 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
@@ -12,15 +12,15 @@ XML                              5           1007              0           6563
 JavaScript                      53           2343           2607           5592
 HTML                            32           1195             53           4150
 CSS                             17            619            375           3251
-Bourne Shell                    95           1342            789           3132
+Bourne Shell                    95           1341            791           3131
 Sass                            19            565            144           2512
 Markdown                        29            740              0           2510
-YAML                            16            100             71            474
-Dockerfile                      11            115            200            279
+YAML                            16            100             71            475
+Dockerfile                      11            115            201            280
 Python                           1              9              0             32
 JSON5                            6              0              0             26
 C++                              2              4              2             10
 INI                              1              4              5              9
 -------------------------------------------------------------------------------
-SUM:                           366          11768          11052          60823
+SUM:                           366          11767          11055          60824
 -------------------------------------------------------------------------------
