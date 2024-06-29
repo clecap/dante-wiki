@@ -20,11 +20,10 @@ Dante-Wiki is a note taking, publishing and peer reviewing system for scientists
   <tr>
     <td><b>Size</b></td>
     <td>
-      <a href=""><img alt="Repository code size" src="https://img.shields.io/github/languages/code-size/clecap/dante-wiki"></a>&nbsp;
-      <a href=""><img alt="Repository LoC" src="https://sloc.xyz/github/clecap/dante-wiki/"></a>
-
-[![Count Lines of Code](https://github.com/clecap/dante-wiki/actions/workflows/count_lines.yml/badge.svg)](https://github.com/clecap/dante-wiki/actions/workflows/count_lines.yml)
-
+      <a href=""><img alt="Repository code size" src="https://img.shields.io/github/languages/code-size/clecap/dante-wiki?color=lightgreen"></a>&nbsp;
+      <a href="https://github.com/clecap/dante-wiki/actions/workflows/count_lines.yml"><img src="https://github.com/clecap/dante-wiki/actions/workflows/count_lines.yml/badge.svg"></a>
+      <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com/clecap/dante-wiki/master/cloc_results.json&label=Files&query=%24.header.n_files&color=lightgreen">
+    <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com/clecap/dante-wiki/master/cloc_results.json&label=Lines&query=%24.header.n_lines&color=lightgreen">
 </td>
   </tr>
   <tr>
