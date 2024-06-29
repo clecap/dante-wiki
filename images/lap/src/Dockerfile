@@ -13,6 +13,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 #   msmtp             write simple mails to inform about backup job completion and more
 #   php-curl:   must include this for the composer to run faster
 
+
 RUN \
 #   ensure docker desktop tab opens with a bash allowing dommand line editing and noy with sh or dash which does not 
     rm /bin/sh && \
@@ -22,9 +23,11 @@ RUN \
     apt-get install -y   --no-install-recommends apache2 ca-certificates apache2-utils openssl && \
     apt-get install -y   --no-install-recommends php && \
     apt-get install -y   --no-install-recommends php-common php-mysqli php-intl php-apcu php-mbstring php- php-gd php-json php-xml php-bcmath php-tokenizer php-igbinary php-opcache php-pear php-curl && \
-    apt-get install -y   --no-install-recommends default-mysql-client && \
-    apt-get install -y   --no-install-recommends php-fpm && \
+    apt-get install -y   --no-install-recommends default-mysql-client           && \
+    apt-get install -y   --no-install-recommends php-fpm                        && \
     apt-get install -y   --no-install-recommends wget curl unzip git diffutils  && \
+#   vim:        it is very convenient to have a vi editor in place for development inside of the container
+    apt-get install -y   --no-install-recommends vim                            && \
 #   prevent hints about the default branch master TODO: put into /etc/git ????
     git config --global init.defaultBranch master && \
     apt-get install -y   --no-install-recommends imagemagick netpbm djvulibre-bin librsvg2-bin xpdf mscgen msmtp gnuplot-nox graphviz && \

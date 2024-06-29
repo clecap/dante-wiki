@@ -136,8 +136,8 @@ composerInstall () {  #  composerInstall:  Doing COMPOSER based installations
 
   printf "\n\n*** DONE installing extension requirements\n\n"
 
-
-  installExtensionGithub  https://github.com/kuenzign/WikiMarkdown                                        WikiMarkdown        main
+# TODO currently this extension is broken. see issues. it produces a deprecated warning which has effects in the load.php URL
+#  installExtensionGithub  https://github.com/kuenzign/WikiMarkdown                                        WikiMarkdown        main
   installExtensionGithub  https://github.com/wikimedia/mediawiki-extensions-MobileFrontend                MobileFrontend      REL1_39
 
 #  installExtensionGithub  https://github.com/labster/HideSection/                                         HideSection master
