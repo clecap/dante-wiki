@@ -27,15 +27,15 @@ jobs:
 
     - name: Generate SBOM for Dockerfile
       run: |
-        syft dir:images/lap --output json > sbom-lap.json
+        syft dir:images/lap --output syft-json > sbom-lap.json
 
     - name: Generate SBOM for Dockerfile
       run: |
-        syft dir:images/dante-mysql --output json > sbom-dante-mysql.json
+        syft dir:images/dante-mysql --output syft-json > sbom-dante-mysql.json
 
     - name: Generate SBOM for Dockerfile
       run: |
-        syft dir:images/tex/ --output json > sbom-tex.json
+        syft dir:images/tex/ --output syft-json > sbom-tex.json
 
     - name: Commit and push SBOM files
       run: |

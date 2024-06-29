@@ -153,7 +153,6 @@ COPY . /
 
 RUN /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/kuenzign/WikiMarkdown                                        WikiMarkdown                 main && \
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-MobileFrontend                MobileFrontend               REL1_39 && \
-
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-RandomSelection               RandomSelection              REL1_39  && \
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-LabeledSectionTransclusion    LabeledSectionTransclusion   REL1_39 && \
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-RevisionSlider                RevisionSlider               REL1_39 && \
