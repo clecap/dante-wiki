@@ -1,7 +1,7 @@
 {
   "version": "2.0.0",
   "tasks": [
-   {"label": "00: GENERATE",                          "command": "composer/run-development.sh"},
+   {"label": "00: GENERATE",                          "command": "composer/generate-and-run-development.sh"},
     {"label": "001: Install recommended vscode extension:  bin/vscodiumExtensions.sh",                          "command": "bin/vscodiumExtensions.sh"},
     {"label": "004 generate volume full:              volumes/full/spec/cmd.sh",                          "command": "volumes/full/spec/cmd.sh"},
     {"label": "005 run lap and my-mysql (cleaned):          images/lap/bin/both.sh with cleand",      "command": "images/lap/bin/both.sh",   "args": ["--cleandb", "my-test-db-volume",  "--dir", "full"] },
