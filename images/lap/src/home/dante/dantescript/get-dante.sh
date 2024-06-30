@@ -2,44 +2,47 @@
 
 source /home/dante/dantescript/common-defs.sh
 
+set -e                                 # abort execution on any error
+trap 'abort' ERR                       # call abort on error
+
 #### TODO MUST ABORT COMPLETEL including upstream in case of error - also for some of the other dante scripts. and need an abotzt in lapentry-.sh
 
 if [ -d "$MOUNT/$TARGET/.git" ]; then
     printf "\n*** get-dante.sh: Git directory ${MOUNT}/$TARGET/.git already exists ... doing a PULL \n"
       git -C ${MOUNT}/${TARGET} pull origin ${DANTE_BRANCH} ;       exec 1>&1 2>&2
-    printf "DONE"
+    printf "DONE\n"
   else
     printf "\n*** get-dante.sh: Initialize a git...\n"
       git init ${MOUNT}/${TARGET} ;       exec 1>&1 2>&2
-    printf "DONE"
+    printf "DONE\n"
 
     printf "\n*** get-dante.sh: remote add origin to dante-delta ...\n"
       git -C ${MOUNT}/${TARGET} remote add origin ${REMOTE_REPO_DANTE} ;       exec 1>&1 2>&2
-    printf "DONE"
+    printf "DONE\n"
 
     printf "\n*** get-dante.sh: fetching dante-delta ...\n"
       git -C ${MOUNT}/${TARGET} fetch --depth 1 origin ${DANTE_BRANCH} ;       exec 1>&1 2>&2
-    printf "DONE"
+    printf "DONE\n"
 
     printf "\n*** get-dante.sh:  checking out dante-delta ...\n"
       git -C ${MOUNT}/${TARGET} checkout -f -t origin/${DANTE_BRANCH};       exec 1>&1 2>&2
-    printf "DONE"
+    printf "DONE\n"
 ## todo we might need to run update again, as the last time we did do so, the dante extensions had not been installed into LocalSettings.php yet
 fi
-
-
-
 
 
 
 ##  installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-DrawioEditor                   DrawioEditor REL1_39
 ## This extension is broken currently
 ##  Use my own version - see my mediawiki-extensions-DrawioEditor Patch
-  /home/dante/dantescript/install-extension-github.sh  ${MAOUNT}/${TARGET}  https://github.com/clecap/mediawiki-extensions-DrawioEditor                      DrawioEditor                master && \
-  wget https://raw.githubusercontent.com/clecap/mediawiki-extensions-DrawioEditor/master/PATCH-UploadedFile.php -O ${MOUNT}/$TARGET}/includes/libs/ParamValidator/Util/UploadedFile.php && \
-  wget https://raw.githubusercontent.com/clecap/mediawiki-extensions-DrawioEditor/master/PATCH-UploadBase.php -O ${MOUNT}/$TARGET}includes/upload/UploadBase.php   && \
-
-
+printf "\n*** get-dante.sh: Installing drawio ...\n"
+  /home/dante/dantescript/install-extension-github.sh  ${MAOUNT}/${TARGET}  https://github.com/clecap/mediawiki-extensions-DrawioEditor                      DrawioEditor                master
+      exec 1>&1 2>&2
+  wget https://raw.githubusercontent.com/clecap/mediawiki-extensions-DrawioEditor/master/PATCH-UploadedFile.php -O ${MOUNT}/$TARGET/includes/libs/ParamValidator/Util/UploadedFile.php
+    exec 1>&1 2>&2
+  wget https://raw.githubusercontent.com/clecap/mediawiki-extensions-DrawioEditor/master/PATCH-UploadBase.php -O ${MOUNT}/$TARGETincludes/upload/UploadBase.php 
+    exec 1>&1 2>&2
+printf "\nDONE installing drawio ...\n"
 
 
 
@@ -57,6 +60,8 @@ EOF
   else
     printf "\n*** +++++++++++++++++++++++++++++ get-dante.sh: no LocalSettings.php found, cannot inject \n"
 fi
+
+ exec 1>&1 2>&2
 
 if [ -f "$MOUNT/$TARGET/mediawiki-PRIVATE.php" ]; then
     printf "\n*** get-dante.sh: mediawiki-PRIVATE.php already existing, skip generation\n"
@@ -89,11 +94,12 @@ if [ -f "$MOUNT/$TARGET/mediawiki-PRIVATE.php" ]; then
 
 ?>
 EOF
-    printf "DONE generating mediawiki-PRIVATE.php"
+    printf "DONE generating mediawiki-PRIVATE.php\n"
 fi
 
+ exec 1>&1 2>&2
 
-
+prntf "${GREEN}*** DONE get-dante.sh${RESET}"
 
 
 # trap : EXIT         # switch trap command back to noop (:) on EXIT

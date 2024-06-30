@@ -6,7 +6,7 @@
 source /home/dante/dantescript/common-defs.sh
 
 ## Say hello
-printf "\n *** *** This is /lap-entrypoint.sh\n"
+printf "\n*** *** This is /lap-entrypoint.sh *** ***\n"
 
 ## Load the secret configuration file
 if [ -f "/run/secrets/configuration" ]; then

@@ -6,12 +6,15 @@
 
 source /home/dante/dantescript/common-defs.sh
 
+set -e                                 # abort execution on any error
+trap 'abort' ERR                       # call abort on error
+
 printf "*** This is make-localhost-certificate.sh\n"
 
 if [ -e "/etc/ssl/apache2/server.crt" ] && [ -e "/etc/ssl/apache2/server.key" ]; then
   printf "/etc/ssl/apache2/server.crt and /etc/ssl/apache2/server.key both exist \n"
 else
-  printf "One of /etc/ssl/apache2/server.crt or /etc/ssl/apache2/server.key both missing \n"
+  printf "   One of /etc/ssl/apache2/server.crt or /etc/ssl/apache2/server.key both missing \n"
   APACHE_SERVER_KEY_LENGTH="${#APACHE_SERVER_KEY}"
   APACHE_SERVER_CRT_LENGTH="${#APACHE_SERVER_CRT}"
   if [ "$APACHE_SERVER_KEY_LENGTH" -gt 20 && "$APACHE_SERVER_CRT_LENGTH" -gt 20 ]; then

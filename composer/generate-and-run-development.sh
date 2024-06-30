@@ -34,7 +34,8 @@ printf "$GREEN---DONE$RESET\n"
 
 printf "\n$GREEN---Starting up configuration...$RESET\n" 
 # do this in detached mode so as to allow the waiting for the service to start
-  docker-compose -f $TOP_DIR/composer/docker-compose-development.yaml up -d
+#  docker-compose -f $TOP_DIR/composer/docker-compose-development.yaml up -d
+  docker-compose -f $TOP_DIR/composer/docker-compose-development.yaml up &
 printf "$GREEN---DONE$RESET\n"
 
 # Function to check the health status of a service
@@ -48,8 +49,8 @@ services=("web")
 
 # Loop until all services are healthy
 
-while [ "$(check_health $service)" != "healthy" ]; do
-  printf "Waiting for $service to be healthy...\n"
+while [ "$(check_health)" != "healthy" ]; do
+  printf "Waiting for configuration to come up..\n"
   sleep 5
 done
 printf "WEbserver is healthy is healthy!\n"

@@ -12,46 +12,45 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
-    - name: Install cloc
-      run: sudo apt-get install cloc
+      - name: Install cloc
+        run: sudo apt-get install cloc
 
-    - name: Run cloc
-      run: cloc .
+      - name: Run cloc
+        run: cloc .
 
-    - name: Save results
-      id: save-results
-      run: |
-        mkdir -p .github/results
-        cloc . > .github/results/cloc_results.txt
-#        cloc_output=$(cat cloc_results.txt | sed ':a;N;$!ba;s/\n/\\n/g')
-#        echo "cloc-output=${cloc_output}" >> $GITHUB_ENV
-        cloc -json . > cloc_results.json
+      - name: Save results
+        id: save-results
+        run: |
+          mkdir -p .github/results
+          cloc . > .github/results/cloc_results.txt
+          # cloc_output=$(cat cloc_results.txt | sed ':a;N;$!ba;s/\n/\\n/g')
+          # echo "cloc-output=${cloc_output}" >> $GITHUB_ENV
+          cloc -json . > cloc_results.json
 
-    - name: Upload cloc results
-      uses: actions/upload-artifact@v4
-      with:
-        name: cloc-results
-        path: cloc_results.txt
+      - name: Upload cloc results
+        uses: actions/upload-artifact@v4
+        with:
+          name: cloc-results
+          path: cloc_results.txt
 
-    - name: Print cloc results
-      run: cat cloc_results.txt
+      - name: Print cloc results
+        run: cat cloc_results.txt
 
-# upload the results to the repository
-    - name: Commit cloc results
-      run: |
-        git config --global user.name 'github-actions[bot]'
-        git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
-        git add .github/results/cloc_results.txt
-        git add cloc_results.json
-        git commit -m 'Update cloc results'
-        git push
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit cloc results
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/results/cloc_results.txt
+          git add cloc_results.json
+          git commit -m 'Update cloc results'
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
