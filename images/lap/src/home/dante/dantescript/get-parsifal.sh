@@ -7,7 +7,7 @@ source /home/dante/dantescript/common-defs.sh
 ##
 
 if [ -d "$MOUNT/$TARGET/extensions/Parsifal/.git" ]; then
-    printf "\n*** get-parsifal.sh: Git directory ${MOUNT}/$TARGET/.git already exists ... doing a PULL \n"
+    printf "\n*** get-parsifal.sh: Git directory ${MOUNT}/$TARGET/extensions/Parsifal/.git already exists ... doing a PULL \n"
       git -C ${MOUNT}/${TARGET} pull origin ${PARSIFAL_BRANCH} ;       exec 1>&1 2>&2
     printf "DONE"
   else

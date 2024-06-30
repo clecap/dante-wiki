@@ -1,12 +1,12 @@
 name: Generate SBOM for Dockerfiles
 
-on:
-  push:
-    branches:
-      - master
-      - 'release/*'
-  schedule:
-    - cron: '0 0 * * *'  # Runs every day at midnight      
+#on:
+#  push:
+#    branches:
+#      - master
+#      - 'release/*'
+#  schedule:
+#    - cron: '0 0 * * *'  # Runs every day at midnight      
 
 jobs:
   generate-sbom:

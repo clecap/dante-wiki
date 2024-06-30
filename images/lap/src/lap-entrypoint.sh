@@ -23,7 +23,14 @@ printf "$GREEN*** /lap-entrypoint.sh: Iterating the $# arguments: $* ${RESET}\n"
 for script in "$@"; do
   if [ -f "/home/dante/dantescript/$script" ]; then
       printf "\n$GREEN***/lap-entrypoint.sh: Executing dantescript: /home/dante/dantescript/$script ---------- $script $RESET\n"
-      RETURN_VALUE="returnvalue-initialized" ; source "/home/dante/dantescript/$script" ; exec 1>&1 2>&2
+      RETURN_VALUE="returnvalue-initialized" ; 
+      source "/home/dante/dantescript/$script" 
+      EXIT_STATUS=$?
+      if [[ $EXIT_STATUS -ne 0 ]]; then
+        exec 1>&1 2>&2 ; echo "B.sh exited with status $EXIT_STATUS"
+      else
+        exec 1>&1 2>&2 ; echo "B.sh returned with status $EXIT_STATUS"
+      fi
       if [ "$RETURN_VALUE" == "shutdown" ]; then
           printf "\n/lap-entrypoint.sh: $script returned $RETURN_VALUE, shutting down now\n" ; exit 0
         else

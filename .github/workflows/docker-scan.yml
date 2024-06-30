@@ -1,11 +1,11 @@
 name: Docker Hub Vulnerability Scan
 
-on:
-  schedule:
-    - cron: '0 0 * * *' # Runs daily at midnight
-  push:
-    branches:
-      - master
+#on:
+#  schedule:
+#    - cron: '0 0 * * *' # Runs daily at midnight
+#  push:
+#    branches:
+#      - master
 
 jobs:
   scan:

@@ -38,17 +38,33 @@ printf "\n$GREEN---Starting up configuration...$RESET\n"
   docker-compose -f $TOP_DIR/composer/docker-compose-development.yaml up &
 printf "$GREEN---DONE$RESET\n"
 
+sleep 10
 
-# Loop to wait for health check to succeed
-while [  ]; do
-  printf "\n*** WIll do check \n"
-  docker inspect --format='{{.State.Health.Status}}' $SERVICE_CONTAINER
-#  status=$(docker inspect --format='{{.State.Health.Status}}' $SERVICE_CONTAINER)
-  printf "Waiting for configuration to come up..\n"
+# Loop to wait for container to run and health check to succeed
+SERVER_STATUS="Down"
+
+## first wait until our container is running at all
+while [ "$SERVER_STATUS" != "true" ]; do
+  printf "\n*** Will check if container is running \n"
+  SERVER_STATUS=$(docker inspect --format='{{.State.Running}}' $SERVICE_CONTAINER)
+  printf "\n Received on .State.Running: $SERVER_STATUS\n"
+  sleep 10
+done
+
+# then wait until it gets healthy 
+while [ "$SERVER_STATUS" != "true" ]; do
+  printf "\n*** Will check if container is healthy \n"
+  SERVER_STATUS=$(docker inspect --format='{{.State.Health.Status}}' $SERVICE_CONTAINER)
+  printf "\n Received on .State.Health.Status: $SERVER_STATUS\n"
+  if [ "$SERVER_STATUS" == "unhealthy" ]; then
+    printf "${ERROR}*** Container considered unhealthy. Good bye. ${RESET}\n"
+    exit -1
+  fi
+  printf "Still waiting for configuration to come up...\n"
   sleep 5
 done
 
-printf "Webserver is healthy is healthy!\n"
+printf "${GREEN}*** Webserver is healthy!${RESET}\n"
 
 if [ `uname` == "Darwin" ]; then 
   printf "\n *** Attempting to start a local Chrome browser\n";

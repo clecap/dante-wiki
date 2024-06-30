@@ -41,6 +41,9 @@ services:
       - dante-network
     command: "wait-for-mysql.sh get-dante.sh get-parsifal.sh init.sh copy-out.sh shutdown.sh"
 
+# NOTE: we add a shutdown.sh for the copy-to-host service so that the webserver may start up
+#       If we need to debug some stuff, we can also remove it for a moment 
+
 # NOTE: wait for mysql not via health check but via script, since we want a more fine granular control over this
 #       than seems to work with the docker healthcheck approach
 

@@ -42,9 +42,6 @@ jobs:
           name: cloc-results
           path: cloc_results.txt
 
-      - name: Print cloc results
-        run: cat cloc_results.txt
-
       - name: Commit cloc results
         run: |
           git config --global user.name 'github-actions[bot]'
