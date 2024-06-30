@@ -162,13 +162,8 @@ RUN /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://gi
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-NativeSvgHandler              NativeSvgHandler             REL1_39 && \
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-UniversalLanguageSelector     UniversalLanguageSelector    REL1_39 && \
 #  installExtensionGithub  https://github.com/labster/HideSection/                                         HideSection master
-#  installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-DrawioEditor                   DrawioEditor REL1_39
-# This extension is broken currently
-#  Use my own version - see my mediawiki-extensions-DrawioEditor Patch
-    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/clecap/mediawiki-extensions-DrawioEditor                      DrawioEditor                master && \
-# PATHCES: ## TODO: maybe at a different place and not in dockerfile !!!
-    wget https://raw.githubusercontent.com/clecap/mediawiki-extensions-DrawioEditor/master/PATCH-UploadedFile.php -O includes/libs/ParamValidator/Util/UploadedFile.php && \
-    wget https://raw.githubusercontent.com/clecap/mediawiki-extensions-DrawioEditor/master/PATCH-UploadBase.php -O includes/upload/UploadBase.php   && \
+#
+#
 ##  looks like this extension is broken
 ##  installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-WikEdDiff WikEdDiff REL1_39
 ##  The following is broken currently in REL1_38 only, might be fine in higher releases

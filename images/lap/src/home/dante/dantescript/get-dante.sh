@@ -28,6 +28,22 @@ if [ -d "$MOUNT/$TARGET/.git" ]; then
 fi
 
 
+
+
+
+
+##  installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-DrawioEditor                   DrawioEditor REL1_39
+## This extension is broken currently
+##  Use my own version - see my mediawiki-extensions-DrawioEditor Patch
+  /home/dante/dantescript/install-extension-github.sh  ${MAOUNT}/${TARGET}  https://github.com/clecap/mediawiki-extensions-DrawioEditor                      DrawioEditor                master && \
+  wget https://raw.githubusercontent.com/clecap/mediawiki-extensions-DrawioEditor/master/PATCH-UploadedFile.php -O ${MOUNT}/$TARGET}/includes/libs/ParamValidator/Util/UploadedFile.php && \
+  wget https://raw.githubusercontent.com/clecap/mediawiki-extensions-DrawioEditor/master/PATCH-UploadBase.php -O ${MOUNT}/$TARGET}includes/upload/UploadBase.php   && \
+
+
+
+
+
+
 #   inject only, after LocalSettings.php has been generated
 if [ -f "$MOUNT/$TARGET/LocalSettings.php" ]; then
     printf "\n*** get-dante.sh:  connecting to Mediawiki via an injection into LocalSettings.pgp ...\n"
