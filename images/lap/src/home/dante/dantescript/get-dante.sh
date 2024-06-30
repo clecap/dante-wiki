@@ -58,7 +58,7 @@ require_once ("DanteSettings.php");
 EOF
     printf "DONE"
   else
-    printf "\n${ERROR}*** +++++++++++++++++++++++++++++ get-dante.sh: no LocalSettings.php found, cannot inject ${RESET}\n" ; abort
+    printf "\n*** get-dante.sh: no LocalSettings.php found, cannot inject, maybe later\n" ;
 fi
 
  exec 1>&1 2>&2

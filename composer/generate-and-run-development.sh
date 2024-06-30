@@ -38,24 +38,17 @@ printf "\n$GREEN---Starting up configuration...$RESET\n"
   docker-compose -f $TOP_DIR/composer/docker-compose-development.yaml up &
 printf "$GREEN---DONE$RESET\n"
 
-# Function to check the health status of a service
-check_health() {
-  printf "\nWill now check health  \n"
-  status=$(docker inspect --format='{{.State.Health.Status}}' $SERVICE_CONTAINER)
-  printf "\n*** STATUS was $status and exit status of last command was $?  \n"
-  echo $status
-}
 
-# List of services to check
-services=("web")
-
-# Loop until all services are healthy
-
-while [ "$(check_health)" != "healthy" ]; do
+# Loop to wait for health check to succeed
+while [  ]; do
+  printf "\n*** WIll do check \n"
+  docker inspect --format='{{.State.Health.Status}}' $SERVICE_CONTAINER
+#  status=$(docker inspect --format='{{.State.Health.Status}}' $SERVICE_CONTAINER)
   printf "Waiting for configuration to come up..\n"
   sleep 5
 done
-printf "WEbserver is healthy is healthy!\n"
+
+printf "Webserver is healthy is healthy!\n"
 
 if [ `uname` == "Darwin" ]; then 
   printf "\n *** Attempting to start a local Chrome browser\n";
