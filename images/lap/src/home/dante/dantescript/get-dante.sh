@@ -40,7 +40,7 @@ printf "\n*** get-dante.sh: Installing drawio ...\n"
       exec 1>&1 2>&2
   wget https://raw.githubusercontent.com/clecap/mediawiki-extensions-DrawioEditor/master/PATCH-UploadedFile.php -O ${MOUNT}/$TARGET/includes/libs/ParamValidator/Util/UploadedFile.php
     exec 1>&1 2>&2
-  wget https://raw.githubusercontent.com/clecap/mediawiki-extensions-DrawioEditor/master/PATCH-UploadBase.php -O ${MOUNT}/$TARGETincludes/upload/UploadBase.php 
+  wget https://raw.githubusercontent.com/clecap/mediawiki-extensions-DrawioEditor/master/PATCH-UploadBase.php -O ${MOUNT}/$TARGET/includes/upload/UploadBase.php 
     exec 1>&1 2>&2
 printf "\nDONE installing drawio ...\n"
 

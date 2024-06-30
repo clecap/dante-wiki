@@ -4,7 +4,7 @@
 
 source /home/dante/dantescript/common-defs.sh
 
-printf "${GREEN}*** THIS IS /dantescript/init.sh ***** "
+printf "${GREEN}*** THIS IS /dantescript/init.sh ***** ${RESET}"
 
 
 

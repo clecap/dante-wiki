@@ -1,26 +1,0 @@
-     100 files     200 files     300 files     400 files     411 text files.
-classified 409 filesDuplicate file check 409 files (373 known unique)Unique:      100 files                                          Unique:      200 files                                          Unique:      300 files                                               395 unique files.                              
-Counting:  100Counting:  200Counting:  300      55 files ignored.
-
-github.com/AlDanial/cloc v 1.90  T=0.41 s (899.6 files/s, 205253.1 lines/s)
--------------------------------------------------------------------------------
-Language                     files          blank        comment           code
--------------------------------------------------------------------------------
-JSON                            17              2              0          18138
-PHP                             63           3724           6806          14233
-XML                              5           1007              0           6563
-JavaScript                      53           2343           2607           5592
-HTML                            32           1195             53           4150
-CSS                             17            619            375           3251
-Bourne Shell                    95           1341            791           3131
-Sass                            19            565            144           2512
-Markdown                        29            738              0           2511
-YAML                            16            100             71            475
-Dockerfile                      11            115            201            280
-Python                           1              9              0             32
-JSON5                            6              0              0             26
-C++                              2              4              2             10
-INI                              1              4              5              9
--------------------------------------------------------------------------------
-SUM:                           367          11766          11055          60913
--------------------------------------------------------------------------------

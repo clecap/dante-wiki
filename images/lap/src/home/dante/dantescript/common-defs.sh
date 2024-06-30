@@ -42,6 +42,8 @@ export GREEN="\e[1;92m"
 ### set terminate on error 
 abort() 
 {
-  printf "%b" "\e[1;31m *** *** *** ABORTED *** *** *** \e[0m"; exit 1 
+  printf "%b" "\e[1;31m *** *** *** ******* *** *** *** \e[0m\n"; 
+  printf "%b" "\e[1;31m *** *** *** ABORTED *** *** *** \e[0m\n"; 
+  printf "%b" "\e[1;31m *** *** *** ******* *** *** *** \e[0m\n";  exit 1
 }
 
