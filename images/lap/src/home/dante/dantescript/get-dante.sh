@@ -58,7 +58,7 @@ require_once ("DanteSettings.php");
 EOF
     printf "DONE"
   else
-    printf "\n*** +++++++++++++++++++++++++++++ get-dante.sh: no LocalSettings.php found, cannot inject \n"
+    printf "\n${ERROR}*** +++++++++++++++++++++++++++++ get-dante.sh: no LocalSettings.php found, cannot inject ${RESET}\n" ; abort
 fi
 
  exec 1>&1 2>&2
@@ -99,7 +99,7 @@ fi
 
  exec 1>&1 2>&2
 
-prntf "${GREEN}*** DONE get-dante.sh${RESET}"
+printf "${GREEN}*** DONE get-dante.sh${RESET}"
 
 
 # trap : EXIT         # switch trap command back to noop (:) on EXIT

@@ -40,6 +40,7 @@ printf "$GREEN---DONE$RESET\n"
 
 # Function to check the health status of a service
 check_health() {
+  printf "\nWill now check health  \n"
   status=$(docker inspect --format='{{.State.Health.Status}}' $SERVICE_CONTAINER)
   printf "\n*** STATUS was $status and exit status of last command was $?  \n"
   echo $status
