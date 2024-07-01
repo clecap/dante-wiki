@@ -20,6 +20,10 @@
 </head>
 <body>
     <h1>Page Not Found (404)</h1>
-    <p>The requested URL <strong><?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?></strong> was not found on this server.</p>
+    <p>The requested URL <strong style="color:red;"><?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?></strong> was not found on this server.</p>
+    <p>If you consider this to be in error and want to support the further development of this software, you can report this here: 
+       <a href="https://github.com/clecap/dante-wiki/issues">https://github.com/clecap/dante-wiki/issues</a>.
+    </p>
+    
 </body>
 </html>

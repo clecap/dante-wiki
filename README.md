@@ -1,9 +1,9 @@
 ## Description
 
-Dante-Wiki is a system for taking notes, exchanging ideas, publishing and peer reviewing results for scientists.
+Dante-Wiki is a system for taking notes, exchanging ideas, publishing and peer reviewing results for scientists and students.
 
 It is based on [Mediawiki](https://www.mediawiki.org/), [LaTeX](https://www.latex-project.org/) and 
-[other] [open source](https://opensource.com/resources/what-open-source) components. It is deployed using Docker.
+[other](#components) [open source](https://opensource.com/resources/what-open-source) components. It is deployed using Docker.
 It provides data, process and workflow ownership (''sovereignty''), 
 complete privacy and full control over your flow of ideas.
 
@@ -78,4 +78,20 @@ The current status of the system is experimental.
     </td>
   </tr>
 </table>
+
+
+
+### <a name="components"></a>Software Components and Supply Chain
+
+Notable open source software components bundled with Dante-Wiki comprise:
+* Mediawiki
+* Mysql
+* PHP
+* LaTeX (TexLive)
+* Drawio
+* PyMuPDF
+
+Following the trends towards a more transparent and hopefully more secure software supply chain,
+we aim to provide a full Software Bill of Material (SBOM).
+
 

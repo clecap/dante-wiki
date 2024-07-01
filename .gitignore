@@ -35,6 +35,7 @@ volumes/full/content/wiki-dir
 
 
 live/error404.html
+live/error404.php
 live/favicon.ico
 
 live/wiki-dir
