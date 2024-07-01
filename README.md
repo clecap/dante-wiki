@@ -1,11 +1,12 @@
 ## Description
 
-Dante-Wiki is a system for taking notes, exchanging ideas, publishing and peer reviewing results for scientists and students.
+Dante-Wiki is a system for taking notes and exchanging ideas, for publishing, presenting and peer reviewing. It is developed by
+a scientist for scientists and students.
 
-It is based on [Mediawiki](https://www.mediawiki.org/), [LaTeX](https://www.latex-project.org/) and 
+Dante-Wiki is based on [Mediawiki](https://www.mediawiki.org/), [LaTeX](https://www.latex-project.org/) and 
 [other](#components) [open source](https://opensource.com/resources/what-open-source) components. It is deployed using Docker.
 It provides data, process and workflow ownership (''sovereignty''), 
-complete privacy and full control over your flow of ideas.
+privacy and a full control over the flow of your ideas.
 
 The current status of the system is experimental.
 
@@ -27,12 +28,14 @@ The current status of the system is experimental.
   <tr>
     <td><b><a href="https://github.com/clecap/dante-wiki/blob/master/.github/results/cloc_results.md" title="Show detailed line counts!">Size</a></b></td>
     <td>
-      <a href="https://github.com/clecap/dante-wiki/blob/master/.github/results/cloc_results.md" title="Show detailed line counts!"><img alt="Repository code size" src="https://img.shields.io/github/languages/code-size/clecap/dante-wiki?color=lightgreen"></a>&nbsp;
-      <a href="https://github.com/clecap/dante-wiki/actions/workflows/count_lines.yml" title="Click leads to report on workflow execution"><img 
-        src="https://github.com/clecap/dante-wiki/actions/workflows/count_lines.yml/badge.svg"></a>
-      <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com/clecap/dante-wiki/master/cloc_results.json&label=Files&query=%24.header.n_files&color=lightgreen">
-    <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com/clecap/dante-wiki/master/cloc_results.json&label=Lines&query=%24.header.n_lines&color=lightgreen">
-
+      <a href="https://github.com/clecap/dante-wiki/blob/master/.github/results/cloc_results.md" title="Show detailed line counts!">
+        <img alt="Repository code size" src="https://img.shields.io/github/languages/code-size/clecap/dante-wiki?color=lightgreen"></a>&nbsp;
+      <a href="https://github.com/clecap/dante-wiki/actions/workflows/count_lines.yml" title="Show report on workflow execution">
+        <img src="https://github.com/clecap/dante-wiki/actions/workflows/count_lines.yml/badge.svg"></a>
+      <a href="https://github.com/clecap/dante-wiki/blob/master/.github/results/cloc_results.md" title="Show detailed line counts!">
+        <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com/clecap/dante-wiki/master/.github/results/cloc_results.json&label=Files&query=%24.header.n_files&color=lightgreen"></a>&nbsp;
+      <a href="https://github.com/clecap/dante-wiki/blob/master/.github/results/cloc_results.md" title="Show detailed line counts!">
+        <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com/clecap/dante-wiki/master/.github/results/cloc_results.json&label=Lines&query=%24.header.n_lines&color=lightgreen"></a>
 </td>
   </tr>
   <tr>
@@ -43,6 +46,7 @@ The current status of the system is experimental.
         <td><b>Lap </b></td>
         <td>
           <a href=""><img alt="Docker Image Version" src="https://img.shields.io/docker/v/clecap/lap?sort=date&label=Pulls"></a>&nbsp;
+          <a href=""><img alt="Docker Image Pulls"   src="https://img.shields.io/docker/pulls/clecap/lap"></a>&nbsp;
           <a href=""><img alt="Docker Image Size"    src="https://img.shields.io/docker/image-size/clecap/lap?sort=date&label=Size"></a>&nbsp;
           <a href=""><img alt="Docker Image Stars"   src="https://img.shields.io/docker/stars/clecap/lap"></a>&nbsp;
           <a href=""><img alt="Docker Image Build"   src="https://img.shields.io/docker/automated/clecap/lap"></a>
@@ -52,6 +56,7 @@ The current status of the system is experimental.
         <td><b>TeX </b></td>
         <td>
           <a href=""><img alt="Docker Image Version" src="https://img.shields.io/docker/v/clecap/tex?sort=date&label=Pulls"></a>&nbsp;
+          <a href=""><img alt="Docker Image Pulls"   src="https://img.shields.io/docker/pulls/clecap/tex"></a>&nbsp;
           <a href=""><img alt="Docker Image Size"    src="https://img.shields.io/docker/image-size/clecap/tex?sort=date&label=Size"></a>&nbsp;
           <a href=""><img alt="Docker Image Stars"   src="https://img.shields.io/docker/stars/clecap/tex"></a>&nbsp;
           <a href=""><img alt="Docker Image Build"   src="https://img.shields.io/docker/automated/clecap/tex"></a>
@@ -61,6 +66,7 @@ The current status of the system is experimental.
         <td><b>Dante-Mysql </b></td>
         <td>
           <a href=""><img alt="Docker Image Version" src="https://img.shields.io/docker/v/clecap/dante-mysql?sort=date&label=Pulls"></a>&nbsp;
+          <a href=""><img alt="Docker Image Pulls"   src="https://img.shields.io/docker/pulls/clecap/dante-mysql"></a>&nbsp;
           <a href=""><img alt="Docker Image Size"    src="https://img.shields.io/docker/image-size/clecap/dante-mysql?sort=date&label=Size"></a>&nbsp;
           <a href=""><img alt="Docker Image Stars"   src="https://img.shields.io/docker/stars/clecap/dante-mysql"></a>&nbsp;
           <a href=""><img alt="Docker Image Build"   src="https://img.shields.io/docker/automated/clecap/dante-mysql"></a>
