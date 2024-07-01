@@ -1,8 +1,13 @@
 ## Description
 
-Dante-Wiki is a note taking, publishing and peer reviewing system for scientists, based on Mediawiki and LaTeX.
+Dante-Wiki is a system for taking notes, exchanging ideas, publishing and peer reviewing results for scientists.
+It is based on Mediawiki, LaTeX and other open source components. It is deployed using Docker.
+It provides data, process and workflow ownership (''sovereignty''), 
+complete privacy and full control over your flow of ideas.
 
-## Shields
+The current status of the system is experimental.
+
+#### Shields
 
 <table border=0 style="border-collapse: collapse;">
   <tr>
@@ -18,16 +23,18 @@ Dante-Wiki is a note taking, publishing and peer reviewing system for scientists
 <a href=""><img alt="GitHub all releases" src="https://img.shields.io/github/downloads/clecap/dante-wiki/total"></a></td>
   </tr>
   <tr>
-    <td><b>Size</b></td>
+    <td><b><a href="https://github.com/clecap/dante-wiki/blob/master/.github/results/cloc_results.md" title="Show detailed line counts!">Size</a></b></td>
     <td>
-      <a href=""><img alt="Repository code size" src="https://img.shields.io/github/languages/code-size/clecap/dante-wiki?color=lightgreen"></a>&nbsp;
-      <a href="https://github.com/clecap/dante-wiki/actions/workflows/count_lines.yml"><img src="https://github.com/clecap/dante-wiki/actions/workflows/count_lines.yml/badge.svg"></a>
+      <a href="https://github.com/clecap/dante-wiki/blob/master/.github/results/cloc_results.md" title="Show detailed line counts!"><img alt="Repository code size" src="https://img.shields.io/github/languages/code-size/clecap/dante-wiki?color=lightgreen"></a>&nbsp;
+      <a href="https://github.com/clecap/dante-wiki/actions/workflows/count_lines.yml" title="Click leads to report on workflow execution"><img 
+        src="https://github.com/clecap/dante-wiki/actions/workflows/count_lines.yml/badge.svg"></a>
       <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com/clecap/dante-wiki/master/cloc_results.json&label=Files&query=%24.header.n_files&color=lightgreen">
     <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com/clecap/dante-wiki/master/cloc_results.json&label=Lines&query=%24.header.n_lines&color=lightgreen">
+
 </td>
   </tr>
   <tr>
-    <td><b>Docker</b></td>
+    <td><b><a href="https://hub.docker.com/u/clecap" title="Go to dockerhub repository">Docker</b></td>
     <td>
       <table>
       <tr>
@@ -69,8 +76,4 @@ Dante-Wiki is a note taking, publishing and peer reviewing system for scientists
     </td>
   </tr>
 </table>
-
-
-
-
 
