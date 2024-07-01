@@ -2,7 +2,7 @@
 classified 416 filesDuplicate file check 416 files (382 known unique)Unique:      100 files                                          Unique:      200 files                                          Unique:      300 files                                               403 unique files.                              
 Counting:  100Counting:  200Counting:  300Counting:  400      55 files ignored.
 
-github.com/AlDanial/cloc v 1.90  T=0.41 s (907.6 files/s, 204067.4 lines/s)
+github.com/AlDanial/cloc v 1.90  T=0.41 s (912.5 files/s, 205166.5 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
@@ -13,14 +13,14 @@ JavaScript                      53           2343           2607           5592
 HTML                            32           1195             53           4150
 CSS                             17            619            375           3251
 Bourne Shell                    96           1359            794           3221
-Markdown                        32            752              0           2553
+Markdown                        32            752              0           2554
 Sass                            19            565            144           2512
-YAML                            17            108            114            498
+YAML                            17            106            107            509
 Dockerfile                      11            115            199            277
 Python                           1              9              0             32
 JSON5                            6              0              0             26
 C++                              2              4              2             10
 INI                              1              4              5              9
 -------------------------------------------------------------------------------
-SUM:                           374          11808          11099          61181
+SUM:                           374          11806          11092          61193
 -------------------------------------------------------------------------------
