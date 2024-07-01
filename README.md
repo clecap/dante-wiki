@@ -75,7 +75,8 @@ The current status of the system is experimental.
        <a href="https://github.com/clecap/dante-wiki/blob/master/doc/sbom.json"><img src="https://img.shields.io/badge/SBOM-available-brightgreen?label=SBOM%20of%20lap">
       <a href=""><img src="https://github.com/clecap/dante-wiki/actions/workflows/github-code-scanning/codeql/badge.svg">
   <img src="https://github.com/clecap/dante-wiki/actions/workflows/docker-scan.yml/badge.svg">
-[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/{owner}/{repo}/badge)](https://scorecard.dev/viewer/?uri=github.com/{owner}/{repo})
+<img src="https://github.com/clecap/dante-wiki/actions/workflows/scorecard.yml/badge.svg">
+<!-- [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/{owner}/clecap/badge)](https://scorecard.dev/viewer/?uri=github.com/clecap/dante-wiki) --!>
     </td>
   </tr>
 </table>
@@ -88,11 +89,12 @@ Notable open source software components bundled with Dante-Wiki comprise:
 * Mediawiki
 * Mysql
 * PHP
-* LaTeX (TexLive)
+* LaTeX (TexLive variant)
 * Drawio
 * PyMuPDF
 
-Following the trends towards a more transparent and hopefully more secure software supply chain,
-we aim to provide a full Software Bill of Material (SBOM).
+We follow the trends towards a more transparent and hopefully more secure software supply chain
+and include a full Software Bill of Material (SBOM) and accredited tests into our project:
 
+[![Scorecard supply-chain security](https://github.com/clecap/dante-wiki/actions/workflows/scorecard.yml/badge.svg)](https://github.com/clecap/dante-wiki/actions/workflows/scorecard.yml)
 

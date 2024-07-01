@@ -28,6 +28,9 @@ images/ssh-copy/bin/ssh_host_rsa_key.pub
 
 volumes/full/content/wiki-dir
 
+# do not upload our experiments directory ( we do know that it contains numerous security issues, this is fine
+# but since these are only experiments and not product parts this also should not be part of the scanning process
+experiments/
 
 ##
 ## configuring live

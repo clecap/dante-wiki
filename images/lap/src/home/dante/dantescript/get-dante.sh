@@ -35,12 +35,21 @@ fi
 ##  installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-DrawioEditor                   DrawioEditor REL1_39
 ## This extension is broken currently
 ##  Use my own version - see my mediawiki-extensions-DrawioEditor Patch
-printf "\n*** get-dante.sh: Installing drawio ...\n"
+printf "\n*** get-dante.sh: Installing drawio extension ...\n"
   /home/dante/dantescript/install-extension-github.sh  ${MOUNT}/${TARGET}  https://github.com/clecap/mediawiki-extensions-DrawioEditor                      DrawioEditor                master  ; exec 1>&1 2>&2
   wget https://raw.githubusercontent.com/clecap/mediawiki-extensions-DrawioEditor/master/PATCH-UploadedFile.php -O ${MOUNT}/$TARGET/includes/libs/ParamValidator/Util/UploadedFile.php           ; exec 1>&1 2>&2
   wget https://raw.githubusercontent.com/clecap/mediawiki-extensions-DrawioEditor/master/PATCH-UploadBase.php -O ${MOUNT}/$TARGET/includes/upload/UploadBase.php                                 ; exec 1>&1 2>&2
-printf "\nDONE installing drawio ...\n"
+printf "\nDONE installing drawio extension ...\n"
 exec 1>&1 2>&2
+printf "\n *** Installing drawio external service into target=${TARGET}\n"
+  mkdir -p ${MOUNT}/${TARGET}/external-services/draw-io/
+#  ls ${TOP_DIR}/volumes/full/content/${TARGET}
+  wget --no-verbose -q https://github.com/clecap/drawio/archive/refs/heads/dev.zip -O ${MOUNT}/${TARGET}/external-services/dev.zip ; exec 1>&1 2>&2
+  unzip -q ${MOUNT}/${TARGET}/external-services/dev.zip -d ${MOUNT}/${TARGET}/external-services/draw-io/ ; exec 1>&1 2>&2
+  rm ${MOUNT}/${TARGET}/external-services/dev.zip ; exec 1>&1 2>&2
+printf "DONE installing drawio external service\n"
+
+
 
 
 #   inject only, after LocalSettings.php has been generated
