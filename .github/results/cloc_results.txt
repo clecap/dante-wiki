@@ -1,8 +1,8 @@
-     100 files     200 files     300 files     400 files     417 text files.
-classified 415 filesDuplicate file check 415 files (380 known unique)Unique:      100 files                                          Unique:      200 files                                          Unique:      300 files                                               402 unique files.                              
+     100 files     200 files     300 files     400 files     418 text files.
+classified 416 filesDuplicate file check 416 files (382 known unique)Unique:      100 files                                          Unique:      200 files                                          Unique:      300 files                                               403 unique files.                              
 Counting:  100Counting:  200Counting:  300Counting:  400      55 files ignored.
 
-github.com/AlDanial/cloc v 1.90  T=0.41 s (908.7 files/s, 204684.5 lines/s)
+github.com/AlDanial/cloc v 1.90  T=0.41 s (907.6 files/s, 204067.4 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
@@ -15,12 +15,12 @@ CSS                             17            619            375           3251
 Bourne Shell                    96           1359            794           3221
 Markdown                        32            752              0           2553
 Sass                            19            565            144           2512
-YAML                            16            100             85            462
+YAML                            17            108            114            498
 Dockerfile                      11            115            199            277
 Python                           1              9              0             32
 JSON5                            6              0              0             26
 C++                              2              4              2             10
 INI                              1              4              5              9
 -------------------------------------------------------------------------------
-SUM:                           373          11800          11070          61145
+SUM:                           374          11808          11099          61181
 -------------------------------------------------------------------------------
