@@ -1,6 +1,0 @@
-#!/bin/sh
-
-
-sleep infinity
-
-
