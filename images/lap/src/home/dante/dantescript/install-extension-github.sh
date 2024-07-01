@@ -3,6 +3,8 @@
 
 source /home/dante/dantescript/common-defs.sh
 
+printf "\n*** install-extension-github called at $1 $2 $3 $4\n"
+
 TOP_DIR=$1
 URL=$2
 NAME=$3
@@ -24,4 +26,5 @@ rm -Rf ${TOP_DIR}/extensions/${NAME}/.git
 #  Injecting installation into DanteDynamicInstalls
 echo "wfLoadExtension( '${NAME}' );" >> ${TOP_DIR}/DanteDynamicInstalls.php 
 
+printf "\n*** injected into DanteDynamicInstalls \n"
 

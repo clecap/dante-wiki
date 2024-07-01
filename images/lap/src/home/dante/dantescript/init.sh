@@ -6,12 +6,6 @@ source /home/dante/dantescript/common-defs.sh
 
 printf "${GREEN}*** THIS IS /dantescript/init.sh ***** ${RESET}"
 
-
-
-## set -e                                  # abort execution on any error
-## trap 'abort' EXIT                       # call abort on EXIT
-
-
 ###### send mail upon completion ????
 #### favicon must be included into the thing - and at the dockerfile level ## todo
 #### check if we are already initialized ##### TODO
@@ -34,8 +28,9 @@ printf "\n*** init.sh: Deleting phpinfo.php..."
 printf "DONE\n"
 
 printf "\n*** init.sh: Copying in index.html and favicon.ico to ${MOUNT}..."
-  cp /home/dante/html/index.html  ${MOUNT}
-  cp /home/dante/html/favicon.ico ${MOUNT}
+  cp /home/dante/html/index.html    ${MOUNT}
+  cp /home/dante/html/favicon.ico   ${MOUNT}
+  cp /home/dante/html/error404.html ${MOUNT}
   exec 1>&1 2>&2
 printf "DONE\n"
 

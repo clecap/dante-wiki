@@ -5,7 +5,6 @@ source /home/dante/dantescript/common-defs.sh
 printf "\n*** *** *** THIS IS /home/dante/dantescript/copy-out.sh ***** "
 
 
-set -e                                 # abort execution on any error
 trap 'abort' ERR                       # call abort on error
 
 exec 1>&1 2>&2

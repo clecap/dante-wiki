@@ -6,7 +6,6 @@
 
 source /home/dante/dantescript/common-defs.sh
 
-set -e                                 # abort execution on any error
 trap 'abort' ERR                       # call abort on error
 
 printf "*** This is make-localhost-certificate.sh\n"

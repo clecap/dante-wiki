@@ -2,7 +2,7 @@
 
 source /home/dante/dantescript/common-defs.sh
 
-set -e                                 # abort execution on any error
+
 trap 'abort' ERR                       # call abort on error
 
 #### TODO MUST ABORT COMPLETEL including upstream in case of error - also for some of the other dante scripts. and need an abotzt in lapentry-.sh
@@ -36,15 +36,11 @@ fi
 ## This extension is broken currently
 ##  Use my own version - see my mediawiki-extensions-DrawioEditor Patch
 printf "\n*** get-dante.sh: Installing drawio ...\n"
-  /home/dante/dantescript/install-extension-github.sh  ${MAOUNT}/${TARGET}  https://github.com/clecap/mediawiki-extensions-DrawioEditor                      DrawioEditor                master
-      exec 1>&1 2>&2
-  wget https://raw.githubusercontent.com/clecap/mediawiki-extensions-DrawioEditor/master/PATCH-UploadedFile.php -O ${MOUNT}/$TARGET/includes/libs/ParamValidator/Util/UploadedFile.php
-    exec 1>&1 2>&2
-  wget https://raw.githubusercontent.com/clecap/mediawiki-extensions-DrawioEditor/master/PATCH-UploadBase.php -O ${MOUNT}/$TARGET/includes/upload/UploadBase.php 
-    exec 1>&1 2>&2
+  /home/dante/dantescript/install-extension-github.sh  ${MOUNT}/${TARGET}  https://github.com/clecap/mediawiki-extensions-DrawioEditor                      DrawioEditor                master  ; exec 1>&1 2>&2
+  wget https://raw.githubusercontent.com/clecap/mediawiki-extensions-DrawioEditor/master/PATCH-UploadedFile.php -O ${MOUNT}/$TARGET/includes/libs/ParamValidator/Util/UploadedFile.php           ; exec 1>&1 2>&2
+  wget https://raw.githubusercontent.com/clecap/mediawiki-extensions-DrawioEditor/master/PATCH-UploadBase.php -O ${MOUNT}/$TARGET/includes/upload/UploadBase.php                                 ; exec 1>&1 2>&2
 printf "\nDONE installing drawio ...\n"
-
-
+exec 1>&1 2>&2
 
 
 #   inject only, after LocalSettings.php has been generated
@@ -100,6 +96,3 @@ fi
  exec 1>&1 2>&2
 
 printf "${GREEN}*** DONE get-dante.sh${RESET}"
-
-
-# trap : EXIT         # switch trap command back to noop (:) on EXIT
