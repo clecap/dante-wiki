@@ -1,7 +1,9 @@
 ## Description
 
 Dante-Wiki is a system for taking notes, exchanging ideas, publishing and peer reviewing results for scientists.
-It is based on Mediawiki, LaTeX and other open source components. It is deployed using Docker.
+
+It is based on [Mediawiki](https://www.mediawiki.org/), [LaTeX](https://www.latex-project.org/) and 
+[other] [open source](https://opensource.com/resources/what-open-source) components. It is deployed using Docker.
 It provides data, process and workflow ownership (''sovereignty''), 
 complete privacy and full control over your flow of ideas.
 
