@@ -1,26 +1,21 @@
-     100 files     200 files     300 files     400 files     418 text files.
-classified 416 filesDuplicate file check 416 files (382 known unique)Unique:      100 files                                          Unique:      200 files                                          Unique:      300 files                                               403 unique files.                              
-Counting:  100Counting:  200Counting:  300Counting:  400      55 files ignored.
+     100 files     200 files     223 text files.
+classified 221 filesDuplicate file check 221 files (211 known unique)Unique:      100 files                                          Unique:      200 files                                               216 unique files.                              
+Counting:  100Counting:  200      37 files ignored.
 
-github.com/AlDanial/cloc v 1.90  T=0.41 s (912.5 files/s, 205166.5 lines/s)
+github.com/AlDanial/cloc v 1.90  T=0.12 s (1576.9 files/s, 336919.4 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-JSON                            18              3              0          18226
-PHP                             64           3725           6806          14261
+PHP                             63           3725           6805          14258
 XML                              5           1007              0           6563
-JavaScript                      53           2343           2607           5592
-HTML                            32           1195             53           4150
-CSS                             17            619            375           3251
-Bourne Shell                    96           1359            794           3221
-Markdown                        32            752              0           2554
-Sass                            19            565            144           2512
-YAML                            17            106            107            509
-Dockerfile                      11            115            199            277
+Bourne Shell                    68           1090            640           2707
+Markdown                        23            668              0           2402
+JSON                            16              3              0            830
+YAML                            14            103             99            490
+Dockerfile                       3             70            146            191
 Python                           1              9              0             32
-JSON5                            6              0              0             26
-C++                              2              4              2             10
+HTML                             2              4              0             17
 INI                              1              4              5              9
 -------------------------------------------------------------------------------
-SUM:                           374          11806          11092          61193
+SUM:                           196           6683           7695          27499
 -------------------------------------------------------------------------------
