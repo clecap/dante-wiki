@@ -1,12 +1,11 @@
 name: Generate SBOM for Dockerfiles
 
-#on:
-#  push:
-#    branches:
-#      - master
-#      - 'release/*'
-#  schedule:
-#    - cron: '0 0 * * *'  # Runs every day at midnight      
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '0 0 * * *'  # Runs every day at midnight      
 
 jobs:
   generate-sbom:
@@ -27,22 +26,25 @@ jobs:
 
     - name: Generate SBOM for Dockerfile
       run: |
-        syft dir:images/lap --output syft-json > sbom-lap.json
+        mkdir -p .github/results
+        syft dir:images/lap          --output syft-json     > .github/results/sbom-lap.json
+        syft dir:images/dante-mysql  --output syft-json     > .github/results/sbom-dante-mysql.json
+        syft dir:images/tex/         --output syft-json     > .github/results/sbom-tex.json
+        syft dir:images/lap          --output syft-text     > .github/results/sbom-lap.text
+        syft dir:images/dante-mysql  --output syft-text     > .github/results/sbom-dante-mysql.text
+        syft dir:images/tex/         --output syft-text     > .github/results/sbom-tex.text
+        syft dir:images/lap          --output cyclonedx-xml     > .github/results/sbom-lap.xml
+        syft dir:images/dante-mysql  --output cyclonedx-xml     > .github/results/sbom-dante-mysql.xml
+        syft dir:images/tex/         --output cyclonedx-xml     > .github/results/sbom-tex.xml
 
-    - name: Generate SBOM for Dockerfile
-      run: |
-        syft dir:images/dante-mysql --output syft-json > sbom-dante-mysql.json
-
-    - name: Generate SBOM for Dockerfile
-      run: |
-        syft dir:images/tex/ --output syft-json > sbom-tex.json
-
-    - name: Commit and push SBOM files
+    - name: Commit SBOM files
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        git add sbom-*.json
-        git commit -m "Add generated SBOM files"
+        git add .github/results/sbom-*.json
+        git add .github/results/sbom-*.text
+        git add .github/results/sbom-*.xml
+        git commit -m "Add auto-generated SBOM files"
         git push origin ${{ github.ref }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

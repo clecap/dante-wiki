@@ -75,6 +75,7 @@ The current status of the system is experimental.
        <a href="https://github.com/clecap/dante-wiki/blob/master/doc/sbom.json"><img src="https://img.shields.io/badge/SBOM-available-brightgreen?label=SBOM%20of%20lap">
       <a href=""><img src="https://github.com/clecap/dante-wiki/actions/workflows/github-code-scanning/codeql/badge.svg">
   <img src="https://github.com/clecap/dante-wiki/actions/workflows/docker-scan.yml/badge.svg">
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/{owner}/{repo}/badge)](https://scorecard.dev/viewer/?uri=github.com/{owner}/{repo})
     </td>
   </tr>
 </table>
