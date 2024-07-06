@@ -27,15 +27,19 @@ jobs:
     - name: Generate SBOM for Dockerfile
       run: |
         mkdir -p .github/results
-        syft dir:images/lap          --output syft-json     > .github/results/sbom-lap.json
-        syft dir:images/dante-mysql  --output syft-json     > .github/results/sbom-dante-mysql.json
-        syft dir:images/tex/         --output syft-json     > .github/results/sbom-tex.json
-        syft dir:images/lap          --output syft-text     > .github/results/sbom-lap.text
-        syft dir:images/dante-mysql  --output syft-text     > .github/results/sbom-dante-mysql.text
-        syft dir:images/tex/         --output syft-text     > .github/results/sbom-tex.text
+        syft dir:images/lap          --output json     > .github/results/sbom-lap.json
+        syft dir:images/dante-mysql  --output json     > .github/results/sbom-dante-mysql.json
+        syft dir:images/tex/         --output json     > .github/results/sbom-tex.json
+        syft dir:images/lap          --output text     > .github/results/sbom-lap.text
+        syft dir:images/dante-mysql  --output text     > .github/results/sbom-dante-mysql.text
+        syft dir:images/tex/         --output text     > .github/results/sbom-tex.text
         syft dir:images/lap          --output cyclonedx-xml     > .github/results/sbom-lap.xml
         syft dir:images/dante-mysql  --output cyclonedx-xml     > .github/results/sbom-dante-mysql.xml
         syft dir:images/tex/         --output cyclonedx-xml     > .github/results/sbom-tex.xml
+
+
+#  --output syft-json  produced error message
+
 
     - name: Commit SBOM files
       run: |

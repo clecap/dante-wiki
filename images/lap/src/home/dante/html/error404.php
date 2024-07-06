@@ -24,6 +24,11 @@
     <p>If you consider this to be in error and want to support the further development of this software, you can report this here: 
        <a href="https://github.com/clecap/dante-wiki/issues">https://github.com/clecap/dante-wiki/issues</a>.
     </p>
+    <p>If you want to go back to your Dante-Wiki you can do so here
+      <ul>
+        <li><a href="/wiki-dir">/wiki-dir</a></li>
+      </ul>
+    </p>
     
 </body>
 </html>
