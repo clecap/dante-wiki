@@ -1,17 +1,11 @@
-#!/bin/ash
+#!/bin/sh
 
-#
-# Script which will be used inside of the container of a containerized DanteWiki to generate regular backups
-# and send information on this to the intended user
-#
 
-# Example:   clemens@clemens-cap.de  heinrich "Math Wiki"  backup-user  ki40.iuk.one
 
-# Parameter 1: Email address of the recipient of the backup completed email
-# Parameter 2: Email address to be used as sender of the backup completed email
-# Parameter 3: Short name (preferably without blank), identifying the source wiki
-# Parameter 4: User name on the remote machine
-# Parameter 5: Fully qualified domain name of the remote machine to which the dump is sent
+source main-config.sh
+
+### TODO warning if missing
+
 
 MAIL=$1
 FROM=$2
@@ -19,7 +13,7 @@ SOURCE_NAME=$3
 TARGET_USER=$4
 TARGET_HOST=$5
 
-MODE="dumpPagesBySsh"
+MODE="dumpPagesBySsh"     
 
 ## the command which generates a stream of contents
 COMMAND="php /var/www/html/${PREFIX}/maintenance/dumpBackup.php --full --include-files --uploads"

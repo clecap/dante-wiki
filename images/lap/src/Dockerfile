@@ -215,7 +215,9 @@ RUN \
 #  Give non-root user ownership of the application files
 #  Set the default user ## TODO: do we want this? is it compatible with the deletion strategies we need ???
 
-# USER root
+#  do not want auto-updates here
+RUN rm -f /etc/cron.daily/apt-compat
+
 
 
 ## TODO: do we really need this ???
