@@ -27,18 +27,19 @@ jobs:
     - name: Generate SBOM for Dockerfile
       run: |
         mkdir -p .github/results
-        syft dir:images/lap          --output json     > .github/results/sbom-lap.json
-        syft dir:images/dante-mysql  --output json     > .github/results/sbom-dante-mysql.json
-        syft dir:images/tex/         --output json     > .github/results/sbom-tex.json
-        syft dir:images/lap          --output text     > .github/results/sbom-lap.text
-        syft dir:images/dante-mysql  --output text     > .github/results/sbom-dante-mysql.text
-        syft dir:images/tex/         --output text     > .github/results/sbom-tex.text
-        syft dir:images/lap          --output cyclonedx-xml     > .github/results/sbom-lap.xml
-        syft dir:images/dante-mysql  --output cyclonedx-xml     > .github/results/sbom-dante-mysql.xml
-        syft dir:images/tex/         --output cyclonedx-xml     > .github/results/sbom-tex.xml
+        syft dir:images/lap          -o json        > .github/results/sbom-lap.json
+        syft dir:images/dante-mysql  -o json        > .github/results/sbom-dante-mysql.json
+        syft dir:images/tex/         -o json        > .github/results/sbom-tex.json
+        syft dir:images/lap          -o spdx        > .github/results/sbom-lap.spdx
+        syft dir:images/dante-mysql  -o spdx        > .github/results/sbom-dante-mysql.spdx
+        syft dir:images/tex/         -o spdx        > .github/results/sbom-tex.spdx
+        syft dir:images/lap          -o cyclonedx   > .github/results/sbom-lap.xml
+        syft dir:images/dante-mysql  -o cyclonedx   > .github/results/sbom-dante-mysql.xml
+        syft dir:images/tex/         -o cyclonedx   > .github/results/sbom-tex.xml
 
 
-#  --output syft-json  produced error message
+#  --output syft-json   produced error message
+#  --output json        produced error message
 
 
     - name: Commit SBOM files
@@ -46,7 +47,7 @@ jobs:
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
         git add .github/results/sbom-*.json
-        git add .github/results/sbom-*.text
+        git add .github/results/sbom-*.spdx
         git add .github/results/sbom-*.xml
         git commit -m "Add auto-generated SBOM files"
         git push origin ${{ github.ref }}

@@ -62,6 +62,7 @@ echo "Done dumping, now sending email"
 
 # dispatch email
 
-msmtp $MAIL < $TMPFILE
+
+cat $TMPFILE | msmtp --host=${SMTP_HOST} --port=${SMTP_PORT} --user=${SMTP_USER} --password="${SMTP_PASSWORD}" --auth=on --tls=on --from=$SMTP_FROM $SMTP_TO
 
 echo "Sent email"
