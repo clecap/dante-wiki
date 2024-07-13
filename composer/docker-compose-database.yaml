@@ -1,0 +1,35 @@
+services:
+
+  database:
+    image: mariadb:10.5
+    ports:
+      - "3306:3306"
+    container_name: dante-mariadb-container
+    networks:
+      - dante-network
+    secrets:
+     - configuration
+    volumes:
+      - ../volumes/mysql-init:/docker-entrypoint-initdb.d
+    environment:
+      MARIADB_ROOT_PASSWORD: initialPassword
+
+
+  phpmyadmin:
+    image: phpmyadmin:5.2.1
+    ports: 
+      - "9090:80"
+    container_name: php-myadmin-container
+    networks: 
+      - dante-network
+    environment:
+      PMA_HOST: dante-mariadb-container
+    depends_on:
+      - database
+
+networks:
+  dante-network:
+
+secrets:
+  configuration:
+    file: ../private/configuration.sh

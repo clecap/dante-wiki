@@ -16,7 +16,7 @@
 services:
 
   database:
-    image: dante-mysql
+    image: dante-mysql:last
     container_name: dante-mysql-container
     networks:
       - dante-network
@@ -26,8 +26,13 @@ services:
       - ../images/dante-mysql/mysql-init:/docker-entrypoint-initdb.d
 
 
+
+
+
+
+
   copy-to-host:
-    image: dante
+    image: dante:last
     container_name: dante-copy-container
     restart: "no"
     volumes:
@@ -53,7 +58,7 @@ services:
 # a second time in webserver-after-copy, to be sure that we have the freshest version even when we did not redo the complete copy cycle
 
   webserver-after-copy:
-    image: lap
+    image: dante:last
     container_name: dante-container
     depends_on:
       copy-to-host:
@@ -81,7 +86,7 @@ services:
     image: phpmyadmin:5.0
     ports: 
       - "9090:80"
-    container_name: my-php-myadmin
+    container_name: php-myadmin-container
     networks: 
       dante-network:
         aliases:

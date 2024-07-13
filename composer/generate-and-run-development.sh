@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SERVICE_CONTAINER=my-dante-container
+SERVICE_CONTAINER=dante-container
 
 # get directory where this script resides wherever it is called from
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -26,11 +26,16 @@ printf "\n$GREEN---Taking down configuration...$RESET\n"
   docker-compose -f $TOP_DIR/composer/docker-compose-development.yaml down
 printf "$GREEN---DONE$RESET\n" ;
 
-printf "\n$GREEN---Building image if necessary...$RESET\n" ; 
+printf "\n$GREEN---Building image dante if necessary...$RESET\n" ; 
   cd ${TOP_DIR}/images/dante
-  docker build $TOP_DIR/images/dante/src
-##$TOP_DIR/images/lap/src
+  docker build -t dante:last $TOP_DIR/images/dante/src
 printf "$GREEN---DONE$RESET\n"
+
+printf "\n$GREEN---Building image dante-mysql if necessary...$RESET\n" ; 
+  cd ${TOP_DIR}/images/dante
+  docker build -t dante-mysql:last $TOP_DIR/images/dante-mysql/src
+printf "$GREEN---DONE$RESET\n"
+
 
 
 printf "\n$GREEN---Starting up configuration...$RESET\n" 

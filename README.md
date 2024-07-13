@@ -65,16 +65,6 @@ The current status of the system is experimental.
           <a href=""><img alt="Docker Image Build"   src="https://img.shields.io/docker/automated/clecap/tex"></a>
         </td>
       </tr>
-      <tr>
-        <td><b>Dante-Mysql </b></td>
-        <td>
-          <a href=""><img alt="Docker Image Version" src="https://img.shields.io/docker/v/clecap/dante-mysql?sort=date&label=Pulls"></a>&nbsp;
-          <a href=""><img alt="Docker Image Pulls"   src="https://img.shields.io/docker/pulls/clecap/dante-mysql"></a>&nbsp;
-          <a href=""><img alt="Docker Image Size"    src="https://img.shields.io/docker/image-size/clecap/dante-mysql?sort=date&label=Size"></a>&nbsp;
-          <a href=""><img alt="Docker Image Stars"   src="https://img.shields.io/docker/stars/clecap/dante-mysql"></a>&nbsp;
-          <a href=""><img alt="Docker Image Build"   src="https://img.shields.io/docker/automated/clecap/dante-mysql"></a>
-        </td>
-      </tr>
       </table>
     </td>
   </tr>
@@ -94,13 +84,15 @@ The current status of the system is experimental.
 
 ### <a name="components"></a>Software Components and Supply Chain
 
-Notable open source software components bundled with Dante-Wiki comprise:
+Open source software components bundled with Dante-Wiki comprise:
 * Mediawiki
-* Mysql
 * PHP
 * LaTeX (TexLive variant)
 * Drawio
 * PyMuPDF
+* MariaDB (used in separate docker container)
+
+
 
 We follow the trends towards a more transparent and hopefully more secure software supply chain
 and include a full Software Bill of Material (SBOM) and accredited tests into our project:
