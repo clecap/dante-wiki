@@ -1,12 +1,10 @@
 #!/bin/bash
 
-
-SERVICE_CONTAINER=my-lap-container
+SERVICE_CONTAINER=my-dante-container
 
 # get directory where this script resides wherever it is called from
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 TOP_DIR=${DIR}/.. 
-
 
 RESET="\e[0m"; ERROR="\e[1;31m"
 # 32m for green
@@ -29,8 +27,11 @@ printf "\n$GREEN---Taking down configuration...$RESET\n"
 printf "$GREEN---DONE$RESET\n" ;
 
 printf "\n$GREEN---Building image if necessary...$RESET\n" ; 
-  docker build -t lap:latest -f $TOP_DIR/images/lap/src/Dockerfile  $TOP_DIR/images/lap/src
+  cd ${TOP_DIR}/images/dante
+  docker build $TOP_DIR/images/dante/src
+##$TOP_DIR/images/lap/src
 printf "$GREEN---DONE$RESET\n"
+
 
 printf "\n$GREEN---Starting up configuration...$RESET\n" 
 # do this in detached mode so as to allow the waiting for the service to start

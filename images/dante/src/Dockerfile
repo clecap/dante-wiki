@@ -1,4 +1,4 @@
-FROM debian:stable-slim
+FROM debian:stable-slim AS intermediary
 
 ##
 ## ARG / VARIABLE section  
@@ -100,7 +100,7 @@ RUN apt-get update                                                              
     apt-get purge -y gnupg                                                                             && \
     gunzip /tmp/install-tl-unx.tar.gz                                                                  && \
     mkdir -p /tmp/install-tl                                                                           && \
-    tar -xf /tmp/install-tl-unx.tar    -C /tmp/install-tl                                              && \
+    tar -xf /tmp/install-tl-unx.tar    -C /tmp/install-tl  --strip-components=1                        && \
     ls -alg /tmp && \
     ls -alg /tmp/install-tl && \
     # select full installation
@@ -155,6 +155,13 @@ RUN apt-get update                                                              
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 
+
+FROM intermediary AS dante
+
+
+
+
+
 ## Install necessary packages
 #   git                       get proper hashes in Special:Version and in other places
 #   imagemagick               THUMBNAIL support in mediawiki
@@ -163,9 +170,21 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 #   php-curl:                 must include this for the composer to run faster
 
 RUN \
-    echo "*** *** *** Ensure docker desktop tab opens with a bash allowing command line editing "                          && \ 
+    echo "*** *** *** Ensure docker desktop tab opens with a bash allowing command line editing  "                         && \ 
     rm /bin/sh                                                                                                             && \
     ln -sf /bin/bash /bin/sh                                                                                               && \
+    echo "*** *** *** Generate target directories for the COPY operation below "                                           && \
+    useradd -m dante && echo "dante:password" | chpasswd && adduser dante sudo                                             && \
+    chown -R dante:dante /home/dante     
+
+##
+## COPY in docker context 
+##
+#
+
+COPY . /
+
+RUN \
     echo "*** *** *** Installations "                                                                                      && \
     apt-get update                                                                                                         && \
     apt-get install -y   --no-install-recommends  apache2  apache2-utils openssl                                           && \
@@ -190,7 +209,7 @@ RUN \
     apt-get install -y --no-install-recommends  php-dev  make                                                              && \
     pecl channel-update pecl.php.net                                                                                       && \
     pecl install ds                                                                                                        && \
-    apt-get purge  php-dev  make                                                                                           && \
+    apt-get purge -y  php-dev  make                                                                                           && \
     echo "*** *** *** Install python and pip and then pygments for supporting TeX and Parsifal "                           && \
     apt-get install -y --no-install-recommends  python3  python3-pip                                                       && \
     ln -sf python3 /usr/bin/python                                                                                         && \
@@ -233,7 +252,7 @@ RUN \
       /var/cache/apt/*      \
       /var/cache/man/*      \
       /tmp/*
-#
+
 ## Install pymupdf
 #
 #    1) Installations with pip should use a virtual python environment or a --break-system-package (which is not recommended)
@@ -299,29 +318,26 @@ RUN composer config --no-plugins allow-plugins.wikimedia/composer-merge-plugin t
     echo '{}' > ${TOP_PATH}/composer.local.json                                                && \
     composer config --global allow-plugins true                                                && \
     echo "<?php " > ${TOP_PATH}/DanteDynamicInstalls.php                                       && \
-#   Install markdown parser https://github.com/erusev/parsedown
+    echo "*** *** *** Install support library for markdown "                                   && \
     COMPOSER=${TOP_PATH}/composer.local.json  composer require erusev/parsedown                && \
-#   Install markdown-extra https://michelf.ca/projects/php-markdown/extra/
     COMPOSER=${TOP_PATH}/composer.local.json  composer require erusev/parsedown-extra                  && \
     COMPOSER=${TOP_PATH}/composer.local.json  composer require benjaminhoegh/parsedown-extended 
 #   Install requirements for deepl integration in DantePresentations
 ## TODO: has some small dependency problem which we solve later
 ##    COMPOSER=${TOP_PATH}/composer.local.json  composer require deeplcom/deepl-php
 
-##
-## COPY in docker context
-##
-COPY . /
 
-RUN /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/kuenzign/WikiMarkdown                                        WikiMarkdown                 main     && \
-    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-MobileFrontend                MobileFrontend               REL1_39  && \
-    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-RandomSelection               RandomSelection              REL1_39  && \
-    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-LabeledSectionTransclusion    LabeledSectionTransclusion   REL1_39  && \
-    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-RevisionSlider                RevisionSlider               REL1_39  && \
-    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-NativeSvgHandler              NativeSvgHandler             REL1_39  && \
-    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-UniversalLanguageSelector     UniversalLanguageSelector    REL1_39  && \
+
+RUN /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/kuenzign/WikiMarkdown                                        WikiMarkdown                 main       && \
+    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-MobileFrontend                MobileFrontend               REL1_39    && \
+    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-RandomSelection               RandomSelection              REL1_39    && \
+    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-LabeledSectionTransclusion    LabeledSectionTransclusion   REL1_39    && \
+    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-RevisionSlider                RevisionSlider               REL1_39    && \
+    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-NativeSvgHandler              NativeSvgHandler             REL1_39    && \
+    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-UniversalLanguageSelector     UniversalLanguageSelector    REL1_39    && \
+    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-WikiCategoryTagCloud          WikiCategoryTagCloud         REL1_39    && \
 #  installExtensionGithub  https://github.com/labster/HideSection/                                         HideSection master
-#
+#  TODO STUFF
 ##  looks like this extension is broken
 ##  installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-WikEdDiff WikEdDiff REL1_39
 ##  The following is broken currently in REL1_38 only, might be fine in higher releases
@@ -329,7 +345,6 @@ RUN /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://gi
 ##  installExtensionGithub https://github.com/clecap/DynamicPageList3 DynamicPageList3 master
 ###### HACK: see README-DynamicPageList3-Clemens.md in TOPD_DIR/own for more details.
 ##  docker cp $TOP_DIR/own/DynamicPageList3/ ${LAP_CONTAINER}:/${MOUNT}/${VOLUME_PATH}/extensions
-    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-WikiCategoryTagCloud  WikiCategoryTagCloud  REL1_39 && \
     composer update
 
 
@@ -349,13 +364,9 @@ RUN /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://gi
 RUN rm -f /etc/cron.daily/apt-compat
 
 
+# Just kept in for debugging purposes during development 
+# CMD ["sh", "-c", "while :; do sleep 2073600; done"]
 
-## TODO: do we really need this ???
-RUN useradd -m dante && echo "dante:password" | chpasswd && adduser dante sudo
-
-
-WORKDIR /home/dante
-RUN chown -R dante:dante /home/dante
 
 
 ##
@@ -366,6 +377,7 @@ CMD ["run-apache.sh"]
 ##
 ## Specify entrypoint, which will itself execute scripts provided as parameter
 ##
+
 ENTRYPOINT ["/lap-entrypoint.sh"]
 
 

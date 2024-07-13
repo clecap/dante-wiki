@@ -15,7 +15,10 @@ The current status of the system is experimental.
 <table border=0 style="border-collapse: collapse;">
   <tr>
     <td><b>License</b></td>
-    <td><a href=""><img alt="AGPL V3 license" src="https://img.shields.io/badge/License-AGPL%20v3-blue.svg"></a></td>
+      <td>
+        <a href=""><img alt="AGPL V3 license" src="https://img.shields.io/badge/License-AGPL%20v3-blue.svg"></a>
+        <a href="https://scorecard.dev/viewer/?uri=github.com/clecap/dante-wiki" title="Read detailed score report"><img src="https://img.shields.io/badge/Openssf%20Scorecard-Click_to_View-Green.svg"/></a>
+      </td>
   </tr>
   <tr>
     <td><b>Github</b></td>
@@ -80,13 +83,13 @@ The current status of the system is experimental.
      <td>
        <a href="https://github.com/clecap/dante-wiki/blob/master/doc/sbom.json"><img src="https://img.shields.io/badge/SBOM-available-brightgreen?label=SBOM%20of%20lap">
       <a href=""><img src="https://github.com/clecap/dante-wiki/actions/workflows/github-code-scanning/codeql/badge.svg">
-  <img src="https://github.com/clecap/dante-wiki/actions/workflows/docker-scan.yml/badge.svg">
-<img src="https://github.com/clecap/dante-wiki/actions/workflows/scorecard.yml/badge.svg">
-<!-- [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/{owner}/clecap/badge)](https://scorecard.dev/viewer/?uri=github.com/clecap/dante-wiki) --!>
+      <img src="https://github.com/clecap/dante-wiki/actions/workflows/docker-scan.yml/badge.svg">
+      <img src="https://github.com/clecap/dante-wiki/actions/workflows/scorecard.yml/badge.svg">
+      <a href="https://scorecard.dev/viewer/?uri=github.com/clecap/dante-wiki" title="Read detailed score report"><img src="https://img.shields.io/ossf-scorecard/github.com/clecap/dante-wiki"></a>
+
     </td>
   </tr>
 </table>
-
 
 
 ### <a name="components"></a>Software Components and Supply Chain

@@ -17,7 +17,7 @@ services:
 
   database:
     image: dante-mysql
-    container_name: my-dante-mysql
+    container_name: dante-mysql-container
     networks:
       - dante-network
     secrets:
@@ -27,8 +27,8 @@ services:
 
 
   copy-to-host:
-    image: lap
-    container_name: my-lap-container-copy
+    image: dante
+    container_name: dante-copy-container
     restart: "no"
     volumes:
       - ../live:/mnt
@@ -54,7 +54,7 @@ services:
 
   webserver-after-copy:
     image: lap
-    container_name: my-lap-container
+    container_name: dante-container
     depends_on:
       copy-to-host:
         condition: service_completed_successfully
@@ -87,7 +87,7 @@ services:
         aliases:
           - phpmyadmin.local
     environment:
-      PMA_HOST: my-dante-mysql
+      PMA_HOST: dante-mysql-container
     depends_on:
       - database
 
