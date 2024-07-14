@@ -66,3 +66,8 @@ else
       printf "*** make-localhost-certificae: Made and mailed key and crt\n"
   fi
 fi  
+
+
+  exec 1>&1 2>&2
+
+  exec 1>&1 2>&2

@@ -48,7 +48,7 @@ printf "\n *** Installing drawio external service into target=${TARGET}\n"
   unzip -o -q ${MOUNT}/${TARGET}/external-services/dev.zip -d ${MOUNT}/${TARGET}/external-services/draw-io/ ; exec 1>&1 2>&2
   rm ${MOUNT}/${TARGET}/external-services/dev.zip ; exec 1>&1 2>&2
 printf "DONE installing drawio external service\n"
-     
+exec 1>&1 2>&2     
 
 
 
