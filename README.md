@@ -25,7 +25,7 @@ The current status of the system is experimental.
     <td>
       <a href=""><img alt="GitHub issues" src="https://img.shields.io/github/issues/clecap/dante-wiki"></a>&nbsp;
       <a href=""><img alt="GitHub closed issues" src="https://img.shields.io/github/issues-closed/clecap/dante-wiki?color=lightgreen"></a>&nbsp;
-      <img alt="" src="https://img.shields.io/github/issues-pr/clecap/dante-wiki?color=red">
+      <img alt="" src="https://img.shields.io/github/issues-pr/clecap/dante-wiki">
       <img alt="" src="https://img.shields.io/github/issues-pr-closed/clecap/dante-wiki?color=lightgreen"><br>
       <a href=""><img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/clecap/dante-wiki"></a>&nbsp;
       <a href=""><img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/clecap/dante-wiki"></a>&nbsp;
