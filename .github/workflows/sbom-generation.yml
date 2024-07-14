@@ -27,15 +27,9 @@ jobs:
     - name: Generate SBOM for Dockerfile
       run: |
         mkdir -p .github/results
-        syft scan dir:images/lap          -o json        > .github/results/sbom-lap.json
-        syft scan dir:images/dante-mysql  -o json        > .github/results/sbom-dante-mysql.json
-        syft scan dir:images/tex/         -o json        > .github/results/sbom-tex.json
-        syft scan dir:images/lap          -o spdx        > .github/results/sbom-lap.spdx
-        syft scan dir:images/dante-mysql  -o spdx        > .github/results/sbom-dante-mysql.spdx
-        syft scan dir:images/tex/         -o spdx        > .github/results/sbom-tex.spdx
-        syft scan dir:images/lap          -o cyclonedx   > .github/results/sbom-lap.xml
-        syft scan dir:images/dante-mysql  -o cyclonedx   > .github/results/sbom-dante-mysql.xml
-        syft scan dir:images/tex/         -o cyclonedx   > .github/results/sbom-tex.xml
+        syft scan dir:images/dante          -o json        > .github/results/sbom-dante.json
+        syft scan dir:images/dante          -o spdx        > .github/results/sbom-dante.spdx
+        syft scan dir:images/dante          -o cyclonedx   > .github/results/sbom-dante.xml
 
 #  --output syft-json   produced error message
 #  --output json        produced error message
@@ -45,9 +39,9 @@ jobs:
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        git add .github/results/sbom-*.json
-        git add .github/results/sbom-*.spdx
-        git add .github/results/sbom-*.xml
+        git add .github/results/sbom-dante.json
+        git add .github/results/sbom-dante.spdx
+        git add .github/results/sbom-dante.xml
         git commit -m "Add auto-generated SBOM files"
         git push origin ${{ github.ref }}
       env:

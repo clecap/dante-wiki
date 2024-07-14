@@ -1,7 +1,7 @@
 ## Description
 
-Dante-Wiki is a system for taking notes and exchanging ideas, for publishing, presenting and peer reviewing. It is developed by
-a scientist for scientists and students.
+Content management for note taking, exchanging ideas, publishing, presenting and peer reviewing.
+Developed by a scientist for scientists and students.
 
 Dante-Wiki is based on [Mediawiki](https://www.mediawiki.org/), [LaTeX](https://www.latex-project.org/) and 
 [other](#components) [open source](https://opensource.com/resources/what-open-source) components. It is deployed using Docker.
@@ -42,45 +42,26 @@ The current status of the system is experimental.
 </td>
   </tr>
   <tr>
-    <td><b><a href="https://hub.docker.com/u/clecap" title="Go to dockerhub repository">Docker</b></td>
+    <td><b><a href="https://hub.docker.com/u/clecap/dante-wiki" title="Go to dockerhub repository of dante-wiki">Docker</b></td>
     <td>
-      <table>
-      <tr>
-        <td><b>Lap </b></td>
-        <td>
-          <a href=""><img alt="Docker Image Version" src="https://img.shields.io/docker/v/clecap/lap?sort=date&label=Pulls"></a>&nbsp;
-          <a href=""><img alt="Docker Image Pulls"   src="https://img.shields.io/docker/pulls/clecap/lap"></a>&nbsp;
-          <a href=""><img alt="Docker Image Size"    src="https://img.shields.io/docker/image-size/clecap/lap?sort=date&label=Size"></a>&nbsp;
-          <a href=""><img alt="Docker Image Stars"   src="https://img.shields.io/docker/stars/clecap/lap"></a>&nbsp;
-          <a href=""><img alt="Docker Image Build"   src="https://img.shields.io/docker/automated/clecap/lap"></a>
-        </td>
-      </tr>
-      <tr>
-        <td><b>TeX </b></td>
-        <td>
-          <a href=""><img alt="Docker Image Version" src="https://img.shields.io/docker/v/clecap/tex?sort=date&label=Pulls"></a>&nbsp;
-          <a href=""><img alt="Docker Image Pulls"   src="https://img.shields.io/docker/pulls/clecap/tex"></a>&nbsp;
-          <a href=""><img alt="Docker Image Size"    src="https://img.shields.io/docker/image-size/clecap/tex?sort=date&label=Size"></a>&nbsp;
-          <a href=""><img alt="Docker Image Stars"   src="https://img.shields.io/docker/stars/clecap/tex"></a>&nbsp;
-          <a href=""><img alt="Docker Image Build"   src="https://img.shields.io/docker/automated/clecap/tex"></a>
-        </td>
-      </tr>
-      </table>
+      <a href=""><img alt="Docker Image Version" src="https://img.shields.io/docker/v/clecap/dante-wiki?sort=date&label=Pulls"></a>&nbsp;
+      <a href=""><img alt="Docker Image Pulls"   src="https://img.shields.io/docker/pulls/clecap/dante-wiki"></a>&nbsp;
+      <a href=""><img alt="Docker Image Size"    src="https://img.shields.io/docker/image-size/clecap/dante-wiki?sort=date&label=Size"></a>&nbsp;
+      <a href=""><img alt="Docker Image Stars"   src="https://img.shields.io/docker/stars/clecap/dante-wiki"></a>&nbsp;
+      <a href=""><img alt="Docker Image Build"   src="https://img.shields.io/docker/automated/clecap/dante-wiki"></a>
     </td>
   </tr>
   <tr>
-     <td><b>Security</b></td>
-     <td>
-       <a href="https://github.com/clecap/dante-wiki/blob/master/doc/sbom.json"><img src="https://img.shields.io/badge/SBOM-available-brightgreen?label=SBOM%20of%20lap">
+    <td><b>Security</b></td>
+    <td>
+      <a href="https://github.com/clecap/dante-wiki/blob/master/doc/sbom.json"><img src="https://img.shields.io/badge/SBOM-available-brightgreen?label=SBOM%20of%20lap">
       <a href=""><img src="https://github.com/clecap/dante-wiki/actions/workflows/github-code-scanning/codeql/badge.svg">
       <img src="https://github.com/clecap/dante-wiki/actions/workflows/docker-scan.yml/badge.svg">
       <img src="https://github.com/clecap/dante-wiki/actions/workflows/scorecard.yml/badge.svg">
       <a href="https://scorecard.dev/viewer/?uri=github.com/clecap/dante-wiki" title="Read detailed score report"><img src="https://img.shields.io/ossf-scorecard/github.com/clecap/dante-wiki"></a>
-
     </td>
   </tr>
 </table>
-
 
 ### <a name="components"></a>Software Components and Supply Chain
 
