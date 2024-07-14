@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: Checkout this repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.1.7
 
       - name: Checkout central labels repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.1.7
         with:
           repository: clecap/dante-wiki
           path: central
