@@ -43,8 +43,9 @@ printf "\nDONE installing drawio extension ...\n"
 exec 1>&1 2>&2
 printf "\n *** Installing drawio external service into target=${TARGET}\n"
   mkdir -p ${MOUNT}/${TARGET}/external-services/draw-io/
+## TODO: below could be done better (not via culr but via clone with depth 0 or similar)
   curl -s -o ${MOUNT}/${TARGET}/external-services/dev.zip -L https://github.com/clecap/drawio/archive/refs/heads/dev.zip  ; exec 1>&1 2>&2
-  unzip -q ${MOUNT}/${TARGET}/external-services/dev.zip -d ${MOUNT}/${TARGET}/external-services/draw-io/ ; exec 1>&1 2>&2
+  unzip -o -q ${MOUNT}/${TARGET}/external-services/dev.zip -d ${MOUNT}/${TARGET}/external-services/draw-io/ ; exec 1>&1 2>&2
   rm ${MOUNT}/${TARGET}/external-services/dev.zip ; exec 1>&1 2>&2
 printf "DONE installing drawio external service\n"
      
