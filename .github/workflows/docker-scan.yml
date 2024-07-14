@@ -7,11 +7,21 @@ on:
     branches:
       - master
 
+permissions:
+  contents: read
+
 jobs:
   scan:
+    permissions:
+      contents: write  # for Git to git push
     runs-on: ubuntu-latest
 
     steps:
+    - name: Harden Runner
+      uses: step-security/harden-runner@v2
+      with:
+        egress-policy: audit
+
     - name: Checkout repository
       uses: actions/checkout@v4
 

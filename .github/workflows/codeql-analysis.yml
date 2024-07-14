@@ -14,6 +14,9 @@ on:
   schedule:
     - cron: '0 0 * * *'
 
+permissions:
+  contents: read
+
 jobs:
   analyze:
     name: Analyze
@@ -29,6 +32,11 @@ jobs:
         language: [ 'javascript', 'typescript' ] # List your languages here
 
     steps:
+    - name: Harden Runner
+      uses: step-security/harden-runner@v2
+      with:
+        egress-policy: audit
+
     - name: Checkout repository
       uses: actions/checkout@v3
 
