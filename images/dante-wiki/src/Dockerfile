@@ -177,12 +177,7 @@ RUN \
     useradd -m dante && echo "dante:password" | chpasswd && adduser dante sudo                                             && \
     chown -R dante:dante /home/dante     
 
-##
-## COPY in docker context 
-##
-#
 
-COPY . /
 
 RUN \
     echo "*** *** *** Installations "                                                                                      && \
@@ -326,6 +321,15 @@ RUN composer config --no-plugins allow-plugins.wikimedia/composer-merge-plugin t
 ## TODO: has some small dependency problem which we solve later
 ##    COMPOSER=${TOP_PATH}/composer.local.json  composer require deeplcom/deepl-php
 
+
+##
+## COPY in docker context 
+##
+#  Do this as late as possible, since otherwise chenges in files require a redo of older dockerfile layers
+#  Do this immediately before the files are really needed
+# 
+
+COPY . /
 
 
 RUN /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/kuenzign/WikiMarkdown                                        WikiMarkdown                 main       && \

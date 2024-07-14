@@ -28,7 +28,7 @@ jobs:
     - name: Fetch Docker Hub Scan Results
       env:
         DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
-        DOCKER_HUB_REPO: 'tex'
+        DOCKER_HUB_REPO: 'dante-wiki'
         DOCKER_HUB_TAG: 'latest'
       run: |
         python .github/scripts/fetch-scan-results.py

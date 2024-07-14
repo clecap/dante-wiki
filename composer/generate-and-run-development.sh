@@ -26,17 +26,11 @@ printf "\n$GREEN---Taking down configuration...$RESET\n"
   docker-compose -f $TOP_DIR/composer/docker-compose-development.yaml down
 printf "$GREEN---DONE$RESET\n" ;
 
-printf "\n$GREEN---Building image dante if necessary...$RESET\n" ; 
-  cd ${TOP_DIR}/images/dante
-  docker build -t dante:last $TOP_DIR/images/dante/src
+printf "\n$GREEN---Building image dante-wiki if necessary...$RESET\n" ; 
+#  cd ${TOP_DIR}/images/dante
+# deprecated TODO above 
+  docker build -t dante-wiki:latest $TOP_DIR/images/dante-wiki/src
 printf "$GREEN---DONE$RESET\n"
-
-printf "\n$GREEN---Building image dante-mysql if necessary...$RESET\n" ; 
-  cd ${TOP_DIR}/images/dante
-  docker build -t dante-mysql:last $TOP_DIR/images/dante-mysql/src
-printf "$GREEN---DONE$RESET\n"
-
-
 
 printf "\n$GREEN---Starting up configuration...$RESET\n" 
 # do this in detached mode so as to allow the waiting for the service to start

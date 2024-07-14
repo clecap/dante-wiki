@@ -4,35 +4,29 @@
 #  TODO: need to have local .git and git submodules for the correct treatment of git push upstream functionality
 #
 
-
 # Start up database and webserver
 # initialize webserver
 # copy out to live
 
-
-
-########################### TODO: we might want to have two database container startups ??? to have it settle first...
-
 services:
 
   database:
-    image: dante-mysql:last
-    container_name: dante-mysql-container
+    image: mariadb:10.5
+    ports:
+      - "3306:3306"
+    container_name: dante-mariadb-container
     networks:
       - dante-network
     secrets:
      - configuration
     volumes:
-      - ../images/dante-mysql/mysql-init:/docker-entrypoint-initdb.d
-
-
-
-
-
-
+      - ../volumes/mysql-init:/docker-entrypoint-initdb.d
+    environment:
+      MARIADB_ROOT_PASSWORD: initialPassword
 
   copy-to-host:
-    image: dante:last
+    image: dante-wiki:latest
+    build: ../images/dante-wiki/src
     container_name: dante-copy-container
     restart: "no"
     volumes:
@@ -58,8 +52,8 @@ services:
 # a second time in webserver-after-copy, to be sure that we have the freshest version even when we did not redo the complete copy cycle
 
   webserver-after-copy:
-    image: dante:last
-    container_name: dante-container
+    image: dante-wiki:latest
+    container_name: dante-wiki-container
     depends_on:
       copy-to-host:
         condition: service_completed_successfully
@@ -83,7 +77,7 @@ services:
 
 
   phpmyadmin:
-    image: phpmyadmin:5.0
+    image: phpmyadmin:5.2.1
     ports: 
       - "9090:80"
     container_name: php-myadmin-container
@@ -92,7 +86,7 @@ services:
         aliases:
           - phpmyadmin.local
     environment:
-      PMA_HOST: dante-mysql-container
+      PMA_HOST: dante-mariadb-container
     depends_on:
       - database
 

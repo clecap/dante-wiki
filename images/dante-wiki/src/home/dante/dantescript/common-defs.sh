@@ -37,7 +37,7 @@ export ERROR="\e[1;31m"
 # 92m for bold green
 export GREEN="\e[1;92m"
 
-
+  
 
 ### set terminate on error 
 abort() 
@@ -45,5 +45,7 @@ abort()
   printf "%b" "\n\n\e[1;31m *** *** *** ****** *** *** *** \e[0m\n"; 
   printf "%b" "\e[1;31m *** *** *** ERROR *** *** *** \e[0m\n"; 
   printf "%b" "\e[1;31m *** *** *** ****** *** *** *** \e[0m\n";
+
+  exit 1
 }
 

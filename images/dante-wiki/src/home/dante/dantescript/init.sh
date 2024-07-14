@@ -38,7 +38,7 @@ printf "\n*** init.sh: Listing of ${MOUNT}/${TARGET}\n"
 printf "DONE\n"
 
 
-MEDIAWIKI_DB_HOST=my-dante-mysql
+MEDIAWIKI_DB_HOST=dante-mariadb-container
 MEDIAWIKI_DB_TYPE=mysql
 MEDIAWIKI_DB_NAME=${MY_DB_NAME}
 MEDIAWIKI_DB_PORT=3306

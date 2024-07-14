@@ -27,9 +27,9 @@ jobs:
     - name: Generate SBOM for Dockerfile
       run: |
         mkdir -p .github/results
-        syft scan dir:images/dante          -o json        > .github/results/sbom-dante.json
-        syft scan dir:images/dante          -o spdx        > .github/results/sbom-dante.spdx
-        syft scan dir:images/dante          -o cyclonedx   > .github/results/sbom-dante.xml
+        syft scan dir:images/dante-wiki          -o json        > .github/results/sbom-dante-wiki.json
+        syft scan dir:images/dante-wiki          -o spdx        > .github/results/sbom-dante-wiki.spdx
+        syft scan dir:images/dante-wiki          -o cyclonedx   > .github/results/sbom-dante-wiki.xml
 
 #  --output syft-json   produced error message
 #  --output json        produced error message
@@ -39,9 +39,9 @@ jobs:
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        git add .github/results/sbom-dante.json
-        git add .github/results/sbom-dante.spdx
-        git add .github/results/sbom-dante.xml
+        git add .github/results/sbom-dante-wiki.json
+        git add .github/results/sbom-dante-wiki.spdx
+        git add .github/results/sbom-dante-wiki.xml
         git commit -m "Add auto-generated SBOM files"
         git push origin ${{ github.ref }}
       env:
