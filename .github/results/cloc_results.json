@@ -2,11 +2,11 @@
 {"header" : {
   "cloc_url"           : "github.com/AlDanial/cloc",
   "cloc_version"       : "1.90",
-  "elapsed_seconds"    : 0.12067699432373,
-  "n_files"            : 195,
-  "n_lines"            : 42042,
-  "files_per_second"   : 1615.88379867077,
-  "lines_per_second"   : 348384.546993417},
+  "elapsed_seconds"    : 0.128051042556763,
+  "n_files"            : 193,
+  "n_lines"            : 41873,
+  "files_per_second"   : 1507.2114693205,
+  "lines_per_second"   : 327002.413755737},
 "PHP" :{
   "nFiles": 64,
   "blank": 3725,
@@ -18,15 +18,15 @@
   "comment": 0,
   "code": 6563},
 "Bourne Shell" :{
-  "nFiles": 68,
-  "blank": 1120,
-  "comment": 658,
-  "code": 2760},
+  "nFiles": 67,
+  "blank": 1113,
+  "comment": 657,
+  "code": 2749},
 "Markdown" :{
   "nFiles": 24,
-  "blank": 716,
+  "blank": 714,
   "comment": 0,
-  "code": 2469},
+  "code": 2452},
 "JSON" :{
   "nFiles": 14,
   "blank": 1,
@@ -36,12 +36,12 @@
   "nFiles": 14,
   "blank": 114,
   "comment": 96,
-  "code": 502},
+  "code": 496},
 "Dockerfile" :{
-  "nFiles": 2,
-  "blank": 74,
-  "comment": 168,
-  "code": 266},
+  "nFiles": 1,
+  "blank": 62,
+  "comment": 118,
+  "code": 203},
 "Python" :{
   "nFiles": 1,
   "blank": 9,
@@ -58,7 +58,7 @@
   "comment": 5,
   "code": 9},
 "SUM": {
-  "blank": 6774,
-  "comment": 7732,
-  "code": 27536,
-  "nFiles": 195} }
+  "blank": 6753,
+  "comment": 7681,
+  "code": 27439,
+  "nFiles": 193} }
