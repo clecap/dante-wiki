@@ -2,11 +2,11 @@
 {"header" : {
   "cloc_url"           : "github.com/AlDanial/cloc",
   "cloc_version"       : "1.90",
-  "elapsed_seconds"    : 0.12230396270752,
+  "elapsed_seconds"    : 0.122599124908447,
   "n_files"            : 193,
-  "n_lines"            : 41880,
-  "files_per_second"   : 1578.03554134664,
-  "lines_per_second"   : 342425.536122266},
+  "n_lines"            : 41888,
+  "files_per_second"   : 1574.23635889837,
+  "lines_per_second"   : 341666.38653645},
 "PHP" :{
   "nFiles": 64,
   "blank": 3725,
@@ -34,9 +34,9 @@
   "code": 654},
 "YAML" :{
   "nFiles": 14,
-  "blank": 105,
+  "blank": 107,
   "comment": 100,
-  "code": 497},
+  "code": 503},
 "Dockerfile" :{
   "nFiles": 1,
   "blank": 64,
@@ -58,7 +58,7 @@
   "comment": 5,
   "code": 9},
 "SUM": {
-  "blank": 6750,
+  "blank": 6752,
   "comment": 7689,
-  "code": 27441,
+  "code": 27447,
   "nFiles": 193} }
