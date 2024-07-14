@@ -15,3 +15,8 @@ if [ -d "$MOUNT/$TARGET/extensions/Parsifal/.git" ]; then
       git clone --depth 1 --branch $PARSIFAL_BRANCH https://github.com/clecap/Parsifal ${MOUNT}/$TARGET/extensions/Parsifal ;      exec 1>&1 2>&2
     printf "DONE get-parsifal.sh_ cloning branch $BRANCH of Parsifal\n"
 fi
+
+printf "*** Making parsifal lock directory\n\n"
+  mkdir -p /var/lock/parsifal
+printf "\nDONE\n\n"
+

@@ -127,12 +127,16 @@ fi
 printf "*** Adding reference to DanteSettings.php ... "
   echo ' ' >> LocalSettings.php
   echo '###' >> LocalSettings.php
-  echo '### Automagically injected by volume cmd.sh ' >> LocalSettings.php
+  echo '### Automagically injected by volume /home/dante/dantescript/init.sh.sh ' >> LocalSettings.php
   echo '###' >> LocalSettings.php
     # NOTE: Doing this with include does not produce an error if the file goes missing
-  echo 'include (\"DanteSettings.php\"); ' >> LocalSettings.php
+  echo 'include ("DanteSettings.php"); ' >> LocalSettings.php
   exec 1>&1 2>&2
 printf  "DONE\n"
+
+
+set +e 
+
 
 printf "\n*** Adding initial contents..."
   php ${MOUNT}${TARGET}/maintenance/importDump.php --namespaces '8' --debug $CONT/minimal-initial-contents.xml

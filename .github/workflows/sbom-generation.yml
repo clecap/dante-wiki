@@ -27,9 +27,10 @@ jobs:
     - name: Generate SBOM for Dockerfile
       run: |
         mkdir -p .github/results
-        syft scan dir:images/dante-wiki          -o json        > .github/results/sbom-dante-wiki.json
-        syft scan dir:images/dante-wiki          -o spdx        > .github/results/sbom-dante-wiki.spdx
-        syft scan dir:images/dante-wiki          -o cyclonedx   > .github/results/sbom-dante-wiki.xml
+        ls -alg
+        syft scan dante-wiki:latest          -o json        > .github/results/sbom-dante-wiki.json
+        syft scan dante-wiki:latest          -o spdx        > .github/results/sbom-dante-wiki.spdx
+        syft scan dante-wiki:latest          -o cyclonedx   > .github/results/sbom-dante-wiki.xml
 
 #  --output syft-json   produced error message
 #  --output json        produced error message

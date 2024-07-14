@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SERVICE_CONTAINER=dante-container
+SERVICE_CONTAINER=dante-wiki-container
 
 # get directory where this script resides wherever it is called from
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"

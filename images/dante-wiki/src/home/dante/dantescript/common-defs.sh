@@ -46,6 +46,8 @@ abort()
   printf "%b" "\e[1;31m *** *** *** ERROR *** *** *** \e[0m\n"; 
   printf "%b" "\e[1;31m *** *** *** ****** *** *** *** \e[0m\n";
 
-  exit 1
+  printf "\n\n*** Sleeping for 1 hour to keep container running for debug attempts ***\n\n"
+  sleep 3600
+
 }
 
