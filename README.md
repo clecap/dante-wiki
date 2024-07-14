@@ -22,11 +22,14 @@ The current status of the system is experimental.
   </tr>
   <tr>
     <td><b>Github</b></td>
-    <td><a href=""><img alt="GitHub issues" src="https://img.shields.io/github/issues/clecap/dante-wiki"></a>&nbsp;
-<a href=""><img alt="GitHub closed issues" src="https://img.shields.io/github/issues-closed/clecap/dante-wiki"></a>&nbsp;
-<a href=""><img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/clecap/dante-wiki"></a>&nbsp;
-<a href=""><img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/clecap/dante-wiki"></a>&nbsp;
-<a href=""><img alt="GitHub all releases" src="https://img.shields.io/github/downloads/clecap/dante-wiki/total"></a></td>
+    <td>
+      <a href=""><img alt="GitHub issues" src="https://img.shields.io/github/issues/clecap/dante-wiki"></a>&nbsp;
+      <a href=""><img alt="GitHub closed issues" src="https://img.shields.io/github/issues-closed/clecap/dante-wiki?color=lightgreen"></a>&nbsp;
+      <img alt="" src="https://img.shields.io/github/issues-pr/clecap/dante-wiki?color=red">
+      <img alt="" src="https://img.shields.io/github/issues-pr-closed/clecap/dante-wiki?color=lightgreen"><br>
+      <a href=""><img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/clecap/dante-wiki"></a>&nbsp;
+      <a href=""><img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/clecap/dante-wiki"></a>&nbsp;
+      <a href=""><img alt="GitHub all releases" src="https://img.shields.io/github/downloads/clecap/dante-wiki/total"></a></td>
   </tr>
   <tr>
     <td><b><a href="https://github.com/clecap/dante-wiki/blob/master/.github/results/cloc_results.md" title="Show detailed line counts!">Size</a></b></td>
