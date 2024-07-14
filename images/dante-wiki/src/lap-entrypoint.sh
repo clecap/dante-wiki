@@ -27,9 +27,9 @@ for script in "$@"; do
       source "/home/dante/dantescript/$script" 
       EXIT_STATUS=$?
       if [[ $EXIT_STATUS -ne 0 ]]; then
-        exec 1>&1 2>&2 ; echo "B.sh exited with status $EXIT_STATUS"
+        exec 1>&1 2>&2 ; echo "$script exited with status $EXIT_STATUS"
       else
-        exec 1>&1 2>&2 ; echo "B.sh returned with status $EXIT_STATUS"
+        exec 1>&1 2>&2 ; echo "$script returned with status $EXIT_STATUS"
       fi
       if [ "$RETURN_VALUE" == "shutdown" ]; then
           printf "\n/lap-entrypoint.sh: $script returned $RETURN_VALUE, shutting down now\n" ; exit 0

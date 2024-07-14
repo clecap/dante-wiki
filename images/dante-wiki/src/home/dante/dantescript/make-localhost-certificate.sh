@@ -16,7 +16,7 @@ else
   printf "   One of /etc/ssl/apache2/server.crt or /etc/ssl/apache2/server.key both missing \n"
   APACHE_SERVER_KEY_LENGTH="${#APACHE_SERVER_KEY}"
   APACHE_SERVER_CRT_LENGTH="${#APACHE_SERVER_CRT}"
-  if [ "$APACHE_SERVER_KEY_LENGTH" -gt 20 && "$APACHE_SERVER_CRT_LENGTH" -gt 20 ]; then
+  if [ "$APACHE_SERVER_KEY_LENGTH" -gt 20 -a "$APACHE_SERVER_CRT_LENGTH" -gt 20 ]; then
     printf "*** make-localhost-certificate: Found certificate strings in secret, using them\n"
       rm -f /etc/ssl/apache2/server.crt
       rm -f /etc/ssl/apache2/server.key

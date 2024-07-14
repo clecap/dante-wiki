@@ -14,7 +14,7 @@ exec 1>&1 2>&2
 # some files we still need !
 #
 printf "\n*** copy-out.sh: removing old stuff...\n "
-  rm -rf /mnt/${TARGET} ; rm -f /mtn/.DS_Store ;  exec 1>&1 2>&2
+  rm -rf /mnt/${TARGET} ; rm -f /mnt/.DS_Store ;  exec 1>&1 2>&2
 printf "DONE cleaning up old stuff\n"
 
 ## TODO: some stuff does not get deleted properly. why? check this !! problem, if there is an old file still there which gets used
