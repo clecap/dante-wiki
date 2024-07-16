@@ -8,9 +8,11 @@ source /home/dante/dantescript/common-defs.sh
 
 exec 1>&1 2>&2
 
+printf "\n*** get-parsifal.sh \n"
+
 if [ -d "$MOUNT/$TARGET/extensions/Parsifal/.git" ]; then
     printf "\n*** get-parsifal.sh: Git directory ${MOUNT}/$TARGET/extensions/Parsifal/.git already exists ... doing a PULL \n"
-      git -C ${MOUNT}/${TARGET} pull origin ${PARSIFAL_BRANCH} ;       exec 1>&1 2>&2
+      git -C ${MOUNT}/${TARGET}/extensions/parsifal pull origin ${PARSIFAL_BRANCH} ;       exec 1>&1 2>&2
     printf "DONE doing a pull\n"
   else
     printf "\n*** get-parsifal.sh: Cloning Parsifal from branch $PARSIFAL_BRANCH into ${MOUNT}/${TARGET}/extensions... \n"
@@ -18,7 +20,9 @@ if [ -d "$MOUNT/$TARGET/extensions/Parsifal/.git" ]; then
     printf "DONE get-parsifal.sh_ cloning branch $BRANCH of Parsifal\n"
 fi
 
-printf "*** Making parsifal lock directory\n\n"
+printf "*** Making parsifal lock directory and setting correct ownership\n\n"
   mkdir -p /var/lock/parsifal
+  chown -R www-data:www-data /var/lock/parsifal
+  exec 1>&1 2>&2
 printf "\nDONE\n\n"
 
