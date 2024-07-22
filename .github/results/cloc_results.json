@@ -2,11 +2,11 @@
 {"header" : {
   "cloc_url"           : "github.com/AlDanial/cloc",
   "cloc_version"       : "1.90",
-  "elapsed_seconds"    : 0.133567094802856,
+  "elapsed_seconds"    : 0.134038925170898,
   "n_files"            : 194,
   "n_lines"            : 41345,
-  "files_per_second"   : 1452.45354244129,
-  "lines_per_second"   : 309544.802640387},
+  "files_per_second"   : 1447.34076129491,
+  "lines_per_second"   : 308455.174101743},
 "PHP" :{
   "nFiles": 64,
   "blank": 3725,
