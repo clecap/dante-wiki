@@ -1,8 +1,8 @@
-     100 files     200 files     222 text files.
-classified 220 filesDuplicate file check 220 files (210 known unique)Unique:      100 files                                          Unique:      200 files                                               215 unique files.                              
+     100 files     200 files     223 text files.
+classified 221 filesDuplicate file check 221 files (210 known unique)Unique:      100 files                                          Unique:      200 files                                               216 unique files.                              
 Counting:  100Counting:  200      36 files ignored.
 
-github.com/AlDanial/cloc v 1.90  T=0.13 s (1541.0 files/s, 327238.1 lines/s)
+github.com/AlDanial/cloc v 1.90  T=0.13 s (1514.2 files/s, 320271.8 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
@@ -11,11 +11,11 @@ XML                              5           1007              0           6563
 Bourne Shell                    67           1124            655           2763
 Markdown                        24            611              0           1934
 JSON                            15              2              0            717
-YAML                            15            119            100            553
+YAML                            16            132            101            583
 Dockerfile                       1             64            120            203
-Python                           1              9              0             32
+Python                           1             10              0             35
 HTML                             2              4              0             17
 INI                              1              4              5              9
 -------------------------------------------------------------------------------
-SUM:                           195           6669           7685          27055
+SUM:                           196           6683           7686          27088
 -------------------------------------------------------------------------------
