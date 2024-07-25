@@ -1,14 +1,14 @@
      100 files     200 files     226 text files.
-classified 224 filesDuplicate file check 224 files (212 known unique)Unique:      100 files                                          Unique:      200 files                                               219 unique files.                              
+classified 224 filesDuplicate file check 224 files (211 known unique)Unique:      100 files                                          Unique:      200 files                                               219 unique files.                              
 Counting:  100Counting:  200      36 files ignored.
 
-github.com/AlDanial/cloc v 1.90  T=0.13 s (1542.9 files/s, 322272.0 lines/s)
+github.com/AlDanial/cloc v 1.90  T=0.13 s (1529.3 files/s, 319458.9 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
 PHP                             64           3725           6805          14264
 XML                              5           1007              0           6563
-Bourne Shell                    67           1121            656           2767
+Bourne Shell                    67           1123            656           2769
 Markdown                        24            611              0           1935
 JSON                            16              2              0            723
 YAML                            17            138            110            621
@@ -18,5 +18,5 @@ Python                           1             11              1             38
 HTML                             2              4              0             17
 INI                              1              4              5              9
 -------------------------------------------------------------------------------
-SUM:                           199           6687           7697          27181
+SUM:                           199           6689           7697          27183
 -------------------------------------------------------------------------------
