@@ -23,6 +23,10 @@ def main():
     repo_name = os.getenv('DOCKER_HUB_REPO')
     tag = os.getenv('DOCKER_HUB_TAG')
     token = os.getenv('DOCKER_HUB_TOKEN')
+
+    print("Repo:", repo_name)
+    print("Tag:", tag)
+    print("Token:", token)
     
     scan_results = fetch_vulnerability_scan(repo_name, tag, token)
     severity_count = parse_scan_results(scan_results)

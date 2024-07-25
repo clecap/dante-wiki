@@ -45,7 +45,7 @@ The current status of the system is experimental.
 </td>
   </tr>
   <tr>
-    <td><b><a href="https://hub.docker.com/u/clecap/dante-wiki" title="Go to dockerhub repository of dante-wiki">Docker</b></td>
+    <td><b><a href="https://hub.docker.com/u/clecap/dante-wiki" title="Go to dockerhub repository of dante-wiki">Docker</a></b></td>
     <td>
       <a href=""><img alt="Docker Image Version" src="https://img.shields.io/docker/v/clecap/dante-wiki?sort=date&label=Pulls"></a>&nbsp;
       <a href=""><img alt="Docker Image Pulls"   src="https://img.shields.io/docker/pulls/clecap/dante-wiki"></a>&nbsp;
