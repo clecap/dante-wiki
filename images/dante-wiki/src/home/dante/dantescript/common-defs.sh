@@ -47,10 +47,7 @@ abort()
   printf "%b" "The error occured in line number $LINENO: of $BASH_COMMAND \n";
   printf "%b" "\e[1;31m *** *** *** ****** *** *** *** \e[0m\n";
 
-
-
-
-  printf "\n\n*** Sleeping for 1 hour to keep container running for debug attempts ***\n\n"
+  printf "\n\n*** abort: Sleeping for 1 hour to keep container running for debug attempts ***\n\n"
   sleep 3600
 
 }
