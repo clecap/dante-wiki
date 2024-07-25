@@ -3,7 +3,7 @@ import json
 import os
 
 def fetch_vulnerability_scan(repo_name, tag, token):
-    url = f"https://hub.docker.com/v2/repositories/{repo_name}/tags/{tag}/scan/"
+    url = f"https://hub.docker.com/v2/repositories/{repo_name}/tags/"
 # might also want to try    url = f"https://hub.docker.com/v2/repositories/{repo_name}/tags/"
 
     headers = {"Authorization": f"JWT {token}"}
