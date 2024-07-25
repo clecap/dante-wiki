@@ -6,7 +6,10 @@ def fetch_vulnerability_scan(repo_name, tag, token):
     url = f"https://hub.docker.com/api/v2/repositories/{repo_name}/tags/{tag}/scan/"
     headers = {"Authorization": f"JWT {token}"}
     response = requests.get(url, headers=headers)
-    return response.json()
+    print ("URL: ", url)
+    print ("Response ", response)
+    json = response.json()
+    return json
 
 def parse_scan_results(scan_results):
     vulnerabilities = scan_results.get("vulnerabilities", [])
