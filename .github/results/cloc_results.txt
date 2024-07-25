@@ -1,8 +1,8 @@
-     100 files     200 files     224 text files.
-classified 222 filesDuplicate file check 222 files (210 known unique)Unique:      100 files                                          Unique:      200 files                                               217 unique files.                              
+     100 files     200 files     225 text files.
+classified 223 filesDuplicate file check 223 files (211 known unique)Unique:      100 files                                          Unique:      200 files                                               218 unique files.                              
 Counting:  100Counting:  200      36 files ignored.
 
-github.com/AlDanial/cloc v 1.90  T=0.14 s (1458.4 files/s, 307305.3 lines/s)
+github.com/AlDanial/cloc v 1.90  T=0.13 s (1556.9 files/s, 326445.2 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
@@ -10,12 +10,12 @@ PHP                             64           3725           6805          14264
 XML                              5           1007              0           6563
 Bourne Shell                    67           1124            656           2764
 Markdown                        24            611              0           1934
-JSON                            15              2              0            717
+JSON                            16              2              0            718
 YAML                            17            138            110            618
 Dockerfile                       1             64            120            203
-Python                           1             10              0             38
+Python                           1             11              1             38
 HTML                             2              4              0             17
 INI                              1              4              5              9
 -------------------------------------------------------------------------------
-SUM:                           197           6689           7696          27127
+SUM:                           198           6690           7697          27128
 -------------------------------------------------------------------------------
