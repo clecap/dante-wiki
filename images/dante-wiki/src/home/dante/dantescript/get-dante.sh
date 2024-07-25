@@ -9,6 +9,8 @@ trap 'abort' ERR                       # call abort on error
 
 if [ -d "$MOUNT/$TARGET/.git" ]; then
     printf "\n*** get-dante.sh: Git directory ${MOUNT}/$TARGET/.git already exists ... doing a PULL \n"
+      # need to fix differences in userids of directory and of calling shell script, recommended by git itself
+      git config --global --add safe.directory ${MOUNT}/${TARGET}
       git -C ${MOUNT}/${TARGET} pull origin ${DANTE_BRANCH} ;       exec 1>&1 2>&2
     printf "DONE\n"
   else
