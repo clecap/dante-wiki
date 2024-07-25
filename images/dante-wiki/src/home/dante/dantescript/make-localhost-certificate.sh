@@ -27,10 +27,12 @@ else
     printf "DONE using secret strings\n"
   else
     printf "*** make-localhost-certificate: No reasonable strings found in secret, generating key and crt and mailing crt\n"
-      openssl req -x509 -out /etc/ssl/apache2/server.crt -keyout /etc/ssl/apache2/server.key \
+      openssl req -x509 -out /etc/ssl/apache2/server.crt -noout -quiet -keyout /etc/ssl/apache2/server.key \
         -newkey rsa:2048 -nodes -sha256 \
         -subj '/CN=localhost' -extensions EXT -config <( \
       printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
+      exec 1>&1 2>&2
+
       chmod 600 /etc/ssl/apache2/server.key
       chmod 644 /etc/ssl/apache2/server.crt
 
