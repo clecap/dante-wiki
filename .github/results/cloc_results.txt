@@ -1,8 +1,8 @@
-     100 files     200 files     223 text files.
-classified 221 filesDuplicate file check 221 files (210 known unique)Unique:      100 files                                          Unique:      200 files                                               216 unique files.                              
+     100 files     200 files     224 text files.
+classified 222 filesDuplicate file check 222 files (210 known unique)Unique:      100 files                                          Unique:      200 files                                               217 unique files.                              
 Counting:  100Counting:  200      36 files ignored.
 
-github.com/AlDanial/cloc v 1.90  T=0.14 s (1388.4 files/s, 293698.8 lines/s)
+github.com/AlDanial/cloc v 1.90  T=0.13 s (1526.7 files/s, 321690.9 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
@@ -11,11 +11,11 @@ XML                              5           1007              0           6563
 Bourne Shell                    67           1124            655           2763
 Markdown                        24            611              0           1934
 JSON                            15              2              0            717
-YAML                            16            132            101            583
+YAML                            17            138            110            618
 Dockerfile                       1             64            120            203
 Python                           1             10              0             38
 HTML                             2              4              0             17
 INI                              1              4              5              9
 -------------------------------------------------------------------------------
-SUM:                           196           6683           7686          27091
+SUM:                           197           6689           7695          27126
 -------------------------------------------------------------------------------
