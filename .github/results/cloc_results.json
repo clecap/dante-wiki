@@ -2,11 +2,11 @@
 {"header" : {
   "cloc_url"           : "github.com/AlDanial/cloc",
   "cloc_version"       : "1.90",
-  "elapsed_seconds"    : 0.137638092041016,
+  "elapsed_seconds"    : 0.124629020690918,
   "n_files"            : 196,
-  "n_lines"            : 41446,
-  "files_per_second"   : 1424.02438956792,
-  "lines_per_second"   : 301123.034949142},
+  "n_lines"            : 41448,
+  "files_per_second"   : 1572.66741657293,
+  "lines_per_second"   : 332571.015725075},
 "PHP" :{
   "nFiles": 64,
   "blank": 3725,
@@ -20,8 +20,8 @@
 "Bourne Shell" :{
   "nFiles": 67,
   "blank": 1124,
-  "comment": 655,
-  "code": 2763},
+  "comment": 656,
+  "code": 2764},
 "Markdown" :{
   "nFiles": 24,
   "blank": 611,
@@ -59,6 +59,6 @@
   "code": 9},
 "SUM": {
   "blank": 6688,
-  "comment": 7695,
-  "code": 27063,
+  "comment": 7696,
+  "code": 27064,
   "nFiles": 196} }
