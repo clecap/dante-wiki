@@ -9,9 +9,9 @@ trap 'abort' ERR                       # call abort on error
  
 if [ -d "$MOUNT/$TARGET/.git" ]; then
     printf "\n*** get-dante.sh: Git directory ${MOUNT}/$TARGET/.git already exists \n"
-    printf "\n*** get-dante.sh: Setting git safe directory exception for ${MOUNT}/${TARGET}...\n"
+    printf "\n*** get-dante.sh: Setting git safe directory exception for ${MOUNT}${TARGET}...\n"
       # need to fix differences in userids of directory and of calling shell script, recommended by git itself
-        git config --global --add safe.directory ${MOUNT}/${TARGET}
+        git config --global --add safe.directory ${MOUNT}${TARGET}
     printf "DONE setting git safe directory exception\n"
     printf "\n*** get-dante.sh: Pulling dante...\n"
       git -C ${MOUNT}/${TARGET} pull origin ${DANTE_BRANCH} ;       exec 1>&1 2>&2
