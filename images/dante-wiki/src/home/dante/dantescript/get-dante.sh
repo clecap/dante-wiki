@@ -6,7 +6,7 @@ source /home/dante/dantescript/common-defs.sh
 trap 'abort' ERR                       # call abort on error
 
 #### TODO MUST ABORT COMPLETEL including upstream in case of error - also for some of the other dante scripts. and need an abotzt in lapentry-.sh
-
+ 
 if [ -d "$MOUNT/$TARGET/.git" ]; then
     printf "\n*** get-dante.sh: Git directory ${MOUNT}/$TARGET/.git already exists ... doing a PULL \n"
       # need to fix differences in userids of directory and of calling shell script, recommended by git itself
