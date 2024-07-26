@@ -27,6 +27,11 @@ printf "\n*** init.sh: Deleting phpinfo.php..."
   exec 1>&1 2>&2
 printf "DONE\n"
 
+printf "\n*** init.sh: Copying in file to be used as favicon..."
+  cp /home/dante/caravaggio-180x180.png ${MOUNT}/${TARGET}/caravaggio-180x180.png
+  exec 1>&1 2>&2
+printf "DONE\n"
+
 printf "\n*** init.sh: Listing of ${MOUNT}\n"
   ls -alg ${MOUNT}
   exec 1>&1 2>&2

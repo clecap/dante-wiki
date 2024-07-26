@@ -2,14 +2,14 @@
 
 ## Supported Versions
 
-We release patches for security vulnerabilities. 
+We will release patches for security vulnerabilities.
 
 ## Reporting a Vulnerability
 
 If you discover a security vulnerability, please help us by doing the following steps:
 
 1. **Do not** open a public issue on the GitHub repository. This makes the vulnerability immediately visible to the public and could pose a security risk.
-2. **Send an email** to the owner of the repository with the details of the vulnerability. Include as much information as possible to help us understand and replicate the issue.
+2. **Send an email** to the owner of the repository at mailto:impressum@clemens-cap.de with the details of the vulnerability. Include as much information as possible to help us understand and replicate the issue.
 3. **Expect an acknowledgment** within 96 hours. If you do not receive an acknowledgment within this time frame, please follow up.
 
 Please include the following details in your report:
