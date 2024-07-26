@@ -38,9 +38,11 @@ jobs:
       run: |
         mkdir -p .github/results
         ls -alg
-        syft
+        echo "Doing syft version"
         syft --version
+        echo "Done doing syft version"
         syft scan --help
+        echo "Done doing syft help"
         syft scan dante-wiki:latest          -o json        > .github/results/sbom-dante-wiki.json
         syft scan dante-wiki:latest          -o spdx        > .github/results/sbom-dante-wiki.spdx
         syft scan dante-wiki:latest          -o cyclonedx   > .github/results/sbom-dante-wiki.xml

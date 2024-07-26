@@ -2,8 +2,8 @@ import requests
 import json
 import os
 
-def fetch_vulnerability_scan(repo_name, tag, token):
-    url = f"https://hub.docker.com/v2/repositories/{repo_name}/tags/"
+def fetch_vulnerability_scan(token):
+    url = f"https://hub.docker.com/v2/repositories/clecap/dante-wiki/tags/"
 # might also want to try    url = f"https://hub.docker.com/v2/repositories/{repo_name}/tags/"
 
     headers = {"Authorization": f"JWT {token}"}
@@ -25,15 +25,8 @@ def parse_scan_results(scan_results):
     return severity_count
 
 def main():
-    repo_name = os.getenv('DOCKER_HUB_REPO')
-    tag = os.getenv('DOCKER_HUB_TAG')
     token = os.getenv('DOCKER_HUB_TOKEN')
-
-    print("Repo:", repo_name)
-    print("Tag:", tag)
-    print("Token:", token)
-    
-    scan_results = fetch_vulnerability_scan(repo_name, tag, token)
+    scan_results = fetch_vulnerability_scan(token)
     severity_count = parse_scan_results(scan_results)
 
     badge_data = {
