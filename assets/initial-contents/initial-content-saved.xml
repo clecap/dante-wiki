@@ -1,0 +1,2 @@
+
+Warning: file(/var/www/html/wiki-dir/extensions/DanteBackup/list_of_files_to_backup): Failed to open stream: No such file or directory in /var/www/html/wiki-dir/maintenance/dumpBackup.php on line 104
