@@ -654,25 +654,26 @@ magic-line-identifier-for-inclusion
     <ns>8</ns>
     <id>8</id>
     <revision>
-      <id>8</id>
-      <timestamp>2023-11-08T13:01:21Z</timestamp>
+      <id>137</id>
+      <parentid>8</parentid>
+      <timestamp>2024-07-27T20:26:09Z</timestamp>
       <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
+        <username>Admin</username>
+        <id>1</id>
       </contributor>
-      <origin>8</origin>
+      <origin>137</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="604" sha1="j06bpxm15xclnl7ky1olcxazzdjbb7y" xml:space="preserve">This page is a system page.
+      <text bytes="634" sha1="pgbqdlzq7e1303kgjikakt3pu9fk4si" xml:space="preserve">This page is a system page.
 
 It must conform to the following rules:
 
 * It contains data in strict JSON format, which must be contained in a PRE-tag.
-* Top-level the JSON data is an array.
+* At top-level, this JSON data is an array.
 * The array contains objects of one of the following types:
 ** {"root": &lt;string&gt;, "depth": &lt;number&gt;}
 ** {"name": &lt;string&gt;}
-** Every object may contain an optional "style" field.
+** Every object may contain an optional "style" key whose value is a CSS string.
 ** Every object may contain an optional "classname" field.
 
 &lt;pre&gt;
@@ -683,9 +684,8 @@ It must conform to the following rules:
 ]
 &lt;/pre&gt;
 
-
 [[Category:DanteInitialContents]]</text>
-      <sha1>j06bpxm15xclnl7ky1olcxazzdjbb7y</sha1>
+      <sha1>pgbqdlzq7e1303kgjikakt3pu9fk4si</sha1>
     </revision>
   </page>
   <page>
@@ -693,17 +693,17 @@ It must conform to the following rules:
     <ns>8</ns>
     <id>17</id>
     <revision>
-      <id>97</id>
-      <parentid>17</parentid>
-      <timestamp>2024-07-27T19:18:12Z</timestamp>
+      <id>136</id>
+      <parentid>135</parentid>
+      <timestamp>2024-07-27T20:21:21Z</timestamp>
       <contributor>
         <username>Admin</username>
         <id>1</id>
       </contributor>
-      <origin>97</origin>
+      <origin>136</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="3484" sha1="as1nw8pi9pquf9rjtzr2i7mtf3vzj46" xml:space="preserve">&lt;pre&gt;
+      <text bytes="3589" sha1="0l14t5d5951omy2kskc75hsbkrvg1kg" xml:space="preserve">&lt;pre&gt;
 {{#tree: extensions=["persist"] | 
 * &lt;b&gt;[{{fullurl:Main Page}} Main Page]&lt;/b&gt;
 * [[MediaWiki:CreatePage|Create Page]]
@@ -722,6 +722,7 @@ It must conform to the following rules:
 ** [{{fullurl:MediaWiki:Sidebar/Categories|action=edit}} Categories]
 ** [{{fullurl:MediaWiki:Sidebar/Navigation|action=edit}} Navigation]
 ** [{{fullurl:MediaWiki:Sidebar/UI|action=edit}} UI]
+** [{{fullurl:MediaWiki:Sidebar/Social|action=edit}} Social]
 
 * &lt;b title="Query for pages in specific namespaces"&gt;Lists &amp; Queries&lt;/b&gt;
 ** [{{fullurl:Special:AllPages}} All Pages]
@@ -731,9 +732,10 @@ It must conform to the following rules:
 ** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=2}} User]
 ** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=12}} Help]
 ** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=4}} Project]
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=2100}} Snip]
 ** [{{fullurl:Special:ListFiles}} Files]
 
-* &lt;b title="Found a bug"&gt;Issues&lt;/b&gt;
+* &lt;b title="Found a bug"&gt;Issue Reporting&lt;/b&gt;
 ** [https://github.com/clecap/dante-delta/issues DanteDelta Issues \s]
 ** [https://github.com/clecap/dante-wiki/issues DanteWiki Issues \s]
 ** [https://github.com/clecap/dante-wiki-production/issues DanteProduction Issues \s]
@@ -746,7 +748,6 @@ It must conform to the following rules:
 ** [[Special:WantedPages | Missing Pages]]
 
 * &lt;b&gt;Demos &amp; Tests&lt;/b&gt;
-** [[Test/Simple Test Page]]
 ** Javascript Gadget Tests
 *** &lt;b&gt;[javascript:window.DANTE.testConsole() window.DANTE.testConsole()]&lt;/b&gt;
 *** &lt;b&gt;[javascript:Dante.testConsoleZwei() Dante.testConsoleZwei()]&lt;/b&gt;
@@ -784,7 +785,7 @@ It must conform to the following rules:
 
 
 [[Category:DanteInitialContents]]</text>
-      <sha1>as1nw8pi9pquf9rjtzr2i7mtf3vzj46</sha1>
+      <sha1>0l14t5d5951omy2kskc75hsbkrvg1kg</sha1>
     </revision>
   </page>
   <page>
@@ -1127,6 +1128,753 @@ this system are subject to copyright.
 are subject to copyright.
 [[Category:DanteInitialContents]]</text>
       <sha1>qg9kly0wkzfdwtq1dr4rzgc4kc60f4n</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Parsifal</title>
+    <ns>12</ns>
+    <id>46</id>
+    <revision>
+      <id>127</id>
+      <parentid>108</parentid>
+      <timestamp>2024-07-27T20:10:23Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <minor/>
+      <comment>Admin moved page [[Help:Demo for Parsifal]] to [[Help:Parsifal]] without leaving a redirect</comment>
+      <origin>108</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="409" sha1="jwjxhzvm44czwu5zzqvsmapv9ue2z1q" xml:space="preserve">
+__SLIDES__
+
+== one ==
+bla
+&lt;amsmath&gt;
+asdqh
+a
+\ubf{q}w  \ubf{w}er \ubf janus
+
+&lt;/amsmath&gt;
+
+== Link ==
+&lt;amsmath&gt;
+\dref{Main Page}  
+
+\dref{Help: Demo for Parsifal}
+
+\dref{Help: Demo for DanteLinks}
+
+\dref{Test/Parsifal Section Heading Style}
+
+\dref{Test/Parsifal Section Heading Style#h4}
+
+\url{https://www.clemenscap.de} 
+
+&lt;/amsmath&gt;
+
+[[Test/Parsifal Section Heading Style#h4]]
+[[Category:DanteInitialContents]]</text>
+      <sha1>jwjxhzvm44czwu5zzqvsmapv9ue2z1q</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Test/Parsifal</title>
+    <ns>12</ns>
+    <id>35</id>
+    <revision>
+      <id>118</id>
+      <parentid>117</parentid>
+      <timestamp>2024-07-27T19:53:03Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <minor/>
+      <comment>Admin moved page [[Help:Parsifal Test]] to [[Help:Test/Parsifal]] without leaving a redirect</comment>
+      <origin>117</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="1204" sha1="9mzsjp0xzqyvwp152xy4xe9a8qd9fr4" xml:space="preserve">== Titel ==
+
+&lt;amsmath n="Myname"&gt;aix q kk  1 2 3d ss fghjghj56 876qq kjha slkjh  hallo q1 jk aa s wwad fs d a andsom more  st uff which in side o f this   d
+   
+\xcx
+
+Rule of 14cm  
+\hrule height 1px depth 1px width 14cm \relax         
+
+Rule  of 14.2cm 
+\hrule height 1px depth 1px width 14.2cm \relax
+
+Rule of s 15cm
+\hrule height 1px depth 1px width 15cm \relax
+
+Rule of 16cm
+\hrule height 1px depth 1px width 16cm \relax
+&lt;/amsmath&gt;
+
+== Part 2 ==
+&lt;amsmath&gt;
+b ja q q io qw qw   fje q
+&lt;/amsmath&gt;
+
+== One ==
+&lt;beamer b&gt;
+Hallo2345123 123 123 
+Das ist jakjh 
+$a$=$b$ kjh  kjqh k jkl lkj j h iuhh zh qwe asd u io
+&lt;/beamer&gt;
+
+== Stuff ==
+&lt;beamer b&gt;
+This is no w asdcvb we asd  qwe as d  qwe a sd qw e asd qwe asd qwe asd qwe asd qwe  asd qwe asd qwe asd qwe asd qwe asd beamer a sd
+&lt;/beamer&gt;
+
+== Only ==
+
+&lt;amsmath n="Myname"&gt;J xust  a test&lt;/amsmath&gt;
+
+== Titel Y ==
+
+&lt;amsmath o-proof&gt;
+Ea iaaa  sds df ax sd   gg   n s
+&lt;/amsmath&gt;
+
+&lt;amsmath c-habanalop&gt;Zwhc 
+sdf sdf
+sdfsdf
+xx
+sdfsdf
+as
+sdfsdf
+sdfsdf
+
+sdfsdf
+
+sdfsdf
+
+sdfsdf
+
+sdfsdf
+
+sdfsdf
+
+sdfsdf
+
+sdfsdf
+
+sdfsdf
+
+sdfsdf
+
+sdfsdf
+
+sdfsdfsdf
+
+sdf
+
+sdfe i&lt;/amsmath&gt;
+
+&lt;amsmath c="Ha bA Na"&gt;
+Drei \url{https://www.ifi.ch}
+&lt;/amsmath&gt;
+[[Category:DanteInitialContents]]</text>
+      <sha1>9mzsjp0xzqyvwp152xy4xe9a8qd9fr4</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Test/Diverse</title>
+    <ns>12</ns>
+    <id>54</id>
+    <revision>
+      <id>120</id>
+      <parentid>119</parentid>
+      <timestamp>2024-07-27T19:54:03Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>120</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="2486" sha1="j4vs56yassv6p0an5onvidty8b3360w" xml:space="preserve">
+[[Main Page ¦ target=_blank]]
+
+[[Main Page ¦ target=_new]]
+
+
+[[Help:Transclusion Test]]
+
+= Level 1 =
+
+
+&lt;amsmath&gt;
+Blabla this is an ekjhkjh kjhkjh kjhkjh kjhkjh xample for an entire line filling the entire area of the browser to get a demonstration for the autoscaling feature. 
+&lt;/amsmath&gt;
+
+== Level 1.1 ==
+
+=== Level 1.1.1 ===
+&lt;amsmath&gt;
+Blabla this is an example for an entire line filling the entire area of the browser to get a demonstration for the autoscaling feature.
+&lt;/amsmath&gt;
+
+&lt;amsmath&gt;
+Blab wer qwer qwer qwer qwer qsdf sdf dsf sdf sdf sdf sdf df sdf er qwer qwer qwer qwer qwer qwer qerqwerqewrqerqerqewrqwerqwerqwer sdf sdfsdfsdfsdf sdfsdfsdfsdf sdfsdf gggggggggggggggggggggggggggggg ggggggggggggggggggsdf
+
+\bigskip\bigskip\bigskip
+
+this hjkhjk hjk hjk hjk hjk hjkhjk hjk hjk hjk hjkhjk
+
+\bigskip\bigskip\bigskip
+
+is kjh hjk hjk
+
+\bigskip\bigskip\bigskip
+
+an 
+
+\bigskip\bigskip\bigskip
+
+
+example 
+
+\bigskip\bigskip\bigskip
+
+
+for 
+
+an 
+
+\bigskip\bigskip\bigskip
+
+entire line 
+
+\bigskip\bigskip\bigskip
+
+filling 
+
+\bigskip\bigskip\bigskip
+
+the 
+
+\bigskip\bigskip\bigskip
+
+entire 
+
+area of the browser to get a demonstration for the autoscaling feature.
+&lt;/amsmath&gt;
+
+
+==== Level 1.1.1.1 ====
+
+&lt;amsmath&gt;
+\tikzdeg
+\begin{figure} 
+\centering
+\begin{tikzpicture}
+\node (a) {E}
+child {node (b) {F}
+}
+child {node (c) {+}
+}
+child {node (d) {T}
+child {node (e) {T} 
+  child {node (f) {F}  child {node  (g) {8}} }  
+  }
+child {node  (h) {*}}
+child {node  (i) {F} child {node  (j) {2}}}
+};
+
+\begin{scope}[every node/.style={font=\footnotesize,color=red}]
+\node[right=of a] (na) {\{E.v${}\coloneqq{}$+T.v\}};
+\node[right=of d] (nd) {\{T.v${}\coloneqq{}$F.v$^{*}$T.v\}};
+\node[right=of i] (ni) {\{F.v${}\coloneqq{}$2\}};
+\node[left=of b] (nb) {\{F.v${}\coloneqq{}$5\}};
+\node[left=of e] (ne) {\{T.v${}\coloneqq{}$F.v\}};
+\node[left=of f] (nf) {\{F.v${}\coloneqq{}$8\}};
+\foreach \i in {a,b,d,e,f,i}
+  \draw[dotted] (\i) -- (n\i);
+\end{scope}
+\end{tikzpicture}
+
+\end{figure}
+k hjhjk hjkhjk hj fgh fgh tzutzu
+&lt;/amsmath&gt;
+
+===== Level 1.1.1.1.1 =====
+&lt;amsmath sans&gt;
+Test asd asd a aqqqqjhgjhgjhgjhgjhgjhgjhgjhgjhgjhgjhgjhgjhgj
+Ich glaube es ist jetzt schon nicht so ganz einfach mit dem
+scheduling dessen, was wir im backendsehen. hjkjhj
+
+&lt;/amsmath&gt;
+
+
+====== Level 1.1.1.1.1.1 ======
+
+======= Level 1.1.1.1.1.1.1 =======
+
+======== Level 1.1.1.1.1.1.1.1 ========
+
+== Level 1.2 ==
+
+=== Level 1.2.1 ===
+
+=== Lebel 1.2.2 ===
+
+== Level 1.3 ==
+
+=== Level 1.3.1 ===
+[[Category:DanteInitialContents]]</text>
+      <sha1>j4vs56yassv6p0an5onvidty8b3360w</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Test/Transclusion</title>
+    <ns>12</ns>
+    <id>57</id>
+    <revision>
+      <id>124</id>
+      <parentid>123</parentid>
+      <timestamp>2024-07-27T20:08:57Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>124</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="34" sha1="db9o00csmtk4plmwiuw9qncfsje0tjv" xml:space="preserve">
+[[Category:DanteInitialContents]]</text>
+      <sha1>db9o00csmtk4plmwiuw9qncfsje0tjv</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:DanteLinks</title>
+    <ns>12</ns>
+    <id>45</id>
+    <revision>
+      <id>126</id>
+      <parentid>125</parentid>
+      <timestamp>2024-07-27T20:10:00Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>126</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="2710" sha1="e4kx4rvrm7puj6vxatjdbhi7j4bhwv1" xml:space="preserve">
+
+
+Window
+* [https://blog.fefe.de \w]
+* [https://blog.fefe.de Fefe \w]
+
+
+Side
+* [https://blog.fefe.de \s]
+* [https://blog.fefe.de Fefe \s]
+
+
+'''Example'''
+* &lt;nowiki&gt;[[Main Page || doub]]&lt;/nowiki&gt;
+* [[Main Page || doub]] 
+
+* &lt;nowiki&gt;[[Main Page \| doub]]&lt;/nowiki&gt;
+* [[Main Page \| doub]]
+
+
+'''Example'''
+* &lt;nowiki&gt;[[Main Page ¦ style=color:green;]]&lt;/nowiki&gt;
+* [[Main Page ¦ style=color:green;]]
+
+'''Example'''
+* &lt;nowiki&gt;[[Help:Demo for DanteLinks ¦ style=color:green;]]&lt;/nowiki&gt;
+* [[Help:Demo for DanteLinks ¦ style=color:green;]]
+
+'''Example:''' Adding style attributes to an external link via broken pipe symbol
+* &lt;nowiki&gt;[https://blog.fefe.de Fefe ¦ style=color:green;]&lt;/nowiki&gt; produces
+* [https://blog.fefe.de Fefe ¦ style=color:green;]
+
+
+'''Example:''' Adding target attribute _blank to an external link opens it in a new tab
+* &lt;nowiki&gt;[https://blog.fefe.de Fefe ¦ target=_blank ]&lt;/nowiki&gt; produces:
+* [https://blog.fefe.de Fefe ¦ target=_blank ]
+
+For use in sidebars only: There is a special class dexternal which can be used to append an external link symbol to link. In the sidebar links which otherwise are external will not show the symbol external. This is as we need query extensions for a number of links in the sidebar and this needs fullurl as parser and this causes the parser to understand the link as external in every case. Therefore we turned this thingie off in sidebar until we find a smart fix for this.
+
+[[Main Page]]
+
+And here [[Main Page]] some text [https://blog.fefe.de Fefe] to see the distances when
+rendering in text.
+
+
+== Requirements ==
+
+* We always want to see where a link goes (internal or external)
+* We always want to know where a link opens (same tab, new tab, new window)
+* We want to allow the user to open the link where he wants to (same tab, new tab, new window)
+* We want to force-open some links in specific modes (same tab, new tab, new window) when the user only clicks normally.
+
+== All Link Types ==
+
+&lt;table&gt;
+&lt;tr&gt;&lt;td&gt;Internal&lt;/td&gt;&lt;td&gt;&lt;nowiki&gt;[[Main Page]]&lt;/nowiki&gt;&lt;/td&gt;&lt;td&gt;[[Main Page]]&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Piped&lt;/td&gt;&lt;td&gt;&lt;nowiki&gt;[[Main Page|Hauptseite]]&lt;/nowiki&gt;&lt;/td&gt;&lt;td&gt;[[Main Page|Hauptseite]]&lt;/td&gt;&lt;/tr&gt;
+
+
+&lt;tr&gt;&lt;td&gt;External numbered&lt;/td&gt;&lt;td&gt;&lt;nowiki&gt;[https://blog.fefe.de]&lt;/nowiki&gt;&lt;/td&gt;&lt;td&gt;[https://blog.fefe.de]&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;External text&lt;/td&gt;&lt;td&gt;&lt;nowiki&gt;[https://blog.fefe.de Fefe]&lt;/nowiki&gt;&lt;/td&gt;&lt;td&gt;[https://blog.fefe.de Fefe]&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;External bare&lt;/td&gt;&lt;td&gt;&lt;nowiki&gt;https://blog.fefe.de&lt;/nowiki&gt;&lt;/td&gt;&lt;td&gt;https://blog.fefe.de&lt;/td&gt;&lt;/tr&gt;
+
+
+&lt;/table&gt;
+
+
+[[Main Page]]s
+
+[https://blog.fefe.de Fefe]
+
+
+[[Murundai\w]]
+
+[https://blog.fefe.de Hurundai\w]
+
+[[Pipetrick (computing)|Pipetrick]] 
+
+
+
+
+[[:Category:Root]]
+[[Category:DanteInitialContents]]</text>
+      <sha1>e4kx4rvrm7puj6vxatjdbhi7j4bhwv1</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Sidebar</title>
+    <ns>12</ns>
+    <id>44</id>
+    <revision>
+      <id>128</id>
+      <parentid>45</parentid>
+      <timestamp>2024-07-27T20:17:01Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>128</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="257" sha1="mhrzfonpkrkm0m2l8yxgdbx5yf6pqc2" xml:space="preserve">
+== Configuring the Sidebar ==
+
+* Main Sidebar File: [[MediaWiki:Sidebar]]
+* Sidebar Tree Files:
+** [[MediaWiki:Sidebar/Areas]]
+** [[MediaWiki:Sidebar/Social]]
+* Sidebar Category Definition: [[MediaWiki:Sidebar/Categories]]
+[[Category:DanteInitialContents]]</text>
+      <sha1>mhrzfonpkrkm0m2l8yxgdbx5yf6pqc2</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Test/DanteLinks</title>
+    <ns>12</ns>
+    <id>48</id>
+    <revision>
+      <id>129</id>
+      <parentid>112</parentid>
+      <timestamp>2024-07-27T20:17:16Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>129</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="211" sha1="fw0c8e9nzmfd59pje2c5mqcx0mhb4h0" xml:space="preserve">* Broken pipes for the internal links do not yet work.
+[[Main Page ¦ style=color:green;]]
+
+== Test for setting target ==
+* [https://www.mediawiki.org/ olgana ¦ target=_blank ]
+[[Category:DanteInitialContents]]</text>
+      <sha1>fw0c8e9nzmfd59pje2c5mqcx0mhb4h0</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Test/Drawio</title>
+    <ns>12</ns>
+    <id>50</id>
+    <revision>
+      <id>130</id>
+      <parentid>114</parentid>
+      <timestamp>2024-07-27T20:17:30Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>130</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="79" sha1="9v475rtow0pgp053k5j7x18mq8rdik9" xml:space="preserve">
+== First Test ==  
+&lt;drawio filename="asd" /&gt;
+[[Category:DanteInitialContents]]</text>
+      <sha1>9v475rtow0pgp053k5j7x18mq8rdik9</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Test/Parsifal/Internal Links</title>
+    <ns>12</ns>
+    <id>75</id>
+    <revision>
+      <id>131</id>
+      <parentid>122</parentid>
+      <timestamp>2024-07-27T20:17:44Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>131</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="130" sha1="iowk69udwpmd0l1uwr1p9v1qwxmu5gr" xml:space="preserve">
+&lt;amsmath&gt;
+
+\dref{Help:Demo for Parsifal}{asd}
+
+\dref{Help:Demo für Parsifal}{qdqd}
+
+&lt;/amsmath&gt;
+[[Category:DanteInitialContents]]</text>
+      <sha1>iowk69udwpmd0l1uwr1p9v1qwxmu5gr</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Test/Parsifal/Page Width</title>
+    <ns>12</ns>
+    <id>51</id>
+    <revision>
+      <id>132</id>
+      <parentid>116</parentid>
+      <timestamp>2024-07-27T20:17:56Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>132</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="1655" sha1="5vaha1o65xgx6oyx8j3hrxh7xuip9sz" xml:space="preserve">== Test for Parsifal Page Width ==
+Pre
+&lt;amsmath&gt;
+Ei nz el test aq qwehj hjk hjk 789
+ 
+Rule of 14cm
+\hrule height 1px depth 1px width 14cm \relax
+
+Rule of 15cm
+\hrule height 1px depth 1px width 15cm \relax
+
+Rule of 16cm
+\hrule height 1px depth 1px width 16cm \relax
+&lt;/amsmath&gt;
+
+== Setting Page Width ==
+&lt;amsmath slim b&gt;
+This is a slim page 
+&lt;/amsmath&gt;
+
+&lt;amsmath width="25cm"&gt;
+Width 25cm 
+&lt;/amsmath&gt;
+
+&lt;amsmath width="5cm"&gt;
+Width 5cm 
+&lt;/amsmath&gt;
+
+&lt;amsmath width="15cm"&gt;
+Width 15cm 
+&lt;/amsmath&gt;
+
+&lt;amsmath width="14cm"&gt;
+Width 14cm 
+&lt;/amsmath&gt;
+
+&lt;amsmath width="13cm"&gt;
+Width 13cm 
+&lt;/amsmath&gt;
+
+
+
+&lt;amsmath width="50cm"&gt;
+Width 50cm  
+&lt;/amsmath&gt;
+
+== Wide Page ==
+&lt;amsmath wide&gt;
+This is a wide page which is able to contain quite
+a lot of text provided we enter enough text to fill the
+the page which has a lot of space.  
+
+{\color{red}asd asd asd asd asd asd asd asd}
+
+\begin{enumerate}
+\item a
+\item b
+\end{enumerate}
+aSome more
+
+&lt;/amsmath&gt;
+
+&lt;amsmath wide&gt;
+This is a wide pagej
+&lt;/amsmath&gt;
+
+&lt;amsmath&gt;
+This is a normal page.
+&lt;/amsmath&gt;
+
+== Setting Size ==
+&lt;amsmath width="1cm" scale="3" b&gt;
+One centimetersss s
+
+&lt;/amsmath&gt;
+
+== PDF Scale Adjustment ==
+&lt;amsmath pdfscale="7"&gt;
+7
+&lt;/amsmath&gt;
+
+&lt;amsmath pdfscale="8"&gt;
+8
+&lt;/amsmath&gt;
+
+&lt;amsmath pdfscale="9"&gt;
+9
+&lt;/amsmath&gt;
+
+&lt;amsmath pdfscale="20"&gt;
+20
+&lt;/amsmath&gt;
+
+&lt;amsmath pdfscale="1"&gt;
+1 20
+&lt;/amsmath&gt;
+
+
+== Margin adjustment ==
+&lt;amsmath&gt;
+No margin adjustments
+&lt;/amsmath&gt;
+
+&lt;amsmath margin="0.07cm"&gt;
+Now margin=0.07cm
+&lt;/amsmath&gt;
+
+&lt;amsmath margin="0.5cm"&gt;
+Now margin=0.5cm
+&lt;/amsmath&gt;
+
+&lt;amsmath margin="{0.0cm 0.0cm 0.0cm 3cm}"&gt;
+Now margin=0.0cm 0.0cm 0.0cm 3cm  as in left bottom right top
+&lt;/amsmath&gt;
+[[Category:DanteInitialContents]]</text>
+      <sha1>5vaha1o65xgx6oyx8j3hrxh7xuip9sz</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Test/Parsifal Raw Test</title>
+    <ns>12</ns>
+    <id>52</id>
+    <revision>
+      <id>133</id>
+      <parentid>110</parentid>
+      <timestamp>2024-07-27T20:18:11Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>133</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="170" sha1="jou9ssba6i4y1511d49ctg6k8agml6t" xml:space="preserve">This is a test for the raw parsifal tag tex.
+
+== First ==
+&lt;tex&gt;
+\documentclass{article}
+\begin{document}
+asd khjks
+\end{document}
+&lt;/tex&gt;
+[[Category:DanteInitialContents]]</text>
+      <sha1>jou9ssba6i4y1511d49ctg6k8agml6t</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Test/Reveal</title>
+    <ns>12</ns>
+    <id>49</id>
+    <revision>
+      <id>134</id>
+      <parentid>115</parentid>
+      <timestamp>2024-07-27T20:18:23Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>134</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="229" sha1="79r3kudp4povk94cubqufqs1b669x7c" xml:space="preserve">
+__SLIDES__
+
+__NOTOC__
+
+==One==
+&lt;beamer b&gt;
+one
+
+qwe
+
+qwe
+
+qwe
+
+
+&lt;/beamer&gt;
+
+==Two==
+&lt;beamer b&gt;
+Two qwd
+&lt;/beamer&gt;
+
+== Three ==
+&lt;amsmath&gt;
+asd asd
+&lt;/amsmath&gt;
+
+== Four ==
+&lt;amsmath&gt;
+asd asdv
+&lt;/amsmath&gt;
+[[Category:DanteInitialContents]]</text>
+      <sha1>79r3kudp4povk94cubqufqs1b669x7c</sha1>
     </revision>
   </page>
   <page>
@@ -2309,25 +3057,26 @@ magic-line-identifier-for-inclusion
     <ns>8</ns>
     <id>8</id>
     <revision>
-      <id>8</id>
-      <timestamp>2023-11-08T13:01:21Z</timestamp>
+      <id>137</id>
+      <parentid>8</parentid>
+      <timestamp>2024-07-27T20:26:09Z</timestamp>
       <contributor>
-        <username>imported&gt;Dir</username>
-        <id>0</id>
+        <username>Admin</username>
+        <id>1</id>
       </contributor>
-      <origin>8</origin>
+      <origin>137</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="604" sha1="j06bpxm15xclnl7ky1olcxazzdjbb7y" xml:space="preserve">This page is a system page.
+      <text bytes="634" sha1="pgbqdlzq7e1303kgjikakt3pu9fk4si" xml:space="preserve">This page is a system page.
 
 It must conform to the following rules:
 
 * It contains data in strict JSON format, which must be contained in a PRE-tag.
-* Top-level the JSON data is an array.
+* At top-level, this JSON data is an array.
 * The array contains objects of one of the following types:
 ** {"root": &lt;string&gt;, "depth": &lt;number&gt;}
 ** {"name": &lt;string&gt;}
-** Every object may contain an optional "style" field.
+** Every object may contain an optional "style" key whose value is a CSS string.
 ** Every object may contain an optional "classname" field.
 
 &lt;pre&gt;
@@ -2338,9 +3087,8 @@ It must conform to the following rules:
 ]
 &lt;/pre&gt;
 
-
 [[Category:DanteInitialContents]]</text>
-      <sha1>j06bpxm15xclnl7ky1olcxazzdjbb7y</sha1>
+      <sha1>pgbqdlzq7e1303kgjikakt3pu9fk4si</sha1>
     </revision>
   </page>
   <page>
@@ -2403,17 +3151,17 @@ It must conform to the following rules:
     <ns>8</ns>
     <id>17</id>
     <revision>
-      <id>97</id>
-      <parentid>17</parentid>
-      <timestamp>2024-07-27T19:18:12Z</timestamp>
+      <id>136</id>
+      <parentid>135</parentid>
+      <timestamp>2024-07-27T20:21:21Z</timestamp>
       <contributor>
         <username>Admin</username>
         <id>1</id>
       </contributor>
-      <origin>97</origin>
+      <origin>136</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
-      <text bytes="3484" sha1="as1nw8pi9pquf9rjtzr2i7mtf3vzj46" xml:space="preserve">&lt;pre&gt;
+      <text bytes="3589" sha1="0l14t5d5951omy2kskc75hsbkrvg1kg" xml:space="preserve">&lt;pre&gt;
 {{#tree: extensions=["persist"] | 
 * &lt;b&gt;[{{fullurl:Main Page}} Main Page]&lt;/b&gt;
 * [[MediaWiki:CreatePage|Create Page]]
@@ -2432,6 +3180,7 @@ It must conform to the following rules:
 ** [{{fullurl:MediaWiki:Sidebar/Categories|action=edit}} Categories]
 ** [{{fullurl:MediaWiki:Sidebar/Navigation|action=edit}} Navigation]
 ** [{{fullurl:MediaWiki:Sidebar/UI|action=edit}} UI]
+** [{{fullurl:MediaWiki:Sidebar/Social|action=edit}} Social]
 
 * &lt;b title="Query for pages in specific namespaces"&gt;Lists &amp; Queries&lt;/b&gt;
 ** [{{fullurl:Special:AllPages}} All Pages]
@@ -2441,9 +3190,10 @@ It must conform to the following rules:
 ** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=2}} User]
 ** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=12}} Help]
 ** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=4}} Project]
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=2100}} Snip]
 ** [{{fullurl:Special:ListFiles}} Files]
 
-* &lt;b title="Found a bug"&gt;Issues&lt;/b&gt;
+* &lt;b title="Found a bug"&gt;Issue Reporting&lt;/b&gt;
 ** [https://github.com/clecap/dante-delta/issues DanteDelta Issues \s]
 ** [https://github.com/clecap/dante-wiki/issues DanteWiki Issues \s]
 ** [https://github.com/clecap/dante-wiki-production/issues DanteProduction Issues \s]
@@ -2456,7 +3206,6 @@ It must conform to the following rules:
 ** [[Special:WantedPages | Missing Pages]]
 
 * &lt;b&gt;Demos &amp; Tests&lt;/b&gt;
-** [[Test/Simple Test Page]]
 ** Javascript Gadget Tests
 *** &lt;b&gt;[javascript:window.DANTE.testConsole() window.DANTE.testConsole()]&lt;/b&gt;
 *** &lt;b&gt;[javascript:Dante.testConsoleZwei() Dante.testConsoleZwei()]&lt;/b&gt;
@@ -2494,7 +3243,7 @@ It must conform to the following rules:
 
 
 [[Category:DanteInitialContents]]</text>
-      <sha1>as1nw8pi9pquf9rjtzr2i7mtf3vzj46</sha1>
+      <sha1>0l14t5d5951omy2kskc75hsbkrvg1kg</sha1>
     </revision>
   </page>
   <page>
