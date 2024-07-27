@@ -1878,6 +1878,44 @@ asd asdv
     </revision>
   </page>
   <page>
+    <title>Help:Test/Parsifal/Syntax Highlighting</title>
+    <ns>12</ns>
+    <id>42</id>
+    <revision>
+      <id>139</id>
+      <parentid>138</parentid>
+      <timestamp>2024-07-27T20:28:43Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>139</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="299" sha1="pg3c6yti2vwimlshsj3jxqa30f79bbh" xml:space="preserve">
+
+== Simple Highlight ==
+&lt;syntaxhighlight&gt;
+let x = 7;
+&lt;/syntaxhighlight&gt;
+
+== More Complex Highlight ==
+‎&lt;syntaxhighlight lang="python"&gt;
+def quick_sort(arr):
+	less = []
+	pivot_list = []
+	more = []
+	if len(arr) &lt;= 1:
+		return arr
+	else:
+		pass
+‎&lt;/syntaxhighlight&gt;
+[[Category:DanteInitialContents]]</text>
+      <sha1>pg3c6yti2vwimlshsj3jxqa30f79bbh</sha1>
+    </revision>
+  </page>
+  <page>
     <title>MediaWiki:Aboutsite</title>
     <ns>8</ns>
     <id>10</id>
