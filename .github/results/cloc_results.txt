@@ -1,13 +1,13 @@
-     100 files     200 files     226 text files.
-classified 224 filesDuplicate file check 224 files (212 known unique)Unique:      100 files                                          Unique:      200 files                                               219 unique files.                              
+     100 files     200 files     227 text files.
+classified 225 filesDuplicate file check 225 files (213 known unique)Unique:      100 files                                          Unique:      200 files                                               220 unique files.                              
 Counting:  100Counting:  200      36 files ignored.
 
-github.com/AlDanial/cloc v 1.90  T=0.13 s (1561.1 files/s, 326175.6 lines/s)
+github.com/AlDanial/cloc v 1.90  T=0.13 s (1566.4 files/s, 325645.0 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
 PHP                             64           3725           6805          14264
-XML                              5           1007              0           6563
+XML                              6           1007              0           6564
 Bourne Shell                    67           1124            656           2773
 Markdown                        24            611              0           1935
 JSON                            16              2              0            723
@@ -18,5 +18,5 @@ Python                           1              9              1             33
 HTML                             2              4              0             17
 INI                              1              4              5              9
 -------------------------------------------------------------------------------
-SUM:                           199           6690           7704          27184
+SUM:                           200           6690           7704          27185
 -------------------------------------------------------------------------------
