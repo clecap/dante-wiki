@@ -83,3 +83,14 @@ and include a full Software Bill of Material (SBOM) and accredited tests into ou
 
 [![Scorecard supply-chain security](https://github.com/clecap/dante-wiki/actions/workflows/scorecard.yml/badge.svg)](https://github.com/clecap/dante-wiki/actions/workflows/scorecard.yml)
 
+
+
+
+## Compliance
+
+GDPR
+
+HIPAA
+
+WCAG
+
