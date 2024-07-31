@@ -27,8 +27,6 @@ printf "\n$GREEN---Taking down configuration...$RESET\n"
 printf "$GREEN---DONE$RESET\n" ;
 
 printf "\n$GREEN---Building image dante-wiki if necessary...$RESET\n" ; 
-#  cd ${TOP_DIR}/images/dante
-# deprecated TODO above 
   docker build -t dante-wiki:latest $TOP_DIR/images/dante-wiki/src
 printf "$GREEN---DONE$RESET\n"
 

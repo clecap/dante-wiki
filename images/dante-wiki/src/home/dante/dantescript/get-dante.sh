@@ -57,6 +57,10 @@ exec 1>&1 2>&2
 
 
 
+
+
+
+
 #   inject only, after LocalSettings.php has been generated
 if [ -f "$MOUNT/$TARGET/LocalSettings.php" ]; then
     printf "\n*** get-dante.sh:  connecting to Mediawiki via an injection into LocalSettings.pgp ...\n"

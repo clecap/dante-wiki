@@ -4,7 +4,7 @@ This is the README file for a development machine.
 
 ## Concepts
 
-## Prepare Requirements on Target Machine
+## Requirements on Target Machine
 
 ### 1. Install Docker on Target Machine
 * Follow the instructions at https://docs.docker.com/engine/install/debian/
@@ -19,22 +19,31 @@ This is the README file for a development machine.
 * Configure helper according to https://docs.github.com/en/get-started/getting-started-with-git/caching-your-github-credentials-in-git
 
 
-### 3. Clone the github repository
 
-  ```git clone https://github.com/clecap/continuous-deployment-test ```
+## Docker Tags Used
+
+* `stable`: The latest version which is running in a stable fashion and is ready for production.
+* `development`: The version we are currently developing and changing on.
+* `latest`: Is always the most recent image we generated.
+
+## Build Process Local
+
+
+
+## Docker Image Build on Dockerhub
+
+
+
+
+# OLD STUFF
 
 ## Build Docker Images 
 
-We use 3 docker images:
-1. `tex`: Very long build time, contains the complete latex installation and a time consuming pymupdf installation
-2. `lap`: linux-apache-php stack.
-3. `mysql`: Mysql stack
 
-### Build Locally
 
-1. Build tex image: ```images/tex/bin/generate.sh```
-2. Build lap, based on tex image: ```images/lap/bin/generate.sh```
-3. Build mysql image: ```images/my-mysql/bin/generate.sh```
+
+
+
 
 ### Build on DockerHub
 
@@ -111,24 +120,6 @@ On the machine:  ```docker exec -it CONTAINER_NAME /bin/ash```
 From outside:  ssh -i login-key -p 2222 cap@localhost
 
 login-key is to be found on /images/ssh of the machine on which the container was run (do not confuse machines !)
-
-
-
-#### Look into images
-
-ssh:
-tex:
-
-my-mysql:  ssh -i login-key cap@IP-OF-MY-MYSQL-CONTAINER‚
-
-wget --no-check-certificate
-
-#### Clean
-
-docker stop my-lap-container
-docker rm my-lap-container
-docker stop my-mysql
-docker rm my-mysql
 
 
 
