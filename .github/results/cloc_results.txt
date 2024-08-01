@@ -1,17 +1,17 @@
      100 files     194 text files.
-classified 193 filesDuplicate file check 193 files (184 known unique)Unique:      100 files                                               189 unique files.                              
+classified 193 filesDuplicate file check 193 files (183 known unique)Unique:      100 files                                               189 unique files.                              
 Counting:  100      32 files ignored.
 
-github.com/AlDanial/cloc v 1.90  T=0.13 s (1339.6 files/s, 274048.2 lines/s)
+github.com/AlDanial/cloc v 1.90  T=0.11 s (1600.3 files/s, 327440.5 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
 XML                              6           2227              0          11937
 PHP                             36           1892           3516           7236
 Bourne Shell                    67           1128            654           2773
-Markdown                        22            467              0           1228
+Markdown                        22            467              0           1229
 YAML                            16            127            109            599
-JSON                            13              2              0            538
+JSON                            13              2              0            543
 Dockerfile                       1             64            127            200
 SVG                              5              0              1             40
 JavaScript                       1              0              0             35
@@ -19,5 +19,5 @@ Python                           1              9              1             33
 HTML                             2              4              0             17
 INI                              1              4              5              9
 -------------------------------------------------------------------------------
-SUM:                           171           5924           4413          24645
+SUM:                           171           5924           4413          24651
 -------------------------------------------------------------------------------
