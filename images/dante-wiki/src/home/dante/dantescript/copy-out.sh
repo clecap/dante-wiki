@@ -36,7 +36,8 @@ printf "DONE cleaning up old stuff\n"
 printf "\n*** copy-out.sh: Copying in index.html and favicon.ico and error404.php to /mnt ..."
   cp /home/dante/html/index.html    /mnt
   cp /home/dante/html/favicon.ico   /mnt
-  cp /home/dante/html/error404.php /mnt
+  cp /home/dante/html/error.php     /mnt
+
   exec 1>&1 2>&2
 printf "DONE\n"
 

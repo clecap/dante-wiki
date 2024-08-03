@@ -140,6 +140,14 @@ printf "*** Adding reference to DanteSettings.php ... "
 printf  "DONE\n"
 
 
+
+
+printf "\n*** Setting password for apache..."
+  htpasswd -cb /etc/apache2/.htpasswd debug "${APACHE_DEBUG_PASSWORD}"
+printf "DONE setting debug password for apache\n
+
+
+
 set +e 
 
 
