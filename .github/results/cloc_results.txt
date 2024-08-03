@@ -1,23 +1,23 @@
-     100 files     195 text files.
-classified 194 filesDuplicate file check 194 files (185 known unique)Unique:      100 files                                               190 unique files.                              
+     100 files     193 text files.
+classified 192 filesDuplicate file check 192 files (183 known unique)Unique:      100 files                                               188 unique files.                              
 Counting:  100      33 files ignored.
 
-github.com/AlDanial/cloc v 1.90  T=0.14 s (1236.7 files/s, 275404.9 lines/s)
+github.com/AlDanial/cloc v 1.90  T=0.11 s (1492.4 files/s, 336019.1 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
 XML                              7           2865              0          14813
 PHP                             36           1892           3516           7236
-Bourne Shell                    67           1128            655           2776
-Markdown                        22            464              0           1227
-YAML                            17            130            117            612
+Bourne Shell                    67           1128            679           2752
+Markdown                        21            461              0           1224
+YAML                            16            129            117            596
 JSON                            13              2              0            543
 Dockerfile                       1             64            127            200
 SVG                              5              0              1             40
-JavaScript                       1              0              0             35
+JavaScript                       1              0              0             33
 Python                           1              9              1             33
 HTML                             2              4              0             17
 INI                              1              4              5              9
 -------------------------------------------------------------------------------
-SUM:                           173           6562           4422          27541
+SUM:                           171           6558           4446          27496
 -------------------------------------------------------------------------------
