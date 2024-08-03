@@ -88,9 +88,4 @@ and include a full Software Bill of Material (SBOM) and accredited tests into ou
 
 ## Compliance
 
-GDPR
-
-HIPAA
-
-WCAG
-
+GDPR: This software is intended for one user only. It uses only cookies and local status which is technical necessary. It does not store personal data.

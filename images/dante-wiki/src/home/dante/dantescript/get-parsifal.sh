@@ -12,6 +12,10 @@ printf "\n*** get-parsifal.sh \n"
 
 if [ -d "$MOUNT/$TARGET/extensions/Parsifal/.git" ]; then
     printf "\n*** get-parsifal.sh: Git directory ${MOUNT}/$TARGET/extensions/Parsifal/.git already exists ... doing a PULL \n"
+    printf "\n*** get-parsifal.sh: Setting git safe directory exception for ${MOUNT}${TARGET}/extensions/Parsifal...\n"
+      # need to fix differences in userids of directory and of calling shell script, recommended by git itself
+        git config --global --add safe.directory ${MOUNT}${TARGET}/extensions/Parsifal
+    printf "DONE setting git safe directory exception\n"
       git -C ${MOUNT}/${TARGET}/extensions/parsifal pull origin ${PARSIFAL_BRANCH} ;       exec 1>&1 2>&2
     printf "DONE doing a pull\n"
   else
