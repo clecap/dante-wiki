@@ -1,12 +1,12 @@
-     100 files     193 text files.
-classified 192 filesDuplicate file check 192 files (183 known unique)Unique:      100 files                                               188 unique files.                              
-Counting:  100      32 files ignored.
+     100 files     194 text files.
+classified 193 filesDuplicate file check 193 files (184 known unique)Unique:      100 files                                               189 unique files.                              
+Counting:  100      33 files ignored.
 
-github.com/AlDanial/cloc v 1.90  T=0.11 s (1599.7 files/s, 327318.5 lines/s)
+github.com/AlDanial/cloc v 1.90  T=0.12 s (1468.0 files/s, 328601.9 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-XML                              6           2227              0          11937
+XML                              7           2865              0          14813
 PHP                             36           1892           3516           7236
 Bourne Shell                    67           1128            654           2773
 Markdown                        22            467              0           1229
@@ -19,5 +19,5 @@ Python                           1              9              1             33
 HTML                             2              4              0             17
 INI                              1              4              5              9
 -------------------------------------------------------------------------------
-SUM:                           171           5924           4413          24651
+SUM:                           172           6562           4413          27527
 -------------------------------------------------------------------------------
