@@ -38,14 +38,14 @@ jobs:
       run: |
         mkdir -p .github/results
         ls -alg
-        echo "Doing syft version"
-        syft --version
         echo "Done doing syft version"
         syft scan --help
         echo "Done doing syft help"
-        syft scan dante-wiki:latest          -o json        > .github/results/sbom-dante-wiki.json
-        syft scan dante-wiki:latest          -o spdx        > .github/results/sbom-dante-wiki.spdx
-        syft scan dante-wiki:latest          -o cyclonedx   > .github/results/sbom-dante-wiki.xml
+        syft docker:clecap:dante-wiki:latest  -o json        > .github/results/sbom-dante-wiki-docker.json
+        syft dir:.  -o json        > .github/results/sbom-dante-wiki-docker-repo.json
+#        syft scan dante-wiki:latest          -o json        > .github/results/sbom-dante-wiki.json
+#        syft scan dante-wiki:latest          -o spdx        > .github/results/sbom-dante-wiki.spdx
+#        syft scan dante-wiki:latest          -o cyclonedx   > .github/results/sbom-dante-wiki.xml
 
 #  --output syft-json   produced error message
 #  --output json        produced error message
