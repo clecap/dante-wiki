@@ -17,9 +17,7 @@ module.exports = {
   plugins: [
   ],
   rules: {
-    'prettier/prettier': 'error',
     'react/prop-types': 'off',
-    '@typescript-eslint/no-unused-vars': 'warn',
     'no-console': 'warn',
     'no-debugger': 'error',
     'eqeqeq': ['error', 'always'],
