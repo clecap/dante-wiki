@@ -6,42 +6,19 @@ source /home/dante/dantescript/common-defs.sh
 
 printf "${GREEN}*** THIS IS /dantescript/init.sh ***** ${RESET}"
 
+
+
+# check if we succeeded to generate LocalSettings.php
+if [ -e "${MOUNT}/${TARGET}/LocalSettings.php" ]; then
+  printf "${GREEN} *** init.sh finds the system already in initialized state - exiting init.sh\n"
+  exit 0
+fi
+
+
 ###### send mail upon completion ????
 #### favicon must be included into the thing - and at the dockerfile level ## todo
 #### check if we are already initialized ##### TODO
 ####### crontab entries for backup and for job queue TODO
-
-
-#printf "\n*** init.sh: Listing of ${MOUNT}\n"
-#  ls -alg ${MOUNT}
-#  exec 1>&1 2>&2
-#printf "DONE\n"
-
-#printf "\n*** init.sh: Listing of ${MOUNT}/${TARGET}\n"
-#  ls -alg ${MOUNT}/${TARGET}
-#  exec 1>&1 2>&2
-#printf "DONE\n"
-
-#printf "\n*** init.sh: Deleting phpinfo.php..."
-#  rm -f ${MOUNT}/phpinfo.php
-#  exec 1>&1 2>&2
-#printf "DONE\n"
-
-#printf "\n*** init.sh: Copying in file to be used as favicon..."
-#  cp /home/dante/caravaggio-180x180.png ${MOUNT}/${TARGET}/caravaggio-180x180.png
-#  exec 1>&1 2>&2
-#printf "DONE\n"
-
-#printf "\n*** init.sh: Listing of ${MOUNT}\n"
-#  ls -alg ${MOUNT}
-#  exec 1>&1 2>&2
-#printf "DONE\n"
-
-#printf "\n*** init.sh: Listing of ${MOUNT}/${TARGET}\n"
-#  ls -alg ${MOUNT}/${TARGET}
-#  exec 1>&1 2>&2
-#printf "DONE\n"
-
 
 MEDIAWIKI_DB_HOST=dante-mariadb-container
 MEDIAWIKI_DB_TYPE=mysql
@@ -199,6 +176,10 @@ printf "\n**** init.sh RUNNING: refreshFileHeaders \n"
   php ${MOUNT}/${TARGET}/maintenance/refreshFileHeaders.php --verbose
   exec 1>&1 2>&2
 printf "DONE refreshFileHeaders.php\n"
+
+
+
+
 
 # touch the file LocalSettings.php to refresh the cache
 printf "\n\n**** init.sh: Touching LocalSettings.php to refresh the cache..."

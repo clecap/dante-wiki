@@ -8,12 +8,21 @@ trap 'abort' ERR                       # call abort on error
 #### TODO MUST ABORT COMPLETEL including upstream in case of error - also for some of the other dante scripts. and need an abotzt in lapentry-.sh
  
 if [ -d "$MOUNT/$TARGET/.git" ]; then
-    printf "\n*** get-dante.sh: Git directory ${MOUNT}/$TARGET/.git already exists \n"
+    printf "\n*** get-dante.sh: Git directory ${MOUNT}$TARGET/.git already exists ... will be doing a PULL\n"
+    GDIR=${MOUNT}${TARGET}/.git
+    if ! git config --global --get-all safe.directory | grep -q "^${GDIR}$"; then
+      printf "\n*** get-dante.sh needs to add directory $GDIR to safe.directory."
+        git config --global --add safe.directory $GDIR
+      printf "DONE adding to safe.directory"
+    else
+      printf "\n*** get-dante.sh already sees directory $DIR listed in safe.directory."
+    fi
     printf "\n*** get-dante.sh: Setting git safe directory exception for ${MOUNT}${TARGET}...\n"
       # need to fix differences in userids of directory and of calling shell script, recommended by git itself
         git config --global --add safe.directory ${MOUNT}${TARGET}
     printf "DONE setting git safe directory exception\n"
-    printf "\n*** get-dante.sh: Pulling dante...\n"
+
+    printf "\n*** get-dante.sh: Now pulling dante...\n"
       git -C ${MOUNT}/${TARGET} pull origin ${DANTE_BRANCH} ;       exec 1>&1 2>&2
     printf "DONE\n"
   else

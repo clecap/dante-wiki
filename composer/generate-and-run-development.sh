@@ -49,7 +49,7 @@ while [ "$SERVER_STATUS" != "true" ]; do
   sleep 10
 done
 
-# then wait until it gets healthy 
+# then wait until webserver container status gets healthy 
 while [ "$SERVER_STATUS" != "true" ]; do
   printf "\n*** Will check if container is healthy \n"
   SERVER_STATUS=$(docker inspect --format='{{.State.Health.Status}}' $SERVICE_CONTAINER)
@@ -63,6 +63,32 @@ while [ "$SERVER_STATUS" != "true" ]; do
 done
 
 printf "${GREEN}*** Webserver is healthy!${RESET}\n"
+
+# wait until webserver is servicing requests
+url="https://localhost:4443"
+timeout=60
+interval=5
+start_time=$(date +%s)
+
+while true; do
+  if curl --output /dev/null --silent --head --insecure --fail "$url"; then
+    printf "${GREEN}*** Webservice is serving requests"
+    break
+  else
+    printf "\nWaiting for the webservice to become ready..."
+  fi
+  current_time=$(date +%s)
+  elapsed_time=$(( current_time - start_time ))
+  if [ $elapsed_time -ge $timeout ]; then
+    echo "Timed out waiting for the server."
+    exit 1
+  fi
+
+  sleep 5
+done
+
+
+
 
 if [ `uname` == "Darwin" ]; then 
   printf "\n *** Attempting to start a local Chrome browser\n";

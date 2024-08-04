@@ -190,6 +190,7 @@ RUN \
     apt-get install -y   --no-install-recommends  php-fpm                                                                  && \
     apt-get install -y   --no-install-recommends  default-mysql-client                                                     && \
     apt-get install -y   --no-install-recommends  curl  unzip  git  diffutils                                              && \
+    apt-get install -y   --no-install-recommends  logrotate                                                                && \
     #   vim:        it is very convenient to have a vi editor in place for development inside of the container
     apt-get install -y   --no-install-recommends vim                                                                       && \
     #   configure git: prevent hints about the default branch master
@@ -204,7 +205,7 @@ RUN \
     apt-get install -y --no-install-recommends  php-dev  make                                                              && \
     pecl channel-update pecl.php.net                                                                                       && \
     pecl install ds                                                                                                        && \
-    apt-get purge -y  php-dev  make                                                                                           && \
+    apt-get purge -y  php-dev  make                                                                                        && \
     echo "*** *** *** Install python and pip and then pygments for supporting TeX and Parsifal "                           && \
     apt-get install -y --no-install-recommends  python3  python3-pip                                                       && \
     ln -sf python3 /usr/bin/python                                                                                         && \
