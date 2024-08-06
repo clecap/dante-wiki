@@ -1,8 +1,8 @@
-     100 files     195 text files.
-classified 194 filesDuplicate file check 194 files (184 known unique)Unique:      100 files                                               189 unique files.                              
+     100 files     197 text files.
+classified 196 filesDuplicate file check 196 files (187 known unique)Unique:      100 files                                               191 unique files.                              
 Counting:  100      34 files ignored.
 
-github.com/AlDanial/cloc v 1.90  T=0.13 s (1363.6 files/s, 356512.3 lines/s)
+github.com/AlDanial/cloc v 1.90  T=0.13 s (1361.2 files/s, 349946.5 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
@@ -14,10 +14,11 @@ YAML                            16            129            120            593
 JSON                            13              2              0            543
 Dockerfile                       1             64            127            201
 SVG                              5              0              1             40
-JavaScript                       1              0              0             33
+JavaScript                       2              1              0             34
 Python                           1              9              1             33
-HTML                             2              4              0             17
+HTML                             3             15              1             28
 INI                              1              4              5              9
+CSS                              1              1              0              1
 -------------------------------------------------------------------------------
-SUM:                           171           7475           4426          32806
+SUM:                           174           7488           4427          32819
 -------------------------------------------------------------------------------
