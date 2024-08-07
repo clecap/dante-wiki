@@ -34,7 +34,6 @@ services:
     depends_on:
       copy-to-host:
         condition: service_completed_successfully
-    volumes:
     ports:
       - "8080:80"
       - "4443:443"
