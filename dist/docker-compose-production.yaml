@@ -63,7 +63,7 @@ networks:
   dante-network:
 
 volumes:
-  data
+  data:
 
 
 secrets:
