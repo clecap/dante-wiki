@@ -1,16 +1,16 @@
      100 files     197 text files.
-classified 196 filesDuplicate file check 196 files (184 known unique)Unique:      100 files                                               190 unique files.                              
+classified 196 filesDuplicate file check 196 files (185 known unique)Unique:      100 files                                               190 unique files.                              
 Counting:  100      35 files ignored.
 
-github.com/AlDanial/cloc v 1.90  T=0.13 s (1334.6 files/s, 346806.3 lines/s)
+github.com/AlDanial/cloc v 1.90  T=0.13 s (1362.2 files/s, 353990.0 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
 XML                              7           3768              0          20088
 PHP                             35           1893           3516           7232
-Bourne Shell                    69           1155            665           2812
+Bourne Shell                    69           1157            666           2813
 Markdown                        22            470              0           1225
-YAML                            15            116            113            548
+YAML                            15            119            113            545
 JSON                            13              2              0            543
 Dockerfile                       1             64            127            201
 SVG                              5              0              1             40
@@ -19,5 +19,5 @@ Python                           1              9              1             33
 HTML                             2              4              0             17
 INI                              1              4              5              9
 -------------------------------------------------------------------------------
-SUM:                           172           7485           4428          32781
+SUM:                           172           7490           4429          32779
 -------------------------------------------------------------------------------
