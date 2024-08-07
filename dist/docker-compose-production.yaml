@@ -68,4 +68,4 @@ volumes:
 
 secrets:
   configuration:
-    file: ../private/configuration.sh
+    file: ./private/configuration.sh

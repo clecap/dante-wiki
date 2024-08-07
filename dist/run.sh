@@ -12,6 +12,10 @@ mkdir -p volumes/mysql-init
 curl -fsSL -o volumes/mysql-init/init.sh https://raw.githubusercontent.com/clecap/dante-wiki/$BRANCH/volumes/mysql-init/init.sh
 chmod 755 volumes/mysql-init/init.sh
 
+mkdir -p private
+chmod 700 private
+
+
 curl -fsSL -o docker-compose-production.yaml https://raw.githubusercontent.com/clecap/dante-wiki/$BRANCH/dist/docker-compose-production.yaml
 
 docker-compose -f docker-compose-production.yaml down
