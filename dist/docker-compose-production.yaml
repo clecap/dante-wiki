@@ -62,7 +62,8 @@ services:
 networks:
   dante-network:
 
-
+volumes:
+  data
 
 
 secrets:
