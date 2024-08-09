@@ -54,7 +54,7 @@ if [ "$REGENERATE_PRIVATE_KEY" = "true" ]; then
       echo "Save the attached file (for example to /tmp/id_rsa.pub) and "
       echo "install it to the ssl backup host using "
       echo 
-      echo "ssh-copy-id -i /tmp/id_rsa.pub  ${BACKUP_USER_SSL}@${BACKUP_HOST_SSL} "
+      echo "ssh-copy-id -i /tmp/id_rsa.pub  ${BACKUP_USER_SSH}@${BACKUP_HOST_SSH} "
       echo
       echo
       echo "--$BOUNDARY"
