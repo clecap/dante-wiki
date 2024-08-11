@@ -321,10 +321,12 @@ RUN composer config --no-plugins allow-plugins.wikimedia/composer-merge-plugin t
     echo "*** *** *** Install support library for markdown "                                   && \
     COMPOSER=${TOP_PATH}/composer.local.json  composer require erusev/parsedown                && \
     COMPOSER=${TOP_PATH}/composer.local.json  composer require erusev/parsedown-extra                  && \
-    COMPOSER=${TOP_PATH}/composer.local.json  composer require benjaminhoegh/parsedown-extended 
+    COMPOSER=${TOP_PATH}/composer.local.json  composer require benjaminhoegh/parsedown-extended   && \
+#   The next 2 are required for openai / chatgpt integration
+    COMPOSER=${TOP_PATH}/composer.local.json  composer require php-http/discovery    && \
+    COMPOSER=${TOP_PATH}/composer.local.json  composer require openai-php/client       && \
 #   Install requirements for deepl integration in DantePresentations
-## TODO: has some small dependency problem which we solve later
-##    COMPOSER=${TOP_PATH}/composer.local.json  composer require deeplcom/deepl-php
+    COMPOSER=${TOP_PATH}/composer.local.json  composer require deeplcom/deepl-php
 
 
 ##

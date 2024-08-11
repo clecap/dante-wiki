@@ -18,7 +18,7 @@ if [ -d "$MOUNT/$TARGET/extensions/Parsifal/.git" ]; then
         git config --global --add safe.directory $GDIR
       printf "DONE adding to safe.directory"
     else
-      printf "\n*** get-parsifal.sh already sees directory $DIR listed in safe.directory."
+      printf "\n*** get-parsifal.sh already sees directory $GDIR listed in safe.directory."
     fi
     printf "\n*** get-parsifal.sh: Now pulling Parsifal \n"
       git -C ${MOUNT}/${TARGET}/extensions/Parsifal pull origin ${PARSIFAL_BRANCH} ;       exec 1>&1 2>&2
