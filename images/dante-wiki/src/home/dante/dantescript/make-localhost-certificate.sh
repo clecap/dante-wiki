@@ -70,6 +70,6 @@ else
 fi  
 
 
-  exec 1>&1 2>&2
+exec 1>&1 2>&2
 
-  exec 1>&1 2>&2
+trap -

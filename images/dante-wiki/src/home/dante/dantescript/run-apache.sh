@@ -4,9 +4,14 @@ source /home/dante/dantescript/common-defs.sh
 
 printf "*** THIS IS run-apache.sh\n\n"
 
+
+set +e
+
 printf "\n*** run-apache.sh: chown all files to www-data...\n"
   chown -R www-data:www-data ${MOUNT}/${TARGET} ; exec 1>&1 2>&2
 printf "DONE chowning all files\n"
+
+set -e
 
 printf "*** run-apache.sh: Starting fpm...\n"
   service php8.2-fpm start ; exec 1>&1 2>&2

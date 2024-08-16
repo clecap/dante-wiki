@@ -122,4 +122,6 @@ fi
 
  exec 1>&1 2>&2
 
+trap -
+
 printf "${GREEN}*** DONE get-dante.sh${RESET}"
