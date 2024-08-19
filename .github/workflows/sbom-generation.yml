@@ -43,7 +43,7 @@ jobs:
         echo "Done doing syft help"
         syft docker:clecap:dante-wiki:latest  -o json        > .github/results/sbom-dante-wiki-docker.json
         echo "Done doing syft docker"
-        syft dir:.  -o json        > .github/results/sbom-dante-wiki-docker-repo.json
+        syft dir:.  > .github/results/sbom-dante-wiki-docker-repo.json
         echo "Done doing syft dir"
 #        syft scan dante-wiki:latest          -o json        > .github/results/sbom-dante-wiki.json
 #        syft scan dante-wiki:latest          -o spdx        > .github/results/sbom-dante-wiki.spdx
@@ -58,8 +58,8 @@ jobs:
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
         git add .github/results/sbom-dante-wiki.json
-        git add .github/results/sbom-dante-wiki.spdx
-        git add .github/results/sbom-dante-wiki.xml
+#        git add .github/results/sbom-dante-wiki.spdx
+#        git add .github/results/sbom-dante-wiki.xml
         git commit -m "Add auto-generated SBOM files"
         git push origin ${{ github.ref }}
       env:
