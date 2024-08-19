@@ -1,4 +1,4 @@
-FROM debian:stable-slim AS intermediary
+FROM debian:stable-slim@sha256:382967fd7c35a0899ca3146b0b73d0791478fba2f71020c7aa8c27e3a4f26672 AS intermediary
 
 ##
 ## ARG / VARIABLE section  
