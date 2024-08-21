@@ -1,0 +1,1834 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.11/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.11/ http://www.mediawiki.org/xml/export-0.11.xsd" version="0.11" xml:lang="en">
+  <siteinfo>
+    <sitename>Dantewiki</sitename>
+    <dbname>Dante</dbname>
+    <base>https://localhost:4443/wiki-dir/index.php/Main_Page</base>
+    <generator>MediaWiki 1.39.0</generator>
+    <case>first-letter</case>
+    <namespaces>
+      <namespace key="-2" case="first-letter">Media</namespace>
+      <namespace key="-1" case="first-letter">Special</namespace>
+      <namespace key="0" case="first-letter" />
+      <namespace key="1" case="first-letter">Talk</namespace>
+      <namespace key="2" case="first-letter">User</namespace>
+      <namespace key="3" case="first-letter">User talk</namespace>
+      <namespace key="4" case="first-letter">Dantewiki</namespace>
+      <namespace key="5" case="first-letter">Dantewiki talk</namespace>
+      <namespace key="6" case="first-letter">File</namespace>
+      <namespace key="7" case="first-letter">File talk</namespace>
+      <namespace key="8" case="first-letter">MediaWiki</namespace>
+      <namespace key="9" case="first-letter">MediaWiki talk</namespace>
+      <namespace key="10" case="first-letter">Template</namespace>
+      <namespace key="11" case="first-letter">Template talk</namespace>
+      <namespace key="12" case="first-letter">Help</namespace>
+      <namespace key="13" case="first-letter">Help talk</namespace>
+      <namespace key="14" case="first-letter">Category</namespace>
+      <namespace key="15" case="first-letter">Category talk</namespace>
+      <namespace key="2100" case="first-letter">Snip</namespace>
+      <namespace key="2101" case="first-letter">Snip talk</namespace>
+      <namespace key="2200" case="first-letter">Translated</namespace>
+      <namespace key="2201" case="first-letter">Translated Talk</namespace>
+      <namespace key="2300" case="case-sensitive">Gadget</namespace>
+      <namespace key="2301" case="case-sensitive">Gadget talk</namespace>
+      <namespace key="2302" case="case-sensitive">Gadget definition</namespace>
+      <namespace key="2303" case="case-sensitive">Gadget definition talk</namespace>
+    </namespaces>
+  </siteinfo>
+  <page>
+    <title>MediaWiki:ParsifalTemplate/amsmath</title>
+    <ns>8</ns>
+    <id>2</id>
+    <revision>
+      <id>92</id>
+      <parentid>2</parentid>
+      <timestamp>2024-04-06T14:21:54Z</timestamp>
+      <contributor>
+        <username>imported&gt;Admin</username>
+        <id>0</id>
+      </contributor>
+      <origin>92</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="14649" sha1="sy5729lg11n83ef841iu3ygd75j8yqr" xml:space="preserve">&lt;pre&gt;
+\documentclass[varwidth=15cm,margin=0.07cm]{standalone} 
+
+%%
+%% Standard package imports
+%% 
+
+\usepackage[T1]{fontenc}             % fontencoding - FIRST load fontencoding 
+\usepackage[utf8]{inputenc}          % and only THEN load UTF-8 see https://tex.stackexchange.com/questions/13067/
+\usepackage{ucs}                     % unicode support
+\usepackage{comment}                 %    allows to flag portions of the document using \begin{comment} ... \end{comment}
+
+\usepackage{csquotes}                % quotes
+\usepackage{tabto}                   % command \tabto{2cm}
+\usepackage[usenames]{color}         % Should load before tcolorbox                  
+\usepackage{tcolorbox}
+
+%% minted is included dynamically
+
+%%
+%% DRAWING and GRAPHICS
+%%
+
+\usepackage{tikz}
+\usetikzlibrary{trees,positioning}
+\usetikzlibrary{fpu}
+\usetikzlibrary{arrows.meta,calc,decorations.markings,math}
+\usetikzlibrary{intersections}
+\usetikzlibrary{positioning,fit}%
+\usetikzlibrary{quotes,angles}
+\usetikzlibrary{mindmap}%  
+\usetikzlibrary{shadows}%                           % needed by mindmaps
+\usetikzlibrary{automata, arrows}
+
+\usepackage{tikz-qtree}
+
+\usepackage{qrcode}                                   % defines \qrcode[height=1cm,level=L]{ABCD} level: L M Q H for low medium ... quality
+\usepackage[percent]{overpic}                         % wrote some text directly over a picture, see 
+                                                      % https://tex.stackexchange.com/questions/20792/how-to-superimpose-latex-on-a-picture
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\pgfplotsset{trig format plots=rad}                   % trigonometry MUST clearly be done in radiants 
+
+\tikzset{trig format=rad}%      pgfplotsset only affects plots, also need this for all of tikz
+
+%%\usepackage{tikz-uml}  %% UNKNOWN 
+
+\def\tikzrad{\pgfplotsset{trig format plots=rad}\tikzset{trig format=rad}}
+\def\tikzdeg{\pgfplotsset{trig format plots=deg}\tikzset{trig format=deg}}
+
+
+\def\tikzAutomaton{
+  \tikzdeg%
+  \tikzset{
+    -&gt;,                                       % makes the edges directed
+    &gt;=stealth,                                % makes the arrow heads bold
+    node distance=2cm,                        % specifies the minimum distance between two nodes. Change if necessary.
+    every state/.style={thick, fill=gray!10}, % sets the properties for each ’state’ node
+    initial text=$ $,                         % sets the text that appears on the start arrow
+  }%
+}
+
+
+
+%% TODO: what is this for ??
+\newcommand*{\info}[4][16.3]{%
+  \node [ annotation, #3, scale=0.65, text width = #1em, inner sep = 2mm ] at (#2) {%
+  %\vspace*{-0.5em}%
+  \def\BL{\list{$\bullet$}{\topsep=0pt\itemsep=0pt\parsep=0pt\parskip=0pt\labelwidth=8pt\leftmargin=8pt\itemindent=0pt\labelsep=2pt}%
+    \def\EL{\endlist}%\baselineskip12pt%
+  }%
+ \par\nointerlineskip  #4%
+  };
+}
+
+%%
+%% MATHEMATICS
+%%
+\usepackage[fleqn]{amsmath}          % ams math package with flushed left equations
+\usepackage{amssymb,amscd}           % math symbols
+\usepackage{mathtools}               % fixes deficiencies in amsmath
+\usepackage[all]{xy}
+\usepackage{bussproofs}              % proof trees
+
+%%
+%% TWEAK amsmath macro to allow \begin{pmatrix}[1.5] for having more space see https://tex.stackexchange.com/questions/14071/how-can-i-increase-the-line-spacing-in-a-matrix
+%%
+\makeatletter
+\renewcommand*\env@matrix[1][\arraystretch]{%
+  \edef\arraystretch{#1}%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{*\c@MaxMatrixCols c}}
+\makeatother
+
+%\input prooftree
+
+
+%%
+%% Include local packages
+%%
+
+\input{../local/chc-jpabox.tex}
+\input{../local/variants.tex}
+
+
+
+
+\usepackage{ifpdf}%          to be able to detect pdf
+\ifpdf{
+\pdfcompresslevel=0
+\pdfobjcompresslevel=0
+%% the following is to get stable builds with the same hash value of the PDF and better control over document privarcy
+\pdftrailerid{}             % seed pdf trailer computation with and empty argument for reproducible hash values 
+\pdfsuppressptexinfo7       % force pdf driver to omit 1 fullbanner, 2 filename, 4 pagenumber, but leaves info dict intact (for trapped !)
+\pdfinfoomitdate1           % force removal of creation and modification dates from PDF file
+\pdfpagewidth 15cm
+}\else{}\fi
+
+%%
+%% Adjusting the lengths
+%%
+
+\marginparsep   0cm
+\marginparwidth 0cm
+\headsep        0cm
+\headheight     0cm
+
+\pagestyle{empty}
+
+
+\setlength{\mathindent}{1cm}
+%\makeatletter
+%\setlength\@mathmargin{100pt}
+%\makeatother
+
+
+\def\chcdisplayskipadjust{% 
+  \setlength{\abovedisplayskip}{4pt}%
+  \setlength{\belowdisplayskip}{4pt}%
+  \setlength{\abovedisplayshortskip}{4pt}%
+  \setlength{\belowdisplayshortskip}{4pt}%
+}%
+
+\let\chcoldselectfont\selectfont%
+\def\selectfont{%
+  \chcoldselectfont%
+  \chcdisplayskipadjust%
+}%
+\chcdisplayskipadjust%
+
+
+\def\myInitialize{%   needed for initializations to be done after begin{document} which are taken out by the precompilation process
+  \parindent 0pt
+  \parskip 0.2cm
+  \chcdisplayskipadjust
+  \initializeVariants
+}
+
+
+%%
+%% HYPERREF
+%%
+\usepackage[hyphens,obeyspaces,spaces]{url}  % must be loaded before hyperref
+\usepackage[
+  colorlinks,
+  hyperfootnotes=true,    % footnote marks as links
+  unicode=true,           % https://tex.stackexchange.com/questions/10555/hyperref-warning-token-not-allowed-in-a-pdf-string
+  breaklinks=true,         % allow to break links
+  hypertexnames=true
+]{hyperref}
+
+%%
+%% BELOW configures the line breaking algorithm of the url package.
+%% DO NOT TOUCH since an additional blank at the wron place may break the algo
+%%
+\makeatletter
+\def\UrlBreaks{\do\.\do\@\do\\\do\/\do\!\do\_\do\|\do\;\do\&gt;\do\]%
+  \do\)\do\,\do\?\do\'\do+\do\=\do\#%
+  \do A\do B\do C\do D\do E\do F\do G\do H\do I\do J\do K\do L\do M%
+  \do N\do O\do P\do Q\do R\do S\do T\do U\do V\do W\do X\do Y\do Z%
+  \do a\do b\do c\do d\do e\do f\do g\do h\do i\do j\do k\do l\do m%
+  \do n\do o\do p\do q\do r\do s\do t\do u\do v\do w\do x\do y\do z%
+  \do 0\do 1\do 2\do 3\do 4\do 5\do 6\do 7\do 8\do 9\do\:%
+  \do\.\do\@\do\\\do\/\do\!\do\_\do\|\do\;\do\&gt;\do\]%
+  \do\)\do\,\do\?\do\&amp;\do\'\do+\do\=\do\#}%
+%\def\UrlBigBreaks{\do\:\do@url@hyp\do\/}%
+\def\UrlNoBreaks{}
+%\def\UrlOrds{\do\*\do\-\do\~\do\'\do\"\do\-\do\/\do\e}%
+\makeatother
+
+
+
+
+
+
+
+
+
+\renewcommand{\thempfootnote}{\arabic{mpfootnote}}%    forces footnotes in standalone class to be numeric
+
+
+%%
+%% LOCALIZATION
+%%  
+\usepackage[shorthands=off,german]{babel}%  localization; MUST turn off shorthands due to an interference with some xypic features
+
+
+
+%%
+%% ENUMERATION and ITEMIZATION
+%%
+
+\usepackage[inline]{enumitem}
+
+%% Configuring enumitem
+%   CAVE: 1) the \setlist global values for a single list must be defined in a SINGLE \setlist command as they otherwise get overwritten by defaults again
+%         2) the settings do not carry over to \newlist defined custom lists
+%         3) for the starred inline versions the settings are carried over from the non-starred to the starred versions
+%         4) for \newlist defined custom lists the settings do not carry over from the non-starred to the starred versions
+%         SIGH !
+
+\setlist{itemjoin={\hspace{0.5cm}}}%                     bit of space as joiner for the inline version
+
+\def\enumerateWithDots{
+  \setlist[enumerate]{
+    partopsep=1.0\parskip,  % separation added when the preceding is a paragraph
+    topsep=-0.5\parskip,    % separation added when the preceding is only a line with no paragraph ending
+    itemsep=0cm,
+    label=\textbf{(\arabic*)},
+    after={\vspace*{1.5\parskip}}
+  }
+}
+
+\def\enumerateWithBrackets{
+  \setlist[enumerate]{
+    partopsep=1.0\parskip,  % separation added when the preceding is a paragraph
+    topsep=-0.5\parskip,    % separation added when the preceding is only a line with no paragraph ending
+    itemsep=0cm,
+    label=\textbf{(\arabic*)},
+    after={\vspace*{1.5\parskip}}
+  }
+  \setlist[enumerate,2]{
+    label=(\arabic*)
+  }
+}
+
+\enumerateWithBrackets
+
+
+%% define enumerated as dotted version should we nevertheless need it.
+\newlist{enumerated}{enumerate}{3}\setlist[enumerated]{topsep=0pt,itemsep=0cm,label=\textbf{\arabic*.}}  
+\newlist{enumerated*}{enumerate*}{3}\setlist[enumerated*]{topsep=0pt,itemsep=0cm,label=\textbf{\arabic*.}} % need that since for custom lists the * automatism does not work
+
+\setlist[itemize]{
+  partopsep=1.0\parskip,
+  topsep=-0.5\parskip,
+  itemsep=0cm,
+  after={\vspace*{1.5\parskip}}
+}
+
+\setlist[description]{itemindent=-1.5em, labelsep=0pt,partopsep=\parskip,topsep=-\parskip}
+
+
+
+%%
+%% TABLES and ARRAYS
+%%
+
+\usepackage{array}%                       load the new array package
+
+\arraycolsep=3.0pt%                       adds to the separation of array columns
+\def\arraystretch{1.2}%                   increase the distance between rows of an array
+
+\usepackage{adjustbox}%   used for alignment https://tex.stackexchange.com/questions/127056/vertical-alignment-of-graphic-and-tabular
+
+\usepackage{marginnote}
+\def\mymarg#1{\hspace*{-6cm}\marginnote{#1}}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FONTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{concmath}
+%\usepackage[OT1]{fontenc}
+%\usepackage{txfonts}
+
+\usepackage{stix}                  % needed for \operp and similar symbols
+\usepackage{stmaryrd}               % needed for \bigsqcap
+\usepackage{fontawesome}           % make fontawesome with some additional symbols available, for example \faTV etc
+\usepackage{wasysym}               % some symbols
+\usepackage{eurosym}               % euro symbol
+
+
+
+%%
+%% SHORTCUTS
+%%
+\def\be{\begin{equation}}
+\def\ee{\end{equation}}
+
+% underline boldface
+\def\ubf#1{\underline{\textbf{#1}}}
+
+
+% add shortcut for roman literals
+\makeatletter
+\newcommand{\rmnum}[1]{\romannumeral #1}
+\newcommand{\Rmnum}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+
+
+\def\proof#1#2#3{\prooftree #1 \justifies #2 \thickness=0.04em \using #3 \endprooftree}
+
+
+
+
+\usepackage{soul}                                     % defines strikeout markup   \st{strike out}
+
+
+%%%
+%%% SYMBOLS
+%%%
+
+
+
+%% MediaWiki:ParsifalInclude/LaTeXSymbols
+
+
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+
+\def\vv#1{\overrightarrow{#1}} 
+\def\vvplus{\vec{+}}
+
+\def\commutes{\leftrightarrow}
+
+
+
+\def\with{\|}
+
+\def\leaves{\spadesuit}                     % Leaves of a tree etc...
+\def\interleave{ \mid \mid \mid }   
+
+
+\def\con{ \mbox{\^{ }}}                     % Concatenation
+\def\sts#1{\stackrel{#1}{\longrightarrow}}  % State Transition System
+\def\stss#1{\stackrel{#1}{ {\longrightarrow } }_*} % with a star
+\def\stsp#1{\stackrel{#1}{ {\longrightarrow } }_+} % with a plus
+\def\stsc#1{\stackrel{#1}{ {\longrightarrow } }_\circ} % with a circle
+\def\stsh#1{\stackrel{#1}{ {\longrightarrow } }_h} % with a h
+\def\pre#1{ {^\bullet #1} }                 % preset in Petri Nets
+\def\post#1{ {#1 ^ \bullet} }               % postset in Petri Nets
+\def\Me{\mbox{Me}}                          % Me (X,Y) Symbol
+\def\bottom{\bot}
+\def\with{\mid}
+
+\def\error{\dagger}                          % error symbol error algebras
+\def\im{{\cal I}}                            % image of a partial function
+\def\nin{\not\in}
+
+
+
+\def\negil{\kern-.13em }
+\def\negir{\kern-.08em }
+\def\LB{[\negil[}
+\def\RB{]\negir]}
+
+\def\1{\mbox{{\bf 1}}}
+\def\0{\mbox{{\bf 0}}}
+\def\T{\mbox{{\bf T}}}
+\def\F{\mbox{{\bf F}}}
+
+%%
+%% SETS and FUNCTIONS
+%%
+
+\def\N{{\Bbb N}}
+\def\Q{{\Bbb Q}}
+\def\Z{{\Bbb Z}}
+\def\K{{\Bbb K}}
+\def\R{{\Bbb R}}
+\def\C{{\Bbb C}}
+
+
+%%
+%% Specific mathematical arrows
+%%
+
+\def\pto{\rightharpoonup}            % partial function:  f: A \pto B
+\def\inclusion{\hookrightarrow}      % inclusion, or more general: injective function   f: A \inclusion B
+
+\def\ito{\hookrightarrow}        % inclusion function
+\def\pto{\leadsto}               % partially defined function
+
+
+\def\lins{{\text{\bf Lin}_s}}    % stetige lineare Abbildungen
+
+\def\tr{\text{\bf Tr}}           % spur operator
+\def\ker{\text{\bf Kern}}        % Kernel of a linear map
+\def\im{\text{\bf Im}}           % Image of a linear map
+\def\eig{\text{\bf Eig}}         % Eigenspace of a linear map
+
+\def\norm#1{\| #1 \|}            % norm
+
+%%
+%% Pseudocode
+%%
+ 
+\def\tIF{\mbox{\tt \ if }}
+\def\tTHEN{\mbox{\tt \ then }}
+\def\tELSE{\mbox{\tt \ else }}
+\def\tFI{\mbox{\tt \ fi }}
+\def\tWHILE{\mbox{\tt \ while }}
+\def\tDO{\mbox{\tt \ do }}
+\def\tREPEAT{\mbox{\tt \ repeat }}
+\def\tUNTIL{\mbox{\tt \ until }}
+
+%% 
+%% Category Theory
+%% 
+\def\M{{\frak M}}                       % Morphisms of a category
+\def\O{{\frak O}}                       % Objects of a category
+
+\def\codom{\mbox{\textbf{Codom}}}       % Codomain
+\def\dom{\mbox{\textbf{Dom}}}           % Domain
+\def\Hom{\mbox{\textbf{Hom}}}           % Hom functor
+
+\def\hto{\twoheadrightarrow}
+\def\htot{\rightarrowtail}
+\def\smallbox{[\hspace*{-0.02cm}]}      % Non-deterministic choice in guarded command language
+
+\def\clolli{{\&gt;\mathbin\multimap\&gt;}}
+\def\illolc{{\&gt;\mathbin{\circ\! -}\&gt;}}
+
+\def\before{\mathbin\succeq} 
+\def\prebefore{\mathbin{\vec{\succ}}}
+\def\extendsto{\mathbin\trianglerighteq}
+\def\extendstoim{\mathbin{\vec{\triangleright}}}
+
+
+\def\trans{\longrightarrow}
+\def\transa#1{\stackrel{#1}{\trans}}
+\def\transb#1#2{\stackrel{#1}{\trans_#2}}
+
+\def\proof#1#2#3{\prooftree #1 \justifies #2 \thickness=0.04em \using #3 \endprooftree}
+
+\def\entails{\vdash}
+
+
+\def\tbone#1{\hbox to 5cm{#1}}
+
+\def\THEN{\Rightarrow}
+\def\IFF{\Leftrightarrow}
+
+
+
+%%%
+%%% LEGACY STUFF
+%%%
+\newcounter{myc}
+\newenvironment{mitemize}%
+  {\begin{list}{\arabic{myc}.}{\usecounter{myc}\setlength{\topsep}{0pt}}%
+    \setlength{\itemsep}{0pt}%
+    \setlength{\parskip}{\parskip}}%
+  {\end{list}}
+  
+\newenvironment{menumerate}%
+  {\begin{list}{\arabic{myc}.}{\usecounter{myc}\setlength{\topsep}{0pt}}%
+    \setlength{\itemsep}{0pt}%
+    \setlength{\parskip}{\parskip}}%
+  {\end{list}}  
+%%%
+%%%  END OF TWEAK ITEMIZATIONS
+%%%
+
+
+%%
+%% SPACING MACROS
+%%
+
+\def\tab{\hspace*{0.7cm}}
+\def\n{\break}
+
+\def\up{\vspace*{-\parskip}}          % go up one parskip
+
+\def\mleft{\hspace*{-\mathindent}}    % go left one mathindent space
+\def\mright{\hspace*{\mathindent}}    % go right one mathindent space
+
+\def\qquad{\quad\quad}                % double quad
+\def\qqquad{\quad\quad\quad}          % triple quad
+\def\qqqauad{\quad\quad\quad\quad}    % quadruple quad
+
+%%
+%% STRUCTURAL MACROS
+%%
+
+\def\title#1{\textbf{\large #1}}
+
+
+\AtBeginDocument{\parskip 0.2cm}
+
+\begin{document}\chcdisplayskipadjust\myInitialize\typeout{HERESTARTSTHEMAINDOCUMENT}%
+
+\parskip 0.2cm
+
+magic-line-identifier-for-inclusion
+
+\end{document}
+&lt;/pre&gt;
+
+
+[[Category:DanteInitialContents]]
+[[Category:ParsifalTemplate]]</text>
+      <sha1>sy5729lg11n83ef841iu3ygd75j8yqr</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:ParsifalTemplate/beamer</title>
+    <ns>8</ns>
+    <id>3</id>
+    <revision>
+      <id>3</id>
+      <timestamp>2023-11-11T16:25:32Z</timestamp>
+      <contributor>
+        <username>imported&gt;Admin</username>
+        <id>0</id>
+      </contributor>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>3</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="315" sha1="77wde66imt8rtc83tqj7s55ib59bwb3" xml:space="preserve">&lt;pre&gt;
+\documentclass{beamer}
+\begin{document}
+\title{Simple Beamer Class}   
+\author{Sascha Frank} 
+\date{\today} 
+
+\begin{document}\chcdisplayskipadjust\typeout{HERESTARTSTHEMAINDOCUMENT}%
+
+magic-line-identifier-for-inclusion
+
+\end{document}
+&lt;/pre&gt;
+
+
+[[Category:ParsifalTemplate]]
+[[Category:DanteInitialContents]]</text>
+      <sha1>77wde66imt8rtc83tqj7s55ib59bwb3</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Sidebar/Social</title>
+    <ns>8</ns>
+    <id>7</id>
+    <revision>
+      <id>7</id>
+      <timestamp>2023-11-08T11:36:05Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <origin>7</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="371" sha1="ie7xpnedmhgi6axvwbqa6rrmblmuuz3" xml:space="preserve">&lt;pre&gt;
+{{#tree: extensions=["persist"] | 
+* [https://orcid.org/0000-0003-3958-6136 Orcid]
+* [https://scholar.google.com/citations?hl=en&amp;user=fAf_fA4AAAAJ Google Scholar]
+* [https://dblp.org/pid/49/2208.html DBLP]
+* [https://de.linkedin.com/in/clemens-h-cap-489691257 LinkedIn]
+* [https://www.xing.com/profile/ClemensH_Cap Xing]
+}}
+&lt;/pre&gt;
+
+[[Category:DanteInitialContents]]</text>
+      <sha1>ie7xpnedmhgi6axvwbqa6rrmblmuuz3</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Sidebar/Categories</title>
+    <ns>8</ns>
+    <id>8</id>
+    <revision>
+      <id>1312</id>
+      <parentid>1311</parentid>
+      <timestamp>2024-07-28T10:19:03Z</timestamp>
+      <contributor>
+        <username>imported&gt;Admin</username>
+        <id>0</id>
+      </contributor>
+      <origin>1312</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="820" sha1="kz2ne280xhoypolclxrcgbfmt6uzwot" xml:space="preserve">This page is a system page. It controls what is shown in the
+&lt;code&gt;Categories&lt;/code&gt; portion of the sidebar.
+
+The contents of this page must conform to the following rules:
+
+* The page contains a single &lt;code&gt;&amp;lt;pre&gt; ... &amp;lt;/pre&gt;&lt;/code&gt; area.
+* This area contains a JSON data string of type array.
+* The array contains objects of one of the following types:
+** &lt;code&gt;{"root": &lt;string&gt;, "depth": &lt;number&gt;}&lt;/code&gt;
+** &lt;code&gt;{"name": &lt;string&gt;}&lt;/code&gt;
+** Every object may contain an optional "style" key whose value is a CSS string.
+** Every object may contain an optional "classname" field whose value refers to a class name known to the system
+
+&lt;pre&gt;
+[
+  {"root": "Root", "depth":4},
+  {"name": "Example", "style": "color:red;"},
+  {"name": "Testpage", "style": "color:green;"}
+]
+&lt;/pre&gt;
+
+[[Category:DanteInitialContents]]</text>
+      <sha1>kz2ne280xhoypolclxrcgbfmt6uzwot</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Sidebar/Navigation</title>
+    <ns>8</ns>
+    <id>17</id>
+    <revision>
+      <id>1335</id>
+      <parentid>1334</parentid>
+      <timestamp>2024-07-28T10:46:06Z</timestamp>
+      <contributor>
+        <username>imported&gt;Admin</username>
+        <id>0</id>
+      </contributor>
+      <origin>1335</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="3679" sha1="ppbbe0r3vnxrhhlec286xktxc1vkm2a" xml:space="preserve">&lt;pre&gt;
+{{#tree: extensions=["persist"] | 
+* &lt;b&gt;[{{fullurl:Main Page}} Main Page]&lt;/b&gt;
+* [[MediaWiki:CreatePage|Create Page]]
+* [{{fullurl:Special:RecentChanges}} Recent Changes]
+* &lt;b style='color:red !important;'&gt;[[Help:Customize | Please customize these pages!]]&lt;/b&gt;
+
+* &lt;b&gt;Help&lt;/b&gt;
+** [https://help.fandom.com/wiki/Extension:DPL3/Manual DPL3]
+** [[Help:Sidebar | Sidebar]]
+** [[Help:Parsifal Cheat| Parsifal Cheat]]
+** [[Help:Dante Cheat| Dante Cheat]]
+** [https://www.mediawiki.org/wiki/Help:Links Links WP]
+
+* &lt;b&gt;Sidebar Edits&lt;/b&gt;
+** [{{fullurl:MediaWiki:Sidebar|action=edit}} Full Sidebar]
+** [{{fullurl:MediaWiki:Sidebar/Areas|action=edit}} Areas]
+** [{{fullurl:MediaWiki:Sidebar/Categories|action=edit}} Categories]
+** [{{fullurl:MediaWiki:Sidebar/Navigation|action=edit}} Navigation]
+** [{{fullurl:MediaWiki:Sidebar/UI|action=edit}} UI]
+** [{{fullurl:MediaWiki:Sidebar/Social|action=edit}} Social]
+
+* &lt;b title="Query for pages in specific namespaces"&gt;Lists &amp; Queries&lt;/b&gt;
+** [{{fullurl:Special:AllPages}} All Pages]
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=8}} MediaWiki]
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=14}} Category]
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=10}} Template]
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=2}} User]
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=12}} Help]
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=4}} Project]
+** [{{fullurl:Special:AllPages|from=&amp;to=&amp;namespace=2100}} Snip]
+** [{{fullurl:Special:ListFiles}} Files]
+
+* &lt;b title="Found a bug"&gt;Issue Reporting&lt;/b&gt;
+** [https://github.com/clecap/dante-delta/issues DanteDelta Issues \s]
+** [https://github.com/clecap/dante-wiki/issues DanteWiki Issues \s]
+** [https://github.com/clecap/dante-wiki-production/issues DanteProduction Issues \s]
+** [https://github.com/clecap/Parsifal/issues Parsifal Issues \s]
+
+* &lt;b title="Check this regularly"&gt;Maintenance&lt;/b&gt;
+** [[Special:BrokenRedirects | Broken Redirects]]
+** [[Special:DoubleRedirects | Double Redirects]]
+** [[Special:UncategorizedPages | Uncat Pages]]
+** [[Special:WantedPages | Missing Pages]]
+
+* &lt;b&gt;Demos &amp; Tests&lt;/b&gt;
+** Javascript Gadget Tests
+*** &lt;b&gt;[javascript:window.DANTE.testConsole() window.DANTE.testConsole()]&lt;/b&gt;
+*** &lt;b&gt;[javascript:Dante.testConsoleZwei() Dante.testConsoleZwei()]&lt;/b&gt;
+*** &lt;b&gt;[javascript:Dante.testConsoleDrei() Dante.testConsoleDrei()]&lt;/b&gt;
+*** &lt;b&gt;[javascript:console.log(Dante.testConsoleDrei); testprintfc]&lt;/b&gt;
+*** &lt;b&gt;[javascript:console.log(Dante); Log Dante object]&lt;/b&gt;
+*** &lt;b&gt;[javascript:console.log(Dante.testDump); Log Dante.testDump]&lt;/b&gt;
+*** &lt;b&gt;[javascript:Dante.testDump(); Dante.testDump]&lt;/b&gt;
+** [[Help:Tests for Drawio|Drawio]]
+** Parsifal Tests
+*** [[Test/Parsifal Links]]
+*** [[Test/Parsifal Long Page Scroll Test]]
+*** [[Help:Parsifal Internal Links]]
+*** [[Help:Demo for DanteLinks | Dante-Links]]
+*** [[Help:Demo for Parsifal | Parsifal]]
+*** [[Help:Diverse Tests]]
+*** [[Test/Parsifal Section Heading Style]]
+*** [[Help:Parsifal Diverse Demo|Diverse Parsifal]]
+*** [[Help:Test for DanteLinks|DanteLinks]]
+*** [[Help:Parsifal Test|Parsifal General Tests]]
+*** [[Help:Parsifal Raw Test|Parsifal Raw Tests]]
+*** [[Help:Parsifal Page Width|Parsifal Page Width]]
+*** [[Help:Slides Test Reveal|Slides Reveal]]
+* [[Special:Upload| Upload file]]
+* [[Special:SpecialPages| Special pages]]
+* &lt;b&gt;Page Tools&lt;/b&gt;
+** [{{fullurl:Dummy:WhatLinksHere}} What links here?]
+** [{{fullurl:Dummy:PageInfo}} Page Info]
+** [{{fullurl:Dummy:RelatedChanges}} Related Changes]
+** [{{fullurl:Dummy:PermaLink}} Permanent Link]
+** [{{fullurl:Dummy:CiteThisPage}} Cite this page]
+** [javascript:print(true) Printable version]
+}}
+&lt;/pre&gt;
+
+
+[[Category:DanteInitialContents]]</text>
+      <sha1>ppbbe0r3vnxrhhlec286xktxc1vkm2a</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Sidebar/UI</title>
+    <ns>8</ns>
+    <id>25</id>
+    <revision>
+      <id>25</id>
+      <timestamp>2023-11-10T19:16:21Z</timestamp>
+      <contributor>
+        <username>imported&gt;Admin</username>
+        <id>0</id>
+      </contributor>
+      <origin>25</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="407" sha1="2wibqj59ggxdcdujsaqve3bzvaltwg5" xml:space="preserve">&lt;pre&gt;
+{{#tree: extensions=["persist"] | 
+* &lt;b id="limitSize" title="Change setting: Limit automagic growth of TeX areas."&gt;[javascript:PRT.toggleLimitSize() Limit Size:]&lt;/b&gt;
+* &lt;b id="variantShow" title="Change setting: Show variants of pages."&gt;[javascript:PRT.toggleVariants() Show Variants:]&lt;/b&gt;
+* &lt;b&gt;[javascript:window.persistCatWindow() Persist Cat Window]&lt;/b&gt;
+}}
+&lt;/pre&gt;
+
+[[Category:DanteInitialContents]]</text>
+      <sha1>2wibqj59ggxdcdujsaqve3bzvaltwg5</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Parsifal Diverse Demo</title>
+    <ns>12</ns>
+    <id>47</id>
+    <revision>
+      <id>48</id>
+      <timestamp>2023-11-08T12:24:29Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <origin>48</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="3530" sha1="4bi88bcjos7hxrcg7d64zgxw5wl87f0" xml:space="preserve">&lt;amsmath style="border:10px solid green;"&gt;
+921iihj kjh ujkWe6697 i m a sdf  ke a meas urement and  get a r esu lt  $\omega$. We now assume we can talk of an object with the property $\omega$. We cannota
+say that the object is (or is in the state) $\omega$ as this description might not be precise enough in the sense that the object
+might have additional properties as well (The color red is an insufficient characterization of an object). We have the fantasy that
+a sufficient number of properties will uniquely describe an object (This fantasy might not be true).
+We used language to assign the property to the object but we should rather have used language which assigns the property to the 
+relation of both, the measurement device and the object. And we should not ignore that, in addition to measurement device and object there is
+also a certain rest in the universe. In the end, we should talk about the property being connected to the measurement device, the object and the rest of the universe. However, it is more convenient, at least in the beginning, to assume that the property belongs to the object 
+alone and take the journey from there. Also,lkj  we must admit that there are observations (Hon Mandel dip) and theories (particle number operator not always
+precisely defined in Fock space) which make it difficult to talk about well-defined objects, of which we have the fantasy that they can be identified, and even if they do not carry identity that the at least could be counted in numbers of a kind.
+
+We make the observation: If we measure a property twice immediately after each other leaving no time for development in between,
+we get the same result. This might not be the case for every measurement (there are measuremetns for which this is not true and where we describe the measurement as an interaction which changes the object in a way and
+there are measurements which cannot be made twice in a row as, for example, they destroy the measured object by the very act of observation -- at least
+that is how we describe the situations in these cases), but at least we can assume this for a class of ideal measurements. 
+
+Under this assumption: After the measurement we talk about the property of the object in a precise manner in the sense
+that a repeated measurement leads to the same result.
+
+So, how would we describe the object before the measurement?
+
+Assume we make the observation, that an object may lead to different measurement results. 
+We find: When we measure (different) objects of a certain kind of which we believe we know no difference (short of knowing somehow that they are different), why would they lead to different measurement results.
+
+a
+Even worse: We assumed that we knew a property after the measurement. So we know the object as such. 
+
+We can describe this as: One property is still missing which we did not measure in that measurement (for example we measured color and not smell) and if we had measured it
+we would have realized that the object is indeed different.
+We can describe this as: Before the measurement the object did not have the property we measured (it was imprinted by the measurement).
+Before the measurement the object had that property only to a certain degree, and for some reason the measurement process selected this and not that aspect of the property. 
+&lt;/amsmath&gt;
+
+
+&lt;amsmath&gt;
+1 5 s s  h jk jkl
+&lt;/amsmath&gt;
+
+
+&lt;amsmath&gt;
+1 as d  a sd as d    this is ju st an example
+&lt;/amsmath&gt; 
+
+&lt;amsmath&gt;
+Ve ry s  m a ll k    
+&lt;/amsmath&gt;
+
+[[Category:DanteInitialContents]]</text>
+      <sha1>4bi88bcjos7hxrcg7d64zgxw5wl87f0</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Parsifal Cheat</title>
+    <ns>12</ns>
+    <id>58</id>
+    <revision>
+      <id>1376</id>
+      <parentid>1375</parentid>
+      <timestamp>2024-07-27T20:41:58Z</timestamp>
+      <contributor>
+        <username>imported&gt;Admin</username>
+        <id>0</id>
+      </contributor>
+      <origin>1376</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="965" sha1="gdcprgdvy3nythbwzdrp8i2o3x9afsr" xml:space="preserve">
+
+== Parsifal Cheat Sheet ==
+
+== Editor ==
+
+If the editor frame window is focused,
+adjust the font size of the editor
+using &lt;code&gt;Cmd +&lt;/code&gt; or &lt;code&gt;Cmd -&lt;/code&gt; 
+without resizing the rest of the browser.
+
+
+=== Attributes ===
+
+==== Collapse ====
+
+==== Continuation ====
+Situation: We want to split TeX text into several smaller portions.
+Advantages of this are:
+* Faster preview
+* Smaller unit of error and unit of editing
+* Seperate edit link
+
+For the presentation, there can be several scenarios:
+* Separation: We want a bit of markup which lets the reader see that there are two
+different portions of text. 
+* Continuation: We do not want to indicate this separation into two different portions of text. The second portion should be a seamless continuation of the
+first text. Nevertheless there should be a possibility for the reader to recognize the two parts and to invoke edit links and similar actions for the
+two parts.
+
+[[Category:DanteInitialContents]]</text>
+      <sha1>gdcprgdvy3nythbwzdrp8i2o3x9afsr</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Dante Cheat</title>
+    <ns>12</ns>
+    <id>59</id>
+    <revision>
+      <id>62</id>
+      <timestamp>2023-11-08T12:13:11Z</timestamp>
+      <contributor>
+        <username>imported&gt;Dir</username>
+        <id>0</id>
+      </contributor>
+      <comment>/* Dante Tree */</comment>
+      <origin>62</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="747" sha1="icte5f0n2iwvoxxckdccto4sdov4q66" xml:space="preserve">
+
+== Dante Links ==
+* Provides a possibility to add attributes to links.
+* Ensures that links (A-elements) with target 
+** _window open in a separate window, next to the browser, of similar size
+** _side open in an 800x800 window left on the screen.
+
+* Provide markup for external links  which open in a separate window 
+[https://www.w3c.org W3C \w]
+as opposed to [https://www.w3c.org W3C]
+
+
+
+== Dante Tree ==
+
+* A shift-click on to a Category link opens the category window as seperate popup window in small size and on the left of the screen. This proved helpful for quick deploy of a category window as an overview.
+
+* A shift-click on a link into a portal heading opens an edit window for that portal content.
+[[Category:DanteInitialContents]]</text>
+      <sha1>icte5f0n2iwvoxxckdccto4sdov4q66</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Copyrightwarning</title>
+    <ns>8</ns>
+    <id>12</id>
+    <revision>
+      <id>1323</id>
+      <parentid>1322</parentid>
+      <timestamp>2024-07-29T18:35:24Z</timestamp>
+      <contributor>
+        <username>imported&gt;Admin</username>
+        <id>0</id>
+      </contributor>
+      <origin>1323</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="106" sha1="khyn2j5pck39h0e3hm0fmxuh1ozr8tg" xml:space="preserve">Please note: All contributions to this system are subject to copyright.
+
+[[Category:DanteInitialContents]]</text>
+      <sha1>khyn2j5pck39h0e3hm0fmxuh1ozr8tg</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:Copyrightwarning2</title>
+    <ns>8</ns>
+    <id>13</id>
+    <revision>
+      <id>1325</id>
+      <parentid>1324</parentid>
+      <timestamp>2024-07-27T19:23:52Z</timestamp>
+      <contributor>
+        <username>imported&gt;Admin</username>
+        <id>0</id>
+      </contributor>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>1325</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="110" sha1="m2kx6smcx3b6h3d718rp8nc2zq8if10" xml:space="preserve">Please note that all contributions to 
+this system are subject to copyright.
+[[Category:DanteInitialContents]]</text>
+      <sha1>m2kx6smcx3b6h3d718rp8nc2zq8if10</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>MediaWiki:CreatePage</title>
+    <ns>8</ns>
+    <id>15</id>
+    <revision>
+      <id>1327</id>
+      <parentid>1326</parentid>
+      <timestamp>2024-07-29T18:42:41Z</timestamp>
+      <contributor>
+        <username>imported&gt;Admin</username>
+        <id>0</id>
+      </contributor>
+      <origin>1327</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="199" sha1="mefz1vjair2eh6idbwrzjv4wymcg5uw" xml:space="preserve">&lt;div style="float:left;"&gt;
+&lt;inputbox&gt;
+type=create 
+break=no 
+buttonlabel=Create new article with this title  
+&lt;/inputbox&gt;
+&lt;/div&gt;&lt;div style="clear:left;"&gt;&lt;/div&gt;
+
+
+
+
+
+
+
+[[Category:DanteInitialContents]]</text>
+      <sha1>mefz1vjair2eh6idbwrzjv4wymcg5uw</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Sidebar</title>
+    <ns>12</ns>
+    <id>44</id>
+    <revision>
+      <id>1370</id>
+      <parentid>45</parentid>
+      <timestamp>2024-07-27T20:17:01Z</timestamp>
+      <contributor>
+        <username>imported&gt;Admin</username>
+        <id>0</id>
+      </contributor>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>1370</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="257" sha1="mhrzfonpkrkm0m2l8yxgdbx5yf6pqc2" xml:space="preserve">
+== Configuring the Sidebar ==
+
+* Main Sidebar File: [[MediaWiki:Sidebar]]
+* Sidebar Tree Files:
+** [[MediaWiki:Sidebar/Areas]]
+** [[MediaWiki:Sidebar/Social]]
+* Sidebar Category Definition: [[MediaWiki:Sidebar/Categories]]
+[[Category:DanteInitialContents]]</text>
+      <sha1>mhrzfonpkrkm0m2l8yxgdbx5yf6pqc2</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Test/Parsifal</title>
+    <ns>12</ns>
+    <id>1264</id>
+    <revision>
+      <id>1391</id>
+      <parentid>1390</parentid>
+      <timestamp>2024-08-02T16:17:34Z</timestamp>
+      <contributor>
+        <username>imported&gt;Admin</username>
+        <id>0</id>
+      </contributor>
+      <origin>1391</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="1686" sha1="t3fvak519zx2qalio9dgslydkeejsfv" xml:space="preserve">asdaa
+
+== Titel ==
+
+&lt;amsmath n="Myname"&gt;o f t  h is   d
+   qweq
+\xcx
+
+Rule of 14cm  
+\hrule height 1px depth 1px width 14cm \relax         
+
+Rule  of 14.2cm  
+\hrule height 1px depth 1px width 14.2cm \relax
+
+Rule of s 15cm
+\hrule height 1px depth 1px width 15cm \relax
+
+Rule of 16cm
+\hrule height 1px depth 1px width 16cm \relax
+&lt;/amsmath&gt;
+   
+&lt;hide&gt;
+
+== Part 2 ==
+&lt;amsmath&gt;
+b ja q q io qw qw   fje ssqa aa sj jhgjhg jhgssssssss
+&lt;/amsmath&gt;
+
+&lt;/hide&gt;
+
+== One ==
+&lt;beamer b&gt;
+Hallo2345123 123 123 
+Das ist jakjh 
+$a$=$b$ kjh  kjqh k jkl lkj j h iuaahh zh qwe asd u io
+&lt;/beamer&gt;
+
+== Stuff ==
+&lt;beamer b&gt;
+This is no w asdcvmmsd b weasdasd asd  qwe as d  qwe a sd qw e asd qwe asd qwe asd qwe asd qwe  asd qwe asd qwe asd qwe asd qwe asd beamer a sd
+&lt;/beamer&gt;
+
+== Only ==
+
+&lt;amsmath n="Myname"&gt;J xust  a test&lt;/amsmath&gt;
+
+== Titel Y ==
+
+&lt;amsmath o-proof&gt;
+Ea iaaa  sdsa df ax sda   gg   n s
+&lt;/amsmath&gt;
+
+&lt;amsmath c-habanalop&gt;Zwhc 
+sdf sdf
+sdfsd f
+xxjj
+sdfsdf
+as
+sdfsdf
+sdfsdf
+
+sdfsdf
+
+sdfsdf
+
+sdfsdf
+
+sdfsdf
+
+sdfsdfgh
+
+sdfsdf
+
+sdfsdf
+
+sdfsdf
+
+sdfsdf
+
+sdfsdf
+
+sdfsdfsdf
+
+sdf
+
+sdfe i&lt;/amsmath&gt;
+
+&lt;amsmath c="Ha bA Na"&gt;
+Drei \url{https://www.ifi.ch}
+&lt;/amsmath&gt;
+
+
+== Test; Style Attribute ==
+&lt;amsmath style="border:10px solid green;"&gt;
+921iihj kjh ujkWe6697 i m a sdf  ke a meas urement and  get a r esu lt  $\omega$. We now assume we can talk of an object with the property $\omega$. We cannota
+say that the object is (or is in the state) $\omega$ as this description might not be precise enough in the sense that the object
+might have additional properties as well (The color red is an insufficient characterization of an object). We have the fantasy that
+&lt;/amsmath&gt;
+
+
+
+
+[[Category:DanteInitialContents]]</text>
+      <sha1>t3fvak519zx2qalio9dgslydkeejsfv</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Test/Parsifal/Syntax Highlighting</title>
+    <ns>12</ns>
+    <id>1266</id>
+    <revision>
+      <id>1399</id>
+      <parentid>1398</parentid>
+      <timestamp>2024-07-27T20:28:43Z</timestamp>
+      <contributor>
+        <username>imported&gt;Admin</username>
+        <id>0</id>
+      </contributor>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>1399</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="299" sha1="pg3c6yti2vwimlshsj3jxqa30f79bbh" xml:space="preserve">
+
+== Simple Highlight ==
+&lt;syntaxhighlight&gt;
+let x = 7;
+&lt;/syntaxhighlight&gt;
+
+== More Complex Highlight ==
+‎&lt;syntaxhighlight lang="python"&gt;
+def quick_sort(arr):
+	less = []
+	pivot_list = []
+	more = []
+	if len(arr) &lt;= 1:
+		return arr
+	else:
+		pass
+‎&lt;/syntaxhighlight&gt;
+[[Category:DanteInitialContents]]</text>
+      <sha1>pg3c6yti2vwimlshsj3jxqa30f79bbh</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:DanteLinks</title>
+    <ns>12</ns>
+    <id>1268</id>
+    <revision>
+      <id>1404</id>
+      <parentid>1403</parentid>
+      <timestamp>2024-07-27T20:10:00Z</timestamp>
+      <contributor>
+        <username>imported&gt;Admin</username>
+        <id>0</id>
+      </contributor>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>1404</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="2710" sha1="e4kx4rvrm7puj6vxatjdbhi7j4bhwv1" xml:space="preserve">
+
+
+Window
+* [https://blog.fefe.de \w]
+* [https://blog.fefe.de Fefe \w]
+
+
+Side
+* [https://blog.fefe.de \s]
+* [https://blog.fefe.de Fefe \s]
+
+
+'''Example'''
+* &lt;nowiki&gt;[[Main Page || doub]]&lt;/nowiki&gt;
+* [[Main Page || doub]] 
+
+* &lt;nowiki&gt;[[Main Page \| doub]]&lt;/nowiki&gt;
+* [[Main Page \| doub]]
+
+
+'''Example'''
+* &lt;nowiki&gt;[[Main Page ¦ style=color:green;]]&lt;/nowiki&gt;
+* [[Main Page ¦ style=color:green;]]
+
+'''Example'''
+* &lt;nowiki&gt;[[Help:Demo for DanteLinks ¦ style=color:green;]]&lt;/nowiki&gt;
+* [[Help:Demo for DanteLinks ¦ style=color:green;]]
+
+'''Example:''' Adding style attributes to an external link via broken pipe symbol
+* &lt;nowiki&gt;[https://blog.fefe.de Fefe ¦ style=color:green;]&lt;/nowiki&gt; produces
+* [https://blog.fefe.de Fefe ¦ style=color:green;]
+
+
+'''Example:''' Adding target attribute _blank to an external link opens it in a new tab
+* &lt;nowiki&gt;[https://blog.fefe.de Fefe ¦ target=_blank ]&lt;/nowiki&gt; produces:
+* [https://blog.fefe.de Fefe ¦ target=_blank ]
+
+For use in sidebars only: There is a special class dexternal which can be used to append an external link symbol to link. In the sidebar links which otherwise are external will not show the symbol external. This is as we need query extensions for a number of links in the sidebar and this needs fullurl as parser and this causes the parser to understand the link as external in every case. Therefore we turned this thingie off in sidebar until we find a smart fix for this.
+
+[[Main Page]]
+
+And here [[Main Page]] some text [https://blog.fefe.de Fefe] to see the distances when
+rendering in text.
+
+
+== Requirements ==
+
+* We always want to see where a link goes (internal or external)
+* We always want to know where a link opens (same tab, new tab, new window)
+* We want to allow the user to open the link where he wants to (same tab, new tab, new window)
+* We want to force-open some links in specific modes (same tab, new tab, new window) when the user only clicks normally.
+
+== All Link Types ==
+
+&lt;table&gt;
+&lt;tr&gt;&lt;td&gt;Internal&lt;/td&gt;&lt;td&gt;&lt;nowiki&gt;[[Main Page]]&lt;/nowiki&gt;&lt;/td&gt;&lt;td&gt;[[Main Page]]&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Piped&lt;/td&gt;&lt;td&gt;&lt;nowiki&gt;[[Main Page|Hauptseite]]&lt;/nowiki&gt;&lt;/td&gt;&lt;td&gt;[[Main Page|Hauptseite]]&lt;/td&gt;&lt;/tr&gt;
+
+
+&lt;tr&gt;&lt;td&gt;External numbered&lt;/td&gt;&lt;td&gt;&lt;nowiki&gt;[https://blog.fefe.de]&lt;/nowiki&gt;&lt;/td&gt;&lt;td&gt;[https://blog.fefe.de]&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;External text&lt;/td&gt;&lt;td&gt;&lt;nowiki&gt;[https://blog.fefe.de Fefe]&lt;/nowiki&gt;&lt;/td&gt;&lt;td&gt;[https://blog.fefe.de Fefe]&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;External bare&lt;/td&gt;&lt;td&gt;&lt;nowiki&gt;https://blog.fefe.de&lt;/nowiki&gt;&lt;/td&gt;&lt;td&gt;https://blog.fefe.de&lt;/td&gt;&lt;/tr&gt;
+
+
+&lt;/table&gt;
+
+
+[[Main Page]]s
+
+[https://blog.fefe.de Fefe]
+
+
+[[Murundai\w]]
+
+[https://blog.fefe.de Hurundai\w]
+
+[[Pipetrick (computing)|Pipetrick]] 
+
+
+
+
+[[:Category:Root]]
+[[Category:DanteInitialContents]]</text>
+      <sha1>e4kx4rvrm7puj6vxatjdbhi7j4bhwv1</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Parsifal</title>
+    <ns>12</ns>
+    <id>1269</id>
+    <revision>
+      <id>1408</id>
+      <parentid>1407</parentid>
+      <timestamp>2024-07-27T20:10:23Z</timestamp>
+      <contributor>
+        <username>imported&gt;Admin</username>
+        <id>0</id>
+      </contributor>
+      <minor/>
+      <comment>Admin moved page [[Help:Demo for Parsifal]] to [[Help:Parsifal]] without leaving a redirect</comment>
+      <origin>1407</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="409" sha1="jwjxhzvm44czwu5zzqvsmapv9ue2z1q" xml:space="preserve">
+__SLIDES__
+
+== one ==
+bla
+&lt;amsmath&gt;
+asdqh
+a
+\ubf{q}w  \ubf{w}er \ubf janus
+
+&lt;/amsmath&gt;
+
+== Link ==
+&lt;amsmath&gt;
+\dref{Main Page}  
+
+\dref{Help: Demo for Parsifal}
+
+\dref{Help: Demo for DanteLinks}
+
+\dref{Test/Parsifal Section Heading Style}
+
+\dref{Test/Parsifal Section Heading Style#h4}
+
+\url{https://www.clemenscap.de} 
+
+&lt;/amsmath&gt;
+
+[[Test/Parsifal Section Heading Style#h4]]
+[[Category:DanteInitialContents]]</text>
+      <sha1>jwjxhzvm44czwu5zzqvsmapv9ue2z1q</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Test/DanteLinks</title>
+    <ns>12</ns>
+    <id>1270</id>
+    <revision>
+      <id>1411</id>
+      <parentid>1410</parentid>
+      <timestamp>2024-07-27T20:17:16Z</timestamp>
+      <contributor>
+        <username>imported&gt;Admin</username>
+        <id>0</id>
+      </contributor>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>1411</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="211" sha1="fw0c8e9nzmfd59pje2c5mqcx0mhb4h0" xml:space="preserve">* Broken pipes for the internal links do not yet work.
+[[Main Page ¦ style=color:green;]]
+
+== Test for setting target ==
+* [https://www.mediawiki.org/ olgana ¦ target=_blank ]
+[[Category:DanteInitialContents]]</text>
+      <sha1>fw0c8e9nzmfd59pje2c5mqcx0mhb4h0</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Test/Reveal</title>
+    <ns>12</ns>
+    <id>1271</id>
+    <revision>
+      <id>1414</id>
+      <parentid>1413</parentid>
+      <timestamp>2024-07-27T20:18:23Z</timestamp>
+      <contributor>
+        <username>imported&gt;Admin</username>
+        <id>0</id>
+      </contributor>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>1414</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="229" sha1="79r3kudp4povk94cubqufqs1b669x7c" xml:space="preserve">
+__SLIDES__
+
+__NOTOC__
+
+==One==
+&lt;beamer b&gt;
+one
+
+qwe
+
+qwe
+
+qwe
+
+
+&lt;/beamer&gt;
+
+==Two==
+&lt;beamer b&gt;
+Two qwd
+&lt;/beamer&gt;
+
+== Three ==
+&lt;amsmath&gt;
+asd asd
+&lt;/amsmath&gt;
+
+== Four ==
+&lt;amsmath&gt;
+asd asdv
+&lt;/amsmath&gt;
+[[Category:DanteInitialContents]]</text>
+      <sha1>79r3kudp4povk94cubqufqs1b669x7c</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Test/Drawio</title>
+    <ns>12</ns>
+    <id>1272</id>
+    <revision>
+      <id>1418</id>
+      <parentid>1417</parentid>
+      <timestamp>2024-07-27T20:17:30Z</timestamp>
+      <contributor>
+        <username>imported&gt;Admin</username>
+        <id>0</id>
+      </contributor>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>1418</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="79" sha1="9v475rtow0pgp053k5j7x18mq8rdik9" xml:space="preserve">
+== First Test ==  
+&lt;drawio filename="asd" /&gt;
+[[Category:DanteInitialContents]]</text>
+      <sha1>9v475rtow0pgp053k5j7x18mq8rdik9</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Test/Parsifal/Page Width</title>
+    <ns>12</ns>
+    <id>1273</id>
+    <revision>
+      <id>1421</id>
+      <parentid>1420</parentid>
+      <timestamp>2024-07-27T20:17:56Z</timestamp>
+      <contributor>
+        <username>imported&gt;Admin</username>
+        <id>0</id>
+      </contributor>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>1421</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="1655" sha1="5vaha1o65xgx6oyx8j3hrxh7xuip9sz" xml:space="preserve">== Test for Parsifal Page Width ==
+Pre
+&lt;amsmath&gt;
+Ei nz el test aq qwehj hjk hjk 789
+ 
+Rule of 14cm
+\hrule height 1px depth 1px width 14cm \relax
+
+Rule of 15cm
+\hrule height 1px depth 1px width 15cm \relax
+
+Rule of 16cm
+\hrule height 1px depth 1px width 16cm \relax
+&lt;/amsmath&gt;
+
+== Setting Page Width ==
+&lt;amsmath slim b&gt;
+This is a slim page 
+&lt;/amsmath&gt;
+
+&lt;amsmath width="25cm"&gt;
+Width 25cm 
+&lt;/amsmath&gt;
+
+&lt;amsmath width="5cm"&gt;
+Width 5cm 
+&lt;/amsmath&gt;
+
+&lt;amsmath width="15cm"&gt;
+Width 15cm 
+&lt;/amsmath&gt;
+
+&lt;amsmath width="14cm"&gt;
+Width 14cm 
+&lt;/amsmath&gt;
+
+&lt;amsmath width="13cm"&gt;
+Width 13cm 
+&lt;/amsmath&gt;
+
+
+
+&lt;amsmath width="50cm"&gt;
+Width 50cm  
+&lt;/amsmath&gt;
+
+== Wide Page ==
+&lt;amsmath wide&gt;
+This is a wide page which is able to contain quite
+a lot of text provided we enter enough text to fill the
+the page which has a lot of space.  
+
+{\color{red}asd asd asd asd asd asd asd asd}
+
+\begin{enumerate}
+\item a
+\item b
+\end{enumerate}
+aSome more
+
+&lt;/amsmath&gt;
+
+&lt;amsmath wide&gt;
+This is a wide pagej
+&lt;/amsmath&gt;
+
+&lt;amsmath&gt;
+This is a normal page.
+&lt;/amsmath&gt;
+
+== Setting Size ==
+&lt;amsmath width="1cm" scale="3" b&gt;
+One centimetersss s
+
+&lt;/amsmath&gt;
+
+== PDF Scale Adjustment ==
+&lt;amsmath pdfscale="7"&gt;
+7
+&lt;/amsmath&gt;
+
+&lt;amsmath pdfscale="8"&gt;
+8
+&lt;/amsmath&gt;
+
+&lt;amsmath pdfscale="9"&gt;
+9
+&lt;/amsmath&gt;
+
+&lt;amsmath pdfscale="20"&gt;
+20
+&lt;/amsmath&gt;
+
+&lt;amsmath pdfscale="1"&gt;
+1 20
+&lt;/amsmath&gt;
+
+
+== Margin adjustment ==
+&lt;amsmath&gt;
+No margin adjustments
+&lt;/amsmath&gt;
+
+&lt;amsmath margin="0.07cm"&gt;
+Now margin=0.07cm
+&lt;/amsmath&gt;
+
+&lt;amsmath margin="0.5cm"&gt;
+Now margin=0.5cm
+&lt;/amsmath&gt;
+
+&lt;amsmath margin="{0.0cm 0.0cm 0.0cm 3cm}"&gt;
+Now margin=0.0cm 0.0cm 0.0cm 3cm  as in left bottom right top
+&lt;/amsmath&gt;
+[[Category:DanteInitialContents]]</text>
+      <sha1>5vaha1o65xgx6oyx8j3hrxh7xuip9sz</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Test/Parsifal Raw Test</title>
+    <ns>12</ns>
+    <id>1274</id>
+    <revision>
+      <id>1425</id>
+      <parentid>1424</parentid>
+      <timestamp>2024-07-27T20:18:11Z</timestamp>
+      <contributor>
+        <username>imported&gt;Admin</username>
+        <id>0</id>
+      </contributor>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>1425</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="170" sha1="jou9ssba6i4y1511d49ctg6k8agml6t" xml:space="preserve">This is a test for the raw parsifal tag tex.
+
+== First ==
+&lt;tex&gt;
+\documentclass{article}
+\begin{document}
+asd khjks
+\end{document}
+&lt;/tex&gt;
+[[Category:DanteInitialContents]]</text>
+      <sha1>jou9ssba6i4y1511d49ctg6k8agml6t</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Test/Diverse</title>
+    <ns>12</ns>
+    <id>1275</id>
+    <revision>
+      <id>1428</id>
+      <parentid>1427</parentid>
+      <timestamp>2024-07-27T19:54:03Z</timestamp>
+      <contributor>
+        <username>imported&gt;Admin</username>
+        <id>0</id>
+      </contributor>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>1428</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="2486" sha1="j4vs56yassv6p0an5onvidty8b3360w" xml:space="preserve">
+[[Main Page ¦ target=_blank]]
+
+[[Main Page ¦ target=_new]]
+
+
+[[Help:Transclusion Test]]
+
+= Level 1 =
+
+
+&lt;amsmath&gt;
+Blabla this is an ekjhkjh kjhkjh kjhkjh kjhkjh xample for an entire line filling the entire area of the browser to get a demonstration for the autoscaling feature. 
+&lt;/amsmath&gt;
+
+== Level 1.1 ==
+
+=== Level 1.1.1 ===
+&lt;amsmath&gt;
+Blabla this is an example for an entire line filling the entire area of the browser to get a demonstration for the autoscaling feature.
+&lt;/amsmath&gt;
+
+&lt;amsmath&gt;
+Blab wer qwer qwer qwer qwer qsdf sdf dsf sdf sdf sdf sdf df sdf er qwer qwer qwer qwer qwer qwer qerqwerqewrqerqerqewrqwerqwerqwer sdf sdfsdfsdfsdf sdfsdfsdfsdf sdfsdf gggggggggggggggggggggggggggggg ggggggggggggggggggsdf
+
+\bigskip\bigskip\bigskip
+
+this hjkhjk hjk hjk hjk hjk hjkhjk hjk hjk hjk hjkhjk
+
+\bigskip\bigskip\bigskip
+
+is kjh hjk hjk
+
+\bigskip\bigskip\bigskip
+
+an 
+
+\bigskip\bigskip\bigskip
+
+
+example 
+
+\bigskip\bigskip\bigskip
+
+
+for 
+
+an 
+
+\bigskip\bigskip\bigskip
+
+entire line 
+
+\bigskip\bigskip\bigskip
+
+filling 
+
+\bigskip\bigskip\bigskip
+
+the 
+
+\bigskip\bigskip\bigskip
+
+entire 
+
+area of the browser to get a demonstration for the autoscaling feature.
+&lt;/amsmath&gt;
+
+
+==== Level 1.1.1.1 ====
+
+&lt;amsmath&gt;
+\tikzdeg
+\begin{figure} 
+\centering
+\begin{tikzpicture}
+\node (a) {E}
+child {node (b) {F}
+}
+child {node (c) {+}
+}
+child {node (d) {T}
+child {node (e) {T} 
+  child {node (f) {F}  child {node  (g) {8}} }  
+  }
+child {node  (h) {*}}
+child {node  (i) {F} child {node  (j) {2}}}
+};
+
+\begin{scope}[every node/.style={font=\footnotesize,color=red}]
+\node[right=of a] (na) {\{E.v${}\coloneqq{}$+T.v\}};
+\node[right=of d] (nd) {\{T.v${}\coloneqq{}$F.v$^{*}$T.v\}};
+\node[right=of i] (ni) {\{F.v${}\coloneqq{}$2\}};
+\node[left=of b] (nb) {\{F.v${}\coloneqq{}$5\}};
+\node[left=of e] (ne) {\{T.v${}\coloneqq{}$F.v\}};
+\node[left=of f] (nf) {\{F.v${}\coloneqq{}$8\}};
+\foreach \i in {a,b,d,e,f,i}
+  \draw[dotted] (\i) -- (n\i);
+\end{scope}
+\end{tikzpicture}
+
+\end{figure}
+k hjhjk hjkhjk hj fgh fgh tzutzu
+&lt;/amsmath&gt;
+
+===== Level 1.1.1.1.1 =====
+&lt;amsmath sans&gt;
+Test asd asd a aqqqqjhgjhgjhgjhgjhgjhgjhgjhgjhgjhgjhgjhgjhgj
+Ich glaube es ist jetzt schon nicht so ganz einfach mit dem
+scheduling dessen, was wir im backendsehen. hjkjhj
+
+&lt;/amsmath&gt;
+
+
+====== Level 1.1.1.1.1.1 ======
+
+======= Level 1.1.1.1.1.1.1 =======
+
+======== Level 1.1.1.1.1.1.1.1 ========
+
+== Level 1.2 ==
+
+=== Level 1.2.1 ===
+
+=== Lebel 1.2.2 ===
+
+== Level 1.3 ==
+
+=== Level 1.3.1 ===
+[[Category:DanteInitialContents]]</text>
+      <sha1>j4vs56yassv6p0an5onvidty8b3360w</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Test/Transclusion</title>
+    <ns>12</ns>
+    <id>1276</id>
+    <revision>
+      <id>1431</id>
+      <parentid>1430</parentid>
+      <timestamp>2024-07-27T20:08:57Z</timestamp>
+      <contributor>
+        <username>imported&gt;Admin</username>
+        <id>0</id>
+      </contributor>
+      <comment>Automated change: Category Edit by TreeAndMenu new generation, file: fancytree.js</comment>
+      <origin>1431</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="34" sha1="db9o00csmtk4plmwiuw9qncfsje0tjv" xml:space="preserve">
+[[Category:DanteInitialContents]]</text>
+      <sha1>db9o00csmtk4plmwiuw9qncfsje0tjv</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Help:Test/Parsifal/Internal Links</title>
+    <ns>12</ns>
+    <id>1280</id>
+    <revision>
+      <id>1443</id>
+      <parentid>1442</parentid>
+      <timestamp>2024-08-02T11:00:40Z</timestamp>
+      <contributor>
+        <username>imported&gt;Admin</username>
+        <id>0</id>
+      </contributor>
+      <origin>1443</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="140" sha1="ac0wu41f5hi6ofn7putyvs347h9lnps" xml:space="preserve">
+&lt;amsmath&gt;
+
+\dref{Help:Demo for Parsifal}{asd} Just asdd
+
+\dref{Help:Demo für Parsifal}{qdqd}
+
+&lt;/amsmath&gt;
+[[Category:DanteInitialContents]]</text>
+      <sha1>ac0wu41f5hi6ofn7putyvs347h9lnps</sha1>
+    </revision>
+  </page>
+</mediawiki>
