@@ -68,7 +68,7 @@ services:
       dante-network:
         aliases: 
           - dante.local
-    command: "make-localhost-certificate.sh get-dante.sh get-parsifal.sh run-apache-no-cache.sh"
+    command: "make-localhost-certificate.sh get-dante.sh get-parsifal.sh chown.sh run-apache-no-cache.sh"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost"]
       interval: 30s
