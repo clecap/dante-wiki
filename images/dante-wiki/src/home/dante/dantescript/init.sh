@@ -103,9 +103,6 @@ fi
 
 
 
-
-
-
 printf "*** Adding reference to DanteSettings.php ... "
   echo ' ' >> LocalSettings.php
   echo '###' >> LocalSettings.php
@@ -115,7 +112,6 @@ printf "*** Adding reference to DanteSettings.php ... "
   echo 'include ("DanteSettings.php"); ' >> LocalSettings.php
   exec 1>&1 2>&2
 printf  "DONE\n"
-
 
 
 

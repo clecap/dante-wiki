@@ -263,13 +263,6 @@ RUN apt-get install -y --no-install-recommends python3.11-venv                  
     /opt/myenv/bin/pip3 install --no-cache-dir wheel                                && \
     /opt/myenv/bin/pip3 install awscli --use-pep517                                 && \
     exit && \
-## TODO: what is this exit ???
-## TODO: deprecated below
-#    echo "*** *** *** Install amazon cloud command line for backup "                            && \
-#    curl -s "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/awscliv2.zip"   && \
-#    unzip -q /tmp/awscliv2.zip                                                                  && \
-#    source /tmp/aws/install                                                                     && \
-#    rm -rf /tmp/awscliv2.zip aws                                                                && \
     echo "*** *** *** Final cleanup "                                                           && \
     apt-get purge -y php-dev  build-base  linux-headers                                         && \
     apt-get autoremove -y                                                                       && \
