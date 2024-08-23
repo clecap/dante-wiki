@@ -47,6 +47,6 @@ printf "\n***  copy-out.sh: doing an LS after the copying operation \n "
   ls -lag /mnt ; exec 1>&1 2>&2
 printf "DONE cleaning up old stuff\n"
 
-trap -
+trap - ERR
 
 printf "*** /home/dante/dantescript/copy-out.sh has completed. GOOD BYE\n"

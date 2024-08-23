@@ -9,7 +9,7 @@ printf "*** THIS IS chown.sh\n\n"
 # thus we disable the stop on error and trap options which we might have inherited from earlier or caller
 set +e
 
-trap -
+trap - ERR
 
 printf "\n*** chwon.sh: chown all files to www-data...\n"
   chown -R www-data:www-data ${MOUNT}/${TARGET} ; exec 1>&1 2>&2

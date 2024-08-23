@@ -2,8 +2,6 @@ name: Count Lines of Code
 
 on:
   push:
-    branches:
-      - master
   schedule:
     - cron: '0 0 * * *'  # Runs every day at midnight
 

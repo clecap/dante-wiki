@@ -124,19 +124,27 @@ printf "DONE setting debug password for apache\n"
 set +e 
 
 
+#printf "\n*** Adding initial contents..."
+#  php ${MOUNT}${TARGET}/maintenance/importDump.php --namespaces '8' --debug $CONT/minimal-initial-contents.xml
+#  exec 1>&1 2>&2
+#  printf " namespace 8 done ";
+#  php ${MOUNT}${TARGET}/maintenance/importDump.php --namespaces '10' --debug $CONT/minimal-initial-contents.xml
+#  exec 1>&1 2>&2
+#  printf " namespace 10 done ";
+#  php ${MOUNT}${TARGET}/maintenance/importDump.php --uploads --debug $CONT/minimal-initial-contents.xml
+#  exec 1>&1 2>&2
+#  printf " uploads done ";
+#printf "DONE\n"
+
 printf "\n*** Adding initial contents..."
-  php ${MOUNT}${TARGET}/maintenance/importDump.php --namespaces '8' --debug $CONT/minimal-initial-contents.xml
-  exec 1>&1 2>&2
-  printf " namespace 8 done ";
-  php ${MOUNT}${TARGET}/maintenance/importDump.php --namespaces '10' --debug $CONT/minimal-initial-contents.xml
-  exec 1>&1 2>&2
-  printf " namespace 10 done ";
-  php ${MOUNT}${TARGET}/maintenance/importDump.php --uploads --debug $CONT/minimal-initial-contents.xml
-  exec 1>&1 2>&2
-  printf " uploads done ";
+  getInitial Cat_DanteInitialContents
+  getInitial Cat_DanteInitialCustomize 
+  getInitial MediaWiki_DanteInitialContents
+  getInitial MediaWiki_DanteInitialCustomize
+  getInitial Test
 printf "DONE\n"
 
-# main page and sidebar need a separate check in to show the proper dates
+# main page and sidebar need a separate check in to show the proper dates; this also needs an --overwrite flag
 printf "\n*** Checking in sidebar..."
    php ${MOUNT}/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite --prefix "MediaWiki:" $CONT/Sidebar
   exec 1>&1 2>&2

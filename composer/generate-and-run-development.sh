@@ -23,7 +23,7 @@ trap 'abort' ERR
 
 
 printf "\n$GREEN---Taking down configuration...$RESET\n"
-  docker-compose -f $TOP_DIR/composer/docker-compose-development.yaml down
+  docker compose -f $TOP_DIR/composer/docker-compose-development.yaml down
 printf "$GREEN---DONE$RESET\n" ;
 
 printf "\n$GREEN---Building image dante-wiki if necessary...$RESET\n" ; 
@@ -32,8 +32,8 @@ printf "$GREEN---DONE$RESET\n"
 
 printf "\n$GREEN---Starting up configuration...$RESET\n" 
 # do this in detached mode so as to allow the waiting for the service to start
-#  docker-compose -f $TOP_DIR/composer/docker-compose-development.yaml up -d
-  docker-compose -f $TOP_DIR/composer/docker-compose-development.yaml up &
+#  docker compose -f $TOP_DIR/composer/docker-compose-development.yaml up -d
+  docker compose -f $TOP_DIR/composer/docker-compose-development.yaml up &
 printf "$GREEN---DONE$RESET\n"
 
 sleep 10

@@ -17,13 +17,14 @@ module.exports = {
   plugins: [
   ],
   rules: {
-    'react/prop-types': 'off',
-    'no-console': 'warn',
-    'no-debugger': 'error',
-    'eqeqeq': ['error', 'always'],
-    'curly': ['error', 'all'],
-    'semi': ['error', 'always'],
-    'quotes': ['error', 'single'],
+    'react/prop-types':  'off',
+    'no-console':        'warn',
+    'no-debugger':       'error',
+    'no-unused-vars':    ['warn'],
+    'eqeqeq':            ['error', 'always'],
+    'curly':             ['error', 'all'],
+    'semi':              ['error', 'always'],
+    'quotes':            ['error', 'single'],
   },
   settings: {
     react: {

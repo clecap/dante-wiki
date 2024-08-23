@@ -115,6 +115,9 @@ if [ -f "$MOUNT/$TARGET/mediawiki-PRIVATE.php" ]; then
 \$wgDefaultUserOptions['aws-region']          =  '${AWS_DEFAULT_REGION}';
 \$wgDefaultUserOptions['aws-encpw']           =  '${MY_AWS_CRYPTO_PASSWORD}';
 
+// Github tokens
+\$wgDefaultUserOptions['github-dante-wiki-contents']           =  '${GITHUB_DANTE_WIKI_CONTENTS}';
+
 ?>
 EOF
     printf "DONE generating mediawiki-PRIVATE.php\n"
@@ -122,6 +125,6 @@ fi
 
  exec 1>&1 2>&2
 
-trap -
+trap - ERR
 
 printf "${GREEN}*** DONE get-dante.sh${RESET}"

@@ -72,4 +72,4 @@ fi
 
 exec 1>&1 2>&2
 
-trap -
+trap - ERR

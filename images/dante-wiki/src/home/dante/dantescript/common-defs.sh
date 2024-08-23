@@ -37,7 +37,7 @@ export ERROR="\e[1;31m"
 # 92m for bold green
 export GREEN="\e[1;92m"
 
-  
+
 
 ### set terminate on error 
 abort() 
@@ -49,6 +49,16 @@ abort()
 
   printf "\n\n*** abort: Sleeping for 1 hour to keep container running for debug attempts ***\n\n"
   sleep 3600
+}
 
+getInitial()
+{
+  local url=$1.xml.gz
+  local PREFIX="https://raw.githubusercontent.com/clecap/dante-wiki-contents/master/assets/initial-contents/"
+  printf "*** Checking in contents from $url ..."
+  curl -L $url | gunzip -c | php ${MOUNT}${TARGET}/maintenance/importDump.php --namespaces '8'
+  curl -L $url | gunzip -c | php ${MOUNT}${TARGET}/maintenance/importDump.php --namespaces '10'
+  curl -L $url | gunzip -c | php ${MOUNT}${TARGET}/maintenance/importDump.php 
+  printf "COMPLETED"
 }
 
