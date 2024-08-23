@@ -53,8 +53,8 @@ abort()
 
 getInitial()
 {
-  local url=$1.xml.gz
   local PREFIX="https://raw.githubusercontent.com/clecap/dante-wiki-contents/master/assets/initial-contents/"
+  local url=${PREFIX}$1.xml.gz
   printf "*** Checking in contents from $url ..."
   curl -L $url | gunzip -c | php ${MOUNT}${TARGET}/maintenance/importDump.php --namespaces '8'
   curl -L $url | gunzip -c | php ${MOUNT}${TARGET}/maintenance/importDump.php --namespaces '10'

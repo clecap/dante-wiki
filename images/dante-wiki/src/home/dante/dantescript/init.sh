@@ -118,10 +118,11 @@ printf  "DONE\n"
 printf "\n*** Setting password for apache..."
   htpasswd -cb /etc/apache2/.htpasswd debug "${APACHE_DEBUG_PASSWORD}"
 printf "DONE setting debug password for apache\n"
-
+  exec 1>&1 2>&2
 
 
 set +e 
+trap 'abort' ERR
 
 
 #printf "\n*** Adding initial contents..."
@@ -191,5 +192,6 @@ printf "\n\n**** init.sh: Touching LocalSettings.php to refresh the cache..."
   exec 1>&1 2>&2
 printf "DONE touching LocalSettings.php\n"
 
+trap - ERR
 
 printf "\n\n*** /home/dante/dantescript/init.sh COMPLETED \n\n"
