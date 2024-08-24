@@ -55,10 +55,10 @@ getInitial()
 {
   local PREFIX="https://raw.githubusercontent.com/clecap/dante-wiki-contents/master/assets/initial-contents/"
   local url=${PREFIX}$1.xml.gz
-  printf "*** Checking in contents from $url ..."
+  printf "${GREEN}*** Checking in contents from $url ...${RESET}"
   curl -L $url | gunzip -c | php ${MOUNT}${TARGET}/maintenance/importDump.php --namespaces '8'
   curl -L $url | gunzip -c | php ${MOUNT}${TARGET}/maintenance/importDump.php --namespaces '10'
-  curl -L $url | gunzip -c | php ${MOUNT}${TARGET}/maintenance/importDump.php 
-  printf "COMPLETED"
+  curl -L $url | gunzip -c | php ${MOUNT}${TARGET}/maintenance/importDump.php --uploads
+  printf "\n${GREEN}COMPLETED${RESET}\n\n"
 }
 
