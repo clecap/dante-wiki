@@ -1,23 +1,23 @@
-     100 files     200 files     208 text files.
-classified 207 filesDuplicate file check 207 files (198 known unique)Unique:      100 files                                               201 unique files.                              
+     100 files     200 files     216 text files.
+classified 215 filesDuplicate file check 215 files (208 known unique)Unique:      100 files                                          Unique:      200 files                                               209 unique files.                              
 Counting:  100Counting:  200      35 files ignored.
 
-github.com/AlDanial/cloc v 1.90  T=0.14 s (1354.0 files/s, 348217.0 lines/s)
+github.com/AlDanial/cloc v 1.90  T=0.14 s (1383.6 files/s, 345585.2 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
 XML                             11           4165              0          21853
-PHP                             35           1893           3516           7232
-Bourne Shell                    73           1193            694           2912
-Markdown                        24            481              0           1231
-YAML                            16            126            110            569
+PHP                             34           1890           3516           7228
+Bourne Shell                    83           1370            725           3298
+Markdown                        24            488              0           1235
+YAML                            15            131            115            586
 JSON                            13              2              0            543
-Dockerfile                       1             64            119            204
+Dockerfile                       1             69            126            210
 SVG                              5              0              1             40
 JavaScript                       1              0              0             34
 Python                           1              9              1             33
 HTML                             2              4              0             17
 INI                              1              4              5              9
 -------------------------------------------------------------------------------
-SUM:                           183           7941           4446          34677
+SUM:                           191           8132           4489          35086
 -------------------------------------------------------------------------------
