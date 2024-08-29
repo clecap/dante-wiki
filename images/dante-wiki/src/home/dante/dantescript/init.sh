@@ -7,17 +7,13 @@ source /home/dante/dantescript/common-defs.sh
 printf "${GREEN}*** THIS IS /dantescript/init.sh ***** ${RESET}"
 
 
-
-# check if we succeeded to generate LocalSettings.php
+# check if we already have a LocalSettings.php
 if [ -e "${MOUNT}/${TARGET}/LocalSettings.php" ]; then
   printf "${GREEN} *** init.sh finds the system already in initialized state - exiting init.sh\n"
   exit 0
 fi
 
 
-###### send mail upon completion ????
-#### favicon must be included into the thing - and at the dockerfile level ## todo
-#### check if we are already initialized ##### TODO
 ####### crontab entries for backup and for job queue TODO
 
 MEDIAWIKI_DB_HOST=dante-mariadb-container
@@ -96,11 +92,11 @@ exec 1>&1 2>&2
 
 # check if we succeeded to generate LocalSettings.php
 if [ -e "${MOUNT}/${TARGET}/LocalSettings.php" ]; then
-  printf "\e[1;32m* SUCCESS:  ${MOUNT}/${TARGET}/LocalSettings.php  generated \e[0m \n"
+  printf "${GREEN}*** SUCCESS:  ${MOUNT}/${TARGET}/LocalSettings.php  generated${RESET}\n"
 else
-  printf "\033[0;31m *ERROR:  Could not generate ${MOUNT}/${TARGET}/LocalSettings.php - *** ABORTING \033[0m\n"
+  printf "${ERROR}*** ERROR:  Could not generate ${MOUNT}/${TARGET}/LocalSettings.php - *** ABORTING${RESET}\n"
+  exit -1
 fi
-
 
 
 printf "*** Adding reference to DanteSettings.php ... "
@@ -114,83 +110,16 @@ printf "*** Adding reference to DanteSettings.php ... "
 printf  "DONE\n"
 
 
-
-printf "\n*** Setting password for apache..."
-  htpasswd -cb /etc/apache2/.htpasswd debug "${APACHE_DEBUG_PASSWORD}"
-printf "DONE setting debug password for apache\n"
-  exec 1>&1 2>&2
-
-
 set +e 
 trap 'abort' ERR
 
 
-#printf "\n*** Adding initial contents..."
-#  php ${MOUNT}${TARGET}/maintenance/importDump.php --namespaces '8' --debug $CONT/minimal-initial-contents.xml
-#  exec 1>&1 2>&2
-#  printf " namespace 8 done ";
-#  php ${MOUNT}${TARGET}/maintenance/importDump.php --namespaces '10' --debug $CONT/minimal-initial-contents.xml
-#  exec 1>&1 2>&2
-#  printf " namespace 10 done ";
-#  php ${MOUNT}${TARGET}/maintenance/importDump.php --uploads --debug $CONT/minimal-initial-contents.xml
-#  exec 1>&1 2>&2
-#  printf " uploads done ";
-#printf "DONE\n"
 
-printf "\n*** Adding initial contents..."
-  getInitial Cat_DanteInitialContents
-  getInitial Cat_DanteInitialCustomize 
-  getInitial MediaWiki_DanteInitialContents
-  getInitial MediaWiki_DanteInitialCustomize
-  getInitial Test
-printf "DONE\n"
 
-# main page and sidebar need a separate check in to show the proper dates; this also needs an --overwrite flag
-printf "\n*** Checking in sidebar..."
-   php ${MOUNT}/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite --prefix "MediaWiki:" $CONT/Sidebar
-  exec 1>&1 2>&2
-printf "DONE\n"
 
-printf "\n*** Checking in MainPage..."
-  php ${MOUNT}/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite  "$CONT/Main Page"
-  exec 1>&1 2>&2
-printf "DONE\n"
 
 # Must do an update, since we have installed all kinds of extensions earlier
-printf "\n*** Doing a mediawiki maintenance update ... "
-  php ${MOUNT}/${TARGET}/maintenance/update.php
-  exec 1>&1 2>&2
-printf "DONE update.php\n"
-
-printf "\n\n**** init.sh: RUNNING: initSiteStats \n"
-  php ${MOUNT}/${TARGET}/maintenance/initSiteStats.php --update
-  exec 1>&1 2>&2
-printf "DONE initSiteStats.php\n"
-
-printf "\n\n**** init.sh: RUNNING: rebuildall \n\n"
-  php ${MOUNT}/${TARGET}/maintenance/rebuildall.php 
-  exec 1>&1 2>&2
-printf "DONE rebuildall.php\n"
-
-printf "\n**** init.sh: RUNNING: checkImages \n"
-  php ${MOUNT}/${TARGET}/maintenance/checkImages.php
-  exec 1>&1 2>&2
-printf "DONE checkImages.php\n"
-
-printf "\n**** init.sh RUNNING: refreshFileHeaders \n"
-  php ${MOUNT}/${TARGET}/maintenance/refreshFileHeaders.php --verbose
-  exec 1>&1 2>&2
-printf "DONE refreshFileHeaders.php\n"
-
-
-
-
-
-# touch the file LocalSettings.php to refresh the cache
-printf "\n\n**** init.sh: Touching LocalSettings.php to refresh the cache..."
-  touch ${MOUNT}/${TARGET}/LocalSettings.php
-  exec 1>&1 2>&2
-printf "DONE touching LocalSettings.php\n"
+doMaintenanceUpdate
 
 trap - ERR
 

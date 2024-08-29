@@ -2,7 +2,6 @@
 
 source /home/dante/dantescript/common-defs.sh
 
-
 trap 'abort' ERR                       # call abort on error
 
 #### TODO MUST ABORT COMPLETEL including upstream in case of error - also for some of the other dante scripts. and need an abotzt in lapentry-.sh
@@ -45,7 +44,6 @@ if [ -d "$MOUNT/$TARGET/.git" ]; then
 fi
 
 
-
 ##  installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-DrawioEditor                   DrawioEditor REL1_39
 ## This extension is broken currently
 ##  Use my own version - see my mediawiki-extensions-DrawioEditor Patch
@@ -65,11 +63,6 @@ printf "DONE installing drawio external service\n"
 exec 1>&1 2>&2     
 
 
-
-
-
-
-
 #   inject only, after LocalSettings.php has been generated
 if [ -f "$MOUNT/$TARGET/LocalSettings.php" ]; then
     printf "\n*** get-dante.sh:  connecting to Mediawiki via an injection into LocalSettings.pgp ...\n"
@@ -84,47 +77,10 @@ EOF
     printf "\n*** get-dante.sh: no LocalSettings.php found, cannot inject, maybe later\n" ;
 fi
 
- exec 1>&1 2>&2
-
-if [ -f "$MOUNT/$TARGET/mediawiki-PRIVATE.php" ]; then
-    printf "\n*** get-dante.sh: mediawiki-PRIVATE.php already existing, skip generation\n"
-  else
-    printf "\n*** get-dante.sh: mediawiki-PRIVATE.php not found, generating it...\n"
-    cat <<EOF >> ${MOUNT}/$TARGET/mediawiki-PRIVATE.php
-<?php
-
-\$wgPasswordSender = "${SMTP_FROM}";          // address of the sending email account
-
-\$wgSMTP = [
-    'host'     => '${SMTP_HOST}',                // hostname of the smtp server of the email account
-    'IDHost'   => '${MY_DOMAINNAME}',            // sub(domain) of your wiki
-    'port'     => ${SMTP_PORT},                  // SMTP port to be used
-    'username' => '${SMTP_USER}',                // username of the email account
-    'password' => '${SMTP_PASSWORD}',            // password of the email account
-    'auth'     => true                           // shall authentisation be used
-];
-
-\$wgLocaltimezone="${MW_TIMEZONE}";
-
-\$DEEPL_API_KEY="${DEEPL_API_KEY}";
-
-// AWS data for an S3 user restricted to backup   dantebackup.iuk.one
-\$wgDefaultUserOptions['aws-accesskey']       =  '${AWS_ACCESS_KEY_ID}';
-\$wgDefaultUserOptions['aws-secretaccesskey'] =  '${AWS_SECRET_ACCESS_KEY}';
-\$wgDefaultUserOptions['aws-bucketname']      =  '${AWS_BUCKETNAME}';
-\$wgDefaultUserOptions['aws-region']          =  '${AWS_DEFAULT_REGION}';
-\$wgDefaultUserOptions['aws-encpw']           =  '${MY_AWS_CRYPTO_PASSWORD}';
-
-// Github tokens
-\$wgDefaultUserOptions['github-dante-wiki-contents']           =  '${GITHUB_DANTE_WIKI_CONTENTS}';
-
-?>
-EOF
-    printf "DONE generating mediawiki-PRIVATE.php\n"
-fi
-
- exec 1>&1 2>&2
+exec 1>&1 2>&2
 
 trap - ERR
 
 printf "${GREEN}*** DONE get-dante.sh${RESET}"
+
+

@@ -281,11 +281,32 @@ RUN apt-get install -y --no-install-recommends python3.11-venv                  
 
 
 
-# Download and extract MediaWiki
+#  do not want auto-updates here
+RUN rm -f /etc/cron.daily/apt-compat
+
+# Install gosu since su and sudo is not playing nice in docker according to docu
+# RUN apt-get update && apt-get install -y gosu && rm -rf /var/lib/apt/lists/*
+# TODO deprecate did not work properly
+
+
+# we need to be able to do a su on www-data TODO: check if we really still need that
+RUN chsh -s "/bin/bash" "www-data"
+
+# make this more efficient, have a cleanup - include this into above parts TODO
+RUN apt-get update && apt-get install -y sudo && \
+  echo "www-data ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+
+RUN chown -R www-data:www-data /var/www
+
+# We do not want to have to chown files, as this is a time consuming operation when many files are involved
+# Thus we switch to a different user for the following operations
+USER www-data
+
 RUN  curl -o /tmp/$MEDIAWIKI_TARBALL $MEDIAWIKI_URL                 && \
-    tar -xzf /tmp/$MEDIAWIKI_TARBALL -C /tmp                       && \
+    mkdir /var/www/html/${TARGET}                                   && \
+    tar -xzf /tmp/$MEDIAWIKI_TARBALL -C /var/www/html/${TARGET} --strip-components=1    && \
     rm /tmp/$MEDIAWIKI_TARBALL                                     && \
-    mv /tmp/mediawiki-$MEDIAWIKI_VERSION /var/www/html/${TARGET}   && \
     rm -Rf /var/www/html/${TARGET}/skins/Refreshed/.git
 
 
@@ -352,9 +373,6 @@ RUN /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://gi
     composer update
 
 
-
-
-
 ## 
 ## Adhere to default non-root user policy promoted by dockerhub
 ##
@@ -364,14 +382,14 @@ RUN /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://gi
 #  Give non-root user ownership of the application files
 #  Set the default user ## TODO: do we want this? is it compatible with the deletion strategies we need ???
 
-#  do not want auto-updates here
-RUN rm -f /etc/cron.daily/apt-compat
+
 
 
 # Just kept in for debugging purposes during development 
 # CMD ["sh", "-c", "while :; do sleep 2073600; done"]
 
-
+# todo: kann weg, war ja schon weiter oben gemacht worden !
+USER www-data
 
 ##
 ## Default parameters for the entrypoint script below

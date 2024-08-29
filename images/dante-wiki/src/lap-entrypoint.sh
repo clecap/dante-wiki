@@ -7,16 +7,8 @@ source /home/dante/dantescript/common-defs.sh
 
 ## Say hello
 printf "\n*** *** This is /lap-entrypoint.sh *** ***\n"
- 
-## Load the secret configuration file
-if [ -f "/run/secrets/configuration" ]; then
-    printf "$GREEN*** /lap-entrypoint.sh will now load configuration...${RESET} "
-    source /run/secrets/configuration ; exec 1>&1 2>&2
-    printf "DONE loading configuration\n"
-  else
-    printf "$ERROR*** /lap-entrypoint.sh could not find configuration file, EXITING $RESET\n"
-    exit 1
-fi
+
+loadSecrets
 
 ## Iterate over each argument in the list of arguments we are called on
 printf "$GREEN*** /lap-entrypoint.sh: Iterating the $# arguments: $* ${RESET}\n"

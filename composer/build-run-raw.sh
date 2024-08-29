@@ -17,9 +17,8 @@ build
 # TODO: research if we can also do this with -d for detached mode and make better use of the health check dependency in the yaml file
 #  docker compose -f $TOP_DIR/composer/docker-compose-development.yaml up -d
 
-upServices $TOP_DIR/composer/docker-compose-development.yaml database copy-to-host webserver-after-copy phpmyadmin
+upServices $TOP_DIR/composer/docker-compose-development.yaml database webserver-raw phpmyadmin
 
-waitForContainerRunning dante-wiki-container
-waitForContainerHealthy dante-wiki-container
+
 waitForWebserverServicing
 openChrome

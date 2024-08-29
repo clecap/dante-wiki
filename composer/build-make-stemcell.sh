@@ -1,5 +1,9 @@
 #!/bin/bash
 
+
+## build a stem container and tag it as such
+
+
 # get directory where this script resides wherever it is called from
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 TOP_DIR=${DIR}/.. 
@@ -17,9 +21,5 @@ build
 # TODO: research if we can also do this with -d for detached mode and make better use of the health check dependency in the yaml file
 #  docker compose -f $TOP_DIR/composer/docker-compose-development.yaml up -d
 
-upServices $TOP_DIR/composer/docker-compose-development.yaml database copy-to-host webserver-after-copy phpmyadmin
+upServices $TOP_DIR/composer/docker-compose-development.yaml database webserver-stemcell
 
-waitForContainerRunning dante-wiki-container
-waitForContainerHealthy dante-wiki-container
-waitForWebserverServicing
-openChrome

@@ -8,9 +8,6 @@ set -e
 exec 1>&1 2>&2
 exec 1>&1 2>&2
 
-
-
-
 echo ""
 echo "**********************************************"
 echo "*** volumes/mysql-init/init.sh running now ***"
@@ -99,29 +96,3 @@ exec 1>&1 2>&2
 
 
 # sleep infinity
-
-
-
-
-#mysql -u root <<-EOF
-#  DELETE FROM mysql.user WHERE User='';
-#  DROP DATABASE IF EXISTS test;
-#  DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
-#  UPDATE mysql.user SET Host='localhost' WHERE User='root';
-#  FLUSH PRIVILEGES;
-#  SHOW USERS;
-#EOF
-
-#printf "*** Generating mail\n"
-## Name of a temporary file for building up the mail
-#TMPFILE=`mktemp`
-
-# generate header in mail file
-#echo "To: $SMTP_TO"         >> $TMPFILE
-#echo "From: $SMTP_FROM"       >> $TMPFILE
-#echo "Subject: Mysql initialized " >> $TMPFILE
-
-#msmtp --host=${SMTP_HOST} --port=${SMTP_PORT} --auth=on --user=${SMTP_USER} --passwordeval="echo $SMTP_PASSWORD" --tls=on --from=${SMTP_FROM}  ${SMTP_TO} < $TMPFILE
-#printf "DONE generating mail\n\n"
-
-#printf "*** Completed dante/mysql-init/init.sh\n"

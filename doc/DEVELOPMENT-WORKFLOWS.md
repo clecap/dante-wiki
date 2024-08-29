@@ -3,6 +3,17 @@
 
 
 
+1. Do Dockerfile installation portions
+2. Do dynamic installation portions
+
+
+
+
+
+## Aspects:
+
+Starting up and loading sql has the problem that we have the user preferences wrong.
+
 
 
 

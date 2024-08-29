@@ -9,8 +9,6 @@
 # copy out to live
 
 
-
-
 services:
 
   database:
@@ -22,8 +20,6 @@ services:
       - dante-network
     secrets:
      - configuration
-    volumes:
-      - ../volumes/mysql-init:/docker-entrypoint-initdb.d
     environment:
       MARIADB_ROOT_PASSWORD: initialPassword
 
@@ -38,7 +34,7 @@ services:
       - configuration
     networks: 
       - dante-network
-    command: "wait-for-mysql.sh get-dante.sh get-parsifal.sh init.sh copy-out.sh shutdown.sh"
+    command: "wait-for-mysql.sh get-dante.sh get-parsifal.sh generate-mediawiki-private.sh init.sh copy-out.sh shutdown.sh"
 
 # NOTE: we add a shutdown.sh for the copy-to-host service so that the webserver may start up
 #       If we need to debug some stuff, we can also remove it for a moment 
@@ -68,12 +64,78 @@ services:
       dante-network:
         aliases: 
           - dante.local
-    command: "make-localhost-certificate.sh get-dante.sh get-parsifal.sh chown.sh run-apache-no-cache.sh"
+    command: "install-webserver-certificate.sh get-dante.sh get-parsifal.sh generate-mediawiki-private.sh chown.sh run-apache-no-cache.sh"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost"]
       interval: 30s
       timeout: 10s
       retries: 5
+
+
+## starts a container which has not been initialized but which does not require a copy to the development environment
+## runs not off a volume but off the container itself
+  webserver-raw:
+    image: dante-wiki:latest
+    container_name: dante-wiki-container
+    ports:
+      - "8080:80"
+      - "4443:443"
+    secrets:
+      - configuration
+    networks: 
+      dante-network:
+        aliases: 
+          - dante.local
+    command: "wait-for-db-server.sh prepare-database.sh install-webserver-certificate.sh get-dante.sh get-parsifal.sh generate-mediawiki-private.sh init.sh set-user-preferences.sh initial-xml-git.sh run-apache-no-cache.sh"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+## starts a container and does all the work for preparing a 
+  webserver-stemcell:
+    image: dante-wiki:latest
+    container_name: dante-wiki-container
+    ports:
+      - "8080:80"
+      - "4443:443"
+    secrets:
+      - configuration
+    networks: 
+      dante-network:
+        aliases: 
+          - dante.local
+    command: "wait-for-db-server.sh prepare-database.sh install-webserver-certificate.sh get-dante.sh get-parsifal.sh"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+
+
+
+
+
+
+
+## start a container which has already been initialized
+  webserver-cooked:
+    image: dante-wiki:cooked
+    container_name: dante-wiki-container
+    ports:
+      - "8080:80"
+      - "4443:443"
+    secrets:
+      - configuration
+    networks: 
+      dante-network:
+        aliases: 
+          - dante.local
+    command: "wait-for-mysql.sh restore-initial-sql.sh chown.sh run-apache-no-cache.sh"
+
+# TODO: waiting for mysql: maybe we can put this into a health check ?!?!? in a better way than thus far ????
 
 
   phpmyadmin:

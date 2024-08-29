@@ -1,10 +1,5 @@
 #!/bin/bash
 
-
-
-##### THIS script waits for the Dante database to be available and assume the DB container has its own initialization script
-
-
 DB_NAME="Dante"
 
 MAX_RETRIES=100  ;  SLEEP_INTERVAL=5  ;  RETRY_COUNT=0
@@ -13,20 +8,26 @@ source /home/dante/dantescript/common-defs.sh
 
 MYSQL_PWD=$MY_DB_PASS
 
+
 # Function to check if the database exists
-check_database_exists() {
-  RESULT=$(mysql -h $MY_DB_HOST -u root -pdimida -e "SHOW DATABASES LIKE '${DB_NAME}';" 2>&1)
-  if [[ "$RESULT" == *"$DB_NAME"* ]]; then
-      return 0
-    else
-      return 1
+check_database_running() {
+  printf "Pinging database\n"
+  mysqladmin ping -h "$MY_DB_HOST" -u root -pinitialPassword --silent
+  if [ $? -eq 0 ]; then
+    printf "Returning true-ish\n"
+    return 0  # True-ish
+  else
+    printf "Returning false-ish\n"
+    return 1  # False-ish
   fi
 }
 
+
+
 # Main script logic
-printf "\n$GREEN*** This is wait-for-mysql: we are waiting for $MY_DB_HOST to come up\n"
+printf "\n$GREEN*** This is wait-for-db: we are waiting for $MY_DB_HOST to come up\n"
 while [[ $RETRY_COUNT -lt $MAX_RETRIES ]]; do
-  if check_database_exists; then
+  if check_database_running; then
       printf "$GREEN*** wait-for-mysql: SUCCESS: Database ${DB_NAME} exists, exiting script at retrycount=$RETRY_COUNT\n" 
       return 0
     else

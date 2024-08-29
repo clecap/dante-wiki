@@ -8,7 +8,7 @@ source /home/dante/dantescript/common-defs.sh
 
 trap 'abort' ERR                       # call abort on error
 
-printf "*** This is make-localhost-certificate.sh\n"
+printf "*** This is install-webserver-certificate.sh\n"
 
 if [ -e "/etc/ssl/apache2/server.crt" ] && [ -e "/etc/ssl/apache2/server.key" ]; then
   printf "/etc/ssl/apache2/server.crt and /etc/ssl/apache2/server.key both exist \n"
@@ -17,24 +17,31 @@ else
   APACHE_SERVER_KEY_LENGTH="${#APACHE_SERVER_KEY}"
   APACHE_SERVER_CRT_LENGTH="${#APACHE_SERVER_CRT}"
   if [ "$APACHE_SERVER_KEY_LENGTH" -gt 20 -a "$APACHE_SERVER_CRT_LENGTH" -gt 20 ]; then
-    printf "*** make-localhost-certificate: Found certificate strings in secret, using them\n"
-      rm -f /etc/ssl/apache2/server.crt
-      rm -f /etc/ssl/apache2/server.key
-      echo "$APACHE_SERVER_KEY" > /etc/ssl/apache2/server.key
-      echo "$APACHE_SERVER_CRT" > /etc/ssl/apache2/server.crt
-      chmod 600 /etc/ssl/apache2/server.key
-      chmod 644 /etc/ssl/apache2/server.crt
+    printf "*** install-webserver-certificate: Found certificate strings in secret, using them\n"
+      sudo rm -f /etc/ssl/apache2/server.crt
+      sudo rm -f /etc/ssl/apache2/server.key
+      # CAVE: Below: sudo must also affect the redirect, so we must encapsulate this into a complete shell run as follows:
+      sudo sh -c 'echo "$APACHE_SERVER_KEY" > /etc/ssl/apache2/server.key'
+      sudo sh -c 'echo "$APACHE_SERVER_CRT" > /etc/ssl/apache2/server.crt'
+      sudo chmod 600 /etc/ssl/apache2/server.key
+      sudo chmod 644 /etc/ssl/apache2/server.crt
     printf "DONE using secret strings\n"
   else
-    printf "*** make-localhost-certificate: No reasonable strings found in secret, generating key and crt and mailing crt\n"
-      openssl req -x509 -out /etc/ssl/apache2/server.crt -quiet -keyout /etc/ssl/apache2/server.key \
+    printf "*** install-webserver-certificate: No reasonable strings found in secret, generating key and crt and mailing crt\n"
+      openssl req -x509 -out /tmp/server.crt -quiet -keyout /tmp/server.key \
         -newkey rsa:2048 -nodes -sha256 \
+        -days 900 \
         -subj '/CN=localhost' -extensions EXT -config <( \
       printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
+
       exec 1>&1 2>&2
 
-      chmod 600 /etc/ssl/apache2/server.key
-      chmod 644 /etc/ssl/apache2/server.crt
+      sudo cp /tmp/server.crt /etc/ssl/apache2/server.crt
+      sudo cp /tmp/server.key /etc/ssl/apache2/server.key
+      rm /tmp/server.crt
+      rm /tmp/server.key
+      sudo chmod 600 /etc/ssl/apache2/server.key
+      sudo chmod 644 /etc/ssl/apache2/server.crt
 
       # Name of a temporary file for building up the mail
       TMPFILE=`mktemp`
@@ -65,9 +72,11 @@ else
         echo "--$BOUNDARY--"
       } > $TMPFILE
       msmtp --host=${SMTP_HOST} --port=${SMTP_PORT} --auth=on --user=${SMTP_USER} --passwordeval="echo $SMTP_PASSWORD" --tls=on --from=${SMTP_FROM}  ${SMTP_TO} < $TMPFILE
-      printf "*** make-localhost-certificae: Made and mailed key and crt\n"
+      printf "*** install-webserver-certificate: Made and mailed key and crt\n"
   fi
 fi  
+
+
 
 
 exec 1>&1 2>&2
