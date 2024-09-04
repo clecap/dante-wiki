@@ -86,7 +86,7 @@ services:
       dante-network:
         aliases: 
           - dante.local
-    command: "wait-for-db-server.sh prepare-database.sh install-webserver-certificate.sh get-dante.sh get-parsifal.sh generate-mediawiki-private.sh init.sh set-user-preferences.sh initial-xml-git.sh run-apache-no-cache.sh"
+    command: "wait-for-db-server.sh prepare-database.sh install-webserver-certificate.sh get-dante.sh get-parsifal.sh generate-mediawiki-private.sh init.sh set-user-preferences.sh initial-xml-git.sh  sleep.sh  run-apache-no-cache.sh"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost"]
       interval: 30s
