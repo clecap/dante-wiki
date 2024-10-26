@@ -11,6 +11,7 @@
 
 services:
 
+## a database running of a volume which is part of the container
   database:
     image: mariadb:10.5
     ports:
@@ -22,6 +23,23 @@ services:
      - configuration
     environment:
       MARIADB_ROOT_PASSWORD: initialPassword
+
+
+## a database running off a named volume
+  database-volume:
+    image: mariadb:10.5
+    ports:
+      - "3306:3306"
+    container_name: dante-mariadb-container
+    networks:
+      - dante-network
+    secrets:
+     - configuration
+    volumes:
+      - data:/var/lib/mysql
+    environment:
+      MARIADB_ROOT_PASSWORD: initialPassword
+
 
   copy-to-host:
     image: dante-wiki:latest
@@ -86,7 +104,7 @@ services:
       dante-network:
         aliases: 
           - dante.local
-    command: "prepare-database.sh install-webserver-certificate.sh get-dante.sh get-parsifal.sh generate-mediawiki-private.sh init.sh set-user-preferences.sh initial-xml-git.sh  sleep.sh  run-apache-no-cache.sh"
+    command: "prepare-database.sh install-webserver-certificate.sh get-dante.sh get-parsifal.sh generate-mediawiki-private.sh init.sh set-user-preferences.sh initial-xml-git.sh run-apache-no-cache.sh"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost"]
       interval: 30s
@@ -112,11 +130,6 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
-
-
-
-
-
 
 
 
@@ -154,6 +167,8 @@ services:
 
 networks:
   dante-network:
+
+
 
 secrets:
   configuration:

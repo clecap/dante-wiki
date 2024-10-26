@@ -2,9 +2,5 @@
 
 
 
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/clecap/dante-wiki/master/dist/run.sh)"
 
-
-
-
-
+/bin/bash -c "$(curl -fsSL https://github.com/clecap/dante-wiki/raw/refs/heads/master/dist/get.sh)"

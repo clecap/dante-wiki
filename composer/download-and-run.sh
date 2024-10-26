@@ -88,9 +88,4 @@ while true; do
 done
 
 
-
-
-if [ `uname` == "Darwin" ]; then 
-  printf "\n *** Attempting to start a local Chrome browser\n";
-  open -na "Google Chrome" --args --new-window http://localhost:8080/index.html
-fi
+openChrome

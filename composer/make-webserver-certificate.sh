@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# make a webserver certificate
+# make a webserver certificate for localhost
 
 openssl req -x509 -out /tmp/server.crt -quiet -keyout /tmp/server.key \
   -newkey rsa:2048 -nodes -sha256 \

@@ -32,7 +32,7 @@ cat <<EOF >> ${MOUNT}/$TARGET/mediawiki-PRIVATE.php
 EOF
 
 chmod 600 ${MOUNT}/$TARGET/mediawiki-PRIVATE.php
-chown www-data:www-data 600 ${MOUNT}/$TARGET/mediawiki-PRIVATE.php
+chown www-data:www-data ${MOUNT}/$TARGET/mediawiki-PRIVATE.php
 
 printf "DONE generating mediawiki-PRIVATE.php\n"
 
