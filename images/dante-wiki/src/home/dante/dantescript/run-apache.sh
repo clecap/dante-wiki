@@ -21,6 +21,10 @@ printf "\n*** run-apache.sh: Listing apache modules...\n"
   exec 1>&1 2>&2
 printf "DONE\n"
 
+printf "\n*** run-apache-no-cache.sh: Testing configuration...\n"
+  apachectl configtest
+printf "DONE\n"
+
 printf "\n*** run-apache.sh: Starting apache with DO-CACHE ...\n"
   sudo apachectl  -D DO_CACHE -k start 
   exec 1>&1 2>&2

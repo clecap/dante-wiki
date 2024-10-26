@@ -16,13 +16,18 @@ else
   printf "   One of /etc/ssl/apache2/server.crt or /etc/ssl/apache2/server.key both missing \n"
   APACHE_SERVER_KEY_LENGTH="${#APACHE_SERVER_KEY}"
   APACHE_SERVER_CRT_LENGTH="${#APACHE_SERVER_CRT}"
+  printf "  APACHE_SERVER_KEY_LENGTH IS ${APACHE_SERVER_KEY_LENGTH}\n"
+  printf "  APACHE_SERVER_CRT_LENGTH IS ${APACHE_SERVER_CRT_LENGTH}\n"
   if [ "$APACHE_SERVER_KEY_LENGTH" -gt 20 -a "$APACHE_SERVER_CRT_LENGTH" -gt 20 ]; then
     printf "*** install-webserver-certificate: Found certificate strings in secret, using them\n"
+    printf "***KEY IS: ${APACHE_SERVER_KEY}\n"
+    printf "***CRT IS: ${APACHE_SERVER_CRT}\n"
       sudo rm -f /etc/ssl/apache2/server.crt
       sudo rm -f /etc/ssl/apache2/server.key
-      # CAVE: Below: sudo must also affect the redirect, so we must encapsulate this into a complete shell run as follows:
-      sudo sh -c 'echo "$APACHE_SERVER_KEY" > /etc/ssl/apache2/server.key'
-      sudo sh -c 'echo "$APACHE_SERVER_CRT" > /etc/ssl/apache2/server.crt'
+      echo "${APACHE_SERVER_KEY}" > /tmp/server.key
+      echo "${APACHE_SERVER_CRT}" > /tmp/server.crt
+      sudo mv /tmp/server.key /etc/ssl/apache2/server.key
+      sudo mv /tmp/server.crt /etc/ssl/apache2/server.crt
       sudo chmod 600 /etc/ssl/apache2/server.key
       sudo chmod 644 /etc/ssl/apache2/server.crt
     printf "DONE using secret strings\n"

@@ -6,7 +6,7 @@
 source /home/dante/dantescript/common-defs.sh
 
 ## Say hello
-printf "\n*** *** This is /lap-entrypoint.sh *** ***\n"
+printf "\n*** *** This is /lap-entrypoint.sh V2 *** ***\n"
 
 loadSecrets
 
@@ -18,6 +18,7 @@ for script in "$@"; do
       RETURN_VALUE="returnvalue-initialized" ; 
       source "/home/dante/dantescript/$script" 
       EXIT_STATUS=$?
+      printf "\n$GREEN***/lap-entrypoint.sh: Now testing on exit status\n"
       if [[ $EXIT_STATUS -ne 0 ]]; then
         exec 1>&1 2>&2 ; echo "$script exited with status $EXIT_STATUS"
       else

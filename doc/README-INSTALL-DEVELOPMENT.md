@@ -1,5 +1,5 @@
 
-This is the README file for a development machine.
+This is the README file for generating a development environment.
 
 
 ## Concepts
@@ -17,7 +17,6 @@ This is the README file for a development machine.
 * For Linux/Debian see: https://github.com/git-ecosystem/git-credential-manager/blob/release/docs/install.md and follow Debian instructions
 * Get a github permission token
 * Configure helper according to https://docs.github.com/en/get-started/getting-started-with-git/caching-your-github-credentials-in-git
-
 
 
 ## Docker Tags Used

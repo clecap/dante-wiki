@@ -155,6 +155,139 @@ changeWikiRootUser()
 
 
 
+
+
+
+
+
+
+# Function to check if the database server is running; returns true if it is running
+#### TODO
+#### CAVE: NEEDS correct password !!!
+ping_dbserver() {
+  local MY_DB_HOST="$1"
+  printf "check_dbserver_running: Pinging database $MY_DB_HOST \n"
+  mysqladmin ping -h "$MY_DB_HOST"
+
+
+  sleep 600000
+
+  RESULT=$?
+  printf "mysqladmin returned $RESULT"
+  if [ $RESULT -eq 0 ]; then
+    printf "ping_dbserver: Returning true-ish\n"
+    return 1  # True-ish
+  else
+    printf "ping_dbserver: Returning false-ish\n"
+    return 0  # False-ish
+  fi
+}
+
+
+
+check_dbserver_running() {
+  local MYSQL_HOST="$1"
+  local MYSQL_PORT=3306
+
+# Use /dev/tcp to check if the MySQL server is reachable
+  if (echo > /dev/tcp/$MYSQL_HOST/$MYSQL_PORT) &> /dev/null; then
+    printf "   check_dbserver_running: MySQL server ${MYSQL_HOST} is up\n"
+    return 1
+  else
+    printf "   check_dbserver_running: MySQL server ${MYSQL_HOST} is down or unreachable\n"
+    return 0
+  fi
+}
+
+
+
+
+
+wait_dbserver_running() {
+  local MY_DB_HOST="$1"
+  local MAX_RETRIES=100    
+  local SLEEP_INTERVAL=5  
+  local RETRY_COUNT=0
+  local RESULT
+
+  printf "\n$GREEN*** This is wait_dbserver_running: we are waiting for $MY_DB_HOST to come up\n"
+  while [[ $RETRY_COUNT -lt $MAX_RETRIES ]]; do
+    check_dbserver_running "$MY_DB_HOST"
+    RESULT=$?
+    if [ "$RESULT" == "1" ]; then
+      printf "$GREEN*** wait_dbserver_running: SUCCESS: Database server is running, exiting script at retrycount=$RETRY_COUNT\n" 
+      return 1
+    elif [ "$RESULT" == "0" ]; then
+      printf "   wait_dbserver_running: Database server does not exist. Will sleep ${SLEEP_INTERVAL} seconds and then retry. We are at retry count $RETRY_COUNT\n"
+      sleep $SLEEP_INTERVAL
+      ((RETRY_COUNT++))
+    else
+      printf "wait_dbserver_running: The variable does not contain 1 or 0"
+    fi
+  done
+  printf "\n\n $ERROR*** wait_dbserver_running: ERROR: Database server not running after ${MAX_RETRIES} retries.\n\n"
+  sleep 600000
+  exit 1
+}
+
+
+
+check_dbserver_initial_rootpassword() {
+  local MY_DB_HOST="$1"
+  if mysqladmin ping -u root -pinitialPassword -h "$MY_DB_HOST"; then
+    printf "check_dbserver_initial_password: db server is running and initial password is ok.\n"
+    return 1
+  else
+    printf "check_dnserver_initial_password: db server is not running or initial password is incorrect.\n"
+    return 0
+  fi
+}
+
+
+
+# Function to check if the database $1 exists and is running
+check_database_exists() {
+  local DB_NAME="$1"
+  local RESULT=$(mysql -h $MY_DB_HOST -u root -p${MY_DB_PASS} -e "SHOW DATABASES LIKE '${DB_NAME}';" 2>&1)
+  if [[ "$RESULT" == *"$DB_NAME"* ]]; then
+      printf "check_database_exists did not find database ${DB_NAME}"
+      return 0
+    else
+      printf "check_database_exists found database ${DB_NAME}"
+      return 1
+  fi
+}
+
+
+
+wait_database_ready() {
+  local DB_NAME="$1"
+  local MAX_RETRIES=100
+  local SLEEP_INTERVAL=5
+  local RETRY_COUNT=0
+  printf "\n$GREEN*** wait_database_ready: Waiting for $MY_DB_HOST to come up with ${DB_NAME}\n"
+  while [[ $RETRY_COUNT -lt $MAX_RETRIES ]]; do
+    if check_database_exists; then
+        printf "$GREEN*** wait_database_ready: SUCCESS: Database ${DB_NAME} exists, exiting script at retrycount=$RETRY_COUNT\n" 
+        return 0
+      else
+        printf "wait_database_ready: Database ${DB_NAME} does not exist. Will sleep ${SLEEP_INTERVAL} seconds and then retry at retry count $RETRY_COUNT\n"
+        sleep $SLEEP_INTERVAL
+       ((RETRY_COUNT++))
+    fi
+  done
+
+  printf "\n\n $ERROR*** wait_database_ready: ERROR: Database ${DB_NAME} was not found after ${MAX_RETRIES} retries.$RESET \n\n"
+  exit 1
+}
+
+
+
+
+
+
+
+
 listUsers()
 {
   local MY_DB_HOST=$1
