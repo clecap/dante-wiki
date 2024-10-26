@@ -1,14 +1,14 @@
      100 files     200 files     213 text files.
-classified 212 filesDuplicate file check 212 files (202 known unique)Unique:      100 files                                          Unique:      200 files                                               206 unique files.                              
+classified 212 filesDuplicate file check 212 files (203 known unique)Unique:      100 files                                          Unique:      200 files                                               206 unique files.                              
 Counting:  100Counting:  200      36 files ignored.
 
-github.com/AlDanial/cloc v 1.90  T=0.14 s (1346.9 files/s, 341844.8 lines/s)
+github.com/AlDanial/cloc v 1.90  T=0.14 s (1348.9 files/s, 342364.5 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
 XML                             11           4165              0          21853
 PHP                             34           1890           3516           7228
-Bourne Shell                    81           1384            724           3355
+Bourne Shell                    81           1381            725           3356
 Markdown                        24            483              0           1235
 YAML                            14            119            109            548
 JSON                            13              2              0            543
@@ -19,5 +19,5 @@ Python                           1              9              1             33
 HTML                             2              4              0             17
 INI                              1              4              5              9
 -------------------------------------------------------------------------------
-SUM:                           188           8129           4482          35105
+SUM:                           188           8126           4483          35106
 -------------------------------------------------------------------------------
