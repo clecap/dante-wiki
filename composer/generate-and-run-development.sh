@@ -9,6 +9,9 @@ source $DIR/library.sh
 set -e
 trap 'abort' ERR
 
+injectInfo dante-wiki:latest
+
+
 downAllServices $TOP_DIR/composer/docker-compose-development.yaml
 
 # TODO: would be nice if we could include the build process into the YAML file as well.

@@ -56,3 +56,9 @@ rm -f /tmp/${NAME}
 ## VSCODIUM
 
 * Need extension "Ansi Colors" to see colours in output window.
+
+## set -e
+
+set -e leads to an immediate abort of the script in case of an error. Also a trap is not
+taken (unless, maybe, it is on EXIT). Thus, control does not return to the calling script
+for error handling.

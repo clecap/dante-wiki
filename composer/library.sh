@@ -221,3 +221,32 @@ cooked_to_GitHub()
   docker logout
 }
 
+
+injectInfo()
+{
+  rm -f ${TOP_DIR}/composer/docker-compose-injected.yaml
+  local IMAGE="$1"
+  local IMAGE_ID=$(docker images ${IMAGE} --format "{{.ID}}")
+  local IMAGE_DIGEST=$(docker images ${IMAGE} --format "{{.Digest}}")
+  local IMAGE_REPOSITORY=$(docker images ${IMAGE} --format "{{.Repository}}")
+  local IMAGE_CREATED_AT=$(docker images ${IMAGE} --format "{{.CreatedAt}}")
+  local IMAGE_TAG==$(docker images ${IMAGE} --format "{{.Tag}}")
+
+# Replace placeholder in docker-compose.yml with actual hash
+  sed  \
+    -e "s/<id>/$IMAGE_ID/g"   \
+    -e "s/<digest>/$IMAGE_DIGEST/g"   \
+    -e "s/<repository>/$IMAGE_REPOSITORY/g"   \
+    -e "s/<created_at>/$IMAGE_CREATED_AT/g"   \
+    -e "s/<tag>/$IMAGE_TAG/g"   \
+    ${TOP_DIR}/composer/docker-compose-development.yaml \
+    > ${TOP_DIR}/composer/docker-compose-injected.yaml      
+}
+
+
+
+
+
+
+
+

@@ -9,4 +9,4 @@ BRANCH=master
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 TOP_DIR=${DIR}/.. 
 
-docker compose -f "$compose_file" up -d $TOP_DIR/composer/docker-compose-development.yaml database webserver-raw phpmyadmin
+docker compose -f docker-compose-development.yaml up -d database webserver-raw phpmyadmin

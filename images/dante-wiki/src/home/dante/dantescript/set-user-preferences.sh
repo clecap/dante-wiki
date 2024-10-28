@@ -6,7 +6,10 @@ source /home/dante/dantescript/common-defs.sh
 
 printf "${GREEN}*** THIS IS set-user-preferences.sh ***** ${RESET}"
 
-set -e; trap 'abort' ERR
+loadSecrets
+export MYSQL_PWD="${MYSQL_ROOT_PASSWORD}"
+
+trap warn ERR
 
 setPref()
 {
@@ -51,4 +54,23 @@ setPref "pref-openai-api-key"            "${OPENAI_API_KEY}"
 
 setPref "github-dante-wiki-contents"     "${GITHUB_DANTE_WIKI_CONTENTS}"
 
-trap - ERR
+
+
+printf "*** Editing \$danteConfigurationHash to $DANTE_CONFIG_HASH\n"
+  sed -i.bak "s/\(\$danteConfigurationHash\s*=\s*\).*\$/\1\"$DANTE_CONFIG_HASH\";/" "${MOUNT}${TARGET}/DanteSettings.php"
+  if [ $? -eq 0 ]; then
+    printf "*** \$danteConfigurationHash successfully changed to '$DANTE_CONFIG_HASH'."
+    printf "A backup of the original DanteSettings.php has been saved as DanteSettings.php.bak"
+  else
+    printf "${ERROR}Error: Failed to change \$danteConfigurationHash\n\n"
+    exit 1
+  fi
+
+
+
+
+
+export MYSQL_PWD=""
+
+
+

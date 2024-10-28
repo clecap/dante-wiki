@@ -42,7 +42,7 @@ export GREEN="\e[1;92m"
 git config --global init.defaultBranch master
 
 
-### set terminate on error 
+# trap handler which sleeps after taking the trap for 1 hour for
 abort() 
 { 
   printf "%b" "\n\n\e[1;31m *** *** *** ****** *** *** *** \e[0m\n"; 
@@ -53,6 +53,18 @@ abort()
   printf "\n\n*** abort: Sleeping for 1 hour to keep container running for debug attempts ***\n\n"
   sleep 3600
 }
+
+# trap handler which prints a highly visible warning and then continues
+warn()
+{
+  printf "%b" "\n\n\e[1;31m *** *** *** ****** *** *** *** \e[0m\n"; 
+  printf "%b" "\e[1;31m *** *** *** ERROR *** *** *** \e[0m\n"; 
+  printf "%b" "The error occured in line number $LINENO: of $BASH_COMMAND \n";
+  printf "%b" "\e[1;31m *** *** *** ****** *** *** *** \e[0m\n";
+}
+
+
+
 
 installInitialFromGit()
 {
@@ -92,7 +104,8 @@ loadSecrets()
   if [ -f "/run/secrets/configuration" ]; then
     printf "$GREEN*** common-defs.sh:loadSecrets will now load configuration...${RESET} "
     source /run/secrets/configuration ; exec 1>&1 2>&2
-    printf "DONE loading configuration\n"
+    export DANTE_CONFIG_HASH=$(shasum -a 256 /run/secrets/configuration | awk '{ print $1 }')
+    printf "DONE loading configuration, hashes to ${DANTE_CONFIG_HASH}\n"
   else
     printf "$ERROR*** common-defs.sh:loadSecrets could not find configuration file, EXITING $RESET\n"
     exit 1
@@ -363,6 +376,7 @@ setUserPreference()
   local USER_NAME=$3
   local PREFERENCE_NAME=$4
   local PREFERENCE_VALUE=$5
+
 
   printf "${GREEN}** Setting preference ${PREFERENCE_NAME} to value ${PREFERENCE_VALUE} in ${MY_DB_NAME} for user ${USER_NAME}${RESET}\n"
   ERROR_OUTPUT=$(mysql -h ${MY_DB_HOST} -u root $MY_DB_NAME <<EOF

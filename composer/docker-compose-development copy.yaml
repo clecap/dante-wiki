@@ -70,12 +70,6 @@ services:
   webserver-after-copy:
     environment:
       - COMPOSER_IDENTITY=webserver-after-copy
-      - IMAGE_ID="<id>"
-      - IMAGE_DIGEST="<digest>"
-      - IMAGE_REPOSITORY="<repository>"
-      - IMAGE_CREATED_AT="<created_at>"
-      - IMAGE_TAG="<tag>"
-
     image: dante-wiki:latest
     container_name: dante-wiki-container
     depends_on:
