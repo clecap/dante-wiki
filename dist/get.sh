@@ -4,6 +4,9 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 TOP_DIR=${DIR}
 
+# CAVE: TOP_DIR in get is the manually generated directory into which we install
+
+
 mkdir -p ${TOP_DIR}/dist
 mkdir -p ${TOP_DIR}/private
 touch ${TOP_DIR}/private/configuration.sh
