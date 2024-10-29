@@ -19,6 +19,7 @@ curl -fsSL -o ${TOP_DIR}/dist/get.sh    https://raw.githubusercontent.com/clecap
 chmod 755 ${TOP_DIR}/dist/run.sh
 chmod 755 ${TOP_DIR}/dist/stop.sh
 chmod 755 ${TOP_DIR}/dist/get.sh
+chmod 700 ${TOP_DIR}/private
 chmod 600 ${TOP_DIR}/private/configuration.sh
 
 chmod 600 ${TOP_DIR}/private
