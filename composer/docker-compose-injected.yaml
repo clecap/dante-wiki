@@ -70,11 +70,11 @@ services:
   webserver-after-copy:
     environment:
       - COMPOSER_IDENTITY=webserver-after-copy
-      - IMAGE_ID=3c4d7f36eafe
-      - IMAGE_DIGEST=<none>
-      - IMAGE_REPOSITORY=dante-wiki
-      - IMAGE_CREATED_AT=2024-10-27 17:15:54 +0100 CET
-      - IMAGE_TAG==latest
+      - IMAGE_ID="3c4d7f36eafe"
+      - IMAGE_DIGEST="<none>"
+      - IMAGE_REPOSITORY="dante-wiki"
+      - IMAGE_CREATED_AT="2024-10-27 17:15:54 +0100 CET"
+      - IMAGE_TAG="=latest"
 
     image: dante-wiki:latest
     container_name: dante-wiki-container

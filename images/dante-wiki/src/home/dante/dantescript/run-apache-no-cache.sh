@@ -27,6 +27,7 @@ printf "\n*** Listing active traps: \n"
 trap
 printf "DONE\n"
 
+## TODO: HINT: Reason might have been an incorrectly activated set -e somewhere. It might not longer be an issue. 
 # for some unclear reason the below thing does not properly return to the calling shell lap-entrypoint.sh
 # in case (1) and error occurs and (2) the final & is missing
 # In this scenario the thing crashes locally, does not return to lap-entrypoint.sh and does not give us an
