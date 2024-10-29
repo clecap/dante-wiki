@@ -2,7 +2,7 @@
 
 # get directory where this script resides wherever it is called from
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-TOP_DIR=${DIR}/.. 
+TOP_DIR=${DIR}
 
 mkdir -p ${TOP_DIR}/dist
 mkdir -p ${TOP_DIR}/private
