@@ -238,6 +238,7 @@ RUN \
     a2enmod rewrite                                                                                                        && \
     a2enmod alias                                                                                                          && \
     a2enmod include                                                                                                        && \
+    a2enmod authnz_ldap                                                                                                    && \
 # clean up
    apt-get autoremove -y                                                                                                   && \
     apt-get clean                                                                                                          && \

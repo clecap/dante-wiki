@@ -13,7 +13,7 @@ chmod 755 dante/dist/run.sh
 chmod 755 dante/dist/stop.sh
 chmod 755 dante/dist/get.sh
 
-chmod 700 dante/private
+chmod 600 dante/private
 
 docker pull clecap/dante-wiki:latest
 docker tag clecap/dante-wiki:latest dante-wiki:latest
