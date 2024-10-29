@@ -15,14 +15,12 @@ curl -fsSL -o ${TOP_DIR}/dist/docker-compose-development.yaml https://raw.github
 curl -fsSL -o ${TOP_DIR}/dist/run.sh    https://raw.githubusercontent.com/clecap/dante-wiki/HEAD/dist/run.sh
 curl -fsSL -o ${TOP_DIR}/dist/stop.sh   https://raw.githubusercontent.com/clecap/dante-wiki/HEAD/dist/stop.sh
 curl -fsSL -o ${TOP_DIR}/dist/get.sh    https://raw.githubusercontent.com/clecap/dante-wiki/HEAD/dist/get.sh
+curl -fsSL -o ${TOP_DIR}/dist/clean.sh    https://raw.githubusercontent.com/clecap/dante-wiki/HEAD/dist/clean.sh
 
-chmod 755 ${TOP_DIR}/dist/run.sh
-chmod 755 ${TOP_DIR}/dist/stop.sh
-chmod 755 ${TOP_DIR}/dist/get.sh
-chmod 700 ${TOP_DIR}/private
-chmod 600 ${TOP_DIR}/private/configuration.sh
+chmod 755 ${TOP_DIR}/dist/*.sh
 
-chmod 600 ${TOP_DIR}/private
+chmod 755 ${TOP_DIR}/private
+chmod 644 ${TOP_DIR}/private/configuration.sh
 
 docker pull clecap/dante-wiki:latest
 docker tag clecap/dante-wiki:latest dante-wiki:latest
