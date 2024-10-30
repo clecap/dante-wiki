@@ -14,6 +14,6 @@ if [ -f "${TOP_DIR}/private/configuration.shc" ] && [ $(stat -c%s "${TOP_DIR}/pr
   printf "Error: Configuration file is smaller than 20 bytes, did you forget to adjust it?"
 fi
 
-source ${TOPD_DIR}/private/configuration.sh
+source ${TOP_DIR}/private/configuration.sh
 
 docker compose -f ${TOP_DIR}/dist/docker-compose-development.yaml up -d database webserver-raw-${HOST_PROTOCOL}
