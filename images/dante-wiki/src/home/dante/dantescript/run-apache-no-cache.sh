@@ -3,7 +3,10 @@
 source /home/dante/dantescript/common-defs.sh
 
 printf "*** THIS IS run-apache-no-cache.sh\n\n"
- 
+
+loadSecrets
+export APACHE_SERVER_NAME=${MY_DOMAINNAME}
+
 printf "*** run-apache-no-cache.sh: Starting fpm...\n"
   sudo service php8.2-fpm start 
   exec 1>&1 2>&2
@@ -26,6 +29,9 @@ printf "DONE\n"
 printf "\n*** Listing active traps: \n"
 trap
 printf "DONE\n"
+
+
+
 
 ## TODO: HINT: Reason might have been an incorrectly activated set -e somewhere. It might not longer be an issue. 
 # for some unclear reason the below thing does not properly return to the calling shell lap-entrypoint.sh

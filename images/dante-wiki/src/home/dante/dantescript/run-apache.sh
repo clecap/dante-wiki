@@ -4,7 +4,8 @@ source /home/dante/dantescript/common-defs.sh
 
 printf "*** THIS IS run-apache.sh\n\n"
 
-trap 'abort' ERR
+loadSecrets
+export APACHE_SERVER_NAME=${MY_DOMAINNAME}
 
 printf "*** run-apache.sh: Starting fpm...\n"
   sudo service php8.2-fpm start
@@ -29,7 +30,5 @@ printf "\n*** run-apache.sh: Starting apache with DO-CACHE ...\n"
   sudo apachectl  -D DO_CACHE -k start 
   exec 1>&1 2>&2
 printf "DONE with starting apache\n"
-
-trap - ERR
 
 printf "${GREEN}*** EXITING run-apache.sh\n\n"
