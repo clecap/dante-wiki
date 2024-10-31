@@ -7,6 +7,17 @@ source /home/dante/dantescript/common-defs.sh
 printf "${GREEN}*** THIS IS /dantescript/init.sh ***** ${RESET}"
 
 
+printf "\n*** init.sh: Copying index.html, favicon.ico and error404.php to ${MOUNT}..."
+  cp /home/dante/html/index.html    ${MOUNT}
+  cp /home/dante/html/favicon.ico   ${MOUNT}
+  cp /home/dante/html/error.php     ${MOUNT}
+  exec 1>&1 2>&2
+printf "DONE\n"
+
+
+
+
+
 # check if we already have a LocalSettings.php
 if [ -e "${MOUNT}/${TARGET}/LocalSettings.php" ]; then
   printf "${GREEN} *** init.sh finds the system already in initialized state - exiting init.sh\n"
