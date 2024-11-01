@@ -14,7 +14,6 @@ touch ${TOP_DIR}/private/configuration.sh
 curl -fsSL -o ${TOP_DIR}/dist/docker-compose-development.yaml https://raw.githubusercontent.com/clecap/dante-wiki/HEAD/composer/docker-compose-development.yaml
 curl -fsSL -o ${TOP_DIR}/dist/run.sh    https://raw.githubusercontent.com/clecap/dante-wiki/HEAD/dist/run.sh
 curl -fsSL -o ${TOP_DIR}/dist/stop.sh   https://raw.githubusercontent.com/clecap/dante-wiki/HEAD/dist/stop.sh
-curl -fsSL -o ${TOP_DIR}/dist/get.sh    https://raw.githubusercontent.com/clecap/dante-wiki/HEAD/dist/get.sh
 curl -fsSL -o ${TOP_DIR}/dist/clean.sh    https://raw.githubusercontent.com/clecap/dante-wiki/HEAD/dist/clean.sh
 
 chmod 755 ${TOP_DIR}/dist/*.sh

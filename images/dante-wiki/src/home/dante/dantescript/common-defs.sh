@@ -45,25 +45,22 @@ git config --global init.defaultBranch master
 # trap handler which sleeps after taking the trap for 1 hour for
 abort() 
 { 
-  printf "%b" "\n\n\e[1;31m *** *** *** ****** *** *** *** \e[0m\n"; 
-  printf "%b" "\e[1;31m *** *** *** ERROR *** *** *** \e[0m\n"; 
-  printf "%b" "The error occured in line number $LINENO: of $BASH_COMMAND \n";
-  printf "%b" "\e[1;31m *** *** *** ****** *** *** *** \e[0m\n";
-
-  printf "\n\n*** abort: Sleeping for 1 hour to keep container running for debug attempts ***\n\n"
+  printf "\n\n${ERROR} *** *** *** ****** *** *** *** \n"; 
+  printf "*** *** *** ERROR *** *** *** \n"; 
+  printf "The error occured in line number $LINENO: of $BASH_COMMAND \n";
+  printf "*** *** *** ****** *** *** *** \n";
+  printf "\n\n*** abort: Sleeping for 1 hour to keep container running for debug attempts ***\n\n ${RESET}"
   sleep 3600
 }
 
 # trap handler which prints a highly visible warning and then continues
 warn()
 {
-  printf "%b" "\n\n\e[1;31m *** *** *** ****** *** *** *** \e[0m\n"; 
-  printf "%b" "\e[1;31m *** *** *** ERROR *** *** *** \e[0m\n"; 
-  printf "%b" "The error occured in line number $LINENO: of $BASH_COMMAND \n";
-  printf "%b" "\e[1;31m *** *** *** ****** *** *** *** \e[0m\n";
+  printf "\n\n${ERROR} *** *** *** ****** *** *** ***n"; 
+  printf "${ERROR} *** *** *** ERROR *** *** ***\n"; 
+  printf "The error occured in line number $LINENO: of $BASH_COMMAND \n";
+  printf "*** *** *** ****** *** *** *** ${RESET}\n";
 }
-
-
 
 
 installInitialFromGit()
@@ -160,9 +157,9 @@ changeWikiRootUser()
   php "${MOUNT}${TARGET}/maintenance/changePassword.php" --user="${new_username}" --password="${new_password}"
 
   if [ $? -eq 0 ]; then
-    printf "${GREEN}Administrator password has been successfully changed. \n"
+    printf "${GREEN}Administrator password has been successfully changed.\n${RESET}"
   else
-   printf "${ERROR}Failed to change the administrator password. \n"
+   printf "${ERROR}Failed to change the administrator password. \n${RESET}"
   fi
 }
 
@@ -223,12 +220,12 @@ wait_dbserver_running() {
   local RETRY_COUNT=0
   local RESULT
 
-  printf "\n$GREEN*** This is wait_dbserver_running: we are waiting for $MY_DB_HOST to come up\n"
+  printf "\n$GREEN*** This is wait_dbserver_running: we are waiting for $MY_DB_HOST to come up${RESET}\n"
   while [[ $RETRY_COUNT -lt $MAX_RETRIES ]]; do
     check_dbserver_running "$MY_DB_HOST"
     RESULT=$?
     if [ "$RESULT" == "1" ]; then
-      printf "$GREEN*** wait_dbserver_running: SUCCESS: Database server is running, exiting script at retrycount=$RETRY_COUNT\n" 
+      printf "$GREEN*** wait_dbserver_running: SUCCESS: Database server is running, exiting script at retrycount=$RETRY_COUNT\n ${RESET}" 
       return 1
     elif [ "$RESULT" == "0" ]; then
       printf "   wait_dbserver_running: Database server does not exist. Will sleep ${SLEEP_INTERVAL} seconds and then retry. We are at retry count $RETRY_COUNT\n"
@@ -238,7 +235,7 @@ wait_dbserver_running() {
       printf "wait_dbserver_running: The variable does not contain 1 or 0"
     fi
   done
-  printf "\n\n $ERROR*** wait_dbserver_running: ERROR: Database server not running after ${MAX_RETRIES} retries.\n\n"
+  printf "\n\n $ERROR*** wait_dbserver_running: ERROR: Database server not running after ${MAX_RETRIES} retries.\n\n${RESET}"
   sleep 600000
   exit 1
 }
@@ -278,10 +275,10 @@ wait_database_ready() {
   local MAX_RETRIES=100
   local SLEEP_INTERVAL=5
   local RETRY_COUNT=0
-  printf "\n$GREEN*** wait_database_ready: Waiting for $MY_DB_HOST to come up with ${DB_NAME}\n"
+  printf "\n$GREEN*** wait_database_ready: Waiting for $MY_DB_HOST to come up with ${DB_NAME}\n${RESET}"
   while [[ $RETRY_COUNT -lt $MAX_RETRIES ]]; do
     if check_database_exists; then
-        printf "$GREEN*** wait_database_ready: SUCCESS: Database ${DB_NAME} exists, exiting script at retrycount=$RETRY_COUNT\n" 
+        printf "$GREEN*** wait_database_ready: SUCCESS: Database ${DB_NAME} exists, exiting script at retrycount=$RETRY_COUNT\n${RESET}" 
         return 0
       else
         printf "wait_database_ready: Database ${DB_NAME} does not exist. Will sleep ${SLEEP_INTERVAL} seconds and then retry at retry count $RETRY_COUNT\n"
@@ -469,13 +466,31 @@ printf "DONE refreshFileHeaders.php\n"
 }
 
 
-setApacheDebugPassword()
+
+setApacheAuthentication()
 {
-  printf "\n*** Setting password for apache debug user..."
-    sudo htpasswd -cb /etc/apache2/.htpasswd debug "${APACHE_DEBUG_PASSWORD}"
+  printf "\n*** setApacheAuthentication: removing old password file..."
+    rm -f /etc/apache2/.htdigest
+  printf "${GREEN}DONE removing old password file\n${RESET}"
+
+  printf "\n*** setApacheAuthentication: Setting password for apache debug user..."
+    printf "${APACHE_DEBUG_PASSWORD}\n" | sudo htdigest -c /etc/apache2/.htdigest "Debug Area" "debug"
   printf "DONE setting debug password for apache\n"
-  exec 1>&1 2>&2
+
+  if [ "$USE_APACHE_PASSWORD" = "true" ]; then
+    printf "DONE setting debug password for apache\n"
+    printf "${APACHE_AUTH_PASSWORD}\n" | sudo htdigest -c /etc/apache2/.htdigest "${APACHE_AUTH_NAME}" "${APACHE_AUTH_USER}"
+    printf "DONE setting password for apache for user ${APACHE_AUTH_USER}\n"
+  else
+    printf "\n*** setApacheAuthentication: not using apache user passwords\n"
+  fi
 }
+
+
+
+
+
+
 
 
 # generate an ssh login (private,public) key pair for user USER to login in host HOST

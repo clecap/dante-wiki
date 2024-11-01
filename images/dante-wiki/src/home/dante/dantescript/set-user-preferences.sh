@@ -11,13 +11,15 @@ export MYSQL_PWD="${MYSQL_ROOT_PASSWORD}"
 
 trap warn ERR
 
+##
+## Define a shorthand for setting preferences
+##
 setPref()
 {
   local key=$1
   local value=$2
   setUserPreference "${MY_DB_HOST}" "${MY_DB_NAME}" "Admin" ${key} ${value}
 }
-
 
 
 ##
@@ -60,17 +62,12 @@ printf "*** Editing \$danteConfigurationHash to $DANTE_CONFIG_HASH\n"
   sed -i.bak "s/\(\$danteConfigurationHash\s*=\s*\).*\$/\1\"$DANTE_CONFIG_HASH\";/" "${MOUNT}${TARGET}/DanteSettings.php"
   if [ $? -eq 0 ]; then
     printf "*** \$danteConfigurationHash successfully changed to '$DANTE_CONFIG_HASH'."
-    printf "A backup of the original DanteSettings.php has been saved as DanteSettings.php.bak"
+    printf "A backup of the original DanteSettings.php has been saved as DanteSettings.php.bak\n"
   else
-    printf "${ERROR}Error: Failed to change \$danteConfigurationHash\n\n"
+    printf "${ERROR}Error: Failed to change \$danteConfigurationHash\n\n${RESET}"
     exit 1
   fi
 
 
-
-
-
+# clear mysql root password again
 export MYSQL_PWD=""
-
-
-
