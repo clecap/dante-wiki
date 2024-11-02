@@ -1,5 +1,12 @@
 #!/bin/bash
 
+
+export DANTE_IMAGE=dante-wiki:latest
+# configures the specific docker image we will use
+
+### TODO: put this as variable into the yaml file  
+
+
 # get directory where this script resides wherever it is called from
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 TOP_DIR=${DIR}/.. 
@@ -9,8 +16,9 @@ source $DIR/library.sh
 set -e
 trap 'abort' ERR
 
-injectInfo dante-wiki:latest
+source ${TOP_DIR}/private/configuration.sh
 
+getImageInfo ${DANTE_IMAGE}
 
 downAllServices $TOP_DIR/composer/docker-compose-development.yaml
 

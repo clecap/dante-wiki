@@ -191,13 +191,7 @@ cooked_to_DockerHub()
 
 }
 
-
-
-
 # needs a classic token with   write:packages, read:packages, and delete:packages scopes
-
-
-
 
 # NOT WORKING: contents: read and write   meta-data read only    package: read and write
 
@@ -222,25 +216,15 @@ cooked_to_GitHub()
 }
 
 
-injectInfo()
+# obtains information of the image $1 and exports it into the shell
+getImageInfo()
 {
-  rm -f ${TOP_DIR}/composer/docker-compose-injected.yaml
   local IMAGE="$1"
-  local IMAGE_ID=$(docker images ${IMAGE} --format "{{.ID}}")
-  local IMAGE_DIGEST=$(docker images ${IMAGE} --format "{{.Digest}}")
-  local IMAGE_REPOSITORY=$(docker images ${IMAGE} --format "{{.Repository}}")
-  local IMAGE_CREATED_AT=$(docker images ${IMAGE} --format "{{.CreatedAt}}")
-  local IMAGE_TAG==$(docker images ${IMAGE} --format "{{.Tag}}")
-
-# Replace placeholder in docker-compose.yml with actual hash
-  sed  \
-    -e "s/<id>/$IMAGE_ID/g"   \
-    -e "s/<digest>/$IMAGE_DIGEST/g"   \
-    -e "s/<repository>/$IMAGE_REPOSITORY/g"   \
-    -e "s/<created_at>/$IMAGE_CREATED_AT/g"   \
-    -e "s/<tag>/$IMAGE_TAG/g"   \
-    ${TOP_DIR}/composer/docker-compose-development.yaml \
-    > ${TOP_DIR}/composer/docker-compose-injected.yaml      
+  export IMAGE_ID=$(docker images ${IMAGE} --format "{{.ID}}")
+  export IMAGE_DIGEST=$(docker images ${IMAGE} --format "{{.Digest}}")
+  export IMAGE_REPOSITORY=$(docker images ${IMAGE} --format "{{.Repository}}")
+  export IMAGE_CREATED_AT=$(docker images ${IMAGE} --format "{{.CreatedAt}}")
+  export IMAGE_TAG==$(docker images ${IMAGE} --format "{{.Tag}}")
 }
 
 

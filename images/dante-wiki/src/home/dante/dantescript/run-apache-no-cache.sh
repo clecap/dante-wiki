@@ -30,6 +30,10 @@ printf "\n*** Listing active traps: \n"
 trap
 printf "DONE\n"
 
+prtinf "REPORTING !!!!!\n"
+printf "APACHE_AUTH_NAME = ${APACHE_AUTH_NAME}\n"
+printf "APACHE_AUTH_USER = ${APACHE_AUTH_USER}\n"
+printf "APACHE_SERVER_NAME = ${APACHE_SERVER_NAME}\n"
 
 
 
@@ -40,7 +44,12 @@ printf "DONE\n"
 # opportunity to exec into the then stopped container
 
 printf "\n*** run-apache-no-cache.sh: Starting apache NO-CACHE ...\n"
-  sudo apachectl  -D NO_CACHE -k start &
+  sudo apachectl              \
+    -D NO_CACHE               \
+    -D USE_APACHE_PASSWORD    \
+    -D APACHE_AUTH_NAME       \
+    -D APACHE_AUTH_USER       \
+    -k start &
 printf "DONE with starting apache\n"
 
 printf "${GREEN}*** EXITING run-apache-no-cache.sh\n\n"
