@@ -1,14 +1,14 @@
-     100 files     200 files     217 text files.
-classified 216 filesDuplicate file check 216 files (207 known unique)Unique:      100 files                                          Unique:      200 files                                               211 unique files.                              
-Counting:  100Counting:  200      38 files ignored.
+     100 files     200 files     218 text files.
+classified 217 filesDuplicate file check 217 files (208 known unique)Unique:      100 files                                          Unique:      200 files                                               212 unique files.                              
+Counting:  100Counting:  200      39 files ignored.
 
-github.com/AlDanial/cloc v 1.90  T=0.14 s (1359.1 files/s, 341419.2 lines/s)
+github.com/AlDanial/cloc v 1.90  T=0.14 s (1377.3 files/s, 345950.5 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
 XML                             11           4165              0          21853
 PHP                             34           1890           3516           7228
-Bourne Shell                    82           1432            741           3430
+Bourne Shell                    82           1432            741           3425
 Markdown                        25            513              0           1264
 YAML                            14            131            114            582
 JSON                            13              2              0            543
@@ -19,5 +19,5 @@ Python                           1              9              1             33
 HTML                             3              4              0             30
 INI                              1              4              5              9
 -------------------------------------------------------------------------------
-SUM:                           191           8219           4504          35257
+SUM:                           191           8219           4504          35252
 -------------------------------------------------------------------------------
