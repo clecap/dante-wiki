@@ -12,9 +12,11 @@ printf "\n*** init.sh: Copying index.html, favicon.ico and error404.php to ${MOU
   cp /home/dante/html/favicon.ico   ${MOUNT}
   cp /home/dante/html/error.php     ${MOUNT}
   exec 1>&1 2>&2
-printf "DONE\n"
+printf "DONE\n\n"
 
-
+printf "\n***init.sh: Listing ${MOUNT}\n"
+  ls -la ${MOUNT}
+printf "DONE\n\n"
 
 
 

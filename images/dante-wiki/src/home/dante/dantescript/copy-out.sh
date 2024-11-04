@@ -27,17 +27,22 @@ printf "\n*** copy-out.sh: cleaning up old stuff..LS \n "
   ls -ld /mnt ; exec 1>&1 2>&2
 printf "DONE cleaning up old stuff\n"
 
+printf "\n*** copy-out.sh: Listing the source directory ${MOUNT} \n "
+  ls -la ${MOUNT} ; exec 1>&1 2>&2
+printf "DONE listing the source directory\n"
+
 ## copy out what we have just produced from 
-printf "\n\n*** copy-out.sh: copying out...\n"
+printf "\n\n*** copy-out.sh: copying out ${MOUNT} to /mnt \n"
+#### was ${MOUNT}/${TARGET}
   cp -a ${MOUNT}/${TARGET} /mnt
+  trap - ERR
+  cp -p ${MOUNT}/* /mnt
+  trap 'abot' ERR
   exec 1>&1 2>&2
 printf "DONE cleaning up old stuff\n"
 
 
-
-
-
-printf "\n***  copy-out.sh: doing an LS after the copying operation \n "
+printf "\n***  copy-out.sh: listing /mnt (after the copy operation) \n "
   ls -lag /mnt ; exec 1>&1 2>&2
 printf "DONE cleaning up old stuff\n"
 

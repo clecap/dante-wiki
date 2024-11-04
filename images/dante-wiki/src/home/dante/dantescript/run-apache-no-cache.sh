@@ -2,10 +2,27 @@
 
 source /home/dante/dantescript/common-defs.sh
 
-printf "*** THIS IS run-apache-no-cache.sh\n\n"
+printf "*** THIS IS run-apache-no-cache.sh\n\n"  
 
 loadSecrets
 export APACHE_SERVER_NAME=${MY_DOMAINNAME}
+
+printf "*** run-apache-no-cache.sh: Generating environment variable file for Apache..."
+  rm -f /etc/apache2/env-dante
+  rm -f /tmp/env-dante
+  # used in site configuration file  dante-mediawiki.conf:
+  printf "export APACHE_SERVER_NAME=\"${APACHE_SERVER_NAME}\"" >> /tmp/env-dante
+  # used in additional-user.conf:
+  printf "export APACHE_USE_PASSWORD=\"${APACHE_USE_PASSWORD}\"" >> /tmp/env-dante
+  printf "export APACHE_AUTH_NAME=\"${APACHE_AUTH_NAME}\"" >> /tmp/env-dante
+  printf "export APACHE_AUTH_USER=\"${APACHE_AUTH_USER}\"" >> /tmp/env-dante
+  
+  sudo mv /tmp/env-dante /etc/apache2/env-dante
+  sudo chmod 755 /etc/apache2/env-dante
+  sudo chown www-data:www-data /etc/apache2/env-dante
+printf "DONE generating environment variable file for Apache\n"
+
+exec 1>&1 2>&2
 
 printf "*** run-apache-no-cache.sh: Starting fpm...\n"
   sudo service php8.2-fpm start 
@@ -24,27 +41,17 @@ printf "DONE\n"
 
 printf "\n*** run-apache-no-cache.sh: Testing configuration...\n"
   apachectl configtest
+  exec 1>&1 2>&2
 printf "DONE\n"
 
-printf "\n*** Listing active traps: \n"
+printf "\n*** run-apache-no-cache.sh: Listing active traps: \n"
 trap
 printf "DONE\n"
 
-prtinf "REPORTING !!!!!\n"
-printf "APACHE_AUTH_NAME = ${APACHE_AUTH_NAME}\n"
-printf "APACHE_AUTH_USER = ${APACHE_AUTH_USER}\n"
-printf "APACHE_SERVER_NAME = ${APACHE_SERVER_NAME}\n"
-
-
-
-## TODO: HINT: Reason might have been an incorrectly activated set -e somewhere. It might not longer be an issue. 
-# for some unclear reason the below thing does not properly return to the calling shell lap-entrypoint.sh
-# in case (1) and error occurs and (2) the final & is missing
-# In this scenario the thing crashes locally, does not return to lap-entrypoint.sh and does not give us an
-# opportunity to exec into the then stopped container
+loadSecrets
 
 printf "\n*** run-apache-no-cache.sh: Starting apache NO-CACHE ...\n"
-  sudo apachectl -D NO_CACHE -k start &
+  sudo apachectl -D NO_CACHE -k start
 printf "DONE with starting apache\n"
 
 printf "${GREEN}*** EXITING run-apache-no-cache.sh\n\n"

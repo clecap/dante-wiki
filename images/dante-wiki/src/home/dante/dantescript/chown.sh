@@ -10,7 +10,7 @@ printf "*** THIS IS chown.sh\n\n"
 
 trap warn ERR
 
-printf "\n*** chwon.sh: chown all files to www-data...\n"
+printf "\n*** chown.sh: chown all files to www-data...\n"
   chown -R www-data:www-data ${MOUNT}/${TARGET} ; exec 1>&1 2>&2
 printf "DONE chowning all files\n"
 

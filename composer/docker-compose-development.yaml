@@ -3,6 +3,7 @@
 #  TODO: use fresh and empty database volume from scratch !!
 #  TODO: need to have local .git and git submodules for the correct treatment of git push upstream functionality
 #
+# 
 
 # Start up database and webserver
 # initialize webserver
@@ -11,7 +12,7 @@
 
 services:
 
-## a database running of a volume which is part of the container
+## a database running on backing store which as a file is part of the container
   database:
     image: mariadb:10.5
     ports:
@@ -25,7 +26,7 @@ services:
       MARIADB_ROOT_PASSWORD: initialPassword
 
 
-## a database running off a named volume
+## a database running on backing store which is a named volume, separate from the container
   database-volume:
     image: mariadb:10.5
     ports:
@@ -61,6 +62,11 @@ services:
 #       than seems to work with the docker healthcheck approach
 
 
+
+
+
+
+
 # get dante and parsifal twice.
 # once before generating the copy so that we have it in place before init.sh for the update scripts etc.
 # a second time in webserver-after-copy, to be sure that we have the freshest version even when we did not redo the complete copy cycle
@@ -76,8 +82,8 @@ services:
       - IMAGE_REPOSITORY="${IMAGE_REPOSITORY}"
       - IMAGE_CREATED_AT="${IMAGE_CREATED_AT}"
       - IMAGE_TAG="${IMAGE_TAG}"
-
     image: dante-wiki:latest
+    hostname: ${MY_DOMAINNAME}      
     container_name: dante-wiki-container
     depends_on:
       copy-to-host:
@@ -101,12 +107,32 @@ services:
       retries: 5
 
 
+## webserver which runs /var/www/html on TOP_DIR/live for development purposes and directly initializes into this host-bound volume
+  webserver-host:
+    image: dante-wiki:latest
+    hostname: ${MY_DOMAINNAME}      
+    container_name: dante-wiki-container
+    volumes:
+      - ../live-ext:/var/www/html
+    ports:
+      - "8080:80"
+      - "4443:443"
+    secrets:
+      - configuration
+    networks: 
+      dante-network:
+        aliases: 
+          - dante.local
+    command: "prepare-database.sh  install-webserver-certificate.sh get-dante.sh get-parsifal.sh generate-mediawiki-private.sh  init.sh  chown.sh set-user-preferences.sh initial-xml-git.sh run-apache-no-cache.sh"
+
+
 ## starts a container which has not been initialized but which does not require a copy to the development environment
 ## runs not off a volume but off the container itself
   webserver-raw-http:
     environment:
       - COMPOSER_IDENTITY=webserver-raw-http
     image: dante-wiki:latest
+    hostname: ${MY_DOMAINNAME}      
     container_name: dante-wiki-container
     ports:
       - "${HOST_HTTP_PORT}:80"
@@ -131,6 +157,7 @@ services:
     environment:
       - COMPOSER_IDENTITY=webserver-raw-https
     image: dante-wiki:latest
+    hostname: ${MY_DOMAINNAME}      
     container_name: dante-wiki-container
     ports:
       - "${HOST_HTTPS_PORT}:443"
@@ -151,16 +178,12 @@ services:
 
 
 
-
-
-
-
-
 ## starts a container and does all the work for preparing a 
   webserver-stemcell:
     environment:
       - COMPOSER_IDENTITY=webserver-stemcell
     image: dante-wiki:latest
+    hostname: ${MY_DOMAINNAME}      
     container_name: dante-wiki-container
     ports:
       - "8080:80"
@@ -185,6 +208,7 @@ services:
     environment:
       - COMPOSER_IDENTITY=webserver-cooked
     image: dante-wiki:cooked
+    hostname: ${MY_DOMAINNAME}      
     container_name: dante-wiki-container
     ports:
       - "8080:80"
@@ -219,6 +243,8 @@ networks:
 
 volumes:
   data:
+    external: true
+  live-ext:
     external: true
 
 secrets:
