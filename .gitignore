@@ -35,17 +35,6 @@ experiments/
 ##
 ## configuring live
 ##
-
-
-live/error404.html
-live/error404.php
-live/favicon.ico
-
-live/wiki-dir
-
-# in live there is another .gitignore file which does some reincludes!
-
+live/
 
 .vscode/tasks-min.json
-
-
