@@ -102,7 +102,7 @@ loadSecrets()
     printf "$GREEN*** common-defs.sh:loadSecrets will now load configuration...${RESET} "
     source /run/secrets/configuration ; exec 1>&1 2>&2
     export DANTE_CONFIG_HASH=$(shasum -a 256 /run/secrets/configuration | awk '{ print $1 }')
-    printf "DONE loading configuration, hashes to ${DANTE_CONFIG_HASH}\n"
+    printf "DONE\n   loading configuration, hashed to ${DANTE_CONFIG_HASH}\n"
   else
     printf "$ERROR*** common-defs.sh:loadSecrets could not find configuration file, EXITING $RESET\n"
     exit 1

@@ -91,6 +91,8 @@ waitForContainerRunning()
 
 
 # wait until container $1 is healthy
+#
+# NOTE: not used since for some reason the conatiner shows unhealthy for a while before becoming healthy again
 waitForContainerHealthy()
 {
   local SERVICE_CONTAINER=$1

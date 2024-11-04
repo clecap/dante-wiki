@@ -10,8 +10,14 @@ printf "*** THIS IS chown.sh\n\n"
 
 trap warn ERR
 
+
 printf "\n*** chown.sh: chown all files to www-data...\n"
-  chown -R www-data:www-data ${MOUNT}/${TARGET} ; exec 1>&1 2>&2
+  find ${MOUNT}/${TARGET} -not -path "*/.git/*" -exec chown www-data:www-data {} \;
+# 
+# find dir -not -path "*/git/*" -print0 | xargs -0 -P 8 -n 10 chown www-data:www-data
+# Does this in parallel, speeding up the entire process
+
+#  chown -R www-data:www-data ${MOUNT}/${TARGET} ; exec 1>&1 2>&2
 printf "DONE chowning all files\n"
 
 trap abort ERR

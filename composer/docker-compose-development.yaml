@@ -15,6 +15,8 @@ services:
 ## a database running on backing store which as a file is part of the container
   database:
     image: mariadb:10.5
+    logging:
+      driver: journald
     ports:
       - "3306:3306"
     container_name: dante-mariadb-container
@@ -29,6 +31,8 @@ services:
 ## a database running on backing store which is a named volume, separate from the container
   database-volume:
     image: mariadb:10.5
+    logging:
+      driver: journald    
     ports:
       - "3306:3306"
     container_name: dante-mariadb-container
@@ -44,6 +48,8 @@ services:
 
   copy-to-host:
     image: dante-wiki:latest
+    logging:
+      driver: journald    
     build: ../images/dante-wiki/src
     container_name: dante-copy-container
     restart: "no"
@@ -84,6 +90,8 @@ services:
       - IMAGE_TAG="${IMAGE_TAG}"
     image: dante-wiki:latest
     hostname: ${MY_DOMAINNAME}      
+    logging:
+      driver: journald
     container_name: dante-wiki-container
     depends_on:
       copy-to-host:
@@ -110,6 +118,8 @@ services:
 ## webserver which runs /var/www/html on TOP_DIR/live for development purposes and directly initializes into this host-bound volume
   webserver-host:
     image: dante-wiki:latest
+    logging:
+      driver: journald    
     hostname: ${MY_DOMAINNAME}      
     container_name: dante-wiki-container
     volumes:

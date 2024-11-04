@@ -48,9 +48,15 @@ fi
 ## This extension is broken currently
 ##  Use my own version - see my mediawiki-extensions-DrawioEditor Patch
 printf "\n*** get-dante.sh: Installing drawio extension ...\n"
-  /home/dante/dantescript/install-extension-github.sh  ${MOUNT}/${TARGET}  https://github.com/clecap/mediawiki-extensions-DrawioEditor                      DrawioEditor                master  ; exec 1>&1 2>&2
-  curl -s -o ${MOUNT}/$TARGET/includes/libs/ParamValidator/Util/UploadedFile.php https://raw.githubusercontent.com/clecap/mediawiki-extensions-DrawioEditor/master/PATCH-UploadedFile.php            ; exec 1>&1 2>&2
-  curl -s -o ${MOUNT}/$TARGET/includes/upload/UploadBase.php   https://raw.githubusercontent.com/clecap/mediawiki-extensions-DrawioEditor/master/PATCH-UploadBase.php                                ; exec 1>&1 2>&2
+  printf "   getting drawioeditor mediawiki extension..."
+    /home/dante/dantescript/install-extension-github.sh  ${MOUNT}/${TARGET}  https://github.com/clecap/mediawiki-extensions-DrawioEditor                      DrawioEditor                master  ; exec 1>&1 2>&2
+  printf "DONE\n"
+  printf "   getting PATCH-UploadedFile.php..."
+    curl -s -o ${MOUNT}/$TARGET/includes/libs/ParamValidator/Util/UploadedFile.php https://raw.githubusercontent.com/clecap/mediawiki-extensions-DrawioEditor/master/PATCH-UploadedFile.php            ; exec 1>&1 2>&2
+  printf "DONE\n"
+  printf "   getting PATCH-UploadedBase.php..."
+    curl -s -o ${MOUNT}/$TARGET/includes/upload/UploadBase.php   https://raw.githubusercontent.com/clecap/mediawiki-extensions-DrawioEditor/master/PATCH-UploadBase.php                                ; exec 1>&1 2>&2
+  printf "DONE\n"
 printf "\nDONE installing drawio extension ...\n"
 exec 1>&1 2>&2
 printf "\n *** Installing drawio external service into target=${TARGET}\n"

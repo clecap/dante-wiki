@@ -31,6 +31,6 @@ build
 upServices $TOP_DIR/composer/docker-compose-development.yaml database copy-to-host webserver-after-copy phpmyadmin
 
 waitForContainerRunning dante-wiki-container
-waitForContainerHealthy dante-wiki-container
+# waitForContainerHealthy dante-wiki-container
 waitForWebserverServicing
 openChrome

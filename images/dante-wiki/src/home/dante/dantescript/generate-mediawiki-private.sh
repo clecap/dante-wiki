@@ -5,11 +5,11 @@ source /home/dante/dantescript/common-defs.sh
 loadSecrets
 
 if [ -f "$MOUNT/$TARGET/mediawiki-PRIVATE.php" ]; then
-    printf "\n${ERROR}*** get-dante.sh: mediawiki-PRIVATE.php already existing - will delete and regenerate${RESET}\n"
+    printf "\n${ERROR}*** generate-mediawiki-private.sh: mediawiki-PRIVATE.php already existing - will delete and regenerate${RESET}\n"
     rm ${MOUNT}/$TARGET/mediawiki-PRIVATE.php
     printf "   DONE deleting\n"
   else
-    printf "\n*** get-dante.sh: mediawiki-PRIVATE.php not found - will generate one\n"
+    printf "\n*** generate-mediawiki-private.sh: : mediawiki-PRIVATE.php not found - will generate one\n"
 fi
 
 cat <<EOF >> ${MOUNT}/$TARGET/mediawiki-PRIVATE.php
