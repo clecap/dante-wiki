@@ -210,6 +210,8 @@ RUN \
     apt-get install -y --no-install-recommends  python3  python3-pip                                                       && \
     ln -sf python3 /usr/bin/python                                                                                         && \
     apt-get install -y --no-install-recommends  python3-setuptools                                                         && \
+    echo "*** *** *** ldap utilities, required for apache ldap access "                                                    && \
+    apt-get install -y --no-install-recommends  ldap-utils                                                                 && \
     echo "*** *** *** Configuring apache modules and environment "                                                         && \
 #   select intended operating mode
     a2dismod php8.2                                                                                                        && \

@@ -16,7 +16,16 @@ printf "*** run-apache-no-cache.sh: Generating environment variable file for Apa
   printf "export APACHE_USE_PASSWORD=\"${APACHE_USE_PASSWORD}\"" >> /tmp/env-dante
   printf "export APACHE_AUTH_NAME=\"${APACHE_AUTH_NAME}\"" >> /tmp/env-dante
   printf "export APACHE_AUTH_USER=\"${APACHE_AUTH_USER}\"" >> /tmp/env-dante
-  
+  printf "export APACHE_SERVER_ADMINISTRATOR=\"${APACHE_SERVER_ADMINISTRATOR}\"" >> /tmp/env-dante
+
+  printf "export USING_LDAP=\"${USING_LDAP}\"" >> /tmp/env-dante
+
+  printf "export AuthLDAPURL=\"${AuthLDAPURL}\"" >> /tmp/env-dante
+  printf "export AuthLDAPBindDN=\"${AuthLDAPBindDN}\"" >> /tmp/env-dante
+  printf "export AuthLDAPBindPassword=\"${AuthLDAPBindPassword}\"" >> /tmp/env-dante
+  printf "export LDAP_AUTHNAME=\"${LDAP_AUTHNAME}\"" >> /tmp/env-dante
+
+
   sudo mv /tmp/env-dante /etc/apache2/env-dante
   sudo chmod 755 /etc/apache2/env-dante
   sudo chown www-data:www-data /etc/apache2/env-dante
@@ -51,7 +60,7 @@ printf "DONE\n"
 loadSecrets
 
 printf "\n*** run-apache-no-cache.sh: Starting apache NO-CACHE ...\n"
-  sudo apachectl -D NO_CACHE -k start
+  sudo apachectl -D NO_CACHE -k start & sleep infinity
 printf "DONE with starting apache\n"
 
 printf "${GREEN}*** EXITING run-apache-no-cache.sh\n\n"

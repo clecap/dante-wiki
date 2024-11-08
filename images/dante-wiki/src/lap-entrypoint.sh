@@ -3,6 +3,8 @@
 # entrypoint of image lap
 # Takes as parameter a list of scripts residing in /home/dante/dantescript
 
+
+
 source /home/dante/dantescript/common-defs.sh
 
 ## Say hello
@@ -16,7 +18,11 @@ for script in "$@"; do
   if [ -f "/home/dante/dantescript/$script" ]; then
       printf "\n$GREEN***/lap-entrypoint.sh: Executing dantescript: /home/dante/dantescript/$script ---------- $script $RESET\n"
       RETURN_VALUE="returnvalue-initialized" ; 
-      source "/home/dante/dantescript/$script" 
+
+#      source "/home/dante/dantescript/$script" 
+
+      stdbuf -o0 -e0 "/home/dante/dantescript/$script"
+
       EXIT_STATUS=$?
 #      printf "\n$GREEN***/lap-entrypoint.sh: Now testing on exit status\n"
       if [[ $EXIT_STATUS -ne 0 ]]; then
@@ -34,6 +40,4 @@ for script in "$@"; do
     fi
 done
 
-printf "\n\n/lap-entrypoint.sh: Completed all commands. To keep container alive I will now sleep\n\n"
-
-sleep infinity
+printf "\n\n/lap-entrypoint.sh: Completed all commands. \n\n"
