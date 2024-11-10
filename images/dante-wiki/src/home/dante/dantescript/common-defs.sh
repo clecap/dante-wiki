@@ -45,10 +45,9 @@ git config --global init.defaultBranch master
 # trap handler which sleeps after taking the trap for 1 hour for
 abort() 
 { 
-  printf "\n\n${ERROR} *** *** *** ****** *** *** *** \n"; 
-  printf "*** *** *** ERROR *** *** *** \n"; 
+  banner
   printf "The error occured in line number $LINENO: of $BASH_COMMAND \n";
-  printf "*** *** *** ****** *** *** *** \n";
+  banner
   printf "\n\n*** abort: Sleeping for 1 hour to keep container running for debug attempts ***\n\n ${RESET}"
   sleep 3600
 }
@@ -56,10 +55,24 @@ abort()
 # trap handler which prints a highly visible warning and then continues
 warn()
 {
-  printf "\n\n${ERROR} *** *** *** ****** *** *** ***n"; 
-  printf "${ERROR} *** *** *** ERROR *** *** ***\n"; 
+  banner
   printf "The error occured in line number $LINENO: of $BASH_COMMAND \n";
-  printf "*** *** *** ****** *** *** *** ${RESET}\n";
+  banner
+}
+
+
+banner()
+{
+ if [ $# -eq 0 ]; then
+    printf "\n\n${ERROR} *** *** *** ****** *** *** *** ${RESET}\n"; 
+    printf "\n\n${ERROR} *** *** *** ****** *** *** *** ${RESET}\n"; 
+  else
+    printf "\n\n${ERROR} *** *** *** ****** *** *** *** ${RESET}\n"; 
+    printf "\n\n${ERROR} *** *** *** ****** *** *** *** ${RESET}\n"; 
+    printf "\n\n${ERROR} ***  $1  ${RESET}\n";
+    printf "\n\n${ERROR} *** *** *** ****** *** *** *** ${RESET}\n"; 
+    printf "\n\n${ERROR} *** *** *** ****** *** *** *** ${RESET}\n"; 
+  fi
 }
 
 

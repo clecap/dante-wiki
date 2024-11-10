@@ -12,6 +12,8 @@ source /home/dante/dantescript/common-defs.sh
 
 loadSecrets
 
+banner "PREPARE-DATABASE"
+
 wait_dbserver_running ${MY_DB_HOST}
 
 check_dbserver_initial_rootpassword ${MY_DB_HOST}

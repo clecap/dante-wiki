@@ -13,10 +13,10 @@ printf "\n*** *** This is /lap-entrypoint.sh V2 *** ***\n"
 loadSecrets
 
 ## Iterate over each argument in the list of arguments we are called on
-printf "$GREEN*** /lap-entrypoint.sh: Iterating the $# arguments: $* ${RESET}\n"
+stdbuf -o0 -e0 printf "$GREEN*** /lap-entrypoint.sh: Iterating the $# arguments: $* ${RESET}\n"
 for script in "$@"; do
   if [ -f "/home/dante/dantescript/$script" ]; then
-      printf "\n$GREEN***/lap-entrypoint.sh: Executing dantescript: /home/dante/dantescript/$script ---------- $script $RESET\n"
+      stdbuf -o0 -e0 printf "\n$GREEN***/lap-entrypoint.sh: Executing dantescript: /home/dante/dantescript/$script ---------- $script $RESET\n"
       RETURN_VALUE="returnvalue-initialized" ; 
 
 #      source "/home/dante/dantescript/$script" 
@@ -26,18 +26,18 @@ for script in "$@"; do
       EXIT_STATUS=$?
 #      printf "\n$GREEN***/lap-entrypoint.sh: Now testing on exit status\n"
       if [[ $EXIT_STATUS -ne 0 ]]; then
-        exec 1>&1 2>&2 ; echo "$script exited with status $EXIT_STATUS"
+        exec 1>&1 2>&2 ; stdbuf -o0 -e0 printf "${ERROR}$script exited with status $EXIT_STATUS ${RESET} \n "
       else
-        exec 1>&1 2>&2 ; echo "$script returned with status $EXIT_STATUS"
+        exec 1>&1 2>&2 ; stdbuf -o0 -e0 printf "${GREEN}$script returned with status $EXIT_STATUS ${RESET} \n"
       fi
       if [ "$RETURN_VALUE" == "shutdown" ]; then
-          printf "\n/lap-entrypoint.sh: $script returned $RETURN_VALUE, shutting down now\n" ; exit 0
+          stdbuf -o0 -e0 printf "\n${ERROR}/lap-entrypoint.sh: $script returned $RETURN_VALUE, shutting down now${RESET}\n" ; exit 0
         else
-           printf "\n/lap-entrypoint.sh: $script returned $RETURN_VALUE, moving on\n"
+          stdbuf -o0 -e0 printf "\n${GREEN}lap-entrypoint.sh: $script returned $RETURN_VALUE, moving on ${RESET}\n"
       fi
     else
-      printf "\n${ERROR}/lap-entrypoint.sh: Error: File '$script' not found or is not a regular file. $RESET\n"
+      stdbuf -o0 -e0 printf "\n${ERROR}/lap-entrypoint.sh: Error: File '$script' not found or is not a regular file. $RESET\n"
     fi
 done
 
-printf "\n\n/lap-entrypoint.sh: Completed all commands. \n\n"
+printf "\n\n${GREEN}lap-entrypoint.sh: Completed all commands. ${RESET}\n\n"

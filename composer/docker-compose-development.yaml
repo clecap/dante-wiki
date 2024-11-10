@@ -62,11 +62,6 @@ services:
 #       than seems to work with the docker healthcheck approach
 
 
-
-
-
-
-
 # get dante and parsifal twice.
 # once before generating the copy so that we have it in place before init.sh for the update scripts etc.
 # a second time in webserver-after-copy, to be sure that we have the freshest version even when we did not redo the complete copy cycle
@@ -99,7 +94,7 @@ services:
       dante-network:
         aliases: 
           - dante.local
-    command: "install-webserver-certificate.sh get-dante.sh get-parsifal.sh generate-mediawiki-private.sh chown.sh set-user-preferences.sh initial-xml-git.sh run-apache-no-cache.sh"
+    command: "install-webserver-certificate.sh chown.sh set-user-preferences.sh PAUSED-initial-xml-git.sh run-apache.sh"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost"]
       interval: 30s
@@ -123,7 +118,7 @@ services:
       dante-network:
         aliases: 
           - dante.local
-    command: "prepare-database.sh  install-webserver-certificate.sh get-dante.sh get-parsifal.sh generate-mediawiki-private.sh  init.sh  chown.sh set-user-preferences.sh initial-xml-git.sh run-apache-no-cache.sh"
+    command: "prepare-database.sh  install-webserver-certificate.sh get-dante.sh get-parsifal.sh generate-mediawiki-private.sh  init.sh  chown.sh set-user-preferences.sh initial-xml-git.sh run-apache.sh"
 
 
 ## starts a container which has not been initialized but which does not require a copy to the development environment
@@ -142,7 +137,7 @@ services:
       dante-network:
         aliases: 
           - dante.local
-    command: "prepare-database.sh install-webserver-certificate.sh get-dante.sh get-parsifal.sh generate-mediawiki-private.sh init.sh set-user-preferences.sh initial-xml-git.sh run-apache-no-cache.sh"
+    command: "prepare-database.sh install-webserver-certificate.sh get-dante.sh get-parsifal.sh generate-mediawiki-private.sh init.sh set-user-preferences.sh initial-xml-git.sh run-apache.sh"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost"]
       interval: 30s
@@ -167,7 +162,7 @@ services:
       dante-network:
         aliases: 
           - dante.local
-    command: "prepare-database.sh install-webserver-certificate.sh get-dante.sh get-parsifal.sh generate-mediawiki-private.sh init.sh set-user-preferences.sh initial-xml-git.sh run-apache-no-cache.sh"
+    command: "prepare-database.sh install-webserver-certificate.sh get-dante.sh get-parsifal.sh generate-mediawiki-private.sh init.sh set-user-preferences.sh initial-xml-git.sh run-apache.sh"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost"]
       interval: 30s
@@ -219,7 +214,7 @@ services:
       dante-network:
         aliases: 
           - dante.local
-    command: "prepare-database.sh restore-initial-sql.sh chown.sh run-apache-no-cache.sh"
+    command: "prepare-database.sh restore-initial-sql.sh chown.sh run-apache.sh"
 
 # TODO: waiting for mysql: maybe we can put this into a health check ?!?!? in a better way than thus far ????
 

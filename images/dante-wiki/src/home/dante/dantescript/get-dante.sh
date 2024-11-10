@@ -1,6 +1,14 @@
 #!/bin/bash
 
+
+if [ -e /home/dante/DONE-getDante ]; then
+  printf "\n*** get-dante.sh already done\n"
+  return 0
+fi
+
 source /home/dante/dantescript/common-defs.sh
+
+
 
 trap 'abort' ERR                       # call abort on error
 
@@ -86,6 +94,8 @@ fi
 exec 1>&1 2>&2
 
 trap - ERR
+
+touch /home/dante/DONE-getDante
 
 printf "${GREEN}*** DONE get-dante.sh${RESET}"
 

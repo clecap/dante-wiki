@@ -12,17 +12,34 @@ trap warn ERR
 
 
 printf "\n*** chown.sh: chown all files to www-data...\n"
-  printf "\n chown timing for one\n"
-  time find ${MOUNT}/${TARGET} -not -path "*/.git/*" -exec chown www-data:www-data {} \;
-# 
-  printf "\n DONE ONE\n"
 
-  sleep 10
+#  printf "\n chown timing for one\n"
+#  time find ${MOUNT}/${TARGET} -not -path "*/.git/*" -exec chown www-data:www-data {} \;
+## took 2 minutes 11 seconds real time
+#  printf "\n DONE ONE\n"
+
+#  sleep 10
+
+#  printf "\n chown tming for parallel\n"
+#  time ( find ${MOUNT}/${TARGET} -not -path "*/.git/*" -print0 | xargs -0 -P 8 -n 10 chown www-data:www-data )
+## Does this in parallel, speeding up the entire process
+## Took 0 minutes 14 seconds real time (scheduled immediately afterwards, together - cache effect ?
+#  printf "\nDONE PARALLEL\n"
+
+
 
   printf "\n chown tming for parallel\n"
-  time ( find ${MOUNT}/${TARGET} -not -path "*/.git/*" -print0 | xargs -0 -P 8 -n 10 chown www-data:www-data )
+  time ( find ${MOUNT}/${TARGET} -not -path "*/.git/*" -print0 | xargs -0 -P 16 -n 20 chown www-data:www-data )
 # Does this in parallel, speeding up the entire process
+# Took 14 seconds real time with 16 procs 10 n
+# 
   printf "\nDONE PARALLEL\n"
+
+
+
+
+
+
 
 #  chown -R www-data:www-data ${MOUNT}/${TARGET} ; exec 1>&1 2>&2
 printf "DONE chowning all files\n"

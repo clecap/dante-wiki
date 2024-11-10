@@ -39,17 +39,22 @@ printf "\n\n*** copy-out.sh: copying out ${MOUNT} to /mnt \n"
 
   printf "\n COPY TIMING with cp \n"
   time ( cp -a ${MOUNT}/${TARGET} /mnt )
-  printf "\n DONE OPCY TIMING with cp \n"
+  printf "\n DONE COPY TIMING with cp \n"
+#  this took 1minute 22 sec ;  1 minute 7 sec
 
+
+
+# rsync not found !
+# when installed it takes 2 minutes 49 - longer than cp
 ##### TODO: studying possibilities of speeding this up
 #  printf "\n COPY TIMING with rsync \n"
 # rsync -a ${MOUNT}/${TARGET} /mnt/  
 #  printf "\n DONE OPCY TIMING with crsync \n"
 
 
-####
+#### parallel is not installed in our debian
 #  printf "\n COPY TIMING with parallel \n"
-##  find ${MOUNT}/${TARGET} | parallel -j 8 cp {} /mnt/
+#  find ${MOUNT}/${TARGET} | parallel -j 8 cp {} /mnt/
 #  printf "\n DONE COPY TIMING with parallel \n"
 
 

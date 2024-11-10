@@ -62,3 +62,16 @@ rm -f /tmp/${NAME}
 set -e leads to an immediate abort of the script in case of an error. Also a trap is not
 taken (unless, maybe, it is on EXIT). Thus, control does not return to the calling script
 for error handling.
+
+
+## APACHE CONFIGURATION
+
+The concept of the Apache configuration, especially where it comes to access to environment variables
+and conditional directives, is fundamentally brain-damaged from the side of Apache as well as of Debian.
+Sorry to say so.
+
+Here, we generate shell environment variables for use in Apache configuraiton in env-dante, which is loaded
+from envvars which is loaded by apachectl. It works. Recommend not to make it shorter or more elegant
+since this does not work as documented and is badly documented.
+
+
