@@ -12,7 +12,7 @@ source /home/dante/dantescript/common-defs.sh
 
 loadSecrets
 
-banner "PREPARE-DATABASE"
+# banner "PREPARE-DATABASE"
 
 wait_dbserver_running ${MY_DB_HOST}
 

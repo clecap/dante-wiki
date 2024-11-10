@@ -42,11 +42,16 @@ export GREEN="\e[1;92m"
 git config --global init.defaultBranch master
 
 
+
+# Pre-execution trap to capture the line number before each command is run
+trap 'export LAST_COMMAND_LINE=$LINENO' DEBUG
+
+
 # trap handler which sleeps after taking the trap for 1 hour for
 abort() 
 { 
   banner
-  printf "The error occured in line number $LINENO: of $BASH_COMMAND \n";
+  printf "Error in line number $LAST_COMMAND_LINE of ${BASH_SOURCE[0]} at command $BASH_COMMAND \n";
   banner
   printf "\n\n*** abort: Sleeping for 1 hour to keep container running for debug attempts ***\n\n ${RESET}"
   sleep 3600
@@ -65,13 +70,14 @@ banner()
 {
  if [ $# -eq 0 ]; then
     printf "\n\n${ERROR} *** *** *** ****** *** *** *** ${RESET}\n"; 
-    printf "\n\n${ERROR} *** *** *** ****** *** *** *** ${RESET}\n"; 
+    printf     "${ERROR} *** *** *** ****** *** *** *** ${RESET}\n"; 
   else
+    local input="$1"
     printf "\n\n${ERROR} *** *** *** ****** *** *** *** ${RESET}\n"; 
-    printf "\n\n${ERROR} *** *** *** ****** *** *** *** ${RESET}\n"; 
-    printf "\n\n${ERROR} ***  $1  ${RESET}\n";
-    printf "\n\n${ERROR} *** *** *** ****** *** *** *** ${RESET}\n"; 
-    printf "\n\n${ERROR} *** *** *** ****** *** *** *** ${RESET}\n"; 
+    printf     "${ERROR} *** *** *** ****** *** *** *** ${RESET}\n"; 
+    printf     "${ERROR} ***  ${input^^}  ${RESET}\n";
+    printf     "${ERROR} *** *** *** ****** *** *** *** ${RESET}\n"; 
+    printf     "${ERROR} *** *** *** ****** *** *** *** ${RESET}\n\n"; 
   fi
 }
 

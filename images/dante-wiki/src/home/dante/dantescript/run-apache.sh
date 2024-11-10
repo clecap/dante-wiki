@@ -44,26 +44,44 @@ sudo a2ensite dante-mediawiki.conf
 ### Enable LDAP
 if [ "$USING_LDAP" = "true" ]; then
   printf "   Enabling LDAP..."
-  sudo a2enconf ldap-restrictions.conf
+    sudo a2enconf ldap-restrictions.conf
   printf "DONE (enabling ldap)\n"
 else
   printf "   DISABLEING LDAP..."
-  sudo a2disconf ldap-restrictions.conf
-  echo "DONE (disabling ldap)\n"
+    sudo a2disconf ldap-restrictions.conf
+  printf "DONE (disabling ldap)\n"
 fi
 
 ### Enable PASSWORDS
 if [ "$APACHE_USE_PASSWORD" = "true" ]; then
   printf "   Enabling Passwords..."
-  sudo a2enconf user-restrictions.conf
+    sudo a2enconf user-restrictions.conf
   printf "DONE (enabling passwords)\n"
 else
   printf "   DISABLEING Passwords..."
-  sudo a2disconf user-restrictions.conf
-  echo "DONE (disabling passwords)\n"
+    sudo a2disconf user-restrictions.conf
+  printf "DONE (disabling passwords)\n"
 fi
 
-# Disable all superfluous configurations
+## Enable https or http servicing
+if [ "$HOST_PROTOCOL" = "http" ]; then
+  printf "   Enabling http configuration"
+    sudo a2enconf http.conf
+    sudo a2disconf https.conf
+  printf "DONE (enabling http configuration)\n"
+elif  [ "$HOST_PROTOCOL" = "https" ]; then
+  printf "   Enabling https configuration"
+    sudo a2disconf http.conf
+    sudo a2enconf https.conf
+  printf "DONE (enabling https configuration)\n"
+else
+  printf "${ERROR} Incorrect value of HOST_PROTOCOL is ${HOST_PROTOCOL}\n ${RESET}"
+fi
+
+
+
+
+## Disable all superfluous configurations
 sudo a2disconf charset.conf
 sudo a2disconf localized-error-pages.conf
 sudo a2disconf security.conf
@@ -87,8 +105,7 @@ printf "\n*** run-apache.sh: Listing apache modules...\n"
 printf "DONE\n"
 
 printf "\n*** run-apache.sh: Testing configuration...\n"
-  apachectl configtest
-  exec 1>&1 2>&2
+  stdbuf -o0 -e0 apachectl configtest
 printf "DONE\n"
 
 printf "\n*** run-apache.sh: Listing active traps: \n"

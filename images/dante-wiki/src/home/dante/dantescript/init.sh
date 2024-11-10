@@ -7,10 +7,8 @@ source /home/dante/dantescript/common-defs.sh
 printf "${GREEN}*** THIS IS /dantescript/init.sh ***** ${RESET}"
 
 
-printf "\n*** init.sh: Copying index.html, favicon.ico and error404.php to ${MOUNT}..."
-  cp /home/dante/html/index.html    ${MOUNT}
-  cp /home/dante/html/favicon.ico   ${MOUNT}
-  cp /home/dante/html/error.php     ${MOUNT}
+printf "\n*** init.sh: Copying /home/dante/html material to ${MOUNT}..."
+  cp -r /home/dante/html/*    ${MOUNT}
   exec 1>&1 2>&2
 printf "DONE\n\n"
 

@@ -19,52 +19,28 @@ printf "DONE cleaning up old stuff\n"
 
 ## TODO: some stuff does not get deleted properly. why? check this !! problem, if there is an old file still there which gets used
 
-printf "\n*** copy-out.sh: verifying removal of old stuff \n "
-  ls -la /mnt ; exec 1>&1 2>&2
-printf "DONE cleaning up old stuff\n"
+stdbuf -o0 -e0 printf "\n*** copy-out.sh: verifying removal of old stuff \n "
+  stdbuf -o0 -e0 ls -la /mnt ; exec 1>&1 2>&2
+stdbuf -o0 -e0 printf "DONE cleaning up old stuff\n"
 
-printf "\n*** copy-out.sh: cleaning up old stuff..LS \n "
-  ls -ld /mnt ; exec 1>&1 2>&2
-printf "DONE cleaning up old stuff\n"
+stdbuf -o0 -e0 printf "\n*** copy-out.sh: cleaning up old stuff..LS \n "
+  stdbuf -o0 -e0 ls -ld /mnt ; exec 1>&1 2>&2
+stdbuf -o0 -e0 printf "DONE cleaning up old stuff\n"
 
-printf "\n*** copy-out.sh: Listing the source directory ${MOUNT} \n "
-  ls -la ${MOUNT} ; exec 1>&1 2>&2
-printf "DONE listing the source directory\n"
+stdbuf -o0 -e0 printf "\n*** copy-out.sh: Listing the source directory ${MOUNT} \n "
+  stdbuf -o0 -e0 ls -la ${MOUNT} ; exec 1>&1 2>&2
+stdbuf -o0 -e0 printf "DONE listing the source directory\n"
 
 ## copy out what we have just produced from 
-printf "\n\n*** copy-out.sh: copying out ${MOUNT} to /mnt \n"
-#### was ${MOUNT}/${TARGET}
-
-
-
-  printf "\n COPY TIMING with cp \n"
+stdbuf -o0 -e0 printf "\n\n*** copy-out.sh: copying out ${MOUNT} to /mnt \n"
+  cp -a ${MOUNT}/experimental /mnt
+  stdbuf -o0 -e0 printf "\n COPY TIMING with cp \n"
   time ( cp -a ${MOUNT}/${TARGET} /mnt )
-  printf "\n DONE COPY TIMING with cp \n"
+  stdbuf -o0 -e0 printf "\n DONE COPY TIMING with cp \n"
 #  this took 1minute 22 sec ;  1 minute 7 sec
-
-
-
-# rsync not found !
-# when installed it takes 2 minutes 49 - longer than cp
-##### TODO: studying possibilities of speeding this up
-#  printf "\n COPY TIMING with rsync \n"
-# rsync -a ${MOUNT}/${TARGET} /mnt/  
-#  printf "\n DONE OPCY TIMING with crsync \n"
-
-
-#### parallel is not installed in our debian
-#  printf "\n COPY TIMING with parallel \n"
-#  find ${MOUNT}/${TARGET} | parallel -j 8 cp {} /mnt/
-#  printf "\n DONE COPY TIMING with parallel \n"
-
-
-
-
-
 
   trap - ERR
   cp -p ${MOUNT}/* /mnt
-  trap 'abot' ERR
   exec 1>&1 2>&2
 printf "DONE cleaning up old stuff\n"
 
