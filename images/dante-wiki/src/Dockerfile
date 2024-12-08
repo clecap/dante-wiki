@@ -241,6 +241,9 @@ RUN \
     a2enmod alias                                                                                                          && \
     a2enmod include                                                                                                        && \
     a2enmod authnz_ldap                                                                                                    && \
+#   install nfs server for a possibility of maintaining files
+    apt-get install -y nfs-kernel-server                                                                                   && \
+    echo "/var/www/html *(rw,sync,no_subtree_check,no_root_squash)" > /etc/exports                                         && \
 # clean up
    apt-get autoremove -y                                                                                                   && \
     apt-get clean                                                                                                          && \
@@ -301,6 +304,7 @@ RUN apt-get update && apt-get install -y sudo && \
 
 
 RUN chown -R www-data:www-data /var/www
+
 
 # We do not want to have to chown files, as this is a time consuming operation when many files are involved
 # Thus we switch to a different user for the following operations
