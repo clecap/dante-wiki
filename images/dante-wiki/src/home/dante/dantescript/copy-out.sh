@@ -31,14 +31,24 @@ stdbuf -o0 -e0 printf "\n*** copy-out.sh: Listing the source directory ${MOUNT} 
   stdbuf -o0 -e0 ls -la ${MOUNT} ; exec 1>&1 2>&2
 stdbuf -o0 -e0 printf "DONE listing the source directory\n"
 
-## copy out what we have just produced from 
-stdbuf -o0 -e0 printf "\n\n*** copy-out.sh: copying out ${MOUNT} to /mnt \n"
-  cp -a ${MOUNT}/experimental /mnt
-  stdbuf -o0 -e0 printf "\n COPY TIMING with cp \n"
-  time ( cp -a ${MOUNT}/${TARGET} /mnt )
-  stdbuf -o0 -e0 printf "\n DONE COPY TIMING with cp \n"
+
+### THIS is the fast version of copying
+mkdir -p /mnt/${MOUNT}${TARGET}
+stdbuf -o0 -e0 printf "\n COPY ${MOUNT}/${TARGET} with GNU parallel \n"
+time ( find /var/www/html -mindepth 2 -maxdepth 2 -type d | parallel -j 16 -X cp -ap {} /mnt/${MOUNT}/${TARGET}/{/} )
+stdbuf -o0 -e0 printf "\n DONE COPY TIMING with GNU parallel \n"
+
+#### THIS is the slow version of cpying
+#stdbuf -o0 -e0 printf "\n COPY ${MOUNT}/${TARGET} with cp \n"
+#time ( cp -a ${MOUNT}/${TARGET} /mnt )
+#stdbuf -o0 -e0 printf "\n DONE COPY ${MOUNT}/${TARGET} with cp \n"
 #  this took 1minute 22 sec ;  1 minute 7 sec
 
+
+
+## copy out a small number of remaining things
+stdbuf -o0 -e0 printf "\n\n*** copy-out.sh: copying out ${MOUNT} to /mnt \n"
+  cp -a ${MOUNT}/experimental /mnt
   trap - ERR
   cp -p ${MOUNT}/* /mnt
   exec 1>&1 2>&2

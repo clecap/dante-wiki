@@ -3,12 +3,6 @@
 #  TODO: use fresh and empty database volume from scratch !!
 #  TODO: need to have local .git and git submodules for the correct treatment of git push upstream functionality
 #
-# 
-
-# Start up database and webserver
-# initialize webserver
-# copy out to live
-
 
 services:
 
@@ -41,7 +35,7 @@ services:
     environment:
       MARIADB_ROOT_PASSWORD: initialPassword
 
-
+## a copy-only container, which builds and initializes dantewiki and then copies out the result to a 
   copy-to-host:
     image: dante-wiki:latest
     build: ../images/dante-wiki/src
@@ -88,11 +82,6 @@ services:
     ports:
       - "8080:80"
       - "4443:443"
-      - "2049:2049"   # NFS port
-      - "20048:20048" # NFS daemon port
-      - "111:111"     # RPCBind TCP
-      - "111:111/udp" # RPCBind UDP
-    privileged: true  # needed for nfs server!  # TODO: remove in production (as well as nfs ports) for security reasons.
     secrets:
       - configuration
     networks: 
@@ -240,6 +229,7 @@ services:
 
 networks:
   dante-network:
+    driver: bridge   # TODO testing only for nfs !
 
 volumes:
   data:

@@ -154,13 +154,21 @@ RUN apt-get update                                                              
 # this is necessary for some of the commands we use
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-
-
 FROM intermediary AS dante
 
-
-
-
+# Stuff we may clean at the end of each layer
+ARG CLEAN_DOCKER_LAYER=" \
+      /usr/share/doc   \
+      /usr/share/man        \
+      /usr/share/locale/*   \
+      /usr/share/info       \
+      /var/cache/debconf/*-old    \
+      /var/lib/apt/lists/*        \
+      /var/lib/dpkg/*-old         \
+      /var/lib/dpkg/info/*        \
+      /var/cache/apt/*            \
+      /var/cache/man/*            \
+      /tmp/* "
 
 ## Install necessary packages
 #   git                       get proper hashes in Special:Version and in other places
@@ -241,19 +249,12 @@ RUN \
     a2enmod alias                                                                                                          && \
     a2enmod include                                                                                                        && \
     a2enmod authnz_ldap                                                                                                    && \
-#   install nfs server for a possibility of maintaining files
-    apt-get install -y nfs-kernel-server                                                                                   && \
-    echo "/var/www/html *(rw,sync,no_subtree_check,no_root_squash)" > /etc/exports                                         && \
+#   GNU parallel helps with fast copying 
+    apt-get install -y parallel                                                                                            && \
 # clean up
-   apt-get autoremove -y                                                                                                   && \
+    apt-get autoremove -y                                                                                                   && \
     apt-get clean                                                                                                          && \
-    rm -rf /usr/share/doc   \
-      /usr/share/man        \
-      /usr/share/locale/*   \
-      /usr/share/info       \
-      /var/cache/apt/*      \
-      /var/cache/man/*      \
-      /tmp/*
+    rm -rf ${CLEAN_DOCKER_LAYER}
 
 ## Install pymupdf
 #
@@ -273,57 +274,37 @@ RUN apt-get install -y --no-install-recommends python3.11-venv                  
     apt-get purge -y php-dev  build-base  linux-headers                                         && \
     apt-get autoremove -y                                                                       && \
     apt-get clean                                                                               &&  \
-    rm -rf /usr/share/doc         \
-      /usr/share/man              \
-      /usr/share/locale/*         \
-      /usr/share/info             \
-      /var/cache/debconf/*-old    \
-      /var/lib/apt/lists/*        \
-      /var/lib/dpkg/*-old         \
-      /var/lib/dpkg/info/*        \
-      /var/cache/apt/*            \
-      /var/cache/man/*            \
-      /tmp/*
+    rm -rf ${CLEAN_DOCKER_LAYER}
 
 
 
 #  do not want auto-updates here
-RUN rm -f /etc/cron.daily/apt-compat
-
-# Install gosu since su and sudo is not playing nice in docker according to docu
-# RUN apt-get update && apt-get install -y gosu && rm -rf /var/lib/apt/lists/*
-# TODO deprecate did not work properly
-
-
-# we need to be able to do a su on www-data TODO: check if we really still need that
-RUN chsh -s "/bin/bash" "www-data"
-
-# make this more efficient, have a cleanup - include this into above parts TODO
-RUN apt-get update && apt-get install -y sudo && \
-  echo "www-data ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-
-
-RUN chown -R www-data:www-data /var/www
-
+RUN \
+    echo "*** preventing autoupdates"                                                  && \
+    rm -f /etc/cron.daily/apt-compat                                                   && \
+    echo "*** injecting the correct shell for www-data to enable a su to www-data "    && \
+    chsh -s "/bin/bash" "www-data"                                                     && \
+    echo "*** install and configure sudo "                                             && \
+    apt-get update && apt-get install -y sudo                                          && \
+    echo "www-data ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers                             && \
+    chown -R www-data:www-data /var/www                                                && \
+    apt-get clean                                                                      && \
+    rm -rf ${CLEAN_DOCKER_LAYER}
 
 # We do not want to have to chown files, as this is a time consuming operation when many files are involved
 # Thus we switch to a different user for the following operations
 USER www-data
 
-RUN  curl -o /tmp/$MEDIAWIKI_TARBALL $MEDIAWIKI_URL                 && \
+RUN curl -o /tmp/$MEDIAWIKI_TARBALL $MEDIAWIKI_URL                 && \
     mkdir /var/www/html/${TARGET}                                   && \
     tar -xzf /tmp/$MEDIAWIKI_TARBALL -C /var/www/html/${TARGET} --strip-components=1    && \
     rm /tmp/$MEDIAWIKI_TARBALL                                     && \
     rm -Rf /var/www/html/${TARGET}/skins/Refreshed/.git
 
-
-
-
 #   we need to open composer or we get problems with composer permission details
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
 #  We must adjust the global configuration file of composer and the loca configuration file of composer to permit the use of certain plugins.
-
 
 # The skins autoregister in the installation routine, however Bootstrap does not. But then, Bootstrap must be loaded before some skins.
 # Therefore we must FIRST do the installation THEN install Bootstrap and inject that into the settings and only then install the skins and inject them (as they will now no longer autoregister)
@@ -390,13 +371,9 @@ RUN /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://gi
 #  Set the default user ## TODO: do we want this? is it compatible with the deletion strategies we need ???
 
 
-
-
 # Just kept in for debugging purposes during development 
 # CMD ["sh", "-c", "while :; do sleep 2073600; done"]
 
-# todo: kann weg, war ja schon weiter oben gemacht worden !
-USER www-data
 
 ##
 ## Default parameters for the entrypoint script below
