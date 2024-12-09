@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 source /home/dante/dantescript/common-defs.sh
 
 printf "\n*** install-extension-github called at $1 $2 $3 $4\n"
@@ -16,6 +15,7 @@ git config --global core.packedGitWindowSize 512m
 git config --global pack.deltaCacheSize 2047m
 git config --global pack.packSizeLimit 2047m
 git config --global pack.windowMemory 2047m
+git config --global init.defaultBranch master
 
 rm -Rf ${TOP_DIR}/extensions/${NAME}
 git clone --depth 1 ${URL} --branch ${BRANCH} ${TOP_DIR}/extensions/${NAME}

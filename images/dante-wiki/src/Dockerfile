@@ -251,31 +251,25 @@ RUN \
     a2enmod authnz_ldap                                                                                                    && \
 #   GNU parallel helps with fast copying 
     apt-get install -y parallel                                                                                            && \
-# clean up
-    apt-get autoremove -y                                                                                                   && \
-    apt-get clean                                                                                                          && \
-    rm -rf ${CLEAN_DOCKER_LAYER}
-
 ## Install pymupdf
 #
 #    1) Installations with pip should use a virtual python environment or a --break-system-package (which is not recommended)
 #    2) For some reason the active shell has no source command and we need to switch to bash
 #    3) This also is an issue when the install triggers for python3.11-venv are activated
-
-RUN apt-get install -y --no-install-recommends python3.11-venv                      && \
-    python3 -m venv /opt/myenv                                                      && \
-    source /opt/myenv/bin/activate                                                  && \
-    /opt/myenv/bin/pip3 install --no-cache-dir pymupdf                              && \
+    echo "*** installing python stuff in virtual environment "                                                             && \
+    apt-get install -y --no-install-recommends python3.11-venv                                                             && \
+    python3 -m venv /opt/myenv                                                                                             && \
+    source /opt/myenv/bin/activate                                                                                         && \
+    /opt/myenv/bin/pip3 install --no-cache-dir pymupdf                                                                     && \
     # need wheel package for installing aws
-    /opt/myenv/bin/pip3 install --no-cache-dir wheel                                && \
-    /opt/myenv/bin/pip3 install awscli --use-pep517                                 && \
-    exit && \
-    echo "*** *** *** Final cleanup "                                                           && \
-    apt-get purge -y php-dev  build-base  linux-headers                                         && \
-    apt-get autoremove -y                                                                       && \
-    apt-get clean                                                                               &&  \
+    /opt/myenv/bin/pip3 install --no-cache-dir wheel                                                                       && \
+    /opt/myenv/bin/pip3 install awscli --use-pep517                                                                        && \
+    exit                                                                                                                   && \
+    echo "*** *** *** Final cleanup "                                                                                      && \
+    apt-get purge -y php-dev  build-base  linux-headers                                                                    && \
+    apt-get autoremove -y                                                                                                  && \
+    apt-get clean                                                                                                          && \
     rm -rf ${CLEAN_DOCKER_LAYER}
-
 
 
 #  do not want auto-updates here
@@ -341,7 +335,8 @@ RUN composer config --no-plugins allow-plugins.wikimedia/composer-merge-plugin t
 COPY . /
 
 
-RUN /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/kuenzign/WikiMarkdown                                        WikiMarkdown                 main       && \
+RUN  \
+    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/kuenzign/WikiMarkdown                                        WikiMarkdown                 main       && \
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-MobileFrontend                MobileFrontend               REL1_39    && \
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-RandomSelection               RandomSelection              REL1_39    && \
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-LabeledSectionTransclusion    LabeledSectionTransclusion   REL1_39    && \
@@ -351,14 +346,14 @@ RUN /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://gi
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-WikiCategoryTagCloud          WikiCategoryTagCloud         REL1_39    && \
 #  installExtensionGithub  https://github.com/labster/HideSection/                                         HideSection master
 #  TODO STUFF
-##  looks like this extension is broken
-##  installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-WikEdDiff WikEdDiff REL1_39
-##  The following is broken currently in REL1_38 only, might be fine in higher releases
-    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/Universal-Omega/DynamicPageList3                  DynamicPageList3         REL1_39  && \
+#  looks like this extension is broken
+#  installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-WikEdDiff WikEdDiff REL1_39
+#  The following is broken currently in REL1_38 only, might be fine in higher releases
+    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/Universal-Omega/DynamicPageList3                  DynamicPageList3         REL1_39    && \
 ##  installExtensionGithub https://github.com/clecap/DynamicPageList3 DynamicPageList3 master
 ###### HACK: see README-DynamicPageList3-Clemens.md in TOPD_DIR/own for more details.
 ##  docker cp $TOP_DIR/own/DynamicPageList3/ ${LAP_CONTAINER}:/${MOUNT}/${VOLUME_PATH}/extensions
-    composer update
+   composer update
 
 
 ## 

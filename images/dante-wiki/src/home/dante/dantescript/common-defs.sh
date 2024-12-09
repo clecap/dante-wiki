@@ -39,9 +39,6 @@ export GREEN="\e[1;92m"
 
 
 
-git config --global init.defaultBranch master
-
-
 
 # Pre-execution trap to capture the line number before each command is run
 trap 'export LAST_COMMAND_LINE=$LINENO' DEBUG
@@ -49,19 +46,30 @@ trap 'export LAST_COMMAND_LINE=$LINENO' DEBUG
 
 # trap handler which sleeps after taking the trap for 1 hour for
 abort() 
-{ 
+{
+  local i=0 
   banner
-  printf "Error in line number $LAST_COMMAND_LINE of ${BASH_SOURCE[0]} at command $BASH_COMMAND \n";
+  printf "${ERROR}Error in line number $LAST_COMMAND_LINE  at command $BASH_COMMAND ${RESET}\n"
+  printf "${ERROR}Calling stack was:\n${RESET}"
+  while [[ ${BASH_SOURCE[i]} ]]; do
+    printf "${ERROR}  File: ${BASH_SOURCE[i]} at line: ${BASH_LINENO[i]} \n${RESET}"
+    ((i++))
+  done
   banner
-  printf "\n\n*** abort: Sleeping for 1 hour to keep container running for debug attempts ***\n\n ${RESET}"
+  printf "${ERROR}\n\n*** abort: Sleeping for 1 hour to keep container running for debug attempts ***\n\n ${RESET}"
   sleep 3600
 }
 
 # trap handler which prints a highly visible warning and then continues
 warn()
 {
+  local i=0
   banner
-  printf "The error occured in line number $LINENO: of $BASH_COMMAND \n";
+  printf "${ERROR}The problem occured in command $BASH_COMMAND ${RESET}\n"
+  while [[ ${BASH_SOURCE[i]} ]]; do
+    printf "${ERROR}  File: ${BASH_SOURCE[i]} at line: ${BASH_LINENO[i]} ${RESET}\n"
+    ((i++))
+  done
   banner
 }
 
@@ -80,6 +88,26 @@ banner()
     printf     "${ERROR} *** *** *** ****** *** *** *** ${RESET}\n\n"; 
   fi
 }
+
+
+
+bannerGreen()
+{
+ if [ $# -eq 0 ]; then
+    printf "\n\n${GREEN} *** *** *** ****** *** *** *** ${RESET}\n"; 
+    printf     "${GREEN} *** *** *** ****** *** *** *** ${RESET}\n"; 
+  else
+    local input="$1"
+    printf "\n\n${GREEN} *** *** *** ****** *** *** *** ${RESET}\n"; 
+    printf     "${GREEN} *** *** *** ****** *** *** *** ${RESET}\n"; 
+    printf     "${GREEN} ***  ${input^^}  ${RESET}\n";
+    printf     "${GREEN} *** *** *** ****** *** *** *** ${RESET}\n"; 
+    printf     "${GREEN} *** *** *** ****** *** *** *** ${RESET}\n\n"; 
+  fi
+}
+
+
+
 
 
 installInitialFromGit()

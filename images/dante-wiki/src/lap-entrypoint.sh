@@ -16,7 +16,7 @@ loadSecrets
 stdbuf -o0 -e0 printf "$GREEN*** /lap-entrypoint.sh: Iterating the $# arguments: $* ${RESET}\n"
 for script in "$@"; do
   if [ -f "/home/dante/dantescript/$script" ]; then
-      banner "/home/dante/dantescript/$script ---------- $script $RESET\n"
+      bannerGreen "/home/dante/dantescript/$script ---------- $script "
 
 ##      stdbuf -o0 -e0 printf "\n$GREEN***/lap-entrypoint.sh: Executing dantescript: /home/dante/dantescript/$script ---------- $script $RESET\n"
       RETURN_VALUE="returnvalue-initialized" ; 

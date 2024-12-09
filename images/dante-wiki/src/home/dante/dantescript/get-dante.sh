@@ -93,9 +93,9 @@ fi
 
 exec 1>&1 2>&2
 
-trap - ERR
+sudo touch /home/dante/DONE-getDante
 
-touch /home/dante/DONE-getDante
+trap - ERR
 
 printf "${GREEN}*** DONE get-dante.sh${RESET}"
 

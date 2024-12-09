@@ -2,7 +2,7 @@
 
 source /home/dante/dantescript/common-defs.sh
 
-printf "*** THIS IS chown.sh\n\n"
+stdbuf -o0 -e0  printf "*** THIS IS chown.sh\n\n"
 
 # an error in the chown might happen in the git directory on restart
 # in THIS case a wrong permission (in git) is not missing critical
@@ -11,7 +11,7 @@ printf "*** THIS IS chown.sh\n\n"
 trap warn ERR
 
 
-printf "\n*** chown.sh: chown all files to www-data...\n"
+stdbuf -o0 -e0  printf "\n*** chown.sh: chown all files to www-data...\n"
 
 #  printf "\n chown timing for one\n"
 #  time find ${MOUNT}/${TARGET} -not -path "*/.git/*" -exec chown www-data:www-data {} \;
@@ -28,22 +28,18 @@ printf "\n*** chown.sh: chown all files to www-data...\n"
 
 
 
-  printf "\n chown tming for parallel\n"
+stdbuf -o0 -e0   printf "\n chown tming for parallel\n"
   time ( find ${MOUNT}/${TARGET} -not -path "*/.git/*" -print0 | xargs -0 -P 16 -n 20 chown www-data:www-data )
 # Does this in parallel, speeding up the entire process
 # Took 14 seconds real time with 16 procs 10 n
 # 
-  printf "\nDONE PARALLEL\n"
-
-
-
-
+stdbuf -o0 -e0   printf "\nDONE PARALLEL\n"
 
 
 
 #  chown -R www-data:www-data ${MOUNT}/${TARGET} ; exec 1>&1 2>&2
-printf "DONE chowning all files\n"
+stdbuf -o0 -e0 printf "DONE chowning all files\n"
 
 trap abort ERR
 
-printf "${GREEN}*** EXITING chown.sh\n\n"
+stdbuf -o0 -e0  printf "${GREEN}*** EXITING chown.sh\n\n"
