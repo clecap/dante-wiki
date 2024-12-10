@@ -6,9 +6,9 @@ source /home/dante/dantescript/common-defs.sh
 ## Install Parsifal development version
 ##
 
-exec 1>&1 2>&2
-
 printf "\n*** get-parsifal.sh \n"
+
+set -e  # exit on error
 
 if [ -d "$MOUNT/$TARGET/extensions/Parsifal/.git" ]; then
     printf "\n*** get-parsifal.sh: Git directory ${MOUNT}$TARGET/extensions/Parsifal/.git already exists ... will be doing a PULL \n"
@@ -29,9 +29,6 @@ if [ -d "$MOUNT/$TARGET/extensions/Parsifal/.git" ]; then
     printf "DONE get-parsifal.sh_ cloning branch $BRANCH of Parsifal\n"
 fi
 
-printf "*** Making parsifal lock directory and setting correct ownership\n\n"
-  mkdir -p /var/lock/parsifal
-  chown -R www-data:www-data /var/lock/parsifal
-  exec 1>&1 2>&2
-printf "\nDONE\n\n"
+
+set +e  # unset exit on error
 

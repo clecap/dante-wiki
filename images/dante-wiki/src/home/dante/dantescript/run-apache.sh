@@ -43,37 +43,37 @@ sudo a2ensite dante-mediawiki.conf
 
 ### Enable LDAP
 if [ "$USING_LDAP" = "true" ]; then
-  printf "   Enabling LDAP..."
+  printf "  ENABLING LDAP...\n"
     sudo a2enconf ldap-restrictions.conf
-  printf "DONE (enabling ldap)\n"
+  printf "  DONE (enabling ldap)\n"
 else
-  printf "   DISABLEING LDAP..."
+  printf "   DISABLING LDAP...\n"
     sudo a2disconf ldap-restrictions.conf
-  printf "DONE (disabling ldap)\n"
+  printf "  DONE (disabling ldap)\n"
 fi
 
 ### Enable PASSWORDS
 if [ "$APACHE_USE_PASSWORD" = "true" ]; then
-  printf "   Enabling Passwords..."
+  printf "   ENABLING APACHE Passwords...\n"
     sudo a2enconf user-restrictions.conf
-  printf "DONE (enabling passwords)\n"
+  printf "  DONE (enabling apache passwords)\n"
 else
-  printf "   DISABLEING Passwords..."
+  printf "   DISABLING APACHE Passwords...\n"
     sudo a2disconf user-restrictions.conf
-  printf "DONE (disabling passwords)\n"
+  printf "  DONE (disabling apache passwords)\n"
 fi
 
 ## Enable https or http servicing
 if [ "$HOST_PROTOCOL" = "http" ]; then
-  printf "   Enabling http configuration"
+  printf "   ENABLING http configuration...\n"
     sudo a2enconf http.conf
     sudo a2disconf https.conf
-  printf "DONE (enabling http configuration)\n"
+  printf "  DONE (enabling http configuration)\n"
 elif  [ "$HOST_PROTOCOL" = "https" ]; then
-  printf "   Enabling https configuration"
+  printf "   ENABLING https configuration...\n"
     sudo a2disconf http.conf
     sudo a2enconf https.conf
-  printf "DONE (enabling https configuration)\n"
+  printf "  DONE (enabling https configuration)\n"
 else
   printf "${ERROR} Incorrect value of HOST_PROTOCOL is ${HOST_PROTOCOL}\n ${RESET}"
 fi
@@ -90,33 +90,29 @@ sudo a2disconf serve-cgi-bin.conf
 
 
 printf "*** run-apache.sh: Starting fpm...\n"
-  sudo service php8.2-fpm start 
+  sudo  stdbuf -o0 -e0  service php8.2-fpm start 
   exec 1>&1 2>&2
 printf "DONE\n"
 
 printf "\n*** run-apache.sh: Listing apache includes...\n"
-  sudo apachectl -D DUMP_INCLUDES 
+  sudo  stdbuf -o0 -e0  apachectl -D DUMP_INCLUDES 
   exec 1>&1 2>&2
 printf "DONE\n"
 
 printf "\n*** run-apache.sh: Listing apache modules...\n"
-  sudo apachectl -D DUMP_MODULES 
+  sudo  stdbuf -o0 -e0  apachectl -D DUMP_MODULES 
   exec 1>&1 2>&2
-printf "DONE\n"
+printf "DONE listing apache modules\n"
 
 printf "\n*** run-apache.sh: Testing configuration...\n"
-  stdbuf -o0 -e0 apachectl configtest
-printf "DONE\n"
-
-printf "\n*** run-apache.sh: Listing active traps: \n"
-trap
-printf "DONE\n"
+  sudo  stdbuf -o0 -e0  apachectl configtest
+printf "DONE testing configuration\n"
 
 loadSecrets
 
 printf "\n*** run-apache.sh: Starting apache...\n"
-  sudo apachectl -k start & sleep infinity
-printf "DONE with starting apache\n"
+  sudo stdbuf -o0 -e0  apachectl -k start & sleep infinity
+printf "DONE starting apache\n"
 
 trap - ERR
 

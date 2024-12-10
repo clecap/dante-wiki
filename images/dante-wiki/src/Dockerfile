@@ -204,8 +204,9 @@ RUN \
     #   configure git: prevent hints about the default branch master
     git config --global init.defaultBranch master                                                                          && \
     # install dependencies of mediawiki extensions we need
+    # graphviz mscgen plantuml needed for extension:diagrams
     apt-get install -y   --no-install-recommends  imagemagick  netpbm  djvulibre-bin  librsvg2-bin  xpdf  mscgen           && \
-    apt-get install -y   --no-install-recommends  gnuplot-nox  graphviz                                                    && \
+    apt-get install -y   --no-install-recommends  gnuplot-nox  graphviz  plantuml                                          && \
     apt-get install -y   --no-install-recommends  msmtp                                                                    && \
     echo "*** *** *** Installing composer "                                                                                && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer                   && \
@@ -342,7 +343,6 @@ RUN  \
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-LabeledSectionTransclusion    LabeledSectionTransclusion   REL1_39    && \
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-RevisionSlider                RevisionSlider               REL1_39    && \
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-NativeSvgHandler              NativeSvgHandler             REL1_39    && \
-    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-UniversalLanguageSelector     UniversalLanguageSelector    REL1_39    && \
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-WikiCategoryTagCloud          WikiCategoryTagCloud         REL1_39    && \
 #  installExtensionGithub  https://github.com/labster/HideSection/                                         HideSection master
 #  TODO STUFF

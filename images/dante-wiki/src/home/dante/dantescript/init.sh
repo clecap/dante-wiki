@@ -120,14 +120,24 @@ printf "*** Adding reference to DanteSettings.php ... "
   exec 1>&1 2>&2
 printf  "DONE\n"
 
+# overwrite the default main page and sidebar from mediawiki by the default initial-content from dantewiki
+# this also needs an --overwrite flag
+printf "\n*** Checking in sidebar..."
+   php ${MOUNT}/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite --prefix "MediaWiki:" $CONT/Sidebar
+  exec 1>&1 2>&2
+printf "DONE\n"
+
+printf "\n*** Checking in MainPage..."
+  php ${MOUNT}/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite  "$CONT/Main Page"
+  exec 1>&1 2>&2
+printf "DONE\n"
+
+
+
+
 
 set +e 
-trap 'abort' ERR
-
-
-
-
-
+trap 'errorTrap' ERR
 
 # Must do an update, since we have installed all kinds of extensions earlier
 doMaintenanceUpdate

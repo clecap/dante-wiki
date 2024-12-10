@@ -45,7 +45,7 @@ trap 'export LAST_COMMAND_LINE=$LINENO' DEBUG
 
 
 # trap handler which sleeps after taking the trap for 1 hour for
-abort() 
+errorTrap() 
 {
   local i=0 
   banner
@@ -56,7 +56,7 @@ abort()
     ((i++))
   done
   banner
-  printf "${ERROR}\n\n*** abort: Sleeping for 1 hour to keep container running for debug attempts ***\n\n ${RESET}"
+  printf "${ERROR}\n\n***  Sleeping for 1 hour to keep container running for debug attempts ***\n\n ${RESET}"
   sleep 3600
 }
 
@@ -72,6 +72,14 @@ warn()
   done
   banner
 }
+
+abort()
+{
+  banner $1
+  printf "${ERROR}\n\n***  Sleeping for 1 hour to keep container running for debug attempts ***\n\n ${RESET}"
+  sleep 3600
+}
+
 
 
 banner()
@@ -338,13 +346,6 @@ wait_database_ready() {
   exit 1
 }
 
-
-
-
-
-
-
-
 listUsers()
 {
   local MY_DB_HOST=$1
@@ -422,7 +423,7 @@ setUserPreference()
   local PREFERENCE_VALUE=$5
 
 
-  printf "${GREEN}** Setting preference ${PREFERENCE_NAME} to value ${PREFERENCE_VALUE} in ${MY_DB_NAME} for user ${USER_NAME}${RESET}\n"
+  printf "** Setting preference ${PREFERENCE_NAME} to value ${PREFERENCE_VALUE} in ${MY_DB_NAME} for user ${USER_NAME}\n"
   ERROR_OUTPUT=$(mysql -h ${MY_DB_HOST} -u root $MY_DB_NAME <<EOF
     INSERT INTO user_properties (up_user, up_property, up_value)
     SELECT user_id, '$PREFERENCE_NAME', '$PREFERENCE_VALUE' 
@@ -534,12 +535,6 @@ setApacheAuthentication()
 }
 
 
-
-
-
-
-
-
 # generate an ssh login (private,public) key pair for user USER to login in host HOST
 # install the private key at  /root/.ssh/id_rsa of the machine on which this is running
 # mail the public key to the user SMTP_TO who then must install this at HOST
@@ -595,15 +590,5 @@ generateSshKey()
     echo "  New key mailed"
 
 }
-
-
-
-
-
-
-
-
-
-
 
 

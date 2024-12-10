@@ -6,7 +6,7 @@
 
 source /home/dante/dantescript/common-defs.sh
 
-trap 'abort' ERR                       # call abort on error
+trap 'errorTrap' ERR
 
 printf "*** This is install-webserver-certificate.sh\n"
 

@@ -88,7 +88,7 @@ services:
       dante-network:
         aliases: 
           - dante.local
-    command: "install-webserver-certificate.sh chown.sh set-user-preferences.sh PAUSED-initial-xml-git.sh run-apache.sh"
+    command: "install-webserver-certificate.sh chown.sh set-user-preferences.sh ensure-parsifal-lock.sh initial-xml-git.sh run-apache.sh"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost"]
       interval: 30s
@@ -112,7 +112,7 @@ services:
       dante-network:
         aliases: 
           - dante.local
-    command: "prepare-database.sh  install-webserver-certificate.sh get-dante.sh get-parsifal.sh generate-mediawiki-private.sh  init.sh  chown.sh set-user-preferences.sh initial-xml-git.sh run-apache.sh"
+    command: "prepare-database.sh  install-webserver-certificate.sh get-dante.sh get-parsifal.sh generate-mediawiki-private.sh  init.sh  chown.sh set-user-preferences.sh ensure-parsifal-lock.sh initial-xml-git.sh run-apache.sh"
 
 
 ## starts a container which has not been initialized but which does not require a copy to the development environment
@@ -131,7 +131,7 @@ services:
       dante-network:
         aliases: 
           - dante.local
-    command: "prepare-database.sh install-webserver-certificate.sh get-dante.sh get-parsifal.sh generate-mediawiki-private.sh init.sh set-user-preferences.sh initial-xml-git.sh run-apache.sh"
+    command: "prepare-database.sh install-webserver-certificate.sh get-dante.sh get-parsifal.sh generate-mediawiki-private.sh init.sh set-user-preferences.sh ensure-parsifal-lock.sh initial-xml-git.sh run-apache.sh"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost"]
       interval: 30s
@@ -156,7 +156,7 @@ services:
       dante-network:
         aliases: 
           - dante.local
-    command: "prepare-database.sh install-webserver-certificate.sh get-dante.sh get-parsifal.sh generate-mediawiki-private.sh init.sh set-user-preferences.sh initial-xml-git.sh run-apache.sh"
+    command: "prepare-database.sh install-webserver-certificate.sh get-dante.sh get-parsifal.sh generate-mediawiki-private.sh init.sh set-user-preferences.sh ensure-parsifal-lock.sh initial-xml-git.sh run-apache.sh"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost"]
       interval: 30s

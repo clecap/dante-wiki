@@ -4,7 +4,7 @@
 
 source /home/dante/dantescript/common-defs.sh
 
-printf "${GREEN}*** THIS IS set-user-preferences.sh ***** ${RESET}"
+printf "${GREEN}*** THIS IS set-user-preferences.sh ***** ${RESET}\n"
 
 loadSecrets
 export MYSQL_PWD="${MYSQL_ROOT_PASSWORD}"

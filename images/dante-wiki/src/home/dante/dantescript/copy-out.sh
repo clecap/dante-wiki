@@ -5,7 +5,7 @@ source /home/dante/dantescript/common-defs.sh
 printf "\n*** *** *** THIS IS /home/dante/dantescript/copy-out.sh ***** "
 
 
-trap 'abort' ERR                       # call abort on error
+trap 'errorTrap' ERR
 
 exec 1>&1 2>&2
 
@@ -49,7 +49,7 @@ stdbuf -o0 -e0 printf "\n DONE COPY TIMING with GNU parallel \n"
 ## copy out a small number of remaining things
 stdbuf -o0 -e0 printf "\n\n*** copy-out.sh: copying out ${MOUNT} to /mnt \n"
 
-  find ${MOUNT}/${TARGET} -type f -exec cp {} /mnt/${TARGET} \;
+  find ${MOUNT}/${TARGET} -type f -mindepth 1 -maxdepth 1 -exec cp {} /mnt/${TARGET} \;
 
 #   cp -p ${MOUNT}/${TARGET}/* /mnt/${TARGET}
   cp -a ${MOUNT}/experimental /mnt
@@ -57,7 +57,6 @@ stdbuf -o0 -e0 printf "\n\n*** copy-out.sh: copying out ${MOUNT} to /mnt \n"
   cp -p ${MOUNT}/* /mnt
   exec 1>&1 2>&2
 printf "DONE cleaning up old stuff\n"
-
 
 printf "\n***  copy-out.sh: listing /mnt (after the copy operation) \n "
   ls -lag /mnt ; exec 1>&1 2>&2

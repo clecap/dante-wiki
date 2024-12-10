@@ -582,7 +582,7 @@
                         delete peers[config.to];
                     }
 
-                    if (config.onuserleft) config.onuserleft(config.to);
+                    if (config.onuserleft) {config.onuserleft(config.to);}
                 }
             };
 

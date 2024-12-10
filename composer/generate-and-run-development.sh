@@ -11,6 +11,8 @@ export DANTE_IMAGE=dante-wiki:latest
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 TOP_DIR=${DIR}/.. 
 
+printf "TOP_DIR is: ${TOP_DIR}"
+
 source $DIR/library.sh
 
 set -e
