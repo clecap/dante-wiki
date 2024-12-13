@@ -344,15 +344,25 @@ RUN  \
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-RevisionSlider                RevisionSlider               REL1_39    && \
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-NativeSvgHandler              NativeSvgHandler             REL1_39    && \
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-WikiCategoryTagCloud          WikiCategoryTagCloud         REL1_39    && \
+#
+#
+    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/samwilson/diagrams-extension                                 Diagrams                     master     && \
+    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-ReplaceText                   ReplaceText                  REL1_39    && \
+    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/ProfessionalWiki/Network                                     Network                      master     && \
+#
+    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-SubPageList3                 SubPageList3                  REL1_39    && \
+    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/ProfessionalWiki/SubPageList                                SubPageList                   master     && \
+    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-SubpageNavigation            SubpageNavigation             REL1_41    && \
 #  installExtensionGithub  https://github.com/labster/HideSection/                                         HideSection master
 #  TODO STUFF
 #  looks like this extension is broken
 #  installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-WikEdDiff WikEdDiff REL1_39
 #  The following is broken currently in REL1_38 only, might be fine in higher releases
-    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/Universal-Omega/DynamicPageList3                  DynamicPageList3         REL1_39    && \
+    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/Universal-Omega/DynamicPageList3                             DynamicPageList3             REL1_39    && \
 ##  installExtensionGithub https://github.com/clecap/DynamicPageList3 DynamicPageList3 master
 ###### HACK: see README-DynamicPageList3-Clemens.md in TOPD_DIR/own for more details.
 ##  docker cp $TOP_DIR/own/DynamicPageList3/ ${LAP_CONTAINER}:/${MOUNT}/${VOLUME_PATH}/extensions
+#
    composer update
 
 
