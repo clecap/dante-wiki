@@ -36,8 +36,6 @@ The current status of the system is experimental.
     <td>
       <a href="https://github.com/clecap/dante-wiki/blob/master/.github/results/cloc_results.md" title="Show detailed line counts!">
         <img alt="Repository code size" src="https://img.shields.io/github/languages/code-size/clecap/dante-wiki?color=lightgreen"></a>&nbsp;
-      <a href="https://github.com/clecap/dante-wiki/actions/workflows/count_lines.yml" title="Show report on workflow execution">
-        <img src="https://github.com/clecap/dante-wiki/actions/workflows/count_lines.yml/badge.svg"></a>
       <a href="https://github.com/clecap/dante-wiki/blob/master/.github/results/cloc_results.md" title="Show detailed line counts!">
         <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com/clecap/dante-wiki/master/.github/results/cloc_results.json&label=Files&query=%24.header.n_files&color=lightgreen"></a>&nbsp;
       <a href="https://github.com/clecap/dante-wiki/blob/master/.github/results/cloc_results.md" title="Show detailed line counts!">
@@ -57,11 +55,12 @@ The current status of the system is experimental.
   <tr>
     <td><b>Security</b></td>
     <td>
-      <a href="https://github.com/clecap/dante-wiki/blob/master/doc/sbom.json"><img src="https://img.shields.io/badge/SBOM-available-brightgreen?label=SBOM%20of%20lap">
-      <a href=""><img src="https://github.com/clecap/dante-wiki/actions/workflows/github-code-scanning/codeql/badge.svg">
+      <a href="https://github.com/clecap/dante-wiki/blob/master/doc/sbom.json"><img src="https://img.shields.io/badge/SBOM-available-brightgreen?label=SBOM%20of%20lap"></a>
+      <a href=""><img src="https://github.com/clecap/dante-wiki/actions/workflows/github-code-scanning/codeql/badge.svg"></a>
       <img src="https://github.com/clecap/dante-wiki/actions/workflows/docker-scan.yml/badge.svg">
       <img src="https://github.com/clecap/dante-wiki/actions/workflows/scorecard.yml/badge.svg">
       <a href="https://scorecard.dev/viewer/?uri=github.com/clecap/dante-wiki" title="Read detailed score report"><img src="https://img.shields.io/ossf-scorecard/github.com/clecap/dante-wiki"></a>
+      <a href="https://www.bestpractices.dev/projects/9840" title="Read detailed score report"><img src="https://www.bestpractices.dev/projects/9840/badge"></a>
     </td>
   </tr>
 </table>

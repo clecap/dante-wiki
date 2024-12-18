@@ -9,7 +9,7 @@
 ## PARAMETERS supplied to the script:
 ##
 # MODE   Parameter 1:  Which backup to generate.              Values:   sql    or  xml
-# TRANS  Parameter 2:  How to transport to the backup place.  Values:   rsync  or  ssh_stream  (or aws_stream, github_stream and more)
+# TRANS  Parameter 2:  How to transport to the backup place.  Values:   rsync  or  ssh_stream  or aws-s3       (or aws_stream, github_stream and more)
 # FREQ   Parameter 3:  Identifies time stamp and kind of the dump. Eg: week-10  day-2024-07-28  or similar
 
 MODE="$1"
@@ -29,7 +29,7 @@ ERRORFLAG=0
 # generate the name of the file as it then will appear in the backup storage
 if [[ "$MODE" == "xml" ]]; then
   DUMPFILENAME="$ACRO-$FREQ.xml"
-elif [[  "$MODE" == "sql" ]]
+elif [[  "$MODE" == "sql" ]]; then
   DUMPFILENAME="$ACRO-$FREQ.sql"
 else
   printf "\n Error: Illegal value for mode parameter found was: $MODE\n" >> $TMPFILE
@@ -59,6 +59,9 @@ if   [[ "$MODE" == "xml" && "$TRANS" == "ssh_stream" ]]; then
     printf "\n\n*** SSH STDERR: \n" >> $TMPFILE
     cat $TWOERR >> $TMPFILE
   printf "\nDONE xml/ssh_stream\n\n" >> $TMPFILE 
+##
+##
+##
 elif [[ "$MODE" == "xml" && "$TRANS" == "rsync" ]]; then
   printf "DOING xml/rsync \n\n" >> $TMPFILE
   printf "First: generating xml into $DUMPFILENAME\n\n" >> $TMPFILE
@@ -73,9 +76,32 @@ elif [[ "$MODE" == "xml" && "$TRANS" == "rsync" ]]; then
     ERRORFLAG==$(( RSYNC_STATUS || ERRORFLAG ))
   printf "\nSTATUS: RSYNC=$RSYNC_STATUS TOTAL=$ERRORFLAG\n\n"
   printf "\nDONE rsync\n" >> $TMPFILE
+##
+##
+##
+elif [[ "$MODE" == "xml" && "$TRANS" == "aws-s3" ]]; then
+  printf "DOING xml/aws-s3\n\n" >> $TMPFILE
+    printf "Entering virtual python environment for aws\n"
+    source /opt/myenv/bin/activate
+    printf "Doing dump\n"
+    (php /var/www/html/${PREFIX}/maintenance/dumpBackup.php --full --include-files --uploads  2> $ONEERR) | ( aws s3 cp - s3://${AWS_BUCKETNAME}/${DUMPFILENAME}  2> $TWOERR)
+    PHP_STATUS=${PIPESTATUS[0]}
+    SSH_STATUS=${PIPESTATUS[1]}
+    ERRORFLAG=$(( PHP_STATUS || SSH_STATUS || ERRORFLAG ))
+    printf "\nSTATUS: PHP=$PHP_STATUS  SSH=$SSH_STATUS  TOTAL=$ERRORFLAG\n\n" >> $TMPFILE
+    printf "\n\n*** PHP STDERR: \n" >> $TMPFILE
+    cat $ONEERR >> $TMPFILE
+    printf "\n\n*** SSH STDERR: \n" >> $TMPFILE
+    cat $TWOERR >> $TMPFILE
+    printf "Exiting virtual python environment\n"
+    exit
+  printf "\nDONE xml/aws-s3\n\n" >> $TMPFILE 
+##
+##
+##
 elif [[ "$MODE" == "sql" && "$TRANS" == "ssh_stream" ]]; then
   printf "DOING sql and ssh_stream in one command \n\n" >> $TMPFILE
-    (mysqldump --all-databases --routines --user=root 2>$ONEERR) | (ssh -o ServerAliveInterval=240 ${CBB_TARGET_SSH_USER}@${CBB_TARGET_SSH_HOST} ${DUMPFILENAME} 2> $TWOERR)
+    (mysqldump -h ${MY_DB_HOST} --all-databases --routines --user root 2>$ONEERR) | (ssh -o ServerAliveInterval=240 ${CBB_TARGET_SSH_USER}@${CBB_TARGET_SSH_HOST} ${DUMPFILENAME} 2> $TWOERR)
     SQL_STATUS=${PIPESTATUS[0]}
     SSH_STATUS=${PIPESTATUS[1]}
     ERRORFLAG=$(( SQL_STATUS || SSH_STATUS || ERRORFLAG ))
@@ -85,10 +111,13 @@ elif [[ "$MODE" == "sql" && "$TRANS" == "ssh_stream" ]]; then
     printf "\n\n*** SSH STDERR: \n" >> $TMPFILE
     cat $TWOERR >> $TMPFILE
   printf "\nDONE" >> $TMPFILE 
+##
+##
+##
 elif [[ "$MODE" == "sql" && "$TRANS" == "rsync" ]]; then
   printf "DOING sql/rsync \n\n" >> $TMPFILE
   printf "First: Generating sql into $DUMPFILENAME\n\n"
-    mysqldump --all-databases --routines --user=root --result-file=$DUMPFILENAME >>  $TMPFILE
+    mysqldump -h ${MY_DB_HOST} --all-databases --routines --user root --result-file=$DUMPFILENAME >>  $TMPFILE
     SQL_STATUS=$?
     ERRORFLAG==$(( SQL_STATUS || ERRORFLAG ))
   printf "\nSTATUS: SQL=$SQL_STATUS TOTAL=$ERRORFLAG\n\n"
@@ -99,6 +128,29 @@ elif [[ "$MODE" == "sql" && "$TRANS" == "rsync" ]]; then
     ERRORFLAG==$(( RSYNC_STATUS || ERRORFLAG ))
   printf "\nSTATUS: RSYNC=$RSYNC_STATUS TOTAL=$ERRORFLAG\n\n"
   printf "DONE rsync\n" >> $TMPFILE
+##
+##
+##
+elif [[ "$MODE" == "sql" && "$TRANS" == "aws-s3" ]]; then
+  printf "DOING sql/aws-s3 \n\n" >> $TMPFILE
+    printf "Entering virtual python environment for aws\n"
+    source /opt/myenv/bin/activate
+    printf "Doing dump\n"
+  (mysqldump -h ${MY_DB_HOST} --all-databases --routines --user root 2>$ONEERR) | (aws s3 cp - s3://${AWS_BUCKETNAME}/${DUMPFILENAME}  2> $TWOERR)
+  SQL_STATUS=${PIPESTATUS[0]}
+  SSH_STATUS=${PIPESTATUS[1]}
+  ERRORFLAG=$(( SQL_STATUS || SSH_STATUS || ERRORFLAG ))
+  printf "\nSTATUS: SQL=$SQL_STATUS  SSH=$SSH_STATUS  TOTAL=$ERRORFLAG\n\n"
+  printf "\n\n*** SQL STDERR: \n" >> $TMPFILE
+  cat $ONEERR >> $TMPFILE
+  printf "\n\n*** SSH STDERR: \n" >> $TMPFILE
+  cat $TWOERR >> $TMPFILE
+  printf "Exiting virtual python environment\n"
+  exit
+  printf "\nDONE" >> $TMPFILE 
+##
+##
+##
 else
   printf "\n Error: Illegal parameters found $MODE, $TRANS"
   ERRORFLAG=1
