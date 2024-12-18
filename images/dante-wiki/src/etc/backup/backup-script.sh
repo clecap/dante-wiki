@@ -1,4 +1,4 @@
-#!/bin/ash
+#!/bin/sh
 
 #
 # Script which will be used inside of the container of a containerized DanteWiki to generate regular backups
@@ -29,7 +29,7 @@ ERRORFLAG=0
 # generate the name of the file as it then will appear in the backup storage
 if [[ "$MODE" == "xml" ]]; then
   DUMPFILENAME="$ACRO-$FREQ.xml"
-elif [[ ]]
+elif [[  "$MODE" == "sql" ]]
   DUMPFILENAME="$ACRO-$FREQ.sql"
 else
   printf "\n Error: Illegal value for mode parameter found was: $MODE\n" >> $TMPFILE
@@ -39,12 +39,11 @@ fi
 rm -f $DUMPFILENAME
 
 # Name of a temporary file for building up the mail
-TMPFILE=$(mktemp --suffix='.txt')
+TMPFILE=$(mktemp --suffix='.backupmail.txt')
 
 # Name of temporary files capturing stderr in case of a pipe scenario
-ONEERR=$(mktemp --suffix='.log')
-TWOERR=$(mktemp --suffix='.log')
-
+ONEERR=$(mktemp --suffix='.backup-one.log')
+TWOERR=$(mktemp --suffix='.backup-two.log')
 
 printf "/etc/backup/backup-driver.sh: Generating $MODE dump and sending via $TRANS for $ACRO, frequency $FREQ\n\n" >> $TMPFILE
 
@@ -105,8 +104,8 @@ else
   ERRORFLAG=1
 fi
 
-rm -f $ONEERR
-rm -f $TWOERR
+# rm -f $ONEERR
+# rm -f $TWOERR
 
 # set mail subject
 if [[ $status -eq 0 ]]; then
@@ -125,5 +124,5 @@ fi
   echo "From: $SMTP_FROM" 
   echo
   cat $TMPFILE
-} | msmtp --host=$SMTP_HOST --port=$SMTP_PORT --auth=on --user=$SMTP_USER --password=$SMTP_PASSWORD --tls=on --from=$SMTP_FROM  ${SMTP_TO}
+} | msmtp --host=$SMTP_HOST --port=$SMTP_PORT --auth=on --user=$SMTP_USER --passwordeval="echo $SMTP_PASSWORD" --tls=on --from=$SMTP_FROM  ${SMTP_TO}
 

@@ -206,7 +206,9 @@ RUN \
     # install dependencies of mediawiki extensions we need
     # graphviz mscgen plantuml needed for extension:diagrams
     apt-get install -y   --no-install-recommends  imagemagick  netpbm  djvulibre-bin  librsvg2-bin  xpdf  mscgen           && \
-    apt-get install -y   --no-install-recommends  gnuplot-nox  graphviz  plantuml                                          && \
+#    apt-get install -y   --no-install-recommends  openjdk-17-jre-headless                                                 && \
+#    apt-get install -y   --no-install-recommends  plantuml                                                                 && \
+    apt-get install -y   --no-install-recommends  gnuplot-nox  graphviz                                                    && \
     apt-get install -y   --no-install-recommends  msmtp                                                                    && \
     echo "*** *** *** Installing composer "                                                                                && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer                   && \
@@ -251,7 +253,9 @@ RUN \
     a2enmod include                                                                                                        && \
     a2enmod authnz_ldap                                                                                                    && \
 #   GNU parallel helps with fast copying 
-    apt-get install -y parallel                                                                                            && \
+    apt-get install -y --no-install-recommends parallel                                                                    && \
+#   ssh client, needed for doing backups           
+    apt-get install -y --no-install-recommends openssh-client                                                              && \
 ## Install pymupdf
 #
 #    1) Installations with pip should use a virtual python environment or a --break-system-package (which is not recommended)
@@ -262,7 +266,7 @@ RUN \
     python3 -m venv /opt/myenv                                                                                             && \
     source /opt/myenv/bin/activate                                                                                         && \
     /opt/myenv/bin/pip3 install --no-cache-dir pymupdf                                                                     && \
-    # need wheel package for installing aws
+    # need wheel package for installing aws command line
     /opt/myenv/bin/pip3 install --no-cache-dir wheel                                                                       && \
     /opt/myenv/bin/pip3 install awscli --use-pep517                                                                        && \
     exit                                                                                                                   && \
@@ -308,22 +312,23 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 
 WORKDIR ${TOP_PATH}
 
-RUN composer config --no-plugins allow-plugins.wikimedia/composer-merge-plugin true            && \
-    composer config --no-plugins allow-plugins.composer/package-versions-deprecated true       && \
-    composer config --no-plugins allow-plugins.composer/installers true                        && \
-    echo "*** *** *** Need the file to exist before being able to configure"                   && \
-    echo '{}' > ${TOP_PATH}/composer.local.json                                                && \
-    composer config --global allow-plugins true                                                && \
-    echo "<?php " > ${TOP_PATH}/DanteDynamicInstalls.php                                       && \
-    echo "*** *** *** Install support library for markdown "                                   && \
-    COMPOSER=${TOP_PATH}/composer.local.json  composer require erusev/parsedown                && \
-    COMPOSER=${TOP_PATH}/composer.local.json  composer require erusev/parsedown-extra                  && \
-    COMPOSER=${TOP_PATH}/composer.local.json  composer require benjaminhoegh/parsedown-extended   && \
+RUN composer config --no-plugins allow-plugins.wikimedia/composer-merge-plugin true              && \
+    composer config --no-plugins allow-plugins.composer/package-versions-deprecated true         && \
+    composer config --no-plugins allow-plugins.composer/installers true                          && \
+    echo "*** *** *** Need the file to exist before being able to configure"                     && \
+    echo '{}' > ${TOP_PATH}/composer.local.json                                                  && \
+    composer config --global allow-plugins true                                                  && \
+    echo "<?php " > ${TOP_PATH}/DanteDynamicInstalls.php                                         && \
+    echo "*** *** *** Install support library for markdown "                                     && \
+    COMPOSER=${TOP_PATH}/composer.local.json  composer require erusev/parsedown                  && \
+    COMPOSER=${TOP_PATH}/composer.local.json  composer require erusev/parsedown-extra            && \
+    COMPOSER=${TOP_PATH}/composer.local.json  composer require benjaminhoegh/parsedown-extended  && \
 #   The next 2 are required for openai / chatgpt integration
-    COMPOSER=${TOP_PATH}/composer.local.json  composer require php-http/discovery    && \
-    COMPOSER=${TOP_PATH}/composer.local.json  composer require openai-php/client       && \
+    COMPOSER=${TOP_PATH}/composer.local.json  composer require php-http/discovery                && \
+    COMPOSER=${TOP_PATH}/composer.local.json  composer require openai-php/client                 && \
 #   Install requirements for deepl integration in DantePresentations
-    COMPOSER=${TOP_PATH}/composer.local.json  composer require deeplcom/deepl-php
+    COMPOSER=${TOP_PATH}/composer.local.json  composer require  deeplcom/deepl-php               && \
+    COMPOSER=${TOP_PATH}/composer.local.json  composer require  mediawiki/sub-page-list:~3.0
 
 
 ##
@@ -351,8 +356,10 @@ RUN  \
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/ProfessionalWiki/Network                                     Network                      master     && \
 #
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-SubPageList3                 SubPageList3                  REL1_39    && \
-    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/ProfessionalWiki/SubPageList                                SubPageList                   master     && \
-    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-SubpageNavigation            SubpageNavigation             REL1_41    && \
+##    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/ProfessionalWiki/SubPageList                                SubPageList                   master     && \
+#     SubPageList uses 
+##    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-SubpageNavigation            SubpageNavigation             REL1_41    && \
+#     SubpageNavigation not fully working in my 1.39 release.
 #  installExtensionGithub  https://github.com/labster/HideSection/                                         HideSection master
 #  TODO STUFF
 #  looks like this extension is broken
