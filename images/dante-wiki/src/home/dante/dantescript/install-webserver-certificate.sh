@@ -3,6 +3,8 @@
 # Generates a (public, private) key pair for use in localhost
 # Mails the public key to SMTP_TO
 # Installs the public and private key
+# 
+# Installs the fingerprint of the ssh host locally
 
 source /home/dante/dantescript/common-defs.sh
 
@@ -82,7 +84,8 @@ else
 fi  
 
 
-
+sudo ssh-keyscan ${SSH_HOST} >> /tmp/known_hosts
+sudo mv /tmp/known_hosts /root/.ssh/known_hosts
 
 exec 1>&1 2>&2
 

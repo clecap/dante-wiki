@@ -254,8 +254,8 @@ RUN \
     a2enmod authnz_ldap                                                                                                    && \
 #   GNU parallel helps with fast copying 
     apt-get install -y --no-install-recommends parallel                                                                    && \
-#   ssh client, needed for doing backups           
-    apt-get install -y --no-install-recommends openssh-client                                                              && \
+#   ssh client and rsync needed for doing backups           
+    apt-get install -y --no-install-recommends openssh-client  rsync                                                       && \
 ## Install pymupdf
 #
 #    1) Installations with pip should use a virtual python environment or a --break-system-package (which is not recommended)
@@ -269,6 +269,7 @@ RUN \
     # need wheel package for installing aws command line
     /opt/myenv/bin/pip3 install --no-cache-dir wheel                                                                       && \
     /opt/myenv/bin/pip3 install awscli --use-pep517                                                                        && \
+   ################################################################################################################# /opt/myenv/bin/pip3 install pygments && \
     exit                                                                                                                   && \
     echo "*** *** *** Final cleanup "                                                                                      && \
     apt-get purge -y php-dev  build-base  linux-headers                                                                    && \

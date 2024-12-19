@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# provides a trampoline mechanism for activating the virtual python environment
+# where pygmentize is installed and then invoking the connected pygmentize
+# need this since pygmentize wants ot be installed in virtual python and
+# latex looks for it in /usr/local/bin, but without invoking the virtual environment first
+
+source /opt/myenv/bin/activate 
+
+/opt/myenv/bin/pygmentize $@

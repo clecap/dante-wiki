@@ -16,6 +16,9 @@ MODE="$1"
 TRANS="$2"
 FREQ="$3"
 
+
+export PREFIX="wiki-dir"
+
 source /run/secrets/configuration 
 
 export MYSQL_PWD="${MYSQL_ROOT_PASSWORD}"
