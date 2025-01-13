@@ -27,8 +27,6 @@ This is the README file for generating a development environment.
 
 ## Build Process Local
 
-
-
 ## Docker Image Build on Dockerhub
 
 
@@ -37,12 +35,6 @@ This is the README file for generating a development environment.
 # OLD STUFF
 
 ## Build Docker Images 
-
-
-
-
-
-
 
 ### Build on DockerHub
 
