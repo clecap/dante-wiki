@@ -2,6 +2,8 @@
 
 # TODO: USE branches in github and tags in docker hub !!!
 
+printf "\n\nThis is dante-wiki/dist/get.sh version 2.3\n\n"  # As freshness check during development
+
 # branch we are checking out from github
 BRANCH=master
 

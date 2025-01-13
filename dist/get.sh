@@ -1,6 +1,6 @@
 #!/bin/bash
 
-printf "\nThis is dante-wiki/dist/get.sh version 2.3\n\n"  # As freshness check during development
+printf "\n\nThis is dante-wiki/dist/get.sh version 2.3\n\n"  # As freshness check during development
 
 # get directory where this script resides wherever it is called from
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
