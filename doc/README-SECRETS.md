@@ -2,7 +2,7 @@ Secrets management in the system.
 
 
 
-The secrets are written into the private/configuraiton.sh file
+The secrets are written into the private/configuration.sh file
 
 The (initial) secrets are stored in a secrets file of docker.
 
