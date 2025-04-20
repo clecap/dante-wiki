@@ -352,7 +352,9 @@ RUN  \
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-WikiCategoryTagCloud          WikiCategoryTagCloud         REL1_39    && \
 #
 #
-    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/samwilson/diagrams-extension                                 Diagrams                     master     && \
+#    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/samwilson/diagrams-extension                                 Diagrams                     master     && \
+##  TODO: diagrams-extension master currently breaks claimed backwards compatibility with MW 1.39
+#
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-ReplaceText                   ReplaceText                  REL1_39    && \
     /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/ProfessionalWiki/Network                                     Network                      master     && \
 #
