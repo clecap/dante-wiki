@@ -27,6 +27,11 @@ This is the README file for generating a development environment.
 
 ## Build Process Local
 
+
+* composer/generate-and-run-development.sh
+
+
+
 ## Docker Image Build on Dockerhub
 
 
