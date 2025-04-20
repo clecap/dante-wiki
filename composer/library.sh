@@ -1,8 +1,10 @@
 #!/bin/bash
 
+#
+# Library functions for composing Docker constellation for DanteWiki
+#
 
-##### export SERVICE_CONTAINER=dante-wiki-container
-
+# bash color codes
 export RESET="\e[0m"; 
 export ERROR="\e[1;31m"; 
 export GREEN="\e[1;92m"
