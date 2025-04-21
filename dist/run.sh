@@ -13,18 +13,22 @@ TOP_DIR=${DIR}/..
 printf "TOP_DIR used is ${TOP_DIR}\n"
 printf "DIR used is ${DIR}\n"
 
-if [ -f "${TOP_DIR}/private/configuration.shc" ] && [ $(stat -c%s "${TOP_DIR}/private/configuration.sh") -lt 20 ]; then
-  printf "Error: Configuration file is smaller than 20 bytes, did you forget to adjust it?"
-  exit -1
+
+if [ ! -f "${TOP_DIR}/private/configuration.sh" ]; then
+  printf "Error: Configuration file ${TOP_DIR}/private/configuration.sh does not exist\n"
+  printf "       Please read instructions on how to add configuration file\n"
+  exit 1
+elif [ $(stat -c%s "${TOP_DIR}/private/configuration.sh") -lt 20 ]; then
+  printf "Error: Configuration file ${TOP_DIR}/private/configuration.sh is smaller than 20 bytes. Probably you forgot to adjust it?\n"
+  printf "       Please read instructions on how to add configuration file\n"
+  exit 1
 else
-  printf "Using configuration file ${TOP_DIR}/private/configuration.sh\n"
+  echo "Using configuration file ${TOP_DIR}/private/configuration.sh "
 fi
 
-printf "Reading configuration file..."
+printf "Reading configuration file ${TOP_DIR}/private/configuration.sh..."
   source ${TOP_DIR}/private/configuration.sh
 printf "DONE\n"
-
-
 
 
 docker compose -f ${TOP_DIR}/dist/docker-compose-development.yaml up -d database webserver-raw-${HOST_PROTOCOL}
