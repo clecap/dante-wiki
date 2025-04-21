@@ -1,4 +1,6 @@
-FROM debian:stable-slim@sha256:382967fd7c35a0899ca3146b0b73d0791478fba2f71020c7aa8c27e3a4f26672 AS intermediary
+FROM debian:stable-20250407-slim
+
+# FROM debian:stable-slim@sha256:382967fd7c35a0899ca3146b0b73d0791478fba2f71020c7aa8c27e3a4f26672 AS intermediary
 
 ##
 ## ARG / VARIABLE section  
@@ -26,7 +28,7 @@ ARG TOP_PATH=/var/www/html/wiki-dir
 ##
 
 LABEL maintainer="Clemens H. Cap"
-LABEL copyright="(C) 2022-2024 Clemens H. Cap"
+LABEL copyright="(C) 2022-2025 Clemens H. Cap"
 LABEL description="Dockerfile for Dantewiki"
 LABEL dockerhub-url="https://hub.docker.com/repository/docker/clecap/dante"
 LABEL git-url="https://github.com/clecap/dante"

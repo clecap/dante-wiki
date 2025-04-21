@@ -39,3 +39,6 @@ export IMAGE_CREATED_AT=$(docker images ${IMAGE} --format "{{.CreatedAt}}")
 export IMAGE_TAG==$(docker images ${IMAGE} --format "{{.Tag}}")
 
 docker compose -f ${TOP_DIR}/dist/docker-compose-development.yaml up -d database webserver-raw-${HOST_PROTOCOL}
+
+# show real time logs while starting up
+docker logs -f dante-wiki-container

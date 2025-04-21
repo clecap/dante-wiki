@@ -4,6 +4,11 @@ source /home/dante/dantescript/common-defs.sh
 
 printf "*** THIS IS run-apache.sh\n\n"  
 
+
+printf "\n*** run-apache.sh: Listing ${MOUNT}\n"
+  ls -la ${MOUNT}
+printf "DONE\n\n"
+
 loadSecrets
 export APACHE_SERVER_NAME=${MY_DOMAINNAME}
 
