@@ -1,4 +1,4 @@
-FROM debian:stable-20250407-slim
+FROM debian:stable-20250407-slim AS intermediary
 
 # FROM debian:stable-slim@sha256:382967fd7c35a0899ca3146b0b73d0791478fba2f71020c7aa8c27e3a4f26672 AS intermediary
 
@@ -66,7 +66,9 @@ ENV DEBIAN_FRONTEND=noninteractive  \
     # TEXINPUTS might be amended outside of the container as part of Parsifal etc.
     TEXINPUTS=/var/www/texinputs   \
     #  We are setting the path so that we can more easily exercise and test commands inside of a docker exec shell
-    PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/texlive/$YEAR/bin/x86_64-linux:/bin: \
+    # TODO: We add the 2025 path while we are migrating from 2024 to 2025 
+    #       We need this currnetly since it looks like (?) tlmgr is in the 2025 path
+    PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/texlive/$YEAR/bin/x86_64-linux:/bin:/usr/local/texlive/2025/bin/x86_64-linux:/bin        \
     # We must run composer as root, suppress warning and error messages about this
     COMPOSER_ROOT_VERSION=${MEDIAWIKI_VERSION}
 
@@ -118,9 +120,11 @@ RUN apt-get update                                                              
     echo "tlpdbopt_sys_bin /usr/bin" >> /tmp/install-tl/install.profile                                && \
     # actually install TeX Live
     /tmp/install-tl/install-tl -profile /tmp/install-tl/install.profile                                && \
+    echo "*** *** *** TeX Cleanup "  && \
     #
     #  Adjust for vulnerabilities reported in sub-packages by docker scanner
     #
+    # TODO: might want to attempt to remove below because it might be the case that these things have been repaired
     tlmgr remove --force tlcockpit                                                                     && \
     tlmgr remove --force texplate                                                                      && \
     tlmgr remove --force arara                                                                         && \

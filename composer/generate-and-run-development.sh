@@ -36,3 +36,5 @@ waitForContainerRunning dante-wiki-container
 # waitForContainerHealthy dante-wiki-container
 waitForWebserverServicing
 openChrome
+
+
