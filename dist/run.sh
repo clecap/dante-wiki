@@ -23,12 +23,19 @@ elif [ $(stat -c%s "${TOP_DIR}/private/configuration.sh") -lt 20 ]; then
   printf "       Please read instructions on how to add configuration file\n"
   exit 1
 else
-  echo "Using configuration file ${TOP_DIR}/private/configuration.sh "
+  printf "Using configuration file ${TOP_DIR}/private/configuration.sh \n"
 fi
 
 printf "Reading configuration file ${TOP_DIR}/private/configuration.sh..."
   source ${TOP_DIR}/private/configuration.sh
 printf "DONE\n"
 
+IMAGE="clecap/dantewiki:latest"
+
+export IMAGE_ID=$(docker images ${IMAGE} --format "{{.ID}}")
+export IMAGE_DIGEST=$(docker images ${IMAGE} --format "{{.Digest}}")
+export IMAGE_REPOSITORY=$(docker images ${IMAGE} --format "{{.Repository}}")
+export IMAGE_CREATED_AT=$(docker images ${IMAGE} --format "{{.CreatedAt}}")
+export IMAGE_TAG==$(docker images ${IMAGE} --format "{{.Tag}}")
 
 docker compose -f ${TOP_DIR}/dist/docker-compose-development.yaml up -d database webserver-raw-${HOST_PROTOCOL}
