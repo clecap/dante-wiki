@@ -10,7 +10,6 @@ printf "DIR used is ${DIR}\n"
 
 # CAVE: TOP_DIR in get is the manually generated directory into which we install  
 
-
 mkdir -p ${TOP_DIR}/dist
 mkdir -p ${TOP_DIR}/private
 touch ${TOP_DIR}/private/configuration.sh

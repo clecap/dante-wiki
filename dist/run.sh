@@ -7,18 +7,6 @@ printf "\n\nThis is dante-wiki/dist/get.sh version 2.3\n\n"  # As freshness chec
 # branch we are checking out from github
 BRANCH=master
 
-# TODO migrate this into the configuration file !!
-# Check if exactly one argument is provided
-if [ "$#" -ne 1 ]; then
-  printf "ERROR: Script requires 1 parameter. Use http or https."
-  exit 1
-fi
-
-# Store the argument
-HOST_PROTOCOL="$1"
-
-echo "Argument stored in HT: $HT"
-
 # get directory where this script resides wherever it is called from
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 TOP_DIR=${DIR}/.. 
