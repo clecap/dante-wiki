@@ -8,7 +8,7 @@
 	"settings": {
 		"git.repositoryScanMaxDepth": 1,
 		"git.scanRepositories": [
-			"live/wiki-dir/extensions/Parsifal",
+			"live/wiki-dir/extensions/Parsifal", 
       "live/wiki-dir/extensions/DanteTree"
 		],
 		"search.useIgnoreFiles": true,
