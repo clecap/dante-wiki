@@ -13,7 +13,7 @@ exec 1>&1 2>&2
 # Delete old stuff. Must do this for ${TARGET} and ***NOT*** for /mnt, since there are
 # some files we still need !
 #
-printf "\n*** copy-out.sh: removing old stuff...\n "
+printf "\n*** copy-out.sh: removing old stuff, may take a while, please wait...\n "
   rm -rf /mnt/${TARGET} ; rm -f /mnt/.DS_Store ;  exec 1>&1 2>&2
 printf "DONE cleaning up old stuff\n"
 

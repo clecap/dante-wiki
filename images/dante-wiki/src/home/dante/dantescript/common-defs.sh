@@ -164,31 +164,33 @@ loadSecrets()
   fi
 }
 
+
+# TODO: partially broken, deprecate
 # Change database root password to a new root password
 # Call as changeDBRootPassword "old-password" "new-password"
-changeDBRootPassword()
-{
-  local db_host="mariadb_container_hostname_or_ip"
-  local db_port="3306"  # Default MariaDB/MySQL port
-  local current_root_password=$1
-  local new_root_password=$2
-
-  printf "Executing the SQL command to change the database root password for %  \n"
-    ERROR_OUTPUT=$(mysql -h "${db_host}" -P "${db_port}" -u root -p"${current_root_password}" -e "ALTER USER 'root'@'%' IDENTIFIED BY '${new_root_password}'; FLUSH PRIVILEGES;")
-  if [ $? -eq 0 ]; then
-    printf "${GREEN}Root password of database has been successfully changed for @.${RESET}"
-  else
-    printf "${ERROR}Failed to change the database root password for @.  Reason: ${ERROR_OUTPUT}  ${RESET}"
-  fi
-
-  printf "Executing the SQL command to change the database root password for localhost \n"
-   ERROR_OUTPUT=$(mysql -h "${db_host}" -P "${db_port}" -u root -p"${current_root_password}" -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${new_root_password}'; FLUSH PRIVILEGES;")
-  if [ $? -eq 0 ]; then
-    printf "${GREEN}Root password of database has been successfully changed for localhost.${RESET}"
-  else
-    printf "${ERROR}Failed to change the database root password for localhost.  Reason: ${ERROR_OUTPUT} ${RESET}"
-  fi
-}
+#changeDBRootPassword()
+#{
+#  local db_host="mariadb_container_hostname_or_ip"
+#  local db_port="3306"  # Default MariaDB/MySQL port
+#  local current_root_password=$1
+#  local new_root_password=$2
+#
+#  printf "Executing the SQL command to change the database root password for %  \n"
+#  local OUTPUT=$(mysql -h "${db_host}" -P "${db_port}" -u root -p"${current_root_password}" -e "ALTER USER 'root'@'%' IDENTIFIED BY '${new_root_password}'; FLUSH PRIVILEGES;" 2>&1 )
+#  if [ $? -eq 0 ]; then
+#    printf "${GREEN}Root password of database has been successfully changed for @.${RESET}"
+#  else
+#    printf "${ERROR}Failed to change the database root password for @.  Reason: ${OUTPUT}  ${RESET}"
+#  fi
+#
+#  printf "Executing the SQL command to change the database root password for localhost \n"
+#   ERROR_OUTPUT=$(mysql -h "${db_host}" -P "${db_port}" -u root -p"${current_root_password}" -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${new_root_password}'; FLUSH PRIVILEGES;")
+#  if [ $? -eq 0 ]; then
+#    printf "${GREEN}Root password of database has been successfully changed for localhost.${RESET}"
+#  else
+#    printf "${ERROR}Failed to change the database root password for localhost.  Reason: ${ERROR_OUTPUT} ${RESET}"
+#  fi
+#}
 
 
 
@@ -227,7 +229,7 @@ changeWikiRootUser()
 
 
 # Function to check if the database server is running; returns true if it is running
-#### TODO
+#### TODO  MAYBE this is already deprecated ????
 #### CAVE: NEEDS correct password !!!
 ping_dbserver() {
   local MY_DB_HOST="$1"
@@ -296,28 +298,25 @@ wait_dbserver_running() {
 }
 
 
-
 check_dbserver_initial_rootpassword() {
   local MY_DB_HOST="$1"
-  printf "${GREEN}*** Checking DB for initial root password...\n"
-  local RESULT=$(mysqladmin ping -u root -pinitialPassword -h "$MY_DB_HOST")
-  local RETURN="$?"
-  printf "    Result of the ping was: ${RESULT}\n"
-  printf "    Return code was: ${RETURN}\n"
-  if [ "${RETURN}" -eq 0 ]; then
-    printf "${GREEN}    check_dbserver_initial_password: db server is running and initial password is ok.\n"
-    return 0
-  else
-   printf "${ERROR}***check_dbserver_initial_password: db server is not running or initial password is incorrect.\n"
-    return 1
+  printf "\n${GREEN}***Checking DB for initial root password...\n"
+  printf "   Current environment variable is ${MYSQL_PWD}\n"
+  local OUTPUT=$(mysqladmin ping -u root -pinitialPassword -h "$MY_DB_HOST"  2>&1)
+  printf "    Output of the ping was: ${OUTPUT}\n"
+  if echo "$OUTPUT" | grep -i -q "ERROR"; then
+      printf "${ERROR}***check_dbserver_initial_password: db server is not running or initial password is incorrect.\n"
+      return 1
+    else
+      printf "${GREEN}    check_dbserver_initial_password: db server is running and initial password is ok.\n"
+      return 0
   fi
 }
 
 
-
 # Function to check if the database $1 exists and is running
 check_database_exists() {
-  printf "$GREEN*** Checking if database $1 exists...\n"
+  printf "$GREEN***Checking if database $1 exists...\n"
   local DB_NAME="$1"
   local RESULT=$(mysql -h $MY_DB_HOST -u root -p${MY_DB_PASS} -e "SHOW DATABASES LIKE '${DB_NAME}';" 2>&1)
   printf "Result of query was: ${RESULT}\n"
@@ -356,14 +355,15 @@ wait_database_ready() {
 listUsers()
 {
   local MY_DB_HOST=$1
-  printf "${GREEN}*** Listing DB USERS\n${RESET}"                
-  ERROR_OUTPUT=$(mysql -h ${MY_DB_HOST} -u root   <<-EOF
+  printf "${GREEN}*** Listing DB USERS\n${RESET}\n"                
+  local OUTPUT=$(mysql -h ${MY_DB_HOST} -u root 2>&1 <<-EOF
     SELECT User, Host, authentication_string FROM mysql.user;
 EOF
   )
-  if [ $? -ne 0 ]; then
-    printf "${ERROR}*** ERROR ${ERROR_OUTPUT} when listing users${RESET}\n\n"
+if echo "$OUTPUT" | grep -i -q "ERROR"; then
+    printf "${ERROR}*** ERROR ${OUTPUT} when listing users${RESET}\n\n"
   else 
+    printf "   Command output was \n\n${OUTPUT}\n"
     printf "${GREEN}*** DONE listing USERS${RESET}\n\n"    
   fi
 }
@@ -372,14 +372,15 @@ EOF
 listDatabases()
 {
   local MY_DB_HOST=$1
-  printf "${GREEN}*** Listing DATABASES: \n"
-  ERROR_OUTPUT=$(mysql -h ${MY_DB_HOST} -u root <<-EOF
+  printf "${GREEN}*** Listing DATABASES: ${RESET}\n"
+  local OUTPUT=$(mysql -h ${MY_DB_HOST} -u root 2>&1 <<-EOF
     SHOW DATABASES;
 EOF
   )
-  if [ $? -ne 0 ]; then
-    printf "${ERROR}*** ERROR ${ERROR_OUTPUT} when listing DATABASES ${RESET}\n\n"
+if echo "$OUTPUT" | grep -i -q "ERROR"; then
+    printf "${ERROR}*** ERROR ${OUTPUT} when listing DATABASES ${RESET}\n\n"
   else 
+    printf "   Command output was \n\n${OUTPUT}\n"
     printf "${GREEN}*** DONE listing DATABASES ${RESET}\n\n"    
   fi
 }
@@ -389,16 +390,17 @@ EOF
 setDBRootpassword()
 {
   local MY_DB_HOST="$1"
-  printf "** Setting new root password: \n"
-  ERROR_OUTPUT=$(mysql -h ${MY_DB_HOST}  -u root <<-EOF
+  printf "${GREEN}***Setting new root password: ${RESET}\n"
+  local OUTPUT=$(mysql -h ${MY_DB_HOST}  -u root  2>&1 <<-EOF
     ALTER USER 'root'@'localhost' IDENTIFIED BY '${NEW_MYSQL_PASSWORD}';
     ALTER USER 'root'@'%' IDENTIFIED BY '${NEW_MYSQL_PASSWORD}';
     flush privileges;
 EOF
   )
- if [ $? -ne 0 ]; then
-    printf "${ERROR}*** ERROR ${ERROR_OUTPUT} setting new root password ${RESET}\n\n"
+if echo "$OUTPUT" | grep -i -q "ERROR"; then
+    printf "${ERROR}*** ERROR ${OUTPUT} setting new root password ${RESET}\n\n"
   else 
+    printf "   Command output was \n\n${OUTPUT}\n"
     printf "${GREEN}*** DONE setting new root password ${RESET}\n\n"    
   fi
 }
@@ -411,8 +413,8 @@ EOF
 fixRoot()
 {
   local MY_DB_HOST="$1"
-  printf "${GREEN}** Fixing root permissions ${RESET}\n"
-  ERROR_OUTPUT=$(mysql -h ${MY_DB_HOST}  -u root <<-EOF
+  printf "${GREEN}*** Fixing root permissions ${RESET}\n"
+  local OUTPUT=$(mysql -h ${MY_DB_HOST}  -u root  2>&1 <<-EOF
     CREATE USER root@'172.16.0.0/255.240.0.0' IDENTIFIED BY '${MYSQL_PWD}';
     GRANT ALL PRIVILEGES ON *.* TO 'root'@'172.16.0.0/255.240.0.0' WITH GRANT OPTION;
     CREATE USER root@'192.168.0.0/255.255.0.0' IDENTIFIED BY '${MYSQL_PWD}';
@@ -423,9 +425,10 @@ fixRoot()
     SHOW GRANTS FOR 'root'@'192.168.0.0/255.255.0.0';
 EOF
   )
-  if [ $? -ne 0 ]; then
-    printf "${ERROR}*** ERROR ${ERROR_OUTPUT} when fixing root permissions ${RESET}\n\n"
+if echo "$OUTPUT" | grep -i -q "ERROR"; then
+    printf "${ERROR}*** ERROR ${OUTPUT} when fixing root permissions ${RESET}\n\n"
   else 
+    printf "   Command output was \n\n${OUTPUT}\n"
     printf "${GREEN}*** DONE fixing root permissions ${RESET}\n\n"    
   fi
 }
@@ -442,7 +445,7 @@ setUserPreference()
 
 
   printf "** Setting preference ${PREFERENCE_NAME} to value ${PREFERENCE_VALUE} in ${MY_DB_NAME} for user ${USER_NAME}\n"
-  ERROR_OUTPUT=$(mysql -h ${MY_DB_HOST} -u root $MY_DB_NAME <<EOF
+  local OUTPUT=$(mysql -h ${MY_DB_HOST} -u root $MY_DB_NAME  2>&1 <<EOF
     INSERT INTO user_properties (up_user, up_property, up_value)
     SELECT user_id, '$PREFERENCE_NAME', '$PREFERENCE_VALUE' 
     FROM user 
@@ -450,9 +453,10 @@ setUserPreference()
     ON DUPLICATE KEY UPDATE up_value='$PREFERENCE_VALUE';
 EOF
   )
-  if [ $? -ne 0 ]; then
-    printf "${ERROR}** Error ${ERROR_OUTPUT} while setting preference ${PREFERENCE_NAME} to value ${PREFERENCE_VALUE} in ${MY_DB_NAME} for user ${USER_NAME}${RESET}\n\n"
+if echo "$OUTPUT" | grep -i -q "ERROR"; then
+    printf "${ERROR}** Error ${OUTPUT} while setting preference ${PREFERENCE_NAME} to value ${PREFERENCE_VALUE} in ${MY_DB_NAME} for user ${USER_NAME}${RESET}\n\n"
   else 
+    printf "   Command output was \n\n${OUTPUT}\n"
     printf "${GREEN}** DONE setting preference ${PREFERENCE_NAME} to value ${PREFERENCE_VALUE} in ${MY_DB_NAME} for user ${USER_NAME}${RESET}\n"
   fi
 }
@@ -468,7 +472,7 @@ createDBandUsers()
   local MY_DB_USER=$3
   local MY_DB_PASS=$4
   printf "${GREEN}** Creating database ${MY_DB_NAME} and user ${MY_DB_USER}${RESET}\n"
-  ERROR_OUTPUT=$(mysql -h ${MY_DB_HOST} -u root 2>&1 <<-EOF
+  local OUTPUT=$(mysql -h ${MY_DB_HOST} -u root 2>&1 <<-EOF
     CREATE DATABASE IF NOT EXISTS ${MY_DB_NAME} /*\!40100 DEFAULT CHARACTER SET utf8 */;
     CREATE USER IF NOT EXISTS ${MY_DB_USER}@'172.16.0.0/255.240.0.0' IDENTIFIED BY '${MY_DB_PASS}';
     CREATE USER IF NOT EXISTS ${MY_DB_USER}@'192.168.0.0/255.255.0.0' IDENTIFIED BY '${MY_DB_PASS}';
@@ -477,9 +481,10 @@ createDBandUsers()
     FLUSH PRIVILEGES;
 EOF
   )
-  if [ $? -ne 0 ]; then
-    printf "${ERROR}*** ERROR when creating database and user was $ERROR_OUTPUT ${RESET}\n\n"
+if echo "$OUTPUT" | grep -i -q "ERROR"; then
+    printf "${ERROR}*** ERROR ${OUTPUT} when creating database ${RESET}\n\n"
   else 
+    printf "   Command output was \n\n${OUTPUT}\n"
     printf "${GREEN}*** DONE creating database and user ${RESET}\n\n"    
   fi
 }
