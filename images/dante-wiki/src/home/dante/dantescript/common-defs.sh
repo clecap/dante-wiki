@@ -174,19 +174,19 @@ changeDBRootPassword()
   local new_root_password=$2
 
   printf "Executing the SQL command to change the database root password for %  \n"
-    mysql -h "${db_host}" -P "${db_port}" -u root -p"${current_root_password}" -e "ALTER USER 'root'@'%' IDENTIFIED BY '${new_root_password}'; FLUSH PRIVILEGES;"
+    ERROR_OUTPUT=$(mysql -h "${db_host}" -P "${db_port}" -u root -p"${current_root_password}" -e "ALTER USER 'root'@'%' IDENTIFIED BY '${new_root_password}'; FLUSH PRIVILEGES;")
   if [ $? -eq 0 ]; then
     printf "${GREEN}Root password of database has been successfully changed for @.${RESET}"
   else
-    printf "${ERROR}Failed to change the database root password for @.${RESET}"
+    printf "${ERROR}Failed to change the database root password for @.  Reason: ${ERROR_OUTPUT}  ${RESET}"
   fi
 
   printf "Executing the SQL command to change the database root password for localhost \n"
-    mysql -h "${db_host}" -P "${db_port}" -u root -p"${current_root_password}" -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${new_root_password}'; FLUSH PRIVILEGES;"
+   ERROR_OUTPUT=$(mysql -h "${db_host}" -P "${db_port}" -u root -p"${current_root_password}" -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${new_root_password}'; FLUSH PRIVILEGES;")
   if [ $? -eq 0 ]; then
     printf "${GREEN}Root password of database has been successfully changed for localhost.${RESET}"
   else
-    printf "${ERROR}Failed to change the database root password for localhost.${RESET}"
+    printf "${ERROR}Failed to change the database root password for localhost.  Reason: ${ERROR_OUTPUT} ${RESET}"
   fi
 }
 
@@ -299,12 +299,17 @@ wait_dbserver_running() {
 
 check_dbserver_initial_rootpassword() {
   local MY_DB_HOST="$1"
-  if mysqladmin ping -u root -pinitialPassword -h "$MY_DB_HOST"; then
-    printf "check_dbserver_initial_password: db server is running and initial password is ok.\n"
-    return 1
-  else
-    printf "check_dnserver_initial_password: db server is not running or initial password is incorrect.\n"
+  printf "${GREEN}*** Checking DB for initial root password...\n"
+  local RESULT=$(mysqladmin ping -u root -pinitialPassword -h "$MY_DB_HOST")
+  local RETURN="$?"
+  printf "    Result of the ping was: ${RESULT}\n"
+  printf "    Return code was: ${RETURN}\n"
+  if [ "${RETURN}" -eq 0 ]; then
+    printf "${GREEN}    check_dbserver_initial_password: db server is running and initial password is ok.\n"
     return 0
+  else
+   printf "${ERROR}***check_dbserver_initial_password: db server is not running or initial password is incorrect.\n"
+    return 1
   fi
 }
 
@@ -312,8 +317,10 @@ check_dbserver_initial_rootpassword() {
 
 # Function to check if the database $1 exists and is running
 check_database_exists() {
+  printf "$GREEN*** Checking if database $1 exists...\n"
   local DB_NAME="$1"
   local RESULT=$(mysql -h $MY_DB_HOST -u root -p${MY_DB_PASS} -e "SHOW DATABASES LIKE '${DB_NAME}';" 2>&1)
+  printf "Result of query was: ${RESULT}\n"
   if [[ "$RESULT" == *"$DB_NAME"* ]]; then
       printf "check_database_exists did not find database ${DB_NAME}"
       return 0
@@ -350,11 +357,12 @@ listUsers()
 {
   local MY_DB_HOST=$1
   printf "${GREEN}*** Listing DB USERS\n${RESET}"                
-  mysql -h ${MY_DB_HOST} -u root   <<-EOF
+  ERROR_OUTPUT=$(mysql -h ${MY_DB_HOST} -u root   <<-EOF
     SELECT User, Host, authentication_string FROM mysql.user;
 EOF
+  )
   if [ $? -ne 0 ]; then
-    printf "${ERROR}*** ERROR when listing users${RESET}\n\n"
+    printf "${ERROR}*** ERROR ${ERROR_OUTPUT} when listing users${RESET}\n\n"
   else 
     printf "${GREEN}*** DONE listing USERS${RESET}\n\n"    
   fi
@@ -365,10 +373,15 @@ listDatabases()
 {
   local MY_DB_HOST=$1
   printf "${GREEN}*** Listing DATABASES: \n"
-  mysql -h ${MY_DB_HOST} -u root <<-EOF
+  ERROR_OUTPUT=$(mysql -h ${MY_DB_HOST} -u root <<-EOF
     SHOW DATABASES;
 EOF
-  printf "${GREEN}*** DONE listing databases${RESET}\n\n"
+  )
+  if [ $? -ne 0 ]; then
+    printf "${ERROR}*** ERROR ${ERROR_OUTPUT} when listing DATABASES ${RESET}\n\n"
+  else 
+    printf "${GREEN}*** DONE listing DATABASES ${RESET}\n\n"    
+  fi
 }
 
 # assumes NEW_MYSQL_PASSWORD contains new password
@@ -377,12 +390,17 @@ setDBRootpassword()
 {
   local MY_DB_HOST="$1"
   printf "** Setting new root password: \n"
-  mysql -h ${MY_DB_HOST}  -u root <<-EOF
+  ERROR_OUTPUT=$(mysql -h ${MY_DB_HOST}  -u root <<-EOF
     ALTER USER 'root'@'localhost' IDENTIFIED BY '${NEW_MYSQL_PASSWORD}';
     ALTER USER 'root'@'%' IDENTIFIED BY '${NEW_MYSQL_PASSWORD}';
     flush privileges;
 EOF
-  printf "DONE setDBRootpassword\n"
+  )
+ if [ $? -ne 0 ]; then
+    printf "${ERROR}*** ERROR ${ERROR_OUTPUT} setting new root password ${RESET}\n\n"
+  else 
+    printf "${GREEN}*** DONE setting new root password ${RESET}\n\n"    
+  fi
 }
 
 
@@ -394,7 +412,7 @@ fixRoot()
 {
   local MY_DB_HOST="$1"
   printf "${GREEN}** Fixing root permissions ${RESET}\n"
-  mysql -h ${MY_DB_HOST}  -u root <<-EOF
+  ERROR_OUTPUT=$(mysql -h ${MY_DB_HOST}  -u root <<-EOF
     CREATE USER root@'172.16.0.0/255.240.0.0' IDENTIFIED BY '${MYSQL_PWD}';
     GRANT ALL PRIVILEGES ON *.* TO 'root'@'172.16.0.0/255.240.0.0' WITH GRANT OPTION;
     CREATE USER root@'192.168.0.0/255.255.0.0' IDENTIFIED BY '${MYSQL_PWD}';
@@ -404,12 +422,12 @@ fixRoot()
     SHOW GRANTS FOR 'root'@'172.16.0.0/255.240.0.0';
     SHOW GRANTS FOR 'root'@'192.168.0.0/255.255.0.0';
 EOF
+  )
   if [ $? -ne 0 ]; then
-    printf "${ERROR}*** ERROR when fixing root permissions ${RESET}\n\n"
+    printf "${ERROR}*** ERROR ${ERROR_OUTPUT} when fixing root permissions ${RESET}\n\n"
   else 
     printf "${GREEN}*** DONE fixing root permissions ${RESET}\n\n"    
   fi
-
 }
 
 

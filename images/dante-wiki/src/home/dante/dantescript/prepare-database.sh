@@ -19,7 +19,7 @@ wait_dbserver_running ${MY_DB_HOST}
 check_dbserver_initial_rootpassword ${MY_DB_HOST}
 RESULT=$?
 
-if [ $RESULT -eq 1 ]; then
+if [ "$RESULT" -eq 0 ]; then
   printf "${GREEN}\n\n*** prepare-database.sh: We are running on initial root password...setting up database\n"
   export MYSQL_PWD="initialPassword"
 

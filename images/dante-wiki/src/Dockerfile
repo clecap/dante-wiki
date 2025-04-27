@@ -150,7 +150,7 @@ RUN apt-get update                                                              
       /var/cache/man/*      \
       /tmp/*
 
-### CAVE: Do not delete the package files or later installation steps might be troubled
+### CAVE: Do not delete the package files at this moment in tine or later installation steps might be troubled
 #      /var/cache/debconf/*-old \
 #      /var/lib/apt/lists/* \
 #      /var/lib/dpkg/*-old \
@@ -189,11 +189,7 @@ RUN \
     ln -sf /bin/bash /bin/sh                                                                                               && \
     echo "*** *** *** Generate target directories for the COPY operation below "                                           && \
     useradd -m dante && echo "dante:password" | chpasswd && adduser dante sudo                                             && \
-    chown -R dante:dante /home/dante     
-
-
-
-RUN \
+    chown -R dante:dante /home/dante                                                                                       && \
     echo "*** *** *** Installations "                                                                                      && \
     apt-get update                                                                                                         && \
     apt-get install -y   --no-install-recommends  apache2  apache2-utils openssl                                           && \
@@ -262,6 +258,8 @@ RUN \
     apt-get install -y --no-install-recommends parallel                                                                    && \
 #   ssh client and rsync needed for doing backups           
     apt-get install -y --no-install-recommends openssh-client  rsync                                                       && \
+
+
 ## Install pymupdf
 #
 #    1) Installations with pip should use a virtual python environment or a --break-system-package (which is not recommended)
@@ -275,37 +273,33 @@ RUN \
     # need wheel package for installing aws command line
     /opt/myenv/bin/pip3 install --no-cache-dir wheel                                                                       && \
     /opt/myenv/bin/pip3 install awscli --use-pep517                                                                        && \
-   ################################################################################################################# /opt/myenv/bin/pip3 install pygments && \
-    exit                                                                                                                   && \
+    ################################################################################################################# /opt/myenv/bin/pip3 install pygments && \
+    echo "*** Deactivating virtual python environment"                                                                          && \
+    deactivate                                                                                                                   && \
+    echo "*** Preventing autoupdates of the image"                                                                         && \
+    rm -f /etc/cron.daily/apt-compat                                                                                       && \
+    echo "*** injecting the correct shell for www-data to enable a su to www-data "                                        && \
+    chsh -s "/bin/bash" "www-data"                                                                                         && \
+    echo "*** Installing and configuring sudo "                                                                            && \
+    apt-get install -y --no-install-recommends sudo                                                                        && \
+    echo "www-data ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers                                                                 && \
+    chown -R www-data:www-data /var/www                                                                                    && \
     echo "*** *** *** Final cleanup "                                                                                      && \
-    apt-get purge -y php-dev  build-base  linux-headers                                                                    && \
+    apt-get purge -y php-dev                                                                                               && \
     apt-get autoremove -y                                                                                                  && \
     apt-get clean                                                                                                          && \
     rm -rf ${CLEAN_DOCKER_LAYER}
 
 
-#  do not want auto-updates here
-RUN \
-    echo "*** preventing autoupdates"                                                  && \
-    rm -f /etc/cron.daily/apt-compat                                                   && \
-    echo "*** injecting the correct shell for www-data to enable a su to www-data "    && \
-    chsh -s "/bin/bash" "www-data"                                                     && \
-    echo "*** install and configure sudo "                                             && \
-    apt-get update && apt-get install -y sudo                                          && \
-    echo "www-data ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers                             && \
-    chown -R www-data:www-data /var/www                                                && \
-    apt-get clean                                                                      && \
-    rm -rf ${CLEAN_DOCKER_LAYER}
-
-# We do not want to have to chown files, as this is a time consuming operation when many files are involved
+# We do not want to have to chown files, as this is a very time consuming operation when many files are involved
 # Thus we switch to a different user for the following operations
 USER www-data
 
-RUN curl -o /tmp/$MEDIAWIKI_TARBALL $MEDIAWIKI_URL                 && \
-    mkdir /var/www/html/${TARGET}                                   && \
-    tar -xzf /tmp/$MEDIAWIKI_TARBALL -C /var/www/html/${TARGET} --strip-components=1    && \
-    rm /tmp/$MEDIAWIKI_TARBALL                                     && \
-    rm -Rf /var/www/html/${TARGET}/skins/Refreshed/.git
+RUN curl -o "/tmp/$MEDIAWIKI_TARBALL" "$MEDIAWIKI_URL"                                      && \
+    mkdir -p "/var/www/html/${TARGET}"                                                      && \
+    tar -xzf "/tmp/$MEDIAWIKI_TARBALL" -C "/var/www/html/${TARGET}" --strip-components=1    && \
+    rm "/tmp/$MEDIAWIKI_TARBALL"                                                            && \
+    rm -Rf "/var/www/html/${TARGET}/skins/Refreshed/.git"
 
 #   we need to open composer or we get problems with composer permission details
 ENV COMPOSER_ALLOW_SUPERUSER=1
@@ -349,32 +343,32 @@ COPY . /
 
 
 RUN  \
-    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/kuenzign/WikiMarkdown                                        WikiMarkdown                 main       && \
-    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-MobileFrontend                MobileFrontend               REL1_39    && \
-    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-RandomSelection               RandomSelection              REL1_39    && \
-    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-LabeledSectionTransclusion    LabeledSectionTransclusion   REL1_39    && \
-    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-RevisionSlider                RevisionSlider               REL1_39    && \
-    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-NativeSvgHandler              NativeSvgHandler             REL1_39    && \
-    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-WikiCategoryTagCloud          WikiCategoryTagCloud         REL1_39    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/kuenzign/WikiMarkdown                                        WikiMarkdown                 main       && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-MobileFrontend                MobileFrontend               REL1_39    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-RandomSelection               RandomSelection              REL1_39    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-LabeledSectionTransclusion    LabeledSectionTransclusion   REL1_39    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-RevisionSlider                RevisionSlider               REL1_39    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-NativeSvgHandler              NativeSvgHandler             REL1_39    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-WikiCategoryTagCloud          WikiCategoryTagCloud         REL1_39    && \
 #
 #
 #    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/samwilson/diagrams-extension                                 Diagrams                     master     && \
 ##  TODO: diagrams-extension master currently breaks claimed backwards compatibility with MW 1.39
 #
-    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-ReplaceText                   ReplaceText                  REL1_39    && \
-    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/ProfessionalWiki/Network                                     Network                      master     && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-ReplaceText                   ReplaceText                  REL1_39    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/ProfessionalWiki/Network                                     Network                      master     && \
 #
-    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-SubPageList3                 SubPageList3                  REL1_39    && \
-##    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/ProfessionalWiki/SubPageList                                SubPageList                   master     && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-SubPageList3                 SubPageList3                  REL1_39    && \
+##    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/ProfessionalWiki/SubPageList                                SubPageList                   master     && \
 #     SubPageList uses 
-##    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/wikimedia/mediawiki-extensions-SubpageNavigation            SubpageNavigation             REL1_41    && \
+##    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-SubpageNavigation            SubpageNavigation             REL1_41    && \
 #     SubpageNavigation not fully working in my 1.39 release.
 #  installExtensionGithub  https://github.com/labster/HideSection/                                         HideSection master
 #  TODO STUFF
 #  looks like this extension is broken
 #  installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-WikEdDiff WikEdDiff REL1_39
 #  The following is broken currently in REL1_38 only, might be fine in higher releases
-    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/Universal-Omega/DynamicPageList3                             DynamicPageList3             REL1_39    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/Universal-Omega/DynamicPageList3                             DynamicPageList3             REL1_39    && \
 ##  installExtensionGithub https://github.com/clecap/DynamicPageList3 DynamicPageList3 master
 ###### HACK: see README-DynamicPageList3-Clemens.md in TOPD_DIR/own for more details.
 ##  docker cp $TOP_DIR/own/DynamicPageList3/ ${LAP_CONTAINER}:/${MOUNT}/${VOLUME_PATH}/extensions
