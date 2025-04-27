@@ -6,7 +6,7 @@ export DANTE_IMAGE=dante-wiki:latest
 
 ### TODO: put this as variable into the yaml file  
 
-
+ 
 # get directory where this script resides wherever it is called from
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 TOP_DIR=${DIR}/.. 
