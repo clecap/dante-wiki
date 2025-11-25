@@ -1,3 +1,13 @@
 {
+  "workbench.tree.indent": 24,     // make a more reasonable indentation in the editor
 
+
+  "editor.inlineSuggest.enabled": false,  // Disable inline ghost text suggestions
+  "editor.parameterHints.enabled": false,    // Disable the parameter hints popup
+  "editor.lightbulb.enabled": "off",    // Disable the code-action lightbulb hover
+  "editor.hover.enabled": false,   // Disable hover popups
+  "editor.suggest.showDetails": false,    // Disable big suggestion detail panel
+  "editor.suggest.showStatusBar": false,    // disable suggestion documentation preview
+  "editor.suggest.showWords": false,
+  "editor.suggestOnTriggerCharacters": false,    // Optional: make autocomplete less aggressive
 }

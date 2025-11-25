@@ -1,6 +1,8 @@
 {
   "recommendations": [
     "ms-azuretools.vscode-docker",
-    "formulahendry.code-runner"
+    "formulahendry.code-runner",
+    "exiasr.hadolint",                     // linter for Dockerfiles
+    "github.vscode-github-actions"         // support working with github actions
   ]
 }
