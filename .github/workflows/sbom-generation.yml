@@ -13,54 +13,40 @@ permissions:
 jobs:
   generate-sbom:
     permissions:
-      contents: write  # for Git to git push
+      contents: write  # for Git push
     runs-on: ubuntu-latest
 
     steps:
-    - name: Harden Runner
-      uses: step-security/harden-runner@5c7944e73c4c2a096b17a9cb74d65b6c2bbafbde # v2.9.1
-      with:
-        egress-policy: audit
+      - name: Harden Runner
+        uses: step-security/harden-runner@5c7944e73c4c2a096b17a9cb74d65b6c2bbafbde # v2.9.1
+        with:
+          egress-policy: audit
 
-    - name: Checkout repository
-      uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - name: Checkout repository
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
-    - name: Set up Python environment
-      uses: actions/setup-python@39cd14951b08e74b54015e9e001cdefcf80e669f # v5.1.1
-      with:
-        python-version: '3.x'
+      - name: Install syft (Anchore CLI)
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh \
+            | sh -s -- -b /usr/local/bin
+          syft version
 
-    - name: Install syft
-      run: |
-        pip install syft
+      - name: Generate SBOM for Docker image and repo
+        run: |
+          mkdir -p .github/results
+          syft clecap/dante-wiki:latest -o json \
+            > .github/results/sbom-dante-wiki-docker.json
+          syft dir:. -o json \
+            > .github/results/sbom-dante-wiki-docker-repo.json
+          ls -alg .github/results
 
-    - name: Generate SBOM for Dockerfile
-      run: |
-        mkdir -p .github/results
-        ls -alg
-        echo "Done doing syft version"
-        syft scan --help
-        echo "Done doing syft help"
-        syft docker:clecap:dante-wiki:latest  -o json        > .github/results/sbom-dante-wiki-docker.json
-        echo "Done doing syft docker"
-        syft dir:.  > .github/results/sbom-dante-wiki-docker-repo.json
-        echo "Done doing syft dir"
-#        syft scan dante-wiki:latest          -o json        > .github/results/sbom-dante-wiki.json
-#        syft scan dante-wiki:latest          -o spdx        > .github/results/sbom-dante-wiki.spdx
-#        syft scan dante-wiki:latest          -o cyclonedx   > .github/results/sbom-dante-wiki.xml
-
-#  --output syft-json   produced error message
-#  --output json        produced error message
-# looks like it needs a command first
-
-    - name: Commit SBOM files
-      run: |
-        git config --global user.name 'github-actions[bot]'
-        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        git add .github/results/sbom-dante-wiki.json
-#        git add .github/results/sbom-dante-wiki.spdx
-#        git add .github/results/sbom-dante-wiki.xml
-        git commit -m "Add auto-generated SBOM files"
-        git push origin ${{ github.ref }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit SBOM files
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add .github/results/sbom-dante-wiki-docker.json
+          git add .github/results/sbom-dante-wiki-docker-repo.json
+          git commit -m "Add auto-generated SBOM files" || echo "Nothing to commit"
+          git push origin ${{ github.ref }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
