@@ -1,226 +1,17 @@
+FROM debian:stable-20250407-slim AS intermediary
+
 ##
-## Dante Wiki Dockerfile
-##
+## ARG / VARIABLE section  
+#  Set up args (does not create a new layer but provides formal symbols for the process)
 #
-#  We work in two stages.
-#  Stage 1: Builds a system containing the required flavor of TeX and should not be changed often
-#  Stage 2: Copies in TeX
-#
-#  NOTE 1:  Building TeX and copying it in can be cached better, is more robust and minimal
-#           then building and deleting stuff
-#  NOTE 2:  We install TeX not through the network installer but through the ISO image.
-#           ISO image requires only one large file transfer instead of thousands of downloads (slow)
-#           ISO image is more robust (only one network call may fail instead of many over a long period of time)
-#           ISO image can be pulled fast, especially when building at dockerhub
 
-# ==========================
-#  Stage 1: TeX Live builder
-# ==========================
-FROM debian:stable-20251117-slim AS texlive-ready
+# Variable CTAN designates the site where to obtain texlive from.
+#  We mmight want to set it to a different value when there is a problem with a site assigned by mirror.ctan.org
+#  CTAN could be mirror.ctan.org
+#  CTAN could also designate a specific mirror, such as ctan.net
 
-##
-## PARAMETERS for the build
-##
-#  NOTE: ARGs do NOT carry over automagically to later stages
-#  NOTE: ARGs cannot be combined to reduce the number of layers
-#
-#  TL_YEAR: TeX Live year (used in paths and ISO name)
-#  TEXLIVE_FPR: Expected fingerprint of the GPG public signing key
-#                Key will be downloaded and checked against this fingerprint
-#                So this amounts to some form of key pinning as well
-ARG TL_YEAR=2025
-ARG TEXLIVE_FPR=C78B82D8C79512F79CC0D7C80D5E5D9106BAB6BC
-
-# We should derive subsequent argument values from here in ARG, since ENV values can be used only
-# after the entire ENV command has been executed.
-ARG  TL_FILE_NAME="texlive${TL_YEAR}.iso" 
-ARG  TL_ISO_URL="https://mirror.ctan.org/systems/texlive/Images/${TL_FILE_NAME}" 
-
-ENV  DEBIAN_FRONTEND=noninteractive   
-
-# NOTE: set -eux; makes build more reliable
-#           -e    exit on error, prevent silent failures
-#           -u    treat unset variables as error; catches typos and missing variables
-#           -x    print each command into the log before executing it
-# NOTE: Each run starts a fresh shell, so need this at the beginning of every RUN
-
-##
-## DOWNLOAD stage. This takes some time (download 6GB) and so we do this as early as possible
-##   to ensure it can be cached as often as possible
-##
-RUN \
-  set -eux                                                                              && \
-  apt-get update                                                                        && \ 
-  apt-get install -y --no-install-recommends ca-certificates     && \
-  apt-get install -y --no-install-recommends curl                                       && \
-  rm -rf /var/lib/apt/lists/*                                                           && \
-  mkdir -p /texlive                                                                     && \  
-  echo "*** Downloading TeX Live ${TL_ISO_URL} to /texlive/${TL_FILE_NAME}"             && \
-  curl -L "${TL_ISO_URL}" -o "/texlive/${TL_FILE_NAME}"                                 && \
-  echo "DONE: Downloaded TeX Live iso "                                                 && \
-  ls -l /texlive
-
-##
-## ENV Section
-##
-#   Use only one ENV command, as this reduces the number of layers
-ENV \
-  # URLs for ISO + signature; mirror.ctan.org will redirect to a nearby mirror
-  # URL of the GPG key (silence hadolint, since this is a public key)
-  # hadolint ignore=SC2154
-  GPG_KEY_URL="https://www.tug.org/texlive/files/texlive.asc" \
-  TEXLIVE_PUBKEY_ID="TeX Live Distribution <tex-live@tug.org>" 
-
-
-##### WHAT ABOUT LINUXMUSL ???  TODO: REMOVE THIS FROM PARSIFAL config.php
-
-
-##
-## ARGs provided by the build system
-##
-# These are automatically set by buildx for each platform
-ARG TARGETOS
-ARG TARGETARCH
-ARG TARGETVARIANT
-ARG TARGETPLATFORM
-ARG SOURCE_BRANCH
-ARG SOURCE_COMMIT
-ARG SOURCE_TAG
-ARG DOCKERFILE_PATH
-ARG IMAGE_NAME
-
-
-
-# Install required tools and do some small minimal cleanup
-# - downloading (curl)
-# - signature verification (gnupg, ca-certificates)
-# - installer runtime (perl, xz-utils for compressed archives)
-# - extracting ISO (libarchive-tools -> bsdtar)
-RUN                                                                 \ 
-  set -eux                                                       && \
-  apt-get update                                                 && \
-  apt-get install -y --no-install-recommends gnupg               && \
-  apt-get install -y --no-install-recommends perl                && \
-  apt-get install -y --no-install-recommends xz-utils            && \
-  apt-get install -y --no-install-recommends libarchive-tools    && \
-  rm -rf /var/lib/apt/lists/*                                    && \
-                                                                    \ 
-  echo "*** Downloading TeXlive GPG key from ${GPG_KEY_URL}"     && \
-  curl -fsSL "${GPG_KEY_URL}" -o /tmp/key.asc                    && \
-  echo "DONE: Downloading TeXlive GPG key  from ${GPG_KEY_URL}"  && \
-                                                                    \
-  echo "*** Importing GPG key"                                   && \
-  gpg --batch --import /tmp/key.asc                              && \
-  echo "DONE: Importing the GPG key into the keyring"            && \
-                                                                    \
-  echo "*** Listing all keyring keys "                           && \
-  gpg --list-keys --fingerprint                                  && \
-  echo "*** Listing the key we need"                             && \
-  gpg --list-keys "${TEXLIVE_PUBKEY_ID}"                         && \
-                                                                    \
-  echo "*** Obtaining the current fingerprint "                  && \
-  ACTUAL_FPR="$(gpg --batch --with-colons --fingerprint "${TEXLIVE_PUBKEY_ID}" | awk -F: '/^fpr:/ {print $10; exit}')"  && \
-  echo "DONE: Obtained current fingerprint:   $ACTUAL_FPR"       && \
-                                                                    \
-  echo "*** Comparing with expected fingerprint: $TEXLIVE_FPR"   && \
-  if [ "${TEXLIVE_FPR}" != "${ACTUAL_FPR}" ]; then   \
-    echo "ERROR: Fingerprint of proposed texlive key (${ACTUAL_FPR}) does not match expected fingerprint (${TEXLIVE_FPR})" >&2 ; \
-    exit 1 ;   \
-  fi  &&       \
-  echo "DONE: Fingerprint matches expected value."
-
-RUN                                                                                        \
-  set -eux                                                                              && \
-  # Dynamically obtain information on the architecture for which we re building
-  #   Keep this in one RUN to have access to the dynamically created environment variables
-  #   Another RUN opens up another shell  
-  echo "*** Building for TARGETOS=${TARGETOS} TARGETARCH=${TARGETARCH} TARGETVARIANT=${TARGETVARIANT} TARGETPLATFORM=${TARGETPLATFORM}" && \
-  \
-  if [ "$TARGETOS" != "linux" ]; then                           \
-    echo "ERROR: This dockerfile only supports TARGETOS=linux"; \
-    exit 1;                                                     \
-  fi;                                                           \
-                                                                \
-  case "${TARGETARCH}/${TARGETVARIANT}" in                      \
-    amd64/* | amd64/"" )  TL_PLATFORM='x86_64-linux'  ;;        \
-    386/* | 386/"" )      TL_PLATFORM='i386-linux'    ;;        \
-    arm64/* | arm64/"" )  TL_PLATFORM='aarch64-linux' ;;        \
-    arm/v7 )              TL_PLATFORM='armhf-linux'   ;;                  \
-    arm/v6 ) echo "No supported TeX Live binaries for linux/arm/v6 (armel)"; exit 1 ;; \
-    * )      echo "No matching TeX Live platform for ${TARGETOS}/${TARGETARCH}/${TARGETVARIANT}"; exit 1 ;; \
-  esac;                                         \
-  echo  "*** Using TL_PLATFORM=${TL_PLATFORM}" && \
-                                                                                           \
-  echo "*** Found TL_FILE_NAME=${TL_FILE_NAME}" && \
-  echo "*** Found TL_YEAR=${TL_YEAR}" && \
-  echo "*** Found TL_YEAR=${TL_ISO_URL}" && \
-  echo "*** Downloading TeX Live ISO hash ${TL_ISO_URL}.sha512"                         && \
-  curl -L "${TL_ISO_URL}.sha512" -o "/texlive/${TL_FILE_NAME}.sha512"                   && \
-  echo "DONE: Downloaded TeX Live ISO hash ${TL_ISO_URL}.sha512"                        && \
-                                                                                           \
-  echo "*** File contents of /texlive/${TL_FILE_NAME}.sha512 is as follows: "           && \
-  cat "/texlive/${TL_FILE_NAME}.sha512"                                                 && \
-                                                                                           \
-  echo "*** Downloading TeX Live ISO hash signataure ${TL_ISO_URL}.sha512.asc"          && \
-  curl -L "${TL_ISO_URL}.sha512.asc" -o "/texlive/${TL_FILE_NAME}.sha512.asc"           && \
-                                                                                           \
-  echo "*** Verifying signature on the hash value "                                     && \
-  gpg --verify "/texlive/${TL_FILE_NAME}.sha512.asc" "/texlive/${TL_FILE_NAME}.sha512"  && \
-  echo "DONE: Verified signature on hash value"                                         && \
-                                                                                           \
-  ls -l /texlive                                                                        && \
-  echo "*** Verifying hash value "                                                      && \
-  # ensure proper path for sha512sum
-  cd /texlive                                                                           && \
-  sha512sum -c "${TL_FILE_NAME}.sha512"                                                 && \
-  echo "DONE: Verified hash value "                                                     && \                                                                                                                                                                                                            
-                                                                                           \                                                        
-  echo "*** Extracting from ISO "                                                       && \
-  mkdir -p /tmp/install-tl                                                              && \
-  bsdtar -xf "/texlive/${TL_FILE_NAME}" -C /tmp/install-tl                              && \
-  # remove ISO as soon as possible so as not to use up space on the device
-  rm "/texlive/${TL_FILE_NAME}"                                                         && \
-  echo "DONE: Extracted from ISO"                                                       && \
-                                                                                           \
-  echo "*** Creating TeX Live install profile"                                          && \
-  echo "selected_scheme scheme-full" > /tmp/install-tl/install.profile                  && \
-  # Reduce disk usage: do NOT install docs or source trees
-  echo "tlpdbopt_install_docfiles 0" >> /tmp/install-tl/install.profile                 && \
-  echo "tlpdbopt_install_srcfiles 0" >> /tmp/install-tl/install.profile                 && \
-  # Disable automatic backups (common practice in container images)
-  echo "tlpdbopt_autobackup 0" >> /tmp/install-tl/install.profile                       && \
-  # Put TeX Live into a standard prefix that matches TL_YEAR
-  echo "TEXDIR /usr/local/texlive/${TL_YEAR}" >> /tmp/install-tl/install.profile        && \
-  # Request system-wide symlinks under /usr/bin (as in your snippet).
-  # These will be re-created in the final stage via 'tlmgr path add'.
-  echo "tlpdbopt_sys_bin /usr/bin" >> /tmp/install-tl/install.profile                   && \
-  echo "DONE: Creating install profile "                                                && \
-                                                                                           \
-  echo "*** Installing TeX Live (non-interactive, profile-driven)"                      && \
-  /tmp/install-tl/install-tl -profile /tmp/install-tl/install.profile                   && \
-  ls -l /usr                                                                            && \
-  ls -l /usr/local                                                                      && \
-  ls -l /usr/local/texlive                                                              && \
-  echo "DONE: Installing TeX Live "                                                     && \
-                                                                                           \
-  echo "*** Writing file to transport important parameters to next level "              && \
-#
-  printf "export TL_YEAR=\"%s\"\n"       "$TL_YEAR"          >> /usr/local/texlive/texlive-environment.sh  && \
-  printf "export TL_PLATFORM=\"%s\"\n"   "$TL_PLATFORM"      >> /usr/local/texlive/texlive-environment.sh  && \    
-  printf "export PATH=\"/usr/local/texlive/%s/bin/%s:%s\""   "${TL_YEAR}"  "${TL_PLATFORM}" "${PATH}"    >> /usr/local/texlive/texlive-environment.sh  && \
-  echo "*** Cleaning up some files"                                                     && \
-  rm -rf /texlive /tmp/install-tl                                                       && \
-  echo "DONE: Cleaning up some files"
-
-
-
-# =============================
-#  Stage 2: Final runtime image
-# =============================
-FROM debian:stable-20251117-slim as dante
-
-# Copy only the installed TeX Live tree from the builder stage
-COPY --from=texlive-ready /usr/local/texlive /usr/local/texlive
+ARG CTAN=ctan.net
+ARG YEAR=2024
 
 ARG MEDIAWIKI_VERSION=1.39.0
 ARG MEDIAWIKI_TARBALL=mediawiki-$MEDIAWIKI_VERSION.tar.gz
@@ -229,72 +20,25 @@ ARG TARGET=/wiki-dir
 
 ARG TOP_PATH=/var/www/html/wiki-dir
 
-##
-## ARGs provided by the build system
-##
-# These are automatically set by buildx for each platform
-# We here pick them up to 
-#   (1) set proper LABELs in the docker image
-#   (2) set proper paths (TODO: MAYBE NOT NEEDED in PHP)
-ARG TARGETOS
-ARG TARGETARCH
-ARG TARGETVARIANT
-ARG TARGETPLATFORM
-ARG SOURCE_BRANCH
-ARG SOURCE_COMMIT
-ARG SOURCE_TAG
-ARG DOCKERFILE_PATH
-ARG IMAGE_NAME
-
-ENV DEBIAN_FRONTEND=noninteractive
-
-
-RUN \
-  set -eux                                                      && \ 
-  apt-get update                                                && \
-  apt-get install -y --no-install-recommends perl               && \
-  apt-get install -y --no-install-recommends  ca-certificates   && \
-  apt-get install -y --no-install-recommends  curl              && \
-  # recreate required environment
-  echo "*** Checking environment file "                                                && \
-  ls -l /usr/local     && \
-  chmod 755 /usr/local/texlive/texlive-environment.sh                                  && \
-  # Dynamically obtain information on the architecture for which we re building.sh
-  . /usr/local/texlive/texlive-environment.sh                                          && \
-  # Recreate system-wide symlinks into /usr/bin in THIS final image.
-  # This respects 'tlpdbopt_sys_bin /usr/bin' stored in the TL database.
-  echo "*** Creating TeX Live symlinks under /usr/bin via tlmgr path add"              && \
-  tlmgr option sys_bin /usr/bin                                                        && \
-  tlmgr path add
 
 ##
-## LABEL 
+## LABEL section
 ##
-#  NOTE: Only use ONE LABEL command, as this keep sthe number of layers down
-# 
-LABEL maintainer="Clemens H. Cap"                                                      \
-  copyright="(C) 2022-2025 Clemens H. Cap"                                             \
-  description="Dockerfile for Dantewiki"                                               \
-  dockerhub-url="https://hub.docker.com/repository/docker/clecap/dante-wiki/general"   \
-  git-url="https://github.com/clecap/dante-wiki"                                       \
-  vcs-url="https://github.com/clecap/dante-wiki"                                       \
-  license="AGPL 3"                                                                     \
-  targetos="${TARGETOS}"                                                               \
-  targetarch="${TARGETARCH}"                                                           \
-  targetvariant="${TARGETVARIANT}"                                                     \
-  targetplatform="${TARGETPLATFORM}"                                                   \
-  org.opencontainers.image.source-branch="$SOURCE_BRANCH"                              \
-  org.opencontainers.image.revision="$SOURCE_COMMIT"                                   \
-  org.opencontainers.image.version="$SOURCE_TAG"                                       \
-  org.opencontainers.image.dockerfile-path="$DOCKERFILE_PATH"                          \
-  org.opencontainers.image.name="$IMAGE_NAME"
+
+LABEL maintainer="Clemens H. Cap"
+LABEL copyright="(C) 2022-2025 Clemens H. Cap"
+LABEL description="Dockerfile for Dantewiki"
+LABEL dockerhub-url="https://hub.docker.com/repository/docker/clecap/dante"
+LABEL git-url="https://github.com/clecap/dante"
+LABEL vcs-url="https://github.com/clecap/dante"
+LABEL license="AGPL 3"
 
 ##
 ## ENV section
 ##
-#
-#
-ENV LANG=C.UTF-8      \
+
+ENV DEBIAN_FRONTEND=noninteractive  \
+    LANG=C.UTF-8      \
     LC_ALL=C.UTF-8    \
     # ConTeXt cache can be created on runtime and does not need to increase image size  
     TEXLIVE_INSTALL_NO_CONTEXT_CACHE=1 \ 
@@ -322,13 +66,87 @@ ENV LANG=C.UTF-8      \
     #  We are setting the path so that we can more easily exercise and test commands inside of a docker exec shell
     # TODO: We add the 2025 path while we are migrating from 2024 to 2025 
     #       We need this currently since it looks like (?) tlmgr is in the 2025 path
-    # PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/texlive/$YEAR/bin/x86_64-linux:/bin:/usr/local/texlive/2025/bin/x86_64-linux:/bin        \
+    PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/texlive/$YEAR/bin/x86_64-linux:/bin:/usr/local/texlive/2025/bin/x86_64-linux:/bin        \
     # We must run composer as root, suppress warning and error messages about this
     COMPOSER_ROOT_VERSION=${MEDIAWIKI_VERSION}
 
 
 WORKDIR /tmp
 
+##
+## TEX layer
+##
+
+## runtime dependencies:
+# perl for some latex scripts
+## build dependencies
+# gnupg for verifying signature on texlive
+# ca-certificates for the tex-live manager to identify partners
+
+RUN apt-get update                                                                                     && \ 
+    apt-get install -y  --no-install-recommends  perl                                                  && \
+    apt-get install -y  --no-install-recommends  gnupg  curl  ca-certificates                          && \
+    echo "*** *** *** downloading Texlive "                                                            && \
+    curl https://$CTAN/systems/texlive/tlnet/install-tl-unx.tar.gz             -o /tmp/install-tl-unx.tar.gz             && \
+    curl https://$CTAN/systems/texlive/tlnet/install-tl-unx.tar.gz.sha512      -o /tmp/install-tl-unx.tar.gz.sha512      && \
+    curl https://$CTAN/systems/texlive/tlnet/install-tl-unx.tar.gz.sha512.asc  -o /tmp/install-tl-unx.tar.gz.sha512.asc  && \
+    echo "*** *** *** downloading GPG key "                                                            && \
+    curl https://www.tug.org/texlive/files/texlive.asc        -o /tmp/texlive.asc                                        && \
+    echo "*** *** *** importing GPG key "                                                              && \
+    gpg --import /tmp/texlive.asc                                                                      && \
+    echo "*** *** *** Verifying signature on Texlive installer "                                       && \
+    gpg --verify /tmp/install-tl-unx.tar.gz.sha512.asc /tmp/install-tl-unx.tar.gz.sha512               && \
+    echo "*** *** *** Verifying hash value "                                                           && \
+    sha512sum -c /tmp/install-tl-unx.tar.gz.sha512                                                     && \
+    echo "*** *** *** Removing gnupg - no longer needed"                                               && \
+    apt-get purge -y gnupg                                                                             && \
+    gunzip /tmp/install-tl-unx.tar.gz                                                                  && \
+    mkdir -p /tmp/install-tl                                                                           && \
+    tar -xf /tmp/install-tl-unx.tar    -C /tmp/install-tl  --strip-components=1                        && \
+    ls -alg /tmp && \
+    ls -alg /tmp/install-tl && \
+    # select full installation
+    echo "*** *** *** Adjusting install profile "                                                      && \
+    echo "selected_scheme scheme-full" > /tmp/install-tl/install.profile                               && \
+    # do not install doc files
+    echo "tlpdbopt_install_docfiles 0" >> /tmp/install-tl/install.profile                              && \
+    # do not install src files
+    echo "tlpdbopt_install_srcfiles 0" >> /tmp/install-tl/install.profile                              && \
+    # do not know what this does but everybody does so (shitty approach, I know)
+    echo "tlpdbopt_autobackup 0" >> install.profile                                                    && \
+    # furthermore we want our symlinks in the system binary folder
+    echo "tlpdbopt_sys_bin /usr/bin" >> /tmp/install-tl/install.profile                                && \
+    # actually install TeX Live
+    /tmp/install-tl/install-tl -profile /tmp/install-tl/install.profile                                && \
+    echo "*** *** *** TeX Cleanup "  && \
+    #
+    #  Adjust for vulnerabilities reported in sub-packages by docker scanner
+    #
+    # TODO: might want to attempt to remove below because it might be the case that these things have been repaired
+ ##   tlmgr remove --force tlcockpit                                                                     && \
+ ##   tlmgr remove --force texplate                                                                      && \
+ ##   tlmgr remove --force arara                                                                         && \
+ ##   tlmgr remove --force latex2nemeth                                                                  && \
+ ##   echo "*** *** *** Update texlive database after force rmoval "                                     && \
+ ##   tlmgr update --self                                                                                && \
+ ##   tlmgr update --all                                                                                 && \
+    #
+    #
+##    echo "*** *** *** Verify Version "                                                                 && \
+##    tlmgr --version                                                                                    && \
+    #
+    #  Now cleanup
+    #
+    echo "*** *** *** Doing a layer cleanup "                                                          && \
+    apt-get autoremove -y                                                                              && \
+    apt-get clean                                                                                      && \
+    rm -rf /usr/share/doc   \
+      /usr/share/man        \
+      /usr/share/locale/*   \
+      /usr/share/info       \
+      /var/cache/apt/*      \
+      /var/cache/man/*      \
+      /tmp/*
 
 ### CAVE: Do not delete the package files at this moment in tine or later installation steps might be troubled
 #      /var/cache/debconf/*-old \
@@ -340,6 +158,15 @@ WORKDIR /tmp
 # this is necessary for some of the commands we use
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
+
+
+
+
+
+
+
+
+FROM intermediary AS dante
 
 # Stuff we may clean at the end of each layer
 ARG CLEAN_DOCKER_LAYER="          \
@@ -364,12 +191,10 @@ ARG CLEAN_DOCKER_LAYER="          \
 #   php-curl:                 must include this for the composer to run faster
 
 RUN \
-    set -eux   && \
     echo "*** *** *** Ensure docker desktop tab opens with a bash allowing command line editing  "                         && \ 
     rm /bin/sh                                                                                                             && \
     ln -sf /bin/bash /bin/sh                                                                                               && \
     echo "*** *** *** Generate target directories for the COPY operation below "                                           && \
-    apt-get install -y   --no-install-recommends adduser                                                                   && \
     useradd -m dante && echo "dante:password" | chpasswd && adduser dante sudo                                             && \
     chown -R dante:dante /home/dante                                                                                       && \
     echo "*** *** *** Installations "                                                                                      && \
@@ -388,7 +213,7 @@ RUN \
     #   configure git: prevent hints about the default branch master
     git config --global init.defaultBranch master                                                                          && \
     # install dependencies of mediawiki extensions we need
-    # TODO:     graphviz mscgen plantuml needed for extension:diagrams
+    # graphviz mscgen plantuml needed for extension:diagrams
     apt-get install -y   --no-install-recommends  imagemagick  netpbm  djvulibre-bin  librsvg2-bin  xpdf  mscgen           && \
 #    apt-get install -y   --no-install-recommends  openjdk-17-jre-headless                                                 && \
 #    apt-get install -y   --no-install-recommends  plantuml                                                                 && \
@@ -407,22 +232,9 @@ RUN \
     apt-get install -y --no-install-recommends  python3-setuptools                                                         && \
     echo "*** *** *** ldap utilities, required for apache ldap access "                                                    && \
     apt-get install -y --no-install-recommends  ldap-utils                                                                 && \
-    echo "*** *** *** Configuring apache modules and environment "                                                         
- 
- RUN \
-    #   select intended operating mode for Apache
-    # the php modules of apache depend on mpm_prefork and must be disabled first
-    # since we do not know which exact php module variant is installed with this apache, remove it a bit more broadly
-    # since a2dismod does not allow shell expansion, do it as follows:
-    # 1. Find enabled PHP module files (*.load)
-    ls -l /etc/apache2/mods-enabled  && \
-    mods_files=$(find /etc/apache2/mods-enabled -maxdepth 1 -name 'php*.load' -printf '%f\n')  && \
-    echo "Found module files: $mods_files"       && \
-    # 2. Strip the .load ending to get actual module names
-    mods=$(echo "$mods_files" | sed 's/\.load$//')  && \
-    echo "Module names to disable: $mods"   && \
-    # 3. Disable them (only if something was found)
-    [ -n "$mods" ] && a2dismod $mods     && \
+    echo "*** *** *** Configuring apache modules and environment "                                                         && \
+#   select intended operating mode
+    a2dismod php8.2                                                                                                        && \
     a2dismod mpm_prefork                                                                                                   && \
     a2enmod proxy                                                                                                          && \ 
     a2enmod proxy_fcgi                                                                                                     && \
@@ -459,13 +271,10 @@ RUN \
 #    2) For some reason the active shell has no source command and we need to switch to bash
 #    3) This also is an issue when the install triggers for python3.11-venv are activated
     echo "*** installing python stuff in virtual environment "                                                             && \
-    apt-get install -y --no-install-recommends python3-venv                                                             && \
+    apt-get install -y --no-install-recommends python3.11-venv                                                             && \
     python3 -m venv /opt/myenv                                                                                             && \
     source /opt/myenv/bin/activate                                                                                         && \
     /opt/myenv/bin/pip3 install --no-cache-dir pymupdf                                                                     && \
-##    
-## Install aws command line for doing backups and similar stuff
-##
     # need wheel package for installing aws command line
     /opt/myenv/bin/pip3 install --no-cache-dir wheel                                                                       && \
     /opt/myenv/bin/pip3 install awscli --use-pep517                                                                        && \
@@ -595,3 +404,5 @@ CMD ["run-apache.sh"]
 ##
 
 ENTRYPOINT ["/lap-entrypoint.sh"]
+
+
