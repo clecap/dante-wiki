@@ -1,4 +1,4 @@
-cloc|github.com/AlDanial/cloc v 1.98  T=0.16 s (1266.4 files/s, 313968.6 lines/s)
+cloc|github.com/AlDanial/cloc v 1.98  T=0.51 s (400.4 files/s, 98303.2 lines/s)
 --- | ---
 
 Language|files|blank|comment|code
@@ -10,11 +10,11 @@ Markdown|28|555|0|1304
 Dockerfile|3|134|430|690
 YAML|16|139|149|680
 JavaScript|2|129|57|596
-JSON|13|2|0|559
+JSON|15|2|0|561
 HTML|3|91|10|433
 SVG|5|0|1|40
 Python|1|9|1|33
 Text|1|0|0|19
 INI|1|4|5|9
 --------|--------|--------|--------|--------
-SUM:|204|8554|5013|37008
+SUM:|206|8554|5013|37010
