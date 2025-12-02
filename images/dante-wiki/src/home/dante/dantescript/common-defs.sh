@@ -154,44 +154,15 @@ installInitialFromLocal()
 loadSecrets()
 {
   if [ -f "/run/secrets/configuration" ]; then
-    printf "$GREEN*** common-defs.sh:loadSecrets will now load configuration...${RESET} "
+    printf "$GREEN*** common-defs.sh:loadSecrets will now load configuration...${RESET} \n"
     source /run/secrets/configuration ; exec 1>&1 2>&2
     export DANTE_CONFIG_HASH=$(shasum -a 256 /run/secrets/configuration | awk '{ print $1 }')
-    printf "DONE\n   loading configuration, hashed to ${DANTE_CONFIG_HASH}\n"
+    printf "DONE loading configuration ${DANTE_CONFIGURATION_NAME}, hashed to ${DANTE_CONFIG_HASH}\n"
   else
     printf "$ERROR*** common-defs.sh:loadSecrets could not find configuration file, EXITING $RESET\n"
     exit 1
   fi
 }
-
-
-# TODO: partially broken, deprecate
-# Change database root password to a new root password
-# Call as changeDBRootPassword "old-password" "new-password"
-#changeDBRootPassword()
-#{
-#  local db_host="mariadb_container_hostname_or_ip"
-#  local db_port="3306"  # Default MariaDB/MySQL port
-#  local current_root_password=$1
-#  local new_root_password=$2
-#
-#  printf "Executing the SQL command to change the database root password for %  \n"
-#  local OUTPUT=$(mysql -h "${db_host}" -P "${db_port}" -u root -p"${current_root_password}" -e "ALTER USER 'root'@'%' IDENTIFIED BY '${new_root_password}'; FLUSH PRIVILEGES;" 2>&1 )
-#  if [ $? -eq 0 ]; then
-#    printf "${GREEN}Root password of database has been successfully changed for @.${RESET}"
-#  else
-#    printf "${ERROR}Failed to change the database root password for @.  Reason: ${OUTPUT}  ${RESET}"
-#  fi
-#
-#  printf "Executing the SQL command to change the database root password for localhost \n"
-#   ERROR_OUTPUT=$(mysql -h "${db_host}" -P "${db_port}" -u root -p"${current_root_password}" -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${new_root_password}'; FLUSH PRIVILEGES;")
-#  if [ $? -eq 0 ]; then
-#    printf "${GREEN}Root password of database has been successfully changed for localhost.${RESET}"
-#  else
-#    printf "${ERROR}Failed to change the database root password for localhost.  Reason: ${ERROR_OUTPUT} ${RESET}"
-#  fi
-#}
-
 
 
 
@@ -234,7 +205,7 @@ changeWikiRootUser()
 ping_dbserver() {
   local MY_DB_HOST="$1"
   printf "check_dbserver_running: Pinging database $MY_DB_HOST \n"
-  mysqladmin ping -h "$MY_DB_HOST"
+  mysqladmin ping -h "$MY_DB_HOST" 
 
 
   sleep 600000
@@ -299,10 +270,11 @@ wait_dbserver_running() {
 
 
 check_dbserver_initial_rootpassword() {
-  local MY_DB_HOST="$1"
-  printf "\n${GREEN}***Checking DB for initial root password...\n"
-  printf "   Current environment variable is ${MYSQL_PWD}\n"
-  local OUTPUT=$(mysqladmin ping -u root -pinitialPassword -h "$MY_DB_HOST"  2>&1)
+  local MY_DB_HOST="$1"  # TODO This should perhaps also be picked up from configuration
+  local MYSQL_PWD="${MYSQL_ROOT_PASSWORD}"
+  printf "\n${GREEN}***Checking DB for initial root password on MY_DB_HOST=${MY_DB_HOST}...\n"
+  printf "   Current environment variable MYSQL_PWD has value: ${MYSQL_PWD}\n"
+  local OUTPUT=$(mysqladmin ping -u root -pinitialPassword -h "$MY_DB_HOST" --skip-ssl 2>&1)
   printf "    Output of the ping was: ${OUTPUT}\n"
   if echo "$OUTPUT" | grep -i -q "ERROR"; then
       printf "${ERROR}***check_dbserver_initial_password: db server is not running or initial password is incorrect.\n"
@@ -318,7 +290,7 @@ check_dbserver_initial_rootpassword() {
 check_database_exists() {
   printf "$GREEN***Checking if database $1 exists...\n"
   local DB_NAME="$1"
-  local RESULT=$(mysql -h $MY_DB_HOST -u root -p${MY_DB_PASS} -e "SHOW DATABASES LIKE '${DB_NAME}';" 2>&1)
+  local RESULT=$(mysql -h $MY_DB_HOST -u root -p${MY_DB_PASS} -e "SHOW DATABASES LIKE '${DB_NAME}';" --skip-ssl 2>&1)
   printf "Result of query was: ${RESULT}\n"
   if [[ "$RESULT" == *"$DB_NAME"* ]]; then
       printf "check_database_exists did not find database ${DB_NAME}"
@@ -356,7 +328,7 @@ listUsers()
 {
   local MY_DB_HOST=$1
   printf "${GREEN}*** Listing DB USERS\n${RESET}\n"                
-  local OUTPUT=$(mysql -h ${MY_DB_HOST} -u root 2>&1 <<-EOF
+  local OUTPUT=$(mysql -h ${MY_DB_HOST} -u root --skip-ssl  2>&1 <<-EOF
     SELECT User, Host, authentication_string FROM mysql.user;
 EOF
   )
@@ -373,7 +345,7 @@ listDatabases()
 {
   local MY_DB_HOST=$1
   printf "${GREEN}*** Listing DATABASES: ${RESET}\n"
-  local OUTPUT=$(mysql -h ${MY_DB_HOST} -u root 2>&1 <<-EOF
+  local OUTPUT=$(mysql -h ${MY_DB_HOST} -u root --skip-ssl 2>&1 <<-EOF
     SHOW DATABASES;
 EOF
   )
@@ -391,7 +363,7 @@ setDBRootpassword()
 {
   local MY_DB_HOST="$1"
   printf "${GREEN}***Setting new root password: ${RESET}\n"
-  local OUTPUT=$(mysql -h ${MY_DB_HOST}  -u root  2>&1 <<-EOF
+  local OUTPUT=$(mysql -h ${MY_DB_HOST}  -u root  --skip-ssl 2>&1 <<-EOF
     ALTER USER 'root'@'localhost' IDENTIFIED BY '${NEW_MYSQL_PASSWORD}';
     ALTER USER 'root'@'%' IDENTIFIED BY '${NEW_MYSQL_PASSWORD}';
     flush privileges;
@@ -414,7 +386,7 @@ fixRoot()
 {
   local MY_DB_HOST="$1"
   printf "${GREEN}*** Fixing root permissions ${RESET}\n"
-  local OUTPUT=$(mysql -h ${MY_DB_HOST}  -u root  2>&1 <<-EOF
+  local OUTPUT=$(mysql -h ${MY_DB_HOST}  -u root  --skip-ssl  2>&1 <<-EOF
     CREATE USER root@'172.16.0.0/255.240.0.0' IDENTIFIED BY '${MYSQL_PWD}';
     GRANT ALL PRIVILEGES ON *.* TO 'root'@'172.16.0.0/255.240.0.0' WITH GRANT OPTION;
     CREATE USER root@'192.168.0.0/255.255.0.0' IDENTIFIED BY '${MYSQL_PWD}';
@@ -445,7 +417,7 @@ setUserPreference()
 
 
   printf "** Setting preference ${PREFERENCE_NAME} to value ${PREFERENCE_VALUE} in ${MY_DB_NAME} for user ${USER_NAME}\n"
-  local OUTPUT=$(mysql -h ${MY_DB_HOST} -u root $MY_DB_NAME  2>&1 <<EOF
+  local OUTPUT=$(mysql -h ${MY_DB_HOST} -u root $MY_DB_NAME  --skip-ssl 2>&1 <<EOF
     INSERT INTO user_properties (up_user, up_property, up_value)
     SELECT user_id, '$PREFERENCE_NAME', '$PREFERENCE_VALUE' 
     FROM user 
@@ -472,7 +444,7 @@ createDBandUsers()
   local MY_DB_USER=$3
   local MY_DB_PASS=$4
   printf "${GREEN}** Creating database ${MY_DB_NAME} and user ${MY_DB_USER}${RESET}\n"
-  local OUTPUT=$(mysql -h ${MY_DB_HOST} -u root 2>&1 <<-EOF
+  local OUTPUT=$(mysql -h ${MY_DB_HOST} -u root --skip-ssl 2>&1 <<-EOF
     CREATE DATABASE IF NOT EXISTS ${MY_DB_NAME} /*\!40100 DEFAULT CHARACTER SET utf8 */;
     CREATE USER IF NOT EXISTS ${MY_DB_USER}@'172.16.0.0/255.240.0.0' IDENTIFIED BY '${MY_DB_PASS}';
     CREATE USER IF NOT EXISTS ${MY_DB_USER}@'192.168.0.0/255.255.0.0' IDENTIFIED BY '${MY_DB_PASS}';

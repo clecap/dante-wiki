@@ -115,6 +115,7 @@ services:
     command: "prepare-database.sh  install-webserver-certificate.sh get-dante.sh get-parsifal.sh generate-mediawiki-private.sh  init.sh  chown.sh set-user-preferences.sh ensure-parsifal-lock.sh initial-xml-git.sh run-apache.sh"
 
 
+
 ## starts a container which has not been initialized but which does not require a copy to the development environment
 ## runs not off a volume but off the container itself
   webserver-raw-http:

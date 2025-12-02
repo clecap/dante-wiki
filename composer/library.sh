@@ -51,7 +51,7 @@ demoTime()
 # wait until webserver is servicing requests
 waitForWebserverServicing()
 {
-  local url="https://localhost:4443"
+  local url=${MW_SITE_SERVER}
   local timeout=240
   local interval=10
   
@@ -62,7 +62,7 @@ waitForWebserverServicing()
       printf "${GREEN}*** Webservice is serving requests"
       break
     else
-      printf "\nWaiting for the webservice to become ready..."
+      printf "\nWaiting for the webservice to become ready at $url"
     fi
     current_time=$(date +%s)
     elapsed_time=$(( current_time - start_time ))
@@ -121,7 +121,7 @@ openChrome()
 {
   if [ `uname` == "Darwin" ]; then 
     printf "\n*** openChrome: Attempting to start a local Chrome browser\n";
-    open -na "Google Chrome" --args --new-window https://localhost:4443/wiki-dir/
+    open -na "Google Chrome" --args --new-window ${MW_SITE_SERVER}
   fi
 }
 
@@ -230,11 +230,3 @@ getImageInfo()
   export IMAGE_CREATED_AT=$(docker images ${IMAGE} --format "{{.CreatedAt}}")
   export IMAGE_TAG==$(docker images ${IMAGE} --format "{{.Tag}}")
 }
-
-
-
-
-
-
-
-

@@ -30,8 +30,8 @@ jobs:
       - name: Build and push (amd64 + arm64)
         uses: docker/build-push-action@v5
         with:
-          context: .
-          push: true
+          context: images/dante-wiki/src              # docker context
+          push: true                                  # pushes it to dockerhub
           platforms: linux/amd64,linux/arm64
           tags: |
             clecap/dante-wiki:latest

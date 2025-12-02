@@ -9,7 +9,6 @@ fi
 source /home/dante/dantescript/common-defs.sh
 
 
-
 trap 'errorTrap' ERR
 
 #### TODO MUST ABORT COMPLETEL including upstream in case of error - also for some of the other dante scripts. and need an abotzt in lapentry-.sh
@@ -50,6 +49,10 @@ if [ -d "$MOUNT/$TARGET/.git" ]; then
     printf "DONE\n"
 ## todo we might need to run update again, as the last time we did do so, the dante extensions had not been installed into LocalSettings.php yet
 fi
+
+# The default operational mode after a fresh install is production mode
+cp $MOUNT/$TARGET/DanteSettings-production.php $MOUNT/$TARGET/DanteSettings-used.php
+
 
 
 ##  installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-DrawioEditor                   DrawioEditor REL1_39

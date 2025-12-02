@@ -84,8 +84,10 @@ else
 fi  
 
 
-sudo ssh-keyscan ${SSH_HOST} >> /tmp/known_hosts
-sudo mv /tmp/known_hosts /root/.ssh/known_hosts
+## echo "doing an ssh-keyscan for host ${SSH_HOST}"
+## sudo ssh-keyscan ${SSH_HOST} >> /tmp/known_hosts
+## sudo mv /tmp/known_hosts /root/.ssh/known_hosts
+
 
 exec 1>&1 2>&2
 

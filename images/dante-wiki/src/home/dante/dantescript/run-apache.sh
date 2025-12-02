@@ -95,7 +95,7 @@ sudo a2disconf serve-cgi-bin.conf
 
 
 printf "*** run-apache.sh: Starting fpm...\n"
-  sudo  stdbuf -o0 -e0  service php8.2-fpm start 
+  sudo  stdbuf -o0 -e0  service php8.4-fpm start 
   exec 1>&1 2>&2
 printf "DONE\n"
 
