@@ -50,7 +50,7 @@ if [ -d "$MOUNT/$TARGET/.git" ]; then
 ## todo we might need to run update again, as the last time we did do so, the dante extensions had not been installed into LocalSettings.php yet
 fi
 
-# The default operational mode after a fresh install is production mode
+# The default operational mode after a get-dante.sh always is production mode
 cp $MOUNT/$TARGET/DanteSettings-production.php $MOUNT/$TARGET/DanteSettings-used.php
 
 
