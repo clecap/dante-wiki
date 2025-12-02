@@ -145,10 +145,7 @@ upServices()
 
 
 
-# configure the local cloned git
-configGitLocal()
-{
-}
+
 
 
 
