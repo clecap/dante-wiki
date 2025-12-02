@@ -1,6 +1,7 @@
 {
   "recommendations": [
     "ms-azuretools.vscode-docker",
+    "ms-vscode-remote.remote-containers",  // need this to edit remote containers
     "formulahendry.code-runner",
     "exiasr.hadolint",                     // linter for Dockerfiles
     "github.vscode-github-actions"         // support working with github actions
