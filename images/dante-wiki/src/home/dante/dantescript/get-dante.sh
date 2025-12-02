@@ -100,6 +100,6 @@ sudo touch /home/dante/DONE-getDante
 
 trap - ERR
 
-printf "${GREEN}*** DONE get-dante.sh${RESET}"
+printf "${GREEN}*** DONE get-dante.sh${RESET}"git push origin ma
 
 
