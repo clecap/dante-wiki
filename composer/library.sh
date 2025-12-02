@@ -148,7 +148,7 @@ configGit()
 {
   git config --global user.name "Clemens H. Cap" 
   git config --global user.email "clemens.cap@uni-rostock.de"
-}}
+}
 
 
 
