@@ -2,6 +2,23 @@
 This is the README file for generating a development environment.
 
 
+# 
+
+## Requirements
+* Visual Studio Code on the development machine.
+* Extension ms-vscode-remote.remote-containers installed on visual studio code.
+
+```
+  git clone
+  composer/build-run-raw.sh
+``` 
+
+Command Palette: Dev Containers: Attach to Running Container...
+Attach to container dante-wiki
+
+
+# Partially old stuff
+
 ## Concepts
 
 ## Requirements on Target Machine

@@ -143,6 +143,17 @@ upServices()
 }
 
 
+# configure the git inside of the container so that we can use git from inside of the container
+configGit()
+{
+  git config --global user.name "Clemens H. Cap" 
+  git config --global user.email "clemens.cap@uni-rostock.de"
+}}
+
+
+
+
+
 build() 
 {
   startTimer
