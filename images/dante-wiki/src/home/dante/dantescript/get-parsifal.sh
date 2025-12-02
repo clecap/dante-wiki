@@ -9,7 +9,7 @@ source /home/dante/dantescript/common-defs.sh
 printf "\n*** get-parsifal.sh \n"
 
 set -e  # exit on error
-
+q
 if [ -d "$MOUNT/$TARGET/extensions/Parsifal/.git" ]; then
     printf "\n*** get-parsifal.sh: Git directory ${MOUNT}$TARGET/extensions/Parsifal/.git already exists ... will be doing a PULL \n"
     GDIR=${MOUNT}${TARGET}/extensions/Parsifal/.git
