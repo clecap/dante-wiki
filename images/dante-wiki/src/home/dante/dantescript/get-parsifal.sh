@@ -29,6 +29,7 @@ if [ -d "$MOUNT/$TARGET/extensions/Parsifal/.git" ]; then
     printf "DONE get-parsifal.sh_ cloning branch $BRANCH of Parsifal\n"
 fi
 
+git submodule add  https://github.com/clecap/Parsifal  ${MOUNT}/$TARGET/extensions/Parsifal
 
 set +e  # unset exit on error
 
