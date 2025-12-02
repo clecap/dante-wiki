@@ -29,7 +29,7 @@ if [ -d "$MOUNT/$TARGET/extensions/Parsifal/.git" ]; then
     printf "DONE get-parsifal.sh_ cloning branch $BRANCH of Parsifal\n"
 fi
 
-printf "\n*** Turning Parisfal into a git submodule..."
+printf "\n*** Turning Parsifal into a git submodule..."
   git submodule add  https://github.com/clecap/Parsifal  ${MOUNT}/$TARGET/extensions/Parsifal
 printf "DONE\n"
 
