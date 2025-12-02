@@ -11,6 +11,9 @@ source /home/dante/dantescript/common-defs.sh
 
 trap 'errorTrap' ERR
 
+
+configGitContainer
+
 #### TODO MUST ABORT COMPLETEL including upstream in case of error - also for some of the other dante scripts. and need an abotzt in lapentry-.sh
  
 if [ -d "$MOUNT/$TARGET/.git" ]; then

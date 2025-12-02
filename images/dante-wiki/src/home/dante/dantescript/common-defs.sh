@@ -530,6 +530,20 @@ setApacheAuthentication()
 }
 
 
+
+# configure the git inside of the container so that we can use git from inside of the container
+configGitContainer()
+{
+  printf "Configuring git inside of the container..."
+    git config --global user.name "${GIT_USER_NAME}" 
+    git config --global user.email "${GIT_USER_MAIL}"
+  printf "${GREEN}DONE"
+}
+
+
+
+
+
 # generate an ssh login (private,public) key pair for user USER to login in host HOST
 # install the private key at  /root/.ssh/id_rsa of the machine on which this is running
 # mail the public key to the user SMTP_TO who then must install this at HOST
