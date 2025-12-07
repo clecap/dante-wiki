@@ -5,6 +5,8 @@
   "dockerComposeFile": [ "../composer/docker-compose-development.yml" ],
   "service": "dante-wiki",                                            // the container we attach to
   "runServices": ["database", "webserver-raw-https", "phpmyadmin"],   // the other services we want to run
+  "workspaceFolder": "../",
+  "remoteUser": "root",                 // user under which we run dante 
   "features": {},
   "customizations": {
     "vscode": {
