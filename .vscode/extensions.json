@@ -4,6 +4,18 @@
     "ms-vscode-remote.remote-containers",  // need this to edit remote containers
     "formulahendry.code-runner",
     "exiasr.hadolint",                     // linter for Dockerfiles
-    "github.vscode-github-actions"         // support working with github actions
+    "github.vscode-github-actions",         // support working with github actions
+    "dbaeumer.vscode-eslint",                    // js linting
+    "bmewburn.vscode-intelephense-client",       // php language server
+    "xdebug.php-debug",
+    "ms-python.python",
+    "ms-python.vscode-pylance",                   // python language server
+    "GitHub.vscode-github-actions",               // supports github actions
+    "zainchen.json",                              // supports json
+    "shd101wyy.markdown-preview-enhanced",         // markdown previewer
+    "GitHub.copilot",
+    "GitHub.copilot-chat",
+    "genieai.chatgpt-vscode",
+    "timkmecl.chatgpt-vscode"
   ]
 }
