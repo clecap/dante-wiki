@@ -1,8 +1,10 @@
 {
-  "name": "Dante Development Environment",
-  "build": {
-    "dockerfile": "Dockerfile"
-  },
+  "$schema": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devcontainer.schema.json",  // needed to silence editor errors in the json editor
+  "name": "dante-wiki-dev",                // identifies name as used in VS code
+  "image": "dante-wiki",                   // identifies docker image
+  "dockerComposeFile": [ "../composer/docker-compose-development.yml" ],
+  "service": "dante-wiki",                                            // the container we attach to
+  "runServices": ["database", "webserver-raw-https", "phpmyadmin"],   // the other services we want to run
   "features": {},
   "customizations": {
     "vscode": {
