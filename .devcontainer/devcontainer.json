@@ -1,0 +1,22 @@
+{
+  "name": "Dante Development Environment",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "features": {},
+  "customizations": {
+    "vscode": {
+      "extensions": [
+      "exiasr.hadolint",
+        "ms-vscode.vscode-typescript-next",
+        "dbaeumer.vscode-eslint",
+        "bmewburn.vscode-intelephense-client",
+        "xdebug.php-debug",
+        "ms-python.python",
+        "ms-python.vscode-pylance"
+      ]
+    }
+  },
+  "remoteUser": "vscode",
+  "postCreateCommand": "bash .devcontainer/post-create.sh || true"
+}

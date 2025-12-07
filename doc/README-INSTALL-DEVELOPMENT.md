@@ -17,6 +17,11 @@ Command Palette: Dev Containers: Attach to Running Container...
 Attach to container dante-wiki
 
 
+## Dev Containers
+
+  Command Palette → “Dev Containers: Reopen in Container”
+
+
 # Partially old stuff
 
 ## Concepts
