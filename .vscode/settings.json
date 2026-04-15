@@ -3,7 +3,7 @@
   "editor.inlineSuggest.enabled": false,         // Disable inline ghost text suggestions
   "editor.parameterHints.enabled": false,        // Disable the parameter hints popup
   "editor.lightbulb.enabled": "off",             // Disable the code-action lightbulb hover
-  "editor.hover.enabled": false,                 // Disable hover popups
+  "editor.hover.enabled": "off",                 // Disable hover popups
   "editor.suggest.showDetails": false,           // Disable big suggestion detail panel
   "editor.suggest.showStatusBar": false,         // Disable suggestion documentation preview
   "editor.suggest.showWords": false,
