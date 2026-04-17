@@ -1,21 +1,26 @@
 
-This is the README file for generating a development environment.
+README file for ***generating a development environment***
 
 
-# 
-
-## Requirements
+### Requirements
 * Visual Studio Code on the development machine.
 * Extension ms-vscode-remote.remote-containers installed on visual studio code.
+
+### Workflow
+
+1. Start a working instance as docker container on your development machine.
 
 ```
   git clone
   composer/build-run-raw.sh
 ``` 
 
+2. Attach Visual Studio Code to this container.
+
+```
 Command Palette: Dev Containers: Attach to Running Container...
 Attach to container dante-wiki
-
+```
 
 ## Dev Containers
 
@@ -61,9 +66,6 @@ Attach to container dante-wiki
 
 # OLD STUFF
 
-## Build Docker Images 
-
-### Build on DockerHub
 
 
 
@@ -129,7 +131,7 @@ Test: wget --no-check-certificate
 * We must delete the Main Page before the import, as the Main Page otherwise will be populated by a default text and not overwritten as intended.
 * We must import the MediaWiki and Template portions before the pages or else we get errors due to missing Parsifal templates or Templates.
 
-## Debug
+# Docker
 
 #### Look into docker container
 
