@@ -569,7 +569,9 @@ RUN  \
 ###### HACK: see README-DynamicPageList3-Clemens.md in TOPD_DIR/own for more details.
 ##  docker cp $TOP_DIR/own/DynamicPageList3/ ${LAP_CONTAINER}:/${MOUNT}/${VOLUME_PATH}/extensions
 #
-   composer update
+#  Below we ask composer to ignore two CVE audits which are only used in the unit testing framework fo Mediawiki 1.39
+   composer config --json audit.ignore '["PKSA-z3gr-8qht-p93v", "GHSA-vvj3-c3rp-c85p"]'  && \
+   composer update 
 
 
 ## 

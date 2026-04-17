@@ -10,6 +10,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: sbom-generation
+  cancel-in-progress: false
+
 jobs:
   generate-sbom:
     permissions:
@@ -47,6 +51,7 @@ jobs:
           git add .github/results/sbom-dante-wiki-docker.json
           git add .github/results/sbom-dante-wiki-docker-repo.json
           git commit -m "Add auto-generated SBOM files" || echo "Nothing to commit"
-          git push origin ${{ github.ref }}
+          git pull --rebase origin ${{ github.ref_name }}
+          git push origin ${{ github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
