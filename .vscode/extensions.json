@@ -16,6 +16,7 @@
     "GitHub.copilot",
     "GitHub.copilot-chat",
     "genieai.chatgpt-vscode",
-    "timkmecl.chatgpt-vscode"
+    "timkmecl.chatgpt-vscode",
+     "anthropic.claude-code"
   ]
 }
