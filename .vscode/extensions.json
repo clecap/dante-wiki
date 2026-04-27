@@ -5,6 +5,7 @@
     "formulahendry.code-runner",
     "exiasr.hadolint",                     // linter for Dockerfiles
     "github.vscode-github-actions",         // support working with github actions
+    "ms-vscode-remote.remote-ssh",               // access remote machines
     "dbaeumer.vscode-eslint",                    // js linting
     "bmewburn.vscode-intelephense-client",       // php language server
     "xdebug.php-debug",
@@ -13,8 +14,6 @@
     "GitHub.vscode-github-actions",               // supports github actions
     "zainchen.json",                              // supports json
     "shd101wyy.markdown-preview-enhanced",         // markdown previewer
-    "GitHub.copilot",
-    "GitHub.copilot-chat",
     "genieai.chatgpt-vscode",
     "timkmecl.chatgpt-vscode",
      "anthropic.claude-code"

@@ -23,8 +23,5 @@ build
 
 upServices $TOP_DIR/composer/docker-compose-development.yaml database webserver-raw-https phpmyadmin
 
-
-
-
 waitForWebserverServicing
 openChrome

@@ -10,7 +10,6 @@ export ERROR="\e[1;31m";
 export GREEN="\e[1;92m"
 
 
-
 abort() 
 {
   printf "%b" "\n\n$ERROR *** *** *** ABORTED *** *** *** $RESET"; exit 1 
@@ -238,3 +237,6 @@ getImageInfo()
   export IMAGE_CREATED_AT=$(docker images ${IMAGE} --format "{{.CreatedAt}}")
   export IMAGE_TAG==$(docker images ${IMAGE} --format "{{.Tag}}")
 }
+
+
+
