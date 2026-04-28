@@ -10,9 +10,18 @@ export ERROR="\e[1;31m";
 export GREEN="\e[1;92m"
 
 
-abort() 
+abort()
 {
-  printf "%b" "\n\n$ERROR *** *** *** ABORTED *** *** *** $RESET"; exit 1 
+  printf "%b" "\n\n$ERROR *** *** *** ABORTED *** *** *** $RESET"; exit 1
+}
+
+
+askConfirmation()
+{
+  local message="${1:-Are you sure you want to proceed?}"
+  printf "%b" "\n${ERROR}${message}${RESET} [y/N] "
+  read -r reply
+  [[ "$reply" =~ ^[Yy]$ ]] || abort
 }
 
 

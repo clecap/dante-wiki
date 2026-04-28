@@ -16,6 +16,7 @@ source ${TOP_DIR}/private/configuration.sh
 getImageInfo ${DANTE_IMAGE}
 
 # shutdown all running services of this kind
+askConfirmation
 downAllServices $TOP_DIR/composer/docker-compose-development.yaml
 
 # TODO: would be nice if we could include the build process into the YAML file as well.
