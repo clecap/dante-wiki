@@ -143,13 +143,6 @@ upServices()
 
 
 
-
-
-
-
-
-
-
 build() 
 {
   startTimer
@@ -236,6 +229,12 @@ getImageInfo()
   export IMAGE_REPOSITORY=$(docker images ${IMAGE} --format "{{.Repository}}")
   export IMAGE_CREATED_AT=$(docker images ${IMAGE} --format "{{.CreatedAt}}")
   export IMAGE_TAG==$(docker images ${IMAGE} --format "{{.Tag}}")
+  printf "IMAGE $IMAGE"
+  printf "IMAGE_ID $IMAGE_ID"
+  printf "IMAGE_DIGEST = $IMAGE_DIGEST"
+  printf "IMAGE_REPOSITORY = $IMAGE_REPOSITORY"
+  printf "IMAGE_CREATED_AT = $IMAGE_CREATED_AT"
+  printf "IMAGE_TAG = $IMAGE_TAG"
 }
 
 

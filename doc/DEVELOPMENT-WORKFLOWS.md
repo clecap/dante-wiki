@@ -1,13 +1,7 @@
 # Development Workflows
 
-
-
-
 1. Do Dockerfile installation portions
 2. Do dynamic installation portions
-
-
-
 
 
 ## Aspects:

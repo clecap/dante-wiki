@@ -4,15 +4,18 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 TOP_DIR=${DIR}/.. 
 
+# read in the library file for our shell
 source $DIR/library.sh
 
 set -e
 trap 'abort' ERR
 
+# read in the active configuration
 source ${TOP_DIR}/private/configuration.sh
 
 getImageInfo ${DANTE_IMAGE}
 
+# shutdown all running services of this kind
 downAllServices $TOP_DIR/composer/docker-compose-development.yaml
 
 # TODO: would be nice if we could include the build process into the YAML file as well.

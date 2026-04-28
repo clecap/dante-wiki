@@ -73,7 +73,7 @@ Open source software components bundled with Dante-Wiki comprise:
 * LaTeX (TexLive variant)
 * Drawio
 * PyMuPDF
-* MariaDB (used in separate docker container)
+* MariaDB (in separate docker container)
 
 
 
