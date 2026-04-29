@@ -15,11 +15,10 @@ source ${TOP_DIR}/private/configuration.sh
 
 getImageInfo ${DANTE_IMAGE}
 
-# shutdown all running services of this kind
+# shutdown all running services of this kind after displaying a confirmation (to ensure git has been pushed)
 askConfirmation
 downAllServices $TOP_DIR/composer/docker-compose-development.yaml
 
-# TODO: would be nice if we could include the build process into the YAML file as well.
 build
 
 # TODO: research if we can also do this with -d for detached mode and make better use of the health check dependency in the yaml file
