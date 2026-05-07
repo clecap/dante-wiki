@@ -13,7 +13,7 @@ trap 'abort' ERR
 # read in the active configuration
 source ${TOP_DIR}/private/configuration.sh
 
-getImageInfo ${DANTE_IMAGE}
+# getImageInfo ${DANTE_IMAGE}
 
 # shutdown all running services of this kind after displaying a confirmation (to ensure git has been pushed)
 askConfirmation
