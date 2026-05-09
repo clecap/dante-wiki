@@ -18,7 +18,12 @@ abort()
 
 askConfirmation()
 {
-  local message="${1:-Are you sure you want to proceed?}"
+  local message="${1:-Did you save open GIT files??}"
+  printf "%b" "\n${ERROR}${message}${RESET} [y/N] "
+  read -r reply
+  [[ "$reply" =~ ^[Yy]$ ]] || abort
+
+  local message="${1:-Did you save edited system files??}"
   printf "%b" "\n${ERROR}${message}${RESET} [y/N] "
   read -r reply
   [[ "$reply" =~ ^[Yy]$ ]] || abort
