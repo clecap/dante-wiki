@@ -19,6 +19,8 @@ trap 'abort' ERR
 askConfirmation
 downAllServices $TOP_DIR/composer/docker-compose-development.yaml
 
+DH_PULL_SPEC="clecap/dante-wiki@sha256:c48e8f5fb8d56b8b4870904cd78600f45130aaee7f30c58944185fffb517f158"
+
 pullBySpec
 
 mkdir -p private && chmod 755 private

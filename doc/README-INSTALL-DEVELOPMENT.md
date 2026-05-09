@@ -42,6 +42,16 @@ Attach to container dante-wiki
 /bin/bash -c "$(curl -fsSL https://github.com/clecap/dante-wiki/raw/master/bin/install.sh)"
 ```
 
+```sh
+/bin/bash -c "$(curl -fsSL https://github.com/clecap/dante-wiki/raw/master/bin/install.sh)"
+```
+
+
+## Quick Installation
+
+
+
+
 
 
 
