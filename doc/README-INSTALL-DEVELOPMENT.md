@@ -27,6 +27,16 @@ Attach to container dante-wiki
   Command Palette → “Dev Containers: Reopen in Container”
 
 
+
+# On Remote Machines
+
+```sh
+/bin/bash -c "$(curl -fsSL https://github.com/clecap/dante-wiki/raw/master/bin/install.sh)"
+```
+
+
+
+
 # Partially old stuff
 
 ## Concepts
