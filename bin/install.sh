@@ -27,7 +27,7 @@ DH_REPO="dante-wiki"
 DH_TAG="latest"
 
 
-VERSION=1.54                   # Version number, just for identification purposes
+VERSION=1.55                   # Version number, just for identification purposes
 
 ##
 ## CALCULATED PARAMETERS
@@ -172,13 +172,11 @@ doInstallWithGIT()
 printBanner
 
 
-
-
 if command -v git &>/dev/null; then
   echo "*** install.sh: git is installed ($(git --version))"
   doInstallWithGIT
 #  ./composer/build-run-raw.sh
-  ./composer/pull-run-raw.sh
+  {$INSTALL_DIR}/composer/pull-run-raw.sh
 
 else
   echo "*** install.sh: git is not installed. Please install git and re-run this script."
