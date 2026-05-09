@@ -2,10 +2,10 @@
 
 # install shell script which downloads ${REPO} and uses the shellscripts from there to set up the system
 
-MAIN_DIR="dante"    # Main directory on the machine into which we install, relative to the current directory
-OWNER="clecap"      # Owner name of the github repository for the installation
-REPO="dante-wiki"   # Github repository from which we will install
-BRANCH="master"     # Branch which we will install
+MAIN_DIR="dante-operations"    # Main directory on the machine into which we install, relative to the current directory
+OWNER="clecap"                 # Owner name of the github repository for the installation
+REPO="dante-wiki"              # Github repository from which we will install
+BRANCH="master"                # Branch which we will install
 
 VERSION=1.52        # Version number, just for identification purposes
 
