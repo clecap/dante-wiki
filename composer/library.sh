@@ -166,10 +166,20 @@ build()
 }
 
 
-pull()
+
+pullByTag()
 {
   printf "\n$GREEN---Pulling docker image from {$DH_OWNER}/{$DH_REPO}:${DH_TAG}...$RESET\n" ; 
   docker pull {$DH_OWNER}/{$DH_REPO}:${DH_TAG}
+    ok "$GREEN---DONE$RESET\n"
+}
+
+
+
+pullBySpec()
+{
+  printf "\n$GREEN---Pulling docker image from {$DH_PULL_SPEC}...$RESET\n" ; 
+  docker pull {$DH_PULL_SPEC}
     ok "$GREEN---DONE$RESET\n"
 }
 
