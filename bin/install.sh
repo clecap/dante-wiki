@@ -9,7 +9,7 @@
 # Scenario 2: We pull the docker image from docker hub
 
 
-##
+##    
 ## CONFIGURABLE PARAMETERS
 ##
 
@@ -30,7 +30,7 @@ DH_TAG="latest"
 DH_PULL_SPEC="clecap@sha256:c48e8f5fb8d56b8b4870904cd78600f45130aaee7f30c58944185fffb517f158"
 
 
-VERSION=1.57                   # Version number, just for identification purposes
+VERSION=1.58                   # Version number, just for identification purposes
 
 ##
 ## CALCULATED PARAMETERS
