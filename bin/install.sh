@@ -137,7 +137,7 @@ doInstallWithWGET()
 
 doInstallWithGIT()
 {
-  printf "*** install.sh: Will clone branch $BRANCH from https://github.com/$OWNER/$REPO.git to ${INSTALL_DIR}"
+  printf "*** install.sh: Will clone branch $BRANCH from https://github.com/$OWNER/$REPO.git to ${INSTALL_DIR}\n"
   read -p "Proceed with cloning? [y/N] " -n 1 -r
   echo
   [[ $REPLY =~ ^[Yy]$ ]] || { echo "Aborted."; exit 1; }
@@ -162,7 +162,9 @@ printBanner
 if command -v git &>/dev/null; then
   echo "*** install.sh: git is installed ($(git --version))"
   doInstallWithGIT
-  ./composer/build-run-raw.sh
+#  ./composer/build-run-raw.sh
+  ./composer/pull-run-raw.sh
+
 else
   echo "*** install.sh: git is not installed. Please install git and re-run this script."
   exit 1
