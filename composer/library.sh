@@ -156,7 +156,7 @@ upServices()
 }
 
 
-
+# build the docker image
 build() 
 {
   startTimer
@@ -165,6 +165,13 @@ build()
   ok "$GREEN---DONE$RESET\n"
 }
 
+
+pull()
+{
+  printf "\n$GREEN---Pulling docker image from {$DH_OWNER}/{$DH_REPO}:${DH_TAG}...$RESET\n" ; 
+  docker pull {$DH_OWNER}/{$DH_REPO}:${DH_TAG}
+    ok "$GREEN---DONE$RESET\n"
+}
 
 
 cook()

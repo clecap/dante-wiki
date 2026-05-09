@@ -1,18 +1,33 @@
 #!/bin/bash
 
-# install shell script which downloads ${REPO} and uses the shellscripts from there to set up the system
+# Install shell script 
+# (1) cloes ${GIT_REPO} 
+# (2) uses the shellscripts from there to set up the system, which could comprise two scenarios
+#
+# Scenario 1: We build the docker image locally
+#
+# Scenario 2: We pull the docker image from docker hub
 
 
 ##
 ## CONFIGURABLE PARAMETERS
 ##
 
-MAIN_DIR="dante-operations"    # Main directory on the machine into which we install, relative to the current working directory
-OWNER="clecap"                 # Owner name of the github repository for the installation
-REPO="dante-wiki"              # Github repository from which we will install
-BRANCH="master"                # Branch which we will install
+## LOCAL configuration
+MAIN_DIR="dante-operations"    # Main directory on the machine INTO which we install, relative to the current working directory
 
-VERSION=1.53                   # Version number, just for identification purposes
+## GITHUB configuration
+GIT_OWNER="clecap"             # Owner name of the github repository for the installation
+GIT_REPO="dante-wiki"          # Github repository from which we will install
+GIT_BRANCH="master"            # Branch which we will install
+
+## DOCKERHUB configuration
+DH_OWNER="clecap"
+DH_REPO="dante-wiki"
+DH_TAG="latest"
+
+
+VERSION=1.54                   # Version number, just for identification purposes
 
 ##
 ## CALCULATED PARAMETERS
@@ -54,16 +69,16 @@ checkOldInstallation()  ###### TODO !!!
     if [[ $REPLY =~ ^[kK]$ || "$REPLY" == "" ]]; then
       echo " *** install.sh: Keeping configuation and deleting old installation at ${INSTALL_DIR} "
       ls -l
-      rm -Rf ${INSTALL_DIR}/${BRANCH}.zip
-      rm -Rf ${INSTALL_DIR}/${BRANCH}.zip.*
-      rm -Rf ${INSTALL_DIR}/${REPO}-${BRANCH}
+      rm -Rf ${INSTALL_DIR}/${GIT_BRANCH}.zip
+      rm -Rf ${INSTALL_DIR}/${GIT_BRANCH}.zip.*
+      rm -Rf ${INSTALL_DIR}/${GIT_REPO}-${GIT_BRANCH}
     fi
     if [[ $REPLY =~ ^[dD]$ ]]; then
       echo " *** install.sh: Deleting configuration and installation at ${INSTALL_DIR} "
       ls -l
-      rm -Rf ${INSTALL_DIR}/${BRANCH}.zip
-      rm -Rf ${INSTALL_DIR}/${BRANCH}.zip.*
-      rm -Rf ${INSTALL_DIR}/${REPO}-${BRANCH}
+      rm -Rf ${INSTALL_DIR}/${GIT_BRANCH}.zip
+      rm -Rf ${INSTALL_DIR}/${GIT_BRANCH}.zip.*
+      rm -Rf ${INSTALL_DIR}/${GIT_REPO}-${GIT_BRANCH}
       rm -Rf ${INSTALL_DIR}/generated-conf-file.sh
     fi
     if [[ $REPLY =~ ^[xX]$ ]]; then
@@ -84,14 +99,14 @@ checkOldInstallation()  ###### TODO !!!
 doInstallWithWGET()
 {
   echo ""
-  echo "*** install.sh: I am in directory ${PWD} and want to start downloading ${BRANCH}.zip ..."
-  read -p "Proceed with downloading ${BRANCH}.zip ? [y/N] " -n 1 -r
+  echo "*** install.sh: I am in directory ${PWD} and want to start downloading ${GIT_BRANCH}.zip ..."
+  read -p "Proceed with downloading ${GIT_BRANCH}.zip ? [y/N] " -n 1 -r
   echo
   [[ $REPLY =~ ^[Yy]$ ]] || { echo "Aborted."; exit 1; }
-  wget --directory-prefix=${MAIN_DIR} https://github.com/{$OWNER}/${REPO}/archive/refs/heads/${BRANCH}.zip
-  unzip -d ${MAIN_DIR} ${MAIN_DIR}/${BRANCH}.zip
+  wget --directory-prefix=${MAIN_DIR} https://github.com/{$GIT_OWNER}/${GIT_REPO}/archive/refs/heads/${GIT_BRANCH}.zip
+  unzip -d ${MAIN_DIR} ${MAIN_DIR}/${GIT_BRANCH}.zip
   echo ""
-  echo "DONE downloading ${BRANCH}.zip "
+  echo "DONE downloading ${GIT_BRANCH}.zip "
 
   # ensure presence of a configuration file
   if [ -f ${MAIN_DIR}/generated-conf-file.sh ]; then
@@ -106,21 +121,21 @@ doInstallWithWGET()
     fi
     if [[ $REPLY =~ ^[Rr]$ ]]; then
       echo "*** install: Recreating a new configuration file at ${MAIN_DIR}/generated-conf-file.sh"
-      source ${MAIN_DIR}/${REPO}-${BRANCH}/bin/make-conf.sh
+      source ${MAIN_DIR}/${GIT_REPO}-${GIT_BRANCH}/bin/make-conf.sh
     fi
   else
     # did not find a configuration file: generate one
     echo "*** install.sh: Did not find a configuration file at ${MAIN_DIR}/generated-conf-file.sh and is creating one"
-    source ${MAIN_DIR}/${REPO}-${BRANCH}/bin/make-conf.sh
+    source ${MAIN_DIR}/${GIT_REPO}-${GIT_BRANCH}/bin/make-conf.sh
   fi
 
   printf "*** install.sh: Generating throw-away secrets for the new installation..."
-  mkdir ${MAIN_DIR}/${REPO}-${BRANCH}/private
-  openssl rand -base64 16 > ${MAIN_DIR}/${REPO}-${BRANCH}/private/mysql-root-password.txt
-  openssl rand -base64 16 > ${MAIN_DIR}/${REPO}-${BRANCH}/private/mysql-backup-password.txt
-  chmod 700 ${MAIN_DIR}/${REPO}-${BRANCH}/private
-  chmod 700 ${MAIN_DIR}/${REPO}-${BRANCH}/private/mysql-root-password.txt
-  chmod 700 ${MAIN_DIR}/${REPO}-${BRANCH}/private/mysql-backup-password.txt
+  mkdir ${MAIN_DIR}/${GIT_REPO}-${GIT_BRANCH}/private
+  openssl rand -base64 16 > ${MAIN_DIR}/${GIT_REPO}-${GIT_BRANCH}/private/mysql-root-password.txt
+  openssl rand -base64 16 > ${MAIN_DIR}/${GIT_REPO}-${GIT_BRANCH}/private/mysql-backup-password.txt
+  chmod 700 ${MAIN_DIR}/${GIT_REPO}-${GIT_BRANCH}/private
+  chmod 700 ${MAIN_DIR}/${GIT_REPO}-${GIT_BRANCH}/private/mysql-root-password.txt
+  chmod 700 ${MAIN_DIR}/${GIT_REPO}-${GIT_BRANCH}/private/mysql-backup-password.txt
   printf "DONE\n\n"
 
   printf "*** install.sh: Preparing local directory for certificates..."
@@ -131,17 +146,17 @@ doInstallWithWGET()
   #### THIS NOT YEt !!!!!
   # now kick-off installation routine
   # printf "*** install.sh: Now starting installation routine install-dante.sh..."
-  # source ${MAIN_DIR}/${REPO}-${BRANCH}/install-dante.sh
+  # source ${MAIN_DIR}/${GIT_REPO}-${GIT_BRANCH}/install-dante.sh
 }
 
 
 doInstallWithGIT()
 {
-  printf "*** install.sh: Will clone branch $BRANCH from https://github.com/$OWNER/$REPO.git to ${INSTALL_DIR}\n"
+  printf "*** install.sh: Will clone branch $GIT_BRANCH from https://github.com/$GIT_OWNER/$GIT_REPO.git to ${INSTALL_DIR}\n"
   read -p "Proceed with cloning? [y/N] " -n 1 -r
   echo
   [[ $REPLY =~ ^[Yy]$ ]] || { echo "Aborted."; exit 1; }
-  git clone --depth 1 --branch $BRANCH https://github.com/$OWNER/$REPO.git
+  git clone --depth 1 --branch $GIT_BRANCH https://github.com/$GIT_OWNER/$GIT_REPO.git
 }
 
 
