@@ -19,6 +19,13 @@ source ${TOP_DIR}/private/configuration.sh
 askConfirmation
 downAllServices $TOP_DIR/composer/docker-compose-development.yaml
 
+pullBySpec
+
+
+export CONFIG_ENCRYPTED_URL="https://iuk.one/configuration-iuk-stage.sh.enc"
+read -s -p "Password: " CONFIG_DECRYPTION_KEY && export CONFIG_DECRYPTION_KEY
+
+docker compose -f composer/docker-compose-development.yaml run --rm get-configuration
 
 
 # TODO: research if we can also do this with -d for detached mode and make better use of the health check dependency in the yaml file

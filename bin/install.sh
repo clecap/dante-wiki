@@ -44,7 +44,8 @@ INSTALL_DIR="${PWD}/${MAIN_DIR}"
 ##
 ##
 
-printBanner() 
+
+printBanner()
 {
   printf "\n"
   printf "****************************\n"
