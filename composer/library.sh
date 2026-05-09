@@ -178,8 +178,8 @@ pullByTag()
 
 pullBySpec()
 {
-  printf "\n$GREEN---Pulling docker image from {$DH_PULL_SPEC}...$RESET\n" ; 
-  docker pull {$DH_PULL_SPEC}
+  printf "\n$GREEN---Pulling docker image from ${DH_PULL_SPEC}...$RESET\n" ;
+  docker pull ${DH_PULL_SPEC}
     ok "$GREEN---DONE$RESET\n"
 }
 
