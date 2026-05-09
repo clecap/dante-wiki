@@ -2,7 +2,9 @@
 README file for ***generating a development environment***
 
 
-### Requirements
+# Requirements
+
+### Requirements for Development
 * Visual Studio Code on the development machine.
 * Extension ms-vscode-remote.remote-containers installed on visual studio code. 
 
@@ -57,9 +59,6 @@ Attach to container dante-wiki
 
 # Partially old stuff
 
-## Concepts
-
-## Requirements on Target Machine
 
 ### 1. Install Docker on Target Machine
 * Follow the instructions at https://docs.docker.com/engine/install/debian/
@@ -90,16 +89,6 @@ Attach to container dante-wiki
 ## Docker Image Build on Dockerhub
 
 
-
-
-# OLD STUFF
-
-
-
-
-## Configure
-1. Prepare file ```conf/customize-PRIVATE.sh``` following ```customize-SAMPLE.sh```
-2. Prepare file ```conf/mediawiki-PRIVATE.php``` following ```mediawiki-SAMPLE.php```
 
 
 ## Build Volume Template

@@ -216,14 +216,13 @@ services:
 
   get-configuration:
     image: alpine/openssl
-    entrypoint: sh
-    command: >
-      -c "wget -O /tmp/config.enc $$CONFIG_ENCRYPTED_URL &&
-          openssl enc -d -aes-256-cbc -pbkdf2
-            -pass env:CONFIG_DECRYPTION_KEY
-            -in /tmp/config.enc
-            -out /out/configuration.sh &&
-          chmod 0400 /out/configuration.sh"
+    entrypoint:
+      - sh
+      - -c
+      - |
+        wget -O /tmp/config.enc "$$CONFIG_ENCRYPTED_URL" &&
+        openssl enc -d -aes-256-cbc -pbkdf2 -pass env:CONFIG_DECRYPTION_KEY -in /tmp/config.enc -out /out/configuration.sh &&
+        chmod 0400 /out/configuration.sh
     environment:
       - CONFIG_ENCRYPTED_URL
       - CONFIG_DECRYPTION_KEY
