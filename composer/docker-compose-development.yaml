@@ -1,8 +1,12 @@
 #
-#  TODO: prepare connection to git for push upstream stuff !!!
-#  TODO: use fresh and empty database volume from scratch !!
-#  TODO: need to have local .git and git submodules for the correct treatment of git push upstream functionality
 #
+# docker compose fie for DanteWiki
+#
+
+
+
+# CURRENTLY in USE are:    database webserver-raw-https phpmyadmin
+
 
 services:
 
@@ -18,6 +22,15 @@ services:
      - configuration
     environment:
       MARIADB_ROOT_PASSWORD: initialPassword
+
+
+
+
+
+
+
+
+
 
 
 ## a database running on backing store which is a named volume, separate from the container
@@ -214,22 +227,6 @@ services:
 # TODO: waiting for mysql: maybe we can put this into a health check ?!?!? in a better way than thus far ????
 
 
-  get-configuration:
-    image: alpine/openssl
-    entrypoint:
-      - sh
-      - -c
-      - |
-        wget -O /tmp/config.enc "$$CONFIG_ENCRYPTED_URL" &&
-        openssl enc -d -aes-256-cbc -pbkdf2 -pass env:CONFIG_DECRYPTION_KEY -in /tmp/config.enc -out /out/configuration.sh &&
-        chmod 0644 /out/configuration.sh
-    environment:
-      - CONFIG_ENCRYPTED_URL
-      - CONFIG_DECRYPTION_KEY
-    volumes:
-      - ../private:/out
-    profiles:
-      - tools
 
 
   phpmyadmin:

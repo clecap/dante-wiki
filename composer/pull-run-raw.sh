@@ -23,13 +23,14 @@ DH_PULL_SPEC="clecap/dante-wiki@sha256:c48e8f5fb8d56b8b4870904cd78600f45130aaee7
 
 pullBySpec
 
-mkdir -p private && chmod 755 private
 
+mkdir -p private && chmod 755 private
 
 export CONFIG_ENCRYPTED_URL="https://iuk.one/configuration-iuk-stage.sh.enc"
 read -s -p "Password: " CONFIG_DECRYPTION_KEY && export CONFIG_DECRYPTION_KEY
 
-docker compose -f "$TOP_DIR/composer/docker-compose-development.yaml" run --rm get-configuration
+
+docker compose -f "$TOP_DIR/composer/docker-compose-configure.yaml" run --rm get-configuration
 
 
 # read in the active configuration
