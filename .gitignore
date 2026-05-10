@@ -6,6 +6,9 @@
 deprecated/
 *.zip
 
+
+.claude/
+
 private/
 
 vendor/
