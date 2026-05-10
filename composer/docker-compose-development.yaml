@@ -67,7 +67,7 @@ services:
 
 
 
- get-configuration:
+  get-configuration:
     image: alpine/openssl
     entrypoint:
       - sh
