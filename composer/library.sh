@@ -41,15 +41,15 @@ startTimer() {
 ok() {
   local end_time=$(date +%s)
   local elapsed_time=$((end_time - TIMER_START))
-  printf $1
+  printf "$GREEN $1\n "
   printf "Time spent: ${elapsed_time} seconds $RESET\n"
 }
 
 error() {
   local end_time=$(date +%s%N)
   local elapsed_time=$((end_time - TIMER_START))
-  printf $1
-  print "Time spent: ${elapsed_time} seconds"
+  printf "$ERROR $1\n"
+  print "Time spent: ${elapsed_time} seconds $RESET"
 }
 
 
@@ -152,6 +152,7 @@ upServices()
 {
   local compose_file=$1
   shift
+  printf "DOING: docker compose -f \"$compose_file\" up -d \"$@\" "
   docker compose -f "$compose_file" up -d "$@"
 }
 
