@@ -2,15 +2,11 @@ name: "CodeQL (mine)"
 
 on:
   push:
-    branches: [ "main" ]
     paths:
-      - 'images/**'          # Adjust these paths to your specific directories
-      - 'lib/**'
+      - 'images/**'         
   pull_request:
-    branches: [ "main" ]
     paths:
-      - 'src/**'
-      - 'lib/**'
+      - 'images/**'
   schedule:
     - cron: '0 0 * * *'
 
@@ -29,7 +25,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'javascript', 'typescript', 'python' ] # List your languages here
+        language: [ 'javascript-typescript', 'python' ]
 
     steps:
     - name: Harden Runner
