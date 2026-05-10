@@ -152,7 +152,7 @@ upServices()
 {
   local compose_file=$1
   shift
-  printf "DOING: docker compose -f \"$compose_file\" up -d \"$@\" "
+  printf "DOING: docker compose -f \"$compose_file\" up -d \"$@\"  \n\n"
   docker compose -f "$compose_file" up -d "$@"
 }
 

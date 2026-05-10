@@ -35,11 +35,8 @@ docker compose -f "$TOP_DIR/composer/docker-compose-configure.yaml" run --rm get
 
 printf "\n **** compos configure DONE \n"
 
-
-
 # read in the active configuration
 source ${TOP_DIR}/private/configuration.sh
-
 
 # TODO: research if we can also do this with -d for detached mode and make better use of the health check dependency in the yaml file
 #  docker compose -f $TOP_DIR/composer/docker-compose-development.yaml up -d
