@@ -31,7 +31,7 @@ read -s -p "Password: " CONFIG_DECRYPTION_KEY && export CONFIG_DECRYPTION_KEY
 
 printf "\n **** compos configure\n"
 
-docker compose -f "$TOP_DIR/composer/docker-compose-configure.yaml" run --rm get-configuration
+docker compose -f "$TOP_DIR/composer/docker-compose-development.yaml" run --rm get-configuration
 
 printf "\n **** compos configure DONE \n"
 
