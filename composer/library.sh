@@ -7,7 +7,7 @@
 # bash color codes
 export RESET="\e[0m"; 
 export ERROR="\e[1;31m"; 
-export GREEN="\e[1;92m"
+export GREEN="\e[1;92m";
 
 
 abort()
@@ -42,7 +42,7 @@ ok() {
   local end_time=$(date +%s)
   local elapsed_time=$((end_time - TIMER_START))
   printf $1
-  printf "Time spent: ${elapsed_time} seconds"
+  printf "Time spent: ${elapsed_time} seconds $RESET\n"
 }
 
 error() {
@@ -162,7 +162,7 @@ build()
   startTimer
   printf "\n$GREEN---Building image dante-wiki if necessary...$RESET\n" ; 
     docker build -t dante-wiki:latest $TOP_DIR/images/dante-wiki/src
-  ok "$GREEN---DONE$RESET\n"
+  ok "$GREEN---DONE$RESET"
 }
 
 
@@ -171,7 +171,7 @@ pullByTag()
 {
   printf "\n$GREEN---Pulling docker image by tag from {$DH_OWNER}/{$DH_REPO}:${DH_TAG}...$RESET\n" ; 
     docker pull {$DH_OWNER}/{$DH_REPO}:${DH_TAG}
-  ok "$GREEN---DONE pulling docker image by tag $RESET\n\n"
+  ok "DONE pulling docker image by tag"
 }
 
 
@@ -180,7 +180,7 @@ pullBySpec()
 {
   printf "\n$GREEN---Pulling docker image by spec from ${DH_PULL_SPEC}...$RESET\n" ;
     docker pull ${DH_PULL_SPEC}
-  ok "$GREEN---DONE pulling docker image by spec $RESET\n\n"
+  ok "DONE pulling docker image by spec"
 }
 
 

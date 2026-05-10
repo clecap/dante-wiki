@@ -29,8 +29,12 @@ mkdir -p private && chmod 755 private
 export CONFIG_ENCRYPTED_URL="https://iuk.one/configuration-iuk-stage.sh.enc"
 read -s -p "Password: " CONFIG_DECRYPTION_KEY && export CONFIG_DECRYPTION_KEY
 
+printf "\n **** compos configure\n"
 
 docker compose -f "$TOP_DIR/composer/docker-compose-configure.yaml" run --rm get-configuration
+
+printf "\n **** compos configure DONE \n"
+
 
 
 # read in the active configuration
