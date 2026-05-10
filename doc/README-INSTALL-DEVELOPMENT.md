@@ -4,12 +4,12 @@ README file for ***generating a development environment***
 
 # Requirements
 
-### Requirements for Development
+## Requirements for Development
 * Visual Studio Code on the development machine.
 * Extension ms-vscode-remote.remote-containers installed on visual studio code. 
 
 
-### Workflow
+## Workflow
 
 1. Start a working instance as docker container on your development machine.
 
@@ -26,10 +26,7 @@ Attach to container dante-wiki
 ```
 
 ## Dev Containers
-
   Command Palette → “Dev Containers: Reopen in Container”
-
-
 
 # On Remote Machines
 
@@ -38,22 +35,13 @@ Attach to container dante-wiki
 * Git ...
 * Bash ...
 
+
 ## Installation
 
-```sh
-/bin/bash -c "$(curl -fsSL https://github.com/clecap/dante-wiki/raw/master/bin/install.sh)"
-```
+* Log on as dante
+* 
 
-```sh
-/bin/bash -c "$(curl -fsSL https://github.com/clecap/dante-wiki/raw/master/bin/install.sh)"
-```
-
-
-## Quick Installation
-
-
-
-
+git clone --depth 1 https://github.com/clecap/dante-wiki
 
 
 
