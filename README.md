@@ -54,7 +54,7 @@ privacy and a full control over the flow of your ideas.
   <tr>
     <td><b>Security</b></td>
     <td>
-      <a href="https://github.com/clecap/dante-wiki/blob/master/doc/sbom.json"><img src="https://img.shields.io/badge/SBOM-available-brightgreen?label=SBOM%20of%20lap"></a>
+      <a href="XXX"><img src="https://img.shields.io/badge/SBOM-available-brightgreen?label=SBOM%20of%20dante-wiki"></a>
       <a href=""><img src="https://github.com/clecap/dante-wiki/actions/workflows/github-code-scanning/codeql/badge.svg"></a>
       <img src="https://github.com/clecap/dante-wiki/actions/workflows/docker-scan.yml/badge.svg">
       <img src="https://github.com/clecap/dante-wiki/actions/workflows/scorecard.yml/badge.svg">
@@ -68,10 +68,12 @@ privacy and a full control over the flow of your ideas.
 
 
 <details><summary><b>Repositories</b></summary>
-* https://github.com/clecap/dante-wiki contains the installation scripts and the Docker files.
-* https://github.com/clecap/dante-delta contains the functions we add or patch to MediaWiki.
-* https://github.com/clecap/Parsifal contains the LaTeX extension. 
-* https://github.com/clecap/dante-inital-contents stores the inital contents of system, test and help pages for the DanteWiki.
+<ol>
+<li> https://github.com/clecap/dante-wiki contains the installation scripts and the Docker files.
+<li> https://github.com/clecap/dante-delta contains the functions we add or patch to MediaWiki.
+<li> https://github.com/clecap/Parsifal contains the LaTeX extension. 
+<li> https://github.com/clecap/dante-inital-contents stores the inital contents of system, test and help pages for the DanteWiki.
+</ol>
 </details>
 
 <details><summary><b>Open source software components</b></summary>
@@ -88,11 +90,6 @@ privacy and a full control over the flow of your ideas.
 * <b>GDPR / DSGVO </b> This software is intended for one user only. It uses only cookies and local status where it is technically necessary. It does not store personal data.
 </details>
 
-
-We follow the trends towards a more transparent and hopefully more secure software supply chain
-and include a full Software Bill of Material (SBOM) and accredited tests into our project:
-
-[![Scorecard supply-chain security](https://github.com/clecap/dante-wiki/actions/workflows/scorecard.yml/badge.svg)](https://github.com/clecap/dante-wiki/actions/workflows/scorecard.yml)
 
 
 

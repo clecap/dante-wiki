@@ -1,7 +1,15 @@
 #!/bin/bash
 
+
+
+
+
+
+
+
+
 # Install shell script 
-# (1) clones ${GIT_REPO} 
+# (1) cloes ${GIT_REPO} 
 # (2) uses the shellscripts from there to set up the system, which could comprise two scenarios
 #
 # Scenario 1: We build the docker image locally
@@ -13,10 +21,8 @@
 ## CONFIGURABLE PARAMETERS
 ##
 
-
-
 ## LOCAL configuration
-MAIN_DIR="."    # Main directory on the machine INTO which we install, relative to the current working directory
+MAIN_DIR="dante-operations"    # Main directory on the machine INTO which we install, relative to the current working directory
 
 ## GITHUB configuration
 GIT_OWNER="clecap"             # Owner name of the github repository for the installation

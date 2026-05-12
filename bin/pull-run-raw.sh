@@ -10,7 +10,9 @@ source $DIR/library.sh || { echo "ERROR: could not source $DIR/library.sh"; exit
 set -e
 trap 'abort' ERR
 
-
+#
+# DEFINE what we are installing and how
+#
 
 D_REGISTRY="docker.io"   # at which registry    "docker.io"  or  "" for local only    
 D_OWNER="clecap"         # owner / root namespace of repository
@@ -19,6 +21,24 @@ D_TAG="latest"           # tag to be used for fetch
 
 # determine the full specification
 D_SPEC="${D_REGISTRY}/${D_OWNER}/${D_REPO}:${D_TAG}"
+
+
+
+printBanner()
+{
+  printf "\n"
+  printf "****************************\n"
+  printf "*** QUICK INSTALLER ${VERSION} ***\n"
+  printf "****************************\n\n" 
+  printf "*\n"
+  printf "* Running from current working directory ${PWD} \n"
+  printf "* Will be installing into ${PWD} \n"
+  printf "\n"
+  read -p "Proceed ? [y/N] " -n 1 -r
+  echo
+  [[ $REPLY =~ ^[Yy]$ ]] || { echo "Aborted."; exit 1; }
+}
+
 
 
 start "Doing a docker pull ${D_SPEC}"
