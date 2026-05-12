@@ -41,7 +41,7 @@ jobs:
           cloc -md .   > .github/results/cloc_results.md
 
       - name: Upload cloc results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: cloc-results
           path: .github/results/
