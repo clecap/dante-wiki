@@ -66,6 +66,14 @@ privacy and a full control over the flow of your ideas.
 
 ### <a name="components"></a>Software Components and Supply Chain
 
+
+<details><summary><b>Repositories</b></summary>
+* https://github.com/clecap/dante-wiki contains the installation scripts and the Docker files.
+* https://github.com/clecap/dante-delta contains the functions we add or patch to MediaWiki.
+* https://github.com/clecap/Parsifal contains the LaTeX extension. 
+* https://github.com/clecap/dante-inital-contents stores the inital contents of system, test and help pages for the DanteWiki.
+</details>
+
 <details><summary><b>Open source software components</b></summary>
 * Mediawiki (currently version 1.39)
 * PHP
