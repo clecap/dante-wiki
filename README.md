@@ -3,12 +3,11 @@
 Content management for note taking, exchanging ideas, publishing, presenting and peer reviewing.
 Developed by a scientist for scientists and students.
 
-Dante-Wiki is based on [Mediawiki](https://www.mediawiki.org/), [LaTeX](https://www.latex-project.org/) and 
-[other](#components) [open source](https://opensource.com/resources/what-open-source) components. It is deployed using Docker.
+Dante-Wiki is based on [Mediawiki](https://www.mediawiki.org/), [LaTeX](https://www.latex-project.org/) and [other](#components) [open source](https://opensource.com/resources/what-open-source) components. It is deployed using Docker.
 It provides data, process and workflow ownership (''sovereignty''), 
 privacy and a full control over the flow of your ideas.
 
-The current status of the system is experimental.
+<b style="color:red;">The current status of the system is experimental and there is no stable release yet. Use at your own risk.</b>
 
 #### Shields
 
@@ -67,14 +66,19 @@ The current status of the system is experimental.
 
 ### <a name="components"></a>Software Components and Supply Chain
 
-Open source software components bundled with Dante-Wiki comprise:
-* Mediawiki
+<details><summary><b>Open source software components</b></summary>
+* Mediawiki (currently version 1.39)
 * PHP
 * LaTeX (TexLive variant)
 * Drawio
 * PyMuPDF
 * MariaDB (in separate docker container)
 
+</details>
+
+<details><summary><b>Compliance</b></summary>
+* <b>GDPR / DSGVO </b> This software is intended for one user only. It uses only cookies and local status where it is technically necessary. It does not store personal data.
+</details>
 
 
 We follow the trends towards a more transparent and hopefully more secure software supply chain
@@ -85,6 +89,4 @@ and include a full Software Bill of Material (SBOM) and accredited tests into ou
 
 
 
-## Compliance
 
-GDPR: This software is intended for one user only. It uses only cookies and local status which is technical necessary. It does not store personal data.

@@ -5,24 +5,39 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 TOP_DIR=${DIR}/.. 
 
 # read in the library file for our shell
-source $DIR/library.sh
+source $DIR/library.sh || { echo "ERROR: could not source $DIR/library.sh"; exit 1; }
 
 set -e
 trap 'abort' ERR
 
 
 
-# getImageInfo ${DANTE_IMAGE}
+D_REGISTRY="docker.io"   # at which registry    "docker.io"  or  "" for local only    
+D_OWNER="clecap"         # owner / root namespace of repository
+D_REPO="dante-wiki"      # sepcific repository name
+D_TAG="latest"           # tag to be used for fetch
 
-# shutdown all running services of this kind after displaying a confirmation (to ensure git has been pushed)
-## probably no confirmation since this is for remote - or is it not ??? TODO
+# determine the full specification
+D_SPEC="${D_REGISTRY}/${D_OWNER}/${D_REPO}:${D_TAG}"
+
+
+start "Doing a docker pull ${D_SPEC}"
+  docker pull "${D_SPEC}"
+ok "Pulled"
+
+
+getImageInfo "${D_SPEC}"
+
+
 askConfirmation
-downAllServices $TOP_DIR/composer/docker-compose-development.yaml
-
-DH_PULL_SPEC="clecap/dante-wiki@sha256:c48e8f5fb8d56b8b4870904cd78600f45130aaee7f30c58944185fffb517f158"
 
 pullBySpec
 
+
+# shutdown all running services of this kind after displaying a confirmation (to ensure git has been pushed)
+## probably no confirmation since this is for remote - or is it not ??? TODO
+
+downAllServices $TOP_DIR/composer/docker-compose-development.yaml
 
 mkdir -p private && chmod 755 private
 

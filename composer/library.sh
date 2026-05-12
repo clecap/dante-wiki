@@ -18,12 +18,7 @@ abort()
 
 askConfirmation()
 {
-  local message="${1:-Did you save open GIT files??}"
-  printf "%b" "\n${ERROR}${message}${RESET} [y/N] "
-  read -r reply
-  [[ "$reply" =~ ^[Yy]$ ]] || abort
-
-  local message="${1:-Did you save edited system files??}"
+  local message="${1:-Are you sure ??}"
   printf "%b" "\n${ERROR}${message}${RESET} [y/N] "
   read -r reply
   [[ "$reply" =~ ^[Yy]$ ]] || abort
@@ -38,18 +33,22 @@ startTimer() {
 }
 
 
+start() {
+  printf "$GREEN $1\n "
+  TIMER_START=$(date +%s)
+}
+
+
 ok() {
   local end_time=$(date +%s)
   local elapsed_time=$((end_time - TIMER_START))
-  printf "$GREEN $1\n "
-  printf "Time spent: ${elapsed_time} seconds $RESET\n"
+  printf "${GREEN}$1  ${RESET}  Time spent: ${elapsed_time} [sec] \n"
 }
 
 error() {
   local end_time=$(date +%s%N)
   local elapsed_time=$((end_time - TIMER_START))
-  printf "$ERROR $1\n"
-  print "Time spent: ${elapsed_time} seconds $RESET"
+  printf "${ERROR}$1  ${RESET} Time spent: ${elapsed_time} [sec]"
 }
 
 
@@ -72,10 +71,10 @@ waitForWebserverServicing()
 
   while true; do
     if curl --output /dev/null --silent --head --insecure --fail "$url"; then
-      printf "${GREEN}*** Webservice is serving requests"
+      printf "${GREEN}*** Webservice is serving requests at $url $RESET \n"
       break
     else
-      printf "\nWaiting for the webservice to become ready at $url"
+      printf "Waiting for the webservice to become ready at $url \n"
     fi
     current_time=$(date +%s)
     elapsed_time=$(( current_time - start_time ))
@@ -142,6 +141,7 @@ openChrome()
 # take down all services of composer file $1
 downAllServices()
 {
+  askConfirmation "Did you *** SAVE *** the  (1) GIT files and (2) the SYSTEM files and (3) the USER content - we will now down all services an status will no longer be recoverable !!"
   printf "\n$GREEN---Taking down configuration...$RESET\n"
   docker compose -f $1 down
   printf "$GREEN---DONE$RESET\n" ;
@@ -252,21 +252,38 @@ cooked_to_GitHub()
 }
 
 
-# obtains information of the image $1 and exports it into the shell
+# obtains information of the image $1, prints it and exports it into the shell
 getImageInfo()
 {
   local IMAGE="$1"
-  export IMAGE_ID=$(docker images ${IMAGE} --format "{{.ID}}")
-  export IMAGE_DIGEST=$(docker images ${IMAGE} --format "{{.Digest}}")
-  export IMAGE_REPOSITORY=$(docker images ${IMAGE} --format "{{.Repository}}")
-  export IMAGE_CREATED_AT=$(docker images ${IMAGE} --format "{{.CreatedAt}}")
-  export IMAGE_TAG==$(docker images ${IMAGE} --format "{{.Tag}}")
-  printf "IMAGE $IMAGE"
-  printf "IMAGE_ID $IMAGE_ID"
-  printf "IMAGE_DIGEST = $IMAGE_DIGEST"
-  printf "IMAGE_REPOSITORY = $IMAGE_REPOSITORY"
-  printf "IMAGE_CREATED_AT = $IMAGE_CREATED_AT"
-  printf "IMAGE_TAG = $IMAGE_TAG"
+  export IMAGE_ID=$(docker image inspect "${IMAGE}" --format "{{.ID}}")
+  export IMAGE_CREATED_AT=$(docker image inspect "${IMAGE}" --format "{{.Created}}")
+  export IMAGE_SIZE=$(docker image inspect "${IMAGE}" --format "{{.Size}}")
+  export IMAGE_REPO_TAG=$(docker image inspect "${IMAGE}" --format "{{index .RepoTags 0}}")
+  export IMAGE_REPOSITORY=$(echo "${IMAGE_REPO_TAG}" | cut -d: -f1)
+  export IMAGE_TAG=$(echo "${IMAGE_REPO_TAG}" | cut -d: -f2)
+  export IMAGE_DIGEST=$(docker image inspect "${IMAGE}" --format "{{index .RepoDigests 0}}")
+  export IMAGE_ARCH=$(docker image inspect "${IMAGE}" --format "{{.Architecture}}")
+  export IMAGE_OS=$(docker image inspect "${IMAGE}" --format "{{.Os}}")
+  export IMAGE_LAYERS=$(docker image inspect "${IMAGE}" --format "{{len .RootFS.Layers}}")
+  export IMAGE_LABELS=$(docker image inspect "${IMAGE}" --format "{{json .Config.Labels}}")
+  export IMAGE_LAST_TAGGED=$(docker image inspect "${IMAGE}" --format "{{.Metadata.LastTagTime}}")
+
+  printf "IMAGE            = $IMAGE\n"
+  printf "IMAGE_ID         = $IMAGE_ID\n"
+  printf "IMAGE_REPO_TAG   = $IMAGE_REPO_TAG\n"
+  printf "IMAGE_REPOSITORY = $IMAGE_REPOSITORY\n"
+  printf "IMAGE_TAG        = $IMAGE_TAG\n"
+  printf "IMAGE_DIGEST     = $IMAGE_DIGEST\n"
+  printf "IMAGE_CREATED_AT = $IMAGE_CREATED_AT\n"
+  printf "IMAGE_SIZE       = $IMAGE_SIZE\n"
+  printf "IMAGE_ARCH       = $IMAGE_ARCH\n"
+  printf "IMAGE_OS         = $IMAGE_OS\n"
+  printf "IMAGE_LAYERS     = $IMAGE_LAYERS\n"
+  printf "IMAGE_LABELS:\n"
+  docker image inspect "${IMAGE}" --format '{{range $k, $v := .Config.Labels}}  {{$k}} = {{$v}}
+{{end}}'
+  printf "IMAGE_LAST_TAGGED= $IMAGE_LAST_TAGGED\n"
 }
 
 
