@@ -28,7 +28,7 @@ FROM debian:stable-20260505-slim AS texlive-ready
 #  TEXLIVE_FPR: Expected fingerprint of the GPG public signing key
 #                Key will be downloaded and checked against this fingerprint
 #                So this amounts to some form of key pinning as well
-ARG TL_YEAR=2025
+ARG TL_YEAR=2026
 ARG TEXLIVE_FPR=C78B82D8C79512F79CC0D7C80D5E5D9106BAB6BC
 
 # We should derive subsequent argument values from here in ARG, since ENV values can be used only
@@ -51,14 +51,14 @@ ENV  DEBIAN_FRONTEND=noninteractive
 RUN \
   set -eux                                                                              && \
   apt-get update                                                                        && \ 
-  apt-get install -y --no-install-recommends ca-certificates     && \
-  apt-get install -y --no-install-recommends curl                                       && \
+  apt-get install -y --no-install-recommends ca-certificates=20250419                   && \
+  apt-get install -y --no-install-recommends curl=8.14.1-2+deb13u2                      && \
   rm -rf /var/lib/apt/lists/*                                                           && \
   mkdir -p /texlive                                                                     && \  
   echo "*** Downloading TeX Live ${TL_ISO_URL} to /texlive/${TL_FILE_NAME}"             && \
   curl -L "${TL_ISO_URL}" -o "/texlive/${TL_FILE_NAME}"                                 && \
   echo "DONE: Downloaded TeX Live iso "                                                 && \
-  ls -l /texlive
+  ls -l /texlive                                                                        
 
 ##
 ## ENV Section
@@ -68,7 +68,7 @@ ENV \
   # URLs for ISO + signature; mirror.ctan.org will redirect to a nearby mirror
   # URL of the GPG key (silence hadolint, since this is a public key)
   # hadolint ignore=SC2154
-  GPG_KEY_URL="https://www.tug.org/texlive/files/texlive.asc" \
+  GPG_PUBKEY_URL="https://www.tug.org/texlive/files/texlive.asc" \
   TEXLIVE_PUBKEY_ID="TeX Live Distribution <tex-live@tug.org>" 
 
 
@@ -89,40 +89,42 @@ ARG SOURCE_TAG
 ARG DOCKERFILE_PATH
 ARG IMAGE_NAME
 
-
+# pin shell to a bash and sensure that we do a pipefail
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install required tools and do some small minimal cleanup
 # - downloading (curl)
 # - signature verification (gnupg, ca-certificates)
 # - installer runtime (perl, xz-utils for compressed archives)
 # - extracting ISO (libarchive-tools -> bsdtar)
-RUN                                                                 \ 
-  set -eux                                                       && \
-  apt-get update                                                 && \
-  apt-get install -y --no-install-recommends gnupg               && \
-  apt-get install -y --no-install-recommends perl                && \
-  apt-get install -y --no-install-recommends xz-utils            && \
-  apt-get install -y --no-install-recommends libarchive-tools    && \
-  rm -rf /var/lib/apt/lists/*                                    && \
-                                                                    \ 
-  echo "*** Downloading TeXlive GPG key from ${GPG_KEY_URL}"     && \
-  curl -fsSL "${GPG_KEY_URL}" -o /tmp/key.asc                    && \
-  echo "DONE: Downloading TeXlive GPG key  from ${GPG_KEY_URL}"  && \
-                                                                    \
-  echo "*** Importing GPG key"                                   && \
-  gpg --batch --import /tmp/key.asc                              && \
-  echo "DONE: Importing the GPG key into the keyring"            && \
-                                                                    \
-  echo "*** Listing all keyring keys "                           && \
-  gpg --list-keys --fingerprint                                  && \
-  echo "*** Listing the key we need"                             && \
-  gpg --list-keys "${TEXLIVE_PUBKEY_ID}"                         && \
-                                                                    \
-  echo "*** Obtaining the current fingerprint "                  && \
+ 
+RUN                                                                       \ 
+  set -eux                                                             && \
+  apt-get update                                                       && \
+  apt-get install -y --no-install-recommends gnupg=2.4.7-21+deb13u1    && \
+  apt-get install -y --no-install-recommends perl=5.40.1-6             && \
+  apt-get install -y --no-install-recommends xz-utils=5.8.1-1          && \
+  apt-get install -y --no-install-recommends libarchive-tools=3.7.4-4  && \
+  rm -rf /var/lib/apt/lists/*                                          && \
+                                                                          \ 
+  echo "*** Downloading TeXlive GPG key from ${GPG_PUBKEY_URL}"        && \
+  curl -fsSL "${GPG_PUBKEY_URL}" -o /tmp/key.asc                       && \
+  echo "DONE: Downloading TeXlive GPG key  from ${GPG_PUBKEY_URL}"     && \
+                                                                          \
+  echo "*** Importing GPG key"                                         && \
+  gpg --batch --import /tmp/key.asc                                    && \
+  echo "DONE: Importing the GPG key into the keyring"                  && \
+                                                                          \
+  echo "*** Listing all keyring keys "                                 && \
+  gpg --list-keys --fingerprint                                        && \
+  echo "*** Listing the key we need"                                   && \
+  gpg --list-keys "${TEXLIVE_PUBKEY_ID}"                               && \
+                                                                          \
+  echo "*** Obtaining the current fingerprint "                        && \
   ACTUAL_FPR="$(gpg --batch --with-colons --fingerprint "${TEXLIVE_PUBKEY_ID}" | awk -F: '/^fpr:/ {print $10; exit}')"  && \
-  echo "DONE: Obtained current fingerprint:   $ACTUAL_FPR"       && \
-                                                                    \
-  echo "*** Comparing with expected fingerprint: $TEXLIVE_FPR"   && \
+  echo "DONE: Obtained current fingerprint:   $ACTUAL_FPR"             && \
+                                                                          \
+  echo "*** Comparing with expected fingerprint: $TEXLIVE_FPR"         && \
   if [ "${TEXLIVE_FPR}" != "${ACTUAL_FPR}" ]; then   \
     echo "ERROR: Fingerprint of proposed texlive key (${ACTUAL_FPR}) does not match expected fingerprint (${TEXLIVE_FPR})" >&2 ; \
     exit 1 ;   \
@@ -217,10 +219,13 @@ RUN                                                                             
 # =============================
 #  Stage 2: Final runtime image
 # =============================
-FROM debian:stable-20260505-slim as dante
+FROM debian:stable-20260505-slim AS dante
 
 # Copy only the installed TeX Live tree from the builder stage
 COPY --from=texlive-ready /usr/local/texlive /usr/local/texlive
+
+
+ARG YEAR=2026
 
 ARG MEDIAWIKI_VERSION=1.39.0
 ARG MEDIAWIKI_TARBALL=mediawiki-$MEDIAWIKI_VERSION.tar.gz
@@ -252,9 +257,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN \
   set -eux                                                      && \ 
   apt-get update                                                && \
-  apt-get install -y --no-install-recommends perl               && \
-  apt-get install -y --no-install-recommends  ca-certificates   && \
-  apt-get install -y --no-install-recommends  curl              && \
+  apt-get install -y --no-install-recommends perl=5.40.1-6              && \
+  apt-get install -y --no-install-recommends ca-certificates=20250419  && \
+  apt-get install -y --no-install-recommends curl=8.14.1-2+deb13u2     && \
   # recreate required environment
   echo "*** Checking environment file "                                                && \
   ls -l /usr/local     && \
@@ -265,15 +270,15 @@ RUN \
   # This respects 'tlpdbopt_sys_bin /usr/bin' stored in the TL database.
   echo "*** Creating TeX Live symlinks under /usr/bin via tlmgr path add"              && \
   tlmgr option sys_bin /usr/bin                                                        && \
-  tlmgr path add
-
+  tlmgr path add                                                                       && \
+  rm -rf /var/lib/apt/lists/* 
 ##
 ## LABEL 
 ##
 #  NOTE: Only use ONE LABEL command, as this keep sthe number of layers down
 # 
 LABEL maintainer="Clemens H. Cap"                                                      \
-  copyright="(C) 2022-2025 Clemens H. Cap"                                             \
+  copyright="(C) 2022-2026 Clemens H. Cap"                                             \
   description="Dockerfile for Dantewiki"                                               \
   dockerhub-url="https://hub.docker.com/repository/docker/clecap/dante-wiki/general"   \
   git-url="https://github.com/clecap/dante-wiki"                                       \
@@ -363,9 +368,11 @@ ARG CLEAN_DOCKER_LAYER="          \
 #   msmtp                     write simple mails to inform about backup job completion and more
 #   php-curl:                 must include this for the composer to run faster
 
+# hadolint ignore=DL4005
 RUN \
     set -eux   && \
-    echo "*** *** *** Ensure docker desktop tab opens with a bash allowing command line editing  "                         && \ 
+    apt-get update                                                                                                         && \
+    echo "*** *** *** Ensure docker desktop tab opens with a bash allowing command line editing  "                         && \
     rm /bin/sh                                                                                                             && \
     ln -sf /bin/bash /bin/sh                                                                                               && \
     echo "*** *** *** Generate target directories for the COPY operation below "                                           && \
@@ -408,10 +415,10 @@ RUN \
     echo "*** *** *** ldap utilities, required for apache ldap access "                                                    && \
     apt-get install -y --no-install-recommends  ldap-utils                                                                 && \
     echo "*** *** *** Configuring apache modules and environment "                                                         
- 
+  
  RUN \
-    #   select intended operating mode for Apache
-    # the php modules of apache depend on mpm_prefork and must be disabled first
+    #   select intended operating mode for Apache 
+    # the php modules of apache depend on mpm_prefork and must be disabled first 
     # since we do not know which exact php module variant is installed with this apache, remove it a bit more broadly
     # since a2dismod does not allow shell expansion, do it as follows:
     # 1. Find enabled PHP module files (*.load)
@@ -419,10 +426,10 @@ RUN \
     mods_files=$(find /etc/apache2/mods-enabled -maxdepth 1 -name 'php*.load' -printf '%f\n')  && \
     echo "Found module files: $mods_files"       && \
     # 2. Strip the .load ending to get actual module names
-    mods=$(echo "$mods_files" | sed 's/\.load$//')  && \
+    mods="${mods_files//.load/}"  && \
     echo "Module names to disable: $mods"   && \
     # 3. Disable them (only if something was found)
-    [ -n "$mods" ] && a2dismod $mods     && \
+    [ -n "$mods" ] && echo "$mods" | xargs a2dismod  && \
     a2dismod mpm_prefork                                                                                                   && \
     a2enmod proxy                                                                                                          && \ 
     a2enmod proxy_fcgi                                                                                                     && \
@@ -452,14 +459,15 @@ RUN \
 #   GNU parallel helps with fast copying 
     apt-get install -y --no-install-recommends parallel                                                                    && \
 #   ssh client and rsync needed for doing backups           
-    apt-get install -y --no-install-recommends openssh-client  rsync                                                       && \
+    apt-get install -y --no-install-recommends openssh-client                                                              && \
+    apt-get install -y --no-install-recommends rsync                                                                       && \
 ## Install pymupdf
 #
 #    1) Installations with pip should use a virtual python environment or a --break-system-package (which is not recommended)
 #    2) For some reason the active shell has no source command and we need to switch to bash
 #    3) This also is an issue when the install triggers for python3.11-venv are activated
     echo "*** installing python stuff in virtual environment "                                                             && \
-    apt-get install -y --no-install-recommends python3-venv                                                             && \
+    apt-get install -y --no-install-recommends python3-venv                                                                && \
     python3 -m venv /opt/myenv                                                                                             && \
     source /opt/myenv/bin/activate                                                                                         && \
     /opt/myenv/bin/pip3 install --no-cache-dir pymupdf                                                                     && \
@@ -598,5 +606,4 @@ CMD ["run-apache.sh"]
 ##
 ## Specify entrypoint, which will itself execute scripts provided as parameter
 ##
-
 ENTRYPOINT ["/lap-entrypoint.sh"]

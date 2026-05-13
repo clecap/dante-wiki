@@ -23,8 +23,7 @@ Usage: $(basename $0) <method> <configuration>
   Second parameter: Configuration to be used. Choices:
     iuk-stage       iuk-stage.informatik.uni-rostock.de
     iuk-dante       iuk-dante.informatik.uni-rostock.de
-    clemenscap.de
-    ki40.iuk.one
+    local           use the local configuration file configuration.sh
 
   Version of the command: ${VERSION}
 
@@ -44,7 +43,8 @@ GIT_OWNER="clecap"             # Owner name of the github repository for the ins
 GIT_REPO="dante-wiki"          # Github repository from which we will install
 GIT_BRANCH="master"            # Branch which we will install
 
-
+## DOCKER configuration
+LC_SPEC="dante-wiki:${TAG}"                     # specification to be used for a locally built docker image
 GH_SPEC="ghcr.io/clecap/dantewiki:${TAG}"       # specification to be used for a docker pull from github
 DH_SPEC="docker.io/clecap/dante-wiki:${TAG}"    # specification to be used for a docker pull from docker hub
 
@@ -68,10 +68,11 @@ if [ $# -lt 2 ]; then
   exit 1
 fi
 
-METHOD="$1"
-CONFIGURATION="$2"
+METHOD="$1"             # Method to obtain a docker image.
+CONFIGURATION="$2"      # Configuration to be used
 
 case "$METHOD" in
+  build)   SPEC="$LC_SPEC";;
   pull-dh) SPEC="$DH_SPEC" ;;
   pull-gh) SPEC="$GH_SPEC" ;;
   *)       printf "${ERROR}*** Unknown method: $METHOD ${RESET}\n"; exit 1 ;;
@@ -95,20 +96,31 @@ trap 'abort' ERR
 
 printBanner
 
-start "Doing a docker pull for ${SPEC}"
-  docker pull ${SPEC}
-ok "Pulled"
+## pull or build docker file
+if [ "$METHOD" = "build" ]; then
+  build
+else
+  start "Doing a docker pull for ${SPEC}"
+    docker pull ${SPEC}
+  ok "Pulled"
+fi
 
 start "Providing information on the specified image ${SPEC}"
   getImageInfo "${SPEC}"
 ok "Provided information on ${SPEC}"
 
-start "Downloading and decrypting configuration"
-  mkdir -p private && chmod 755 private
-  export CONFIG_ENCRYPTED_URL="https://iuk.one/configuration-${CONFIGURATION}.sh.enc"
-  read -s -p "Password for decrypting configuration file: " CONFIG_DECRYPTION_KEY && export CONFIG_DECRYPTION_KEY
-  docker compose -f "$TOP_DIR/compose/docker-compose-configure.yaml" run --rm get-configuration
-ok "Downloading and decrypting configuration"
+
+
+if [ "$CONFIGURATION" != "local" ]; then
+  start "Downloading and decrypting configuration file for ${CONFIGURATION}"
+    mkdir -p private && chmod 755 private
+    export CONFIG_ENCRYPTED_URL="https://iuk.one/configuration-${CONFIGURATION}.sh.enc"
+    read -s -p "Password for decrypting configuration file: " CONFIG_DECRYPTION_KEY && export CONFIG_DECRYPTION_KEY
+    docker compose -f "$TOP_DIR/compose/docker-compose-configure.yaml" run --rm get-configuration
+  ok "Downloading and decrypting configuration"
+fi
+
+
 
 start "Reading in the active configuration"
   source ${TOP_DIR}/private/configuration.sh
