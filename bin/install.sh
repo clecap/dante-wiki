@@ -123,7 +123,7 @@ ok "Removed all services"
 # TODO: research if we can also do this with -d for detached mode and make better use of the health check dependency in the yaml file
 #  docker compose -f $TOP_DIR/composer/docker-compose-development.yaml up -d
 
-$DOCKER_SERVICES="database webserver-raw-https phpmyadmin"
+DOCKER_SERVICES="database webserver-raw-https phpmyadmin"
 
 start  "Starting docker services"
   upServices $TOP_DIR/composer/docker-compose-development.yaml ${DOCKER_SERVICES}
