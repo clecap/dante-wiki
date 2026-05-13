@@ -95,14 +95,14 @@ start "Providing information on the specified image ${SPEC}"
 ok "Provided information on ${SPEC}"
 
 start "Removing all docker services for a clean restart (allowing for user abort)"
-  downAllServices $TOP_DIR/composer/docker-compose-development.yaml  
+  downAllServices $TOP_DIR/compose/docker-compose-development.yaml  
 ok "Removed all services"
 
 start "Downloading and decrypting configuration"
   mkdir -p private && chmod 755 private
   export CONFIG_ENCRYPTED_URL="https://iuk.one/configuration-${CONFIGURATION}.sh.enc"
   read -s -p "Password for decrypting configuration file: " CONFIG_DECRYPTION_KEY && export CONFIG_DECRYPTION_KEY
-  docker compose -f "$TOP_DIR/composer/docker-compose-development.yaml" run --rm get-configuration
+  docker compose -f "$TOP_DIR/compose/docker-compose-development.yaml" run --rm get-configuration
 ok "Downloading and decrypting configuration"
 
 start "Reading in the active configuration"

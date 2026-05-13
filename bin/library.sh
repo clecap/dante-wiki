@@ -54,7 +54,7 @@ startTimer() {
 
 
 start() {
-  printf "${GREEN}$1\n "
+  printf "${GREEN}$1${RESET}\n"
   TIMER_START=$(date +%s)
 }
 
@@ -62,7 +62,7 @@ start() {
 ok() {
   local end_time=$(date +%s)
   local elapsed_time=$((end_time - TIMER_START))
-  printf "${GREEN}$1  ${RESET}  Time spent: ${elapsed_time} [sec] \n"
+  printf "${GREEN}$1  ${RESET}  Time spent: ${elapsed_time} [sec] \n\n"
 }
 
 error() {
@@ -176,6 +176,9 @@ openChrome()
 # take down all services of composer file $1
 downAllServices()
 {
+  printf "Currently running docker processes are:\n"
+  docker ps
+  printf "\n\n"
   askConfirmation "Did you *** SAVE *** the  (1) GIT files and (2) the SYSTEM files and (3) the USER content - we will now down all services an status will no longer be recoverable !!"
   printf "\n$GREEN---Taking down configuration...$RESET\n"
   docker compose -f $1 down
@@ -289,6 +292,7 @@ getImageInfo()
   export IMAGE_LABELS=$(docker image inspect "${IMAGE}" --format "{{json .Config.Labels}}")
   export IMAGE_LAST_TAGGED=$(docker image inspect "${IMAGE}" --format "{{.Metadata.LastTagTime}}")
 
+  printf "\n"
   printf "IMAGE            = $IMAGE\n"
   printf "IMAGE_ID         = $IMAGE_ID\n"
   printf "IMAGE_REPO_TAG   = $IMAGE_REPO_TAG\n"
@@ -304,6 +308,7 @@ getImageInfo()
   docker image inspect "${IMAGE}" --format '{{range $k, $v := .Config.Labels}}  {{$k}} = {{$v}}
 {{end}}'
   printf "IMAGE_LAST_TAGGED= $IMAGE_LAST_TAGGED\n"
+  printf "\n\n"
 }
 
 
