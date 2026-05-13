@@ -1,6 +1,10 @@
 #!/bin/bash
 
 
+#
+# Stand alone script which downloads the encrypted configuration files
+#
+
 CONFIG="iuk-stage"
 FILENAME="configuration-$CONFIG.sh"
 CONFIG_ENCRYPTED_URL="https://iuk.one/configuration-$CONFIG.sh.enc"

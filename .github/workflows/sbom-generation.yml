@@ -1,9 +1,9 @@
 name: Generate SBOM for Dockerfiles
 
 on:
-  push:
+  push:                                                  # generated at every push
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 0 * * 0'  # every Sunday at midnight
 
 permissions:
   contents: read
@@ -33,15 +33,36 @@ jobs:
 
       - name: Generate SBOM for Docker image and repo
         run: |
-          mkdir -p .github/results
-          syft clecap/dante-wiki:latest -o json \
-            > .github/results/sbom-dante-wiki-docker.json
-          syft dir:. -o json \
-            > .github/results/sbom-dante-wiki-docker-repo.json
-          ls -alg .github/results
+          mkdir -p sbom
+          syft clecap/dante-wiki:latest \
+            -o json=sbom/sbom-dante-wiki-docker.json \
+            -o table=sbom/sbom-dante-wiki-docker.txt \
+            -o spdx-tag-value=sbom/sbom-dante-wiki-docker.spdx
+          syft dir:. \
+            -o json=sbom/sbom-dante-wiki-repo.json \
+            -o table=sbom/sbom-dante-wiki-repo.txt \
+            -o spdx-tag-value=sbom/sbom-dante-wiki-repo.spdx
+          ls -alg sbom
 
-      - name: Upload SBOM files as workflow artifact
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
         with:
-          name: sbom-files
-          path: .github/results/*.json
+          path: sbom
+
+  deploy-pages:
+    needs: generate-sbom
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+
+    steps:
+      - name: Configure Pages
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
+
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4

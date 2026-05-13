@@ -54,7 +54,8 @@ privacy and a full control over the flow of your ideas.
   <tr>
     <td><b>Security</b></td>
     <td>
-      <a href="XXX"><img src="https://img.shields.io/badge/SBOM-available-brightgreen?label=SBOM%20of%20dante-wiki"></a>
+      <a href="https://clecap.github.io/dante-wiki/sbom-dante-wiki-docker.txt"><img src="https://img.shields.io/badge/SBOM-available-brightgreen?label=SBOM%20of%20docker"></a>
+      <a href="https://clecap.github.io/dante-wiki/sbom-dante-wiki-repo.txt"><img src="https://img.shields.io/badge/SBOM-available-brightgreen?label=SBOM%20of%20repo"></a>
       <a href=""><img src="https://github.com/clecap/dante-wiki/actions/workflows/github-code-scanning/codeql/badge.svg"></a>
       <img src="https://github.com/clecap/dante-wiki/actions/workflows/docker-scan.yml/badge.svg">
       <img src="https://github.com/clecap/dante-wiki/actions/workflows/scorecard.yml/badge.svg">
@@ -64,7 +65,7 @@ privacy and a full control over the flow of your ideas.
   </tr>
 </table>
 
-### <a name="components"></a>Software Components and Supply Chain
+### <a name="components"></a>Software Supply Chain
 
 
 <details><summary><b>Repositories</b></summary>
@@ -84,6 +85,26 @@ privacy and a full control over the flow of your ideas.
 * PyMuPDF
 * MariaDB (in separate docker container)
 
+</details>
+
+<details><summary><b>Software Bill of Material (SBOM)</b></summary>
+Software bills of material (SBOMs) are available here:
+<ol>
+<li>For the Docker image:
+  <ul>
+    <li><a href="https://clecap.github.io/dante-wiki/sbom-dante-wiki-docker.json">JSON</a></li>
+    <li><a href="https://clecap.github.io/dante-wiki/sbom-dante-wiki-docker.txt">Table (human-readable)</a></li>
+    <li><a href="https://clecap.github.io/dante-wiki/sbom-dante-wiki-docker.spdx">SPDX tag-value</a></li>
+  </ul>
+</li>
+<li>For this repository:
+  <ul>
+    <li><a href="https://clecap.github.io/dante-wiki/sbom-dante-wiki-repo.json">JSON</a></li>
+    <li><a href="https://clecap.github.io/dante-wiki/sbom-dante-wiki-repo.txt">Table (human-readable)</a></li>
+    <li><a href="https://clecap.github.io/dante-wiki/sbom-dante-wiki-repo.spdx">SPDX tag-value</a></li>
+  </ul>
+</li>
+</ol>
 </details>
 
 <details><summary><b>Compliance</b></summary>
