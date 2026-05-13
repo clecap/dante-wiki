@@ -210,7 +210,7 @@ pullBySpec()
   if [ -z "$1" ]; then
     printf "${ERROR}*** pullBySpec: no image spec given${RESET}\n"; return 1
   fi
-  printf "\n$GREEN---Pulling docker image by spec from $1...$RESET\n"
+  printf "\n$GREEN---Pulling docker image by spec from $1 $RESET\n"
   docker pull "$1"
   ok "DONE pulling docker image by spec"
 }

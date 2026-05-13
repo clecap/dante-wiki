@@ -7,7 +7,7 @@
 
 VERSION=1.59                   # Version number, just for identification purposes
 
-
+TAG="latest"
 
 usage()
 {
