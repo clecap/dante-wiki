@@ -10,6 +10,7 @@ deprecated/
 .claude/
 
 private/
+!private/README-private.md
 
 vendor/
 
