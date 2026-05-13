@@ -126,7 +126,7 @@ ok "Removed all services"
 DOCKER_SERVICES="database webserver-raw-https phpmyadmin"
 
 start  "Starting docker services"
-  upServices $TOP_DIR/composer/docker-compose-development.yaml ${DOCKER_SERVICES}
+  upServices $TOP_DIR/compose/docker-compose-development.yaml ${DOCKER_SERVICES}
   waitForWebserverServicing
 ok "Docker services are running"
 
