@@ -9,7 +9,10 @@ deprecated/
 
 .claude/
 
-private/
+# Ignore the private directory, which will contain configuration data
+# But do not ignore the README-private.md, which contains info and which is required
+# in roder to retain the directory as such
+private/*
 !private/README-private.md
 
 vendor/
