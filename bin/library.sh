@@ -176,6 +176,7 @@ openChrome()
 # take down all services of composer file $1
 downAllServices()
 {
+  printf "\n"
   printf "Currently running docker processes are:\n"
   docker ps
   printf "\n\n"

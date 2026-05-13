@@ -94,10 +94,6 @@ start "Providing information on the specified image ${SPEC}"
   getImageInfo "${SPEC}"
 ok "Provided information on ${SPEC}"
 
-start "Removing all docker services for a clean restart (allowing for user abort)"
-  downAllServices $TOP_DIR/compose/docker-compose-development.yaml  
-ok "Removed all services"
-
 start "Downloading and decrypting configuration"
   mkdir -p private && chmod 755 private
   export CONFIG_ENCRYPTED_URL="https://iuk.one/configuration-${CONFIGURATION}.sh.enc"
@@ -108,6 +104,12 @@ ok "Downloading and decrypting configuration"
 start "Reading in the active configuration"
   source ${TOP_DIR}/private/configuration.sh
 ok "Read the active configuration"
+
+start "Removing all docker services for a clean restart (allowing for user abort)"
+  downAllServices $TOP_DIR/compose/docker-compose-development.yaml  
+ok "Removed all services"
+
+
 
 # TODO: research if we can also do this with -d for detached mode and make better use of the health check dependency in the yaml file
 #  docker compose -f $TOP_DIR/composer/docker-compose-development.yaml up -d
