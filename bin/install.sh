@@ -98,7 +98,7 @@ start "Downloading and decrypting configuration"
   mkdir -p private && chmod 755 private
   export CONFIG_ENCRYPTED_URL="https://iuk.one/configuration-${CONFIGURATION}.sh.enc"
   read -s -p "Password for decrypting configuration file: " CONFIG_DECRYPTION_KEY && export CONFIG_DECRYPTION_KEY
-  docker compose -f "$TOP_DIR/compose/docker-compose-development.yaml" run --rm get-configuration
+  docker compose -f "$TOP_DIR/compose/docker-compose-configure.yaml" run --rm get-configuration
 ok "Downloading and decrypting configuration"
 
 start "Reading in the active configuration"

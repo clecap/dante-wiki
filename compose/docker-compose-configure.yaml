@@ -1,0 +1,34 @@
+#
+# docker compose file for configuring DanteWiki
+# 
+# We use a separate yaml file since in the main service file we need some shell variables defined which are set only in the configuration
+# which we are about to donwload here.
+
+services:
+
+  get-configuration:
+    image: alpine/openssl
+    entrypoint:
+      - sh
+      - -c
+      - |
+        wget -O /tmp/config.enc "$$CONFIG_ENCRYPTED_URL" &&
+        openssl enc -d -aes-256-cbc -pbkdf2 -pass env:CONFIG_DECRYPTION_KEY -in /tmp/config.enc -out /out/configuration.sh &&
+        chmod 0644 /out/configuration.sh
+    environment:
+      - CONFIG_ENCRYPTED_URL
+      - CONFIG_DECRYPTION_KEY
+    volumes:
+      - ../private:/out
+    profiles:
+      - tools
+
+volumes:
+  data:
+    external: true
+  live-ext:
+    external: true
+
+secrets:
+  configuration:
+    file: ../private/configuration.sh
