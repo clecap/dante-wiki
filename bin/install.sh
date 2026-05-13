@@ -77,6 +77,15 @@ case "$METHOD" in
   *)       printf "${ERROR}*** Unknown method: $METHOD ${RESET}\n"; exit 1 ;;
 esac
 
+# We want to prevent this scenario: The remote ssh has shut down and we nevertheless continue installation
+# Different from original intention we install a configuration on a machine for which it was not meant
+if [ "$(hostname)" != "$CONFIGURATION" ]; then
+  printf "${ERROR}*** WARNING: current hostname '$(hostname)' does not match configuration '${CONFIGURATION}'${RESET}\n"
+  askConfirmation " *** Hostname mismatch — are you sure you want to continue?"
+fi
+
+
+
 set -e
 trap 'abort' ERR
 
@@ -117,7 +126,7 @@ ok "Removed all services"
 $DOCKER_SERVICES="database webserver-raw-https phpmyadmin"
 
 start  "Starting docker services"
-  upServices $TOP_DIR/composer/docker-compose-development.yaml $DOCKER_SERVICES
+  upServices $TOP_DIR/composer/docker-compose-development.yaml ${DOCKER_SERVICES}
   waitForWebserverServicing
 ok "Docker services are running"
 
