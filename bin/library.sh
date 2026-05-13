@@ -19,7 +19,7 @@ printBanner()
   printf "****************************\n"
   printf "*** QUICK INSTALLER ${VERSION} ***\n"
   printf "****************************\n\n" 
-  printf "*\n"
+  printf "\n"
   printf "* Running from current working directory ${PWD} \n"
   printf "* Will be installing into ${INSTALL_DIR} \n"
   printf "\n"
@@ -54,7 +54,7 @@ startTimer() {
 
 
 start() {
-  printf "$GREEN $1\n "
+  printf "${GREEN}$1\n "
   TIMER_START=$(date +%s)
 }
 
@@ -202,18 +202,6 @@ build()
   ok "$GREEN---DONE$RESET"
 }
 
-
-# pull by using the provided docker image specification
-# One parameter needed: docker image specification
-pullBySpec()
-{
-  if [ -z "$1" ]; then
-    printf "${ERROR}*** pullBySpec: no image spec given${RESET}\n"; return 1
-  fi
-  printf "\n$GREEN---Pulling docker image by spec from $1 $RESET\n"
-  docker pull "$1"
-  ok "DONE pulling docker image by spec"
-}
 
 
 

@@ -87,11 +87,11 @@ trap 'abort' ERR
 printBanner
 
 start "Doing a docker pull for ${SPEC}"
-  pullBySpec ${SPEC}
+  docker pull ${SPEC}
 ok "Pulled"
 
 start "Providing information on the specified image ${SPEC}"
-  getImageInfo "${D_SPEC}"
+  getImageInfo "${SPEC}"
 ok "Provided information on ${SPEC}"
 
 start "Removing all docker services for a clean restart (allowing for user abort)"
