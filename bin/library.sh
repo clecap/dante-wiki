@@ -176,15 +176,27 @@ openChrome()
 # take down all services of composer file $1
 downAllServices()
 {
+  listServices
+  askConfirmation "Did you *** SAVE *** the  (1) GIT files and (2) the SYSTEM files and (3) the USER content - we will now down all services an status will no longer be recoverable !!"
+  printf "\n$GREEN---Taking down services...$RESET\n"
+  docker compose -f $1 down
+  printf "\n"
+  listServices
+  printf "$GREEN---DONE$RESET\n" ;
+}
+
+
+
+listServices()
+{
   printf "\n"
   printf "Currently running docker processes are:\n"
   docker ps
   printf "\n\n"
-  askConfirmation "Did you *** SAVE *** the  (1) GIT files and (2) the SYSTEM files and (3) the USER content - we will now down all services an status will no longer be recoverable !!"
-  printf "\n$GREEN---Taking down configuration...$RESET\n"
-  docker compose -f $1 down
-  printf "$GREEN---DONE$RESET\n" ;
 }
+
+
+
 
 # fire up in composer file $1 the services $2 $3 ...
 upServices()
