@@ -1,5 +1,12 @@
 ## Roadmap Ideas
 
+
+## Collaboration
+
+* Shoul duse operational transform or https://github.com/yjs for CRDT data types.
+
+
+
 ### Integration with
 
 * RTF extension
