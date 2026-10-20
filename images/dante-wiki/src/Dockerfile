@@ -52,7 +52,7 @@ RUN \
   set -eux                                                                              && \
   apt-get update                                                                        && \ 
   apt-get install -y --no-install-recommends ca-certificates=20250419                   && \
-  apt-get install -y --no-install-recommends curl=8.14.1-2+deb13u2                      && \
+  apt-get install -y --no-install-recommends curl=8.14.1-2+deb13u7                      && \
   rm -rf /var/lib/apt/lists/*                                                           && \
   mkdir -p /texlive                                                                     && \  
   echo "*** Downloading TeX Live ${TL_ISO_URL} to /texlive/${TL_FILE_NAME}"             && \
@@ -102,9 +102,9 @@ RUN                                                                       \
   set -eux                                                             && \
   apt-get update                                                       && \
   apt-get install -y --no-install-recommends gnupg=2.4.7-21+deb13u1    && \
-  apt-get install -y --no-install-recommends perl=5.40.1-6             && \
-  apt-get install -y --no-install-recommends xz-utils=5.8.1-1          && \
-  apt-get install -y --no-install-recommends libarchive-tools=3.7.4-4  && \
+  apt-get install -y --no-install-recommends perl=5.40.1-6+deb13u1     && \
+  apt-get install -y --no-install-recommends xz-utils=5.8.1-1+deb13u2  && \
+  apt-get install -y --no-install-recommends libarchive-tools=3.7.4-4+deb13u1  && \
   rm -rf /var/lib/apt/lists/*                                          && \
                                                                           \ 
   echo "*** Downloading TeXlive GPG key from ${GPG_PUBKEY_URL}"        && \
@@ -257,9 +257,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN \
   set -eux                                                      && \ 
   apt-get update                                                && \
-  apt-get install -y --no-install-recommends perl=5.40.1-6              && \
+  apt-get install -y --no-install-recommends perl=5.40.1-6+deb13u1      && \
   apt-get install -y --no-install-recommends ca-certificates=20250419  && \
-  apt-get install -y --no-install-recommends curl=8.14.1-2+deb13u2     && \
+  apt-get install -y --no-install-recommends curl=8.14.1-2+deb13u7     && \
   # recreate required environment
   echo "*** Checking environment file "                                                && \
   ls -l /usr/local     && \
@@ -402,7 +402,12 @@ RUN \
     apt-get install -y   --no-install-recommends  gnuplot-nox  graphviz                                                    && \
     apt-get install -y   --no-install-recommends  msmtp                                                                    && \
     echo "*** *** *** Installing composer "                                                                                && \
-    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer                   && \
+    # Pin composer to 2.8.x: composer >= 2.9 refuses to install packages with security advisories, and MediaWiki 1.39.0
+    # requires exact versions of guzzle, symfony/yaml, php_codesniffer which are affected. Unpin after upgrading MediaWiki.
+    #### TODO: MediaWiki 1.39.0 requires exact versions of guzzle, symfony/yaml and php_codesniffer that now have advisories, 
+    # so nothing could be resolved. 2.8.12 should be the last version without that block.
+    # THIS is a temporary fix until upgrading to hgher version of mediawiki. It includes, possibly, a small security issue.
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=2.8.12  && \
     echo "*** *** *** Installing ds, which needs pecl, which needs php-dev and make "                                      && \
     apt-get install -y --no-install-recommends  php-dev  make                                                              && \
     pecl channel-update pecl.php.net                                                                                       && \

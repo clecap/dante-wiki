@@ -21,8 +21,8 @@ README file for ***generating a development environment***
 2. Attach Visual Studio Code to this container.
 
 ```
-Command Palette: Dev Containers: Attach to Running Container...
-Attach to container dante-wiki
+Command Palette (Cmd-Shift-P)): Dev Containers: Attach to Running Container...
+Attach to container dante-wiki (may take a minute or so!)
 ```
 
 ## Dev Containers
