@@ -1,9 +1,8 @@
 name: Count Lines of Code
 
+# runs only upon a git push
 on:
   push:
-  schedule:
-    - cron: '0 0 * * *'  # Runs every day at midnight
 
 permissions:
   contents: read
@@ -21,27 +20,24 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
-        with:
-          node-version: '20'
-
       - name: Install cloc
-        run: sudo apt-get install cloc
+        run: sudo apt-get update && sudo apt-get install -y cloc
 
-      - name: Run cloc
-        run: cloc .
-
-      - name: Save results
-        id: save-results
+      # Write results outside the checkout, so cloc does not count its own output files.
+      # Exclude .github/results, which holds large generated files (e.g. the SBOM json) and is not our code.
+      - name: Run cloc (txt, md, json)
         run: |
-          mkdir -p .github/results
-          cloc .       > .github/results/cloc_results.txt
-          cloc -json . > .github/results/cloc_results.json
-          cloc -md .   > .github/results/cloc_results.md
+          OUT="$RUNNER_TEMP/cloc-results"
+          mkdir -p "$OUT"
+          cloc --exclude-dir=.git,results .        > "$OUT/cloc_results.txt"
+          cloc --exclude-dir=.git,results --md .   > "$OUT/cloc_results.md"
+          cloc --exclude-dir=.git,results --json . > "$OUT/cloc_results.json"
+          cat "$OUT/cloc_results.txt"
+          # show the markdown table directly on the run page
+          cat "$OUT/cloc_results.md" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload cloc results
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: cloc-results
-          path: .github/results/
+          path: ${{ runner.temp }}/cloc-results/

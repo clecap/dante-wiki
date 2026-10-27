@@ -18,8 +18,16 @@ source ${TOP_DIR}/private/configuration.sh
 # shutdown all running services of this kind after displaying a confirmation (to ensure git has been pushed)
 downAllServices $TOP_DIR/compose/docker-compose-development.yaml   # downAllServices calls askConfirmation itself, no need to call twice
 
-# build
-buildNoCache
+# build: ask whether to use the docker build cache or to build from scratch; no default, anything else aborts
+printf "%b" "\n${ERROR}Use cache or build from scratch?${RESET} [c]ache / [s]cratch "
+read -r reply
+if [[ "$reply" =~ ^[Cc]$ ]]; then
+  build
+elif [[ "$reply" =~ ^[Ss]$ ]]; then
+  buildNoCache
+else
+  abort
+fi
 
 # TODO: research if we can also do this with -d for detached mode and make better use of the health check dependency in the yaml file
 #  docker compose -f $TOP_DIR/composer/docker-compose-development.yaml up -d

@@ -22,7 +22,8 @@ else
   printf "  APACHE_SERVER_CRT_LENGTH IS ${APACHE_SERVER_CRT_LENGTH}\n"
   if [ "$APACHE_SERVER_KEY_LENGTH" -gt 20 -a "$APACHE_SERVER_CRT_LENGTH" -gt 20 ]; then
     printf "*** install-webserver-certificate: Found certificate strings in secret, using them\n"
-    printf "***KEY IS: ${APACHE_SERVER_KEY}\n"
+    # never print the private key into the log, only its sha256 hash (identifies the key without revealing it)
+    printf "***KEY SHA256 IS: %s\n" "$(printf '%s' "${APACHE_SERVER_KEY}" | sha256sum | cut -d' ' -f1)"
     printf "***CRT IS: ${APACHE_SERVER_CRT}\n"
       sudo rm -f /etc/ssl/apache2/server.crt
       sudo rm -f /etc/ssl/apache2/server.key

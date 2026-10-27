@@ -30,7 +30,10 @@ services:
   webserver-raw-https:
     environment:
       - COMPOSER_IDENTITY=webserver-raw-https
-    image: clecap/dante-wiki:latest
+    # Use the locally built image (bin/library.sh: build / buildNoCache tag it as dante-wiki:latest),
+    # NOT clecap/dante-wiki:latest from dockerhub. Otherwise bin/build-run-raw.sh builds an image and
+    # then runs whatever stale copy of the dockerhub image happens to be on this machine.
+    image: dante-wiki:latest
     hostname: ${MY_DOMAINNAME}      
     container_name: dante-wiki-container
     ports:
