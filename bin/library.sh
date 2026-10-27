@@ -218,6 +218,14 @@ build()
   ok "$GREEN---DONE$RESET"
 }
 
+# build the docker image from scratch without using cache
+buildNoCache() 
+{
+  startTimer
+  printf "\n$GREEN---Building image dante-wiki from scratch $RESET\n" ; 
+    docker build --no-cache -t dante-wiki:latest $TOP_DIR/images/dante-wiki/src
+  ok "$GREEN---DONE$RESET"
+}
 
 
 

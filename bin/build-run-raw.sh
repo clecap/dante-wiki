@@ -18,7 +18,8 @@ source ${TOP_DIR}/private/configuration.sh
 # shutdown all running services of this kind after displaying a confirmation (to ensure git has been pushed)
 downAllServices $TOP_DIR/compose/docker-compose-development.yaml   # downAllServices calls askConfirmation itself, no need to call twice
 
-build
+# build
+buildNoCache
 
 # TODO: research if we can also do this with -d for detached mode and make better use of the health check dependency in the yaml file
 #  docker compose -f $TOP_DIR/composer/docker-compose-development.yaml up -d

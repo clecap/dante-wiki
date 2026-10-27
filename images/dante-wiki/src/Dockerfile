@@ -387,6 +387,10 @@ RUN \
     apt-get install -y   --no-install-recommends  php-json  php-xml  php-bcmath  php-tokenizer  php-igbinary  php-opcache  && \
     apt-get install -y   --no-install-recommends  php-pear php-curl                                                        && \
     apt-get install -y   --no-install-recommends  php-fpm                                                                  && \
+    # PHP2Shell (CVE-2026-109618, CVE-2026-109619) is fixed in PHP 8.4.27 (Debian 8.4.27-1~deb13u1).
+    # Fail the build if an older, vulnerable PHP got installed (e.g. from a stale build cache).
+    { php -r 'exit(version_compare(PHP_VERSION, "8.4.27", ">=") ? 0 : 1);'                                                   \
+      || { echo "*** ERROR: PHP $(php -r 'echo PHP_VERSION;') is vulnerable to PHP2Shell, need >= 8.4.27"; exit 1; }; }  && \
     apt-get install -y   --no-install-recommends  default-mysql-client                                                     && \
     apt-get install -y   --no-install-recommends  curl  unzip  git  diffutils                                              && \
     apt-get install -y   --no-install-recommends  logrotate                                                                && \
