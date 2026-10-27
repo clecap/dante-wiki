@@ -83,16 +83,11 @@ else
   printf "${ERROR} Incorrect value of HOST_PROTOCOL is ${HOST_PROTOCOL}\n ${RESET}"
 fi
 
-
-
-
 ## Disable all superfluous configurations
 sudo a2disconf charset.conf
 sudo a2disconf localized-error-pages.conf
 sudo a2disconf security.conf
 sudo a2disconf serve-cgi-bin.conf
-
-
 
 printf "*** run-apache.sh: Starting fpm...\n"
   sudo  stdbuf -o0 -e0  service php8.4-fpm start 

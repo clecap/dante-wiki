@@ -3,10 +3,6 @@
 ##
 ## Prepare the database container while executing on the dantewiki container
 ##
-#
-#  This approach has the advantage that we do not need further scripts for the database container
-#  and can just use the standard configuration
-#
 
 source /home/dante/dantescript/common-defs.sh
 
