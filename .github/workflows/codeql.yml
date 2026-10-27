@@ -1,12 +1,9 @@
 name: "CodeQL (mine)"
 
+# Runs on every push (no paths filter), so that OpenSSF Scorecard's SAST check sees every commit analyzed
 on:
   push:
-    paths:
-      - 'images/**'         
   pull_request:
-    paths:
-      - 'images/**'
   schedule:
     - cron: '0 0 * * *'
 

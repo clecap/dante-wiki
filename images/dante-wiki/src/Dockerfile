@@ -34,7 +34,10 @@ ARG TEXLIVE_FPR=C78B82D8C79512F79CC0D7C80D5E5D9106BAB6BC
 # We should derive subsequent argument values from here in ARG, since ENV values can be used only
 # after the entire ENV command has been executed.
 ARG  TL_FILE_NAME="texlive${TL_YEAR}.iso" 
-ARG  TL_ISO_URL="https://mirror.ctan.org/systems/texlive/Images/${TL_FILE_NAME}" 
+# Fixed mirror instead of mirror.ctan.org: the redirector picks a random mirror per request, which sometimes
+# has a broken TLS certificate, and ISO, .sha512 and .sha512.asc could come from mirrors at different states.
+# Safe, since the ISO is verified against the GPG-signed sha512 hash below.
+ARG  TL_ISO_URL="https://ftp.rrze.uni-erlangen.de/ctan/systems/texlive/Images/${TL_FILE_NAME}"
 
 ENV  DEBIAN_FRONTEND=noninteractive   
 
@@ -56,7 +59,7 @@ RUN \
   rm -rf /var/lib/apt/lists/*                                                           && \
   mkdir -p /texlive                                                                     && \  
   echo "*** Downloading TeX Live ${TL_ISO_URL} to /texlive/${TL_FILE_NAME}"             && \
-  curl -L "${TL_ISO_URL}" -o "/texlive/${TL_FILE_NAME}"                                 && \
+  curl -fL --retry 3 "${TL_ISO_URL}" -o "/texlive/${TL_FILE_NAME}"                      && \
   echo "DONE: Downloaded TeX Live iso "                                                 && \
   ls -l /texlive                                                                        
 
@@ -65,7 +68,7 @@ RUN \
 ##
 #   Use only one ENV command, as this reduces the number of layers
 ENV \
-  # URLs for ISO + signature; mirror.ctan.org will redirect to a nearby mirror
+  # URL of the TeX Live signing key (ISO + hash URLs: see TL_ISO_URL above)
   # URL of the GPG key (silence hadolint, since this is a public key)
   # hadolint ignore=SC2154
   GPG_PUBKEY_URL="https://www.tug.org/texlive/files/texlive.asc" \
@@ -157,14 +160,14 @@ RUN                                                                             
   echo "*** Found TL_YEAR=${TL_YEAR}" && \
   echo "*** Found TL_YEAR=${TL_ISO_URL}" && \
   echo "*** Downloading TeX Live ISO hash ${TL_ISO_URL}.sha512"                         && \
-  curl -L "${TL_ISO_URL}.sha512" -o "/texlive/${TL_FILE_NAME}.sha512"                   && \
+  curl -fL --retry 3 "${TL_ISO_URL}.sha512" -o "/texlive/${TL_FILE_NAME}.sha512"        && \
   echo "DONE: Downloaded TeX Live ISO hash ${TL_ISO_URL}.sha512"                        && \
                                                                                            \
   echo "*** File contents of /texlive/${TL_FILE_NAME}.sha512 is as follows: "           && \
   cat "/texlive/${TL_FILE_NAME}.sha512"                                                 && \
                                                                                            \
   echo "*** Downloading TeX Live ISO hash signataure ${TL_ISO_URL}.sha512.asc"          && \
-  curl -L "${TL_ISO_URL}.sha512.asc" -o "/texlive/${TL_FILE_NAME}.sha512.asc"           && \
+  curl -fL --retry 3 "${TL_ISO_URL}.sha512.asc" -o "/texlive/${TL_FILE_NAME}.sha512.asc" && \
                                                                                            \
   echo "*** Verifying signature on the hash value "                                     && \
   gpg --verify "/texlive/${TL_FILE_NAME}.sha512.asc" "/texlive/${TL_FILE_NAME}.sha512"  && \
