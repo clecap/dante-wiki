@@ -16,7 +16,7 @@
 # ==========================
 #  Stage 1: TeX Live builder
 # ==========================
-FROM debian:stable-20260803-slim AS texlive-ready
+FROM debian:stable-20260803-slim@sha256:1710bde34461551a19a47c787885ec9ad7058d9a5bead2affb8d088fa2f8502b AS texlive-ready
 
 ##
 ## PARAMETERS for the build
@@ -222,7 +222,7 @@ RUN                                                                             
 # =============================
 #  Stage 2: Final runtime image
 # =============================
-FROM debian:stable-20260803-slim AS dante
+FROM debian:stable-20260803-slim@sha256:1710bde34461551a19a47c787885ec9ad7058d9a5bead2affb8d088fa2f8502b AS dante
 
 # Copy only the installed TeX Live tree from the builder stage
 COPY --from=texlive-ready /usr/local/texlive /usr/local/texlive
@@ -602,13 +602,6 @@ RUN  \
 #  Copy your application code to the container
 #  Give non-root user ownership of the application files
 #  Set the default user ## TODO: do we want this? is it compatible with the deletion strategies we need ???
-
-
-
-
-# Just kept in for debugging purposes during development 
-# CMD ["sh", "-c", "while :; do sleep 2073600; done"]
-
 
 ##
 ## Default parameters for the entrypoint script below

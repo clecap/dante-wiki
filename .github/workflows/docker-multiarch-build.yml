@@ -68,7 +68,7 @@ jobs:
       # in case the error is further up than the last 300 lines
       - name: Upload full build log
         if: always()
-        uses: actions/upload-artifact@v4   # TODO: pin to a commit hash like the other actions
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: build-log
           path: build.log

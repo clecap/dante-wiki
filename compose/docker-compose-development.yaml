@@ -118,11 +118,14 @@ services:
   webserver-after-copy:
     environment:
       - COMPOSER_IDENTITY=webserver-after-copy
-      - IMAGE_ID="${IMAGE_ID}"
-      - IMAGE_DIGEST="${IMAGE_DIGEST}"
-      - IMAGE_REPOSITORY="${IMAGE_REPOSITORY}"
-      - IMAGE_CREATED_AT="${IMAGE_CREATED_AT}"
-      - IMAGE_TAG="${IMAGE_TAG}"
+      # set by getImageInfo in bin/library.sh. Compose substitutes variables in the whole file on every command
+      # (also on "down"), so ":-" defaults to empty and silences the "variable is not set" warnings when unset.
+      # No quotes: in this list syntax quotes would become part of the value.
+      - IMAGE_ID=${IMAGE_ID:-}
+      - IMAGE_DIGEST=${IMAGE_DIGEST:-}
+      - IMAGE_REPOSITORY=${IMAGE_REPOSITORY:-}
+      - IMAGE_CREATED_AT=${IMAGE_CREATED_AT:-}
+      - IMAGE_TAG=${IMAGE_TAG:-}
     image: dante-wiki:latest
     hostname: ${MY_DOMAINNAME}      
     container_name: dante-wiki-container
