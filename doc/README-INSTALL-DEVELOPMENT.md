@@ -15,7 +15,7 @@ README file for ***generating a development environment***
 
 ```
   git clone
-  composer/build-run-raw.sh
+  bin/build-run-raw.sh
 ``` 
 
 2. Attach Visual Studio Code to this container.
@@ -47,19 +47,23 @@ git clone --depth 1 https://github.com/clecap/dante-wiki
 
 # Certificate for Development
 
-Proper development processing requires a certificate for localhost which has been generated for the specific
-machine on which you are developing.
+Proper development practice requires a certificate for localhost which has been generated for the specific machine on which you are developing.
 
-
-brew install mkcert
+```
+brew install mkcert              # install mkcert on MacOS
 mkcert -install                  # creates a CA for this Mac and trusts it in the System keychain (Chrome uses it)
-cd ~/some/temp/dir
+cd ~/tmp
 mkcert localhost 127.0.0.1 ::1   # writes localhost+2.pem and localhost+2-key.pem
+```
+
+This generates certificates and keys for  https://localhost, https://127.0.0.1 and https://[::1]
+
+Replace the values in `private/configuration.sh`: 
+* APACHE_SERVER_KEY gets the contents of localhost+2-key.pem, 
+* APACHE_SERVER_CRT gets the contents of localhost+2.pem.
 
 
-Replace the values in private/configuration.sh: APACHE_SERVER_KEY (line 96) gets the contents of localhost+2-key.pem, and APACHE_SERVER_CRT (line 125) gets localhost+2.pem. This file is mounted into the container as /run/secrets/configuration.
-Recreate the container, not just restart it. install-webserver-certificate.sh:15 skips installation when /etc/ssl/apache2/server.crt already exists, so a plain restart keeps the old certificate.
-Restart Chrome completely (Cmd+Q).
+Restart Chrome completely (Cmd+Q) after running mkcert.
 
 
 # Partially old stuff

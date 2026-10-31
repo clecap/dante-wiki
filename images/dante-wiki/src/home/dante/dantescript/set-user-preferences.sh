@@ -34,12 +34,13 @@ setPref "aws-encpw"                    "${MY_AWS_CRYPTO_PASSWORD}"
 ##
 ## SSH Based Backup System Configuration
 ##
-setPref 'ssh-host'           "${SSH_HOST}"
-setPref 'ssh-dump-user'      "${SSH_DUMP_USER}"
-setPref 'ssh-dump-pw'        "${SSH_DUMP_PW}"
-setPref 'ssh-restore-user'   "${SSH_RESTORE_USER}"
-setPref 'ssh-restore-pw'     "${SSH_RESTORE_PW}"
-setPref 'ssh-encpw'          "${SSH_ENCPW}"
+setPref 'ssh-host'              "${SSH_HOST}"
+setPref 'ssh-host-pubsha256'    "${SSH_HOST_PUBSHA256}"
+setPref 'ssh-dump-user'         "${SSH_DUMP_USER}"
+setPref 'ssh-dump-pw'           "${SSH_DUMP_PW}"
+setPref 'ssh-restore-user'      "${SSH_RESTORE_USER}"
+setPref 'ssh-restore-pw'        "${SSH_RESTORE_PW}"
+setPref 'ssh-encpw'             "${SSH_ENCPW}"
 
 ##
 ## Passwords for local backup encryption

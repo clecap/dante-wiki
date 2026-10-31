@@ -1,10 +1,13 @@
 #!/bin/bash
 
-# Generates a (public, private) key pair for use in localhost
-# Mails the public key to SMTP_TO
-# Installs the public and private key
-# 
-# Installs the fingerprint of the ssh host locally
+# CASE 1:  In the docker image we DO have configured an apache certificate and key.
+#          THEN: Do nothing
+# CASE 2:  In the docker image we do NOT yet have an apache certificate and key
+#          AND environment variables APACHE_SERVER_KEY and APACHE_SERVER_CRT are provided
+#          THEN: Install the contents of these environment variables as Apache certificate and key
+# CASE 3:  In the docker image we do NOT yet have an apache certificate and key
+#          AND either APACHE_SERVER_KEY or APACHE_SERVER_CRT are missing in the environment
+#          THEN: Generate an APACHER_SERVER_KEY and APACHE_SERVER_CRT and send the CRT by email to SMTP_TO
 
 source /home/dante/dantescript/common-defs.sh
 
@@ -83,12 +86,6 @@ else
       printf "*** install-webserver-certificate: Made and mailed key and crt\n"
   fi
 fi  
-
-
-## echo "doing an ssh-keyscan for host ${SSH_HOST}"
-## sudo ssh-keyscan ${SSH_HOST} >> /tmp/known_hosts
-## sudo mv /tmp/known_hosts /root/.ssh/known_hosts
-
 
 exec 1>&1 2>&2
 
