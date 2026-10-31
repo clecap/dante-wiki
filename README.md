@@ -9,7 +9,7 @@ privacy and a full control over the flow of your ideas.
 
 <b style="color:red;">The current status of the system is experimental and there is no stable release yet. Use at your own risk.</b>
 
-#### Shields
+<details><summary><b>Shields and Badges</b></summary>
 
 <table border=0 style="border-collapse: collapse;">
   <tr>
@@ -36,9 +36,9 @@ privacy and a full control over the flow of your ideas.
       <a href="https://github.com/clecap/dante-wiki/blob/cloc-results/cloc_results.md" title="Show detailed line counts!">
         <img alt="Repository code size" src="https://img.shields.io/github/languages/code-size/clecap/dante-wiki?color=lightgreen"></a>&nbsp;
       <a href="https://github.com/clecap/dante-wiki/blob/cloc-results/cloc_results.md" title="Show detailed line counts!">
-        <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com/clecap/dante-wiki/cloc-results/cloc_results.json&label=Files&query=%24.header.n_files&color=lightgreen"></a>&nbsp;
+        <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com/clecap/dante-wiki/refs/heads/cloc-results/cloc_results.json&label=Files&query=%24.header.n_files&color=lightgreen"></a>&nbsp;
       <a href="https://github.com/clecap/dante-wiki/blob/cloc-results/cloc_results.md" title="Show detailed line counts!">
-        <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com/clecap/dante-wiki/cloc-results/cloc_results.json&label=Lines&query=%24.header.n_lines&color=lightgreen"></a>
+        <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com/clecap/dante-wiki/refs/heads/cloc-results/cloc_results.json&label=Lines&query=%24.header.n_lines&color=lightgreen"></a>
 </td>
   </tr>
   <tr>
@@ -64,6 +64,7 @@ privacy and a full control over the flow of your ideas.
     </td>
   </tr>
 </table>
+</details>
 
 
 ### Installation
@@ -89,21 +90,11 @@ privacy and a full control over the flow of your ideas.
 
 <details><summary><b>Repositories</b></summary>
 <ol>
-<li> https://github.com/clecap/dante-wiki contains the installation scripts and the Docker files.
-<li> https://github.com/clecap/dante-delta contains the functions we add or patch to MediaWiki.
-<li> https://github.com/clecap/Parsifal contains the LaTeX extension. 
-<li> https://github.com/clecap/dante-inital-contents stores the inital contents of system, test and help pages for the DanteWiki.
+<li> <a href="https://github.com/clecap/dante-wiki">https://github.com/clecap/dante-wiki</a> contains the installation scripts and the Docker files.
+<li> <a href="https://github.com/clecap/dante-delta">https://github.com/clecap/dante-delta</a> contains the functions we add or patch to MediaWiki.
+<li> <a href="https://github.com/clecap/Parsifal">https://github.com/clecap/Parsifal</a> contains the LaTeX extension. 
+<li> <a href="https://github.com/clecap/dante-wiki-contents">https://github.com/clecap/dante-wiki-contents</a> stores the initial contents of system, test and help pages for the DanteWiki.
 </ol>
-</details>
-
-<details><summary><b>Open source software components</b></summary>
-* Mediawiki (currently version 1.39)
-* PHP
-* LaTeX (TexLive variant)
-* Drawio
-* PyMuPDF
-* MariaDB (in separate docker container)
-
 </details>
 
 <details><summary><b>Software Bill of Material (SBOM)</b></summary>
