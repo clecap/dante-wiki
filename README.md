@@ -31,14 +31,14 @@ privacy and a full control over the flow of your ideas.
       <a href=""><img alt="GitHub all releases" src="https://img.shields.io/github/downloads/clecap/dante-wiki/total"></a></td>
   </tr>
   <tr>
-    <td><b><a href="https://github.com/clecap/dante-wiki/blob/master/.github/results/cloc_results.md" title="Show detailed line counts!">Size</a></b></td>
+    <td><b><a href="https://github.com/clecap/dante-wiki/blob/cloc-results/cloc_results.md" title="Show detailed line counts!">Size</a></b></td>
     <td>
-      <a href="https://github.com/clecap/dante-wiki/blob/master/.github/results/cloc_results.md" title="Show detailed line counts!">
+      <a href="https://github.com/clecap/dante-wiki/blob/cloc-results/cloc_results.md" title="Show detailed line counts!">
         <img alt="Repository code size" src="https://img.shields.io/github/languages/code-size/clecap/dante-wiki?color=lightgreen"></a>&nbsp;
-      <a href="https://github.com/clecap/dante-wiki/blob/master/.github/results/cloc_results.md" title="Show detailed line counts!">
-        <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com/clecap/dante-wiki/master/.github/results/cloc_results.json&label=Files&query=%24.header.n_files&color=lightgreen"></a>&nbsp;
-      <a href="https://github.com/clecap/dante-wiki/blob/master/.github/results/cloc_results.md" title="Show detailed line counts!">
-        <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com/clecap/dante-wiki/master/.github/results/cloc_results.json&label=Lines&query=%24.header.n_lines&color=lightgreen"></a>
+      <a href="https://github.com/clecap/dante-wiki/blob/cloc-results/cloc_results.md" title="Show detailed line counts!">
+        <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com/clecap/dante-wiki/cloc-results/cloc_results.json&label=Files&query=%24.header.n_files&color=lightgreen"></a>&nbsp;
+      <a href="https://github.com/clecap/dante-wiki/blob/cloc-results/cloc_results.md" title="Show detailed line counts!">
+        <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com/clecap/dante-wiki/cloc-results/cloc_results.json&label=Lines&query=%24.header.n_lines&color=lightgreen"></a>
 </td>
   </tr>
   <tr>
@@ -65,8 +65,27 @@ privacy and a full control over the flow of your ideas.
   </tr>
 </table>
 
-### <a name="components"></a>Software Supply Chain
 
+### Installation
+
+<details><summary>Requirements</summary>
+
+<table>
+<tr><td><b>Ecosystem</b></td><td><b>Recommended:</b> Linux, MacOS<br>Windows (Win 10 and 11 with WSL Windows Subsystem for Linux)</td></tr>
+<tr><td><b>Deployment<br> Environment</b></td><td>Docker<br>
+  <a href="doc/README-docker.md">Preparing docker on a Debian VM</a><br>
+  <a href="https://docs.docker.com/engine/install/">Preparing docker desktop on an arbitrary machine</a>
+</td></tr>
+<tr><td><b>Software</b></td><td>
+ Installed <code>/bin/bash</code> and <code>curl</code></td></tr>
+<tr><td><b>CPU</b></td><td>minimum 2 vCPUs, recommended 4 vCPUs</td></tr>
+<tr><td><b>RAM</b></td><td>minimum 6GB, recommended 8 GB</td></tr>
+<tr><td><b>DISC</b></td><td>20-30 GB recommended</td></tr>
+</table>
+</details>
+
+
+### <a name="components"></a>Software Supply Chain
 
 <details><summary><b>Repositories</b></summary>
 <ol>
