@@ -16,7 +16,7 @@
 # ==========================
 #  Stage 1: TeX Live builder
 # ==========================
-FROM debian:stable-20260803-slim@sha256:1710bde34461551a19a47c787885ec9ad7058d9a5bead2affb8d088fa2f8502b AS texlive-ready
+FROM debian:stable-20261027-slim@sha256:13e0a2e78aa0554ad5ff66e4e260c6dbcdff807eb1f39d43b9fb0288aae88b04 AS texlive-ready
 
 ##
 ## PARAMETERS for the build
@@ -222,7 +222,7 @@ RUN                                                                             
 # =============================
 #  Stage 2: Final runtime image
 # =============================
-FROM debian:stable-20260803-slim@sha256:1710bde34461551a19a47c787885ec9ad7058d9a5bead2affb8d088fa2f8502b AS dante
+FROM debian:stable-20261027-slim@sha256:13e0a2e78aa0554ad5ff66e4e260c6dbcdff807eb1f39d43b9fb0288aae88b04 AS dante
 
 # Copy only the installed TeX Live tree from the builder stage
 COPY --from=texlive-ready /usr/local/texlive /usr/local/texlive
