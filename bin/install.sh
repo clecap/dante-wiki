@@ -131,6 +131,7 @@ start "Removing all docker services for a clean restart (allowing for user abort
 ok "Removed all services"
 
 
+#tlmgr remove --force tlcockpit && rm -f /usr/bin/tlcockpit
 
 # TODO: research if we can also do this with -d for detached mode and make better use of the health check dependency in the yaml file
 #  docker compose -f $TOP_DIR/composer/docker-compose-development.yaml up -d

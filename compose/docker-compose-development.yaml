@@ -72,43 +72,7 @@ services:
       retries: 5
 
 
-## todo: why do we need get-ante and get-parsifal twice??
-## is the depends_on really working here or is it superfluous??
-## TODO: http or https ?????????????????????????
-  webserver-after-copy:
-    environment:
-      - COMPOSER_IDENTITY=webserver-after-copy
-      # set by getImageInfo in bin/library.sh. Compose substitutes variables in the whole file on every command
-      # (also on "down"), so ":-" defaults to empty and silences the "variable is not set" warnings when unset.
-      # No quotes: in this list syntax quotes would become part of the value.
-      - IMAGE_ID=${IMAGE_ID:-}
-      - IMAGE_DIGEST=${IMAGE_DIGEST:-}
-      - IMAGE_REPOSITORY=${IMAGE_REPOSITORY:-}
-      - IMAGE_CREATED_AT=${IMAGE_CREATED_AT:-}
-      - IMAGE_TAG=${IMAGE_TAG:-}
-    image: dante-wiki:latest
-    hostname: ${MY_DOMAINNAME}      
-    container_name: dante-wiki-container
-    depends_on:
-      copy-to-host:
-        condition: service_completed_successfully
-    volumes:
-      - ../live:/var/www/html
-    ports:
-      - "8080:80"
-      - "4443:443"
-    secrets:
-      - configuration
-    networks: 
-      dante-network:
-        aliases: 
-          - dante.local
-    command: "install-webserver-certificate.sh chown.sh set-user-preferences.sh  run-apache.sh"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
+
 
 
 ## starts a container which has not been initialized but which does not require a copy to the development environment

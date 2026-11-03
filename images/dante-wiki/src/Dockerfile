@@ -16,7 +16,7 @@
 # ==========================
 #  Stage 1: TeX Live builder
 # ==========================
-FROM debian:stable-20260803-slim@sha256:1710bde34461551a19a47c787885ec9ad7058d9a5bead2affb8d088fa2f8502b AS texlive-ready
+FROM debian:stable-20261027-slim@sha256:13e0a2e78aa0554ad5ff66e4e260c6dbcdff807eb1f39d43b9fb0288aae88b04 AS texlive-ready
 
 ##
 ## PARAMETERS for the build
@@ -54,7 +54,7 @@ ENV  DEBIAN_FRONTEND=noninteractive
 RUN \
   set -eux                                                                              && \
   apt-get update                                                                        && \ 
-  apt-get install -y --no-install-recommends ca-certificates=20250419                   && \
+  apt-get install -y --no-install-recommends ca-certificates=20250419+deb13u1                  && \
   apt-get install -y --no-install-recommends curl=8.14.1-2+deb13u7                      && \
   rm -rf /var/lib/apt/lists/*                                                           && \
   mkdir -p /texlive                                                                     && \  
@@ -207,9 +207,13 @@ RUN                                                                             
   ls -l /usr/local                                                                      && \
   ls -l /usr/local/texlive                                                              && \
   echo "DONE: Installing TeX Live "                                                     && \
-                                                                                           \
+  # tlcockpit is a GUI for tlmgr (Java, needs a display): useless in a container. The profile can only
+  # exclude whole collections, and its collection-binextra is needed, so remove the single package here.
+  # --force: collection-binextra depends on tlcockpit, tlmgr would otherwise refuse
+  # We also remove it due to CVE-2020-9546 in maven / com.fasterxml.jackson.core/jackson-databind / 2.9.4
+  # which is pulled in as dependency in tlcockpit
+  /usr/local/texlive/${TL_YEAR}/bin/${TL_PLATFORM}/tlmgr remove --force tlcockpit       && \
   echo "*** Writing file to transport important parameters to next level "              && \
-#
   printf "export TL_YEAR=\"%s\"\n"       "$TL_YEAR"          >> /usr/local/texlive/texlive-environment.sh  && \
   printf "export TL_PLATFORM=\"%s\"\n"   "$TL_PLATFORM"      >> /usr/local/texlive/texlive-environment.sh  && \    
   printf "export PATH=\"/usr/local/texlive/%s/bin/%s:%s\""   "${TL_YEAR}"  "${TL_PLATFORM}" "${PATH}"    >> /usr/local/texlive/texlive-environment.sh  && \
@@ -222,7 +226,7 @@ RUN                                                                             
 # =============================
 #  Stage 2: Final runtime image
 # =============================
-FROM debian:stable-20260803-slim@sha256:1710bde34461551a19a47c787885ec9ad7058d9a5bead2affb8d088fa2f8502b AS dante
+FROM debian:stable-20261027-slim@sha256:13e0a2e78aa0554ad5ff66e4e260c6dbcdff807eb1f39d43b9fb0288aae88b04 AS dante
 
 # Copy only the installed TeX Live tree from the builder stage
 COPY --from=texlive-ready /usr/local/texlive /usr/local/texlive
@@ -261,7 +265,7 @@ RUN \
   set -eux                                                      && \ 
   apt-get update                                                && \
   apt-get install -y --no-install-recommends perl=5.40.1-6+deb13u1      && \
-  apt-get install -y --no-install-recommends ca-certificates=20250419  && \
+  apt-get install -y --no-install-recommends ca-certificates=20250419+deb13u1 && \
   apt-get install -y --no-install-recommends curl=8.14.1-2+deb13u7     && \
   # recreate required environment
   echo "*** Checking environment file "                                                && \

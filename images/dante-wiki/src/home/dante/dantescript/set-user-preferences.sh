@@ -45,7 +45,6 @@ setPref 'ssh-encpw'             "${SSH_ENCPW}"
 ##
 ## ITHUB repository containing initial system contents 
 ##
-setPref 'git-owner'                   "${GIT_OWNER}"
 setPref 'git-repository'              "${GIT_REPOSITORY}"
 setPref 'git-branch'                  "${GIT_BRANCH}"
 setPref 'github-dante-wiki-contents'  "$GITHUB_DANTE_WIKI_CONTENTS"
