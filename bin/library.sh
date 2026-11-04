@@ -209,21 +209,31 @@ upServices()
 
 
 
+# version of the checked out source, as built into the image (see doc/DEVELOPMENT-CI.md):
+# v1.2.3 on a version tag, v1.2.3-4-gabc1234 after it, only the commit hash before the first version tag,
+# "unknown" outside of a git repository (e.g. a copy of this library on a remote machine)
+gitVersion()
+{
+  git -C "$TOP_DIR" describe --tags --always --match 'v[0-9]*.[0-9]*.[0-9]*' 2>/dev/null || echo "unknown"
+}
+
 # build the docker image
-build() 
+build()
 {
   startTimer
-  printf "\n$GREEN---Building image dante-wiki if necessary...$RESET\n" ; 
-    docker build -t dante-wiki:latest $TOP_DIR/images/dante-wiki/src
+  local version=$(gitVersion)
+  printf "\n$GREEN---Building image dante-wiki version $version if necessary...$RESET\n" ;
+    docker build --build-arg DANTE_VERSION="$version" -t dante-wiki:latest $TOP_DIR/images/dante-wiki/src
   ok "$GREEN---DONE$RESET"
 }
 
 # build the docker image from scratch without using cache
-buildNoCache() 
+buildNoCache()
 {
   startTimer
-  printf "\n$GREEN---Building image dante-wiki from scratch $RESET\n" ; 
-    docker build --no-cache -t dante-wiki:latest $TOP_DIR/images/dante-wiki/src
+  local version=$(gitVersion)
+  printf "\n$GREEN---Building image dante-wiki version $version from scratch $RESET\n" ;
+    docker build --no-cache --build-arg DANTE_VERSION="$version" -t dante-wiki:latest $TOP_DIR/images/dante-wiki/src
   ok "$GREEN---DONE$RESET"
 }
 

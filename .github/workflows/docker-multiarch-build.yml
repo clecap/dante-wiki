@@ -3,20 +3,68 @@ name: Build and push multi-arch image
 on:
   push:
     branches:
-      - main
       - master
   workflow_dispatch:
 
 permissions:
   contents: read
 
+# Pushes in quick succession are processed one after the other, so two runs never compute the same version
+concurrency:
+  group: build-${{ github.ref_name }}
+  cancel-in-progress: false
+
 jobs:
+  # The version lives in git tags vMAJOR.MINOR.PATCH. Commit messages starting with break: / feat: / bump:
+  # increase MAJOR / MINOR / PATCH (see .github/scripts/next-version.sh). Only a tag is created, no commit,
+  # so the branch does not change and nobody has to pull.
+  version:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      version: ${{ steps.next.outputs.version }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          fetch-depth: 0          # full history and all tags, needed to find the last version tag
+
+      # Without any version tag yet, only the commits of this push count (the history before is not versioned)
+      - name: Compute next version
+        id: next
+        run: |
+          FIRST_RANGE="${{ github.event.before }}..${{ github.sha }}"
+          git cat-file -e "${{ github.event.before }}" 2>/dev/null || FIRST_RANGE="${{ github.sha }}^!"
+          VERSION=$(.github/scripts/next-version.sh "$FIRST_RANGE")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          if [ -n "$VERSION" ]; then
+            echo "### New version: v$VERSION" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "### No new version (no commit starting with break:, feat: or bump:)" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Create and push version tag
+        if: steps.next.outputs.version != ''
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git tag -a "v${{ steps.next.outputs.version }}" -m "Version ${{ steps.next.outputs.version }}" "${{ github.sha }}"
+          git push origin "v${{ steps.next.outputs.version }}"
+
   build-and-push:
+    needs: version
+    # also run when the version job was skipped (workflow_dispatch), but not when it failed
+    if: ${{ !failure() && !cancelled() }}
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          fetch-depth: 0          # full history and all tags (including the one the version job just pushed), for git describe
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@c7c53464625b32c7a7e944ae62b3e17d2b600130 # v3
@@ -38,9 +86,16 @@ jobs:
       # We call docker buildx directly instead of docker/build-push-action, since the action does not give us
       # the log text. We need the log in a file to show its end on the run page and to upload it as artifact.
       - name: Build and push (amd64 + arm64)
+        env:
+          VERSION: ${{ needs.version.outputs.version }}
         run: |
           # without pipefail the step would report the exit code of tee (always 0) and a failed build would look green
           set -o pipefail
+          # version built into the image: v1.2.3 on a version tag, v1.2.3-4-gabc1234 for commits after it,
+          # only the commit hash (abc1234) before the first version tag. --match: ignore other tags (e.g. "test")
+          DANTE_VERSION=$(git describe --tags --always --match 'v[0-9]*.[0-9]*.[0-9]*')
+          echo "### Image version: $DANTE_VERSION" >> "$GITHUB_STEP_SUMMARY"
+          # ${VERSION:+...}:   a new version also becomes an image tag, e.g. clecap/dante-wiki:1.2.3; without one, nothing
           # --progress=plain:  full plain-text output instead of the collapsing tty display
           # --push:            pushes the image to dockerhub
           # 2>&1 | tee:        buildx writes its log to stderr; show it in the job log and also save it to build.log
@@ -48,8 +103,10 @@ jobs:
             --platform linux/amd64,linux/arm64 \
             --progress=plain \
             --push \
+            --build-arg DANTE_VERSION="$DANTE_VERSION" \
             -t clecap/dante-wiki:latest \
             -t clecap/dante-wiki:dev \
+            ${VERSION:+-t clecap/dante-wiki:$VERSION} \
             2>&1 | tee build.log
 
       # Only on failure: write the last 300 lines of the log into the job summary,

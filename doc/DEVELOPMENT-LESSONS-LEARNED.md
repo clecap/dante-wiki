@@ -1,6 +1,6 @@
 
 
-## Base Image
+## Choice of Base Image: Debian Slim.
 
 The base image is debian slim.
 
@@ -8,15 +8,16 @@ Alpine works, but (especially in the higher versions) poses numerous difficultie
 packages which have not been properly adapted (yet). Also, Alpine repository does not
 keep older versions, since the team claims they do not have the resources for doing so.
 
-Update: Using Alpine instead of Debian proves to have been the one big mistake and time-waster
+Using Alpine instead of Debian proves to have been the one big mistake and time-waster
 in my initial work. Debian is so much more straight-forward and Alpine makes so many things different.
 With a large image size of some 5 GB the different between an Alpine and Debian base (of some 150 MB) 
 is very small. Alpine only is reasonable if what you add to the base really is very small.
 
 
-## Apt-Get
-* Using multiple lines of apt-get seems to work better than all in a single apt-get. Could not pinpoint the
-reason, but observed it that way frequently.
+## Apt-Get: USe multiple apt-get lines.
+
+Using multiple lines of apt-get seems to work better than all in a single apt-get. Could not pinpoint the
+reason, but observed it that way frequently. Also, debugging is easier.
 
 ## Paths in Shells
 
@@ -75,3 +76,6 @@ from envvars which is loaded by apachectl. It works. Recommend not to make it sh
 since this does not work as documented and is badly documented.
 
 
+## Pulling in software into docker
+
+Add ```--retry 5 --retry-delay 10 --retry-all-errors``` to the ```curl``` calls to be able to survive soft errors during builds.

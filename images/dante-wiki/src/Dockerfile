@@ -59,7 +59,8 @@ RUN \
   rm -rf /var/lib/apt/lists/*                                                           && \
   mkdir -p /texlive                                                                     && \  
   echo "*** Downloading TeX Live ${TL_ISO_URL} to /texlive/${TL_FILE_NAME}"             && \
-  curl -fL --retry 3 "${TL_ISO_URL}" -o "/texlive/${TL_FILE_NAME}"                      && \
+  # --retry-all-errors: also retry errors curl considers permanent, e.g. (35) connection reset during TLS handshake
+  curl -fL --retry 5 --retry-delay 10 --retry-all-errors "${TL_ISO_URL}" -o "/texlive/${TL_FILE_NAME}"  && \
   echo "DONE: Downloaded TeX Live iso "                                                 && \
   ls -l /texlive                                                                        
 
@@ -86,11 +87,6 @@ ARG TARGETOS
 ARG TARGETARCH
 ARG TARGETVARIANT
 ARG TARGETPLATFORM
-ARG SOURCE_BRANCH
-ARG SOURCE_COMMIT
-ARG SOURCE_TAG
-ARG DOCKERFILE_PATH
-ARG IMAGE_NAME
 
 # pin shell to a bash and sensure that we do a pipefail
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -111,7 +107,7 @@ RUN                                                                       \
   rm -rf /var/lib/apt/lists/*                                          && \
                                                                           \ 
   echo "*** Downloading TeXlive GPG key from ${GPG_PUBKEY_URL}"        && \
-  curl -fsSL "${GPG_PUBKEY_URL}" -o /tmp/key.asc                       && \
+  curl -fsSL --retry 5 --retry-delay 10 --retry-all-errors "${GPG_PUBKEY_URL}" -o /tmp/key.asc  && \
   echo "DONE: Downloading TeXlive GPG key  from ${GPG_PUBKEY_URL}"     && \
                                                                           \
   echo "*** Importing GPG key"                                         && \
@@ -160,14 +156,14 @@ RUN                                                                             
   echo "*** Found TL_YEAR=${TL_YEAR}" && \
   echo "*** Found TL_YEAR=${TL_ISO_URL}" && \
   echo "*** Downloading TeX Live ISO hash ${TL_ISO_URL}.sha512"                         && \
-  curl -fL --retry 3 "${TL_ISO_URL}.sha512" -o "/texlive/${TL_FILE_NAME}.sha512"        && \
+  curl -fL --retry 5 --retry-delay 10 --retry-all-errors "${TL_ISO_URL}.sha512" -o "/texlive/${TL_FILE_NAME}.sha512"  && \
   echo "DONE: Downloaded TeX Live ISO hash ${TL_ISO_URL}.sha512"                        && \
                                                                                            \
   echo "*** File contents of /texlive/${TL_FILE_NAME}.sha512 is as follows: "           && \
   cat "/texlive/${TL_FILE_NAME}.sha512"                                                 && \
                                                                                            \
   echo "*** Downloading TeX Live ISO hash signataure ${TL_ISO_URL}.sha512.asc"          && \
-  curl -fL --retry 3 "${TL_ISO_URL}.sha512.asc" -o "/texlive/${TL_FILE_NAME}.sha512.asc" && \
+  curl -fL --retry 5 --retry-delay 10 --retry-all-errors "${TL_ISO_URL}.sha512.asc" -o "/texlive/${TL_FILE_NAME}.sha512.asc"  && \
                                                                                            \
   echo "*** Verifying signature on the hash value "                                     && \
   gpg --verify "/texlive/${TL_FILE_NAME}.sha512.asc" "/texlive/${TL_FILE_NAME}.sha512"  && \
@@ -252,11 +248,6 @@ ARG TARGETOS
 ARG TARGETARCH
 ARG TARGETVARIANT
 ARG TARGETPLATFORM
-ARG SOURCE_BRANCH
-ARG SOURCE_COMMIT
-ARG SOURCE_TAG
-ARG DOCKERFILE_PATH
-ARG IMAGE_NAME
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -276,7 +267,6 @@ RUN \
   # Recreate system-wide symlinks into /usr/bin in THIS final image.
   # This respects 'tlpdbopt_sys_bin /usr/bin' stored in the TL database.
   echo "*** Creating TeX Live symlinks under /usr/bin via tlmgr path add"              && \
-  tlmgr option sys_bin /usr/bin                                                        && \
   tlmgr path add                                                                       && \
   rm -rf /var/lib/apt/lists/* 
 ##
@@ -294,13 +284,7 @@ LABEL maintainer="Clemens H. Cap"                                               
   targetos="${TARGETOS}"                                                               \
   targetarch="${TARGETARCH}"                                                           \
   targetvariant="${TARGETVARIANT}"                                                     \
-  targetplatform="${TARGETPLATFORM}"                                                   \
-  org.opencontainers.image.source-branch="$SOURCE_BRANCH"                              \
-  org.opencontainers.image.revision="$SOURCE_COMMIT"                                   \
-  org.opencontainers.image.version="$SOURCE_TAG"                                       \
-  org.opencontainers.image.dockerfile-path="$DOCKERFILE_PATH"                          \
-  org.opencontainers.image.name="$IMAGE_NAME"
-
+  targetplatform="${TARGETPLATFORM}"                                                   
 ##
 ## ENV section
 ##
@@ -331,9 +315,6 @@ ENV LANG=C.UTF-8      \
     TEXMFHOME=/var/www/texmf       \
     # TEXINPUTS might be amended outside of the container as part of Parsifal etc.
     TEXINPUTS=/var/www/texinputs   \
-    #  We are setting the path so that we can more easily exercise and test commands inside of a docker exec shell
-    # TODO: We add the 2025 path while we are migrating from 2024 to 2025 
-    #       We need this currently since it looks like (?) tlmgr is in the 2025 path
     # PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/texlive/$YEAR/bin/x86_64-linux:/bin:/usr/local/texlive/2025/bin/x86_64-linux:/bin        \
     # We must run composer as root, suppress warning and error messages about this
     COMPOSER_ROOT_VERSION=${MEDIAWIKI_VERSION}
@@ -362,7 +343,6 @@ ARG CLEAN_DOCKER_LAYER="          \
       /var/cache/debconf/*-old    \
       /var/lib/apt/lists/*        \
       /var/lib/dpkg/*-old         \
-      /var/lib/dpkg/info/*        \
       /var/cache/apt/*            \
       /var/cache/man/*            \
       /tmp/* "
@@ -384,7 +364,10 @@ RUN \
     ln -sf /bin/bash /bin/sh                                                                                               && \
     echo "*** *** *** Generate target directories for the COPY operation below "                                           && \
     apt-get install -y   --no-install-recommends adduser                                                                   && \
-    useradd -m dante && echo "dante:password" | chpasswd && adduser dante sudo                                             && \
+    useradd -m dante                                                                                                       && \
+########## below hardcoded password taken out by suggestion of claude
+#    useradd -m dante && echo "dante:password" | chpasswd && adduser dante sudo                                             && \
+#
     chown -R dante:dante /home/dante                                                                                       && \
     echo "*** *** *** Installations "                                                                                      && \
     apt-get update                                                                                                         && \
@@ -418,7 +401,7 @@ RUN \
     #### TODO: MediaWiki 1.39.0 requires exact versions of guzzle, symfony/yaml and php_codesniffer that now have advisories, 
     # so nothing could be resolved. 2.8.12 should be the last version without that block.
     # THIS is a temporary fix until upgrading to hgher version of mediawiki. It includes, possibly, a small security issue.
-    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=2.8.12  && \
+    curl -fsS --retry 5 --retry-delay 10 --retry-all-errors https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=2.8.12  && \
     echo "*** *** *** Installing ds, which needs pecl, which needs php-dev and make "                                      && \
     apt-get install -y --no-install-recommends  php-dev  make                                                              && \
     pecl channel-update pecl.php.net                                                                                       && \
@@ -500,6 +483,8 @@ RUN \
     rm -f /etc/cron.daily/apt-compat                                                                                       && \
     echo "*** injecting the correct shell for www-data to enable a su to www-data "                                        && \
     chsh -s "/bin/bash" "www-data"                                                                                         && \
+#   The image runs as www-data, and the startup scripts (run-apache.sh, install-webserver-certificate.sh, ...)
+#   need sudo for configuring and starting apache. TODO: restrict this to a single root-owned script.
     echo "*** Installing and configuring sudo "                                                                            && \
     apt-get install -y --no-install-recommends sudo                                                                        && \
     echo "www-data ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers                                                                 && \
@@ -515,7 +500,7 @@ RUN \
 # Thus we switch to a different user for the following operations
 USER www-data
 
-RUN curl -o "/tmp/$MEDIAWIKI_TARBALL" "$MEDIAWIKI_URL"                                      && \
+RUN curl -fL --retry 5 --retry-delay 10 --retry-all-errors -o "/tmp/$MEDIAWIKI_TARBALL" "$MEDIAWIKI_URL"  && \
     mkdir -p "/var/www/html/${TARGET}"                                                      && \
     tar -xzf "/tmp/$MEDIAWIKI_TARBALL" -C "/var/www/html/${TARGET}" --strip-components=1    && \
     rm "/tmp/$MEDIAWIKI_TARBALL"                                                            && \
@@ -606,6 +591,23 @@ RUN  \
 #  Copy your application code to the container
 #  Give non-root user ownership of the application files
 #  Set the default user ## TODO: do we want this? is it compatible with the deletion strategies we need ???
+
+##
+## Version of DanteWiki, passed in by the build: --build-arg DANTE_VERSION=$(git describe ...)
+##
+#  NOTE: Keep this at the END of the Dockerfile. A changed ARG value invalidates the cache of every later step,
+#        so near the top every new version would rebuild everything, including the TeX Live installation.
+#  Three ways to read it:
+#    ENV:   $DANTE_VERSION in shell scripts in the container
+#    file:  /etc/dante-version, for PHP: php-fpm clears the environment of its workers (clear_env), so getenv may not see the ENV
+#    LABEL: from outside, docker inspect --format '{{index .Config.Labels "org.opencontainers.image.version"}}' IMAGE
+ARG DANTE_VERSION=unknown
+ENV DANTE_VERSION=${DANTE_VERSION}
+LABEL org.opencontainers.image.version="${DANTE_VERSION}"
+#  /etc is writable only by root, the build runs as www-data from above
+USER root
+RUN echo "${DANTE_VERSION}" > /etc/dante-version && chmod 644 /etc/dante-version
+USER www-data
 
 ##
 ## Default parameters for the entrypoint script below
