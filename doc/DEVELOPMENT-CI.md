@@ -83,3 +83,58 @@ so `getenv('DANTE_VERSION')` may return nothing.
 The version is set at the very end of the [Dockerfile](../images/dante-wiki/src/Dockerfile). Keep it there: a changed
 build argument invalidates the docker cache of every later step, so near the top every new version would rebuild
 everything, including the TeX Live installation.
+
+## Branches created by automation
+
+Besides `master`, two kinds of branches show up in the repository. Neither needs any action.
+
+### `cloc-results`
+
+The workflow [count_lines_of_code.yml](../.github/workflows/count_lines_of_code.yml) counts the lines of code on every
+push. On pushes to `master`, it publishes the results (`cloc_results.txt`, `.md`, `.json`) to the branch `cloc-results`,
+where the README badges read them.
+
+* It is always the **same single branch**: the first run creates it, every later run overwrites it.
+* It always holds **exactly one commit**: the workflow builds the results in a fresh repository and force-pushes it,
+  so no history accumulates and `master` stays free of bot commits.
+* Pushes to other branches do not touch it; their results are only attached to the run as artifact `cloc-results`.
+
+### `dependabot/...`
+
+Dependabot ([dependabot.yml](../.github/dependabot.yml)) creates one branch per update, e.g.
+`dependabot/github_actions/actions/checkout-7.0.1`, and opens a pull request from it. GitHub deletes the branch after
+the pull request is merged.
+
+Dependabot updates often touch the workflow files. If you changed the same lines locally, `git pull` reports a merge
+conflict; usually the right resolution keeps both: Dependabot's new version and your own change.
+
+### Removing deleted branches locally
+
+`git fetch` keeps local references to branches that no longer exist on GitHub. To remove them:
+
+```bash
+git fetch --prune                        # once
+git config --global fetch.prune true     # or: prune automatically on every fetch
+```
+
+## Cleaning up old workflow runs
+
+Most workflows run on every push, and Dependabot pull requests start runs of their own, so the *Actions* page fills up
+quickly. The workflow [cleanup-workflow-runs.yml](../.github/workflows/cleanup-workflow-runs.yml) removes old runs:
+
+* **When:** every Monday at 03:00 UTC, or by hand (*Actions → Clean up workflow runs → Run workflow*).
+* **What:** deletes every run older than **90 days**.
+* **Exception:** the last **6 runs of each workflow** are always kept, even when older, so rarely running workflows
+  (e.g. *Sync Labels*) still show their latest results.
+* **Trial run:** when started by hand, the option *Only list what would be deleted* shows in the log what would go,
+  without deleting anything.
+
+Deleting a run also deletes its log and artifacts. Nothing else is affected: version tags, docker images and the
+branch `cloc-results` stay. Deleted runs cannot be restored.
+
+The work is done by the action [Mattraks/delete-workflow-runs](https://github.com/Mattraks/delete-workflow-runs),
+pinned to a commit like all other actions; Dependabot keeps it up to date. To change the period or the minimum,
+edit `retain_days` and `keep_minimum_runs` in the workflow.
+
+The repository setting *Settings → Actions → General → Artifact and log retention* is a different thing: it only
+removes logs and artifacts after some days, the runs themselves stay in the list.

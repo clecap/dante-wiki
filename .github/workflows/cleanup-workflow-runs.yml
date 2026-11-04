@@ -1,0 +1,35 @@
+name: Clean up workflow runs
+
+# Deletes workflow runs older than 90 days, so the Actions page does not fill up with thousands of old runs.
+# Deleting a run also deletes its log and artifacts; tags, images and branches are not affected.
+on:
+  schedule:
+    - cron: '0 3 * * 1'     # every Monday 03:00 UTC
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Only list what would be deleted'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write        # for deleting workflow runs
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@46b06cea07f9e64621fdf066ba77ac6915163d43 # v2.22.3
+        with:
+          egress-policy: audit
+
+      - name: Delete workflow runs older than 90 days
+        uses: Mattraks/delete-workflow-runs@b3018382ca039b53d238908238bd35d1fb14f8ee # v2.1.0
+        with:
+          retain_days: 90
+          keep_minimum_runs: 6          # keep the last 6 runs of each workflow even if older, e.g. for rarely running workflows
+          dry_run: ${{ inputs.dry_run || false }}
