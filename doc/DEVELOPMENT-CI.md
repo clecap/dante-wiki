@@ -32,7 +32,18 @@ On every push to `master`, the workflow [docker-multiarch-build.yml](../.github/
    `clecap/dante-wiki:dev`, plus `clecap/dante-wiki:MAJOR.MINOR.PATCH` if a new version was created.
    Git tag and image tag thus always belong to the same commit.
 
-A manual run (*Actions → Build and push multi-arch image → Run workflow*) only builds; it does not create a version.
+### When the docker image is built
+
+A build takes long and is costly, so it does **not** run on every push. It runs only when
+
+* the push creates a new version (a commit starting with `bump:`, `feat:` or `break:`), or
+* a commit **of this push** starts with `build:` — to get a fresh image without raising the version, e.g.
+  `build: test new PHP version`, or
+* it is started by hand (*Actions → Build and push multi-arch image → Run workflow*). A manual run only builds;
+  it does not create a version.
+
+All other pushes (e.g. `Fixes`) only run the `version` job, which then reports "No docker build" on the run page.
+The keywords are case sensitive: `Build:` does not trigger a build.
 
 Pushes in quick succession are processed one after the other, so two runs never claim the same version number.
 

@@ -25,6 +25,7 @@ jobs:
       contents: write
     outputs:
       version: ${{ steps.next.outputs.version }}
+      build:   ${{ steps.next.outputs.build }}
 
     steps:
       - name: Checkout code
@@ -32,18 +33,27 @@ jobs:
         with:
           fetch-depth: 0          # full history and all tags, needed to find the last version tag
 
-      # Without any version tag yet, only the commits of this push count (the history before is not versioned)
-      - name: Compute next version
+      # PUSH_RANGE: the commits of this push (only this commit if the push created the branch)
+      # Without any version tag yet, only the commits of this push count for the version (the history before is not versioned)
+      # The docker image is built only for a new version or when a commit of this push starts with build:
+      - name: Compute next version and whether to build
         id: next
         run: |
-          FIRST_RANGE="${{ github.event.before }}..${{ github.sha }}"
-          git cat-file -e "${{ github.event.before }}" 2>/dev/null || FIRST_RANGE="${{ github.sha }}^!"
-          VERSION=$(.github/scripts/next-version.sh "$FIRST_RANGE")
+          PUSH_RANGE="${{ github.event.before }}..${{ github.sha }}"
+          git cat-file -e "${{ github.event.before }}" 2>/dev/null || PUSH_RANGE="${{ github.sha }}^!"
+          VERSION=$(.github/scripts/next-version.sh "$PUSH_RANGE")
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           if [ -n "$VERSION" ]; then
             echo "### New version: v$VERSION" >> "$GITHUB_STEP_SUMMARY"
           else
             echo "### No new version (no commit starting with break:, feat: or bump:)" >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [ -n "$VERSION" ] || git log --format=%s "$PUSH_RANGE" | grep -q '^build:'; then
+            echo "build=true" >> "$GITHUB_OUTPUT"
+            echo "### Docker image will be built" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "build=false" >> "$GITHUB_OUTPUT"
+            echo "### No docker build (no new version and no commit starting with build:)" >> "$GITHUB_STEP_SUMMARY"
           fi
 
       - name: Create and push version tag
@@ -56,8 +66,9 @@ jobs:
 
   build-and-push:
     needs: version
-    # also run when the version job was skipped (workflow_dispatch), but not when it failed
-    if: ${{ !failure() && !cancelled() }}
+    # Push: only when the version job asks for it (new version, or a commit starting with build:).
+    # Manual run (workflow_dispatch, version job skipped): always. Never when the version job failed.
+    if: ${{ !failure() && !cancelled() && (github.event_name == 'workflow_dispatch' || needs.version.outputs.build == 'true') }}
     runs-on: ubuntu-latest
 
     steps:
