@@ -3,8 +3,8 @@
 ##
 #
 #  We work in two stages.
-#  Stage 1: Builds a system containing the required flavor of TeX and should not be changed often
-#  Stage 2: Copies in TeX
+#  Stage 1: Build a system containing the required flavor of TeX. It should not be changed often due to runtime.
+#  Stage 2: Copy in TeX system from stage 1
 #
 #  NOTE 1:  Building TeX and copying it in can be cached better, is more robust and minimal
 #           then building and deleting stuff
@@ -13,23 +13,28 @@
 #           ISO image is more robust (only one network call may fail instead of many over a long period of time)
 #           ISO image can be pulled fast, especially when building at dockerhub
 
-# ==========================
-#  Stage 1: TeX Live builder
-# ==========================
-FROM debian:stable-20261027-slim@sha256:13e0a2e78aa0554ad5ff66e4e260c6dbcdff807eb1f39d43b9fb0288aae88b04 AS texlive-ready
-
-##
-## PARAMETERS for the build
-##
-#  NOTE: ARGs do NOT carry over automagically to later stages
+#  NOTE: ARGs do NOT carry over automagically to later stages but may be defined in global scope and then taken in 
 #  NOTE: ARGs cannot be combined to reduce the number of layers
 #
 #  TL_YEAR: TeX Live year (used in paths and ISO name)
 #  TEXLIVE_FPR: Expected fingerprint of the GPG public signing key
 #                Key will be downloaded and checked against this fingerprint
 #                So this amounts to some form of key pinning as well
+
 ARG TL_YEAR=2026
 ARG TEXLIVE_FPR=C78B82D8C79512F79CC0D7C80D5E5D9106BAB6BC
+
+# ==========================
+#  Stage 1: TeX Live builder
+# ==========================
+FROM debian:stable-20261027-slim@sha256:13e0a2e78aa0554ad5ff66e4e260c6dbcdff807eb1f39d43b9fb0288aae88b04 AS texlive-ready
+
+##
+## Take in parameters defined in global scope
+##
+
+ARG TL_YEAR
+ARG TEXLIVE_FPR
 
 # We should derive subsequent argument values from here in ARG, since ENV values can be used only
 # after the entire ENV command has been executed.
@@ -48,23 +53,6 @@ ENV  DEBIAN_FRONTEND=noninteractive
 # NOTE: Each run starts a fresh shell, so need this at the beginning of every RUN
 
 ##
-## DOWNLOAD stage. This takes some time (download 6GB) and so we do this as early as possible
-##   to ensure it can be cached as often as possible
-##
-RUN \
-  set -eux                                                                              && \
-  apt-get update                                                                        && \ 
-  apt-get install -y --no-install-recommends ca-certificates=20250419+deb13u1                  && \
-  apt-get install -y --no-install-recommends curl=8.14.1-2+deb13u7                      && \
-  rm -rf /var/lib/apt/lists/*                                                           && \
-  mkdir -p /texlive                                                                     && \  
-  echo "*** Downloading TeX Live ${TL_ISO_URL} to /texlive/${TL_FILE_NAME}"             && \
-  # --retry-all-errors: also retry errors curl considers permanent, e.g. (35) connection reset during TLS handshake
-  curl -fL --retry 5 --retry-delay 10 --retry-all-errors "${TL_ISO_URL}" -o "/texlive/${TL_FILE_NAME}"  && \
-  echo "DONE: Downloaded TeX Live iso "                                                 && \
-  ls -l /texlive                                                                        
-
-##
 ## ENV Section
 ##
 #   Use only one ENV command, as this reduces the number of layers
@@ -74,10 +62,6 @@ ENV \
   # hadolint ignore=SC2154
   GPG_PUBKEY_URL="https://www.tug.org/texlive/files/texlive.asc" \
   TEXLIVE_PUBKEY_ID="TeX Live Distribution <tex-live@tug.org>" 
-
-
-##### WHAT ABOUT LINUXMUSL ???  TODO: REMOVE THIS FROM PARSIFAL config.php
-
 
 ##
 ## ARGs provided by the build system
@@ -97,40 +81,48 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # - installer runtime (perl, xz-utils for compressed archives)
 # - extracting ISO (libarchive-tools -> bsdtar)
  
-RUN                                                                       \ 
-  set -eux                                                             && \
-  apt-get update                                                       && \
-  apt-get install -y --no-install-recommends gnupg=2.4.7-21+deb13u1    && \
-  apt-get install -y --no-install-recommends perl=5.40.1-6+deb13u1     && \
-  apt-get install -y --no-install-recommends xz-utils=5.8.1-1+deb13u2  && \
+RUN                                                                               \ 
+  set -eux                                                                     && \
+  apt-get update                                                               && \
+  apt-get install -y --no-install-recommends ca-certificates=20250419+deb13u1  && \
+  apt-get install -y --no-install-recommends curl=8.14.1-2+deb13u7             && \
+  apt-get install -y --no-install-recommends gnupg=2.4.7-21+deb13u1            && \
+  apt-get install -y --no-install-recommends perl=5.40.1-6+deb13u1             && \
+  apt-get install -y --no-install-recommends xz-utils=5.8.1-1+deb13u2          && \
   apt-get install -y --no-install-recommends libarchive-tools=3.7.4-4+deb13u1  && \
-  rm -rf /var/lib/apt/lists/*                                          && \
-                                                                          \ 
-  echo "*** Downloading TeXlive GPG key from ${GPG_PUBKEY_URL}"        && \
+  rm -rf /var/lib/apt/lists/*                                                  && \
+                                                                                  \ 
+  echo "*** Downloading TeXlive GPG key from ${GPG_PUBKEY_URL}"                && \
   curl -fsSL --retry 5 --retry-delay 10 --retry-all-errors "${GPG_PUBKEY_URL}" -o /tmp/key.asc  && \
-  echo "DONE: Downloading TeXlive GPG key  from ${GPG_PUBKEY_URL}"     && \
+  echo "DONE: Downloading TeXlive GPG key  from ${GPG_PUBKEY_URL}"             && \
                                                                           \
-  echo "*** Importing GPG key"                                         && \
-  gpg --batch --import /tmp/key.asc                                    && \
-  echo "DONE: Importing the GPG key into the keyring"                  && \
-                                                                          \
-  echo "*** Listing all keyring keys "                                 && \
-  gpg --list-keys --fingerprint                                        && \
-  echo "*** Listing the key we need"                                   && \
-  gpg --list-keys "${TEXLIVE_PUBKEY_ID}"                               && \
-                                                                          \
-  echo "*** Obtaining the current fingerprint "                        && \
+  echo "*** Importing GPG key"                                                 && \
+  gpg --batch --import /tmp/key.asc                                            && \
+  echo "DONE: Importing the GPG key into the keyring"                          && \
+                                                                                  \
+  echo "*** Listing all keyring keys "                                         && \
+  gpg --list-keys --fingerprint                                                && \
+  echo "*** Listing the key we need"                                           && \
+  gpg --list-keys "${TEXLIVE_PUBKEY_ID}"                                       && \
+                                                                                  \
+  echo "*** Obtaining the current fingerprint "                                && \
   ACTUAL_FPR="$(gpg --batch --with-colons --fingerprint "${TEXLIVE_PUBKEY_ID}" | awk -F: '/^fpr:/ {print $10; exit}')"  && \
-  echo "DONE: Obtained current fingerprint:   $ACTUAL_FPR"             && \
-                                                                          \
-  echo "*** Comparing with expected fingerprint: $TEXLIVE_FPR"         && \
+  echo "DONE: Obtained current fingerprint:   $ACTUAL_FPR"                     && \
+                                                                                  \
+  echo "*** Comparing with expected fingerprint: $TEXLIVE_FPR"                 && \
   if [ "${TEXLIVE_FPR}" != "${ACTUAL_FPR}" ]; then   \
     echo "ERROR: Fingerprint of proposed texlive key (${ACTUAL_FPR}) does not match expected fingerprint (${TEXLIVE_FPR})" >&2 ; \
     exit 1 ;   \
   fi  &&       \
   echo "DONE: Fingerprint matches expected value."
 
-RUN                                                                                        \
+# The TeX Live ISO (about 6 GB) is kept in a BuildKit cache mount: a directory of the local builder which survives
+# from build to build (also --no-cache builds) and is shared by all platforms, but never ends up in the image.
+# The ISO is downloaded only if the cached file does not match the GPG-signed sha512 hash, i.e. if it is missing,
+# damaged, from another TeX Live year or reissued upstream.
+#   sharing=locked: parallel builds (amd64 + arm64) wait for each other, so the ISO is downloaded only once
+#   Clear the cache with: docker builder prune --filter type=exec.cachemount
+RUN --mount=type=cache,id=texlive-iso,target=/cache,sharing=locked                        \
   set -eux                                                                              && \
   # Dynamically obtain information on the architecture for which we re building
   #   Keep this in one RUN to have access to the dynamically created environment variables
@@ -154,33 +146,42 @@ RUN                                                                             
                                                                                            \
   echo "*** Found TL_FILE_NAME=${TL_FILE_NAME}" && \
   echo "*** Found TL_YEAR=${TL_YEAR}" && \
-  echo "*** Found TL_YEAR=${TL_ISO_URL}" && \
+  echo "*** Found TL_ISO_URL=${TL_ISO_URL}" && \
+  # work in the cache directory; sha512sum -c expects the ISO in the current directory
+  cd /cache                                                                             && \
   echo "*** Downloading TeX Live ISO hash ${TL_ISO_URL}.sha512"                         && \
-  curl -fL --retry 5 --retry-delay 10 --retry-all-errors "${TL_ISO_URL}.sha512" -o "/texlive/${TL_FILE_NAME}.sha512"  && \
+  curl -fL --retry 5 --retry-delay 10 --retry-all-errors "${TL_ISO_URL}.sha512" -o "${TL_FILE_NAME}.sha512"  && \
   echo "DONE: Downloaded TeX Live ISO hash ${TL_ISO_URL}.sha512"                        && \
                                                                                            \
-  echo "*** File contents of /texlive/${TL_FILE_NAME}.sha512 is as follows: "           && \
-  cat "/texlive/${TL_FILE_NAME}.sha512"                                                 && \
+  echo "*** File contents of /cache/${TL_FILE_NAME}.sha512 is as follows: "             && \
+  cat "${TL_FILE_NAME}.sha512"                                                          && \
                                                                                            \
   echo "*** Downloading TeX Live ISO hash signataure ${TL_ISO_URL}.sha512.asc"          && \
-  curl -fL --retry 5 --retry-delay 10 --retry-all-errors "${TL_ISO_URL}.sha512.asc" -o "/texlive/${TL_FILE_NAME}.sha512.asc"  && \
+  curl -fL --retry 5 --retry-delay 10 --retry-all-errors "${TL_ISO_URL}.sha512.asc" -o "${TL_FILE_NAME}.sha512.asc"  && \
                                                                                            \
   echo "*** Verifying signature on the hash value "                                     && \
-  gpg --verify "/texlive/${TL_FILE_NAME}.sha512.asc" "/texlive/${TL_FILE_NAME}.sha512"  && \
+  gpg --verify "${TL_FILE_NAME}.sha512.asc" "${TL_FILE_NAME}.sha512"                    && \
   echo "DONE: Verified signature on hash value"                                         && \
                                                                                            \
-  ls -l /texlive                                                                        && \
-  echo "*** Verifying hash value "                                                      && \
-  # ensure proper path for sha512sum
-  cd /texlive                                                                           && \
-  sha512sum -c "${TL_FILE_NAME}.sha512"                                                 && \
-  echo "DONE: Verified hash value "                                                     && \                                                                                                                                                                                                            
-                                                                                           \                                                        
+  echo "*** Checking for a cached ISO matching the hash value "                         && \
+  if sha512sum -c "${TL_FILE_NAME}.sha512"; then                                           \
+    echo "DONE: Using cached ISO /cache/${TL_FILE_NAME}";                                  \
+  else                                                                                     \
+    echo "*** No matching cached ISO, downloading TeX Live ${TL_ISO_URL}";                 \
+    # download to a temporary name, so an interrupted download never looks like a complete ISO
+    curl -fL --retry 5 --retry-delay 10 --retry-all-errors "${TL_ISO_URL}" -o "${TL_FILE_NAME}.part"; \
+    mv "${TL_FILE_NAME}.part" "${TL_FILE_NAME}";                                           \
+    echo "*** Verifying hash value of the downloaded ISO";                                 \
+    sha512sum -c "${TL_FILE_NAME}.sha512";                                                 \
+    echo "DONE: Downloaded and verified TeX Live ISO";                                     \
+  fi                                                                                    && \
+  # remove files of other TeX Live years, which would otherwise pile up in the cache
+  find /cache -maxdepth 1 -type f ! -name "${TL_FILE_NAME}*" -print -delete             && \
+  ls -l /cache                                                                          && \
+                                                                                           \
   echo "*** Extracting from ISO "                                                       && \
   mkdir -p /tmp/install-tl                                                              && \
-  bsdtar -xf "/texlive/${TL_FILE_NAME}" -C /tmp/install-tl                              && \
-  # remove ISO as soon as possible so as not to use up space on the device
-  rm "/texlive/${TL_FILE_NAME}"                                                         && \
+  bsdtar -xf "/cache/${TL_FILE_NAME}" -C /tmp/install-tl                                && \
   echo "DONE: Extracted from ISO"                                                       && \
                                                                                            \
   echo "*** Creating TeX Live install profile"                                          && \
@@ -214,7 +215,7 @@ RUN                                                                             
   printf "export TL_PLATFORM=\"%s\"\n"   "$TL_PLATFORM"      >> /usr/local/texlive/texlive-environment.sh  && \    
   printf "export PATH=\"/usr/local/texlive/%s/bin/%s:%s\""   "${TL_YEAR}"  "${TL_PLATFORM}" "${PATH}"    >> /usr/local/texlive/texlive-environment.sh  && \
   echo "*** Cleaning up some files"                                                     && \
-  rm -rf /texlive /tmp/install-tl                                                       && \
+  rm -rf /tmp/install-tl                                                                && \
   echo "DONE: Cleaning up some files"
 
 
@@ -227,8 +228,10 @@ FROM debian:stable-20261027-slim@sha256:13e0a2e78aa0554ad5ff66e4e260c6dbcdff807e
 # Copy only the installed TeX Live tree from the builder stage
 COPY --from=texlive-ready /usr/local/texlive /usr/local/texlive
 
-
-ARG YEAR=2026
+##
+## Take in parameters defined in global scope
+##
+ARG TL_YEAR
 
 ARG MEDIAWIKI_VERSION=1.39.0
 ARG MEDIAWIKI_TARBALL=mediawiki-$MEDIAWIKI_VERSION.tar.gz
@@ -300,22 +303,21 @@ ENV LANG=C.UTF-8      \
     # the following environment variables are needed for TeX operations, for PARSIFAL and DANTEWIKI
     # 
     # main TeX directory
-    TEXDIR=/usr/local/texlive/$YEAR  \
+    TEXDIR=/usr/local/texlive/$TL_YEAR  \
     # director for site-wide local files
     TEXMFLOCAL=/usr/local/texlive/texmf-local  \
     # directory for variable and automatically generated data
-    TEXMFSYSVAR=/usr/local/texlive/$YEAR/texmf-var  \
+    TEXMFSYSVAR=/usr/local/texlive/$TL_YEAR/texmf-var  \
     # directory for local configuration
-    TEXMFSYSCONFIG=/usr/local/texlive/$YEAR/texmf-config \
+    TEXMFSYSCONFIG=/usr/local/texlive/$TL_YEAR/texmf-config \
     # personal directory for variable and automatically generated data
-    TEXMFVAR=/var/www/.texlive$YEAR/texmf-var         \           
+    TEXMFVAR=/var/www/.texlive$TL_YEAR/texmf-var         \           
     # personal directory for local config
-    TEXMFCONFIG=/var/www/.texlive$YEAR/texmf-config   \
+    TEXMFCONFIG=/var/www/.texlive$TL_YEAR/texmf-config   \
     # directory for user specific files
     TEXMFHOME=/var/www/texmf       \
     # TEXINPUTS might be amended outside of the container as part of Parsifal etc.
     TEXINPUTS=/var/www/texinputs   \
-    # PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/texlive/$YEAR/bin/x86_64-linux:/bin:/usr/local/texlive/2025/bin/x86_64-linux:/bin        \
     # We must run composer as root, suppress warning and error messages about this
     COMPOSER_ROOT_VERSION=${MEDIAWIKI_VERSION}
 
@@ -591,23 +593,6 @@ RUN  \
 #  Copy your application code to the container
 #  Give non-root user ownership of the application files
 #  Set the default user ## TODO: do we want this? is it compatible with the deletion strategies we need ???
-
-##
-## Version of DanteWiki, passed in by the build: --build-arg DANTE_VERSION=$(git describe ...)
-##
-#  NOTE: Keep this at the END of the Dockerfile. A changed ARG value invalidates the cache of every later step,
-#        so near the top every new version would rebuild everything, including the TeX Live installation.
-#  Three ways to read it:
-#    ENV:   $DANTE_VERSION in shell scripts in the container
-#    file:  /etc/dante-version, for PHP: php-fpm clears the environment of its workers (clear_env), so getenv may not see the ENV
-#    LABEL: from outside, docker inspect --format '{{index .Config.Labels "org.opencontainers.image.version"}}' IMAGE
-ARG DANTE_VERSION=unknown
-ENV DANTE_VERSION=${DANTE_VERSION}
-LABEL org.opencontainers.image.version="${DANTE_VERSION}"
-#  /etc is writable only by root, the build runs as www-data from above
-USER root
-RUN echo "${DANTE_VERSION}" > /etc/dante-version && chmod 644 /etc/dante-version
-USER www-data
 
 ##
 ## Default parameters for the entrypoint script below

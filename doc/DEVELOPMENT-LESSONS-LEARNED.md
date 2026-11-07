@@ -1,81 +1,100 @@
+# Development: Lessons Learned
 
+Things that cost time to find out, so nobody has to find them out again.
 
-## Choice of Base Image: Debian Slim.
+## Dockerfile
 
-The base image is debian slim.
+### ARGs and build stages
 
-Alpine works, but (especially in the higher versions) poses numerous difficulties for
-packages which have not been properly adapted (yet). Also, Alpine repository does not
-keep older versions, since the team claims they do not have the resources for doing so.
+* An `ARG` inside a stage is visible only in that stage.
+* An `ARG` before the first `FROM` has global scope, but is visible only in the `FROM` lines. To use it inside a
+  stage, the stage must redeclare it with a bare `ARG NAME` (no value); it then inherits the global default or the
+  `--build-arg` value.
 
-Using Alpine instead of Debian proves to have been the one big mistake and time-waster
-in my initial work. Debian is so much more straight-forward and Alpine makes so many things different.
-With a large image size of some 5 GB the different between an Alpine and Debian base (of some 150 MB) 
-is very small. Alpine only is reasonable if what you add to the base really is very small.
+```dockerfile
+ARG TL_YEAR=2026              # global: one place for the value
 
+FROM debian:... AS texlive-ready
+ARG TL_YEAR                   # needed, otherwise TL_YEAR is empty in this stage
+```
 
-## Apt-Get: USe multiple apt-get lines.
+* A changed `ARG` value invalidates the docker cache of every later step that uses it. Therefore the version
+  (`DANTE_VERSION`) is set at the very end of the Dockerfile (see [DEVELOPMENT-CI.md](DEVELOPMENT-CI.md)).
 
-Using multiple lines of apt-get seems to work better than all in a single apt-get. Could not pinpoint the
-reason, but observed it that way frequently. Also, debugging is easier.
+### Options in a variable must be expanded without quotes
 
-## Paths in Shells
+To use a variable holding several options, write `curl ${CURL_OPTS} ...`, not `curl "${CURL_OPTS}" ...`.
+Quoted, curl receives all options as one single argument and fails.
 
-#### Find top level directory inside of a git repository:
+### curl: retry also "permanent" errors
 
-`TOP_DIR=$(git rev-parse --show-toplevel 2>/dev/null || echo "$PWD")`
+Downloads failed with `curl: (35) Recv failure: Connection reset by peer` (connection reset during the TLS handshake).
+`--retry` alone does not help, since curl considers this error permanent. All downloads therefore use
 
-#### get directory this shell is running in
-`DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"`
+```
+curl --retry 5 --retry-delay 10 --retry-all-errors ...
+```
 
-## Arrow keys Issue in Shell
+### TeX Live: fixed mirror instead of mirror.ctan.org
 
-Docker and debian usually has /bin/sh linked to /bin/dash instead of /bin/bash and thus the arrow keys are dysfunctional.
+`mirror.ctan.org` redirects every request to a random mirror. Some mirrors had broken TLS certificates, and the ISO,
+its `.sha512` and its `.sha512.asc` could come from mirrors at different states. We use one fixed mirror. This is safe,
+since the ISO is checked against the GPG-signed sha512 hash.
 
-Solution is to make a fresh link.
+### TeX Live: the ISO download
 
+The ISO is about 6 GB. The docker layer cache does not avoid downloading it again in many cases:
 
-## Docker logs
+* `--no-cache` builds (`buildNoCache`, `generate-nocache.sh`) always download again.
+* A multi-arch build (amd64 + arm64) runs the stage once per platform and downloads twice.
+* `docker builder prune` or a full disk removes the cached layer.
+* On GitHub Actions every run starts on a fresh machine with an empty cache.
 
-Sometimes the docker logs do not produce the logs of events in the right sequence. This may be due to
-1. stderr and stdout being interleaved
-2. stdout being line-buffered and printf only producing a full line at \n
+The solution is a **BuildKit cache mount**:
 
-As a relief we can try to flush stdout and stderr explicitely using:
-  exec 1>&1 2>&2
+```dockerfile
+RUN --mount=type=cache,id=texlive-iso,target=/cache,sharing=locked  ...
+```
 
+* `/cache` is a directory of the local builder. It survives from build to build, also `--no-cache` builds, and is
+  shared by all platforms. Its content never ends up in the image, which also saves a 6 GB layer.
+* Every build downloads only the small `.sha512` and `.sha512.asc` files and verifies the signature. If the cached ISO
+  matches the hash, it is used; otherwise (missing, damaged, other TeX Live year, reissued upstream) it is downloaded
+  again. Files of other years are deleted from the cache.
+* The ISO is downloaded to `….part` and renamed only when complete, so an interrupted download never looks complete.
+* `sharing=locked`: amd64 and arm64 build in parallel; one waits until the other has downloaded, then reuses the file.
+* On GitHub Actions the cache is empty on every run, so it still downloads there (fast in the data center).
+* Show and clear the cache:
 
-## Vscodium Automatic installation of an extension
-``` 
-NAME=file-action-0.0.31.vsix
-rm -f /tmp/${NAME}
-wget https://raw.githubusercontent.com/clecap/file-action/main/${NAME}  -O /tmp/${NAME}
-codium --install-extension /tmp/${NAME}
-rm -f /tmp/${NAME}
-```  
+```bash
+docker buildx du --verbose | grep -A3 texlive-iso        # size of the cache
+docker builder prune --filter type=exec.cachemount       # clear all cache mounts
+```
 
-## VSCODIUM
+### sudo in the image is needed
 
-* Need extension "Ansi Colors" to see colours in output window.
+The image runs as `www-data`, and the startup scripts (`run-apache.sh`, `install-webserver-certificate.sh`, ...)
+call `sudo` to configure and start apache. Removing sudo from the image breaks the container start.
 
-## set -e
+### PHP does not see environment variables
 
-set -e leads to an immediate abort of the script in case of an error. Also a trap is not
-taken (unless, maybe, it is on EXIT). Thus, control does not return to the calling script
-for error handling.
+php-fpm clears the environment of its workers by default (`clear_env`), so `getenv('DANTE_VERSION')` may return
+nothing. Information for PHP goes into a file instead, e.g. `/etc/dante-version`.
 
+## GitHub Actions
 
-## APACHE CONFIGURATION
+### Pushes by the workflow do not start workflows
 
-The concept of the Apache configuration, especially where it comes to access to environment variables
-and conditional directives, is fundamentally brain-damaged from the side of Apache as well as of Debian.
-Sorry to say so.
+A tag or commit pushed with the default `GITHUB_TOKEN` does not trigger other workflows. This avoids endless loops,
+but means a tag created by the version job cannot start a build; the build therefore runs in the same workflow as
+a second job.
 
-Here, we generate shell environment variables for use in Apache configuraiton in env-dante, which is loaded
-from envvars which is loaded by apachectl. It works. Recommend not to make it shorter or more elegant
-since this does not work as documented and is badly documented.
+### git describe needs the full history
 
+`actions/checkout` fetches only the last commit and no tags by default. For `git describe` and for finding the last
+version tag, the checkout needs `fetch-depth: 0`.
 
-## Pulling in software into docker
+### git describe picks up any tag
 
-Add ```--retry 5 --retry-delay 10 --retry-all-errors``` to the ```curl``` calls to be able to survive soft errors during builds.
+`git describe --tags` uses every tag, e.g. a stray tag `test`. Version computations therefore use
+`--match 'v[0-9]*.[0-9]*.[0-9]*'`.
