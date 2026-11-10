@@ -5,7 +5,7 @@
 ##
 ## Configurables
 ##
-export PARSIFAL_BRANCH="dante"
+export PARSIFAL_BRANCH="master"
 
 # the name of the branch to which we will clone
 DANTE_BRANCH=master
