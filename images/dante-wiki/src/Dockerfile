@@ -27,7 +27,7 @@ ARG TEXLIVE_FPR=C78B82D8C79512F79CC0D7C80D5E5D9106BAB6BC
 # ==========================
 #  Stage 1: TeX Live builder
 # ==========================
-FROM debian:stable-20261027-slim@sha256:13e0a2e78aa0554ad5ff66e4e260c6dbcdff807eb1f39d43b9fb0288aae88b04 AS texlive-ready
+FROM debian:stable-20261104-slim@sha256:fbfb4059d2127120aa05b6e6064523d2102552f0cf0026ddf0701c12f1f8f3e0 AS texlive-ready
 
 ##
 ## Take in parameters defined in global scope
@@ -223,7 +223,7 @@ RUN --mount=type=cache,id=texlive-iso,target=/cache,sharing=locked              
 # =============================
 #  Stage 2: Final runtime image
 # =============================
-FROM debian:stable-20261027-slim@sha256:13e0a2e78aa0554ad5ff66e4e260c6dbcdff807eb1f39d43b9fb0288aae88b04 AS dante
+FROM debian:stable-20261104-slim@sha256:fbfb4059d2127120aa05b6e6064523d2102552f0cf0026ddf0701c12f1f8f3e0 AS dante
 
 # Copy only the installed TeX Live tree from the builder stage
 COPY --from=texlive-ready /usr/local/texlive /usr/local/texlive
