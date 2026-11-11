@@ -15,6 +15,7 @@ README file for ***generating a development environment***
 
 ```
   git clone https://github.com/clecap/dante-wiki
+  git config include.path ../.gitconfig
   bin/build-run-raw.sh
 ``` 
 

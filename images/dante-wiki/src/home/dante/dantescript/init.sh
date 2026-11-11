@@ -6,12 +6,6 @@ source /home/dante/dantescript/common-defs.sh
 
 printf "${GREEN}*** THIS IS /dantescript/init.sh ***** ${RESET}"
 
-# report an error and abort init.sh with a non-zero exit status, so that the entrypoint sees the failure
-failInit() {
-  printf "\n${ERROR}*** init.sh ERROR: $1 - ABORTING${RESET}\n"
-  exit 1
-}
-
 
 printf "\n*** init.sh: Copying /home/dante/html material to ${MOUNT}..."
   cp -r /home/dante/html/*    ${MOUNT}
@@ -51,7 +45,7 @@ MEDIAWIKI_SITE_LANG=en
 MEDIAWIKI_ADMIN_USER=${WK_ADMIN_USER}
 MEDIAWIKI_ADMIN_PASS=${WK_ADMIN_PASS}
 
-############# TODO !!
+############# TODO: maybe enable
 MEDIAWIKI_ENABLE_SSL=false
 
 echo ""
@@ -97,7 +91,7 @@ if ! php ${MOUNT}/${TARGET}/maintenance/install.php \
     "$MEDIAWIKI_SITE_NAME" \
     "$MEDIAWIKI_ADMIN_USER"
 then
-  failInit "maintenance/install.php failed"
+  failed "maintenance/install.php failed"
 fi
 
   echo ""
@@ -124,23 +118,23 @@ printf "*** Adding reference to DanteSettings.php ... "
     echo '### Automagically injected by volume /home/dante/dantescript/init.sh '
     echo '###'
     echo 'include __DIR__ . "/DanteSettings.php"; '
-  } >> "${MOUNT}/${TARGET}/LocalSettings.php" || failInit "could not add DanteSettings.php to LocalSettings.php"
+  } >> "${MOUNT}/${TARGET}/LocalSettings.php" || failed "could not add DanteSettings.php to LocalSettings.php"
 printf  "DONE\n"
 
 # overwrite the default main page and sidebar from mediawiki by the default initial-content from dantewiki
 # this also needs an --overwrite flag
 printf "\n*** Checking in sidebar..."
   php ${MOUNT}/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite --prefix "MediaWiki:" "$CONT/Sidebar" \
-    || failInit "importing $CONT/Sidebar failed"
+    || failed "importing $CONT/Sidebar failed"
 printf "DONE\n"
 
 printf "\n*** Checking in MainPage..."
   php ${MOUNT}/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite  "$CONT/Main Page" \
-    || failInit "importing $CONT/Main Page failed"
+    || failed "importing $CONT/Main Page failed"
 printf "DONE\n"
 
 
 # Must do an update, since we have installed all kinds of extensions earlier
-doMaintenanceUpdate || failInit "maintenance/update.php failed"
+doMaintenanceUpdate || failed "maintenance/update.php failed"
 
 printf "\n\n*** /home/dante/dantescript/init.sh COMPLETED \n\n"

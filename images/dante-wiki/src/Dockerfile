@@ -433,7 +433,7 @@ RUN \
     pecl channel-update pecl.php.net                                                                                       && \
     pecl install ds                                                                                                        && \
     apt-get purge -y  php-dev  make                                                                                        && \
-    echo "*** *** *** Install python and pip and then pygments for supporting TeX and Parsifal "                           && \
+    echo "*** *** *** Install python and pip for supporting TeX (minted) and Parsifal "                                    && \
     apt-get install -y --no-install-recommends  python3                                                                    && \
     apt-get install -y --no-install-recommends  python3-pip                                                                && \    
     ln -sf python3 /usr/bin/python                                                                                         && \
@@ -501,7 +501,6 @@ RUN \
     # need wheel package for installing aws command line
     /opt/myenv/bin/pip3 install --no-cache-dir wheel                                                                       && \
     /opt/myenv/bin/pip3 install awscli --use-pep517                                                                        && \
-    ################################################################################################################# /opt/myenv/bin/pip3 install pygments && \
     echo "*** Deactivating virtual python environment"                                                                          && \
     deactivate                                                                                                                   && \
     echo "*** Preventing autoupdates of the image"                                                                         && \
@@ -607,6 +606,8 @@ RUN  \
     /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/clecap/parsifal          Parsifal         master   DEV && \
 #  TODO: THAT actually should be fine to be deprecated Below we ask composer to ignore two CVE audits which are only used in the unit testing framework fo Mediawiki 1.39
 #   composer config --json audit.ignore '["PKSA-z3gr-8qht-p93v", "GHSA-vvj3-c3rp-c85p"]'  && \
+#
+   /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-DrawioEditor         DrawioEditor         REL1_43    && \
    composer update 
 
 

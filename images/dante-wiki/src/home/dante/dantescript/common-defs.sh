@@ -57,6 +57,14 @@ errorTrap()
   sleep 3600
 }
 
+# report an error and abort the calling script with a non-zero exit status, so that the caller sees the failure
+# usage:   some-command || failed "description of what went wrong"
+failed()
+{
+  printf "\n${ERROR}*** $(basename "$0") ERROR: $1 - ABORTING${RESET}\n"
+  exit 1
+}
+
 # trap handler which prints a highly visible warning and then continues
 warn()
 {
