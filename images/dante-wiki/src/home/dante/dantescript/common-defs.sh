@@ -474,11 +474,14 @@ touchLocalSettings()
 
 
 # Do a update run, needed after extension installation
+# Returns the exit status of update.php, so callers can detect a failure
 doMaintenanceUpdate()
 {
   printf "\n*** Doing a mediawiki maintenance update ... "
-    php ${MOUNT}/${TARGET}/maintenance/update.php
-    exec 1>&1 2>&2
+  if ! php ${MOUNT}/${TARGET}/maintenance/update.php; then
+    printf "${ERROR}*** ERROR: update.php failed${RESET}\n"
+    return 1
+  fi
   printf "DONE update.php\n"
 }
 

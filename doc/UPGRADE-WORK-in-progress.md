@@ -312,6 +312,23 @@ Use newest MariaDB compatible.
 Use phpmyadmin.
 
 
+TODO:
+CAVE: Every Database dump contains the ASW and github tokens. This is not what we want !!!
+
+
+
+
+
+
+
+
+
+
+
+
+The Dante content was never loaded into this wiki. The database had only one page, Main_Page. The sidebar is built from MediaWiki:Sidebar and its subpages, and none of them existed. init.sh tries to import the Sidebar page, but that step failed without any error message. No script loads minimal-initial-contents.xml at all. As you chose, I imported the whole XML file (82 pages: the MediaWiki: config pages, the sidebar subpages, Common.js, gadgets, Parsifal templates, and the Help/Test pages). I then rebuilt Recent Changes and the site statistics, and deleted the stale sidebarcache file.
+
+
 
 
 
