@@ -404,7 +404,7 @@ RUN \
     # so nothing could be resolved. 2.8.12 should be the last version without that block.
     # THIS is a temporary fix until upgrading to hgher version of mediawiki. It includes, possibly, a small security issue.
     curl -fsS --retry 5 --retry-delay 10 --retry-all-errors https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=2.8.12  && \
-    echo "*** *** *** Installing ds, which needs pecl, which needs php-dev and make "                                      && \
+    echo "*** *** *** Installing ds (needed for Parsifal cleanup code), which needs pecl, which needs php-dev and make "                                      && \
     apt-get install -y --no-install-recommends  php-dev  make                                                              && \
     pecl channel-update pecl.php.net                                                                                       && \
     pecl install ds                                                                                                        && \
@@ -416,7 +416,7 @@ RUN \
     echo "*** *** *** ldap utilities, required for apache ldap access "                                                    && \
     apt-get install -y --no-install-recommends  ldap-utils                                                                 && \
     echo "*** *** *** Configuring apache modules and environment "                                                         
-  
+ 
  RUN \
     #   select intended operating mode for Apache 
     # the php modules of apache depend on mpm_prefork and must be disabled first 

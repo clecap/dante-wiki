@@ -43,12 +43,20 @@ setPref 'ssh-restore-pw'        "${SSH_RESTORE_PW}"
 setPref 'ssh-encpw'             "${SSH_ENCPW}"
 
 ##
-## ITHUB repository containing initial system contents 
+## GITHUB repository 
 ##
 setPref 'git-repository'              "${GIT_REPOSITORY}"
 setPref 'git-branch'                  "${GIT_BRANCH}"
-setPref 'github-dante-wiki-contents'  "$GITHUB_DANTE_WIKI_CONTENTS"
+setPref 'git-write-token'             "$GIT_WRITE_TOKEN"
+setPref 'git-read-token'              "$GIT_READ_TOKEN"
 
+##
+## GITHUB repository containing initial system contents 
+##
+setPref 'git-dante-system-repository'              "${GIT_DANTE_SYSTEM_REPOSITORY}"
+setPref 'git-dante-system-repository-branch'       "${GIT_DANTE_SYSTEM_BRANCH}"
+setPref 'git-dante-system-read-token'              "$GIT_DANTE_SYSTEM_WRITE_TOKEN"
+setPref 'git-dante-system-write-token'             "$GIT_DANTE_SYSTEM_READ_TOKEN"
 
 ##
 ## Passwords for local backup encryption
