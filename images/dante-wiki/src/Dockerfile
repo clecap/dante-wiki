@@ -95,7 +95,7 @@ RUN                                                                             
   echo "*** Downloading TeXlive GPG key from ${GPG_PUBKEY_URL}"                && \
   curl -fsSL --retry 5 --retry-delay 10 --retry-all-errors "${GPG_PUBKEY_URL}" -o /tmp/key.asc  && \
   echo "DONE: Downloading TeXlive GPG key  from ${GPG_PUBKEY_URL}"             && \
-                                                                          \
+                                                                                  \
   echo "*** Importing GPG key"                                                 && \
   gpg --batch --import /tmp/key.asc                                            && \
   echo "DONE: Importing the GPG key into the keyring"                          && \
