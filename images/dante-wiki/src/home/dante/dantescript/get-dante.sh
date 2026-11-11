@@ -59,7 +59,9 @@ configGitContainer
 
 
 # The default operational mode after a get-dante.sh always is production mode
-cp $MOUNT/$TARGET/DanteSettings-production.php $MOUNT/$TARGET/DanteSettings-used.php
+## cp $MOUNT/$TARGET/DanteSettings-production.php $MOUNT/$TARGET/DanteSettings-used.php
+
+cp $MOUNT/$TARGET/DanteSettings-development.php $MOUNT/$TARGET/DanteSettings-used.php
 
 
 

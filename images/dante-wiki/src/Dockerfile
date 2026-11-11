@@ -24,6 +24,12 @@
 ARG TL_YEAR=2026
 ARG TEXLIVE_FPR=C78B82D8C79512F79CC0D7C80D5E5D9106BAB6BC
 
+# Versions of Mediawiki:  MAJO.MINOR-PATCH
+ARG MEDIAWIKI_MAJOR=1
+ARG MEDIAWIKI_MINOR=43
+ARG MEDIAWIKI_PATCH=11
+
+
 # ==========================
 #  Stage 1: TeX Live builder
 # ==========================
@@ -232,10 +238,14 @@ COPY --from=texlive-ready /usr/local/texlive /usr/local/texlive
 ## Take in parameters defined in global scope
 ##
 ARG TL_YEAR
+ARG MEDIAWIKI_MAJOR
+ARG MEDIAWIKI_MINOR
+ARG MEDIAWIKI_PATCH
 
-ARG MEDIAWIKI_VERSION=1.39.0
-ARG MEDIAWIKI_TARBALL=mediawiki-$MEDIAWIKI_VERSION.tar.gz
-ARG MEDIAWIKI_URL=https://releases.wikimedia.org/mediawiki/1.39/$MEDIAWIKI_TARBALL
+ARG MEDIAWIKI_TARBALL=mediawiki-$MEDIAWIKI_MAJOR.$MEDIAWIKI_MINOR.$MEDIAWIKI_PATCH.tar.gz
+
+ARG MEDIAWIKI_URL=https://releases.wikimedia.org/mediawiki/$MEDIAWIKI_MAJOR.$MEDIAWIKI_MINOR/$MEDIAWIKI_TARBALL
+
 ARG TARGET=/wiki-dir
 
 ARG TOP_PATH=/var/www/html/wiki-dir
@@ -317,9 +327,11 @@ ENV LANG=C.UTF-8      \
     # directory for user specific files
     TEXMFHOME=/var/www/texmf       \
     # TEXINPUTS might be amended outside of the container as part of Parsifal etc.
-    TEXINPUTS=/var/www/texinputs   \
+    TEXINPUTS=/var/www/texinputs   
+
+  ###### TODO: this might be deprecated
     # We must run composer as root, suppress warning and error messages about this
-    COMPOSER_ROOT_VERSION=${MEDIAWIKI_VERSION}
+    ## COMPOSER_ROOT_VERSION=${MEDIAWIKI_VERSION}
 
 
 WORKDIR /tmp
@@ -359,7 +371,7 @@ ARG CLEAN_DOCKER_LAYER="          \
 
 # hadolint ignore=DL4005
 RUN \
-    set -eux   && \
+    set -eux                                                                                                               && \
     apt-get update                                                                                                         && \
     echo "*** *** *** Ensure docker desktop tab opens with a bash allowing command line editing  "                         && \
     rm /bin/sh                                                                                                             && \
@@ -367,24 +379,36 @@ RUN \
     echo "*** *** *** Generate target directories for the COPY operation below "                                           && \
     apt-get install -y   --no-install-recommends adduser                                                                   && \
     useradd -m dante                                                                                                       && \
-########## below hardcoded password taken out by suggestion of claude
-#    useradd -m dante && echo "dante:password" | chpasswd && adduser dante sudo                                             && \
-#
     chown -R dante:dante /home/dante                                                                                       && \
     echo "*** *** *** Installations "                                                                                      && \
     apt-get update                                                                                                         && \
-    apt-get install -y   --no-install-recommends  apache2  apache2-utils openssl                                           && \
+    apt-get install -y   --no-install-recommends  apache2                                                                  && \
+    apt-get install -y   --no-install-recommends  apache2-utils                                                            && \
+    apt-get install -y   --no-install-recommends  openssl                                                                  && \
     apt-get install -y   --no-install-recommends  php                                                                      && \
-    apt-get install -y   --no-install-recommends  php-common  php-mysqli  php-intl  php-apcu  php-mbstring  php-gd         && \
-    apt-get install -y   --no-install-recommends  php-json  php-xml  php-bcmath  php-tokenizer  php-igbinary  php-opcache  && \
+    apt-get install -y   --no-install-recommends  php-common                                                               && \
+    apt-get install -y   --no-install-recommends  php-mysqli                                                               && \
+    apt-get install -y   --no-install-recommends  php-intl                                                                 && \
+    apt-get install -y   --no-install-recommends  php-apcu                                                                 && \
+    apt-get install -y   --no-install-recommends  php-mbstring                                                             && \ 
+    apt-get install -y   --no-install-recommends  php-gd                                                                   && \
+    apt-get install -y   --no-install-recommends  php-json                                                                 && \
+    apt-get install -y   --no-install-recommends  php-xml                                                                  && \
+    apt-get install -y   --no-install-recommends  php-bcmath                                                               && \
+    apt-get install -y   --no-install-recommends  php-tokenizer                                                            && \
+    apt-get install -y   --no-install-recommends  php-igbinary                                                             && \
+    apt-get install -y   --no-install-recommends  php-opcache                                                              && \                
     apt-get install -y   --no-install-recommends  php-pear php-curl                                                        && \
     apt-get install -y   --no-install-recommends  php-fpm                                                                  && \
     # PHP2Shell (CVE-2026-109618, CVE-2026-109619) is fixed in PHP 8.4.27 (Debian 8.4.27-1~deb13u1).
     # Fail the build if an older, vulnerable PHP got installed (e.g. from a stale build cache).
     { php -r 'exit(version_compare(PHP_VERSION, "8.4.27", ">=") ? 0 : 1);'                                                   \
-      || { echo "*** ERROR: PHP $(php -r 'echo PHP_VERSION;') is vulnerable to PHP2Shell, need >= 8.4.27"; exit 1; }; }  && \
+      || { echo "*** ERROR: PHP $(php -r 'echo PHP_VERSION;') is vulnerable to PHP2Shell, need >= 8.4.27"; exit 1; }; }   && \
     apt-get install -y   --no-install-recommends  default-mysql-client                                                     && \
-    apt-get install -y   --no-install-recommends  curl  unzip  git  diffutils                                              && \
+    apt-get install -y   --no-install-recommends  curl                                                                     && \
+    apt-get install -y   --no-install-recommends  unzip                                                                    && \
+    apt-get install -y   --no-install-recommends  git                                                                      && \
+    apt-get install -y   --no-install-recommends  diffutils                                                                && \
     apt-get install -y   --no-install-recommends  logrotate                                                                && \
     #   vim:        it is very convenient to have a vi editor in place for development inside of the container
     apt-get install -y   --no-install-recommends vim                                                                       && \
@@ -410,7 +434,8 @@ RUN \
     pecl install ds                                                                                                        && \
     apt-get purge -y  php-dev  make                                                                                        && \
     echo "*** *** *** Install python and pip and then pygments for supporting TeX and Parsifal "                           && \
-    apt-get install -y --no-install-recommends  python3  python3-pip                                                       && \
+    apt-get install -y --no-install-recommends  python3                                                                    && \
+    apt-get install -y --no-install-recommends  python3-pip                                                                && \    
     ln -sf python3 /usr/bin/python                                                                                         && \
     apt-get install -y --no-install-recommends  python3-setuptools                                                         && \
     echo "*** *** *** ldap utilities, required for apache ldap access "                                                    && \
@@ -457,8 +482,6 @@ RUN \
     a2enmod alias                                                                                                          && \
     a2enmod include                                                                                                        && \
     a2enmod authnz_ldap                                                                                                    && \
-#   GNU parallel helps with fast copying 
-    apt-get install -y --no-install-recommends parallel                                                                    && \
 #   ssh client and rsync needed for doing backups           
     apt-get install -y --no-install-recommends openssh-client                                                              && \
     apt-get install -y --no-install-recommends rsync                                                                       && \
@@ -550,22 +573,21 @@ COPY . /
 
 RUN  \
     /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/kuenzign/WikiMarkdown                                        WikiMarkdown                 main       && \
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-MobileFrontend                MobileFrontend               REL1_39    && \
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-RandomSelection               RandomSelection              REL1_39    && \
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-LabeledSectionTransclusion    LabeledSectionTransclusion   REL1_39    && \
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-RevisionSlider                RevisionSlider               REL1_39    && \
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-NativeSvgHandler              NativeSvgHandler             REL1_39    && \
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-WikiCategoryTagCloud          WikiCategoryTagCloud         REL1_39    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-MobileFrontend                MobileFrontend               REL1_43    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-RandomSelection               RandomSelection              REL1_43    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-LabeledSectionTransclusion    LabeledSectionTransclusion   REL1_43    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-RevisionSlider                RevisionSlider               REL1_43    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-NativeSvgHandler              NativeSvgHandler             REL1_43    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-WikiCategoryTagCloud          WikiCategoryTagCloud         REL1_43    && \
 #
 #
-#    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/samwilson/diagrams-extension                                 Diagrams                     master     && \
+    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/samwilson/diagrams-extension                                 Diagrams                     master     && \
 ##  TODO: diagrams-extension master currently breaks claimed backwards compatibility with MW 1.39
 #
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-ReplaceText                   ReplaceText                  REL1_39    && \
-##    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/ProfessionalWiki/Network                                     Network                      master     && \
-## TODO: Network not compatible with 1.39 release
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-ReplaceText                   ReplaceText                  REL1_43    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/ProfessionalWiki/Network                                     Network                      master     && \
 #
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-SubPageList3                 SubPageList3                  REL1_39    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-SubPageList3                 SubPageList3                  REL1_43    && \
 ##    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/ProfessionalWiki/SubPageList                                SubPageList                   master     && \
 #     SubPageList uses 
 ##    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-SubpageNavigation            SubpageNavigation             REL1_41    && \
@@ -575,14 +597,16 @@ RUN  \
 #  looks like this extension is broken
 #  installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-WikEdDiff WikEdDiff REL1_39
 #  The following is broken currently in REL1_38 only, might be fine in higher releases
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/Universal-Omega/DynamicPageList3                             DynamicPageList3             REL1_39    && \
+ ##   /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/Universal-Omega/DynamicPageList3                             DynamicPageList3             REL1_39    && \
+   /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/Universal-Omega/DynamicPageList4                             DynamicPageList4             REL1_43    && \
 ##  installExtensionGithub https://github.com/clecap/DynamicPageList3 DynamicPageList3 master
 ###### HACK: see README-DynamicPageList3-Clemens.md in TOPD_DIR/own for more details.
 ##  docker cp $TOP_DIR/own/DynamicPageList3/ ${LAP_CONTAINER}:/${MOUNT}/${VOLUME_PATH}/extensions
-#
+######## TODO: umstellen der branch names von new-mw auf REL1_43  und ähnliches bei parsifal und dante.
+  echo "kkkkkkkkkkkkkkkkkkkkkkkk" && \
     /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/clecap/parsifal          Parsifal         master   DEV && \
-#  Below we ask composer to ignore two CVE audits which are only used in the unit testing framework fo Mediawiki 1.39
-   composer config --json audit.ignore '["PKSA-z3gr-8qht-p93v", "GHSA-vvj3-c3rp-c85p"]'  && \
+#  TODO: THAT actually should be fine to be deprecated Below we ask composer to ignore two CVE audits which are only used in the unit testing framework fo Mediawiki 1.39
+#   composer config --json audit.ignore '["PKSA-z3gr-8qht-p93v", "GHSA-vvj3-c3rp-c85p"]'  && \
    composer update 
 
 

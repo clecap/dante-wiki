@@ -2,13 +2,10 @@
 
 # Common environment variables and definitions for all dantescript scripts
 
-##
-## Configurables
-##
-export PARSIFAL_BRANCH="master"
+
 
 # the name of the branch to which we will clone
-DANTE_BRANCH=master
+DANTE_BRANCH=new-mw
 
 # the remote repository for dante-delta
 REMOTE_REPO_DANTE=https://github.com/clecap/dante-delta.git
