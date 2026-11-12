@@ -414,20 +414,22 @@ RUN \
     apt-get install -y   --no-install-recommends vim                                                                       && \
     #   configure git: prevent hints about the default branch master
     git config --global init.defaultBranch master                                                                          && \
-    # install dependencies of mediawiki extensions we need
-    # TODO:     graphviz mscgen plantuml needed for extension:diagrams
-    apt-get install -y   --no-install-recommends  imagemagick  netpbm  djvulibre-bin  librsvg2-bin  xpdf  mscgen           && \
-#    apt-get install -y   --no-install-recommends  openjdk-17-jre-headless                                                 && \
-#    apt-get install -y   --no-install-recommends  plantuml                                                                 && \
-    apt-get install -y   --no-install-recommends  gnuplot-nox  graphviz                                                    && \
-    apt-get install -y   --no-install-recommends  msmtp                                                                    && \
+    #
+    #
+    apt-get install -y   --no-install-recommends   imagemagick                                                             && \
+    apt-get install -y   --no-install-recommends   netpbm                                                                  && \
+    apt-get install -y   --no-install-recommends   djvulibre-bin                                                           && \
+    apt-get install -y   --no-install-recommends   librsvg2-bin                                                            && \
+    apt-get install -y   --no-install-recommends   xpdf                                                                    && \
+    apt-get install -y   --no-install-recommends   gnuplot-nox                                                             && \
+    # graphviz, mscgen, plantum required for: https://www.mediawiki.org/wiki/Extension:Diagrams
+    apt-get install -y   --no-install-recommends   graphviz                                                                && \
+    apt-get install -y   --no-install-recommends   mscgen                                                                  && \
+    apt-get install -y   --no-install-recommends   plantuml                                                                && \   
+    apt-get install -y   --no-install-recommends   msmtp                                                                   && \
     echo "*** *** *** Installing composer "                                                                                && \
-    # Pin composer to 2.8.x: composer >= 2.9 refuses to install packages with security advisories, and MediaWiki 1.39.0
-    # requires exact versions of guzzle, symfony/yaml, php_codesniffer which are affected. Unpin after upgrading MediaWiki.
-    #### TODO: MediaWiki 1.39.0 requires exact versions of guzzle, symfony/yaml and php_codesniffer that now have advisories, 
-    # so nothing could be resolved. 2.8.12 should be the last version without that block.
-    # THIS is a temporary fix until upgrading to hgher version of mediawiki. It includes, possibly, a small security issue.
-    curl -fsS --retry 5 --retry-delay 10 --retry-all-errors https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=2.8.12  && \
+    # Composer >= 2.9 blocks packages with security advisories; see the audit.ignore exception before "composer update" below
+    curl -fsS --retry 5 --retry-delay 10 --retry-all-errors https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=2.11.2  && \
     echo "*** *** *** Installing ds (needed for Parsifal cleanup code), which needs pecl, which needs php-dev and make "                                      && \
     apt-get install -y --no-install-recommends  php-dev  make                                                              && \
     pecl channel-update pecl.php.net                                                                                       && \
@@ -482,6 +484,11 @@ RUN \
     a2enmod alias                                                                                                          && \
     a2enmod include                                                                                                        && \
     a2enmod authnz_ldap                                                                                                    && \
+# remove unwanted apache configuration files
+    a2disconf charset.conf                                                                                                 && \
+    a2disconf localized-error-pages.conf                                                                                   && \
+    a2disconf security.conf                                                                                                && \
+    a2disconf serve-cgi-bin.conf                                                                                           && \
 #   ssh client and rsync needed for doing backups           
     apt-get install -y --no-install-recommends openssh-client                                                              && \
     apt-get install -y --no-install-recommends rsync                                                                       && \
@@ -547,12 +554,16 @@ RUN composer config --no-plugins allow-plugins.wikimedia/composer-merge-plugin t
     composer config --no-plugins allow-plugins.composer/installers true                          && \
     echo "*** *** *** Need the file to exist before being able to configure"                     && \
     echo '{}' > ${TOP_PATH}/composer.local.json                                                  && \
+#   Composer dependencies of extensions: MediaWiki's composer.json merges composer.local.json (merge plugin).
+#   The wildcard include below makes every "composer update" also merge extensions/*/composer.json, so the
+#   dependencies of all extensions present at that moment end up in the shared vendor/ directory.
+#   Example: DrawioEditor REL1_43 needs mwstake/* packages (its extension.json callback mwsInitComponents
+#   is defined there); without this, every page dies with "callback 'mwsInitComponents' is not callable".
+#   merge-dev=false: do not install the development tools (codesniffer, phpunit, ...) listed in require-dev.
+#   NOTE: extensions added later (e.g. in the running container) need another "composer update" in ${TOP_PATH}.
+    COMPOSER=${TOP_PATH}/composer.local.json  composer config --json extra.merge-plugin '{"include":["extensions/*/composer.json"],"merge-dev":false}'  && \
     composer config --global allow-plugins true                                                  && \
     echo "<?php " > ${TOP_PATH}/DanteDynamicInstalls.php                                         && \
-    echo "*** *** *** Install support library for markdown "                                     && \
-    COMPOSER=${TOP_PATH}/composer.local.json  composer require erusev/parsedown                  && \
-    COMPOSER=${TOP_PATH}/composer.local.json  composer require erusev/parsedown-extra            && \
-    COMPOSER=${TOP_PATH}/composer.local.json  composer require benjaminhoegh/parsedown-extended  && \
 #   The next 2 are required for openai / chatgpt integration
     COMPOSER=${TOP_PATH}/composer.local.json  composer require php-http/discovery                && \
     COMPOSER=${TOP_PATH}/composer.local.json  composer require openai-php/client                 && \
@@ -571,16 +582,14 @@ RUN composer config --no-plugins allow-plugins.wikimedia/composer-merge-plugin t
 COPY . /
 
 RUN  \
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/kuenzign/WikiMarkdown                                        WikiMarkdown                 main       && \
     /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-MobileFrontend                MobileFrontend               REL1_43    && \
     /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-RandomSelection               RandomSelection              REL1_43    && \
     /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-LabeledSectionTransclusion    LabeledSectionTransclusion   REL1_43    && \
     /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-RevisionSlider                RevisionSlider               REL1_43    && \
     /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-NativeSvgHandler              NativeSvgHandler             REL1_43    && \
     /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-WikiCategoryTagCloud          WikiCategoryTagCloud         REL1_43    && \
-#
-#
-    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/samwilson/diagrams-extension                                 Diagrams                     master     && \
+   #
+   /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"   https://github.com/samwilson/diagrams-extension                                 Diagrams                     master     && \
 ##  TODO: diagrams-extension master currently breaks claimed backwards compatibility with MW 1.39
 #
     /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-ReplaceText                   ReplaceText                  REL1_43    && \
@@ -596,19 +605,23 @@ RUN  \
 #  looks like this extension is broken
 #  installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-WikEdDiff WikEdDiff REL1_39
 #  The following is broken currently in REL1_38 only, might be fine in higher releases
- ##   /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/Universal-Omega/DynamicPageList3                             DynamicPageList3             REL1_39    && \
    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/Universal-Omega/DynamicPageList4                             DynamicPageList4             REL1_43    && \
-##  installExtensionGithub https://github.com/clecap/DynamicPageList3 DynamicPageList3 master
-###### HACK: see README-DynamicPageList3-Clemens.md in TOPD_DIR/own for more details.
-##  docker cp $TOP_DIR/own/DynamicPageList3/ ${LAP_CONTAINER}:/${MOUNT}/${VOLUME_PATH}/extensions
 ######## TODO: umstellen der branch names von new-mw auf REL1_43  und ähnliches bei parsifal und dante.
   echo "kkkkkkkkkkkkkkkkkkkkkkkk" && \
     /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/clecap/parsifal          Parsifal         master   DEV && \
-#  TODO: THAT actually should be fine to be deprecated Below we ask composer to ignore two CVE audits which are only used in the unit testing framework fo Mediawiki 1.39
-#   composer config --json audit.ignore '["PKSA-z3gr-8qht-p93v", "GHSA-vvj3-c3rp-c85p"]'  && \
-#
    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-DrawioEditor         DrawioEditor         REL1_43    && \
-   composer update 
+##
+  echo "*** Installing drawio external service into target=${TARGET}\n"     && \
+  mkdir -p ${TOP_PATH}/external-services/draw-io/   && \
+  git clone --depth 1 --branch dev --single-branch https://github.com/jgraph/drawio.git ${TOP_PATH}/external-services/draw-io/drawio-dev  && \
+  rm -Rf ${TOP_PATH}/external-services/draw-io/drawio-dev/.git && \
+#  Composer >= 2.9 refuses to install packages with known security advisories. MediaWiki 1.43 core pins
+#  symfony/yaml to exactly 5.4.52 (core composer.json), which has two advisories (fixed in 5.4.54 / 5.4.56),
+#  so without this exception "composer update" cannot resolve anything. The exception is limited to these two
+#  advisories; any other advisory still blocks. Risk is low: MediaWiki parses only its own config/schema YAML
+#  files with it, not user content. REMOVE this once a MediaWiki 1.43 point release raises the symfony/yaml pin.
+   composer config --json audit.ignore '{"CVE-2026-109413": "symfony/yaml 5.4.52 pinned by MediaWiki 1.43 core", "GHSA-hwfg-qwvh-2wfx": "symfony/yaml 5.4.52 pinned by MediaWiki 1.43 core"}'  && \
+   composer update
 
 
 ## 

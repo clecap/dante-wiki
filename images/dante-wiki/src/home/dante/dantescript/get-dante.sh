@@ -63,35 +63,6 @@ configGitContainer
 
 cp $MOUNT/$TARGET/DanteSettings-development.php $MOUNT/$TARGET/DanteSettings-used.php
 
-
-
-##### TODO: temporary taken out while trying to adjust to 1.43 mediawiki
-
-##  installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-DrawioEditor                   DrawioEditor REL1_39
-## This extension is broken currently
-##  Use my own version - see my mediawiki-extensions-DrawioEditor Patch
-#printf "\n*** get-dante.sh: Installing drawio extension ...\n"
-#  printf "   getting drawioeditor mediawiki extension..."
-#    /home/dante/dantescript/install-extension-github.sh  ${MOUNT}/${TARGET}  https://github.com/clecap/mediawiki-extensions-DrawioEditor                      DrawioEditor                master  ; exec 1>&1 2>&2
-#  printf "DONE\n"
-#  printf "   getting PATCH-UploadedFile.php..."
-#    curl -s -o ${MOUNT}/$TARGET/includes/libs/ParamValidator/Util/UploadedFile.php https://raw.githubusercontent.com/clecap/mediawiki-extensions-DrawioEditor/master/PATCH-UploadedFile.php            ; exec 1>&1 2>&2
-#  printf "DONE\n"
-#  printf "   getting PATCH-UploadedBase.php..."
-#    curl -s -o ${MOUNT}/$TARGET/includes/upload/UploadBase.php   https://raw.githubusercontent.com/clecap/mediawiki-extensions-DrawioEditor/master/PATCH-UploadBase.php                                ; exec 1>&1 2>&2
-#  printf "DONE\n"
-#printf "\nDONE installing drawio extension ...\n"
-#exec 1>&1 2>&2https://github.com/clecap/mediawiki-extensions-DrawioEditor/blob/master/README-patch.md
-#printf "\n *** Installing drawio external service into target=${TARGET}\n"
-#  mkdir -p ${MOUNT}/${TARGET}/external-services/draw-io/
-### TODO: below could be done better (not via culr but via clone with depth 0 or similar)
-#  curl -s -o ${MOUNT}/${TARGET}/external-services/dev.zip -L https://github.com/clecap/drawio/archive/refs/heads/dev.zip  ; exec 1>&1 2>&2
-#  unzip -o -q ${MOUNT}/${TARGET}/external-services/dev.zip -d ${MOUNT}/${TARGET}/external-services/draw-io/ ; exec 1>&1 2>&2
-#  rm ${MOUNT}/${TARGET}/external-services/dev.zip ; exec 1>&1 2>&2
-#printf "DONE installing drawio external service\n"
-#exec 1>&1 2>&2     
-
-
 #   inject only, after LocalSettings.php has been generated
 if [ -f "$MOUNT/$TARGET/LocalSettings.php" ]; then
     printf "\n*** get-dante.sh:  connecting to Mediawiki via an injection into LocalSettings.pgp ...\n"
