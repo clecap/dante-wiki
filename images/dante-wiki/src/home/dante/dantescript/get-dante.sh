@@ -3,7 +3,7 @@
 
 if [ -e /home/dante/DONE-getDante ]; then
   printf "\n*** get-dante.sh already done\n"
-  return 0
+  exit 0     # exit, not return: this script is executed by lap-entrypoint.sh, not sourced
 fi
 
 source /home/dante/dantescript/common-defs.sh
@@ -59,34 +59,9 @@ configGitContainer
 
 
 # The default operational mode after a get-dante.sh always is production mode
-cp $MOUNT/$TARGET/DanteSettings-production.php $MOUNT/$TARGET/DanteSettings-used.php
+## cp $MOUNT/$TARGET/DanteSettings-production.php $MOUNT/$TARGET/DanteSettings-used.php
 
-
-
-##  installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-DrawioEditor                   DrawioEditor REL1_39
-## This extension is broken currently
-##  Use my own version - see my mediawiki-extensions-DrawioEditor Patch
-printf "\n*** get-dante.sh: Installing drawio extension ...\n"
-  printf "   getting drawioeditor mediawiki extension..."
-    /home/dante/dantescript/install-extension-github.sh  ${MOUNT}/${TARGET}  https://github.com/clecap/mediawiki-extensions-DrawioEditor                      DrawioEditor                master  ; exec 1>&1 2>&2
-  printf "DONE\n"
-  printf "   getting PATCH-UploadedFile.php..."
-    curl -s -o ${MOUNT}/$TARGET/includes/libs/ParamValidator/Util/UploadedFile.php https://raw.githubusercontent.com/clecap/mediawiki-extensions-DrawioEditor/master/PATCH-UploadedFile.php            ; exec 1>&1 2>&2
-  printf "DONE\n"
-  printf "   getting PATCH-UploadedBase.php..."
-    curl -s -o ${MOUNT}/$TARGET/includes/upload/UploadBase.php   https://raw.githubusercontent.com/clecap/mediawiki-extensions-DrawioEditor/master/PATCH-UploadBase.php                                ; exec 1>&1 2>&2
-  printf "DONE\n"
-printf "\nDONE installing drawio extension ...\n"
-exec 1>&1 2>&2
-printf "\n *** Installing drawio external service into target=${TARGET}\n"
-  mkdir -p ${MOUNT}/${TARGET}/external-services/draw-io/
-## TODO: below could be done better (not via culr but via clone with depth 0 or similar)
-  curl -s -o ${MOUNT}/${TARGET}/external-services/dev.zip -L https://github.com/clecap/drawio/archive/refs/heads/dev.zip  ; exec 1>&1 2>&2
-  unzip -o -q ${MOUNT}/${TARGET}/external-services/dev.zip -d ${MOUNT}/${TARGET}/external-services/draw-io/ ; exec 1>&1 2>&2
-  rm ${MOUNT}/${TARGET}/external-services/dev.zip ; exec 1>&1 2>&2
-printf "DONE installing drawio external service\n"
-exec 1>&1 2>&2     
-
+cp $MOUNT/$TARGET/DanteSettings-development.php $MOUNT/$TARGET/DanteSettings-used.php
 
 #   inject only, after LocalSettings.php has been generated
 if [ -f "$MOUNT/$TARGET/LocalSettings.php" ]; then
@@ -108,6 +83,6 @@ sudo touch /home/dante/DONE-getDante
 
 trap - ERR
 
-printf "${GREEN}*** DONE get-dante.sh${RESET}"git push origin ma
+printf "${GREEN}*** DONE get-dante.sh${RESET}\n"
 
 

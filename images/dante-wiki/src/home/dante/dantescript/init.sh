@@ -3,6 +3,7 @@
 # This entrypoint initializes the database, generates LocalSettings.php and runs update.php
 
 source /home/dante/dantescript/common-defs.sh
+loadSecrets                                       # lap-entrypoint.sh no longer loads the secrets for us
 
 printf "${GREEN}*** THIS IS /dantescript/init.sh ***** ${RESET}"
 
@@ -45,7 +46,7 @@ MEDIAWIKI_SITE_LANG=en
 MEDIAWIKI_ADMIN_USER=${WK_ADMIN_USER}
 MEDIAWIKI_ADMIN_PASS=${WK_ADMIN_PASS}
 
-############# TODO !!
+############# TODO: maybe enable
 MEDIAWIKI_ENABLE_SSL=false
 
 echo ""
@@ -74,7 +75,7 @@ echo "*** CALLING MEDIAWIKI INSTALL ROUTINE maintenance/install.php ------------
 echo ""
 
 
-php ${MOUNT}${TARGET}/maintenance/install.php \
+if ! php ${MOUNT}/${TARGET}/maintenance/install.php \
     --confpath        ${MOUNT}/${TARGET} \
     --dbname         "$MEDIAWIKI_DB_NAME" \
     --dbport         "$MEDIAWIKI_DB_PORT" \
@@ -90,14 +91,13 @@ php ${MOUNT}${TARGET}/maintenance/install.php \
     --pass           "$MEDIAWIKI_ADMIN_PASS" \
     "$MEDIAWIKI_SITE_NAME" \
     "$MEDIAWIKI_ADMIN_USER"
-
-exec 1>&1 2>&2
+then
+  failed "maintenance/install.php failed"
+fi
 
   echo ""
   echo "________________________________  completed maintenance/install.php __________________"
   echo ""
-
-exec 1>&1 2>&2
 
 
 
@@ -111,37 +111,31 @@ fi
 
 
 printf "*** Adding reference to DanteSettings.php ... "
-  echo ' ' >> LocalSettings.php
-  echo '###' >> LocalSettings.php
-  echo '### Automagically injected by volume /home/dante/dantescript/init.sh.sh ' >> LocalSettings.php
-  echo '###' >> LocalSettings.php
-    # NOTE: Doing this with include does not produce an error if the file goes missing
-  echo 'include ("DanteSettings.php"); ' >> LocalSettings.php
-  exec 1>&1 2>&2
+  # NOTE: Doing this with include does not produce an error if the file goes missing
+  # NOTE: absolute paths, so this does not depend on the current working directory
+  {
+    echo ' '
+    echo '###'
+    echo '### Automagically injected by volume /home/dante/dantescript/init.sh '
+    echo '###'
+    echo 'include __DIR__ . "/DanteSettings.php"; '
+  } >> "${MOUNT}/${TARGET}/LocalSettings.php" || failed "could not add DanteSettings.php to LocalSettings.php"
 printf  "DONE\n"
 
 # overwrite the default main page and sidebar from mediawiki by the default initial-content from dantewiki
 # this also needs an --overwrite flag
 printf "\n*** Checking in sidebar..."
-   php ${MOUNT}/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite --prefix "MediaWiki:" $CONT/Sidebar
-  exec 1>&1 2>&2
+  php ${MOUNT}/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite --prefix "MediaWiki:" "$CONT/Sidebar" \
+    || failed "importing $CONT/Sidebar failed"
 printf "DONE\n"
 
 printf "\n*** Checking in MainPage..."
-  php ${MOUNT}/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite  "$CONT/Main Page"
-  exec 1>&1 2>&2
+  php ${MOUNT}/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite  "$CONT/Main Page" \
+    || failed "importing $CONT/Main Page failed"
 printf "DONE\n"
 
 
-
-
-
-set +e 
-trap 'errorTrap' ERR
-
 # Must do an update, since we have installed all kinds of extensions earlier
-doMaintenanceUpdate
-
-trap - ERR
+doMaintenanceUpdate || failed "maintenance/update.php failed"
 
 printf "\n\n*** /home/dante/dantescript/init.sh COMPLETED \n\n"

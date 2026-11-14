@@ -21,8 +21,17 @@
 #                Key will be downloaded and checked against this fingerprint
 #                So this amounts to some form of key pinning as well
 
+# Versions of TeXLive
 ARG TL_YEAR=2026
 ARG TEXLIVE_FPR=C78B82D8C79512F79CC0D7C80D5E5D9106BAB6BC
+
+# Versions of Mediawiki:  MAJO.MINOR.PATCH
+ARG MEDIAWIKI_MAJOR=1
+ARG MEDIAWIKI_MINOR=43
+ARG MEDIAWIKI_PATCH=11
+
+# Versions for picking up the typical extension version from its github distribution
+ARG MEDIAWIKI_EXTENSION_TAG=REL1_43
 
 # ==========================
 #  Stage 1: TeX Live builder
@@ -120,8 +129,11 @@ RUN                                                                             
 # from build to build (also --no-cache builds) and is shared by all platforms, but never ends up in the image.
 # The ISO is downloaded only if the cached file does not match the GPG-signed sha512 hash, i.e. if it is missing,
 # damaged, from another TeX Live year or reissued upstream.
+#
 #   sharing=locked: parallel builds (amd64 + arm64) wait for each other, so the ISO is downloaded only once
+#
 #   Clear the cache with: docker builder prune --filter type=exec.cachemount
+#
 RUN --mount=type=cache,id=texlive-iso,target=/cache,sharing=locked                        \
   set -eux                                                                              && \
   # Dynamically obtain information on the architecture for which we re building
@@ -232,10 +244,15 @@ COPY --from=texlive-ready /usr/local/texlive /usr/local/texlive
 ## Take in parameters defined in global scope
 ##
 ARG TL_YEAR
+ARG MEDIAWIKI_MAJOR
+ARG MEDIAWIKI_MINOR
+ARG MEDIAWIKI_PATCH
+ARG MEDIAWIKI_EXTENSION_TAG
 
-ARG MEDIAWIKI_VERSION=1.39.0
-ARG MEDIAWIKI_TARBALL=mediawiki-$MEDIAWIKI_VERSION.tar.gz
-ARG MEDIAWIKI_URL=https://releases.wikimedia.org/mediawiki/1.39/$MEDIAWIKI_TARBALL
+ARG MEDIAWIKI_TARBALL=mediawiki-$MEDIAWIKI_MAJOR.$MEDIAWIKI_MINOR.$MEDIAWIKI_PATCH.tar.gz
+
+ARG MEDIAWIKI_URL=https://releases.wikimedia.org/mediawiki/$MEDIAWIKI_MAJOR.$MEDIAWIKI_MINOR/$MEDIAWIKI_TARBALL
+
 ARG TARGET=/wiki-dir
 
 ARG TOP_PATH=/var/www/html/wiki-dir
@@ -317,9 +334,11 @@ ENV LANG=C.UTF-8      \
     # directory for user specific files
     TEXMFHOME=/var/www/texmf       \
     # TEXINPUTS might be amended outside of the container as part of Parsifal etc.
-    TEXINPUTS=/var/www/texinputs   \
+    TEXINPUTS=/var/www/texinputs   
+
+  ###### TODO: this might be deprecated
     # We must run composer as root, suppress warning and error messages about this
-    COMPOSER_ROOT_VERSION=${MEDIAWIKI_VERSION}
+    ## COMPOSER_ROOT_VERSION=${MEDIAWIKI_VERSION}
 
 
 WORKDIR /tmp
@@ -359,7 +378,7 @@ ARG CLEAN_DOCKER_LAYER="          \
 
 # hadolint ignore=DL4005
 RUN \
-    set -eux   && \
+    set -eux                                                                                                               && \
     apt-get update                                                                                                         && \
     echo "*** *** *** Ensure docker desktop tab opens with a bash allowing command line editing  "                         && \
     rm /bin/sh                                                                                                             && \
@@ -367,50 +386,76 @@ RUN \
     echo "*** *** *** Generate target directories for the COPY operation below "                                           && \
     apt-get install -y   --no-install-recommends adduser                                                                   && \
     useradd -m dante                                                                                                       && \
-########## below hardcoded password taken out by suggestion of claude
-#    useradd -m dante && echo "dante:password" | chpasswd && adduser dante sudo                                             && \
-#
     chown -R dante:dante /home/dante                                                                                       && \
     echo "*** *** *** Installations "                                                                                      && \
     apt-get update                                                                                                         && \
-    apt-get install -y   --no-install-recommends  apache2  apache2-utils openssl                                           && \
+    apt-get install -y   --no-install-recommends  apache2                                                                  && \
+    apt-get install -y   --no-install-recommends  apache2-utils                                                            && \
+    apt-get install -y   --no-install-recommends  openssl                                                                  && \
     apt-get install -y   --no-install-recommends  php                                                                      && \
-    apt-get install -y   --no-install-recommends  php-common  php-mysqli  php-intl  php-apcu  php-mbstring  php-gd         && \
-    apt-get install -y   --no-install-recommends  php-json  php-xml  php-bcmath  php-tokenizer  php-igbinary  php-opcache  && \
+    apt-get install -y   --no-install-recommends  php-common                                                               && \
+    apt-get install -y   --no-install-recommends  php-mysqli                                                               && \
+    apt-get install -y   --no-install-recommends  php-intl                                                                 && \
+    apt-get install -y   --no-install-recommends  php-apcu                                                                 && \
+    apt-get install -y   --no-install-recommends  php-mbstring                                                             && \ 
+    apt-get install -y   --no-install-recommends  php-gd                                                                   && \
+    apt-get install -y   --no-install-recommends  php-json                                                                 && \
+    apt-get install -y   --no-install-recommends  php-xml                                                                  && \
+    apt-get install -y   --no-install-recommends  php-bcmath                                                               && \
+    apt-get install -y   --no-install-recommends  php-tokenizer                                                            && \
+    apt-get install -y   --no-install-recommends  php-igbinary                                                             && \
+    apt-get install -y   --no-install-recommends  php-opcache                                                              && \                
     apt-get install -y   --no-install-recommends  php-pear php-curl                                                        && \
     apt-get install -y   --no-install-recommends  php-fpm                                                                  && \
     # PHP2Shell (CVE-2026-109618, CVE-2026-109619) is fixed in PHP 8.4.27 (Debian 8.4.27-1~deb13u1).
     # Fail the build if an older, vulnerable PHP got installed (e.g. from a stale build cache).
     { php -r 'exit(version_compare(PHP_VERSION, "8.4.27", ">=") ? 0 : 1);'                                                   \
-      || { echo "*** ERROR: PHP $(php -r 'echo PHP_VERSION;') is vulnerable to PHP2Shell, need >= 8.4.27"; exit 1; }; }  && \
+      || { echo "*** ERROR: PHP $(php -r 'echo PHP_VERSION;') is vulnerable to PHP2Shell, need >= 8.4.27"; exit 1; }; }   && \
     apt-get install -y   --no-install-recommends  default-mysql-client                                                     && \
-    apt-get install -y   --no-install-recommends  curl  unzip  git  diffutils                                              && \
+    apt-get install -y   --no-install-recommends  curl                                                                     && \
+    apt-get install -y   --no-install-recommends  unzip                                                                    && \
+    apt-get install -y   --no-install-recommends  git                                                                      && \
+    apt-get install -y   --no-install-recommends  diffutils                                                                && \
     apt-get install -y   --no-install-recommends  logrotate                                                                && \
     #   vim:        it is very convenient to have a vi editor in place for development inside of the container
     apt-get install -y   --no-install-recommends vim                                                                       && \
     #   configure git: prevent hints about the default branch master
     git config --global init.defaultBranch master                                                                          && \
-    # install dependencies of mediawiki extensions we need
-    # TODO:     graphviz mscgen plantuml needed for extension:diagrams
-    apt-get install -y   --no-install-recommends  imagemagick  netpbm  djvulibre-bin  librsvg2-bin  xpdf  mscgen           && \
-#    apt-get install -y   --no-install-recommends  openjdk-17-jre-headless                                                 && \
-#    apt-get install -y   --no-install-recommends  plantuml                                                                 && \
-    apt-get install -y   --no-install-recommends  gnuplot-nox  graphviz                                                    && \
-    apt-get install -y   --no-install-recommends  msmtp                                                                    && \
+    #
+    #
+    apt-get install -y   --no-install-recommends   imagemagick                                                             && \
+    apt-get install -y   --no-install-recommends   netpbm                                                                  && \
+    apt-get install -y   --no-install-recommends   djvulibre-bin                                                           && \
+    apt-get install -y   --no-install-recommends   librsvg2-bin                                                            && \
+    apt-get install -y   --no-install-recommends   xpdf                                                                    && \
+    apt-get install -y   --no-install-recommends   gnuplot-nox                                                             && \
+    # graphviz, mscgen, plantum required for: https://www.mediawiki.org/wiki/Extension:Diagrams
+    apt-get install -y   --no-install-recommends   graphviz                                                                && \
+    apt-get install -y   --no-install-recommends   mscgen                                                                  && \
+    # PlantUML: NOT the Debian package "plantuml" (trixie ships the outdated 1.2020.2 from 2020).
+    #   Instead: official jar from https://github.com/plantuml/plantuml/releases, pinned by version and sha256.
+    #   To update: change version and sha256 (the sha256 is shown as "digest" of plantuml-<version>.jar on the release page).
+    #   The Debian package used to pull in Java; we now install the JRE explicitly (graphviz is installed above).
+    #   The wrapper /usr/local/bin/plantuml keeps the "plantuml" command available for the Diagrams extension.
+    apt-get install -y   --no-install-recommends   default-jre-headless                                                    && \
+    mkdir -p /opt/plantuml                                                                                                 && \
+    curl -fsSL --retry 5 --retry-delay 10 --retry-all-errors -o /opt/plantuml/plantuml.jar \
+      https://github.com/plantuml/plantuml/releases/download/v1.2026.10/plantuml-1.2026.10.jar                             && \
+    echo "e9bc9e6b2eb715e8c0c929f3dcb5fc1923be13f37599b09c293c66d354e88686  /opt/plantuml/plantuml.jar" | sha256sum -c -  && \
+    printf '#!/bin/sh\nexec java -Djava.awt.headless=true -jar /opt/plantuml/plantuml.jar "$@"\n' > /usr/local/bin/plantuml  && \
+    chmod 755 /usr/local/bin/plantuml                                                                                      && \
+    apt-get install -y   --no-install-recommends   msmtp                                                                   && \
     echo "*** *** *** Installing composer "                                                                                && \
-    # Pin composer to 2.8.x: composer >= 2.9 refuses to install packages with security advisories, and MediaWiki 1.39.0
-    # requires exact versions of guzzle, symfony/yaml, php_codesniffer which are affected. Unpin after upgrading MediaWiki.
-    #### TODO: MediaWiki 1.39.0 requires exact versions of guzzle, symfony/yaml and php_codesniffer that now have advisories, 
-    # so nothing could be resolved. 2.8.12 should be the last version without that block.
-    # THIS is a temporary fix until upgrading to hgher version of mediawiki. It includes, possibly, a small security issue.
-    curl -fsS --retry 5 --retry-delay 10 --retry-all-errors https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=2.8.12  && \
+    # Composer >= 2.9 blocks packages with security advisories; see the audit.ignore exception before "composer update" below
+    curl -fsS --retry 5 --retry-delay 10 --retry-all-errors https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=2.11.2  && \
     echo "*** *** *** Installing ds (needed for Parsifal cleanup code), which needs pecl, which needs php-dev and make "                                      && \
     apt-get install -y --no-install-recommends  php-dev  make                                                              && \
     pecl channel-update pecl.php.net                                                                                       && \
     pecl install ds                                                                                                        && \
     apt-get purge -y  php-dev  make                                                                                        && \
-    echo "*** *** *** Install python and pip and then pygments for supporting TeX and Parsifal "                           && \
-    apt-get install -y --no-install-recommends  python3  python3-pip                                                       && \
+    echo "*** *** *** Install python and pip for supporting TeX (minted) and Parsifal "                                    && \
+    apt-get install -y --no-install-recommends  python3                                                                    && \
+    apt-get install -y --no-install-recommends  python3-pip                                                                && \    
     ln -sf python3 /usr/bin/python                                                                                         && \
     apt-get install -y --no-install-recommends  python3-setuptools                                                         && \
     echo "*** *** *** ldap utilities, required for apache ldap access "                                                    && \
@@ -457,8 +502,11 @@ RUN \
     a2enmod alias                                                                                                          && \
     a2enmod include                                                                                                        && \
     a2enmod authnz_ldap                                                                                                    && \
-#   GNU parallel helps with fast copying 
-    apt-get install -y --no-install-recommends parallel                                                                    && \
+# remove unwanted apache configuration files
+    a2disconf charset.conf                                                                                                 && \
+    a2disconf localized-error-pages.conf                                                                                   && \
+    a2disconf security.conf                                                                                                && \
+    a2disconf serve-cgi-bin.conf                                                                                           && \
 #   ssh client and rsync needed for doing backups           
     apt-get install -y --no-install-recommends openssh-client                                                              && \
     apt-get install -y --no-install-recommends rsync                                                                       && \
@@ -478,7 +526,6 @@ RUN \
     # need wheel package for installing aws command line
     /opt/myenv/bin/pip3 install --no-cache-dir wheel                                                                       && \
     /opt/myenv/bin/pip3 install awscli --use-pep517                                                                        && \
-    ################################################################################################################# /opt/myenv/bin/pip3 install pygments && \
     echo "*** Deactivating virtual python environment"                                                                          && \
     deactivate                                                                                                                   && \
     echo "*** Preventing autoupdates of the image"                                                                         && \
@@ -525,12 +572,16 @@ RUN composer config --no-plugins allow-plugins.wikimedia/composer-merge-plugin t
     composer config --no-plugins allow-plugins.composer/installers true                          && \
     echo "*** *** *** Need the file to exist before being able to configure"                     && \
     echo '{}' > ${TOP_PATH}/composer.local.json                                                  && \
+#   Composer dependencies of extensions: MediaWiki's composer.json merges composer.local.json (merge plugin).
+#   The wildcard include below makes every "composer update" also merge extensions/*/composer.json, so the
+#   dependencies of all extensions present at that moment end up in the shared vendor/ directory.
+#   Example: DrawioEditor REL1_43 needs mwstake/* packages (its extension.json callback mwsInitComponents
+#   is defined there); without this, every page dies with "callback 'mwsInitComponents' is not callable".
+#   merge-dev=false: do not install the development tools (codesniffer, phpunit, ...) listed in require-dev.
+#   NOTE: extensions added later (e.g. in the running container) need another "composer update" in ${TOP_PATH}.
+    COMPOSER=${TOP_PATH}/composer.local.json  composer config --json extra.merge-plugin '{"include":["extensions/*/composer.json"],"merge-dev":false}'  && \
     composer config --global allow-plugins true                                                  && \
     echo "<?php " > ${TOP_PATH}/DanteDynamicInstalls.php                                         && \
-    echo "*** *** *** Install support library for markdown "                                     && \
-    COMPOSER=${TOP_PATH}/composer.local.json  composer require erusev/parsedown                  && \
-    COMPOSER=${TOP_PATH}/composer.local.json  composer require erusev/parsedown-extra            && \
-    COMPOSER=${TOP_PATH}/composer.local.json  composer require benjaminhoegh/parsedown-extended  && \
 #   The next 2 are required for openai / chatgpt integration
     COMPOSER=${TOP_PATH}/composer.local.json  composer require php-http/discovery                && \
     COMPOSER=${TOP_PATH}/composer.local.json  composer require openai-php/client                 && \
@@ -549,41 +600,46 @@ RUN composer config --no-plugins allow-plugins.wikimedia/composer-merge-plugin t
 COPY . /
 
 RUN  \
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/kuenzign/WikiMarkdown                                        WikiMarkdown                 main       && \
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-MobileFrontend                MobileFrontend               REL1_39    && \
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-RandomSelection               RandomSelection              REL1_39    && \
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-LabeledSectionTransclusion    LabeledSectionTransclusion   REL1_39    && \
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-RevisionSlider                RevisionSlider               REL1_39    && \
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-NativeSvgHandler              NativeSvgHandler             REL1_39    && \
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-WikiCategoryTagCloud          WikiCategoryTagCloud         REL1_39    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-MobileFrontend                MobileFrontend               ${MEDIAWIKI_EXTENSION_TAG}    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-RandomSelection               RandomSelection              ${MEDIAWIKI_EXTENSION_TAG}    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-LabeledSectionTransclusion    LabeledSectionTransclusion   ${MEDIAWIKI_EXTENSION_TAG}    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-RevisionSlider                RevisionSlider               ${MEDIAWIKI_EXTENSION_TAG}    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-NativeSvgHandler              NativeSvgHandler             ${MEDIAWIKI_EXTENSION_TAG}    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-WikiCategoryTagCloud          WikiCategoryTagCloud         ${MEDIAWIKI_EXTENSION_TAG}    && \
 #
 #
-#    /home/dante/dantescript/install-extension-github.sh  ${TOP_PATH}  https://github.com/samwilson/diagrams-extension                                 Diagrams                     master     && \
+  /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/ProfessionalWiki/NativeMarkdown          NativeMarkdown        master    && \
+   ##
+   ## Diagrams had a problem which I fixed in my own fork, but my pull request has not yet been honored by upstream.
+   ## /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"   https://github.com/samwilson/diagrams-extension                                 Diagrams                     master     && \
+   /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"   https://github.com/clecap/diagrams-extension                                 Diagrams                     mermaid-12  DEV     && \  
 ##  TODO: diagrams-extension master currently breaks claimed backwards compatibility with MW 1.39
 #
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-ReplaceText                   ReplaceText                  REL1_39    && \
-##    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/ProfessionalWiki/Network                                     Network                      master     && \
-## TODO: Network not compatible with 1.39 release
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-ReplaceText                   ReplaceText                  ${MEDIAWIKI_EXTENSION_TAG}    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/ProfessionalWiki/Network                                     Network                      master     && \
 #
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-SubPageList3                 SubPageList3                  REL1_39    && \
-##    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/ProfessionalWiki/SubPageList                                SubPageList                   master     && \
-#     SubPageList uses 
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-SubPageList3                 SubPageList3                  ${MEDIAWIKI_EXTENSION_TAG}    && \
 ##    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-SubpageNavigation            SubpageNavigation             REL1_41    && \
 #     SubpageNavigation not fully working in my 1.39 release.
 #  installExtensionGithub  https://github.com/labster/HideSection/                                         HideSection master
 #  TODO STUFF
 #  looks like this extension is broken
 #  installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-WikEdDiff WikEdDiff REL1_39
-#  The following is broken currently in REL1_38 only, might be fine in higher releases
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/Universal-Omega/DynamicPageList3                             DynamicPageList3             REL1_39    && \
-##  installExtensionGithub https://github.com/clecap/DynamicPageList3 DynamicPageList3 master
-###### HACK: see README-DynamicPageList3-Clemens.md in TOPD_DIR/own for more details.
-##  docker cp $TOP_DIR/own/DynamicPageList3/ ${LAP_CONTAINER}:/${MOUNT}/${VOLUME_PATH}/extensions
-#
+   /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/Universal-Omega/DynamicPageList4                             DynamicPageList4             ${MEDIAWIKI_EXTENSION_TAG}    && \
     /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/clecap/parsifal          Parsifal         master   DEV && \
-#  Below we ask composer to ignore two CVE audits which are only used in the unit testing framework fo Mediawiki 1.39
-   composer config --json audit.ignore '["PKSA-z3gr-8qht-p93v", "GHSA-vvj3-c3rp-c85p"]'  && \
-   composer update 
+   /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-DrawioEditor         DrawioEditor         ${MEDIAWIKI_EXTENSION_TAG}    && \
+##
+  echo "*** Installing drawio external service into target=${TARGET}\n"     && \
+  mkdir -p ${TOP_PATH}/external-services/draw-io/   && \
+  git clone --depth 1 --branch dev --single-branch https://github.com/jgraph/drawio.git ${TOP_PATH}/external-services/draw-io/drawio-dev  && \
+  rm -Rf ${TOP_PATH}/external-services/draw-io/drawio-dev/.git && \
+#  Composer >= 2.9 refuses to install packages with known security advisories. MediaWiki 1.43 core pins
+#  symfony/yaml to exactly 5.4.52 (core composer.json), which has two advisories (fixed in 5.4.54 / 5.4.56),
+#  so without this exception "composer update" cannot resolve anything. The exception is limited to these two
+#  advisories; any other advisory still blocks. Risk is low: MediaWiki parses only its own config/schema YAML
+#  files with it, not user content. REMOVE this once a MediaWiki 1.43 point release raises the symfony/yaml pin.
+   composer config --json audit.ignore '{"CVE-2026-109413": "symfony/yaml 5.4.52 pinned by MediaWiki 1.43 core", "GHSA-hwfg-qwvh-2wfx": "symfony/yaml 5.4.52 pinned by MediaWiki 1.43 core"}'  && \
+   composer update
 
 
 ## 

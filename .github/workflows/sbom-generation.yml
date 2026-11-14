@@ -1,9 +1,22 @@
 name: Generate SBOM for Dockerfiles
 
+# Reusable workflow, called by docker-multiarch-build.yml right after the image has been pushed.
+# It scans exactly the pushed image (by digest, not by the tag "latest"), so the SBOM on GitHub Pages
+# always describes the image that is actually published, and the repository at the commit it was built from.
+# A push to master without a new image does not change the published image, so the Pages SBOM stays correct.
+# Only master publishes; GitHub Pages only allows deployments from the default branch (environment "github-pages").
+# The Docker image additionally carries its own SBOM attestation (--sbom=true in docker-multiarch-build.yml).
 on:
-  push:                                                  # generated at every push
-  schedule:
-    - cron: '0 0 * * 0'  # every Sunday at midnight
+  workflow_call:
+    inputs:
+      image:
+        description: 'Image reference including digest, e.g. clecap/dante-wiki@sha256:...'
+        required: true
+        type: string
+      version:
+        description: 'DANTE_VERSION built into the image (git describe)'
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -22,6 +35,7 @@ jobs:
         with:
           egress-policy: audit
 
+      # In a called workflow this checks out the commit of the caller, i.e. the commit the image was built from
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
@@ -32,9 +46,13 @@ jobs:
           syft version
 
       - name: Generate SBOM for Docker image and repo
+        env:
+          IMAGE:   ${{ inputs.image }}
+          VERSION: ${{ inputs.version }}
         run: |
           mkdir -p sbom
-          syft clecap/dante-wiki:latest \
+          # --platform: the image is multi-arch; the SBOM describes the amd64 variant
+          syft "$IMAGE" --platform linux/amd64 \
             -o json=sbom/sbom-dante-wiki-docker.json \
             -o table=sbom/sbom-dante-wiki-docker.txt \
             -o spdx-tag-value=sbom/sbom-dante-wiki-docker.spdx
@@ -42,6 +60,14 @@ jobs:
             -o json=sbom/sbom-dante-wiki-repo.json \
             -o table=sbom/sbom-dante-wiki-repo.txt \
             -o spdx-tag-value=sbom/sbom-dante-wiki-repo.spdx
+          # record which image and commit these SBOMs describe
+          {
+            echo "image:   $IMAGE"
+            echo "version: $VERSION"
+            echo "commit:  $GITHUB_SHA"
+            echo "date:    $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          } > sbom/IMAGE.txt
+          cat sbom/IMAGE.txt >> "$GITHUB_STEP_SUMMARY"
           ls -alg sbom
 
       - name: Upload Pages artifact

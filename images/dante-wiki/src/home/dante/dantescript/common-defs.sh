@@ -2,13 +2,10 @@
 
 # Common environment variables and definitions for all dantescript scripts
 
-##
-## Configurables
-##
-export PARSIFAL_BRANCH="master"
+
 
 # the name of the branch to which we will clone
-DANTE_BRANCH=master
+DANTE_BRANCH=new-mw
 
 # the remote repository for dante-delta
 REMOTE_REPO_DANTE=https://github.com/clecap/dante-delta.git
@@ -58,6 +55,14 @@ errorTrap()
   banner
   printf "${ERROR}\n\n***  Sleeping for 1 hour to keep container running for debug attempts ***\n\n ${RESET}"
   sleep 3600
+}
+
+# report an error and abort the calling script with a non-zero exit status, so that the caller sees the failure
+# usage:   some-command || failed "description of what went wrong"
+failed()
+{
+  printf "\n${ERROR}*** $(basename "$0") ERROR: $1 - ABORTING${RESET}\n"
+  exit 1
 }
 
 # trap handler which prints a highly visible warning and then continues
@@ -274,7 +279,7 @@ check_dbserver_initial_rootpassword() {
   local MY_DB_HOST="$1"  # TODO This should perhaps also be picked up from configuration
   local MYSQL_PWD="${MYSQL_ROOT_PASSWORD}"
   printf "\n${GREEN}***Checking DB for initial root password on MY_DB_HOST=${MY_DB_HOST}...\n"
-  printf "   Current environment variable MYSQL_PWD has value: ${MYSQL_PWD}\n"
+  ### printf "   Current environment variable MYSQL_PWD has value: ${MYSQL_PWD}\n"  ## ONLY USE FOR DEBUGGING since this would leak the password into the log
   local OUTPUT=$(mysqladmin ping -u root -pinitialPassword -h "$MY_DB_HOST" --skip-ssl 2>&1)
   printf "    Output of the ping was: ${OUTPUT}\n"
   if echo "$OUTPUT" | grep -i -q "ERROR"; then
@@ -477,11 +482,14 @@ touchLocalSettings()
 
 
 # Do a update run, needed after extension installation
+# Returns the exit status of update.php, so callers can detect a failure
 doMaintenanceUpdate()
 {
   printf "\n*** Doing a mediawiki maintenance update ... "
-    php ${MOUNT}/${TARGET}/maintenance/update.php
-    exec 1>&1 2>&2
+  if ! php ${MOUNT}/${TARGET}/maintenance/update.php; then
+    printf "${ERROR}*** ERROR: update.php failed${RESET}\n"
+    return 1
+  fi
   printf "DONE update.php\n"
 }
 

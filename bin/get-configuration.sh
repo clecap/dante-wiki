@@ -2,7 +2,7 @@
 
 
 #
-# Stand alone script which downloads the encrypted configuration files
+# Stand alone script which downloads the encrypted configuration files from iuk.one / probably old version
 #
 
 CONFIG="iuk-stage"

@@ -3,6 +3,8 @@
 #
 
 .DS_Store
+# macOS AppleDouble files (appear on non-Apple file systems)
+._*
 deprecated/
 *.zip
 

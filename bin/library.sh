@@ -174,10 +174,10 @@ openChrome()
 
 
 # take down all services of composer file $1
+# NOTE: does not ask the user; callers must call askConfirmation themselves before (see build-run-raw.sh)
 downAllServices()
 {
   listServices
-  askConfirmation "Did you *** SAVE *** the  (1) GIT files and (2) the SYSTEM files and (3) the USER content - we will now down all services an status will no longer be recoverable !!"
   printf "\n$GREEN---Taking down services...$RESET\n"
   docker compose -f $1 down
   printf "\n"
@@ -223,7 +223,7 @@ build()
   startTimer
   local version=$(gitVersion)
   printf "\n$GREEN---Building image dante-wiki version $version if necessary...$RESET\n" ;
-    docker build --build-arg DANTE_VERSION="$version" -t dante-wiki:latest $TOP_DIR/images/dante-wiki/src
+    docker build --progress=plain --build-arg DANTE_VERSION="$version" -t dante-wiki:latest $TOP_DIR/images/dante-wiki/src
   ok "$GREEN---DONE$RESET"
 }
 
@@ -233,7 +233,7 @@ buildNoCache()
   startTimer
   local version=$(gitVersion)
   printf "\n$GREEN---Building image dante-wiki version $version from scratch $RESET\n" ;
-    docker build --no-cache --build-arg DANTE_VERSION="$version" -t dante-wiki:latest $TOP_DIR/images/dante-wiki/src
+    docker build --progress=plain --no-cache --build-arg DANTE_VERSION="$version" -t dante-wiki:latest $TOP_DIR/images/dante-wiki/src
   ok "$GREEN---DONE$RESET"
 }
 

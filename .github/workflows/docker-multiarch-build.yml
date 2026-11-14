@@ -70,6 +70,9 @@ jobs:
     # Manual run (workflow_dispatch, version job skipped): always. Never when the version job failed.
     if: ${{ !failure() && !cancelled() && (github.event_name == 'workflow_dispatch' || needs.version.outputs.build == 'true') }}
     runs-on: ubuntu-latest
+    outputs:
+      digest:        ${{ steps.build.outputs.digest }}         # digest of the pushed multi-arch image, for the SBOM job
+      dante_version: ${{ steps.build.outputs.dante_version }}
 
     steps:
       - name: Checkout code
@@ -97,6 +100,7 @@ jobs:
       # We call docker buildx directly instead of docker/build-push-action, since the action does not give us
       # the log text. We need the log in a file to show its end on the run page and to upload it as artifact.
       - name: Build and push (amd64 + arm64)
+        id: build
         env:
           VERSION: ${{ needs.version.outputs.version }}
         run: |
@@ -106,19 +110,30 @@ jobs:
           # only the commit hash (abc1234) before the first version tag. --match: ignore other tags (e.g. "test")
           DANTE_VERSION=$(git describe --tags --always --match 'v[0-9]*.[0-9]*.[0-9]*')
           echo "### Image version: $DANTE_VERSION" >> "$GITHUB_STEP_SUMMARY"
+          echo "dante_version=$DANTE_VERSION" >> "$GITHUB_OUTPUT"
           # ${VERSION:+...}:   a new version also becomes an image tag, e.g. clecap/dante-wiki:1.2.3; without one, nothing
           # --progress=plain:  full plain-text output instead of the collapsing tty display
           # --push:            pushes the image to dockerhub
+          # --sbom=true:       BuildKit scans the final image (syft scanner) and pushes an SPDX SBOM as attestation
+          #                    together with the image, one per platform. Show it with:
+          #                    docker buildx imagetools inspect clecap/dante-wiki:latest --format '{{ json .SBOM }}'
+          #                    Docker Hub then also lists an "unknown/unknown" platform entry: that is the attestation, not an image
+          # --metadata-file:   buildx writes the digest of the pushed image there; the SBOM job scans exactly this digest
           # 2>&1 | tee:        buildx writes its log to stderr; show it in the job log and also save it to build.log
           docker buildx build images/dante-wiki/src \
             --platform linux/amd64,linux/arm64 \
             --progress=plain \
             --push \
+            --sbom=true \
+            --metadata-file metadata.json \
             --build-arg DANTE_VERSION="$DANTE_VERSION" \
             -t clecap/dante-wiki:latest \
             -t clecap/dante-wiki:dev \
             ${VERSION:+-t clecap/dante-wiki:$VERSION} \
             2>&1 | tee build.log
+          DIGEST=$(jq -r '."containerimage.digest"' metadata.json)
+          echo "### Image digest: $DIGEST" >> "$GITHUB_STEP_SUMMARY"
+          echo "digest=$DIGEST" >> "$GITHUB_OUTPUT"
 
       # Only on failure: write the last 300 lines of the log into the job summary,
       # which GitHub shows directly on the run page (no need to download or scroll the raw log)
@@ -140,3 +155,17 @@ jobs:
         with:
           name: build-log
           path: build.log
+
+  # Publish the SBOM on GitHub Pages for exactly the image just pushed (by digest), see sbom-generation.yml.
+  # Only on master: a manual run on another branch must not replace the published SBOM (and Pages would refuse it anyway)
+  sbom:
+    needs: build-and-push
+    if: ${{ !failure() && !cancelled() && needs.build-and-push.result == 'success' && github.ref == 'refs/heads/master' }}
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/sbom-generation.yml
+    with:
+      image:   clecap/dante-wiki@${{ needs.build-and-push.outputs.digest }}
+      version: ${{ needs.build-and-push.outputs.dante_version }}

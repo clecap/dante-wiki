@@ -1,45 +1,62 @@
 #!/bin/bash
 
-# entrypoint of image lap
-# Takes as parameter a list of scripts residing in /home/dante/dantescript
-
-
+# Entrypoint of the dante-wiki image
+# Takes as parameters a list of script names residing in /home/dante/dantescript and runs them one after the other.
+#
+# Each script runs as its own child process, so variables it sets do not survive into the next script.
+# Secrets are NOT loaded here: every script that needs them calls loadSecrets itself, so this long-living
+# process (PID 1) does not hold the secrets and does not pass them on to scripts that do not need them.
+#
+# Exit codes of a script:
+#   0     success, continue with the next script
+#   100   intended shutdown (no error): stop the chain and end the container with exit code 0
+#   other error: stop the chain and end the container with this exit code (visible in "docker compose ps")
+#
+# The last script (normally run-apache.sh) is started with exec, so it replaces this shell and receives
+# the stop signal of "docker stop" directly.
 
 source /home/dante/dantescript/common-defs.sh
 
-## Say hello
-printf "\n*** *** This is /lap-entrypoint.sh V2 *** ***\n"
+SCRIPT_DIR=/home/dante/dantescript
+SHUTDOWN_CODE=100
 
-loadSecrets
+printf '\n*** *** This is /lap-entrypoint.sh V3 *** ***\n'
+printf '%b*** /lap-entrypoint.sh: Iterating the %s arguments: %s %b\n' "$GREEN" "$#" "$*" "$RESET"
 
-## Iterate over each argument in the list of arguments we are called on
-stdbuf -o0 -e0 printf "$GREEN*** /lap-entrypoint.sh: Iterating the $# arguments: $* ${RESET}\n"
-for script in "$@"; do
-  if [ -f "/home/dante/dantescript/$script" ]; then
-      bannerGreen "/home/dante/dantescript/$script ---------- $script "
+while [ $# -gt 0 ]; do
+  script=$1
+  shift
 
-##      stdbuf -o0 -e0 printf "\n$GREEN***/lap-entrypoint.sh: Executing dantescript: /home/dante/dantescript/$script ---------- $script $RESET\n"
-      RETURN_VALUE="returnvalue-initialized" ; 
+  # only plain file names, no paths (prevents ../ tricks)
+  if [[ "$script" == */* ]]; then
+    printf '\n%b/lap-entrypoint.sh: ERROR: script name %s must not contain a path - ABORTING%b\n' "$ERROR" "$script" "$RESET"
+    exit 1
+  fi
 
-#      source "/home/dante/dantescript/$script" 
+  if [ ! -f "$SCRIPT_DIR/$script" ]; then
+    printf '\n%b/lap-entrypoint.sh: ERROR: file %s not found or not a regular file - ABORTING%b\n' "$ERROR" "$SCRIPT_DIR/$script" "$RESET"
+    exit 1
+  fi
 
-      stdbuf -o0 -e0 "/home/dante/dantescript/$script"
+  bannerGreen "$SCRIPT_DIR/$script ---------- $script "
 
-      EXIT_STATUS=$?
-#      printf "\n$GREEN***/lap-entrypoint.sh: Now testing on exit status\n"
-      if [[ $EXIT_STATUS -ne 0 ]]; then
-        exec 1>&1 2>&2 ; stdbuf -o0 -e0 printf "${ERROR}$script exited with status $EXIT_STATUS ${RESET} \n "
-      else
-        exec 1>&1 2>&2 ; stdbuf -o0 -e0 printf "${GREEN}$script returned with status $EXIT_STATUS ${RESET} \n"
-      fi
-      if [ "$RETURN_VALUE" == "shutdown" ]; then
-          stdbuf -o0 -e0 printf "\n${ERROR}/lap-entrypoint.sh: $script returned $RETURN_VALUE, shutting down now${RESET}\n" ; exit 0
-        else
-          stdbuf -o0 -e0 printf "\n${GREEN}lap-entrypoint.sh: $script returned $RETURN_VALUE, moving on ${RESET}\n"
-      fi
-    else
-      stdbuf -o0 -e0 printf "\n${ERROR}/lap-entrypoint.sh: Error: File '$script' not found or is not a regular file. $RESET\n"
-    fi
+  # last script: replace this shell, so that it becomes PID 1 and gets the signals of docker stop
+  if [ $# -eq 0 ]; then
+    exec "$SCRIPT_DIR/$script"
+  fi
+
+  "$SCRIPT_DIR/$script"
+  EXIT_STATUS=$?
+
+  if [ $EXIT_STATUS -eq $SHUTDOWN_CODE ]; then
+    printf '\n%b/lap-entrypoint.sh: %s requested shutdown (exit code %s), shutting down now%b\n' "$ERROR" "$script" "$SHUTDOWN_CODE" "$RESET"
+    exit 0
+  elif [ $EXIT_STATUS -ne 0 ]; then
+    printf '\n%b/lap-entrypoint.sh: %s exited with status %s - ABORTING, remaining scripts are not run%b\n' "$ERROR" "$script" "$EXIT_STATUS" "$RESET"
+    exit $EXIT_STATUS
+  fi
+
+  printf '%b/lap-entrypoint.sh: %s returned with status 0, moving on%b\n' "$GREEN" "$script" "$RESET"
 done
 
-printf "\n\n${GREEN}lap-entrypoint.sh: Completed all commands. ${RESET}\n\n"
+printf '\n\n%blap-entrypoint.sh: Completed all commands.%b\n\n' "$GREEN" "$RESET"

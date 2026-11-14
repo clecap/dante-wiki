@@ -54,7 +54,10 @@ services:
       - IMAGE_CREATED_AT=${IMAGE_CREATED_AT:-}
       - IMAGE_TAG=${IMAGE_TAG:-}    
     image: dante-wiki:latest
-    hostname: ${MY_DOMAINNAME}      
+    # init: docker starts a small init process (tini) as PID 1, which forwards the stop signal to our scripts / Apache
+    # and reaps orphaned processes (see run-apache.sh and lap-entrypoint.sh)
+    init: true
+    hostname: ${MY_DOMAINNAME}
     container_name: dante-wiki-container
     ports:
       - "${HOST_HTTPS_PORT}:443"
@@ -81,7 +84,8 @@ services:
     environment:
       - COMPOSER_IDENTITY=webserver-raw-http
     image: dante-wiki:latest
-    hostname: ${MY_DOMAINNAME}      
+    init: true                     # see webserver-raw-https
+    hostname: ${MY_DOMAINNAME}
     container_name: dante-wiki-container
     ports:
       - "${HOST_HTTP_PORT}:80"
@@ -105,7 +109,8 @@ services:
     environment:
       - COMPOSER_IDENTITY=webserver-cooked
     image: dante-wiki:cooked
-    hostname: ${MY_DOMAINNAME}      
+    init: true                     # see webserver-raw-https
+    hostname: ${MY_DOMAINNAME}
     container_name: dante-wiki-container
     ports:
       - "8080:80"

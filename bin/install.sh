@@ -127,6 +127,8 @@ start "Reading in the active configuration"
 ok "Read the active configuration"
 
 start "Removing all docker services for a clean restart (allowing for user abort)"
+  listServices
+  askConfirmation "Did you *** SAVE *** the  (1) GIT files and (2) the SYSTEM files and (3) the USER content - we will now down all services an status will no longer be recoverable !!"
   downAllServices $TOP_DIR/compose/docker-compose-development.yaml  
 ok "Removed all services"
 
