@@ -10,6 +10,7 @@
 #          THEN: Generate an APACHER_SERVER_KEY and APACHE_SERVER_CRT and send the CRT by email to SMTP_TO
 
 source /home/dante/dantescript/common-defs.sh
+loadSecrets                                       # lap-entrypoint.sh no longer loads the secrets for us
 
 trap 'errorTrap' ERR
 

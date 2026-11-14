@@ -3,6 +3,7 @@
 # This entrypoint initializes the database, generates LocalSettings.php and runs update.php
 
 source /home/dante/dantescript/common-defs.sh
+loadSecrets                                       # lap-entrypoint.sh no longer loads the secrets for us
 
 printf "${GREEN}*** THIS IS /dantescript/init.sh ***** ${RESET}"
 

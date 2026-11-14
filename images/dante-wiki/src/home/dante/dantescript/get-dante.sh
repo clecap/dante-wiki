@@ -3,7 +3,7 @@
 
 if [ -e /home/dante/DONE-getDante ]; then
   printf "\n*** get-dante.sh already done\n"
-  return 0
+  exit 0     # exit, not return: this script is executed by lap-entrypoint.sh, not sourced
 fi
 
 source /home/dante/dantescript/common-defs.sh
@@ -83,6 +83,6 @@ sudo touch /home/dante/DONE-getDante
 
 trap - ERR
 
-printf "${GREEN}*** DONE get-dante.sh${RESET}"git push origin ma
+printf "${GREEN}*** DONE get-dante.sh${RESET}\n"
 
 

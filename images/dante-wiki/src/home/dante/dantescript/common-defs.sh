@@ -279,7 +279,7 @@ check_dbserver_initial_rootpassword() {
   local MY_DB_HOST="$1"  # TODO This should perhaps also be picked up from configuration
   local MYSQL_PWD="${MYSQL_ROOT_PASSWORD}"
   printf "\n${GREEN}***Checking DB for initial root password on MY_DB_HOST=${MY_DB_HOST}...\n"
-  printf "   Current environment variable MYSQL_PWD has value: ${MYSQL_PWD}\n"
+  ### printf "   Current environment variable MYSQL_PWD has value: ${MYSQL_PWD}\n"  ## ONLY USE FOR DEBUGGING since this would leak the password into the log
   local OUTPUT=$(mysqladmin ping -u root -pinitialPassword -h "$MY_DB_HOST" --skip-ssl 2>&1)
   printf "    Output of the ping was: ${OUTPUT}\n"
   if echo "$OUTPUT" | grep -i -q "ERROR"; then

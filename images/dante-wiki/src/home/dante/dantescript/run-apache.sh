@@ -104,10 +104,12 @@ printf "DONE testing configuration\n"
 
 loadSecrets
 
-printf "\n*** run-apache.sh: Starting apache...\n"
-  sudo stdbuf -o0 -e0  apachectl -k start & sleep infinity
-printf "DONE starting apache\n"
-
+# Apache runs in the foreground and replaces this script (exec). Chain of processes:
+#   docker init (tini, init: true in compose) -> sudo -> apache2
+# docker stop sends SIGTERM to tini, which forwards it to sudo, which relays it to apache2, so Apache shuts down cleanly.
+# We do not use "apachectl -D FOREGROUND": apachectl starts apache2 as child without exec and would not pass the signal on.
+# Instead we read /etc/apache2/envvars ourselves (as apachectl does); it also reads /etc/apache2/env-dante generated above.
+# The runtime directories of envvars (APACHE_RUN_DIR, APACHE_LOCK_DIR) have already been created by apachectl configtest above.
+printf "\n*** run-apache.sh: Starting apache in the foreground (this script ends here)...\n"
 trap - ERR
-
-printf "${GREEN}*** EXITING run-apache.sh ${RESET}\n\n"
+exec sudo /bin/bash -c '. /etc/apache2/envvars && exec /usr/sbin/apache2 -D FOREGROUND'
