@@ -3,7 +3,6 @@ name: Sync Labels
 # Creates and updates the issue labels of this repository from .github/scripts/labels.yaml
 on:
   push:
-    branches: [ master ]
     paths:
       - '.github/scripts/labels.yaml'
       - '.github/workflows/sync-labels.yml'

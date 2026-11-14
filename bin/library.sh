@@ -174,10 +174,10 @@ openChrome()
 
 
 # take down all services of composer file $1
+# NOTE: does not ask the user; callers must call askConfirmation themselves before (see build-run-raw.sh)
 downAllServices()
 {
   listServices
-  askConfirmation "Did you *** SAVE *** the  (1) GIT files and (2) the SYSTEM files and (3) the USER content - we will now down all services an status will no longer be recoverable !!"
   printf "\n$GREEN---Taking down services...$RESET\n"
   docker compose -f $1 down
   printf "\n"

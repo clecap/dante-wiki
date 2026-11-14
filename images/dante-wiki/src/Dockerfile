@@ -21,14 +21,17 @@
 #                Key will be downloaded and checked against this fingerprint
 #                So this amounts to some form of key pinning as well
 
+# Versions of TeXLive
 ARG TL_YEAR=2026
 ARG TEXLIVE_FPR=C78B82D8C79512F79CC0D7C80D5E5D9106BAB6BC
 
-# Versions of Mediawiki:  MAJO.MINOR-PATCH
+# Versions of Mediawiki:  MAJO.MINOR.PATCH
 ARG MEDIAWIKI_MAJOR=1
 ARG MEDIAWIKI_MINOR=43
 ARG MEDIAWIKI_PATCH=11
 
+# Versions for picking up the typical extension version from its github distribution
+ARG MEDIAWIKI_EXTENSION_TAG=REL1_43
 
 # ==========================
 #  Stage 1: TeX Live builder
@@ -126,8 +129,11 @@ RUN                                                                             
 # from build to build (also --no-cache builds) and is shared by all platforms, but never ends up in the image.
 # The ISO is downloaded only if the cached file does not match the GPG-signed sha512 hash, i.e. if it is missing,
 # damaged, from another TeX Live year or reissued upstream.
+#
 #   sharing=locked: parallel builds (amd64 + arm64) wait for each other, so the ISO is downloaded only once
+#
 #   Clear the cache with: docker builder prune --filter type=exec.cachemount
+#
 RUN --mount=type=cache,id=texlive-iso,target=/cache,sharing=locked                        \
   set -eux                                                                              && \
   # Dynamically obtain information on the architecture for which we re building
@@ -241,6 +247,7 @@ ARG TL_YEAR
 ARG MEDIAWIKI_MAJOR
 ARG MEDIAWIKI_MINOR
 ARG MEDIAWIKI_PATCH
+ARG MEDIAWIKI_EXTENSION_TAG
 
 ARG MEDIAWIKI_TARBALL=mediawiki-$MEDIAWIKI_MAJOR.$MEDIAWIKI_MINOR.$MEDIAWIKI_PATCH.tar.gz
 
@@ -425,7 +432,18 @@ RUN \
     # graphviz, mscgen, plantum required for: https://www.mediawiki.org/wiki/Extension:Diagrams
     apt-get install -y   --no-install-recommends   graphviz                                                                && \
     apt-get install -y   --no-install-recommends   mscgen                                                                  && \
-    apt-get install -y   --no-install-recommends   plantuml                                                                && \   
+    # PlantUML: NOT the Debian package "plantuml" (trixie ships the outdated 1.2020.2 from 2020).
+    #   Instead: official jar from https://github.com/plantuml/plantuml/releases, pinned by version and sha256.
+    #   To update: change version and sha256 (the sha256 is shown as "digest" of plantuml-<version>.jar on the release page).
+    #   The Debian package used to pull in Java; we now install the JRE explicitly (graphviz is installed above).
+    #   The wrapper /usr/local/bin/plantuml keeps the "plantuml" command available for the Diagrams extension.
+    apt-get install -y   --no-install-recommends   default-jre-headless                                                    && \
+    mkdir -p /opt/plantuml                                                                                                 && \
+    curl -fsSL --retry 5 --retry-delay 10 --retry-all-errors -o /opt/plantuml/plantuml.jar \
+      https://github.com/plantuml/plantuml/releases/download/v1.2026.10/plantuml-1.2026.10.jar                             && \
+    echo "e9bc9e6b2eb715e8c0c929f3dcb5fc1923be13f37599b09c293c66d354e88686  /opt/plantuml/plantuml.jar" | sha256sum -c -  && \
+    printf '#!/bin/sh\nexec java -Djava.awt.headless=true -jar /opt/plantuml/plantuml.jar "$@"\n' > /usr/local/bin/plantuml  && \
+    chmod 755 /usr/local/bin/plantuml                                                                                      && \
     apt-get install -y   --no-install-recommends   msmtp                                                                   && \
     echo "*** *** *** Installing composer "                                                                                && \
     # Composer >= 2.9 blocks packages with security advisories; see the audit.ignore exception before "composer update" below
@@ -582,34 +600,34 @@ RUN composer config --no-plugins allow-plugins.wikimedia/composer-merge-plugin t
 COPY . /
 
 RUN  \
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-MobileFrontend                MobileFrontend               REL1_43    && \
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-RandomSelection               RandomSelection              REL1_43    && \
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-LabeledSectionTransclusion    LabeledSectionTransclusion   REL1_43    && \
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-RevisionSlider                RevisionSlider               REL1_43    && \
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-NativeSvgHandler              NativeSvgHandler             REL1_43    && \
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-WikiCategoryTagCloud          WikiCategoryTagCloud         REL1_43    && \
-   #
-   /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"   https://github.com/samwilson/diagrams-extension                                 Diagrams                     master     && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-MobileFrontend                MobileFrontend               ${MEDIAWIKI_EXTENSION_TAG}    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-RandomSelection               RandomSelection              ${MEDIAWIKI_EXTENSION_TAG}    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-LabeledSectionTransclusion    LabeledSectionTransclusion   ${MEDIAWIKI_EXTENSION_TAG}    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-RevisionSlider                RevisionSlider               ${MEDIAWIKI_EXTENSION_TAG}    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-NativeSvgHandler              NativeSvgHandler             ${MEDIAWIKI_EXTENSION_TAG}    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-WikiCategoryTagCloud          WikiCategoryTagCloud         ${MEDIAWIKI_EXTENSION_TAG}    && \
+#
+#
+  /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/ProfessionalWiki/NativeMarkdown          NativeMarkdown        master    && \
+   ##
+   ## Diagrams had a problem which I fixed in my own fork, but my pull request has not yet been honored by upstream.
+   ## /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"   https://github.com/samwilson/diagrams-extension                                 Diagrams                     master     && \
+   /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"   https://github.com/clecap/diagrams-extension                                 Diagrams                     mermaid-12  DEV     && \  
 ##  TODO: diagrams-extension master currently breaks claimed backwards compatibility with MW 1.39
 #
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-ReplaceText                   ReplaceText                  REL1_43    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-ReplaceText                   ReplaceText                  ${MEDIAWIKI_EXTENSION_TAG}    && \
     /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/ProfessionalWiki/Network                                     Network                      master     && \
 #
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-SubPageList3                 SubPageList3                  REL1_43    && \
-##    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/ProfessionalWiki/SubPageList                                SubPageList                   master     && \
-#     SubPageList uses 
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-SubPageList3                 SubPageList3                  ${MEDIAWIKI_EXTENSION_TAG}    && \
 ##    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-SubpageNavigation            SubpageNavigation             REL1_41    && \
 #     SubpageNavigation not fully working in my 1.39 release.
 #  installExtensionGithub  https://github.com/labster/HideSection/                                         HideSection master
 #  TODO STUFF
 #  looks like this extension is broken
 #  installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-WikEdDiff WikEdDiff REL1_39
-#  The following is broken currently in REL1_38 only, might be fine in higher releases
-   /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/Universal-Omega/DynamicPageList4                             DynamicPageList4             REL1_43    && \
-######## TODO: umstellen der branch names von new-mw auf REL1_43  und ähnliches bei parsifal und dante.
-  echo "kkkkkkkkkkkkkkkkkkkkkkkk" && \
+   /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/Universal-Omega/DynamicPageList4                             DynamicPageList4             ${MEDIAWIKI_EXTENSION_TAG}    && \
     /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/clecap/parsifal          Parsifal         master   DEV && \
-   /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-DrawioEditor         DrawioEditor         REL1_43    && \
+   /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-DrawioEditor         DrawioEditor         ${MEDIAWIKI_EXTENSION_TAG}    && \
 ##
   echo "*** Installing drawio external service into target=${TARGET}\n"     && \
   mkdir -p ${TOP_PATH}/external-services/draw-io/   && \

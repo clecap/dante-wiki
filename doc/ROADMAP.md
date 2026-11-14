@@ -6,17 +6,14 @@
 * Shoul duse operational transform or https://github.com/yjs for CRDT data types.
 
 
-
 ### Integration with
 
 * RTF extension
-
 * Zulip
 * Discourse
 * Mattermost
 * Disqus
 * Etherpad
-
 * BigBlue Button
 
 ### Add concepts
@@ -24,10 +21,6 @@
 * Microformats
 * Dublin Core
 * Open access metadata
-
-
-
-
 
 We need:
 
