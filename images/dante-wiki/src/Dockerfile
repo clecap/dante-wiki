@@ -303,8 +303,26 @@ LABEL maintainer="Clemens H. Cap"                                               
   license="AGPL 3"                                                                     \
   targetos="${TARGETOS}"                                                               \
   targetarch="${TARGETARCH}"                                                           \
-  targetvariant="${TARGETVARIANT}"                                                     \
-  targetplatform="${TARGETPLATFORM}"                                                   
+  targetvariant="${TARGETVARIANT}"                                                     \  
+  targetplatform="${TARGETPLATFORM}"                           \
+  # define metadata on vs code - here: include all those extensions the remote container should install automagically upon an attachment
+  devcontainer.metadata='[{                                    \    
+    "customizations": {                                        \
+       "vscode": {                                             \ 
+          "extensions": [                                      \
+           "anthropic.claude-code",                            \
+           "bmewburn.vscode-intelephense-client",              \
+           "dbaeumer.vscode-eslint",                           \
+           "gruntfuggly.todo-tree",                            \
+           "shd101wyy.markdown-preview-enhanced",              \
+           "zainchen.json"                                     \
+           "vscode-ripgrep"                                    \
+          ]                                                    \
+        }                                                      \
+    }                                                          \
+  }]'       
+
+
 ##
 ## ENV section
 ##
@@ -626,7 +644,20 @@ RUN  \
 #  looks like this extension is broken
 #  installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-WikEdDiff WikEdDiff REL1_39
    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/Universal-Omega/DynamicPageList4                             DynamicPageList4             ${MEDIAWIKI_EXTENSION_TAG}    && \
+#
+# Parsifal
+#
     /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/clecap/parsifal          Parsifal         master   DEV && \
+#
+#  CodeMirror 5.65.3 into wiki-dir/vendor/codemirror (npm tarball has top-level dir "package/", hence --strip-components=1)
+  echo "*** Installing CodeMirror 5.65.3 into ${TOP_PATH}/vendor/codemirror\n"     && \
+#  sha512 = npm registry dist.integrity of codemirror@5.65.3, converted from base64 to hex
+  mkdir -p ${TOP_PATH}/vendor/codemirror                                                                                                                                                   && \
+  curl -fsSL --retry 5 --retry-delay 10 --retry-all-errors -o /tmp/codemirror-5.65.3.tgz https://registry.npmjs.org/codemirror/-/codemirror-5.65.3.tgz                                     && \
+  echo "9020b48b01993956571c4296dcd0d339bbccee94c8ca8c23b72e0152a79111139cff723a6d66e06430377c60f0940fab6e0463be74677eab3d49f5f29de97501  /tmp/codemirror-5.65.3.tgz" | sha512sum -c -     && \
+  tar -xzf /tmp/codemirror-5.65.3.tgz -C ${TOP_PATH}/vendor/codemirror --strip-components=1                                                                                                && \
+  rm -f /tmp/codemirror-5.65.3.tgz                                                                                                                                                         && \
+#
    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-DrawioEditor         DrawioEditor         ${MEDIAWIKI_EXTENSION_TAG}    && \
 ##
   echo "*** Installing drawio external service into target=${TARGET}\n"     && \

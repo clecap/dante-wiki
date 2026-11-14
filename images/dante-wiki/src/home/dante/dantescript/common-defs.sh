@@ -4,8 +4,8 @@
 
 
 
-# the name of the branch to which we will clone
-DANTE_BRANCH=new-mw
+# the name of the branch to which we will clone  ## TODO: this should go away
+DANTE_BRANCH=master
 
 # the remote repository for dante-delta
 REMOTE_REPO_DANTE=https://github.com/clecap/dante-delta.git
@@ -545,7 +545,7 @@ configGitContainer()
 {
   printf "Configuring git inside of the container..."
     git config --global user.name "${GIT_USER_NAME}" 
-    git config --global user.email "${GIT_USER_MAIL}"
+    git config --global user.email "${GIT_USER_EMAIL}"
   printf "${GREEN}DONE"
 }
 

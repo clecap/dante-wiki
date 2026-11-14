@@ -7,6 +7,7 @@ if [ -e /home/dante/DONE-getDante ]; then
 fi
 
 source /home/dante/dantescript/common-defs.sh
+loadSecrets                                       # lap-entrypoint.sh no longer loads the secrets for us
 
 
 trap 'errorTrap' ERR
