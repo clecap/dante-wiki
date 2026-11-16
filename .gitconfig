@@ -1,5 +1,0 @@
-[pull]
-    rebase = true
-
-[init]
-    defaultbranch=master
