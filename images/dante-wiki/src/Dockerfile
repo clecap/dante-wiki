@@ -683,6 +683,10 @@ RUN  \
   tar -xzf /tmp/codemirror-5.65.3.tgz -C ${TOP_PATH}/vendor/codemirror --strip-components=1                                                                                                && \
   rm -f /tmp/codemirror-5.65.3.tgz                                                                                                                                                         && \
 #
+# Dante
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/clecap/dante-delta          Parsifal         new-mw   DEV && \
+#
+#
    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-DrawioEditor         DrawioEditor         ${MEDIAWIKI_EXTENSION_TAG}    && \
 ##
   echo "*** Installing drawio external service into target=${TARGET}\n"     && \
