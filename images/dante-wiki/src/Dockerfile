@@ -553,7 +553,7 @@ RUN \
     )                                                                                                                      && \
 ##
 ## awscli with all its dependencies
-##   regenerate: pip-compile --generate-hashes on "wheel awscli" inside the base image,
+##   regenerate: pip-compile --generate-hashes on "awscli" inside the base image,
 ##   then keep the hashes of the cp313/abi3/none-any manylinux x86_64+aarch64 wheels
 ##
     /opt/myenv/bin/pip3 install --no-cache-dir --require-hashes --only-binary :all: -r <(printf "%s\n" \
@@ -567,7 +567,6 @@ RUN \
       'rsa==4.7.2 --hash=sha256:78f9a9bf4e7be0c5ded4583326e7461e3a3c5aae24073648b4bdfa797d78c9d2' \
       'six==1.17.0 --hash=sha256:4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274' \
       'urllib3==2.8.0 --hash=sha256:0cf3cae568d36aa9576b28dfb35f11328f1cb974ca7647d9475ebb86c75ac6e3' \
-      'wheel==0.48.0 --hash=sha256:3217dcc807155e45db462d7ef2431f5ddda0d7273b700d05a67b271ceb1287ab' \
     )                                                                                                                      && \
     echo "*** Deactivating virtual python environment"                                                                          && \
     deactivate                                                                                                                   && \
@@ -656,24 +655,23 @@ RUN  \
    ## Diagrams had a problem which I fixed in my own fork, but my pull request has not yet been honored by upstream.
    ## /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"   https://github.com/samwilson/diagrams-extension                                 Diagrams                     master     && \
    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"   https://github.com/clecap/diagrams-extension                                 Diagrams                     mermaid-12  DEV     && \  
-##  TODO: diagrams-extension master currently breaks claimed backwards compatibility with MW 1.39
 #
     /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-ReplaceText                   ReplaceText                  ${MEDIAWIKI_EXTENSION_TAG}    && \
     /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/ProfessionalWiki/Network                                     Network                      master     && \
 #
     /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-SubPageList3                 SubPageList3                  ${MEDIAWIKI_EXTENSION_TAG}    && \
-##    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-SubpageNavigation            SubpageNavigation             REL1_41    && \
-#     SubpageNavigation not fully working in my 1.39 release.
 #  installExtensionGithub  https://github.com/labster/HideSection/                                         HideSection master
-#  TODO STUFF
+#
+#
+   /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-DrawioEditor         DrawioEditor         ${MEDIAWIKI_EXTENSION_TAG}    && \
+##
+  echo "*** Installing drawio external service into target=${TARGET}\n"                                                                                         && \
+  mkdir -p ${TOP_PATH}/external-services/draw-io/                                                                                                               && \
+  git clone --depth 1 --branch dev --single-branch https://github.com/jgraph/drawio.git ${TOP_PATH}/external-services/draw-io/drawio-dev                        && \
+  rm -Rf ${TOP_PATH}/external-services/draw-io/drawio-dev/.git                                                                                                  && \
 #  looks like this extension is broken
 #  installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-WikEdDiff WikEdDiff REL1_39
    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/Universal-Omega/DynamicPageList4                             DynamicPageList4             ${MEDIAWIKI_EXTENSION_TAG}    && \
-#
-# Parsifal
-#
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/clecap/parsifal          Parsifal         master   DEV && \
-#
 #  CodeMirror 5.65.3 into wiki-dir/vendor/codemirror (npm tarball has top-level dir "package/", hence --strip-components=1)
   echo "*** Installing CodeMirror 5.65.3 into ${TOP_PATH}/vendor/codemirror\n"     && \
 #  sha512 = npm registry dist.integrity of codemirror@5.65.3, converted from base64 to hex
@@ -682,25 +680,33 @@ RUN  \
   echo "9020b48b01993956571c4296dcd0d339bbccee94c8ca8c23b72e0152a79111139cff723a6d66e06430377c60f0940fab6e0463be74677eab3d49f5f29de97501  /tmp/codemirror-5.65.3.tgz" | sha512sum -c -     && \
   tar -xzf /tmp/codemirror-5.65.3.tgz -C ${TOP_PATH}/vendor/codemirror --strip-components=1                                                                                                && \
   rm -f /tmp/codemirror-5.65.3.tgz                                                                                                                                                         && \
-#
-# Dante
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/clecap/dante-delta          Parsifal         new-mw   DEV && \
-#
-#
-   /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-DrawioEditor         DrawioEditor         ${MEDIAWIKI_EXTENSION_TAG}    && \
-##
-  echo "*** Installing drawio external service into target=${TARGET}\n"     && \
-  mkdir -p ${TOP_PATH}/external-services/draw-io/   && \
-  git clone --depth 1 --branch dev --single-branch https://github.com/jgraph/drawio.git ${TOP_PATH}/external-services/draw-io/drawio-dev  && \
-  rm -Rf ${TOP_PATH}/external-services/draw-io/drawio-dev/.git && \
-#  Composer >= 2.9 refuses to install packages with known security advisories. MediaWiki 1.43 core pins
-#  symfony/yaml to exactly 5.4.52 (core composer.json), which has two advisories (fixed in 5.4.54 / 5.4.56),
-#  so without this exception "composer update" cannot resolve anything. The exception is limited to these two
-#  advisories; any other advisory still blocks. Risk is low: MediaWiki parses only its own config/schema YAML
-#  files with it, not user content. REMOVE this once a MediaWiki 1.43 point release raises the symfony/yaml pin.
+  #
+  echo "*** Moving Mediawiki Readme out of our way \n"                                                                                                              && \
+  cp ${TOP_PATH}/README.md ${TOP_PATH}/README-mediawiki-md  || true                                                                                                 && \
+  # Picking up the currently used branch name from the dante-wiki repository for use in dante-delta and in Parsifal 
+  CURRENT_DANTE_BRANCH="$(git -C ${TOP_PATH} branch --show-current)"                                                                                                && \
+  echo "*** We detected that we are running on dante-wiki branch ${CURRENT_DANTE_BRANCH}\n"                                                                         && \
+  printf '%s\n' "${CURRENT_DANTE_BRANCH}" > "${TOP_PATH}/DANTE-BRANCH-${CURRENT_DANTE_BRANCH}.md"                                                                   && \
+  # Dante-Delta installation 
+  # TOP_PATH is not an empty directory, so "git clone" into it would fail; initialise a repo in place and overlay dante-delta.
+#  "checkout -f" overwrites local files which are tracked by dante-delta; all other files in TOP_PATH stay untouched, which is what we want here
+  echo "*** Installing dante-delta, branch ${CURRENT_DANTE_BRANCH}\n"                                                                                               && \
+  git -C "${TOP_PATH}" init -q                                                                                                                                      && \
+  git -C "${TOP_PATH}" remote add origin https://github.com/clecap/dante-delta                                                                                      && \
+  git -C "${TOP_PATH}" fetch origin "${CURRENT_DANTE_BRANCH}"                                                                                                       && \
+  git -C "${TOP_PATH}" checkout -f -b new-mw --track origin/new-mw                                                                                                  && \
+  cp "${TOP_PATH}/DanteSettings-development.php" "${TOP_PATH}/DanteSettings-used.php"                                                                               && \
+  #
+  echo "*** Installing Parsifal, branch ${CURRENT_DANTE_BRANCH}\n"                                                                                                   && \
+  /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/clecap/parsifal          Parsifal        "${CURRENT_DANTE_BRANCH}"   DEV   && \
+  #
+  #  Composer >= 2.9 refuses to install packages with known security advisories. MediaWiki 1.43 core pins
+  #  symfony/yaml to exactly 5.4.52 (core composer.json), which has two advisories (fixed in 5.4.54 / 5.4.56),
+  #  so without this exception "composer update" cannot resolve anything. The exception is limited to these two
+  #  advisories; any other advisory still blocks. Risk is low: MediaWiki parses only its own config/schema YAML
+  #  files with it, not user content. REMOVE this once a MediaWiki 1.43 point release raises the symfony/yaml pin.
    composer config --json audit.ignore '{"CVE-2026-109413": "symfony/yaml 5.4.52 pinned by MediaWiki 1.43 core", "GHSA-hwfg-qwvh-2wfx": "symfony/yaml 5.4.52 pinned by MediaWiki 1.43 core"}'  && \
    composer update
-
 
 ## 
 ## Adhere to default non-root user policy promoted by dockerhub

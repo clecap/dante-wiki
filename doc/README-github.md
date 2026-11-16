@@ -4,7 +4,7 @@
 ```git clone --mirror https://github.com/USER/REPO.git```
 
 
-Source: https://docs.github.com/en/repositories/archiving-a-github-repository/backing-up-a-repository?utm_source=chatgpt.com
+Source: https://docs.github.com/en/repositories/archiving-a-github-repository/backing-up-a-repository
 
 
 # Get all branches locally:

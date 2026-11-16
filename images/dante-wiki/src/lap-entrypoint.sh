@@ -10,7 +10,7 @@
 # Exit codes of a script:
 #   0     success, continue with the next script
 #   100   intended shutdown (no error): stop the chain and end the container with exit code 0
-#   other error: stop the chain and end the container with this exit code (visible in "docker compose ps")
+#   other error: stop the chain and keep the container alive in an infinite sleep (for inspection with docker exec)
 #
 # The last script (normally run-apache.sh) is started with exec, so it replaces this shell and receives
 # the stop signal of "docker stop" directly.
@@ -19,6 +19,15 @@ source /home/dante/dantescript/common-defs.sh
 
 SCRIPT_DIR=/home/dante/dantescript
 SHUTDOWN_CODE=100
+
+# Keep the container alive instead of exiting. Sleep runs in the background and we wait for it, so that the
+# trap fires immediately on "docker stop" (PID 1 ignores SIGTERM unless a handler is installed).
+sleepForever() {
+  printf '\n%b/lap-entrypoint.sh: entering infinite sleep (would have exited with code %s)%b\n' "$ERROR" "$1" "$RESET"
+  trap 'exit '"$1" TERM INT
+  sleep infinity &
+  wait $!
+}
 
 printf '\n*** *** This is /lap-entrypoint.sh V3 *** ***\n'
 printf '%b*** /lap-entrypoint.sh: Iterating the %s arguments: %s %b\n' "$GREEN" "$#" "$*" "$RESET"
@@ -30,12 +39,12 @@ while [ $# -gt 0 ]; do
   # only plain file names, no paths (prevents ../ tricks)
   if [[ "$script" == */* ]]; then
     printf '\n%b/lap-entrypoint.sh: ERROR: script name %s must not contain a path - ABORTING%b\n' "$ERROR" "$script" "$RESET"
-    exit 1
+    sleepForever 1
   fi
 
   if [ ! -f "$SCRIPT_DIR/$script" ]; then
     printf '\n%b/lap-entrypoint.sh: ERROR: file %s not found or not a regular file - ABORTING%b\n' "$ERROR" "$SCRIPT_DIR/$script" "$RESET"
-    exit 1
+    sleepForever 1
   fi
 
   bannerGreen "$SCRIPT_DIR/$script ---------- $script "
@@ -53,10 +62,11 @@ while [ $# -gt 0 ]; do
     exit 0
   elif [ $EXIT_STATUS -ne 0 ]; then
     printf '\n%b/lap-entrypoint.sh: %s exited with status %s - ABORTING, remaining scripts are not run%b\n' "$ERROR" "$script" "$EXIT_STATUS" "$RESET"
-    exit $EXIT_STATUS
+    sleepForever $EXIT_STATUS
   fi
 
   printf '%b/lap-entrypoint.sh: %s returned with status 0, moving on%b\n' "$GREEN" "$script" "$RESET"
 done
 
 printf '\n\n%blap-entrypoint.sh: Completed all commands.%b\n\n' "$GREEN" "$RESET"
+sleepForever 0
