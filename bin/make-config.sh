@@ -7,6 +7,7 @@
 #
 # Every line of the form   IMPORT <filename>   is replaced by the contents of private/LIB/<filename>,
 # framed by an empty line and a BEGIN / END comment. All other lines are copied unchanged.
+# <filename> is either <file> or <directory>/<file> (one subdirectory of LIB at most).
 # Imports are not processed recursively. Nothing from the configuration is executed.
 #
 # See doc/README-make-configurations.md
@@ -57,9 +58,12 @@ process() {
       if [ "$mode" = check ]; then
         WHERE="$SOURCE line $n"
         [ -n "$FILE" ]                     || fail "IMPORT without filename ($WHERE)"
-        [[ "$FILE" != */* ]]               || fail "IMPORT filename must not contain a slash: $FILE ($WHERE)"
+        [[ "$FILE" != /* ]]                || fail "IMPORT filename must not be an absolute path: $FILE ($WHERE)"
+        [[ "$FILE" != */*/* ]]             || fail "IMPORT filename must not contain more than one directory: $FILE ($WHERE)"
         [[ "$FILE" != *..* ]]              || fail "IMPORT filename must not contain double dots: $FILE ($WHERE)"
-        [[ "$FILE" =~ ^[A-Za-z0-9._-]+$ ]] || fail "IMPORT filename contains invalid characters: $FILE ($WHERE)"
+        # either <file> or <directory>/<file>
+        [[ "$FILE" =~ ^[A-Za-z0-9._-]+(/[A-Za-z0-9._-]+)?$ ]] \
+                                           || fail "IMPORT filename is not of the form <file> or <directory>/<file>: $FILE ($WHERE)"
         [ -f "$LIB/$FILE" ] && [ -r "$LIB/$FILE" ] || fail "cannot read $LIB/$FILE ($WHERE)"
       else
         echo ""

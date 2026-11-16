@@ -40,16 +40,14 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Install syft (Anchore CLI)
-        run: |
-          curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh \
-            | sh -s -- -b /usr/local/bin
-          syft version
+        uses: anchore/sbom-action/download-syft@66cbf4bc1f1c0d2edc94016e65bc221b6bb0ad6c # v0.24.3
 
       - name: Generate SBOM for Docker image and repo
         env:
           IMAGE:   ${{ inputs.image }}
           VERSION: ${{ inputs.version }}
         run: |
+          syft version
           mkdir -p sbom
           # --platform: the image is multi-arch; the SBOM describes the amd64 variant
           syft "$IMAGE" --platform linux/amd64 \

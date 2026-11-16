@@ -537,13 +537,38 @@ RUN \
     apt-get install -y --no-install-recommends python3-venv                                                                && \
     python3 -m venv /opt/myenv                                                                                             && \
     source /opt/myenv/bin/activate                                                                                         && \
-    /opt/myenv/bin/pip3 install --no-cache-dir pymupdf                                                                     && \
-##    
-## Install aws command line for doing backups and similar stuff
 ##
-    # need wheel package for installing aws command line
-    /opt/myenv/bin/pip3 install --no-cache-dir wheel                                                                       && \
-    /opt/myenv/bin/pip3 install awscli --use-pep517                                                                        && \
+## Install pymupdf and aws command line (backups) with all dependencies pinned by version and sha256 hash
+##   - inline requirements via bash process substitution, so no separate requirements.txt is needed
+##   - --require-hashes: every package (incl. transitive deps) must be listed with a matching hash
+##   - hashes cover only the wheels for Python 3.13 (Debian stable) on linux amd64 and arm64
+##   - regenerate: pip-compile --generate-hashes on "pymupdf wheel awscli" inside the base image,
+##     then keep the hashes of the cp313/abi3/none-any manylinux x86_64+aarch64 wheels
+##
+    /opt/myenv/bin/pip3 install --no-cache-dir --require-hashes --only-binary :all: -r <(printf "%s\n" \
+      'awscli==1.46.3 --hash=sha256:94c561c1b1b2cf0978ec8d87d956c26c807555438593eec29ea90602b9518cfb' \
+      'colorama==0.4.6 --hash=sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6' \
+      'docutils==0.19 --hash=sha256:5e1de4d849fee02c63b040a4a3fd567f4ab104defd8a5511fbbc24a8a017efbc' \
+      'flatbuffers==25.12.19 --hash=sha256:7634f50c427838bb021c2d66a3d1168e9d199b0607e6329399f04846d42e20b4' \
+      'jmespath==1.1.0 --hash=sha256:a5663118de4908c91729bea0acadca56526eb2698e83de10cd116ae0f4e97c64' \
+      'networkx==3.7 --hash=sha256:e3fd2c13a7814cee3746340d8d7f8598a67f16a58bf47fb7f8793fab6efca1b0' \
+      'numpy==2.5.5 --hash=sha256:ae2b8285d0b4eed24739c3ca9ec0fa424a0247489c01e1d5fe2815a599e11d33 --hash=sha256:824025655df929268bfe6b47ed91a00d14209a6f760847cf150be446829e1ce4' \
+      'onnxruntime==1.32.0 --hash=sha256:54d02baff2df38777b4c3cc7af326406fe8b8a48f54720f4c446d2d327920a79 --hash=sha256:02ea12a28c069ea8510093d95a7f6ff8126bfd9fc5c0d3381c03b80fb2b424ba --hash=sha256:b01314ab8aa8176919818b19b899cd1cd72b5e4fc33e1127396f043206b6ceed --hash=sha256:926b6a87ffdcef56805b213807c28b97ae53763a630795baee1dfb420c2a5b68' \
+      'packaging==26.3 --hash=sha256:d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c' \
+      'protobuf==7.36.2 --hash=sha256:e11e1f0180583a2af89db6a2ecd9e8dc40aa6d2988ca175bfd0e6d12ea72d74e --hash=sha256:89f23aa53c24553a2416fd4fd1ec06f74fa42b14b546d8883128813f775bbfd2 --hash=sha256:bdb3a345d48db958e6ce1f18e508beb0cc981d64f24088427549c866cd039f1e' \
+      'psutil==7.2.2 --hash=sha256:1a571f2330c966c62aeda00dd24620425d4b0cc86881c89861fbc04549e5dc63 --hash=sha256:917e891983ca3c1887b4ef36447b1e0873e70c933afc831c6b6da078ba474312 --hash=sha256:076a2d2f923fd4821644f5ba89f059523da90dc9014e85f8e45a5774ca5bc6f9 --hash=sha256:b0726cecd84f9474419d67252add4ac0cd9811b04d61123054b9fb6f57df6e9e' \
+      'pyasn1==0.6.5 --hash=sha256:4017b0fce125096b8573b39c989fdb1a4b19cf761e683398184550fea0e66587' \
+      'pymupdf==2.1 --hash=sha256:5a1a1fee36d5598013614e06eef25aaa68819d828f5401170dbcaf6f2714d1dd --hash=sha256:a9efa2e9e5f469d3b5749199329739cfef1ff1d1846538ced4885c544eecbcd9' \
+      'pymupdf-layout==2.1 --hash=sha256:e7e00bc50ec9113d36bdbb0dd5cdafa5f4d61e22e598960fc187ee4f721f5095' \
+      'pymupdf4llm==2.1 --hash=sha256:2fe8bb344444c6a8ef41fd745d2d10f6da59df6e104ef20f35d51dd26914b5fb' \
+      'python-dateutil==2.9.0.post0 --hash=sha256:a8b2bc7bffae282281c8140a97d3aa9c14da0b136dfe83f850eea9a5f7470427' \
+      'pyyaml==6.0.3 --hash=sha256:ee2922902c45ae8ccada2c5b501ab86c36525b883eff4255313a253a3160861c --hash=sha256:0f29edc409a6392443abf94b9cf89ce99889a1dd5376d94316ae5145dfedd5d6' \
+      'rsa==4.7.2 --hash=sha256:78f9a9bf4e7be0c5ded4583326e7461e3a3c5aae24073648b4bdfa797d78c9d2' \
+      'six==1.17.0 --hash=sha256:4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274' \
+      'tabulate==0.10.0 --hash=sha256:f0b0622e567335c8fabaaa659f1b33bcb6ddfe2e496071b743aa113f8774f2d3' \
+      'urllib3==2.8.0 --hash=sha256:0cf3cae568d36aa9576b28dfb35f11328f1cb974ca7647d9475ebb86c75ac6e3' \
+      'wheel==0.48.0 --hash=sha256:3217dcc807155e45db462d7ef2431f5ddda0d7273b700d05a67b271ceb1287ab' \
+    )                                                                                                                      && \
     echo "*** Deactivating virtual python environment"                                                                          && \
     deactivate                                                                                                                   && \
     echo "*** Preventing autoupdates of the image"                                                                         && \

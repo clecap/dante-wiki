@@ -16,12 +16,14 @@ Whereever the file private/<NAME>/source-configuration.sh contains a text line s
 
 IMPORT <filename>
 
-it checks that the <filename> contains only the name fo a normal file, without slashes, double dots or paths.
+it checks that the <filename> contains only of the name of a file or of one directory followed by the
+name of a file. It must not contain double dots, an absolute path or more than one directory.
 
 it replaces this line by 
 FIRST:   an empty line
 SECOND:  a shell comment of this form:   # BEGIN importing file <filename>
-THIRD:   the contents of the file <filename> from the subdirectory LIB in the directory private/.
+THIRD:   the contents of the file <filename> from the subdirectory LIB in the directory private/
+  possibly including one subdirectory of LIB.
 FOURTH:  a shell comment of this form:    # END importing file <filename>
 FIFTH:   an empty line
 

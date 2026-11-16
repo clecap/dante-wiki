@@ -1,0 +1,9 @@
+{
+  "name": "dante-wiki-eslint-ci",
+  "private": true,
+  "description": "Pinned ESLint toolchain for .github/workflows/eslint.yml (installed via npm ci from package-lock.json)",
+  "devDependencies": {
+    "@microsoft/eslint-formatter-sarif": "2.1.7",
+    "eslint": "8.10.0"
+  }
+}

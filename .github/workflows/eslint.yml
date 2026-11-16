@@ -28,16 +28,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
+      # Versions and sha512 integrity hashes are pinned in .github/eslint/package-lock.json
       - name: Install ESLint
-        run: |
-          npm install eslint@8.10.0
-          npm install @microsoft/eslint-formatter-sarif@2.1.7
+        run: npm ci --prefix .github/eslint --ignore-scripts
 
       - name: Run ESLint
-        run: npx eslint .
+        run: .github/eslint/node_modules/.bin/eslint .
           --config .eslintrc.js
           --ext .js,.jsx,.ts,.tsx
-          --format @microsoft/eslint-formatter-sarif
+          --ignore-pattern .github/eslint/
+          --format ./.github/eslint/node_modules/@microsoft/eslint-formatter-sarif/sarif.js
           --output-file eslint-results.sarif
         continue-on-error: true
 
