@@ -1,16 +1,20 @@
 {
   "recommendations": [
     "ms-vscode-remote.remote-containers",         // need this to edit remote containers
+    "ms-azuretools.vscode-containers",            // conatiner tools by microsoft
     "anthropic.claude-code",                      // recommended vibe tool assistant, needs claude subscription
     "exiasr.hadolint",                            // linter for Dockerfiles
     "github.vscode-github-actions",               // support working with github actions
     "ms-vscode-remote.remote-ssh",                // access remote machines
     "dbaeumer.vscode-eslint",                     // js linting
     "bmewburn.vscode-intelephense-client",        // php language server
-    "ms-python.python",
+    "ms-python.python",                           // python support
     "ms-python.vscode-pylance",                   // python language server
     "GitHub.vscode-github-actions",               // supports github actions
     "zainchen.json",                              // supports json
-    "shd101wyy.markdown-preview-enhanced",        // markdown previewer
+    "shd101wyy.markdown-preview-enhanced",        // markdown previewer  
+    "streetsidesoftware.code-spell-checker",      // supports spell checking inside of code
+    "bierner.docs-view",                          // view hovering documenztataonasd
+
   ]
 }

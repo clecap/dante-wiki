@@ -1,13 +1,3 @@
-# DanteWiki Upgrade Analysis: MediaWiki 1.39 → 1.40 → 1.43
-
-
-get-dante.sh loads a parametrized branch of dante-delta which me must adjust.  in common-defs.sh we have:
-# the name of the branch to which we will clone
-DANTE_BRANCH=master
-
-and then get-dante.sh is an unfortunate loading rpocess..
-
-
 
 
 Adjust the php.ini and other files in docker home area. especially the php8.2 directory
@@ -99,17 +89,6 @@ These are not needed for 1.43 with its default settings, but they matter for a l
   - The mustache template keys they use (`html-title-heading`, `html-body-content`, `html-after-portal`, `array-indicators`, `html-user-language-attributes`, …) are not listed as removed. `html-hello` is a key the skins define themselves.
 
 
-## Other work around the upgrade
-
-### Bundled and third-party extensions
-
-These third-party extensions each need a release that supports the target version:
-
-| Extension | Current version | Requires MediaWiki |
-|---|---|---|
-
-| WikiMarkdown | 1.1.3 | ≥ 1.34 |
-| SubPageList (composer) | 3.0.1 | ≥ 1.36.0 |
 
 ### Composer
 
@@ -124,10 +103,8 @@ These third-party extensions each need a release that supports the target versio
 
 **From 1.40:**
 
-- **`$wgParserEnableLegacyMediaDOM`:** check whether the default switched to the new `<figure>`-based image markup. If so, CSS that targets `.thumbinner`, `.thumbcaption` and similar classes stops matching. No such selectors were found in the Dante code. Check the bundled skins.
-- **`$wgShellboxUrl`:** removed. It is not used here.
 - **`$wgPrivilegedGroups`:** new. Add any custom user groups you define.
-- **PBKDF2 passwords:** these now use OpenSSL when it is available.
+
 
 **From 1.43:**
 
@@ -141,8 +118,7 @@ These third-party extensions each need a release that supports the target versio
    - **DanteBackup:** dump and restore, including importing drawio SVGs (with and without the SVGReader patch)
    - **Parsifal:** TeX rendering, format precompilation, and the "Parsifals" page property
    - **DantePresentations:** translation, endpoints, displaytitle handling (change 1) and the TOC injection
-   - **DanteSnippets:** snippet jobs (change 6)
-   - **DanteTree:** sidebar menus, and whether the tree state is still saved (change 8)
+
    - **DantePresentationSkin and skinny:** style loading (change 7)
    - **Logs:** check for any remaining deprecation warnings
 

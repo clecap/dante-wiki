@@ -7,7 +7,13 @@ README file for ***generating a development environment***
 ## Requirements for the development machine
 * Visual Studio Code 
 * Docker Desktop
-* Extension ms-vscode-remote.remote-containers installed on visual studio code. 
+
+
+##
+
+
+
+
 
 
 ## Workflow

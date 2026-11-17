@@ -4,17 +4,14 @@
 
 * TeXLyre: https://texlyre.github.io/texlyre/   https://github.com/TeXlyre/texlyre
 
-
 * Swift LaTeX:  https://github.com/SwiftLaTeX/SwiftLaTeX
 and https://www.swiftlatex.com/
-
 
 * Busytex: https://github.com/busytex
 
 * Crixet: https://crixet.com/
 
 * Overleaf  
-
 
 Categories of differences:
 
