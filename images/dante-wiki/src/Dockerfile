@@ -641,7 +641,12 @@ RUN composer config --no-plugins allow-plugins.wikimedia/composer-merge-plugin t
 
 COPY . /
 
+# branch of dante-wiki the image is built from; passed in by build / buildNoCache in bin/library.sh
+# declared as late as possible since a change of its value invalidates the cache from here on
+ARG CURRENT_DANTE_BRANCH
+
 RUN  \
+    test -n "${CURRENT_DANTE_BRANCH}" || { echo "*** ERROR: CURRENT_DANTE_BRANCH not set, pass it with --build-arg"; exit 1; }                                    && \
     /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-MobileFrontend                MobileFrontend               ${MEDIAWIKI_EXTENSION_TAG}    && \
     /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-RandomSelection               RandomSelection              ${MEDIAWIKI_EXTENSION_TAG}    && \
     /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-LabeledSectionTransclusion    LabeledSectionTransclusion   ${MEDIAWIKI_EXTENSION_TAG}    && \
@@ -683,8 +688,7 @@ RUN  \
   #
   echo "*** Moving Mediawiki Readme out of our way \n"                                                                                                              && \
   cp ${TOP_PATH}/README.md ${TOP_PATH}/README-mediawiki-md  || true                                                                                                 && \
-  # Picking up the currently used branch name from the dante-wiki repository for use in dante-delta and in Parsifal 
-  CURRENT_DANTE_BRANCH="$(git -C ${TOP_PATH} branch --show-current)"                                                                                                && \
+  # Picking up the currently used branch name from the dante-wiki repository for use in dante-delta and in Parsifal                                                                                                && \
   echo "*** We detected that we are running on dante-wiki branch ${CURRENT_DANTE_BRANCH}\n"                                                                         && \
   printf '%s\n' "${CURRENT_DANTE_BRANCH}" > "${TOP_PATH}/DANTE-BRANCH-${CURRENT_DANTE_BRANCH}.md"                                                                   && \
   # Dante-Delta installation 

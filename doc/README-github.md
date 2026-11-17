@@ -13,3 +13,7 @@ git fetch origin
 for b in $(git for-each-ref --format='%(refname:strip=3)' refs/remotes/origin/); do
   [ "$b" = "HEAD" ] || git show-ref -q --verify "refs/heads/$b" || git branch --track "$b" "origin/$b"
 done
+
+# Remove the superfluous remote branches when we have more locally
+
+git remote prune origin

@@ -103,6 +103,8 @@ jobs:
         id: build
         env:
           VERSION: ${{ needs.version.outputs.version }}
+          # branch the workflow runs on; the Dockerfile uses it to pick the dante-delta and Parsifal branch
+          CURRENT_DANTE_BRANCH: ${{ github.ref_name }}
         run: |
           # without pipefail the step would report the exit code of tee (always 0) and a failed build would look green
           set -o pipefail
@@ -127,6 +129,7 @@ jobs:
             --sbom=true \
             --metadata-file metadata.json \
             --build-arg DANTE_VERSION="$DANTE_VERSION" \
+            --build-arg CURRENT_DANTE_BRANCH="$CURRENT_DANTE_BRANCH" \
             -t clecap/dante-wiki:latest \
             -t clecap/dante-wiki:dev \
             ${VERSION:+-t clecap/dante-wiki:$VERSION} \

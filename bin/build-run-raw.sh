@@ -10,6 +10,8 @@ source $DIR/library.sh
 set -e
 trap 'abort' ERR
 
+
+
 # read in the active configuration
 source ${TOP_DIR}/private/configuration.sh
 
@@ -18,6 +20,10 @@ source ${TOP_DIR}/private/configuration.sh
 ##
 ## PHASE 1: all user interaction - the user answers all questions first, then the script runs unattended
 ##
+
+CURRENT_DANTE_BRANCH="$(git branch --show-current)"   
+
+showCurrentBranch
 
 # show what is running and ask for confirmation before taking it down (to ensure git has been pushed)
 listServices
@@ -42,9 +48,9 @@ fi
 downAllServices $TOP_DIR/compose/docker-compose-development.yaml
 
 if [ "$BUILD_MODE" = "cache" ]; then
-  build
+  build "$CURRENT_DANTE_BRANCH"
 else
-  buildNoCache
+  buildNoCache "$CURRENT_DANTE_BRANCH"
 fi
 
 # TODO: research if we can also do this with -d for detached mode and make better use of the health check dependency in the yaml file

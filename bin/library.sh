@@ -8,6 +8,7 @@
 export RESET="\e[0m"; 
 export ERROR="\e[1;31m"; 
 export GREEN="\e[1;92m";
+export BOLD="\e[1m";
 
 
 
@@ -195,7 +196,12 @@ listServices()
   printf "\n\n"
 }
 
-
+showCurrentBranch()
+{
+  local branch
+  branch=$(git branch --show-current)
+  printf "{$ERROR}Current branch is %s${RESET}\n" "$branch"
+}
 
 
 # fire up in composer file $1 the services $2 $3 ...
@@ -222,8 +228,9 @@ build()
 {
   startTimer
   local version=$(gitVersion)
-  printf "\n$GREEN---Building image dante-wiki version $version if necessary...$RESET\n" ;
-    docker build --progress=plain --build-arg DANTE_VERSION="$version" -t dante-wiki:latest $TOP_DIR/images/dante-wiki/src
+  local branch=${1:?build: branch name required as first argument}
+  printf "\n$GREEN---Building image dante-wiki version $version, branch $branch if necessary...$RESET\n" ;
+    docker build --progress=plain --build-arg DANTE_VERSION="$version" --build-arg CURRENT_DANTE_BRANCH="$branch" -t dante-wiki:latest $TOP_DIR/images/dante-wiki/src
   ok "$GREEN---DONE$RESET"
 }
 
@@ -232,8 +239,9 @@ buildNoCache()
 {
   startTimer
   local version=$(gitVersion)
-  printf "\n$GREEN---Building image dante-wiki version $version from scratch $RESET\n" ;
-    docker build --progress=plain --no-cache --build-arg DANTE_VERSION="$version" -t dante-wiki:latest $TOP_DIR/images/dante-wiki/src
+  local branch=${1:?buildNoCache: branch name required as first argument}
+  printf "\n$GREEN---Building image dante-wiki version $version, branch $branch from scratch $RESET\n" ;
+    docker build --progress=plain --no-cache --build-arg DANTE_VERSION="$version" --build-arg CURRENT_DANTE_BRANCH="$branch" -t dante-wiki:latest $TOP_DIR/images/dante-wiki/src
   ok "$GREEN---DONE$RESET"
 }
 

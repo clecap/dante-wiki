@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# DISABLED: install.sh does not yet pass CURRENT_DANTE_BRANCH to build; everything below is dead code until fixed
+printf "\e[1;31m*** ERROR: install.sh is currently disabled (does not yet pass CURRENT_DANTE_BRANCH to build)\e[0m\n" >&2
+exit 1
+
 
 ##
 ## FREQUENTLY CHANGED PARAMETERS 
