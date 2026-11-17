@@ -200,7 +200,7 @@ showCurrentBranch()
 {
   local branch
   branch=$(git branch --show-current)
-  printf "{$ERROR}Current branch is %s${RESET}\n" "$branch"
+  printf "${ERROR}Current branch is %s${RESET}\n" "$branch"
 }
 
 

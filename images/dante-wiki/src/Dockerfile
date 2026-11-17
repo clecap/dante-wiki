@@ -694,14 +694,15 @@ RUN  \
   # Dante-Delta installation 
   # TOP_PATH is not an empty directory, so "git clone" into it would fail; initialise a repo in place and overlay dante-delta.
 #  "checkout -f" overwrites local files which are tracked by dante-delta; all other files in TOP_PATH stay untouched, which is what we want here
-  echo "*** Installing dante-delta, branch ${CURRENT_DANTE_BRANCH}\n"                                                                                               && \
+  echo "*** Installing dante-delta, branch ${CURRENT_DANTE_BRANCH} \n"                                                                                               && \
   git -C "${TOP_PATH}" init -q                                                                                                                                      && \
   git -C "${TOP_PATH}" remote add origin https://github.com/clecap/dante-delta                                                                                      && \
   git -C "${TOP_PATH}" fetch origin "${CURRENT_DANTE_BRANCH}"                                                                                                       && \
-  git -C "${TOP_PATH}" checkout -f -b new-mw --track origin/new-mw                                                                                                  && \
+  git -C "${TOP_PATH}" checkout -f -b "${CURRENT_DANTE_BRANCH}" --track "origin/${CURRENT_DANTE_BRANCH}"                                                                                                  && \
+  printf "\n*** Will startup in development mode\n"     && \
   cp "${TOP_PATH}/DanteSettings-development.php" "${TOP_PATH}/DanteSettings-used.php"                                                                               && \
   #
-  echo "*** Installing Parsifal, branch ${CURRENT_DANTE_BRANCH}\n"                                                                                                   && \
+  printf "\n*** Installing Parsifal, branch ${CURRENT_DANTE_BRANCH}\n"                                                                                                   && \
   /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/clecap/parsifal          Parsifal        "${CURRENT_DANTE_BRANCH}"   DEV   && \
   #
   #  Composer >= 2.9 refuses to install packages with known security advisories. MediaWiki 1.43 core pins

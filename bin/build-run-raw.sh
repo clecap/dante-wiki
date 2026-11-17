@@ -23,6 +23,7 @@ source ${TOP_DIR}/private/configuration.sh
 
 CURRENT_DANTE_BRANCH="$(git branch --show-current)"   
 
+printf "\n"
 showCurrentBranch
 
 # show what is running and ask for confirmation before taking it down (to ensure git has been pushed)
