@@ -1,9 +1,7 @@
 {
   "name": "Dante",
 	"folders": [
-		{"path": "."},
-		{"path": "extensions/Parsifal"},
-		{"path": "extensions"}
+		{"path": "."}
 	],
 	"settings": {
 		"git.repositoryScanMaxDepth": 1,

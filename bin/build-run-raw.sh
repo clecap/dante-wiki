@@ -10,8 +10,6 @@ source $DIR/library.sh
 set -e
 trap 'abort' ERR
 
-
-
 # read in the active configuration
 source ${TOP_DIR}/private/configuration.sh
 

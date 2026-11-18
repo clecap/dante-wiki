@@ -112,5 +112,3 @@ Restart Chrome completely (Cmd+Q) after running mkcert.
 
 
 
-
-

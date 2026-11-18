@@ -711,7 +711,11 @@ RUN  \
   #  advisories; any other advisory still blocks. Risk is low: MediaWiki parses only its own config/schema YAML
   #  files with it, not user content. REMOVE this once a MediaWiki 1.43 point release raises the symfony/yaml pin.
    composer config --json audit.ignore '{"CVE-2026-109413": "symfony/yaml 5.4.52 pinned by MediaWiki 1.43 core", "GHSA-hwfg-qwvh-2wfx": "symfony/yaml 5.4.52 pinned by MediaWiki 1.43 core"}'  && \
-   composer update
+   composer update  && \
+   printf "\n*** Move files out of the way\n"  && \
+   mkdir -p "${TOP_PATH}/docs/mw-docs" 
+  mv -n "${TOP_PATH}/INSTALL" "${TOP_PATH}/FAQ" "${TOP_PATH}/CREDITS" "${TOP_PATH}/HISTORY" "${TOP_PATH}/COPYING" "${TOP_PATH}/CODE_OF_CONDUCT.md" \
+         "${TOP_PATH}/SECURITY" "${TOP_PATH}/UPGRADE" "${TOP_PATH}"/RELEASE-NOTES-1.* "${TOP_PATH}/docs/mw-docs"
 
 ## 
 ## Adhere to default non-root user policy promoted by dockerhub

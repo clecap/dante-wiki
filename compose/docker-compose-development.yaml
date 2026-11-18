@@ -137,6 +137,7 @@ services:
           - phpmyadmin.local
     environment:
       PMA_HOST: dante-mariadb-container
+      PMA_ARBITRARY: 1
     depends_on:
       - database
 
