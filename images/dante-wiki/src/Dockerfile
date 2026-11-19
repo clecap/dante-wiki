@@ -633,17 +633,18 @@ RUN composer config --no-plugins allow-plugins.wikimedia/composer-merge-plugin t
 
 
 ##
-## COPY in docker context 
+## COPY in docker context  as late as possible (for cacheing) as early as the files are needed
 ##
-#  Do this as late as possible, since otherwise chenges in files require a redo of older dockerfile layers
-#  Do this immediately before the files are really needed
-# 
 
 COPY . /
 
 # branch of dante-wiki the image is built from; passed in by build / buildNoCache in bin/library.sh
 # declared as late as possible since a change of its value invalidates the cache from here on
 ARG CURRENT_DANTE_BRANCH
+
+# the below ARGs get their value as number of the last commit and trigger a rebuild starting from here if one of repositories have changed
+ARG GIT_COMMIT_DANTE_DELTA
+ARG GIT_COMMIT_PARSIFAL
 
 RUN  \
     test -n "${CURRENT_DANTE_BRANCH}" || { echo "*** ERROR: CURRENT_DANTE_BRANCH not set, pass it with --build-arg"; exit 1; }                                    && \
@@ -659,12 +660,12 @@ RUN  \
    ##
    ## Diagrams had a problem which I fixed in my own fork, but my pull request has not yet been honored by upstream.
    ## /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"   https://github.com/samwilson/diagrams-extension                                 Diagrams                     master     && \
-   /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"   https://github.com/clecap/diagrams-extension                                 Diagrams                     mermaid-12  DEV     && \  
+   /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"   https://github.com/clecap/diagrams-extension                                    Diagrams                     mermaid-12  DEV     && \  
+   
 #
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-ReplaceText                   ReplaceText                  ${MEDIAWIKI_EXTENSION_TAG}    && \
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/ProfessionalWiki/Network                                     Network                      master     && \
-#
-    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-SubPageList3                 SubPageList3                  ${MEDIAWIKI_EXTENSION_TAG}    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-ReplaceText                   ReplaceText                   ${MEDIAWIKI_EXTENSION_TAG}    && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/ProfessionalWiki/Network                                     Network                       master     && \
+    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-SubPageList3                  SubPageList3                  ${MEDIAWIKI_EXTENSION_TAG}    && \
 #  installExtensionGithub  https://github.com/labster/HideSection/                                         HideSection master
 #
 #
@@ -674,11 +675,9 @@ RUN  \
   mkdir -p ${TOP_PATH}/external-services/draw-io/                                                                                                               && \
   git clone --depth 1 --branch dev --single-branch https://github.com/jgraph/drawio.git ${TOP_PATH}/external-services/draw-io/drawio-dev                        && \
   rm -Rf ${TOP_PATH}/external-services/draw-io/drawio-dev/.git                                                                                                  && \
-#  looks like this extension is broken
-#  installExtensionGithub https://github.com/wikimedia/mediawiki-extensions-WikEdDiff WikEdDiff REL1_39
+#
    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/Universal-Omega/DynamicPageList4                             DynamicPageList4             ${MEDIAWIKI_EXTENSION_TAG}    && \
-#  CodeMirror 5.65.3 into wiki-dir/vendor/codemirror (npm tarball has top-level dir "package/", hence --strip-components=1)
-  echo "*** Installing CodeMirror 5.65.3 into ${TOP_PATH}/vendor/codemirror\n"     && \
+  printf "*** Installing CodeMirror 5.65.3 into ${TOP_PATH}/vendor/codemirror\n"     && \
 #  sha512 = npm registry dist.integrity of codemirror@5.65.3, converted from base64 to hex
   mkdir -p ${TOP_PATH}/vendor/codemirror                                                                                                                                                   && \
   curl -fsSL --retry 5 --retry-delay 10 --retry-all-errors -o /tmp/codemirror-5.65.3.tgz https://registry.npmjs.org/codemirror/-/codemirror-5.65.3.tgz                                     && \
@@ -693,7 +692,7 @@ RUN  \
   printf '%s\n' "${CURRENT_DANTE_BRANCH}" > "${TOP_PATH}/DANTE-BRANCH-${CURRENT_DANTE_BRANCH}.md"                                                                   && \
   # Dante-Delta installation 
   # TOP_PATH is not an empty directory, so "git clone" into it would fail; initialise a repo in place and overlay dante-delta.
-#  "checkout -f" overwrites local files which are tracked by dante-delta; all other files in TOP_PATH stay untouched, which is what we want here
+  #  "checkout -f" overwrites local files which are tracked by dante-delta; all other files in TOP_PATH stay untouched, which is what we want here
   echo "*** Installing dante-delta, branch ${CURRENT_DANTE_BRANCH} \n"                                                                                               && \
   git -C "${TOP_PATH}" init -q                                                                                                                                      && \
   git -C "${TOP_PATH}" remote add origin https://github.com/clecap/dante-delta                                                                                      && \
@@ -713,9 +712,12 @@ RUN  \
    composer config --json audit.ignore '{"CVE-2026-109413": "symfony/yaml 5.4.52 pinned by MediaWiki 1.43 core", "GHSA-hwfg-qwvh-2wfx": "symfony/yaml 5.4.52 pinned by MediaWiki 1.43 core"}'  && \
    composer update  && \
    printf "\n*** Move files out of the way\n"  && \
-   mkdir -p "${TOP_PATH}/docs/mw-docs" 
+   mkdir -p "${TOP_PATH}/docs/mw-docs"   && \
   mv -n "${TOP_PATH}/INSTALL" "${TOP_PATH}/FAQ" "${TOP_PATH}/CREDITS" "${TOP_PATH}/HISTORY" "${TOP_PATH}/COPYING" "${TOP_PATH}/CODE_OF_CONDUCT.md" \
          "${TOP_PATH}/SECURITY" "${TOP_PATH}/UPGRADE" "${TOP_PATH}"/RELEASE-NOTES-1.* "${TOP_PATH}/docs/mw-docs"
+
+
+##  TODO: should switch to produciton mode from dev mode soon after the start
 
 ## 
 ## Adhere to default non-root user policy promoted by dockerhub
@@ -725,6 +727,23 @@ RUN  \
 #  Copy your application code to the container
 #  Give non-root user ownership of the application files
 #  Set the default user ## TODO: do we want this? is it compatible with the deletion strategies we need ???
+
+##
+## Version of DanteWiki, passed in by the build: --build-arg DANTE_VERSION=$(git describe ...)
+##
+#  NOTE: Keep this at the END of the Dockerfile. A changed ARG value invalidates the cache of every later step,
+#        so near the top every new version would rebuild everything, including the TeX Live installation.
+#  Three ways to read it:
+#    ENV:   $DANTE_VERSION in shell scripts in the container
+#    file:  /etc/dante-version, for PHP: php-fpm clears the environment of its workers (clear_env), so getenv may not see the ENV
+#    LABEL: from outside, docker inspect --format '{{index .Config.Labels "org.opencontainers.image.version"}}' IMAGE
+ARG DANTE_VERSION=unknown
+ENV DANTE_VERSION=${DANTE_VERSION}
+LABEL org.opencontainers.image.version="${DANTE_VERSION}"
+#  /etc is writable only by root, the build runs as www-data from above
+USER root
+RUN echo "${DANTE_VERSION}" > /etc/dante-version && chmod 644 /etc/dante-version
+USER www-data
 
 ##
 ## Default parameters for the entrypoint script below

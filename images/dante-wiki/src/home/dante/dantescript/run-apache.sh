@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This script generates those files and implements those settings for apache which depend on the suer specific configuraiton file
+
 source /home/dante/dantescript/common-defs.sh
 
 printf "*** THIS IS run-apache.sh\n\n"  
@@ -10,6 +12,8 @@ printf "\n*** run-apache.sh: Listing ${MOUNT}\n"
 printf "DONE\n\n"
 
 loadSecrets
+
+
 export APACHE_SERVER_NAME=${MY_DOMAINNAME}
 
 printf "*** run-apache.sh: Generating environment variable file for Apache..."
@@ -33,11 +37,10 @@ printf "*** run-apache.sh: Generating environment variable file for Apache..."
   echo "export LDAP_AUTHNAME=\"${LDAP_AUTHNAME}\"" >> /tmp/env-dante
 
   sudo mv /tmp/env-dante /etc/apache2/env-dante
-  sudo chmod 755 /etc/apache2/env-dante
+  sudo chmod 600 /etc/apache2/env-dante
   sudo chown root:root /etc/apache2/env-dante
 printf "DONE generating environment variable file for Apache\n"
 
-exec 1>&1 2>&2
 
 trap 'warn' ERR
 
@@ -45,6 +48,7 @@ trap 'warn' ERR
 sudo a2disconf cache.conf
 sudo a2enconf no-cache.conf
 sudo a2ensite dante-mediawiki.conf
+
 
 ### Enable LDAP
 if [ "$USING_LDAP" = "true" ]; then
@@ -70,37 +74,34 @@ fi
 
 ## Enable https or http servicing
 if [ "$HOST_PROTOCOL" = "http" ]; then
-  printf "   ENABLING http configuration...\n"
+  printf "   ENABLING http...\n"
     sudo a2enconf http.conf
     sudo a2disconf https.conf
-  printf "  DONE (enabling http configuration)\n"
+  printf "  DONE (enabling http)\n"
 elif  [ "$HOST_PROTOCOL" = "https" ]; then
-  printf "   ENABLING https configuration...\n"
+  printf "   ENABLING https...\n"
     sudo a2disconf http.conf
     sudo a2enconf https.conf
-  printf "  DONE (enabling https configuration)\n"
+  printf "  DONE (enabling https)\n"
 else
   printf "${ERROR} Incorrect value of HOST_PROTOCOL is ${HOST_PROTOCOL}\n ${RESET}"
 fi
 
 printf "*** run-apache.sh: Starting fpm...\n"
-  sudo  stdbuf -o0 -e0  service php8.4-fpm start 
-  exec 1>&1 2>&2
-printf "DONE\n"
+  sudo service php8.4-fpm start
+printf "  DONE (starting fpm)\n"
 
 printf "\n*** run-apache.sh: Listing apache includes...\n"
-  sudo  stdbuf -o0 -e0  apachectl -D DUMP_INCLUDES 
-  exec 1>&1 2>&2
-printf "DONE\n"
+  sudo apachectl -D DUMP_INCLUDES
+printf "DONE (listing apache includes)\n"
 
 printf "\n*** run-apache.sh: Listing apache modules...\n"
-  sudo  stdbuf -o0 -e0  apachectl -D DUMP_MODULES 
-  exec 1>&1 2>&2
-printf "DONE listing apache modules\n"
+  sudo apachectl -D DUMP_MODULES
+printf "DONE (listing apache modules)\n"
 
 printf "\n*** run-apache.sh: Testing configuration...\n"
-  sudo  stdbuf -o0 -e0  apachectl configtest
-printf "DONE testing configuration\n"
+  sudo apachectl configtest
+printf "DONE (testing configuration)\n"
 
 loadSecrets
 

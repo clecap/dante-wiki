@@ -8,26 +8,19 @@ source /home/dante/dantescript/common-defs.sh
 
 loadSecrets
 
-# banner "PREPARE-DATABASE"
-
 wait_dbserver_running ${MY_DB_HOST}
 
-check_dbserver_initial_rootpassword ${MY_DB_HOST}
-RESULT=$?
-
-if [ "$RESULT" -eq 0 ]; then
-  printf "${GREEN}\n\n*** prepare-database.sh: We are running on initial root password...setting up database\n"
+if check_dbserver_initial_rootpassword "${MY_DB_HOST}"; then
+  printf "${GREEN}\n\n*** prepare-database.sh: We are running on initial root password...now setting up database\n"
   export MYSQL_PWD="initialPassword"
 
   listUsers             "${MY_DB_HOST}"
   listDatabases         "${MY_DB_HOST}"
-  createDBandUsers      "${MY_DB_HOST}" "${MY_DB_NAME}" "${MY_DB_USER}" "${MY_DB_PASS}"
+  createDBandUsers      "${MY_DB_HOST}" "${MY_DB_NAME}" "${MY_DB_USER}" "${MY_DB_PASS}" "${MY_DB_I_USER}" "${MY_DB_I_PASS}"
   listUsers             "${MY_DB_HOST}"
   listDatabases         "${MY_DB_HOST}"
 
   export NEW_MYSQL_PASSWORD="${MYSQL_ROOT_PASSWORD}"  # overwrite with initial password
-
-  exec 1>&1 2>&2
 
   setDBRootpassword     "${MY_DB_HOST}"
 
@@ -35,7 +28,7 @@ if [ "$RESULT" -eq 0 ]; then
 export MYSQL_PWD="${MYSQL_ROOT_PASSWORD}"
 
   listUsers             "${MY_DB_HOST}"
-  fixRoot                "${MY_DB_HOST}"
+  fixRoot               "${MY_DB_HOST}"
   listUsers             "${MY_DB_HOST}"
 
 else

@@ -144,7 +144,7 @@ Make and check test pages for every extension and all the features in the extens
 Add semantic mediawiki extension.
 
 Bluespice:
- An enterprise-ready distribution built directly on top of MediaWiki that adds formal workflow approvals, PDF bookmakers, extended rights management, metadata forms, and technical documentation portals tailored for quality management
+ An enterprise-ready distribution built directly on top of MediaWiki that adds formal workflow approvals, PDF bookmakers, extended rights managementInstalls.php, metadata forms, and technical documentation portals tailored for quality management
 
 
 
@@ -159,3 +159,5 @@ We need to expire the ParserCache whenever we change a template.
 We need to clean up the parsifal cache regularly.
 Have a special whcih does this for Parsifal: Bulk purge: run php maintenance/run.php purgeParserCache to remove old entries or which
 does a purge for all pages with a parisfal tag.
+
+

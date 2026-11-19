@@ -152,6 +152,16 @@ installInitialFromLocal()
 }
 
 
+# print $1 as a PHP single-quoted string literal: escape \ and ' so that any value (e.g. a password) is safe
+# usage inside a heredoc:   'password' => $(phpQuote "${SMTP_PASSWORD}"),
+phpQuote()
+{
+  local s=${1//\\/\\\\}
+  s=${s//\'/\\\'}
+  printf "'%s'" "$s"
+}
+
+
 ## Load the secret configuration file
 loadSecrets()
 {
@@ -160,39 +170,17 @@ loadSecrets()
     source /run/secrets/configuration ; exec 1>&1 2>&2
     export DANTE_CONFIG_HASH=$(shasum -a 256 /run/secrets/configuration | awk '{ print $1 }')
     printf "DONE loading configuration ${DANTE_CONFIGURATION_NAME}, hashed to ${DANTE_CONFIG_HASH}\n"
+    # refuse to continue with empty database credentials
+    ##### TODO: add such checks for the other user and password variables as well 
+    local VAR
+    for VAR in MY_DB_HOST MY_DB_NAME MY_DB_USER MY_DB_PASS MY_DB_I_USER MY_DB_I_PASS; do
+      [ -n "${!VAR}" ] || { printf "${ERROR}*** common-defs.sh:loadSecrets: ${VAR} is empty or not set in configuration - EXITING${RESET}\n"; exit 1; }
+    done
   else
     printf "$ERROR*** common-defs.sh:loadSecrets could not find configuration file, EXITING $RESET\n"
     exit 1
   fi
 }
-
-
-
-changeWikiRootUser()
-{
-  local current_username="Admin"             # Current admin username
-  local new_username="NewAdminName"          # New admin username
-  local new_password="new_password"          # New password for the admin account
-
-  printf "Renaming the administrator username from $current_username to $new_username\n"
-  php "${MOUNT}${TARGET}/maintenance/renameUser.php" --olduser="${current_username}" --newuser="${new_username}" --reason="Automated username change"
-  if [ $? -eq 0 ]; then
-    printf "${GREEN}Administrator username has been successfully changed to ${new_username}. ${RESET}\n"
-  else
-    printf "${ERROR}Failed to change the Wiki administrator username.\n ${RESET}"
-    exit 1
-  fi
-
-  printf "Changing the password for the new administrator username \n"
-  php "${MOUNT}${TARGET}/maintenance/changePassword.php" --user="${new_username}" --password="${new_password}"
-
-  if [ $? -eq 0 ]; then
-    printf "${GREEN}Administrator password has been successfully changed.\n${RESET}"
-  else
-   printf "${ERROR}Failed to change the administrator password. \n${RESET}"
-  fi
-}
-
 
 
 
@@ -206,7 +194,7 @@ changeWikiRootUser()
 #### CAVE: NEEDS correct password !!!
 ping_dbserver() {
   local MY_DB_HOST="$1"
-  printf "check_dbserver_running: Pinging database $MY_DB_HOST \n"
+  printf "ping_dbserver_running: Pinging database $MY_DB_HOST \n"
   mysqladmin ping -h "$MY_DB_HOST" 
 
 
@@ -242,7 +230,7 @@ check_dbserver_running() {
 
 
 
-
+# wait sleeping until DB server is running
 wait_dbserver_running() {
   local MY_DB_HOST="$1"
   local MAX_RETRIES=100    
@@ -274,16 +262,16 @@ wait_dbserver_running() {
 check_dbserver_initial_rootpassword() {
   local MY_DB_HOST="$1"  # TODO This should perhaps also be picked up from configuration
   local MYSQL_PWD="${MYSQL_ROOT_PASSWORD}"
-  printf "\n${GREEN}***Checking DB for initial root password on MY_DB_HOST=${MY_DB_HOST}...\n"
+  printf "\n${GREEN}*** check_dbserver_initial_password: Checking DB for initial root password on MY_DB_HOST=${MY_DB_HOST}...\n"
   ### printf "   Current environment variable MYSQL_PWD has value: ${MYSQL_PWD}\n"  ## ONLY USE FOR DEBUGGING since this would leak the password into the log
   local OUTPUT=$(mysqladmin ping -u root -pinitialPassword -h "$MY_DB_HOST" --skip-ssl 2>&1)
   printf "    Output of the ping was: ${OUTPUT}\n"
   if echo "$OUTPUT" | grep -i -q "ERROR"; then
       printf "${ERROR}***check_dbserver_initial_password: db server is not running or initial password is incorrect.\n"
-      return 1
+      return 0
     else
       printf "${GREEN}    check_dbserver_initial_password: db server is running and initial password is ok.\n"
-      return 0
+      return 1
   fi
 }
 
@@ -445,13 +433,26 @@ createDBandUsers()
   local MY_DB_NAME=$2
   local MY_DB_USER=$3
   local MY_DB_PASS=$4
+  local MY_DB_I_USER=$5
+  local MY_DB_I_PASS=$6
+
+  # refuse to continue with empty values: an empty user would break the SQL batch, an empty password creates a passwordless account
+  local VAR
+  for VAR in MY_DB_HOST MY_DB_NAME MY_DB_USER MY_DB_PASS MY_DB_I_USER MY_DB_I_PASS; do
+    [ -n "${!VAR}" ] || { printf "${ERROR}*** createDBandUsers: ${VAR} is empty or not set in configuration - EXITING${RESET}\n"; exit 1; }
+  done
+
   printf "${GREEN}** Creating database ${MY_DB_NAME} and user ${MY_DB_USER}${RESET}\n"
   local OUTPUT=$(mysql -h ${MY_DB_HOST} -u root --skip-ssl 2>&1 <<-EOF
     CREATE DATABASE IF NOT EXISTS ${MY_DB_NAME} /*\!40100 DEFAULT CHARACTER SET utf8 */;
     CREATE USER IF NOT EXISTS ${MY_DB_USER}@'172.16.0.0/255.240.0.0' IDENTIFIED BY '${MY_DB_PASS}';
     CREATE USER IF NOT EXISTS ${MY_DB_USER}@'192.168.0.0/255.255.0.0' IDENTIFIED BY '${MY_DB_PASS}';
-    GRANT ALL PRIVILEGES ON ${MY_DB_NAME}.* TO '${MY_DB_USER}'@'172.16.0.0/255.240.0.0';
-    GRANT ALL PRIVILEGES ON ${MY_DB_NAME}.* TO '${MY_DB_USER}'@'192.168.0.0/255.255.0.0';
+    CREATE USER IF NOT EXISTS ${MY_DB_I_USER}@'172.16.0.0/255.240.0.0' IDENTIFIED BY '${MY_DB_I_PASS}';
+    CREATE USER IF NOT EXISTS ${MY_DB_I_USER}@'192.168.0.0/255.255.0.0' IDENTIFIED BY '${MY_DB_I_PASS}';
+    GRANT SELECT, INSERT, UPDATE, DELETE, CREATE TEMPORARY TABLES ON ${MY_DB_NAME}.* TO '${MY_DB_USER}'@'172.16.0.0/255.240.0.0';
+    GRANT SELECT, INSERT, UPDATE, DELETE, CREATE TEMPORARY TABLES ON ${MY_DB_NAME}.* TO '${MY_DB_USER}'@'192.168.0.0/255.255.0.0';
+    GRANT ALL PRIVILEGES ON ${MY_DB_NAME}.* TO '${MY_DB_I_USER}'@'172.16.0.0/255.240.0.0';
+    GRANT ALL PRIVILEGES ON ${MY_DB_NAME}.* TO '${MY_DB_I_USER}'@'192.168.0.0/255.255.0.0';
     FLUSH PRIVILEGES;
 EOF
   )
@@ -482,7 +483,7 @@ touchLocalSettings()
 doMaintenanceUpdate()
 {
   printf "\n*** Doing a mediawiki maintenance update ... "
-  if ! php ${MOUNT}/${TARGET}/maintenance/update.php; then
+  if ! php ${MOUNT}/${TARGET}/maintenance/update.php --quick --dbuser "${MY_DB_I_USER}" --dbpass "${MY_DB_I_PASS}"; then
     printf "${ERROR}*** ERROR: update.php failed${RESET}\n"
     return 1
   fi
@@ -534,16 +535,6 @@ setApacheAuthentication()
   fi
 }
 
-
-
-# configure the git inside of the container so that we can use git from inside of the container
-configGitContainer()
-{
-  printf "Configuring git inside of the container..."
-    git config --global user.name "${GIT_USER_NAME}" 
-    git config --global user.email "${GIT_USER_MAIL}"
-  printf "${GREEN}DONE"
-}
 
 
 

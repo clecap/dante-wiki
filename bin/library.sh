@@ -31,18 +31,40 @@ printBanner()
 
 
 
+# abort the calling script; also works from inside a subshell such as VAR=$(askChoice ...)
+#   - message to stderr, so that it is visible also from inside $(...)
+#   - in a subshell, $$ is still the PID of the main script: terminate it with SIGTERM (exit status 143)
 abort()
 {
-  printf "%b" "\n\n$ERROR *** *** *** ABORTED *** *** *** $RESET"; exit 1
+  printf "%b" "\n\n$ERROR *** *** *** ABORTED *** *** *** $RESET\n" >&2
+  if [ "${BASH_SUBSHELL:-0}" -gt 0 ]; then
+    kill -TERM $$
+  fi
+  exit 1
 }
 
 
-askConfirmation()
+# ask the user to pick one of several options; there is no default, any other answer aborts the calling script
+# usage:   VAR=$(askChoice <message> <key> <value> [<key> <value> ...])
+# keys are single letters, compared case-insensitively; the value of the chosen key is printed on stdout
+# the prompt goes to stderr, so that it is shown and not captured by $(...)
+# example: BUILD_MODE=$(askChoice "Build using the [c]ache or from [s]cratch ?" c cache s scratch)
+askChoice()
 {
-  local message="${1:-Are you sure ??}"
-  printf "%b" "\n${ERROR}${message}${RESET} [y/N] "
+  local message=$1
+  shift
+  local reply
+  printf "%b" "\n${ERROR}${message}${RESET} " >&2
   read -r reply
-  [[ "$reply" =~ ^[Yy]$ ]] || abort
+  reply=$(printf '%s' "$reply" | tr '[:upper:]' '[:lower:]')
+  while [ $# -ge 2 ]; do
+    if [ -n "$reply" ] && [ "$reply" = "$(printf '%s' "$1" | tr '[:upper:]' '[:lower:]')" ]; then
+      printf '%s' "$2"
+      return 0
+    fi
+    shift 2
+  done
+  abort
 }
 
 
@@ -168,7 +190,7 @@ waitForContainerHealthy()
 openChrome()
 {
   if [ `uname` == "Darwin" ]; then 
-    printf "\n*** openChrome: Attempting to start a local Chrome browser\n";
+    printf "\n*** openChrome: Attempting to start a local Chrome browser at ${MW_SITE_SERVER}\n";
     open -na "Google Chrome" --args --new-window ${MW_SITE_SERVER}
   fi
 }
@@ -195,6 +217,18 @@ listServices()
   docker ps
   printf "\n\n"
 }
+
+
+listVolumes()
+{
+  printf "\n"
+  printf "Currently existing docker volumes are:\n"
+  docker volume ls
+  printf "\n\n"
+}
+
+
+
 
 showCurrentBranch()
 {
@@ -229,8 +263,16 @@ build()
   startTimer
   local version=$(gitVersion)
   local branch=${1:?build: branch name required as first argument}
+  # last commit on branch in the upstream repositories; a new commit invalidates the docker cache where these ARGs are declared
+  local GIT_COMMIT_DANTE_DELTA="$(git ls-remote https://github.com/clecap/dante-delta.git "refs/heads/${branch}" | cut -f1)"
+  local GIT_COMMIT_PARSIFAL="$(git ls-remote https://github.com/clecap/parsifal.git       "refs/heads/${branch}" | cut -f1)"
   printf "\n$GREEN---Building image dante-wiki version $version, branch $branch if necessary...$RESET\n" ;
-    docker build --progress=plain --build-arg DANTE_VERSION="$version" --build-arg CURRENT_DANTE_BRANCH="$branch" -t dante-wiki:latest $TOP_DIR/images/dante-wiki/src
+    docker build --progress=plain                  \
+        --build-arg DANTE_VERSION="$version"       \
+        --build-arg CURRENT_DANTE_BRANCH="$branch" \
+        --build-arg GIT_COMMIT_DANTE_DELTA="${GIT_COMMIT_DANTE_DELTA}"     \
+        --build-arg GIT_COMMIT_PARSIFAL="${GIT_COMMIT_PARSIFAL}"          \
+     -t dante-wiki:latest $TOP_DIR/images/dante-wiki/src
   ok "$GREEN---DONE$RESET"
 }
 
@@ -241,9 +283,14 @@ buildNoCache()
   local version=$(gitVersion)
   local branch=${1:?buildNoCache: branch name required as first argument}
   printf "\n$GREEN---Building image dante-wiki version $version, branch $branch from scratch $RESET\n" ;
-    docker build --progress=plain --no-cache --build-arg DANTE_VERSION="$version" --build-arg CURRENT_DANTE_BRANCH="$branch" -t dante-wiki:latest $TOP_DIR/images/dante-wiki/src
+    docker build --progress=plain \
+           --no-cache --build-arg DANTE_VERSION="$version" --build-arg CURRENT_DANTE_BRANCH="$branch" \
+           --build-arg GIT_COMMIT_DANTE_DELTA="${GIT_COMMIT_DANTE_DELTA}"     \
+           --build-arg GIT_COMMIT_PARSIFAL="${GIT_COMMIT_PARSIFAL}"          \
+           -t dante-wiki:latest $TOP_DIR/images/dante-wiki/src
   ok "$GREEN---DONE$RESET"
 }
+
 
 
 

@@ -18,7 +18,7 @@ setPref()
 {
   local key=$1
   local value=$2
-  setUserPreference "${MY_DB_HOST}" "${MY_DB_NAME}" "Admin" ${key} ${value}
+  setUserPreference "${MY_DB_HOST}" "${MY_DB_NAME}" "${WK_ADMIN_USER}" ${key} ${value}
 }
 
 

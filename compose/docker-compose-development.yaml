@@ -8,7 +8,7 @@
 
 services:
 
-## a database running on backing store which as a file is part of the container
+## a database running on backing store in the volume db-data (name set by DANTE_DB_VOLUME, see volumes: below)
   database:
     image: mariadb:10.5
     ports:
@@ -18,6 +18,8 @@ services:
       - dante-network
     secrets:
      - configuration
+    volumes:
+      - db-data:/var/lib/mysql
     environment:
       MARIADB_ROOT_PASSWORD: initialPassword
 
@@ -67,7 +69,7 @@ services:
       dante-network:
         aliases: 
           - dante.local
-    command: "prepare-database.sh install-webserver-certificate.sh generate-mediawiki-private.sh init.sh set-user-preferences.sh run-apache.sh"
+    command: "prepare-database.sh install-webserver-certificate.sh  init.sh  restore-from-database.sh set-user-preferences.sh run-apache.sh"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost"]
       interval: 30s
@@ -95,7 +97,13 @@ services:
       dante-network:
         aliases: 
           - dante.local
-    command: "prepare-database.sh install-webserver-certificate.sh generate-mediawiki-private.sh init.sh set-user-preferences.sh run-apache.sh"
+    command: >-
+      prepare-database.sh
+      install-webserver-certificate.sh
+      init.sh
+      restore-from-database.sh
+      set-user-preferences.sh
+      run-apache.sh
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost"]
       interval: 30s
@@ -104,7 +112,7 @@ services:
 
 
 
-## start a container which has already been initialized
+## start a container which has already been initialized # TODO: not yet correct or fit to be used
   webserver-cooked:
     environment:
       - COMPOSER_IDENTITY=webserver-cooked
@@ -121,7 +129,7 @@ services:
       dante-network:
         aliases: 
           - dante.local
-    command: "prepare-database.sh restore-initial-sql.sh chown.sh run-apache.sh"
+    command: "prepare-database.sh restore-initial-sql.sh run-apache.sh"
 
 # TODO: waiting for mysql: maybe we can put this into a health check ?!?!? in a better way than thus far ????
 
@@ -137,7 +145,6 @@ services:
           - phpmyadmin.local
     environment:
       PMA_HOST: dante-mariadb-container
-      PMA_ARBITRARY: 1
     depends_on:
       - database
 
@@ -147,6 +154,11 @@ networks:
     driver: bridge   # TODO testing only for nfs !
 
 volumes:
+  # volume of service database. The name is taken literally (no project prefix) from DANTE_DB_VOLUME,
+  # which bin/build-run-raw.sh exports. Compose creates the volume if it does not exist.
+  # ":-" gives a default for other scripts using this file (e.g. for "down"), where the variable is not set.
+  db-data:
+    name: ${DANTE_DB_VOLUME:-dante-db-data}
   data:
     external: true
   live-ext:
