@@ -142,6 +142,9 @@ waitForWebserverServicing()
     fi
 
     sleep $interval
+
+    # show what the services are doing meanwhile: the last 10 log lines of each service of the compose project
+    docker compose -f "${TOP_DIR}/compose/docker-compose-development.yaml" logs --tail 10
   done
 }
 

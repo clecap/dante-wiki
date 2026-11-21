@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# This entrypoint initializes the database, generates LocalSettings.php and runs update.php
+# This entrypoint initializes the database, generates LocalSettings.php and runs update.php  TODO: that is not completely correct here !
+
+# This script checks if 
 
 source /home/dante/dantescript/common-defs.sh
 loadSecrets                                       # lap-entrypoint.sh no longer loads the secrets for us
@@ -8,9 +10,9 @@ loadSecrets                                       # lap-entrypoint.sh no longer 
 printf "${GREEN}*** THIS IS /dantescript/init.sh ***** ${RESET}\n"
 
 
-##### TODO: below we only use MOUTN and not TARGET. Is that correct? everyhwere else we use both!
 
-printf "\n*** init.sh: Copying /home/dante/html material to ${MOUNT}..."
+
+printf "\n*** init.sh: Copying /home/dante/html material to the overall web-root ${MOUNT}..."
   cp -r /home/dante/html/*    ${MOUNT}
 printf "DONE\n\n"
 
@@ -24,10 +26,19 @@ fi
 
 printf  "*** CALLING MEDIAWIKI INSTALL ROUTINE maintenance/install.php -----------------\n "
 
-# We run install.php as the installer user MY_DB_I_USER and do NOT pass --installdbuser:
-# With --installdbuser, MysqlInstaller::setupUser tries to GRANT ALL PRIVILEGES to 'MY_DB_USER'@'MY_DB_HOST',
-# which fails, since MY_DB_I_USER has no GRANT OPTION (and that account would be useless anyhow).
-# The users and their privileges are set up by createDBandUsers (prepare-database.sh).
+# Database users: this deliberately differs from the MediaWiki documentation. See doc/README-user-concepts.md
+#
+# MediaWiki's model: the installer runs as root, creates the wiki user and grants it ALL PRIVILEGES on the wiki database.
+# Our model: createDBandUsers (prepare-database.sh) creates both users beforehand; the installer user MY_DB_I_USER
+#   may change the schema but has no GRANT OPTION, the runtime user MY_DB_USER may only read and write data.
+#
+# The documented call (--installdbuser MY_DB_I_USER --dbuser MY_DB_USER) fails here: --installdbuser switches on
+# account creation, and MysqlInstaller::setupUser then issues GRANT ALL PRIVILEGES to 'MY_DB_USER'@'MY_DB_HOST'.
+# That GRANT is refused (no GRANT OPTION, account does not exist), counts as fatal and aborts the installation;
+# if it succeeded, it would remove the restriction on MY_DB_USER.
+#
+# Workaround: we pass MY_DB_I_USER as --dbuser and no --installdbuser. Install user and runtime user are then
+# identical, setupUser returns without creating or granting anything, and the tables are created as MY_DB_I_USER.
 # Below, LocalSettings.php is switched to the restricted user MY_DB_USER for normal operation.
 if ! php ${MOUNT}/${TARGET}/maintenance/install.php \
     --confpath        ${MOUNT}/${TARGET} \
@@ -54,8 +65,7 @@ printf "${GREEN}*** maintenance/install.php completed \n"
 if [ -e "${MOUNT}/${TARGET}/LocalSettings.php" ]; then
   printf "${GREEN}*** SUCCESS:  ${MOUNT}/${TARGET}/LocalSettings.php  generated${RESET}\n"
 else
-  printf "${ERROR}*** ERROR:  Could not generate ${MOUNT}/${TARGET}/LocalSettings.php - *** ABORTING${RESET}\n"
-  exit -1
+  failed "*** ERROR:  Could not generate ${MOUNT}/${TARGET}/LocalSettings.php - *** ABORTING\n"
 fi
 
 
@@ -70,7 +80,7 @@ cat <<EOF >> "${MOUNT}/${TARGET}/LocalSettings.php" || failed "could not add dat
 ### Injected by /home/dante/dantescript/init.sh
 ###
 
-// overrides the installer user written by install.php above
+// overrides the installer user written by install.php above (see doc/README-user-concepts.md)
 \$wgDBuser     = $(phpQuote "${MY_DB_USER}");
 \$wgDBpassword = $(phpQuote "${MY_DB_PASS}");
 
@@ -96,12 +106,12 @@ printf "DONE\n"
 # overwrite the default main page and sidebar from mediawiki by the default initial-content from dantewiki
 # this also needs an --overwrite flag
 printf "\n*** Checking in sidebar..."
-  php ${MOUNT}/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite --prefix "MediaWiki:" "$CONT/Sidebar" \
+  php ${MOUNT}/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by init.sh" --overwrite --prefix "MediaWiki:" "$CONT/Sidebar" \
     || failed "importing $CONT/Sidebar failed"
 printf "DONE\n"
 
 printf "\n*** Checking in MainPage..."
-  php ${MOUNT}/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by wiki-init.sh" --overwrite  "$CONT/Main Page" \
+  php ${MOUNT}/${TARGET}/maintenance/importTextFiles.php --rc -s "Imported by init.sh" --overwrite  "$CONT/Main Page" \
     || failed "importing $CONT/Main Page failed"
 printf "DONE\n"
 

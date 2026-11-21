@@ -13,7 +13,10 @@ is_server_up() {
 }
 
 # Wait until the server is up
-echo "wait-for-apache.sh: Waiting for Apache server to be ready..."
+printf "wait-for-apache.sh: Waiting for Apache server to be ready...\n"
+
+
+
 
 until is_server_up; do
     echo -n "."

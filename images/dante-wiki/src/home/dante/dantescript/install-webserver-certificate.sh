@@ -12,7 +12,7 @@
 source /home/dante/dantescript/common-defs.sh
 loadSecrets                                       # lap-entrypoint.sh no longer loads the secrets for us
 
-trap 'errorTrap' ERR
+trap 'failed "command failed: $BASH_COMMAND"' ERR
 
 printf "*** This is install-webserver-certificate.sh\n"
 

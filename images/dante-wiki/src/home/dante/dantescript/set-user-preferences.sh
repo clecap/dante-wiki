@@ -9,7 +9,7 @@ printf "${GREEN}*** THIS IS set-user-preferences.sh ***** ${RESET}\n"
 loadSecrets
 export MYSQL_PWD="${MYSQL_ROOT_PASSWORD}"
 
-trap warn ERR
+trap 'failed "command failed: $BASH_COMMAND"' ERR
 
 ##
 ## Define a shorthand for setting preferences

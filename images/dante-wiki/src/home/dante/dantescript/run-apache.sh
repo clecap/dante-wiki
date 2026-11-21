@@ -42,7 +42,7 @@ printf "*** run-apache.sh: Generating environment variable file for Apache..."
 printf "DONE generating environment variable file for Apache\n"
 
 
-trap 'warn' ERR
+trap 'failed "command failed: $BASH_COMMAND"' ERR
 
 ### Set Apache caching behaviour
 sudo a2disconf cache.conf

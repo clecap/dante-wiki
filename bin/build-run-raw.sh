@@ -57,6 +57,7 @@ downAllServices $TOP_DIR/compose/docker-compose-development.yaml
 if [ "$REMOVE_DB_VOLUME" = "yes" ]; then
   printf "\n${GREEN}---Removing database volume ${DB_VOLUME_NAME}...${RESET}\n"
   docker volume rm "$DB_VOLUME_NAME"
+  listVolumes  
   printf "${GREEN}---DONE${RESET}\n"
 fi
 

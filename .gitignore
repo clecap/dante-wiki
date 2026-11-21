@@ -22,7 +22,6 @@ vendor/
 #
 # private configuration data
 #
-customize-PRIVATE.sh
 localhost-key.pem
 localhost.pem
 login-key

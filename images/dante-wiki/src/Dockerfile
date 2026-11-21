@@ -33,6 +33,8 @@ ARG MEDIAWIKI_PATCH=11
 # Versions for picking up the typical extension version from its github distribution
 ARG MEDIAWIKI_EXTENSION_TAG=REL1_43
 
+ARG MEDIAWIKI_KEEP_LANGUAGES="en en-gb de de-at de-ch de-formal"
+
 # ==========================
 #  Stage 1: TeX Live builder
 # ==========================
@@ -248,14 +250,16 @@ ARG MEDIAWIKI_MAJOR
 ARG MEDIAWIKI_MINOR
 ARG MEDIAWIKI_PATCH
 ARG MEDIAWIKI_EXTENSION_TAG
+ARG MEDIAWIKI_KEEP_LANGUAGES
 
 ARG MEDIAWIKI_TARBALL=mediawiki-$MEDIAWIKI_MAJOR.$MEDIAWIKI_MINOR.$MEDIAWIKI_PATCH.tar.gz
 
 ARG MEDIAWIKI_URL=https://releases.wikimedia.org/mediawiki/$MEDIAWIKI_MAJOR.$MEDIAWIKI_MINOR/$MEDIAWIKI_TARBALL
 
+# TODO: change from /wiki-dir to only wiki-dir  with consequences all the line down
 ARG TARGET=/wiki-dir
 
-ARG TOP_PATH=/var/www/html/wiki-dir
+ARG TOP_PATH=/var/www/html${TARGET}
 
 ##
 ## ARGs provided by the build system
@@ -568,8 +572,8 @@ RUN \
       'six==1.17.0 --hash=sha256:4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274' \
       'urllib3==2.8.0 --hash=sha256:0cf3cae568d36aa9576b28dfb35f11328f1cb974ca7647d9475ebb86c75ac6e3' \
     )                                                                                                                      && \
-    echo "*** Deactivating virtual python environment"                                                                          && \
-    deactivate                                                                                                                   && \
+    echo "*** Deactivating virtual python environment"                                                                     && \
+    deactivate                                                                                                             && \
     echo "*** Preventing autoupdates of the image"                                                                         && \
     rm -f /etc/cron.daily/apt-compat                                                                                       && \
     echo "*** injecting the correct shell for www-data to enable a su to www-data "                                        && \
@@ -586,16 +590,34 @@ RUN \
     apt-get clean                                                                                                          && \
     rm -rf ${CLEAN_DOCKER_LAYER}
 
-
 # We do not want to have to chown files, as this is a very time consuming operation when many files are involved
 # Thus we switch to a different user for the following operations
 USER www-data
 
-RUN curl -fL --retry 5 --retry-delay 10 --retry-all-errors -o "/tmp/$MEDIAWIKI_TARBALL" "$MEDIAWIKI_URL"  && \
-    mkdir -p "/var/www/html/${TARGET}"                                                      && \
-    tar -xzf "/tmp/$MEDIAWIKI_TARBALL" -C "/var/www/html/${TARGET}" --strip-components=1    && \
-    rm "/tmp/$MEDIAWIKI_TARBALL"                                                            && \
-    rm -Rf "/var/www/html/${TARGET}/skins/Refreshed/.git"
+###
+### MEDIAWIKI LAYER:  This installs mediawiki
+###
+# Important: To keep the layer small: remove all those native extensions we do not need in the same RUN command
+#
+RUN curl -fL --retry 5 --retry-delay 10 --retry-all-errors -o "/tmp/$MEDIAWIKI_TARBALL" "$MEDIAWIKI_URL"                      && \
+    mkdir -p "/var/www/html/${TARGET}"                                                                                        && \
+    tar -xzf "/tmp/$MEDIAWIKI_TARBALL" -C "/var/www/html/${TARGET}" --strip-components=1                                      && \
+    rm "/tmp/$MEDIAWIKI_TARBALL"                                                                                              && \
+    echo "*** Removing i18n json files (incl. subdirectories) of languages not in MEDIAWIKI_KEEP_LANGUAGES"                   && \
+    find "${TOP_PATH}/languages/i18n" -type f -name '*.json' -print0 | while IFS= read -r -d '' FILE; do                 \
+      NAME="$(basename "${FILE}" .json)";                                                                                \
+      if [[ " ${MEDIAWIKI_KEEP_LANGUAGES} " != *" ${NAME} "* ]]; then rm "${FILE}"; fi;                                  \
+    done                                                                                                                      && \
+    echo "*** Removing messages files of languages not in MEDIAWIKI_KEEP_LANGUAGES"                                           && \
+    for FILE in "${TOP_PATH}/languages/messages/"*; do                                                                   \
+      NAME="$(basename "${FILE}")"; NAME="${NAME#Messages}"; NAME="${NAME%.php}"; NAME="${NAME,}"; NAME="${NAME//_/-}";  \
+      if [[ " ${MEDIAWIKI_KEEP_LANGUAGES} " != *" ${NAME} "* ]]; then rm "${FILE}"; fi;                                  \
+    done                                                                                                                      && \
+    rm -Rf "/var/www/html/${TARGET}/skins/Refreshed/.git"           && \                             
+    rm -Rf "/var/www/html/${TARGET}/extensions/Math"                && \
+    rm -Rf "/var/www/html/${TARGET}/extensions/VisualEditor"        && \
+    rm -Rf "/var/www/html/${TARGET}/extensions/CodeEditor"          && \
+    rm -Rf "/var/www/html/${TARGET}/extensions/AbuseFilter"           
 
 #   we need to open composer or we get problems with composer permission details
 ENV COMPOSER_ALLOW_SUPERUSER=1
@@ -608,6 +630,11 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 ############################################ phpinfo.php rausnehmen !!!!!
 
 WORKDIR ${TOP_PATH}
+
+
+##
+## COMPOSER LAYER
+##
 
 RUN composer config --no-plugins allow-plugins.wikimedia/composer-merge-plugin true              && \
     composer config --no-plugins allow-plugins.composer/package-versions-deprecated true         && \
@@ -646,6 +673,12 @@ ARG CURRENT_DANTE_BRANCH
 ARG GIT_COMMIT_DANTE_DELTA
 ARG GIT_COMMIT_PARSIFAL
 
+#### TODO: split this more clearly:  mediawiki extensions and dantewiki installation - also: probably have only one composer layer at the very end and not several places for composer
+
+##
+## EXTENSION LAYER: Install additional extensions of MediaWiki
+##
+
 RUN  \
     test -n "${CURRENT_DANTE_BRANCH}" || { echo "*** ERROR: CURRENT_DANTE_BRANCH not set, pass it with --build-arg"; exit 1; }                                    && \
     /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-MobileFrontend                MobileFrontend               ${MEDIAWIKI_EXTENSION_TAG}    && \
@@ -661,7 +694,7 @@ RUN  \
    ## Diagrams had a problem which I fixed in my own fork, but my pull request has not yet been honored by upstream.
    ## /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"   https://github.com/samwilson/diagrams-extension                                 Diagrams                     master     && \
    /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"   https://github.com/clecap/diagrams-extension                                    Diagrams                     mermaid-12  DEV     && \  
-   
+#   
 #
     /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/wikimedia/mediawiki-extensions-ReplaceText                   ReplaceText                   ${MEDIAWIKI_EXTENSION_TAG}    && \
     /home/dante/dantescript/install-extension-github.sh  "${TOP_PATH}"  https://github.com/ProfessionalWiki/Network                                     Network                       master     && \
@@ -713,11 +746,30 @@ RUN  \
    composer update  && \
    printf "\n*** Move files out of the way\n"  && \
    mkdir -p "${TOP_PATH}/docs/mw-docs"   && \
-  mv -n "${TOP_PATH}/INSTALL" "${TOP_PATH}/FAQ" "${TOP_PATH}/CREDITS" "${TOP_PATH}/HISTORY" "${TOP_PATH}/COPYING" "${TOP_PATH}/CODE_OF_CONDUCT.md" \
+   mv -n "${TOP_PATH}/INSTALL" "${TOP_PATH}/FAQ" "${TOP_PATH}/CREDITS" "${TOP_PATH}/HISTORY" "${TOP_PATH}/COPYING" "${TOP_PATH}/CODE_OF_CONDUCT.md" \
          "${TOP_PATH}/SECURITY" "${TOP_PATH}/UPGRADE" "${TOP_PATH}"/RELEASE-NOTES-1.* "${TOP_PATH}/docs/mw-docs"
 
 
-##  TODO: should switch to produciton mode from dev mode soon after the start
+
+
+###### TODO: note: the target name is hardcoded wiki-dir. Make more felxible??
+
+ARG WIKI_COUNT=2
+
+
+##
+## COPY LAYER: Produce the required number of instances of (cleanly separated) Wikis
+##
+
+RUN set -eu; \
+  i=2; \
+  while [ "$i" -le "$WIKI_COUNT" ]; do \
+    cp -a /var/www/html/wiki-dir "/var/www/html/wiki-dir$i"; \
+    i=$((i + 1)); \
+  done
+
+
+##  TODO: we should switch to produciton mode from dev mode soon after the start - in which wikis?? in all wikis? wo do this earlier 
 
 ## 
 ## Adhere to default non-root user policy promoted by dockerhub
@@ -727,6 +779,8 @@ RUN  \
 #  Copy your application code to the container
 #  Give non-root user ownership of the application files
 #  Set the default user ## TODO: do we want this? is it compatible with the deletion strategies we need ???
+
+# TODO: this versionng should probably be local to the specific wiki as well and not global to the entire docker file
 
 ##
 ## Version of DanteWiki, passed in by the build: --build-arg DANTE_VERSION=$(git describe ...)

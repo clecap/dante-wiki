@@ -27,7 +27,7 @@ TARGET_DIR=$(mktemp -d)
 git clone --depth=1 --single-branch --branch "$BRANCH" "$REPO_URL" "$TARGET_DIR"
 php $IP/extensions/DanteCommon/importDirectory.php --ddir "$TARGET_DIR" --slug
 
-trap 'errorTrap' ERR
+trap 'failed "command failed: $BASH_COMMAND"' ERR
 
 trap - ERR
 
