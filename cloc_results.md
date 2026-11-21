@@ -1,0 +1,19 @@
+cloc|github.com/AlDanial/cloc v 2.06  T=0.09 s (1456.0 files/s, 374214.5 lines/s)
+--- | ---
+
+Language|files|blank|comment|code
+:-------|-------:|-------:|-------:|-------:
+XML|10|4165|0|21567
+Bourne Shell|64|994|671|2835
+Markdown|29|624|0|1129
+JSON|5|1|0|1126
+YAML|15|130|159|669
+Dockerfile|2|106|321|499
+SVG|5|0|1|40
+PHP|2|4|0|35
+JavaScript|1|0|0|34
+Python|1|9|1|33
+INI|2|10|15|20
+HTML|1|0|0|13
+--------|--------|--------|--------|--------
+SUM:|137|6043|1168|28000
