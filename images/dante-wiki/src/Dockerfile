@@ -38,7 +38,7 @@ ARG MEDIAWIKI_KEEP_LANGUAGES="en en-gb de de-at de-ch de-formal"
 # ==========================
 #  Stage 1: TeX Live builder
 # ==========================
-FROM debian:stable-20261027-slim@sha256:13e0a2e78aa0554ad5ff66e4e260c6dbcdff807eb1f39d43b9fb0288aae88b04 AS texlive-ready
+FROM debian:stable-20261123-slim@sha256:a64d9dbf633e2a2503afac76be521dc25d9b5765150b30d31a3914d4ae969cab AS texlive-ready
 
 ##
 ## Take in parameters defined in global scope
@@ -237,7 +237,7 @@ RUN --mount=type=cache,id=texlive-iso,target=/cache,sharing=locked              
 # =============================
 #  Stage 2: Final runtime image
 # =============================
-FROM debian:stable-20261027-slim@sha256:13e0a2e78aa0554ad5ff66e4e260c6dbcdff807eb1f39d43b9fb0288aae88b04 AS dante
+FROM debian:stable-20261123-slim@sha256:a64d9dbf633e2a2503afac76be521dc25d9b5765150b30d31a3914d4ae969cab AS dante
 
 # Copy only the installed TeX Live tree from the builder stage
 COPY --from=texlive-ready /usr/local/texlive /usr/local/texlive
